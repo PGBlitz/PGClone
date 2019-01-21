@@ -7,7 +7,7 @@
 ################################################################################
 function log()
 {
-    echo "[PGBlitz] $@" > /var/plexguide/pg.log && bash /opt/plexguide/menu/log/log.sh
+    echo "[PGBlitz] $@" > /var/plexguide/pg.log && bash /opt/pgclone/log/log.sh
     echo "[PGBlitz] $@"
 }
 
