@@ -17,6 +17,10 @@
       shell: "cat /var/plexguide/rclone/deploy.version"
       register: ver
 
+    - name: Register HD Path
+      shell: "cat /var/plexguide/server.hd.path"
+      register: hdpath
+
     - name: Install MOVE Service
       template:
         src: /opt/pgclone/templates/move_script.sh
