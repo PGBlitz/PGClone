@@ -5,10 +5,10 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
-source /opt/plexguide/menu/functions/keys.sh
-source /opt/plexguide/menu/functions/keyback.sh
-source /opt/plexguide/menu/functions/pgclone.sh
+source /opt/pgclone/functions/functions.sh
+source /opt/pgclone/functions/keys.sh
+source /opt/pgclone/functions/keyback.sh
+source /opt/pgclone/functions/pgclone.sh
 ################################################################################
 question1 () {
   touch /opt/appdata/plexguide/rclone.conf
@@ -78,10 +78,10 @@ elif [ "$typed" == "5" ]; then
       deploygdsa01check
       removemounts
       ufsbuilder
-      ansible-playbook /opt/plexguide/menu/pgclone/gdrive.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/tdrive.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/bunionfs.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/pgblitz.yml
+      ansible-playbook /opt/pgclone/gdrive.yml
+      ansible-playbook /opt/pgclone/tdrive.yml
+      ansible-playbook /opt/pgclone/bunionfs.yml
+      ansible-playbook /opt/pgclone/pgblitz.yml
       pgbdeploy
       question1
     elif [ "$transport" == "PG Blitz /w Encryption" ]; then
@@ -90,12 +90,12 @@ elif [ "$typed" == "5" ]; then
       deploygdsa01check
       removemounts
       ufsbuilder
-      ansible-playbook /opt/plexguide/menu/pgclone/gdrive.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/tdrive.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/gcrypt.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/tcrypt.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/bunionfs.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/pgblitz.yml
+      ansible-playbook /opt/pgclone/gdrive.yml
+      ansible-playbook /opt/pgclone/tdrive.yml
+      ansible-playbook /opt/pgclone/gcrypt.yml
+      ansible-playbook /opt/pgclone/tcrypt.yml
+      ansible-playbook /opt/pgclone/bunionfs.yml
+      ansible-playbook /opt/pgclone/pgblitz.yml
       pgbdeploy
       question1
     fi
@@ -138,9 +138,9 @@ elif [ "$typed" == "4" ]; then
       echo "gdrive" > /var/plexguide/rclone/deploy.version
       deploygdrivecheck
       removemounts
-      ansible-playbook /opt/plexguide/menu/pgclone/gdrive.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/munionfs.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/pgmove.yml
+      ansible-playbook /opt/pgclone/gdrive.yml
+      ansible-playbook /opt/pgclone/munionfs.yml
+      ansible-playbook /opt/pgclone/pgmove.yml
       question1
     elif [ "$transport" == "PG Move /w Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
@@ -148,10 +148,10 @@ elif [ "$typed" == "4" ]; then
       deploygdrivecheck
       deploygcryptcheck
       removemounts
-      ansible-playbook /opt/plexguide/menu/pgclone/gdrive.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/gcrypt.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/munionfs.yml
-      ansible-playbook /opt/plexguide/menu/pgclone/pgmove.yml
+      ansible-playbook /opt/pgclone/gdrive.yml
+      ansible-playbook /opt/pgclone/gcrypt.yml
+      ansible-playbook /opt/pgclone/munionfs.yml
+      ansible-playbook /opt/pgclone/pgmove.yml
       question1
     fi
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then

@@ -5,7 +5,7 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/pgblitz.sh
+source /opt/pgclone/functions/pgblitz.sh
 
 #starter
 #stasks

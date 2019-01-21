@@ -13,10 +13,10 @@
 #   under the GPL along with build & install instructions.
 #
 #################################################################################
-source /opt/plexguide/menu/functions/functions.sh
-source /opt/plexguide/menu/functions/keys.sh
-source /opt/plexguide/menu/functions/keyback.sh
-source /opt/plexguide/menu/functions/pgclone.sh
+source /opt/pgclone/functions/functions.sh
+source /opt/pgclone/functions/keys.sh
+source /opt/pgclone/functions/keyback.sh
+source /opt/pgclone/functions/pgclone.sh
 ################################################################################
 mkdir -p /opt/appdata/pgblitz/keys/processed
 path=/opt/appdata/pgblitz/keys/processed

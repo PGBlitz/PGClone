@@ -11,7 +11,7 @@
   tasks:
     - name: Install TDRIVE Service
       template:
-        src: /opt/plexguide/menu/pgclone/templates/tdrive.service
+        src: /opt/pgclone/templates/tdrive.service
         dest: /etc/systemd/system/tdrive.service
         force: yes
       ignore_errors: yes

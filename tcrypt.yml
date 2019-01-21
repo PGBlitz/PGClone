@@ -11,7 +11,7 @@
   tasks:
     - name: Install TCrypt Service
       template:
-        src: /opt/plexguide/menu/pgclone/templates/tcrypt.service
+        src: /opt/pgclone/templates/tcrypt.service
         dest: /etc/systemd/system/tcrypt.service
         force: yes
 

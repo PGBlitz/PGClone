@@ -20,7 +20,7 @@
 
     - name: Install UNIONFS Service
       template:
-        src: /opt/plexguide/menu/pgclone/templates/bunionfs.service
+        src: /opt/pgclone/templates/bunionfs.service
         dest: /etc/systemd/system/unionfs.service
         force: yes
 

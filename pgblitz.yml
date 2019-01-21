@@ -15,13 +15,13 @@
 
     - name: Install pgblitz script
       template:
-        src: /opt/plexguide/menu/pgclone/templates/pgblitz.sh
+        src: /opt/pgclone/templates/pgblitz.sh
         dest: /opt/appdata/pgblitz/pgblitz.sh
         force: yes
 
     - name: Install upload script
       template:
-        src: /opt/plexguide/menu/pgclone/templates/upload.sh
+        src: /opt/pgclone/templates/upload.sh
         dest: /opt/appdata/pgblitz/upload.sh
         force: yes
 
@@ -41,7 +41,7 @@
 
     - name: Install pgblitz Service
       template:
-        src: /opt/plexguide/menu/pgclone/templates/pgblitz.service
+        src: /opt/pgclone/templates/pgblitz.service
         dest: /etc/systemd/system/pgblitz.service
         force: yes
 
