@@ -42,21 +42,30 @@
       shell: 'echo -e "\n[union]\ntype = union\n{{path}}" >> /opt/appdata/plexguide/rclone.conf'
       register: transport
 
-    - name: Install pgblitz script
-      template:
-        src: /opt/pgclone/templates/pgblitz.sh
-        dest: /opt/appdata/pgblitz/pgblitz.sh
-        force: yes
+    - name: 'PG Blitz Execution'
+      block:
 
-    - name: Install pgblitz Service
-      template:
-        src: /opt/pgclone/templates/pgblitz.service
-        dest: /etc/systemd/system/pgblitz.service
-        force: yes
+      - name: Bandwidth Limit
+        shell: "cat /var/plexguide/blitz.bw"
+        register: bandwidth
 
-    - name: Enable pgblitz Service
-      systemd:
-        daemon_reload: yes
-        enabled: yes
-        state: restarted
-        name: pgblitz
+      - name: Install pgblitz script
+        template:
+          src: /opt/pgclone/templates/pgblitz.sh
+          dest: /opt/appdata/pgblitz/pgblitz.sh
+          force: yes
+
+      - name: Install pgblitz Service
+        template:
+          src: /opt/pgclone/templates/pgblitz.service
+          dest: /etc/systemd/system/pgblitz.service
+          force: yes
+
+      - name: Enable pgblitz Service
+        systemd:
+          daemon_reload: yes
+          enabled: yes
+          state: restarted
+          name: pgblitz
+          
+      when: 'transport55.stdout == "eblitz"' or 'transport55.stdout == "ublitz"'
