@@ -16,27 +16,27 @@
 
     - name: Transport Type
       shell: "cat /var/plexguide/pgclone.transport"
-      register: transport
+      register: transport55
 
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
-        path: 'remote = gdrive: tdrive: gcrypt: tcrypt: {{hdpaths.stdout}}/move'
-      when: 'transport.stdout == "eblitz"'
+        path: 'remote = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
+      when: 'transport55.stdout == "eblitz"'
 
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
-        path: 'remote = gdrive: gcrypt: {{hdpaths.stdout}}/move'
-      when: 'transport.stdout == emove'
+        path: 'remote = gdrive: gcrypt: {{hdpath.stdout}}/move'
+      when: 'transport55.stdout == "emove"'
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
-        path: 'remote = gdrive: tdrive: {{hdpaths.stdout}}/move'
-      when: 'transport.stdout == ublitz'
+        path: 'remote = gdrive: tdrive: {{hdpath.stdout}}/move'
+      when: 'transport55.stdout == "ublitz"'
 
     - name: 'If Fact Matches - UnEncrypted Move'
       set_fact:
-        path: 'remote = gdrive: {{hdpaths.stdout}}/move'
-      when: 'transport.stdout == umove'
+        path: 'remote = gdrive: {{hdpath.stdout}}/move'
+      when: 'transport55.stdout == "umove"'
 
     - name: Transport Type
       shell: 'echo -e "\n[union]\ntype = union\n{{path}}" >> /opt/appdata/plexguide/rclone.conf'
