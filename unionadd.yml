@@ -39,7 +39,7 @@
       when: 'transport.stdout == umove'
 
     - name: Transport Type
-      shell: 'echo -e "\n[union]\ntype = union\n{{path}}"' >> /opt/appdata/plexguide/rclone.conf"
+      shell: 'echo -e "\n[union]\ntype = union\n{{path}}" >> /opt/appdata/plexguide/rclone.conf'
       register: transport
 
     - name: Install pgblitz script
