@@ -67,5 +67,6 @@
           enabled: yes
           state: restarted
           name: pgblitz
-          
-      when: 'transport55.stdout == "eblitz"' or 'transport55.stdout == "ublitz"'
+
+      when: ('transport55.stdout == "eblitz"') or
+            ('transport55.stdout == "ublitz"')
