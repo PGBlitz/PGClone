@@ -18,8 +18,8 @@
       shell: "cat /var/plexguide/pgclone.transport"
       register: transport55
 
-    - name: Transport Type
-      shell: "sed -i -e '/[unionfs]/,+3d' /opt/appdata/plexguide/rclone.conf"
+    - name: Line Remover
+      shell: "sed -i -e '/[unionfs]/,+4d' /opt/appdata/plexguide/rclone.conf"
 
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
