@@ -113,3 +113,15 @@
 
       when: ('transport55.stdout == "ublitz"') or
             ('transport55.stdout == "umove"')
+
+    - name: Install UNIONFS Service
+      template:
+        src: /opt/pgclone/templates/unionfs.service
+        dest: /etc/systemd/system/unionfs.service
+        force: yes
+
+    - name: Daemon-Reload
+      systemd: state=stopped name=unionfs daemon_reload=yes enabled=no
+
+    - name: Start UnionFS
+      systemd: state=started name=unionfs enabled=yes
