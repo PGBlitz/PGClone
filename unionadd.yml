@@ -18,6 +18,9 @@
       shell: "cat /var/plexguide/pgclone.transport"
       register: transport55
 
+    - name: Transport Type
+      shell: "sed -i -e '/[unionfs]/,+3d' /opt/appdata/plexguide/rclone.conf"
+
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remote = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
@@ -45,9 +48,6 @@
     - name: Transport Type
       shell: 'echo "[unionfs]\ntype = union\n{{path}}" >> /opt/appdata/plexguide/rclone.conf'
       register: transport
-
-    - name: Transport Type
-      shell: "sed -i -e '/[unionfs]/,+3d' /opt/appdata/plexguide/rclone.conf"
 
     - name: 'PG Blitz Execution'
       block:
