@@ -24,7 +24,7 @@ variable () {
 }
 
 removemounts () {
-  ansible-playbook /opt/plexguide/menu/remove/mounts.yml
+  ansible-playbook /opt/pgclone/mounts.yml
 }
 
 readrcloneconfig () {
