@@ -175,7 +175,4 @@ variable /var/plexguide/blitz.bw  "1000"
 variable /var/plexguide/pgclone.password ""
 variable /var/plexguide/pgclone.salt ""
 
-file="/var/plexguide/rclone/deploy.version"
-  if [ ! -e "$file" ]; then echo "null" > /var/plexguide/rclone/deploy.version; fi
-
 question1
