@@ -20,6 +20,8 @@ question1 () {
   keynum=$(ls /opt/appdata/pgblitz/keys/processed/ | wc -l)
   bwdisplay=$(cat /var/plexguide/move.bw)
   bwdisplay2=$(cat /var/plexguide/blitz.bw)
+  file="/var/plexguide/rclone/deploy.version"
+    if [ ! -e "$file" ]; then echo "null" > /var/plexguide/project.final; fi
 
 if [ "$transport" == "NOT-SET" ]; then
 tee <<-EOF
@@ -76,7 +78,6 @@ elif [ "$typed" == "5" ]; then
       deploygdrivecheck
       deploytdrivecheck
       deploygdsa01check
-      echo "tdrive" > /var/plexguide/rclone/deploy.version
       removemounts
       ufsbuilder
       ansible-playbook /opt/pgclone/gdrive.yml
@@ -88,7 +89,6 @@ elif [ "$typed" == "5" ]; then
       deploygdrivecheck
       deploytdrivecheck
       deploygdsa01check
-      echo "tcrypt" > /var/plexguide/rclone/deploy.version
       removemounts
       ufsbuilder
       ansible-playbook /opt/pgclone/gdrive.yml
@@ -143,7 +143,6 @@ elif [ "$typed" == "4" ]; then
       question1
     elif [ "$transport" == "PG Move /w Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
-      echo "gcrypt" > /var/plexguide/rclone/deploy.version
       deploygdrivecheck
       deploygcryptcheck
       removemounts
@@ -161,12 +160,15 @@ fi
 
 inputphase
 }
+
+mkdir -p /var/plexguide/rclone
 # Reminder for gdrive/tdrive / check rclone to set if active, below just placeholder
 variable /var/plexguide/project.account "NOT-SET"
 variable /var/plexguide/pgclone.project "NOT-SET"
 variable /var/plexguide/pgclone.teamdrive ""
 variable /var/plexguide/pgclone.public ""
 variable /var/plexguide/pgclone.secret ""
+variable /var/plexguide/rclone/deploy.version "null"
 variable /var/plexguide/pgclone.transport "PG Move /w No Encryption"
 variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
 variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
