@@ -76,6 +76,7 @@ elif [ "$typed" == "5" ]; then
       deploygdrivecheck
       deploytdrivecheck
       deploygdsa01check
+      echo "tdrive" > /var/plexguide/rclone/deploy.version
       removemounts
       ufsbuilder
       ansible-playbook /opt/pgclone/gdrive.yml
@@ -87,6 +88,7 @@ elif [ "$typed" == "5" ]; then
       deploygdrivecheck
       deploytdrivecheck
       deploygdsa01check
+      echo "tcrypt" > /var/plexguide/rclone/deploy.version
       removemounts
       ufsbuilder
       ansible-playbook /opt/pgclone/gdrive.yml
@@ -141,6 +143,7 @@ elif [ "$typed" == "4" ]; then
       question1
     elif [ "$transport" == "PG Move /w Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
+      echo "gcrypt" > /var/plexguide/rclone/deploy.version
       deploygdrivecheck
       deploygcryptcheck
       removemounts
