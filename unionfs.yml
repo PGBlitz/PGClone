@@ -43,11 +43,14 @@
 
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
-      register: transport
+#      register: transport
 
     - name: Transport Type
-      shell: 'echo "[unionfs]\ntype = union\n{{path}}" >> /opt/appdata/plexguide/rclone.conf'
-      register: transport
+      shell: |
+        echo "[unionfs]" >> /opt/appdata/plexguide/rclone.conf
+        echo "type = union" >> /opt/appdata/plexguide/rclone.conf
+        echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
+#      register: transport
 
     - name: 'PG Blitz Execution'
       block:
