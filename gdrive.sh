@@ -173,6 +173,6 @@ variable /var/plexguide/pgclone.password ""
 variable /var/plexguide/pgclone.salt ""
 
 file="/var/plexguide/rclone/deploy.version"
-  if [ ! -e "$file" ]; then echo "null" > /var/plexguide/project.final; fi
+  if [ ! -e "$file" ]; then echo "null" > /var/plexguide/rclone/deploy.version; fi
 
 question1
