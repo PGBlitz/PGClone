@@ -88,9 +88,9 @@
         shell: "cat /var/plexguide/move.bw"
         register: bandwidth
 
-      - name: Deploy Version
-        shell: "cat /var/plexguide/rclone/deploy.version"
-        register: ver
+      #- name: Deploy Version
+      #  shell: "cat /var/plexguide/rclone/deploy.version"
+      #  register: ver
 
       - name: Register HD Path
         shell: "cat /var/plexguide/server.hd.path"
