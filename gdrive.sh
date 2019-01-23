@@ -141,7 +141,6 @@ elif [ "$typed" == "4" ]; then
       question1
     elif [ "$transport" == "PG Move /w Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
-      echo "gcrypt" > /var/plexguide/rclone/deploy.version
       deploygdrivecheck
       deploygcryptcheck
       removemounts
@@ -162,7 +161,7 @@ inputphase
 # Reminder for gdrive/tdrive / check rclone to set if active, below just placeholder
 variable /var/plexguide/project.account "NOT-SET"
 variable /var/plexguide/pgclone.project "NOT-SET"
-touch /var/plexguide/rclone/deploy.version 
+variable /var/plexguide/rclone/deploy.version "null"
 variable /var/plexguide/pgclone.teamdrive ""
 variable /var/plexguide/pgclone.public ""
 variable /var/plexguide/pgclone.secret ""
