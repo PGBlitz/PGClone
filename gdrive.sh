@@ -161,7 +161,6 @@ inputphase
 # Reminder for gdrive/tdrive / check rclone to set if active, below just placeholder
 variable /var/plexguide/project.account "NOT-SET"
 variable /var/plexguide/pgclone.project "NOT-SET"
-variable /var/plexguide/rclone/deploy.version "null"
 variable /var/plexguide/pgclone.teamdrive ""
 variable /var/plexguide/pgclone.public ""
 variable /var/plexguide/pgclone.secret ""
@@ -172,5 +171,8 @@ variable /var/plexguide/move.bw  "10"
 variable /var/plexguide/blitz.bw  "1000"
 variable /var/plexguide/pgclone.password ""
 variable /var/plexguide/pgclone.salt ""
+
+file="/var/plexguide/rclone/deploy.version"
+  if [ ! -e "$file" ]; then echo "null" > /var/plexguide/project.final; fi
 
 question1
