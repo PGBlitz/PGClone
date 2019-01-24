@@ -5,6 +5,7 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
+# NOTE: UnionFS does not mean 'unionfs', we keep using 'unionfs' for backward compat but have switched to rclone union.
 ---
 - hosts: localhost
   gather_facts: false
@@ -51,29 +52,52 @@
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
     #      register: transport
 
+    - name: "Stop PGClone Services"
+      block:
+        - name: Stopping Existing PG Blitz Service
+          systemd:
+            daemon_reload: yes
+            enabled: no
+            state: stopped
+            name: pgblitz
+
+        - name: Stopping Existing MOVE Service
+          systemd:
+            daemon_reload: yes
+            enabled: no
+            state: stopped
+            name: move
+
+        - name: Stopping Existing UnionFS Service
+          systemd:
+            daemon_reload: yes
+            enabled: no
+            state: stopped
+            name: unionfs
+
     - name: "PG Blitz Execution"
       block:
         - name: Bandwidth Limit
           shell: "cat /var/plexguide/blitz.bw"
           register: bandwidth
 
-        - name: Install pgblitz script
+        - name: Install PG Blitz Script
           template:
             src: /opt/pgclone/templates/pgblitz.sh
             dest: /opt/appdata/pgblitz/pgblitz.sh
             force: yes
 
-        - name: Install pgblitz Service
+        - name: Install PG Blitz Service
           template:
             src: /opt/pgclone/templates/pgblitz.service
             dest: /etc/systemd/system/pgblitz.service
             force: yes
 
-        - name: Enable pgblitz Service
+        - name: Reload PG Blitz Service
           systemd:
             daemon_reload: yes
             enabled: yes
-            state: restarted
+            state: reloaded
             name: pgblitz
 
       when: ('transport55.stdout == "eblitz"') or
@@ -105,11 +129,12 @@
             dest: /etc/systemd/system/move.service
             force: yes
 
-        - name: Daemon-Reload
-          systemd: state=stopped name=move daemon_reload=yes enabled=no
-
-        - name: Start Move
-          systemd: state=started name=move enabled=yes
+        - name: Reload MOVE Service
+          systemd:
+            daemon_reload: yes
+            enabled: yes
+            state: reloaded
+            name: move
 
       when: ('transport55.stdout == "emove"') or
         ('transport55.stdout == "umove"')
@@ -120,8 +145,9 @@
         dest: /etc/systemd/system/unionfs.service
         force: yes
 
-    - name: Daemon-Reload
-      systemd: state=stopped name=unionfs daemon_reload=yes enabled=no
-
-    - name: Start UnionFS
-      systemd: state=started name=unionfs enabled=yes
+    - name: Reload UNIONFS Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded
+        name: unionfs
