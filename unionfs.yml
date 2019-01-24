@@ -52,29 +52,6 @@
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
     #      register: transport
 
-    - name: "Stop PGClone Services"
-      block:
-        - name: Stopping Existing PG Blitz Service
-          systemd:
-            daemon_reload: yes
-            enabled: no
-            state: stopped
-            name: pgblitz
-
-        - name: Stopping Existing MOVE Service
-          systemd:
-            daemon_reload: yes
-            enabled: no
-            state: stopped
-            name: move
-
-        - name: Stopping Existing UnionFS Service
-          systemd:
-            daemon_reload: yes
-            enabled: no
-            state: stopped
-            name: unionfs
-
     - name: "PG Blitz Execution"
       block:
         - name: Bandwidth Limit

@@ -9,13 +9,6 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: Stopping Existing TCrypt Service
-      systemd:
-        daemon_reload: yes
-        enabled: no
-        state: stopped
-        name: tcrypt
-
     - name: Install TCrypt Service
       template:
         src: /opt/pgclone/templates/tcrypt.service
