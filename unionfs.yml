@@ -9,7 +9,6 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-
     - name: Register HD Path
       shell: "cat /var/plexguide/server.hd.path"
       register: hdpath
@@ -21,101 +20,99 @@
     - name: Line Remover
       shell: 'sed -i -e "/\[unionfs\]/,+2d" /opt/appdata/plexguide/rclone.conf'
 
-    - name: 'If Fact Matches - Encrypted Blitz'
+    - name: "If Fact Matches - Encrypted Blitz"
       set_fact:
-        path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
+        path: "remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move"
       when: 'transport55.stdout == "eblitz"'
 
-    - name: 'If Fact Matches - Encrypted Move'
+    - name: "If Fact Matches - Encrypted Move"
       set_fact:
-        path: 'remotes = gdrive: gcrypt: {{hdpath.stdout}}/move'
+        path: "remotes = gdrive: gcrypt: {{hdpath.stdout}}/move"
       when: 'transport55.stdout == "emove"'
 
-    - name: 'If Fact Matches - UnEncrypted Blitz'
+    - name: "If Fact Matches - UnEncrypted Blitz"
       set_fact:
-        path: 'remotes = gdrive: tdrive: {{hdpath.stdout}}/move'
+        path: "remotes = gdrive: tdrive: {{hdpath.stdout}}/move"
       when: 'transport55.stdout == "ublitz"'
 
-    - name: 'If Fact Matches - UnEncrypted Move'
+    - name: "If Fact Matches - UnEncrypted Move"
       set_fact:
-        path: 'remotes = gdrive: {{hdpath.stdout}}/move'
+        path: "remotes = gdrive: {{hdpath.stdout}}/move"
       when: 'transport55.stdout == "umove"'
 
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
-#      register: transport
+    #      register: transport
 
     - name: Transport Type
       shell: |
         echo "[unionfs]" >> /opt/appdata/plexguide/rclone.conf
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
-#      register: transport
+    #      register: transport
 
-    - name: 'PG Blitz Execution'
+    - name: "PG Blitz Execution"
       block:
+        - name: Bandwidth Limit
+          shell: "cat /var/plexguide/blitz.bw"
+          register: bandwidth
 
-      - name: Bandwidth Limit
-        shell: "cat /var/plexguide/blitz.bw"
-        register: bandwidth
+        - name: Install pgblitz script
+          template:
+            src: /opt/pgclone/templates/pgblitz.sh
+            dest: /opt/appdata/pgblitz/pgblitz.sh
+            force: yes
 
-      - name: Install pgblitz script
-        template:
-          src: /opt/pgclone/templates/pgblitz.sh
-          dest: /opt/appdata/pgblitz/pgblitz.sh
-          force: yes
+        - name: Install pgblitz Service
+          template:
+            src: /opt/pgclone/templates/pgblitz.service
+            dest: /etc/systemd/system/pgblitz.service
+            force: yes
 
-      - name: Install pgblitz Service
-        template:
-          src: /opt/pgclone/templates/pgblitz.service
-          dest: /etc/systemd/system/pgblitz.service
-          force: yes
-
-      - name: Enable pgblitz Service
-        systemd:
-          daemon_reload: yes
-          enabled: yes
-          state: restarted
-          name: pgblitz
+        - name: Enable pgblitz Service
+          systemd:
+            daemon_reload: yes
+            enabled: yes
+            state: restarted
+            name: pgblitz
 
       when: ('transport55.stdout == "eblitz"') or
-            ('transport55.stdout == "ublitz"')
+        ('transport55.stdout == "ublitz"')
 
-    - name: 'PG Move Execution'
+    - name: "PG Move Execution"
       block:
+        - name: Bandwidth Limit
+          shell: "cat /var/plexguide/move.bw"
+          register: bandwidth
 
-      - name: Bandwidth Limit
-        shell: "cat /var/plexguide/move.bw"
-        register: bandwidth
+        - name: Deploy Version
+          shell: "cat /var/plexguide/rclone/deploy.version"
+          register: ver
 
-      - name: Deploy Version
-        shell: "cat /var/plexguide/rclone/deploy.version"
-        register: ver
+        - name: Register HD Path
+          shell: "cat /var/plexguide/server.hd.path"
+          register: hdpath
 
-      - name: Register HD Path
-        shell: "cat /var/plexguide/server.hd.path"
-        register: hdpath
+        - name: Install MOVE Service
+          template:
+            src: /opt/pgclone/templates/move_script.sh
+            dest: /opt/appdata/plexguide/move.sh
+            force: yes
 
-      - name: Install MOVE Service
-        template:
-          src: /opt/pgclone/templates/move_script.sh
-          dest: /opt/appdata/plexguide/move.sh
-          force: yes
+        - name: Install MOVE Service
+          template:
+            src: /opt/pgclone/templates/move.service
+            dest: /etc/systemd/system/move.service
+            force: yes
 
-      - name: Install MOVE Service
-        template:
-          src: /opt/pgclone/templates/move.service
-          dest: /etc/systemd/system/move.service
-          force: yes
+        - name: Daemon-Reload
+          systemd: state=stopped name=move daemon_reload=yes enabled=no
 
-      - name: Daemon-Reload
-        systemd: state=stopped name=move daemon_reload=yes enabled=no
+        - name: Start Move
+          systemd: state=started name=move enabled=yes
 
-      - name: Start Move
-        systemd: state=started name=move enabled=yes
-
-      when: ('transport55.stdout == "ublitz"') or
-            ('transport55.stdout == "umove"')
+      when: ('transport55.stdout == "emove"') or
+        ('transport55.stdout == "umove"')
 
     - name: Install UNIONFS Service
       template:
