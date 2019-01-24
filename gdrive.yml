@@ -9,6 +9,13 @@
 - hosts: localhost
   gather_facts: false
   tasks:
+    - name: Stopping Existing GDRIVE Service
+      systemd:
+        daemon_reload: yes
+        enabled: no
+        state: stopped
+        name: gdrive
+
     - name: Install GDRIVE Service
       template:
         src: /opt/pgclone/templates/gdrive.service
@@ -16,6 +23,9 @@
         force: yes
       ignore_errors: yes
 
-    - name: Start GDRIVE SERVICE
-      systemd: state=started name=gdrive daemon_reload=yes enabled=yes
-      ignore_errors: yes
+    - name: Reload GDRIVE Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded
+        name: gdrive

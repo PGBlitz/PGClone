@@ -9,11 +9,22 @@
 - hosts: localhost
   gather_facts: false
   tasks:
+    - name: Stopping Existing GCrypt Service
+      systemd:
+        daemon_reload: yes
+        enabled: no
+        state: stopped
+        name: gcrypt
+
     - name: Install GCrypt Service
       template:
         src: /opt/pgclone/templates/gcrypt.service
         dest: /etc/systemd/system/gcrypt.service
         force: yes
 
-    - name: Start GCrypt SERVICE
-      systemd: state=started name=gcrypt daemon_reload=yes enabled=yes
+    - name: Reload GCrypt Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded
+        name: gcrypt

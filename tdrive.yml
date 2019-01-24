@@ -9,6 +9,13 @@
 - hosts: localhost
   gather_facts: false
   tasks:
+    - name: Stopping Existing TDRIVE Service
+      systemd:
+        daemon_reload: yes
+        enabled: no
+        state: stopped
+        name: tdrive
+
     - name: Install TDRIVE Service
       template:
         src: /opt/pgclone/templates/tdrive.service
@@ -16,6 +23,9 @@
         force: yes
       ignore_errors: yes
 
-    - name: Start TDRIVE SERVICE
-      systemd: state=started name=tdrive daemon_reload=yes enabled=yes
-      ignore_errors: yes
+    - name: Reload TDRIVE Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded
+        name: tdrive
