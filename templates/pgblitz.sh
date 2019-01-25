@@ -70,7 +70,7 @@ while [ 1 ]; do
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
         --checkers=16 --max-size=99G \
         --log-file=/opt/appdata/plexguide/pgblitz.log \
-        --stats-log-level INFO --stats 5s \
+        --log-level INFO --stats 5s \
         --drive-chunk-size=128M \
         "$dlpath/pgblitz/upload" "$keytransfer:/"
 
