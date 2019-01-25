@@ -27,6 +27,11 @@ keylast=$(cat /opt/appdata/plexguide/key.list | tail -n1)
 keycurrent=0
 cyclecount=0
 
+echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
+echo "PG Blitz Log - First Startup" >> /opt/appdata/plexguide/pgblitz.log
+echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
+
+
 while [ 1 ]; do
 
   dlpath=$(cat /var/plexguide/server.hd.path)
