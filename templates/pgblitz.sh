@@ -25,6 +25,7 @@ keyfirst=$(cat /opt/appdata/plexguide/key.list | head -n1)
 keylast=$(cat /opt/appdata/plexguide/key.list | tail -n1)
 
 keycurrent=0
+cyclecount=0
 
 while [ 1 ]; do
 
@@ -67,6 +68,10 @@ while [ 1 ]; do
         --log-level INFO --stats 5s \
         --drive-chunk-size=128M \
         "$dlpath/pgblitz/upload" "$keytransfer:/"
+
+  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /opt/appdata/plexguide/pgblitz.log
+  cat /opt/appdata/plexguide/pgblitz.log | tail -200 > cat /opt/appdata/plexguide/pgblitz.log
+  sleep 30
 
 # Remove empty directories (MrWednesday)
 find "$dlpath/move/" -mindepth 1 -mmin +30 -type d -empty -delete
