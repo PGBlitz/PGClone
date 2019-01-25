@@ -80,7 +80,7 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories (MrWednesday)
-find "$dlpath/move/" -mindepth 1 -mmin +30 -type d -empty -delete
-find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
+find "$dlpath/move/" -mindepth 1 -mmin +5 -type d -empty -delete
+find "$dlpath/pgblitz/upload" -mindepth 1 -type d -empty -delete
 
 done
