@@ -55,7 +55,7 @@ while [ 1 ]; do
   echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /opt/appdata/plexguide/pgblitz.log
   echo "" >> /opt/appdata/plexguide/pgblitz.log
-  echo "Utilizing: $keytransfer" > /opt/appdata/plexguide/pgblitz.log
+  echo "Utilizing: $keytransfer" >> /opt/appdata/plexguide/pgblitz.log
 
   rclone moveto --tpslimit 12 --checkers=20 --min-age=2m \
         --config /opt/appdata/plexguide/rclone.conf \
