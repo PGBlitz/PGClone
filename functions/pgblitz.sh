@@ -71,7 +71,7 @@ downloadpath=$(cat /var/plexguide/server.hd.path)
 
 for i in `find $downloadpath/pgblitz/* -maxdepth 1 -mindepth 1 -mmin +10 -type d`; do
     log "Found Stuck Folders/Files ~ ${i}"
-    log "Moving ${i} back to /mnt/move for processing"
+    log "Moving ${i} back to $downloadpath/move for processing"
 
     file="/var/plexguide/blitz.badkey"
     if [ ! -e "$file" ]; then echo 0 > /var/plexguide/blitz.badkey; fi
