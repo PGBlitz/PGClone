@@ -48,29 +48,19 @@ while [ 1 ]; do
 
   rclone moveto --min-age=2m \
       --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
       --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
       --exclude='**partial~' --exclude=".unionfs-fuse/**" \
       --exclude="sabnzbd/**" --exclude="nzbget/**" \
       --exclude="qbittorrent/**" --exclude="rutorrent/**" \
       --exclude="deluge/**" --exclude="transmission/**" \
-      --max-size=99G \
-      --log-file=/opt/appdata/plexguide/pgblitz.log \
-      --log-level INFO --stats 5s \
-      --drive-chunk-size=128M \
       "$dlpath/downloads/" "$dlpath/move/"     
 
   rclone moveto --min-age=2m \
         --config /opt/appdata/plexguide/rclone.conf \
-        --transfers=16 \
-        --max-transfer=100G \ 
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-        --max-size=99G \
         --log-file=/opt/appdata/plexguide/pgblitz.log \
         --log-level INFO --stats 5s \
-        --drive-chunk-size=128M \
         "$dlpath/move/" "$dlpath/pgblitz/upload"                 
 
   let "cyclecount++"
@@ -85,7 +75,7 @@ while [ 1 ]; do
         --bwlimit {{bandwidth.stdout}}M \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-        --checkers=16 --max-size=99G \
+        --max-size=99G \
         --log-file=/opt/appdata/plexguide/pgblitz.log \
         --log-level INFO --stats 5s \
         --drive-chunk-size=128M \
