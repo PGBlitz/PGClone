@@ -48,68 +48,23 @@ while [ 1 ]; do
 
   rclone moveto --min-age=2m \
       --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
+      --transfers=16 --ignore-case \
       --max-transfer=100G \
       --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
       --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+      --exclude="sabnzbd/**" --exclude="nzbget/**" \
+      --exclude="qbittorrent/**" --exclude="rutorrent/**" \
+      --exclude="deluge/**" --exclude="transmission/**" \
+      --exclude="sabnzbd/**" --exclude="nzbget/**" \
       --max-size=99G \
       --drive-chunk-size=128M \
-      "$dlpath/downloads/tv/" "$dlpath/move/"     
+      "$dlpath/downloads/" "$dlpath/move/"     
 
-  rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --max-size=99G \
-      --drive-chunk-size=128M \
-      "$dlpath/downloads/movies/" "$dlpath/move/"     
-
-  rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --max-size=99G \
-      --drive-chunk-size=128M \
-      "$dlpath/downloads/music/" "$dlpath/move/"     
-
-  rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --max-size=99G \
-      --drive-chunk-size=128M \
-      "$dlpath/downloads/abooks/" "$dlpath/move/"           
-
-  rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --max-size=99G \
-      --drive-chunk-size=128M \
-      "$dlpath/downloads/ebooks/" "$dlpath/move/"     
-
-  rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --max-size=99G \
-      --drive-chunk-size=128M \
-      "$dlpath/downloads/xxx/" "$dlpath/move/"     
 
   rclone moveto --min-age=2m \
         --config /opt/appdata/plexguide/rclone.conf \
         --transfers=16 \
-        --max-transfer=100G \
+        --max-transfer=100G --ignore-case \ 
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
         --max-size=99G \
@@ -125,7 +80,7 @@ while [ 1 ]; do
   rclone moveto --tpslimit 12 --checkers=20 --min-age=2m \
         --config /opt/appdata/plexguide/rclone.conf \
         --transfers=16 \
-        --bwlimit {{bandwidth.stdout}}M \
+        --bwlimit {{bandwidth.stdout}}M --ignore-case \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
         --checkers=16 --max-size=99G \
