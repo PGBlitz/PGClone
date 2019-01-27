@@ -13,7 +13,7 @@ Type=simple
 User=0
 Group=0
 ExecStartPre=/bin/sleep 10
-ExecStart=/usr/bin/mergerfs -o defaults,allow_other,direct_io,use_ino,nonempty,statfs_ignore=ro,security_capability=false,xattr=nosys,func.getattr=newest,category.create=mfs,moveonenospc=true,minfreespace=0,umask=002,noatime,fsname=pgPool /mnt/move=RW:/mnt/downloads=NC:/mnt/gdrive=NC:/mnt/tdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC /mnt/unionfs
+ExecStart=/usr/bin/mergerfs -o defaults,allow_other,direct_io,use_ino,nonempty,statfs_ignore=ro,security_capability=false,xattr=nosys,func.getattr=newest,category.create=ff,minfreespace=2G,umask=002,noatime,fsname=pgPool /mnt/move=RW:/mnt/downloads=RO:/mnt/gdrive=NC:/mnt/tdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC /mnt/unionfs
 ExecStop=/bin/fusermount -uz /mnt/unionfs
 TimeoutStopSec=20
 KillMode=process
