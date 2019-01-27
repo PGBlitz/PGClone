@@ -46,6 +46,14 @@ while [ 1 ]; do
     if [ "$encheck" == "eblitz" ]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
+  mv -f "$dlpath/downloads/tv" "$dlpath/move/"
+  mv -f "$dlpath/downloads/movies" "$dlpath/move/"
+  mv -f "$dlpath/downloads/audio" "$dlpath/move/"
+  mv -f "$dlpath/downloads/music" "$dlpath/move/"
+  mv -f "$dlpath/downloads/abooks" "$dlpath/move/"
+  mv -f "$dlpath/downloads/ebooks" "$dlpath/move/"
+  mv -f "$dlpath/downloads/xxx" "$dlpath/move/"
+  
   rclone moveto --min-age=2m \
         --config /opt/appdata/plexguide/rclone.conf \
         --transfers=16 \
@@ -54,7 +62,7 @@ while [ 1 ]; do
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
         --max-size=99G \
         --drive-chunk-size=128M \
-        "$dlpath/move/" "$dlpath/pgblitz/upload"
+        "$dlpath/move/" "$dlpath/pgblitz/upload"                 
 
   let "cyclecount++"
   echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
@@ -80,6 +88,13 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories
+find "$dlpath/downloads/tv/" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/downloads/movies/" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/downloads/music/" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/downloads/abooks/" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/downloads/ebooks/" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/downloads/xxx/" -mindepth 2 -mmin +5 -type d -empty -delete
+
 find "$dlpath/move/" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -type d -empty -delete
 
