@@ -93,12 +93,7 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories
-find "$dlpath/downloads/tv/" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads/movies/" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads/music/" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads/abooks/" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads/ebooks/" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads/xxx/" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete
 
 find "$dlpath/move/" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -type d -empty -delete
