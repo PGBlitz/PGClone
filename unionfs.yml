@@ -7,6 +7,22 @@
 ################################################################################
 # NOTE: UnionFS does not mean 'unionfs', we keep using 'unionfs' for backward compat but have switched to rclone union.
 ---
+
+- hosts: localhost
+  sudo: yes
+  tasks:
+    - name: Check if mergerfs is installed
+      shell: dpkg-query -W -f='${Status}' mergerfs | grep 'install ok installed'
+      register: is_installed
+      failed_when: no
+      changed_when: no
+
+    - name: Update mergerfs only if installed
+      get_url: url=https://github.com/trapexit/mergerfs/releases/download/2.25.1/mergerfs_2.25.1.ubuntu-bionic_amd64.deb dest=/tmp/mergerfs.deb
+      apt:
+        deb: /tmp/mergerfs.deb
+      when: is_installed.rc == 0
+
 - hosts: localhost
   gather_facts: false
   tasks:
