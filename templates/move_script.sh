@@ -19,7 +19,7 @@ dlpath=$(cat /var/plexguide/server.hd.path)
 
 rclone moveto --min-age=2m \
       --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 --ignore-case \
+      --transfers=16 \
       --max-transfer=100G \
       --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
       --exclude='**partial~' --exclude=".unionfs-fuse/**" \
