@@ -79,8 +79,8 @@ while [ 1 ]; do
   sed -i -e "/Duplicate directory found in destination/d" /opt/appdata/plexguide/pgblitz.log
   sleep 30
 
-# Remove empty directories (MrWednesday)
-find "$dlpath/move/" -mindepth 1 -mmin +5 -type d -empty -delete
+# Remove empty directories
+find "$dlpath/move/" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -type d -empty -delete
 
 done
