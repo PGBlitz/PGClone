@@ -89,7 +89,7 @@ while [ 1 ]; do
 
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /opt/appdata/plexguide/pgblitz.log
   cat /opt/appdata/plexguide/pgblitz.log | tail -200 > cat /opt/appdata/plexguide/pgblitz.log
-  sed -i -e "/Duplicate directory found in destination/d" /opt/appdata/plexguide/pgblitz.log
+  #sed -i -e "/Duplicate directory found in destination/d" /opt/appdata/plexguide/pgblitz.log
   sleep 30
 
 # Remove empty directories
