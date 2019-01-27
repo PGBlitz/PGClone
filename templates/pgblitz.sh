@@ -56,6 +56,8 @@ while [ 1 ]; do
       --exclude="qbittorrent/**" --exclude="rutorrent/**" \
       --exclude="deluge/**" --exclude="transmission/**" \
       --max-size=99G \
+      --log-file=/opt/appdata/plexguide/pgblitz.log \
+      --log-level INFO --stats 5s \
       --drive-chunk-size=128M \
       "$dlpath/downloads/" "$dlpath/move/"     
 
@@ -66,6 +68,8 @@ while [ 1 ]; do
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
         --max-size=99G \
+        --log-file=/opt/appdata/plexguide/pgblitz.log \
+        --log-level INFO --stats 5s \
         --drive-chunk-size=128M \
         "$dlpath/move/" "$dlpath/pgblitz/upload"                 
 
