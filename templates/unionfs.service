@@ -8,17 +8,12 @@
 [Unit]
 Description=UnionFS
 After=multi-user.target
-
 [Service]
 Type=simple
 User=0
 Group=0
-ExecStart=/usr/bin/rclone --allow-non-empty --allow-other mount unionfs: /mnt/unionfs \
-  --uid=1000 --gid=1000 \
-  --size-only --dir-cache-time=2m \
-  --vfs-read-chunk-size=64M --vfs-cache-max-age 675h --vfs-read-chunk-size-limit=1G \
-  --buffer-size=32M --syslog --umask 002 --log-level INFO \
-  --config /opt/appdata/plexguide/rclone.conf
+ExecStartPre=/bin/sleep 10
+ExecStart=/usr/bin/mergerfs -o defaults,allow_other,direct_io,nonempty,security_capability=false,xattr=nosys,statfs_ignore=ro,category.create=eplfs,moveonenospc=true,minfreespace=15G,fsname=pgPool /mnt/gdrive=RO:/mnt/tdrive=RO:/mnt/tcrypt=RO:/mnt/gcrypt=RO:/mnt/downloads=RW /mnt/unionfs
 ExecStop=/bin/fusermount -uz /mnt/unionfs
 TimeoutStopSec=20
 KillMode=process
