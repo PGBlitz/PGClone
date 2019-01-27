@@ -55,11 +55,9 @@ while [ 1 ]; do
       --exclude="sabnzbd/**" --exclude="nzbget/**" \
       --exclude="qbittorrent/**" --exclude="rutorrent/**" \
       --exclude="deluge/**" --exclude="transmission/**" \
-      --exclude="sabnzbd/**" --exclude="nzbget/**" \
       --max-size=99G \
       --drive-chunk-size=128M \
       "$dlpath/downloads/" "$dlpath/move/"     
-
 
   rclone moveto --min-age=2m \
         --config /opt/appdata/plexguide/rclone.conf \
