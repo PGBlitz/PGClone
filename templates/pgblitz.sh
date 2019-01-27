@@ -53,6 +53,8 @@ while [ 1 ]; do
       --exclude="sabnzbd/**" --exclude="nzbget/**" \
       --exclude="qbittorrent/**" --exclude="rutorrent/**" \
       --exclude="deluge/**" --exclude="transmission/**" \
+      --log-file=/opt/appdata/plexguide/pgblitz.log \
+      --log-level INFO --stats 5s \
       "$dlpath/downloads/" "$dlpath/move/"     
 
   rclone moveto --min-age=2m \
