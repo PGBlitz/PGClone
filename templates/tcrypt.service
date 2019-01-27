@@ -11,8 +11,8 @@ After=multi-user.target
 
 [Service]
 Type=simple
-User=0
-Group=0
+User=1000
+Group=1000
 ExecStart=/usr/bin/rclone --allow-non-empty --allow-other mount tcrypt: /mnt/tcrypt \
   --uid=1000 --gid=1000 \
   --size-only --dir-cache-time=2m \

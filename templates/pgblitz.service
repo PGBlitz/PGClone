@@ -18,8 +18,8 @@ Description='PGBlitz Loaded Balanced Multi SA GDrive Uploader'
 After=multi-user.target network-online.target
 
 [Service]
-User=0
-Group=0
+User=1000
+Group=1000
 Type=simple
 ExecStart=/bin/bash /opt/appdata/pgblitz/pgblitz.sh
 KillMode=process

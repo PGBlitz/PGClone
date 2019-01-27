@@ -46,6 +46,9 @@ while [ 1 ]; do
     if [ "$encheck" == "eblitz" ]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
+  
+  mv
+
   rclone moveto --min-age=2m \
       --config /opt/appdata/plexguide/rclone.conf \
       --transfers=16 \
