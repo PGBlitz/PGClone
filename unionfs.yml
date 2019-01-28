@@ -13,18 +13,18 @@
   tasks:
     - name: Check if mergerfs is installed
       shell: dpkg-query -W -f='${Version}' mergerfs | grep '2.25.1~ubuntu-bionic'
-      register: is_installed
+      register: mergerfs_status
       failed_when: no
       changed_when: no
 
     - name: Download mergerfs only if not installed
       get_url: url=https://github.com/trapexit/mergerfs/releases/download/2.25.1/mergerfs_2.25.1.ubuntu-bionic_amd64.deb dest=/tmp/mergerfs.deb
-      #when: is_installed.rc == 0
+      when: mergerfs_status.rc == 0
       
     - name: Install mergerfs only if not installed
       apt:
         deb: /tmp/mergerfs.deb
-      #when: is_installed.rc == 0
+      when: mergerfs_status.rc == 0
 
 - hosts: localhost
   gather_facts: false
