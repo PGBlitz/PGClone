@@ -113,7 +113,7 @@
           shell: 'cat /var/plexguide/server.hd.path'
           register: hdpath
 
-        - name: Install MOVE Service
+        - name: Install MOVE Script
           template:
             src: /opt/pgclone/templates/move_script.sh
             dest: /opt/appdata/plexguide/move.sh
@@ -135,13 +135,19 @@
       when: (transport55.stdout == "emove") or
         (transport55.stdout == "umove")
 
-    - name: Install UNIONFS Service
+    - name: Install PGUnion Script
+      template:
+        src: /opt/pgclone/templates/pgunion.sh
+        dest: /opt/appdata/plexguide/pgunion.sh
+        force: yes
+
+    - name: Install PGUnion Service
       template:
         src: /opt/pgclone/templates/unionfs.service
         dest: /etc/systemd/system/unionfs.service
         force: yes
 
-    - name: Reload UNIONFS Service
+    - name: Reload PGUnion Service
       systemd:
         daemon_reload: yes
         enabled: yes
