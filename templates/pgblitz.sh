@@ -89,8 +89,7 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories
-find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete
-
+find "$dlpath/downloads" -mindepth 2 ! -path **nzbget/* ! -path **sabnzbd/* ! -path **qbittorrent/* ! -path **deluge/* ! -path **rutorrent/* ! -path **deluge/* ! -path **transmission/* -mmin +5 -type d -empty -delete
 find "$dlpath/move/" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -type d -empty -delete
 
