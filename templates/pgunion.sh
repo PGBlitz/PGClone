@@ -10,4 +10,4 @@
 dlpath=$(cat /var/plexguide/server.hd.path)
 sleep 10
 
-mergerfs -o defaults,noauto_cache,allow_other,use_ino,func.getattr=newest,nonempty,direct_io,security_capability=false,xattr=nosys,category.create=ff,minfreespace=0,umask=002,noatime,fsname=pgUnion /mnt/gdrive=NC:/mnt/tdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC:$dlpath/downloads=NC:$dlpath/move=RW /mnt/unionfs
+mergerfs -o defaults,symlinkify=true,symlinkify_timeout=90,sync_read,allow_other,category.action=all,direct_io,use_ino,func.getattr=newest,nonempty,security_capability=false,xattr=nosys,category.create=ff,minfreespace=0,umask=002,fsname=pgUnion /mnt/gdrive=NC:/mnt/tdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC:$dlpath/downloads=NC:$dlpath/move=RW /mnt/unionfs
