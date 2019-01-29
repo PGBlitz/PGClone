@@ -136,5 +136,5 @@
         state: reloaded
         name: unionfs
 
-    - name: Reload Docker Containers
+    - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
