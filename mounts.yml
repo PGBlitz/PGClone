@@ -23,6 +23,8 @@
       - {name: plexdrive.service}
       - {name: st2monitor.service}
   tasks:
+    - name: Stop All Docker Containers
+      shell: docker stop $(docker ps -a -q)
     - name: Checking Existing Service Name
       stat:
         path: "/etc/systemd/system/{{ item.name }}"
