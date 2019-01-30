@@ -142,6 +142,10 @@
         timeout: 15
         delay: 2
 
+    - name: Register HD Path
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
+
     - name: 'Setting ownership'
       shell: "chown -R 1000:1000 {{hdpath.stdout}}/{{item}}"
       with_items:
@@ -151,7 +155,7 @@
         - "incomplete"
 
     - name: 'Setting permissions'
-      shell: "chmod -R 775 {{item}}"
+      shell: "chmod -R 775 {{hdpath.stdout}}/{{item}}"
       with_items:
         - "move"
         - "pgblitz/upload"
