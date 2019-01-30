@@ -15,7 +15,7 @@ chmod -R 755 "$dlpath/move"
 chown -R 755 "$dlpath/pgblitz/upload"
 
 # Execution
-find "$dlpath/downloads" -mindepth 2 ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** ! -path **rutorrent** ! -path **deluge** ! -path **transmission** ! -path **jdownloader2** ! -path **makemkv** ! -path **handbrake** -mmin +5 -type d -empty -delete
+find "$dlpath/downloads" -mindepth 2 ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** ! -path **rutorrent** ! -path **transmission** ! -path **jdownloader** ! -path **makemkv** ! -path **handbrake** -mmin +5 -type d -empty -delete
 find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
