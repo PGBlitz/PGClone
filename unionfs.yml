@@ -145,6 +145,22 @@
         path: /mnt/unionfs/plexguide
         timeout: 15
         delay: 2
-        
+
+    - name: 'Setting ownership'
+      shell: "chown -R 1000:1000 {{item}}"
+      with_items:
+        - "{{hdpath.stdout}}/move"
+        - "{{hdpath.stdout}}/pgblitz/upload"
+        - "{{hdpath.stdout}}/downloads"
+        - "{{hdpath.stdout}}/incomplete"
+
+    - name: 'Setting permissions'
+      shell: "chmod -R 775 {{item}}"
+      with_items:
+        - "{{hdpath.stdout}}/move"
+        - "{{hdpath.stdout}}/pgblitz/upload"
+        - "{{hdpath.stdout}}/downloads"
+        - "{{hdpath.stdout}}/incomplete"
+
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
