@@ -7,7 +7,6 @@
 ################################################################################
 # NOTE: UnionFS does not mean 'unionfs', we keep using 'unionfs' for backward compat but have switched to rclone union.
 ---
-
 - hosts: localhost
   gather_facts: false
   tasks:
@@ -70,6 +69,12 @@
             src: /opt/pgclone/templates/pgblitz.service
             dest: /etc/systemd/system/pgblitz.service
             force: yes
+
+        - name: 'Setting permissions'
+          shell: 'chmod -R 775 {{hdpath.stdout}}/pgblitz/upload'
+
+        - name: 'Setting ownership'
+          shell: 'chown -R 1000:1000 {{hdpath.stdout}}/pgblitz/upload'
 
         - name: Reload PG Blitz Service
           systemd:
@@ -147,20 +152,26 @@
       register: hdpath
 
     - name: 'Setting ownership'
-      shell: "chown -R 1000:1000 {{hdpath.stdout}}/{{item}}"
+      shell: 'chown -R 1000:1000 {{hdpath.stdout}}/{{item}}'
       with_items:
-        - "move"
-        - "pgblitz/upload"
-        - "downloads"
-        - "incomplete"
+        - 'move'
+        - 'downloads'
 
     - name: 'Setting permissions'
-      shell: "chmod -R 775 {{hdpath.stdout}}/{{item}}"
+      shell: 'chmod -R 775 {{hdpath.stdout}}/{{item}}'
       with_items:
-        - "move"
-        - "pgblitz/upload"
-        - "downloads"
-        - "incomplete"
+        - 'move'
+        - 'downloads'
+        - 'incomplete'
+      ignore_errors: yes
+
+    - name: 'Setting ownership'
+      shell: 'chown -R 1000:1000 {{hdpath.stdout}}/pgblitz/upload'
+      with_items:
+        - 'move'
+        - 'downloads'
+        - 'incomplete'
+      ignore_errors: yes
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
