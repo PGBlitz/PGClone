@@ -17,22 +17,37 @@ dlpath=$(cat /var/plexguide/server.hd.path)
 
 ## Sync, Sleep 2 Minutes, Repeat. BWLIMIT 9 Prevents Google 750GB Google Upload Ban
 
-rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --transfers=16 \
-      --max-transfer=100G \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --exclude="sabnzbd/**" --exclude="nzbget/**" \
-      --exclude="qbittorrent/**" --exclude="rutorrent/**" \
-      --exclude="deluge/**" --exclude="transmission/**" \
-      --max-size=99G \
-      --drive-chunk-size=128M \
-      "$dlpath/downloads/" "$dlpath/move/"         
+rclone moveto -config /opt/appdata/plexguide/rclone.conf \
+  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-level INFO --stats 5s \
+  --min-age=5s \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+  --exclude="**sabnzbd**" --exclude="**nzbget**" \
+  --exclude="**qbittorrent**" --exclude="**rutorrent**" \
+  --exclude="**deluge**" --exclude="**transmission**" \
+  --exclude="**jdownloader**" --exclude="**makemkv**" \
+  --exclude="**handbrake**" --exclude="**bazarr**" \
+  "$dlpath/downloads/" "$dlpath/move/"       
 
-rclone move --config /opt/appdata/plexguide/rclone.conf --bwlimit {{bandwidth.stdout}}M \
-  --tpslimit 6 --exclude='**partial~' --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude=".unionfs-fuse/**" --checkers=16 --max-size 99G --log-file=/opt/appdata/plexguide/rclone \
-  --log-level INFO --stats 5s $dlpath/move {{ver.stdout}}:/
+rclone move --config /opt/appdata/plexguide/rclone.conf \
+  --log-file=/opt/appdata/plexguide/rclone \
+  --log-level INFO --stats 5s \
+  --bwlimit {{bandwidth.stdout}}M \
+  --tpslimit 6 \
+  --checkers=16 \
+  --max-size=300G \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+  $dlpath/move {{ver.stdout}}:/
 sleep 10
+
+# Remove empty directories
+find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete \
+  ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** \
+  ! -path **rutorrent** ! -path **transmission** ! -path **jdownloader** ! -path **makemkv** \
+  ! -path **handbrake**
+find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
+find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
+find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
 done

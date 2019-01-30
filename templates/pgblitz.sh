@@ -52,24 +52,26 @@ while [ 1 ]; do
     if [ "$encheck" == "eblitz" ]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
-  rclone moveto --min-age=2m \
-      --config /opt/appdata/plexguide/rclone.conf \
-      --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-      --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-      --exclude="sabnzbd/**" --exclude="nzbget/**" \
-      --exclude="qbittorrent/**" --exclude="rutorrent/**" \
-      --exclude="deluge/**" --exclude="transmission/**" \
-      --log-file=/opt/appdata/plexguide/pgblitz.log \
-      --log-level INFO --stats 5s \
-      "$dlpath/downloads/" "$dlpath/move/"     
+  rclone moveto -config /opt/appdata/plexguide/rclone.conf \
+    --log-file=/opt/appdata/plexguide/pgblitz.log \
+    --log-level INFO --stats 5s \
+    --min-age=5s \
+    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+    --exclude="**sabnzbd**" --exclude="**nzbget**" \
+    --exclude="**qbittorrent**" --exclude="**rutorrent**" \
+    --exclude="**deluge**" --exclude="**transmission**" \
+    --exclude="**jdownloader**" --exclude="**makemkv**" \
+    --exclude="**handbrake**" --exclude="**bazarr**" \
+    "$dlpath/downloads/" "$dlpath/move/"     
 
-  rclone moveto --min-age=2m \
-        --config /opt/appdata/plexguide/rclone.conf \
-        --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-        --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-        --log-file=/opt/appdata/plexguide/pgblitz.log \
-        --log-level INFO --stats 5s \
-        "$dlpath/move/" "$dlpath/pgblitz/upload"                 
+  rclone moveto --config /opt/appdata/plexguide/rclone.conf \
+    --log-file=/opt/appdata/plexguide/pgblitz.log \
+    --log-level INFO --stats 5s \
+    --min-age=5s \
+    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+    "$dlpath/move/" "$dlpath/pgblitz/upload"                 
 
   let "cyclecount++"
   echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
@@ -77,17 +79,19 @@ while [ 1 ]; do
   echo "" >> /opt/appdata/plexguide/pgblitz.log
   echo "Utilizing: $keytransfer" >> /opt/appdata/plexguide/pgblitz.log
 
-  rclone moveto --tpslimit 12 --checkers=20 --min-age=2m \
-        --config /opt/appdata/plexguide/rclone.conf \
-        --transfers=16 \
-        --bwlimit {{bandwidth.stdout}}M \
-        --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-        --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-        --max-size=99G \
-        --log-file=/opt/appdata/plexguide/pgblitz.log \
-        --log-level INFO --stats 5s \
-        --drive-chunk-size=128M \
-        "$dlpath/pgblitz/upload" "$keytransfer:/"
+  rclone moveto --config /opt/appdata/plexguide/rclone.conf \
+    --log-file=/opt/appdata/plexguide/pgblitz.log \
+    --log-level INFO --stats 5s \
+    --tpslimit 12 \
+    --checkers=20 \
+    --min-age=5s \
+    --transfers=16 \
+    --bwlimit {{bandwidth.stdout}}M \
+    --max-size=300G \
+    --drive-chunk-size=128M \
+    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+    "$dlpath/pgblitz/upload" "$keytransfer:/"
 
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /opt/appdata/plexguide/pgblitz.log
   cat /opt/appdata/plexguide/pgblitz.log | tail -200 > cat /opt/appdata/plexguide/pgblitz.log
@@ -95,7 +99,10 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories
-find "$dlpath/downloads" -mindepth 2 ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** ! -path **rutorrent** ! -path **transmission** ! -path **jdownloader** ! -path **makemkv** ! -path **handbrake** -mmin +5 -type d -empty -delete
+find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete \
+  ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** \
+  ! -path **rutorrent** ! -path **transmission** ! -path **jdownloader** ! -path **makemkv** \
+  ! -path **handbrake**
 find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
