@@ -59,6 +59,8 @@ while [ 1 ]; do
       --exclude="sabnzbd/**" --exclude="nzbget/**" \
       --exclude="qbittorrent/**" --exclude="rutorrent/**" \
       --exclude="deluge/**" --exclude="transmission/**" \
+      --exclude="jdownloader2/**" --exclude="handbrake/**" \
+      --exclude "makemv/**" \
       --log-file=/opt/appdata/plexguide/pgblitz.log \
       --log-level INFO --stats 5s \
       "$dlpath/downloads/" "$dlpath/move/"     
@@ -95,7 +97,7 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories
-find "$dlpath/downloads" -mindepth 2 ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** ! -path **rutorrent** ! -path **deluge** ! -path **transmission** -mmin +5 -type d -empty -delete
+find "$dlpath/downloads" -mindepth 2 ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** ! -path **rutorrent** ! -path **deluge** ! -path **transmission** ! -path **jdownloader2** ! -path **makemkv** ! -path **handbrake** -mmin +5 -type d -empty -delete
 find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
