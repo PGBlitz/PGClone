@@ -143,20 +143,20 @@
         delay: 2
 
     - name: 'Setting ownership'
-      shell: "chown -R 1000:1000 {{item}}"
+      shell: "chown -R 1000:1000 {{hdpath.stdout}}/{{item}}"
       with_items:
-        - "{{hdpath}}/move"
-        - "{{hdpath}}/pgblitz/upload"
-        - "{{hdpath}}/downloads"
-        - "{{hdpath}}/incomplete"
+        - "move"
+        - "pgblitz/upload"
+        - "downloads"
+        - "incomplete"
 
     - name: 'Setting permissions'
       shell: "chmod -R 775 {{item}}"
       with_items:
-        - "{{hdpath}}/move"
-        - "{{hdpath}}/pgblitz/upload"
-        - "{{hdpath}}/downloads"
-        - "{{hdpath}}/incomplete"
+        - "move"
+        - "pgblitz/upload"
+        - "downloads"
+        - "incomplete"
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
