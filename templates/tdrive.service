@@ -14,12 +14,16 @@ After=multi-user.target
 Type=simple
 User=0
 Group=0
-ExecStart=/usr/bin/rclone --allow-non-empty --allow-other mount tdrive: /mnt/tdrive \
-  --uid=1000 --gid=1000 --rc \
-  --size-only --dir-cache-time=2m \
-  --vfs-read-chunk-size=64M --vfs-cache-max-age 675h --vfs-read-chunk-size-limit=1G \
-  --buffer-size=32M --syslog --umask 002 --log-level INFO \
-  --config /opt/appdata/plexguide/rclone.conf
+ExecStart=/usr/bin/rclone mount tdrive: /mnt/tdrive \
+  --allow-non-empty --allow-other \
+  --size-only --syslog --umask 002 --log-level INFO \
+  --uid=1000 --gid=1000 --config /opt/appdata/plexguide/rclone.conf \
+  --timeout 1h \
+  --vfs-read-chunk-size 128M \
+  --vfs-read-chunk-size-limit off \
+  --buffer-size 256M \
+  --dir-cache-time 5m \
+  --drive-chunk-size 32M
 ExecStop=/bin/fusermount -uz /mnt/tdrive
 TimeoutStopSec=20
 KillMode=process
