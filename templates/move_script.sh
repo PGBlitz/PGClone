@@ -33,6 +33,7 @@ rclone moveto -config /opt/appdata/plexguide/rclone.conf \
 rclone move --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/opt/appdata/plexguide/rclone \
   --log-level INFO --stats 5s \
+  --min-age=5s \
   --bwlimit {{bandwidth.stdout}}M \
   --tpslimit 6 \
   --checkers=16 \
