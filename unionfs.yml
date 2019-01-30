@@ -138,10 +138,6 @@
 
     - name: 'Waiting for PGUnion to initialize'
       wait_for:
-        path: /mnt/unionfs/tv
-
-    - name: 'Waiting for PGUnion to initialize'
-      wait_for:
         path: /mnt/unionfs/plexguide
         timeout: 15
         delay: 2
@@ -149,18 +145,18 @@
     - name: 'Setting ownership'
       shell: "chown -R 1000:1000 {{item}}"
       with_items:
-        - "{{hdpath.stdout}}/move"
-        - "{{hdpath.stdout}}/pgblitz/upload"
-        - "{{hdpath.stdout}}/downloads"
-        - "{{hdpath.stdout}}/incomplete"
+        - "{{hdpath}}/move"
+        - "{{hdpath}}/pgblitz/upload"
+        - "{{hdpath}}/downloads"
+        - "{{hdpath}}/incomplete"
 
     - name: 'Setting permissions'
       shell: "chmod -R 775 {{item}}"
       with_items:
-        - "{{hdpath.stdout}}/move"
-        - "{{hdpath.stdout}}/pgblitz/upload"
-        - "{{hdpath.stdout}}/downloads"
-        - "{{hdpath.stdout}}/incomplete"
+        - "{{hdpath}}/move"
+        - "{{hdpath}}/pgblitz/upload"
+        - "{{hdpath}}/downloads"
+        - "{{hdpath}}/incomplete"
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
