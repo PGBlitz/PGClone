@@ -70,6 +70,12 @@
             dest: /etc/systemd/system/pgblitz.service
             force: yes
 
+        - name: Creating pgblitz directory
+          file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000'
+          force: yes
+          with_items:
+            - '/pgblitz/upload'
+
         - name: 'Setting permissions'
           shell: 'chmod -R 775 {{hdpath.stdout}}/pgblitz/upload'
 
@@ -151,11 +157,20 @@
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
 
+    - name: Creating required paths
+      file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000'
+      force: yes
+      with_items:
+        - 'move'
+        - 'downloads'
+        - 'incomplete'
+
     - name: 'Setting ownership'
       shell: 'chown -R 1000:1000 {{hdpath.stdout}}/{{item}}'
       with_items:
         - 'move'
         - 'downloads'
+        - 'incomplete'
 
     - name: 'Setting permissions'
       shell: 'chmod -R 775 {{hdpath.stdout}}/{{item}}'
@@ -163,15 +178,6 @@
         - 'move'
         - 'downloads'
         - 'incomplete'
-      ignore_errors: yes
-
-    - name: 'Setting ownership'
-      shell: 'chown -R 1000:1000 {{hdpath.stdout}}/pgblitz/upload'
-      with_items:
-        - 'move'
-        - 'downloads'
-        - 'incomplete'
-      ignore_errors: yes
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
