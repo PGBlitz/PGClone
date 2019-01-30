@@ -19,10 +19,10 @@ ExecStart=/usr/bin/rclone mount gdrive: /mnt/gdrive \
   --size-only --syslog --umask 002 --log-level INFO \
   --uid=1000 --gid=1000 --config /opt/appdata/plexguide/rclone.conf \
   --timeout 1h \
-  --vfs-read-chunk-size 128M \
-  --vfs-read-chunk-size-limit off \
-  --buffer-size 256M \
   --dir-cache-time 5m \
+  --vfs-read-chunk-size 32M \
+  --vfs-read-chunk-size-limit 2G \
+  --buffer-size 1G \
   --drive-chunk-size 32M
 ExecStop=/bin/fusermount -uz /mnt/gdrive
 TimeoutStopSec=20
