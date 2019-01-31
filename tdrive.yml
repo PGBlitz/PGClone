@@ -22,3 +22,13 @@
         enabled: yes
         state: reloaded
         name: tdrive
+
+    - name: Create TDrive Folders
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - /mnt/tdrive
+        - /mnt/tdrive/tv
+        - /mnt/tdrive/movies
+        - /mnt/tdrive/music
+        - /mnt/tdrive/ebooks
+        - /mnt/tdrive/abooks

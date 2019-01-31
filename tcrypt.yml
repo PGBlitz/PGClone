@@ -21,3 +21,14 @@
         enabled: yes
         state: reloaded
         name: tcrypt
+
+
+    - name: Create TCrypt Folders
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - /mnt/tcrypt
+        - /mnt/tcrypt/tv
+        - /mnt/tcrypt/movies
+        - /mnt/tcrypt/music
+        - /mnt/tcrypt/ebooks
+        - /mnt/tcrypt/abooks

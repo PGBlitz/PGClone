@@ -21,3 +21,13 @@
         enabled: yes
         state: reloaded
         name: gcrypt
+
+    - name: Create GCrypt Folders
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - /mnt/gcrypt
+        - /mnt/gcrypt/tv
+        - /mnt/gcrypt/movies
+        - /mnt/gcrypt/music
+        - /mnt/gcrypt/ebooks
+        - /mnt/gcrypt/abooks
