@@ -52,5 +52,5 @@ find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete \
   ! -path **handbrake**
 find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
+find 
 done
