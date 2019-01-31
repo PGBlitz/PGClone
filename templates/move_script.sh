@@ -10,10 +10,11 @@ if pidof -o %PPID -x "$0"; then
 fi
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
-ver=$(cat /var/plexguide/rclone/deloy.version)
+ver=$(cat /var/plexguide/rclone/deploy.version)
 sleep 10
 while true
 do
+
 dlpath=$(cat /var/plexguide/server.hd.path)
 
 ## Sync, Sleep 2 Minutes, Repeat. BWLIMIT 9 Prevents Google 750GB Google Upload Ban
