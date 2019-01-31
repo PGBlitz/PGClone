@@ -10,6 +10,7 @@ if pidof -o %PPID -x "$0"; then
 fi
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
+ver=$(cat /var/plexguide/rclone/deloy.version)
 sleep 10
 while true
 do
@@ -17,7 +18,8 @@ dlpath=$(cat /var/plexguide/server.hd.path)
 
 ## Sync, Sleep 2 Minutes, Repeat. BWLIMIT 9 Prevents Google 750GB Google Upload Ban
 
-rclone moveto -config /opt/appdata/plexguide/rclone.conf \
+rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
+  --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/opt/appdata/plexguide/pgblitz.log \
   --log-level INFO --stats 5s \
   --min-age=5s \
@@ -27,10 +29,10 @@ rclone moveto -config /opt/appdata/plexguide/rclone.conf \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
   --exclude="**deluge**" --exclude="**transmission**" \
   --exclude="**jdownloader**" --exclude="**makemkv**" \
-  --exclude="**handbrake**" --exclude="**bazarr**" \
-  "$dlpath/downloads/" "$dlpath/move/"       
+  --exclude="**handbrake**" --exclude="**bazarr**"
 
-rclone move --config /opt/appdata/plexguide/rclone.conf \
+rclone move "$dlpath/move/" "$ver:/" \
+  --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/opt/appdata/plexguide/rclone \
   --log-level INFO --stats 5s \
   --min-age=5s \
@@ -39,8 +41,8 @@ rclone move --config /opt/appdata/plexguide/rclone.conf \
   --checkers=16 \
   --max-size=300G \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  $dlpath/move {{ver.stdout}}:/
+  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+
 sleep 10
 
 # Remove empty directories

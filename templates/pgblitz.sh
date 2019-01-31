@@ -52,7 +52,8 @@ while [ 1 ]; do
     if [ "$encheck" == "eblitz" ]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
-  rclone moveto -config /opt/appdata/plexguide/rclone.conf \
+  rclone moveto "$dlpath/downloads/" "$dlpath/move/" \   
+    --config /opt/appdata/plexguide/rclone.conf \
     --log-file=/opt/appdata/plexguide/pgblitz.log \
     --log-level INFO --stats 5s \
     --min-age=5s \
@@ -63,15 +64,15 @@ while [ 1 ]; do
     --exclude="**deluge**" --exclude="**transmission**" \
     --exclude="**jdownloader**" --exclude="**makemkv**" \
     --exclude="**handbrake**" --exclude="**bazarr**" \
-    "$dlpath/downloads/" "$dlpath/move/"     
 
-  rclone moveto --config /opt/appdata/plexguide/rclone.conf \
+
+  rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
+    --config /opt/appdata/plexguide/rclone.conf \
     --log-file=/opt/appdata/plexguide/pgblitz.log \
     --log-level INFO --stats 5s \
     --min-age=5s \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-    "$dlpath/move/" "$dlpath/pgblitz/upload"                 
+    --exclude='**partial~' --exclude=".unionfs-fuse/**"           
 
   let "cyclecount++"
   echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
@@ -79,7 +80,8 @@ while [ 1 ]; do
   echo "" >> /opt/appdata/plexguide/pgblitz.log
   echo "Utilizing: $keytransfer" >> /opt/appdata/plexguide/pgblitz.log
 
-  rclone moveto --config /opt/appdata/plexguide/rclone.conf \
+  rclone moveto "$dlpath/pgblitz/upload" "$keytransfer:/" \
+    --config /opt/appdata/plexguide/rclone.conf \
     --log-file=/opt/appdata/plexguide/pgblitz.log \
     --log-level INFO --stats 5s \
     --tpslimit 12 \
@@ -90,8 +92,7 @@ while [ 1 ]; do
     --max-size=300G \
     --drive-chunk-size=128M \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-    "$dlpath/pgblitz/upload" "$keytransfer:/"
+    --exclude="**partial~" --exclude=".unionfs-fuse/**"
 
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /opt/appdata/plexguide/pgblitz.log
   cat /opt/appdata/plexguide/pgblitz.log | tail -200 > cat /opt/appdata/plexguide/pgblitz.log
