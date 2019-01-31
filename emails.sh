@@ -45,5 +45,7 @@ echo "In GDRIVE, share the teamdrive with the following emails:"
 echo ""
 echo "NOTE 1: Make sure you SHARE with the CORRECT TEAM DRIVE!"
 echo "NOTE 2: Save Time & Copy & Paste the E-Mails Into the G-Drive Share!"
+echo "NOTE 3: change the default Role from Content-Manager to Contribution!"
+echo "        if you don't do it,  you can lose data!"
 echo
 cat /tmp/pgblitz.emails.list
