@@ -19,29 +19,29 @@ dlpath=$(cat /var/plexguide/server.hd.path)
 ## Sync, Sleep 2 Minutes, Repeat. BWLIMIT 9 Prevents Google 750GB Google Upload Ban
 
 rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
-  --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/opt/appdata/plexguide/pgblitz.log \
-  --log-level INFO --stats 5s \
-  --min-age=5s \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  --exclude="**sabnzbd**" --exclude="**nzbget**" \
-  --exclude="**qbittorrent**" --exclude="**rutorrent**" \
-  --exclude="**deluge**" --exclude="**transmission**" \
-  --exclude="**jdownloader**" --exclude="**makemkv**" \
-  --exclude="**handbrake**" --exclude="**bazarr**"
+--config /opt/appdata/plexguide/rclone.conf \
+--log-file=/opt/appdata/plexguide/pgblitz.log \
+--log-level INFO --stats 5s \
+--min-age=5s \
+--exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+--exclude='**partial~' --exclude=".unionfs-fuse/**" \
+--exclude="**sabnzbd**" --exclude="**nzbget**" \
+--exclude="**qbittorrent**" --exclude="**rutorrent**" \
+--exclude="**deluge**" --exclude="**transmission**" \
+--exclude="**jdownloader**" --exclude="**makemkv**" \
+--exclude="**handbrake**" --exclude="**bazarr**"
 
 rclone move "$dlpath/move/" "$ver:/" \
-  --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/opt/appdata/plexguide/rclone \
-  --log-level INFO --stats 5s \
-  --min-age=5s \
-  --bwlimit {{bandwidth.stdout}}M \
-  --tpslimit 6 \
-  --checkers=16 \
-  --max-size=300G \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**"
+--config /opt/appdata/plexguide/rclone.conf \
+--log-file=/opt/appdata/plexguide/rclone \
+--log-level INFO --stats 5s \
+--min-age=5s \
+--bwlimit {{bandwidth.stdout}}M \
+--tpslimit 6 \
+--checkers=16 \
+--max-size=300G \
+--exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+--exclude="**partial~" --exclude=".unionfs-fuse/**"
 
 sleep 10
 

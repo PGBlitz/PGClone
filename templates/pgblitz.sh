@@ -52,27 +52,27 @@ while [ 1 ]; do
     if [ "$encheck" == "eblitz" ]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
-  rclone moveto "$dlpath/downloads/" "$dlpath/move/" \   
-    --config /opt/appdata/plexguide/rclone.conf \
-    --log-file=/opt/appdata/plexguide/pgblitz.log \
-    --log-level INFO --stats 5s \
-    --min-age=5s \
-    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-    --exclude="**sabnzbd**" --exclude="**nzbget**" \
-    --exclude="**qbittorrent**" --exclude="**rutorrent**" \
-    --exclude="**deluge**" --exclude="**transmission**" \
-    --exclude="**jdownloader**" --exclude="**makemkv**" \
-    --exclude="**handbrake**" --exclude="**bazarr**"
+  rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
+  --config /opt/appdata/plexguide/rclone.conf \
+  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-level INFO --stats 5s \
+  --min-age=5s \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+  --exclude="**sabnzbd**" --exclude="**nzbget**" \
+  --exclude="**qbittorrent**" --exclude="**rutorrent**" \
+  --exclude="**deluge**" --exclude="**transmission**" \
+  --exclude="**jdownloader**" --exclude="**makemkv**" \
+  --exclude="**handbrake**" --exclude="**bazarr**"
 
 
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
-    --config /opt/appdata/plexguide/rclone.conf \
-    --log-file=/opt/appdata/plexguide/pgblitz.log \
-    --log-level INFO --stats 5s \
-    --min-age=5s \
-    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude='**partial~' --exclude=".unionfs-fuse/**"           
+  --config /opt/appdata/plexguide/rclone.conf \
+  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-level INFO --stats 5s \
+  --min-age=5s \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude='**partial~' --exclude=".unionfs-fuse/**"           
 
   let "cyclecount++"
   echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
@@ -81,18 +81,18 @@ while [ 1 ]; do
   echo "Utilizing: $keytransfer" >> /opt/appdata/plexguide/pgblitz.log
 
   rclone moveto "$dlpath/pgblitz/upload" "$keytransfer:/" \
-    --config /opt/appdata/plexguide/rclone.conf \
-    --log-file=/opt/appdata/plexguide/pgblitz.log \
-    --log-level INFO --stats 5s \
-    --tpslimit 12 \
-    --checkers=20 \
-    --min-age=5s \
-    --transfers=16 \
-    --bwlimit {{bandwidth.stdout}}M \
-    --max-size=300G \
-    --drive-chunk-size=128M \
-    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude="**partial~" --exclude=".unionfs-fuse/**"
+  --config /opt/appdata/plexguide/rclone.conf \
+  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-level INFO --stats 5s \
+  --tpslimit 12 \
+  --checkers=20 \
+  --min-age=5s \
+  --transfers=16 \
+  --bwlimit {{bandwidth.stdout}}M \
+  --max-size=300G \
+  --drive-chunk-size=128M \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude="**partial~" --exclude=".unionfs-fuse/**"
 
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /opt/appdata/plexguide/pgblitz.log
   cat /opt/appdata/plexguide/pgblitz.log | tail -200 > cat /opt/appdata/plexguide/pgblitz.log
