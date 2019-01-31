@@ -159,7 +159,6 @@
 
     - name: Creating required paths
       file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000'
-      force: yes
       with_items:
         - 'move'
         - 'downloads'
