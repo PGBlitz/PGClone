@@ -41,7 +41,7 @@ rclone move "$dlpath/move/" "$ver:/" \
   --checkers=16 \
   --max-size=300G \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+  --exclude="**partial~" --exclude=".unionfs-fuse/**"
 
 sleep 10
 

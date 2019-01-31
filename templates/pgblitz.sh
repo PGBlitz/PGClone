@@ -63,7 +63,7 @@ while [ 1 ]; do
     --exclude="**qbittorrent**" --exclude="**rutorrent**" \
     --exclude="**deluge**" --exclude="**transmission**" \
     --exclude="**jdownloader**" --exclude="**makemkv**" \
-    --exclude="**handbrake**" --exclude="**bazarr**" \
+    --exclude="**handbrake**" --exclude="**bazarr**"
 
 
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
