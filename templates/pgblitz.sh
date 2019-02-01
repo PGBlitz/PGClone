@@ -56,7 +56,7 @@ while [ 1 ]; do
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/opt/appdata/plexguide/pgblitz.log \
   --log-level INFO --stats 5s \
-  --min-age=5s \
+  --min-age=2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
