@@ -8,6 +8,7 @@
 
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
-sleep 10
+sleep 2
 
-mergerfs -o defaults,symlinkify=true,symlinkify_timeout=3600,sync_read,allow_other,direct_io,use_ino,func.getattr=newest,nonempty,security_capability=false,xattr=nosys,category.create=ff,minfreespace=0,umask=002,fsname=pgUnion /mnt/gdrive=NC:/mnt/tdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC:$dlpath/downloads=NC:$dlpath/move=RW /mnt/unionfs
+mergerfs -o defaults,sync_read,allow_other,direct_io,use_ino,func.getattr=newest,nonempty,security_capability=false,xattr=nosys,category.create=ff,minfreespace=0,umask=002,fsname=pgUnion \
+/mnt/tdrive=NC:/mnt/gdrive=NC:$dlpath/downloads=NC:$dlpath/move=RW:/mnt/pgblitz/upload=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC /mnt/unionfs
