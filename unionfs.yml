@@ -94,12 +94,6 @@
             dest: /etc/systemd/system/pgblitz.service
             force: yes
 
-        - name: 'Setting permissions'
-          shell: 'chmod -R 775 {{hdpath.stdout}}/pgblitz/upload'
-
-        - name: 'Setting ownership'
-          shell: 'chown -R 1000:1000 {{hdpath.stdout}}/pgblitz/upload'
-
         - name: Reload PG Blitz Service
           systemd:
             daemon_reload: yes
