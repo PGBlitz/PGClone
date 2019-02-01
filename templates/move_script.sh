@@ -30,7 +30,8 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
 --exclude="**jdownloader**" --exclude="**makemkv**" \
---exclude="**handbrake**" --exclude="**bazarr**"
+--exclude="**handbrake**" --exclude="**bazarr**" \
+--exclude="**ignore**"
 
 rclone move "$dlpath/move/" "$ver:/" \
 --config /opt/appdata/plexguide/rclone.conf \
@@ -44,14 +45,14 @@ rclone move "$dlpath/move/" "$ver:/" \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude="**partial~" --exclude=".unionfs-fuse/**"
 
-sleep 10
+sleep 5
 
 # Remove empty directories
 find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete \
   ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** \
   ! -path **rutorrent** ! -path **transmission** ! -path **jdownloader** ! -path **makemkv** \
-  ! -path **handbrake**
+  ! -path **handbrake** ! -path **ignore** 
 find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
-find 
+
 done

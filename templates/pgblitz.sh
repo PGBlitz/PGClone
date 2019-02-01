@@ -63,8 +63,8 @@ while [ 1 ]; do
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
   --exclude="**deluge**" --exclude="**transmission**" \
   --exclude="**jdownloader**" --exclude="**makemkv**" \
-  --exclude="**handbrake**" --exclude="**bazarr**"
-
+  --exclude="**handbrake**" --exclude="**bazarr**" \
+  --exclude="**ignore**"
 
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
   --config /opt/appdata/plexguide/rclone.conf \
@@ -103,7 +103,7 @@ while [ 1 ]; do
 find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete \
   ! -path **nzbget** ! -path **sabnzbd** ! -path **qbittorrent** ! -path **deluge** \
   ! -path **rutorrent** ! -path **transmission** ! -path **jdownloader** ! -path **makemkv** \
-  ! -path **handbrake**
+  ! -path **handbrake** ! -path **ignore**
 find "$dlpath/downloads" -mindepth 3 -mmin +5 -type d -empty -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
