@@ -41,6 +41,30 @@
         path: 'remotes = gdrive: {{hdpath.stdout}}/move'
       when: transport55.stdout == "umove"
 
+    - name: Creating required paths
+      file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
+      with_items:
+        - 'move'
+        - 'pgblitz/upload'
+        - 'downloads'
+        - 'incomplete'
+
+    - name: 'Setting ownership'
+      shell: 'chown -R 1000:1000 {{hdpath.stdout}}/{{item}}'
+      with_items:
+        - 'move'
+        - 'pgblitz'
+        - 'downloads'
+        - 'incomplete'
+
+    - name: 'Setting permissions'
+      shell: 'chmod -R 775 {{hdpath.stdout}}/{{item}}'
+      with_items:
+        - 'move'
+        - 'pgblitz'
+        - 'downloads'
+        - 'incomplete'
+
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
     #      register: transport
@@ -150,30 +174,6 @@
     - name: Register HD Path
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
-
-    - name: Creating required paths
-      file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
-      with_items:
-        - 'move'
-        - '/pgblitz/upload'
-        - 'downloads'
-        - 'incomplete'
-
-    - name: 'Setting ownership'
-      shell: 'chown -R 1000:1000 {{hdpath.stdout}}/{{item}}'
-      with_items:
-        - 'move'
-        - '/pgblitz'
-        - 'downloads'
-        - 'incomplete'
-
-    - name: 'Setting permissions'
-      shell: 'chmod -R 775 {{hdpath.stdout}}/{{item}}'
-      with_items:
-        - 'move'
-        - '/pgblitz'
-        - 'downloads'
-        - 'incomplete'
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
