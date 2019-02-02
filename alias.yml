@@ -6,6 +6,56 @@
 # GNU:        General Public License v3.0
 ################################################################################
 ---
+- name: Removing old service helpers
+  file:
+    path: "/bin/{{item}}"
+    state: absent
+  with_items:
+    - blitz
+    - move
+    - ngcrypt
+    - ngdrive
+    - npgblitz
+    - npgmove
+    - npgunion
+    - ntcrypt
+    - ntdrive
+    - pgblitz
+    - pgmove
+    - sgcrypt
+    - sgdrive
+    - spgblitz
+    - spgmove
+    - spgunion
+    - srclone
+    - stcrypt
+
+- name: Removing service helpers
+  template:
+    src: "{{item}}"
+    dest: /bin/{{item}}
+    force: yes
+    mode: 0775
+  with_items:
+    - ngcrypt
+    - ngdrive
+    - npgblitz
+    - npgmove
+    - npgunion
+    - ntcrypt
+    - ntdrive
+    - pgblitz
+    - pgmove
+    - sgcrypt
+    - sgdrive
+    - spgblitz
+    - spgmove
+    - spgunion
+    - srclone
+    - stcrypt
+    - stdrive
+
+
 - name: Installing service helpers
   template:
     src: "{{item}}"
