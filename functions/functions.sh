@@ -23,8 +23,8 @@ variable () {
   if [ ! -e "$file" ]; then echo "$2" > $1; fi
 }
 
-removemounts () {
-  ansible-playbook /opt/pgclone/mounts.yml
+removepgservices () {
+  ansible-playbook /opt/pgclone/pgservices.yml
 }
 
 readrcloneconfig () {

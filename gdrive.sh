@@ -75,7 +75,7 @@ bandwidthblitz
 question1
 elif [ "$typed" == "5" ]; then
     if [ "$transport" == "PG Blitz /w No Encryption" ]; then
-      removemounts
+      removepgservices
       deploygdrivecheck
       deploytdrivecheck
       deploygdsa01check
@@ -86,7 +86,7 @@ elif [ "$typed" == "5" ]; then
       pgbdeploy
       question1
     elif [ "$transport" == "PG Blitz /w Encryption" ]; then
-      removemounts
+      removepgservices
       deploygdrivecheck
       deploytdrivecheck
       deploygdsa01check
@@ -136,14 +136,14 @@ elif [ "$typed" == "4" ]; then
     if [ "$transport" == "PG Move /w No Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
       echo "gdrive" > /var/plexguide/rclone/deploy.version
-      removemounts
+      removepgservices
       deploygdrivecheck
       ansible-playbook /opt/pgclone/gdrive.yml
       ansible-playbook /opt/pgclone/pgunion.yml
       question1
     elif [ "$transport" == "PG Move /w Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
-      removemounts
+      removepgservices
       deploygdrivecheck
       deploygcryptcheck
       ansible-playbook /opt/pgclone/gdrive.yml
