@@ -54,6 +54,9 @@
         - 'pgblitz/upload'
         - 'downloads'
         - 'incomplete'
+        
+    - name: 'Setting ownership on logs'
+      shell: 'chown -R 1000:1000 /var/plexguide/logs'
 
     - name: 'Setting ownership'
       shell: 'chown -R 1000:1000 {{hdpath.stdout}}/{{item}}'
