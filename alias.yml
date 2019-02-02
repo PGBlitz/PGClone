@@ -13,7 +13,7 @@
 
 - name: Installing service helpers
   template:
-    src: {{item}}
+    src: '{{item}}'
     dest: /bin/{{item}}
     force: yes
     mode: 0775
