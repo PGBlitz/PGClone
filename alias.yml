@@ -13,6 +13,7 @@
   with_items:
     - blitz
     - move
+    - nrclone
     - ngcrypt
     - ngdrive
     - npgblitz
@@ -39,6 +40,7 @@
   with_items:
     - blitz
     - move
+    - nrclone
     - ngcrypt
     - ngdrive
     - npgblitz
