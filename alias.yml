@@ -37,6 +37,8 @@
     force: yes
     mode: 0775
   with_items:
+    - blitz
+    - move
     - ngcrypt
     - ngdrive
     - npgblitz
