@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Title:      PlexGuide (Reference Title File)
+# Author(s):  Admin9705 - Deiteq
+# URL:        https://plexguide.com - http://github.plexguide.com
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+
+
+- name: Installing service helpers
+  template:
+    src: {{item}}
+    dest: /bin/{{item}}
+    force: yes
+    mode: 0775
+  with_items:
+    - ngcrypt
+    - ngdrive
+    - npgblitz
+    - npgmove
+    - npgunion
+    - ntcrypt
+    - ntdrive
+    - pgblitz
+    - pgmove
+    - sgcrypt
+    - sgdrive
+    - spgblitz
+    - spgmove
+    - spgunion
+    - srclone
+    - stcrypt
+    - stdrive

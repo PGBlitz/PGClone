@@ -5,11 +5,14 @@
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
 ################################################################################
-# NOTE: UnionFS does not mean 'unionfs', we keep using 'unionfs' for backward compat but have switched to rclone union.
+# NOTE: UnionFS does not mean 'unionfs', we keep using 'unionfs' for backward compat but have switched to mergerfs
 ---
 - hosts: localhost
   gather_facts: false
   tasks:
+    - name: include PGClone aliases
+    - include_tasks: '/opt/pgclone/alias.yml'
+
     - name: Register HD Path
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
@@ -21,6 +24,8 @@
     - name: Line Remover
       shell: 'sed -i -e "/\[unionfs\]/,+2d" /opt/appdata/plexguide/rclone.conf'
 
+    - name: Line Remover
+      shell: 'sed -i -e "/\[pgunion\]/,+2d" /opt/appdata/plexguide/rclone.conf'
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
@@ -76,7 +81,7 @@
 
     - name: Transport Type
       shell: |
-        echo "[unionfs]" >> /opt/appdata/plexguide/rclone.conf
+        echo "[pgunion]" >> /opt/appdata/plexguiqde/rclone.conf
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
     #      register: transport
@@ -125,14 +130,14 @@
 
         - name: Install MOVE Script
           template:
-            src: /opt/pgclone/templates/move_script.sh
-            dest: /opt/appdata/plexguide/move.sh
+            src: /opt/pgclone/templates/pgmove.sh
+            dest: /opt/appdata/plexguide/pgmove.sh
             force: yes
 
         - name: Install MOVE Service
           template:
-            src: /opt/pgclone/templates/move.service
-            dest: /etc/systemd/system/move.service
+            src: /opt/pgclone/templates/pgmove.service
+            dest: /etc/systemd/system/pgmove.service
             force: yes
 
         - name: Reload MOVE Service
@@ -153,8 +158,8 @@
 
     - name: Install PGUnion Service
       template:
-        src: /opt/pgclone/templates/unionfs.service
-        dest: /etc/systemd/system/unionfs.service
+        src: /opt/pgclone/templates/pgunion.service
+        dest: /etc/systemd/system/pgunion.service
         force: yes
 
     - name: Reload PGUnion Service
@@ -162,7 +167,7 @@
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        name: unionfs
+        name: pgunion
 
     - name: 'Waiting for PGUnion to initialize'
       wait_for:
