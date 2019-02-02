@@ -11,7 +11,7 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-    - include_tasks: '/opt/pgclone/alias.yml'
+      include_tasks: '/opt/pgclone/alias.yml'
 
     - name: Register HD Path
       shell: 'cat /var/plexguide/server.hd.path'
@@ -26,6 +26,7 @@
 
     - name: Line Remover
       shell: 'sed -i -e "/\[pgunion\]/,+2d" /opt/appdata/plexguide/rclone.conf'
+
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
