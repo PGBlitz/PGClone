@@ -15,7 +15,7 @@ dlpath=$(cat /var/plexguide/server.hd.path)
 
 # Starting Actions
 mkdir -p /$dlpath/pgblitz/upload
-touch /opt/appdata/plexguide/pgblitz.log
+touch /var/plexguide/logs/pgblitz.log
 
 # Inside Variables
 ls -la /opt/appdata/pgblitz/keys/processed | awk '{print $9}' | grep gdsa > /opt/appdata/plexguide/key.list
@@ -27,10 +27,10 @@ keylast=$(cat /opt/appdata/plexguide/key.list | tail -n1)
 keycurrent=0
 cyclecount=0
 
-echo "" >> /opt/appdata/plexguide/pgblitz.log
-echo "" >> /opt/appdata/plexguide/pgblitz.log
-echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
-echo "PG Blitz Log - First Startup" >> /opt/appdata/plexguide/pgblitz.log
+echo "" >> /var/plexguide/logs/pgblitz.log
+echo "" >> /var/plexguide/logs/pgblitz.log
+echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
+echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
 while [ 1 ]; do
 
@@ -75,10 +75,10 @@ while [ 1 ]; do
   --exclude='**partial~' --exclude=".unionfs-fuse/**"           
 
   let "cyclecount++"
-  echo "----------------------------" >> /opt/appdata/plexguide/pgblitz.log
-  echo "PG Blitz Log - Cycle $cyclecount" >> /opt/appdata/plexguide/pgblitz.log
-  echo "" >> /opt/appdata/plexguide/pgblitz.log
-  echo "Utilizing: $keytransfer" >> /opt/appdata/plexguide/pgblitz.log
+  echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
+  echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
+  echo "" >> /var/plexguide/logs/pgblitz.log
+  echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
 
   rclone moveto "$dlpath/pgblitz/upload" "$keytransfer:/" \
   --config /opt/appdata/plexguide/rclone.conf \
@@ -94,9 +94,9 @@ while [ 1 ]; do
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude="**partial~" --exclude=".unionfs-fuse/**"
 
-  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /opt/appdata/plexguide/pgblitz.log
-  cat /opt/appdata/plexguide/pgblitz.log | tail -200 > cat /opt/appdata/plexguide/pgblitz.log
-  #sed -i -e "/Duplicate directory found in destination/d" /opt/appdata/plexguide/pgblitz.log
+  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
+  cat /var/plexguide/logs/pgblitz.log | tail -200 > cat /var/plexguide/logs/pgblitz.log
+  #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
   sleep 30
 
 # Remove empty directories

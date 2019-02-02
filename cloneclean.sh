@@ -4,7 +4,7 @@
 dlpath=$(cat /var/plexguide/server.hd.path)
 
 # Starting Actions
-touch /opt/appdata/plexguide/pgblitz.log
+touch /var/plexguide/logs/pgblitz.log
 mkdir -p "$dlpath/move"
 
 # Permissions
