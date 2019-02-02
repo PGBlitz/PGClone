@@ -379,7 +379,7 @@ tee <<-EOF
 [3] Create 6 Keys:  Daily Limit - 4.5  TB  <--- Realistic
 [4] Create 8 Keys:  Daily Limit - 6.0  TB
 [5] Create 10 Keys: Daily Limit - 7.5  TB
-[6] Create 20 Keys: Daily Limit - 15   TB
+[6] Create 20 Keys: Daily Limit - 15   TB  <--- only GCE-FEEDER !
 
 💬 # of Keys Generated Sets Your Daily Upload Limit!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
