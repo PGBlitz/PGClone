@@ -67,6 +67,7 @@
 
     - name: 'Install Latest version of RClone'
       shell: 'curl https://rclone.org/install.sh | sudo bash -s beta'
+      ignore_errors: yes
 
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
