@@ -17,7 +17,6 @@ starter () {
   path=/opt/appdata/pgblitz/keys
   mkdir -p /opt/appdata/pgblitz/pid/
   mkdir -p /opt/appdata/pgblitz/json/
-  mkdir -p /opt/appdata/pgblitz/logs/
   mkdir -p /opt/appdata/pgblitz/vars/
 
   #Header
@@ -27,7 +26,7 @@ starter () {
   # Remove left over webui and transfer files
   rm -f /opt/appdata/pgblitz/pid/*
   rm -f /opt/appdata/pgblitz/json/*
-  rm -f /opt/appdata/pgblitz/logs/*
+  rm -rf /opt/appdata/pgblitz/logs
 }
 
 stasks () {

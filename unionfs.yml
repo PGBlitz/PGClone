@@ -68,7 +68,8 @@
     - name: 'Install Latest version of RClone'
       shell: 'curl https://rclone.org/install.sh | sudo bash -s beta'
       register: rclone_exists
-      failed_when: rclone_exists.rc != 3 and swap_exists.rc != 0
+      failed_when: rclone_exists.rc != 3 and rclone_exists.rc != 0
+
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
     #      register: transport
