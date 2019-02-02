@@ -14,15 +14,23 @@ Type=simple
 User=0
 Group=0
 ExecStart=/usr/bin/rclone mount tcrypt: /mnt/tcrypt \
-  --allow-non-empty --allow-other \
-  --size-only --syslog --umask 002 --log-level INFO \
-  --uid=1000 --gid=1000 --config /opt/appdata/plexguide/rclone.conf \
-  --timeout 1h \
-  --dir-cache-time 5m \
-  --vfs-read-chunk-size 32M \
-  --vfs-read-chunk-size-limit 2G \
-  --buffer-size 1G \
-  --drive-chunk-size 32M
+--config /opt/appdata/plexguide/rclone.conf \
+--allow-non-empty \
+--allow-other \
+--size-only \
+--uid=1000 --gid=1000 \
+--umask 002 \
+--log-file=/opt/appdata/plexguide/rclone-tcrypt.log \
+--log-level NOTICE \
+--stats 5s \
+--min-age=2m \
+--timeout 1h \
+--dir-cache-time 48h \
+--vfs-read-chunk-size 32M \
+--vfs-read-chunk-size-limit 5G \
+--buffer-size 500M \
+--drive-chunk-size 32M
+
 ExecStop=/bin/fusermount -uz /mnt/tcrypt
 TimeoutStopSec=20
 KillMode=process

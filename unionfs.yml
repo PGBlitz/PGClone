@@ -65,6 +65,9 @@
         - 'downloads'
         - 'incomplete'
 
+    - name: 'Install Latest version of RClone'
+      shell: 'curl https://rclone.org/install.sh | sudo bash -s beta'
+
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
     #      register: transport
