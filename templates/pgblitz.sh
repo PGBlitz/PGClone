@@ -54,7 +54,7 @@ while [ 1 ]; do
 
   rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level NOTICE --stats 5s \
   --min-age=2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -68,7 +68,7 @@ while [ 1 ]; do
 
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
   --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level NOTICE --stats 5s \
   --min-age=5s \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -82,7 +82,7 @@ while [ 1 ]; do
 
   rclone moveto "$dlpath/pgblitz/upload" "$keytransfer:/" \
   --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/opt/appdata/plexguide/pgblitz.log \
+  --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level NOTICE --stats 5s \
   --tpslimit 12 \
   --checkers=20 \

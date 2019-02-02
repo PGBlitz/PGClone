@@ -21,7 +21,7 @@ ExecStart=/usr/bin/rclone mount gdrive: /mnt/gdrive \
 --size-only \
 --uid=1000 --gid=1000 \
 --umask 002 \
---log-file=/opt/appdata/plexguide/rclone-gdrive.log \
+--log-file=/var/plexguide/logs/rclone-gdrive.log \
 --log-level NOTICE \
 --stats 5s \
 --min-age=2m \

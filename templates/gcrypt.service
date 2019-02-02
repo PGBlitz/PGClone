@@ -21,7 +21,7 @@ ExecStart=/usr/bin/rclone mount gcrypt: /mnt/gcrypt \
 --size-only \
 --uid=1000 --gid=1000 \
 --umask 002 \
---log-file=/opt/appdata/plexguide/rclone-gcrypt.log \
+--log-file=/var/plexguide/logs/rclone-gcrypt.log \
 --log-level NOTICE \
 --stats 5s \
 --min-age=2m \
@@ -31,7 +31,6 @@ ExecStart=/usr/bin/rclone mount gcrypt: /mnt/gcrypt \
 --vfs-read-chunk-size-limit 5G \
 --buffer-size 500M \
 --drive-chunk-size 32M
-
 
 ExecStop=/bin/fusermount -uz /mnt/gcrypt
 TimeoutStopSec=20
