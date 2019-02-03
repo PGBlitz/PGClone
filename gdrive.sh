@@ -12,7 +12,7 @@ source /opt/pgclone/functions/pgclone.sh
 ################################################################################
 
 ################################ Forces RClone Installer ######## START
-echo "14" > ${abc}/pg.rcloneprime
+echo "14" > /var/plexguide/pg.rcloneprime
 
 core () {
     touch /var/plexguide/pg."${1}".stored
