@@ -86,10 +86,12 @@ if [[ "$transport" == "PG Local" ]]; then
   # If UnionFS is detected, we need to disabled it
   file="/etc/systemd/system/unionfs.service"
   if [ -e "$file" ]; then
+  echo ""
   read -p '↘️  unionfs.service Detected - Removing Now | [PRESS] ENTER ' typed < /dev/tty
   removepgservices; fi
 
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
