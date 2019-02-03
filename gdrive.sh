@@ -71,7 +71,14 @@ read -p '↘️  Type Selection | Press [ENTER]: ' typed < /dev/tty
   if [ "$typed" == "1" ]; then
   transportmode
   question1
-  elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then exit; fi
+  elif [[ "$typed" == "Z" || "$typed" == "z" ]];
+
+  # If a New Installer, User Cannot Exit!
+  transport=$(cat /var/plexguide/pgclone.transport)
+  if [ "$transport" == "NOT-SET" ]; then
+  question1; fi
+
+  then exit; fi
 fi
 
 if [[ "$transport" == "PG Blitz /w No Encryption" || "$transport" == "PG Blitz /w Encryption" ]]; then

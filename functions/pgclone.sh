@@ -701,6 +701,7 @@ elif [ "$typed" == "3" ]; then echo "ublitz" > /var/plexguide/pgclone.transport 
 elif [ "$typed" == "4" ]; then echo "eblitz" > /var/plexguide/pgclone.transport && echo;
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
 
+# If a New Installer, User Cannot Exit & Must Select a Version
 transport=$(cat /var/plexguide/pgclone.transport)
 if [ "$transport" == "NOT-SET" ]; then
 transportmode; fi
