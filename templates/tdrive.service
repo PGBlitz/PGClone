@@ -30,7 +30,7 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/tdrive \
 --vfs-read-chunk-size 32M \
 --vfs-read-chunk-size-limit 5G \
 --drive-chunk-size 32M \
---buffer-size 32M
+--buffer-size 128M
 
 ExecStop=/bin/fusermount -uz /mnt/tdrive
 TimeoutStopSec=20
