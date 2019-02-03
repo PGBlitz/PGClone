@@ -22,10 +22,7 @@
       register: transport55
 
     - name: Line Remover
-      shell: 'sed -i -e "/\[unionfs\]/,+2d" /opt/appdata/plexguide/rclone.conf'
-
-    - name: Line Remover
-      shell: 'sed -i -e "/\[pgunion\]/,+2d" /opt/appdata/plexguide/rclone.conf'
+      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /opt/appdata/plexguide/rclone.conf'
 
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
