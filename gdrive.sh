@@ -10,6 +10,37 @@ source /opt/pgclone/functions/keys.sh
 source /opt/pgclone/functions/keyback.sh
 source /opt/pgclone/functions/pgclone.sh
 ################################################################################
+
+################################ Forces RClone Installer ######## START
+echo "13" > ${abc}/pg.rcloneprime
+core rcloneprime
+
+core () {
+    touch /var/plexguide/pg."${1}".stored
+    start=$(cat /var/plexguide/pg."${1}")
+    stored=$(cat /var/plexguide/pg."${1}".stored)
+    if [ "$start" != "$stored" ]; then
+      $1
+      cat /var/plexguide/pg."${1}" > /var/plexguide/pg."${1}".stored;
+    fi
+}
+
+rcloneprime () {
+  ansible-playbook /opt/pgclone/pg.yml --tags rcloneinstall
+
+tee "/etc/fuse.conf" > /dev/null <<EOF
+# /etc/fuse.conf - Configuration file for Filesystem in Userspace (FUSE)
+# Set the maximum number of FUSE mounts allowed to non-root users.
+# The default is 1000.
+#mount_max = 1000
+# Allow non-root users to specify the allow_other or allow_root mount options.
+user_allow_other
+EOF
+
+}
+
+################################ Forces RClone Installer ######## END
+
 question1 () {
   touch /opt/appdata/plexguide/rclone.conf
   transport=$(cat /var/plexguide/pgclone.transport)
