@@ -22,10 +22,11 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/tdrive \
 --uid=1000 --gid=1000 \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-gdrive.log \
---log-level WARN \
+--log-level ERROR \
 --stats 5s \
 --timeout 1h \
 --dir-cache-time 48h \
+--vfs-cache-max-age 72h \
 --vfs-read-chunk-size 32M \
 --vfs-read-chunk-size-limit 5G \
 --drive-chunk-size 32M \
