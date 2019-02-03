@@ -82,7 +82,39 @@ read -p '↘️  Type Selection | Press [ENTER]: ' typed < /dev/tty
 fi
 
 if [[ "$transport" == "PG Local" ]]; then
-    read -p '↘️  Set Choice | Press [ENTER]: ' typed < /dev/tty
+
+  # If UnionFS is detected, we need to disabled it
+  file="/etc/systemd/system/unionfs.service"
+  if [ -e "$file" ]; then
+  read -p '↘️  unionfs.service Detected - Removing Now | [PRESS] ENTER ' typed < /dev/tty
+  removepgservices; fi
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: When setting up your programs, you should still use /mnt/unionfs
+data will go there; but does not go anywhere!
+
+[1] Data Transport Mode: Local HD
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Type Selection | Press [ENTER]: ' typed < /dev/tty
+
+case $typed in
+    1 )
+        transportmode
+        question1;
+    z )
+        exit ;;
+    Z )
+        exit ;;
+    * )
+        question1 ;;
+esac
 fi
 
 if [[ "$transport" == "PG Blitz /w No Encryption" || "$transport" == "PG Blitz /w Encryption" ]]; then
