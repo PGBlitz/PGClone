@@ -205,6 +205,7 @@ EOF
 mountsmenu () {
 
 ###### START OWN AREA
+echo $transport
 if [ "$transport" == "PG Local" ]; then
   read -p '↘️  Set Choice | Press [ENTER]: ' typed < /dev/tty
 fi
