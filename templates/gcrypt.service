@@ -30,7 +30,7 @@ ExecStart=/usr/bin/rclone mount gcrypt: /mnt/gcrypt \
 --vfs-read-chunk-size 32M \
 --vfs-read-chunk-size-limit 5G \
 --drive-chunk-size 32M \
---buffer-size 32M
+--buffer-size 128M
 
 ExecStop=/bin/fusermount -uz /mnt/gcrypt
 TimeoutStopSec=20
