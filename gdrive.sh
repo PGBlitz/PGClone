@@ -40,7 +40,7 @@ rcloneprime () {
   rcpiece
 }
 
-curl https://rclone.org/install.sh | sudo bash -s beta
+core curl https://rclone.org/install.sh | sudo bash -s beta
 
 # Fail Safe
 file="/usr/bin/rclone"
@@ -52,7 +52,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 
 EOF
   sleep 1
-  core rcloneprime
+  rcloneprime
   rcpiece
 fi
 
