@@ -81,6 +81,10 @@ read -p '↘️  Type Selection | Press [ENTER]: ' typed < /dev/tty
   then exit; fi
 fi
 
+if [[ "$transport" == "PG Local" ]]; then
+    read -p '↘️  Set Choice | Press [ENTER]: ' typed < /dev/tty
+fi
+
 if [[ "$transport" == "PG Blitz /w No Encryption" || "$transport" == "PG Blitz /w Encryption" ]]; then
 tee <<-EOF
 

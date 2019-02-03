@@ -204,12 +204,6 @@ EOF
 
 mountsmenu () {
 
-###### START OWN AREA
-echo $transport
-if [ "$transport" == "PG Local" ]; then
-  read -p '↘️  Set Choice | Press [ENTER]: ' typed < /dev/tty
-fi
-
 # Sets Display Status if Passwords are not set for the encryhpted edition
 check5=$(cat /var/plexguide/pgclone.password)
 check6=$(cat /var/plexguide/pgclone.salt)
