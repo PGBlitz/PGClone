@@ -31,7 +31,7 @@
     - srclone
     - stcrypt
 
-- name: Removing service helpers
+- name: Installing service helpers
   template:
     src: "{{item}}"
     dest: /bin/{{item}}
