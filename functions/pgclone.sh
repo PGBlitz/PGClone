@@ -691,7 +691,7 @@ tee <<-EOF
 [2] PG Move  /w Encryption    | Upload 750GB Daily ~ Simple
 [3] PG Blitz /w No Encryption | Exceed 750GB Daily ~ Complex
 [4] PG Blitz /w Encryption    | Exceed 750GB Daily ~ Complex
-[5] PG Local                  | No Suite - Stays Local
+[5] PG Local                  | No GSuite - Stays Local
 [Z] Exit
 
 EOF
