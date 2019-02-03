@@ -45,6 +45,7 @@ core curl https://rclone.org/install.sh | sudo bash -s beta
 # Fail Safe
 file="/usr/bin/rclone"
 if [ ! -e "$file" ]; then
+tee <<-EOF
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "💪 RClone's Role Failed! Executing Backup Installer!"
