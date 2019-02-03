@@ -22,7 +22,7 @@ ExecStart=/usr/bin/rclone mount gcrypt: /mnt/gcrypt \
 --uid=1000 --gid=1000 \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-gcrypt.log \
---log-level WARN \
+--log-level ERROR \
 --stats 5s \
 --timeout 1h \
 --dir-cache-time 48h \
