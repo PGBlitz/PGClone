@@ -22,15 +22,14 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/tdrive \
 --uid=1000 --gid=1000 \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-gdrive.log \
---log-level INFO \
+--log-level WARN \
 --stats 5s \
---min-age=2m \
 --timeout 1h \
 --dir-cache-time 48h \
 --vfs-read-chunk-size 32M \
 --vfs-read-chunk-size-limit 5G \
---buffer-size 500M \
 --drive-chunk-size 32M
+--buffer-size 16M  \
 
 ExecStop=/bin/fusermount -uz /mnt/tdrive
 TimeoutStopSec=20
