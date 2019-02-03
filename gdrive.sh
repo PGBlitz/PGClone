@@ -36,11 +36,11 @@ core () {
 }
 
 rcloneprime () {
-  ansible-playbook /opt/pgclone/pg.yml --tags rcloneinstall
+  curl https://rclone.org/install.sh | sudo bash -s beta
   rcpiece
 }
 
-core curl https://rclone.org/install.sh | sudo bash -s beta
+core rcloneprime
 
 # Fail Safe
 file="/usr/bin/rclone"
@@ -53,7 +53,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 
 EOF
   sleep 1
-  rcloneprime
+  ansible-playbook /opt/pgclone/pg.yml --tags rcloneinstall
   rcpiece
 fi
 
