@@ -146,7 +146,7 @@
             daemon_reload: yes
             enabled: yes
             state: reloaded
-            name: move
+            name: pgmove
 
       when: (transport55.stdout == "emove") or
         (transport55.stdout == "umove")
