@@ -690,6 +690,7 @@ tee <<-EOF
 [2] PG Move  /w Encryption    | Upload 750GB Daily ~ Simple
 [3] PG Blitz /w No Encryption | Exceed 750GB Daily ~ Complex
 [4] PG Blitz /w Encryption    | Exceed 750GB Daily ~ Complex
+[5] PG Local                  | No Suite - Stays Local
 [Z] Exit
 
 EOF
@@ -699,6 +700,7 @@ read -p '↘️  Set Choice | Press [ENTER] ' typed < /dev/tty
 elif [ "$typed" == "2" ]; then echo "emove" > /var/plexguide/pgclone.transport && echo;
 elif [ "$typed" == "3" ]; then echo "ublitz" > /var/plexguide/pgclone.transport && echo;
 elif [ "$typed" == "4" ]; then echo "eblitz" > /var/plexguide/pgclone.transport && echo;
+elif [ "$typed" == "5" ]; then echo "solohd" > /var/plexguide/pgclone.transport && echo;
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
 
 # If a New Installer, User Cannot Exit & Must Select a Version
