@@ -25,7 +25,7 @@ ExecStart=/usr/bin/rclone mount tcrypt: /mnt/tcrypt \
 --stats 5s \
 --min-age=2m \
 --timeout 1h \
---dir-cache-time 48h \
+--dir-cache-time 5m \
 --vfs-cache-max-age 72h \
 --vfs-read-chunk-size 32M \
 --vfs-read-chunk-size-limit 5G \

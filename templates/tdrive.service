@@ -25,7 +25,7 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/tdrive \
 --log-level ERROR \
 --stats 5s \
 --timeout 1h \
---dir-cache-time 48h \
+--dir-cache-time 5m \
 --vfs-cache-max-age 72h \
 --vfs-read-chunk-size 32M \
 --vfs-read-chunk-size-limit 5G \
