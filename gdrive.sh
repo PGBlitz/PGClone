@@ -96,8 +96,8 @@ tee <<-EOF
 💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: When setting up your programs, you should still use /mnt/unionfs
-data will go there; but does not go anywhere!
+NOTE: When setting up your programs, use /mnt/unionfs. Data will go there;
+but does not go anywhere!
 
 [1] Data Transport Mode: Local HD
 [Z] Exit
