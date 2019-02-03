@@ -83,11 +83,18 @@ fi
 
 if [[ "$transport" == "PG Local" ]]; then
 
-  # If UnionFS is detected, we need to disabled it
+  # If UnionFS is detected, we need to remove it
   file="/etc/systemd/system/unionfs.service"
   if [ -e "$file" ]; then
   echo ""
   read -p '↘️  unionfs.service Detected - Removing Now | [PRESS] ENTER ' typed < /dev/tty
+  removepgservices; fi
+
+  # If PGUnion.Serivce is detected, we need to remove it
+  file="/etc/systemd/system/pgunion.service"
+  if [ -e "$file" ]; then
+  echo ""
+  read -p '↘️  pgunion.service Detected - Removing Now | [PRESS] ENTER ' typed < /dev/tty
   removepgservices; fi
 
 tee <<-EOF
