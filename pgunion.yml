@@ -48,7 +48,7 @@
         - 'pgblitz/upload'
         - 'downloads'
         - 'incomplete'
-        
+
     - name: 'Setting ownership on logs'
       shell: 'chown -R 1000:1000 /var/plexguide/logs'
 
@@ -67,15 +67,6 @@
         - 'pgblitz'
         - 'downloads'
         - 'incomplete'
-
-    - name: 'Install Latest version of RClone'
-      shell: 'curl https://rclone.org/install.sh | sudo bash -s beta'
-      register: rclone_exists
-      failed_when: rclone_exists.rc != 3 and rclone_exists.rc != 0
-
-    - name: 'Install Latest version of RClone'
-      shell: 'apt install rclone'
-      when: rclone_exists.rc != 3 and rclone_exists.rc != 0
 
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
