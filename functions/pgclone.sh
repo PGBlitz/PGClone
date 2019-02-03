@@ -699,7 +699,13 @@ read -p '↘️  Set Choice | Press [ENTER] ' typed < /dev/tty
 elif [ "$typed" == "2" ]; then echo "emove" > /var/plexguide/pgclone.transport && echo;
 elif [ "$typed" == "3" ]; then echo "ublitz" > /var/plexguide/pgclone.transport && echo;
 elif [ "$typed" == "4" ]; then echo "eblitz" > /var/plexguide/pgclone.transport && echo;
-elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then question1;
+elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
+
+transport=$(cat /var/plexguide/pgclone.transport)
+if [ "$transport" == "NOT-SET" ]; then
+transportmode; fi
+
+question1;
 else
   badinput
   transportmode; fi
