@@ -676,6 +676,7 @@ temp=$(cat /var/plexguide/pgclone.transport)
 elif [ "$temp" == "emove" ]; then transport="PG Move /w Encryption"
 elif [ "$temp" == "ublitz" ]; then transport="PG Blitz /w No Encryption"
 elif [ "$temp" == "eblitz" ]; then transport="PG Blitz /w Encryption"
+elif [ "$temp" == "solohd" ]; then transport="PG Local"
 else transport="NOT-SET"; fi
 }
 
