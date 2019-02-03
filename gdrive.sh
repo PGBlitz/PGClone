@@ -107,7 +107,7 @@ read -p '↘️  Type Selection | Press [ENTER]: ' typed < /dev/tty
 case $typed in
     1 )
         transportmode
-        question1;
+        question1;;
     z )
         exit ;;
     Z )
