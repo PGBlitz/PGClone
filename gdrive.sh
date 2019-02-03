@@ -39,11 +39,19 @@ EOF
 }
 
 core rcloneprime
-
+echo
 # Fail Safe
 file="/usr/bin/rclone"
 if [ ! -e "$file" ]; then
-  curl https://rclone.org/install.sh | sudo bash
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 RClone's Role Failed! Executing Backup Installer!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+sleep .5
+curl https://rclone.org/install.sh | sudo bash
 
 tee "/etc/fuse.conf" > /dev/null <<EOF
 # /etc/fuse.conf - Configuration file for Filesystem in Userspace (FUSE)
