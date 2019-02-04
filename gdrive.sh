@@ -44,7 +44,15 @@ tee <<-EOF
 Choosing yes will make the folders: tv, movies, music, ebooks, abooks
 in the root of your google drive/team drive!
 
-If you don't know what you're doing, or it's a new setup then leave as yes!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️  System Message: Warning!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This is for advanced users ONLY. 
+If you don't know what you're doing, leave it as YES!
+No help will be provided if this is set to NO!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Yes, use default folders
 [2] No, don't use default folders (ADVANCED!)
