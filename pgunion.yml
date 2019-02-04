@@ -77,7 +77,7 @@
 
     - name: Transport Type
       shell: |
-        echo "[pgunion]" >> /opt/appdata/plexguiqde/rclone.conf
+        echo "[pgunion]" >> /opt/appdata/plexguide/rclone.conf
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
     #      register: transport
