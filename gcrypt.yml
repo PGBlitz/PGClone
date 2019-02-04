@@ -9,6 +9,10 @@
 - hosts: localhost
   gather_facts: false
   tasks:
+    - name: Read Default Folder Choice
+      shell: "cat /var/plexguide/pgclone.defaultFolders"
+      register: defaultFolderChoice
+    
     - name: Install GCrypt Service
       template:
         src: /opt/pgclone/templates/gcrypt.service
@@ -22,10 +26,15 @@
         state: reloaded
         name: gcrypt
 
-    - name: Create GCrypt Folders
+    - name: Create GCrypt Folder
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
         - /mnt/gcrypt
+        
+    - name: Create GCrypt Default Folders
+      when: defaultFolderChoice.stdout.find('Yes') != -1
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
         - /mnt/gcrypt/tv
         - /mnt/gcrypt/movies
         - /mnt/gcrypt/music

@@ -35,6 +35,47 @@ core () {
     fi
 }
 
+createDefaultFolders() {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Create Default Folders?            📓 Reference: defaultFolders.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Choosing yes will make the folders: tv, movies, music, ebooks, abooks
+in the root of your google drive/team drive!
+
+If you don't know what you're doing, or it's a new setup then leave as yes!
+
+[1] Yes, use default folders
+[2] No, don't use default folders (ADVANCED!)
+[Z] Exit
+
+EOF
+read -p '↘️  Type Selection | Press [ENTER]: ' typed < /dev/tty
+
+  if [ "$typed" == "1" ]; then
+      echo "Yes" > /var/plexguide/pgclone.defaultFolders
+  elif [ "$typed" == "2" ]; then
+    echo "No" > /var/plexguide/pgclone.defaultFolders
+  elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
+   exit
+  else
+    badinput
+    createDefaultFolders
+    exit
+  fi
+    
+    
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Default Folders Set                📓 Reference: defaultFolders.plexguide.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+read -p '↘️  Acknowledge Info  | Press [ENTER] ' public < /dev/tty
+
+}
+
 rcloneprime () {
   curl https://rclone.org/install.sh | sudo bash -s beta
   rcpiece
@@ -62,6 +103,7 @@ fi
 question1 () {
   touch /opt/appdata/plexguide/rclone.conf
   transport=$(cat /var/plexguide/pgclone.transport)
+  defaultFolders=$(cat /var/plexguide/pgclone.defaultFolders)
   gstatus=$(cat /var/plexguide/gdrive.pgclone)
   tstatus=$(cat /var/plexguide/tdrive.pgclone)
   transportdisplay
@@ -151,11 +193,12 @@ tee <<-EOF
 💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Data Transport Mode: $transport
+[1] Data Transport Mode:  $transport
 [2] OAuth & Mounts
-[3] Key Management:      $keynum Keys Deployed
-[4] Throttle Limit:      $bwdisplay2 MB
-[5] Deploy:              $transport
+[3] Key Management:       $keynum Keys Deployed
+[4] Throttle Limit:       $bwdisplay2 MB
+[5] Make Default Folders: $defaultFolders
+[6] Deploy:               $transport
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -175,6 +218,9 @@ elif [ "$typed" == "4" ]; then
 bandwidthblitz
 question1
 elif [ "$typed" == "5" ]; then
+createDefaultFolders
+question1
+elif [ "$typed" == "6" ]; then
     if [ "$transport" == "PG Blitz /w No Encryption" ]; then
       removepgservices
       deploygdrivecheck
@@ -214,10 +260,11 @@ tee <<-EOF
 💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Data Transport Mode: $transport
+[1] Data Transport Mode:  $transport
 [2] OAuth & Mounts
-[3] Throttle Limit:      $bwdisplay MB
-[4] Deploy:              $transport
+[3] Throttle Limit:       $bwdisplay MB
+[4] Make Default Folders: $defaultFolders
+[5] Deploy:               $transport
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -234,6 +281,9 @@ elif [ "$typed" == "3" ]; then
 bandwidth
 question1
 elif [ "$typed" == "4" ]; then
+createDefaultFolders
+question1
+elif [ "$typed" == "5" ]; then
     if [ "$transport" == "PG Move /w No Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
       echo "gdrive" > /var/plexguide/rclone/deploy.version
@@ -271,6 +321,7 @@ variable /var/plexguide/pgclone.public ""
 variable /var/plexguide/pgclone.secret ""
 variable /var/plexguide/rclone/deploy.version "null"
 variable /var/plexguide/pgclone.transport "PG Move /w No Encryption"
+variable /var/plexguide/pgclone.defaultFolders "Yes"
 variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
 variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
 variable /var/plexguide/move.bw  "9"

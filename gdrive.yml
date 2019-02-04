@@ -9,6 +9,10 @@
 - hosts: localhost
   gather_facts: false
   tasks:
+    - name: Read Default Folder Choice
+      shell: "cat /var/plexguide/pgclone.defaultFolders"
+      register: defaultFolderChoice
+      
     - name: Install GDRIVE Service
       template:
         src: /opt/pgclone/templates/gdrive.service
@@ -23,10 +27,15 @@
         state: reloaded
         name: gdrive
 
-    - name: Create GDRIVE Folders
+    - name: Create GDRIVE Folder
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
         - /mnt/gdrive
+        
+    - name: Create GDRIVE Default Folders
+      when: defaultFolderChoice.stdout.find('Yes') != -1
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
         - /mnt/gdrive/tv
         - /mnt/gdrive/movies
         - /mnt/gdrive/music
