@@ -22,8 +22,6 @@ ExecStart=/usr/bin/rclone mount tcrypt: /mnt/tcrypt \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-tcrypt.log \
 --log-level ERROR \
---stats 5s \
---min-age=2m \
 --timeout 1h \
 --dir-cache-time 2m \
 --vfs-cache-max-age 72h \

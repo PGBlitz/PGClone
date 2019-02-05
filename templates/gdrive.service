@@ -23,7 +23,6 @@ ExecStart=/usr/bin/rclone mount gdrive: /mnt/gdrive \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-gdrive.log \
 --log-level ERROR \
---stats 5s \
 --timeout 1h \
 --dir-cache-time 2m \
 --vfs-cache-max-age 72h \
