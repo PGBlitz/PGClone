@@ -36,7 +36,7 @@ core () {
 }
 
 rcloneprime () {
-  curl https://rclone.org/install.sh | sudo bash -s beta
+  curl https://rclone.org/install.sh | sudo bash
   rcpiece
 }
 

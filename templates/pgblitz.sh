@@ -65,7 +65,7 @@ while [ 1 ]; do
   --exclude="**jdownloader**" --exclude="**makemkv**" \
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**" \
-  --exclude=".**"
+  --exclude=".*"
 
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
   --config /opt/appdata/plexguide/rclone.conf \

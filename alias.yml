@@ -29,6 +29,11 @@
     - spgmove
     - spgunion
     - srclone
+    - tpgblitz
+    - tpgmove
+    - tmove
+    - tblitz
+    - trclone
     - stcrypt
 
 - name: Installing service helpers
