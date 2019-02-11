@@ -32,7 +32,7 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --exclude="**jdownloader**" --exclude="**makemkv**" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**" \
---exclude=".**"
+--exclude=".*"
 
 rclone move "$dlpath/move/" "$ver:/" \
 --config /opt/appdata/plexguide/rclone.conf \
