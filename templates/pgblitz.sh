@@ -102,7 +102,7 @@ while [ 1 ]; do
 
 # Remove empty directories
 find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads" -mindepth 3 -mmin +60 -type d -size -100M -delete
+find "$dlpath/downloads" -mindepth 3 -mmin +360 -type d -size -100M -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
