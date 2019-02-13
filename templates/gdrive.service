@@ -26,9 +26,9 @@ ExecStart=/usr/bin/rclone mount gdrive: /mnt/gdrive \
 --timeout 1h \
 --dir-cache-time 2m \
 --vfs-cache-max-age 72h \
---vfs-read-chunk-size 32M \
+--vfs-read-chunk-size 128M \
 --vfs-read-chunk-size-limit 5G \
---drive-chunk-size 32M \
+--drive-chunk-size 128M \
 --buffer-size 64M
 
 ExecStop=/bin/fusermount -uz /mnt/gdrive
