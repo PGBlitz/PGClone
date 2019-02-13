@@ -26,7 +26,7 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/tdrive \
 --timeout 1h \
 --dir-cache-time 2m \
 --vfs-cache-max-age 72h \
---vfs-read-chunk-size 128M \
+--vfs-read-chunk-size 64M \
 --vfs-read-chunk-size-limit 5G \
 --drive-chunk-size 128M \
 --buffer-size 64M
