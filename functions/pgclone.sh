@@ -686,11 +686,16 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌟 Select Transport Mode            📓 Reference: transport.plexguide.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              Google is scanning the G/TDrives lately!
+                     We recommend encypted.
+            By encrypting Google can`t read the file name.
+               You can lose your data and your account.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] PG Move  /w No Encryption | Upload 750GB Daily ~ Simple
-[2] PG Move  /w Encryption    | Upload 750GB Daily ~ Simple
-[3] PG Blitz /w No Encryption | Exceed 750GB Daily ~ Complex
-[4] PG Blitz /w Encryption    | Exceed 750GB Daily ~ Complex
+[1] PG Move  /w No Encryption | Upload 750GB Daily ~ Simple   <-- read top
+[2] PG Move  /w Encryption    | Upload 750GB Daily ~ Simple   <-- recommended
+[3] PG Blitz /w No Encryption | Exceed 750GB Daily ~ Complex  <-- read top
+[4] PG Blitz /w Encryption    | Exceed 750GB Daily ~ Complex  <-- recommended
 [5] PG Local                  | No GSuite - Stays Local
 [Z] Exit
 
