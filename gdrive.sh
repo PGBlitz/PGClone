@@ -244,6 +244,7 @@ elif [ "$typed" == "4" ]; then
       question1
     elif [ "$transport" == "PG Move /w Encryption" ]; then
       mkdir -p /var/plexguide/rclone/
+      echo "gcrypt" > /var/plexguide/rclone/deploy.version
       removepgservices
       deploygdrivecheck
       deploygcryptcheck
