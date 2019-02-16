@@ -56,7 +56,6 @@ while [ 1 ]; do
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s \
-  --min-age=2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
@@ -64,14 +63,12 @@ while [ 1 ]; do
   --exclude="**deluge**" --exclude="**transmission**" \
   --exclude="**jdownloader**" --exclude="**makemkv**" \
   --exclude="**handbrake**" --exclude="**bazarr**" \
-  --exclude="**ignore**"  --exclude="**inProgress**" \
-  --exclude=".*"
+  --exclude="**ignore**"  --exclude="**inProgress**"
 
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s \
-  --min-age=5s \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**"           
 
@@ -87,7 +84,6 @@ while [ 1 ]; do
   --log-level INFO --stats 5s \
   --tpslimit 12 \
   --checkers=20 \
-  --min-age=5s \
   --transfers=16 \
   --bwlimit {{bandwidth.stdout}}M \
   --max-size=300G \

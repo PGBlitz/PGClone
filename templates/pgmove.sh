@@ -23,7 +23,6 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level INFO --stats 5s \
---min-age=2m \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
@@ -31,14 +30,12 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --exclude="**deluge**" --exclude="**transmission**" \
 --exclude="**jdownloader**" --exclude="**makemkv**" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
---exclude="**ignore**"  --exclude="**inProgress**" \
---exclude=".*"
+--exclude="**ignore**"  --exclude="**inProgress**"
 
 rclone move "$dlpath/move/" "$ver:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level INFO --stats 5s \
---min-age=5s \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
