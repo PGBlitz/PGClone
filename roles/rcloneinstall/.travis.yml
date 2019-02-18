@@ -3,7 +3,7 @@ language: python
 python: "2.7"
 
 sudo: required
-dist: trusty
+dist: bionic
 services:
   - docker
 
@@ -14,6 +14,8 @@ env:
   #   version: 6 # package issue with mandb
   - distribution: fedora
     version: 25
+  - distribution: ubuntu
+    version: 18.04
   - distribution: ubuntu
     version: 16.04
   - distribution: ubuntu
