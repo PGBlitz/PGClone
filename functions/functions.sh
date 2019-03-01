@@ -55,22 +55,77 @@ keysprocessed () {
 }
 
 mustset () {
+pgclonevars
 tee <<-EOF
 
-if [[ "$transport" == "NOT-SET" || "$method" == "NOT-SET" ]]; then
+if [[ "$transport" == "NOT-SET"; then
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NOTE: PG Clone is a service that automates mergerfs; with mount, rclone,
+and key development to mount user drives and move/store data accordingly.
+Visit the link above before starting this process!
 
-[1] Data Transport Mode: $transport
-[2] Data Storage Method: $method
+[1] PGClone Method: $transport
 [Z] Exit
 
-NOTE: Unable to proceed until [1] & [2] are set!
+NOTE: Unable to proceed until [1] & [2] are established!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+
 read -p '↘️ Input Selection | Press [ENTER]' typed < /dev/tty
+
+case $typed in
+    1 )
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NOTE: Please visit the link and understand what your doing first!
+
+[1] Move  Unencrypt: Data > GDrive | Easy    | 750GB Daily Transfer Max
+[2] Move  Encrypted: Data > GDrive | Easy    | 750GB Daily Transfer Max
+[3] Blitz Unencrypt: Data > TDrive | Complex | Exceed 750GB Transport Cap
+[4] Blitz Encrypted: Data > TDrive | Complex | Exceed 750GB Transport Cap
+[5] PGDrive Mode   : Read Only     | Novice  | No Upload Data Transfer
+[6] Local Edition  : Local HDs     | Simple  | No GDrive/TDrive Usage
+
+[Z] Exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️ Input Selection | Press [ENTER]' typed < /dev/tty
+
+case $typed in
+    1 )
+    echo "mu" > /var/plexguide/pgclone.transport ;;
+    2 )
+    echo "me" > /var/plexguide/pgclone.transport ;;
+    3 )
+    echo "bu" > /var/plexguide/pgclone.transport ;;
+    4 )
+    echo "be" > /var/plexguide/pgclone.transport ;;
+    5 )
+    echo "pd" > /var/plexguide/pgclone.transport ;;
+    6 )
+    echo "le" > /var/plexguide/pgclone.transport ;;
+    z )
+        mustset ;;
+    Z )
+        mustset ;;
+    * )
+        mustset ;;
+esac
+    z )
+        exit ;;
+    Z )
+        exit ;;
+    * )
+        mustset ;;
+esac
 }
 
 pgclonevars () {
@@ -81,11 +136,13 @@ pgclonevars () {
   variable /var/plexguide/pgclone.public ""
   variable /var/plexguide/pgclone.secret ""
   variable /var/plexguide/rclone/deploy.version "null"
-  variable /var/plexguide/pgclone.transport "PG Move /w No Encryption"
+  variable /var/plexguide/pgclone.transport "NOT-SET"
   variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
   variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
   variable /var/plexguide/move.bw  "9"
   variable /var/plexguide/blitz.bw  "1000"
   variable /var/plexguide/pgclone.password ""
   variable /var/plexguide/pgclone.salt ""
+
+  transport=$(cat variable /var/plexguide/pgclone.transport)
 }
