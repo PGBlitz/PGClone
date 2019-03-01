@@ -9,21 +9,22 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: Install TDRIVE Service
+
+    - name: "Install - Service {{mount.stdout}}"
       template:
-        src: /opt/pgclone/templates/tdrive.service
-        dest: /etc/systemd/system/tdrive.service
+        src: "/opt/pgclone/templates/{{mount.stdout}}.service"
+        dest: "/etc/systemd/system/{{mount.stdout}}.service"
         force: yes
       ignore_errors: yes
 
-    - name: Reload TDRIVE Service
+    - name: "Reload Service - {{mount.stdout}} "
       systemd:
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        name: tdrive
-  
-    - name: Create TDrive Folders
+        name: "{{mount.stdout}}.service"
+
+    - name: "Creating Folder - /mnt/{{mount.stdout}}"
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
-        - /mnt/tdrive
+        - "/mnt/{{mount.stdout}}"
