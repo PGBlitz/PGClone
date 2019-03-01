@@ -1,1 +1,1 @@
-# PlexGuide-PGClone
+# PGBlitz-PGClone
