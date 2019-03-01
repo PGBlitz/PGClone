@@ -2,7 +2,7 @@
 #
 # Title:      PGClone (A 100% PG Product)
 # Author(s):  Admin9705
-# URL:        https://plexguide.com - http://github.plexguide.com
+# URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/pgclone/functions/functions.sh
@@ -76,7 +76,7 @@ if [ "$transport" == "NOT-SET" ]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
+💪 Welcome to PG Clone                 📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Data Transport Mode: $transport
@@ -118,7 +118,7 @@ if [[ "$transport" == "PG Local" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
+💪 Welcome to PG Clone                 📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE: When setting up your programs, use /mnt/unionfs. Data will go there;
@@ -148,7 +148,7 @@ if [[ "$transport" == "PG Blitz /w No Encryption" || "$transport" == "PG Blitz /
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
+💪 Welcome to PG Clone                 📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Data Transport Mode: $transport
@@ -211,7 +211,7 @@ if [[ "$transport" == "PG Move /w No Encryption" || "$transport" == "PG Move /w 
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone                 📓 Reference: pgclone.plexguide.com
+💪 Welcome to PG Clone                 📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Data Transport Mode: $transport
