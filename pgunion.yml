@@ -5,7 +5,6 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-# NOTE: UnionFS does not mean 'unionfs', we keep using 'unionfs' for backward compat but have switched to mergerfs
 ---
 - hosts: localhost
   gather_facts: false

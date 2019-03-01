@@ -53,3 +53,39 @@ keysprocessed () {
   mkdir -p /opt/appdata/pgblitz/keys/processed
   ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
 }
+
+mustset () {
+tee <<-EOF
+
+if [[ "$transport" == "NOT-SET" || "$method" == "NOT-SET" ]]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1] Data Transport Mode: $transport
+[2] Data Storage Method: $method
+[Z] Exit
+
+NOTE: Unable to proceed until [1] & [2] are set!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️ Input Selection | Press [ENTER]' typed < /dev/tty
+}
+
+pgclonevars () {
+  mkdir -p /var/plexguide/rclone
+  variable /var/plexguide/project.account "NOT-SET"
+  variable /var/plexguide/pgclone.project "NOT-SET"
+  variable /var/plexguide/pgclone.teamdrive ""
+  variable /var/plexguide/pgclone.public ""
+  variable /var/plexguide/pgclone.secret ""
+  variable /var/plexguide/rclone/deploy.version "null"
+  variable /var/plexguide/pgclone.transport "PG Move /w No Encryption"
+  variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
+  variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
+  variable /var/plexguide/move.bw  "9"
+  variable /var/plexguide/blitz.bw  "1000"
+  variable /var/plexguide/pgclone.password ""
+  variable /var/plexguide/pgclone.salt ""
+}
