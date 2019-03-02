@@ -5,16 +5,11 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/pgclone/functions/pgblitz.sh
-
-#starter
-#stasks
 
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
 
 # Starting Actions
-mkdir -p /$dlpath/pgblitz/upload
 touch /var/plexguide/logs/pgblitz.log
 
 # Inside Variables
@@ -35,13 +30,10 @@ echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 while [ 1 ]; do
 
   dlpath=$(cat /var/plexguide/server.hd.path)
-  mkdir -p /$dlpath/pgblitz/upload
 
   # Permissions
   chown -R 1000:1000 "$dlpath/move"
-  chown -R 1000:1000 "$dlpath/pgblitz/upload"
   chmod -R 755 "$dlpath/move"
-  chown -R 755 "$dlpath/pgblitz/upload"
 
   if [ "$keylast" == "$keyuse" ]; then keycurrent=0; fi
 
@@ -65,20 +57,13 @@ while [ 1 ]; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
-  --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/var/plexguide/logs/pgblitz.log \
-  --log-level INFO --stats 5s \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude='**partial~' --exclude=".unionfs-fuse/**"           
-
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
   echo "" >> /var/plexguide/logs/pgblitz.log
   echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
 
-  rclone moveto "$dlpath/pgblitz/upload" "$keytransfer:/" \
+  rclone moveto "$dlpath/move" "$keytransfer:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s \
@@ -100,8 +85,6 @@ while [ 1 ]; do
 find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete
 find "$dlpath/downloads" -mindepth 3 -mmin +360 -type d -size -100M -delete
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
-
 find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/pgblitz/upload" -mindepth 1 -mmin +5 -type d -empty -delete
 
 done

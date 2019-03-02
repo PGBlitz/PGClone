@@ -44,7 +44,6 @@
       file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
       with_items:
         - 'move'
-        - 'pgblitz/upload'
         - 'downloads'
         - 'incomplete'
 
@@ -55,7 +54,6 @@
       shell: 'chown -R 1000:1000 {{hdpath.stdout}}/{{item}}'
       with_items:
         - 'move'
-        - 'pgblitz'
         - 'downloads'
         - 'incomplete'
 
@@ -63,7 +61,6 @@
       shell: 'chmod -R 775 {{hdpath.stdout}}/{{item}}'
       with_items:
         - 'move'
-        - 'pgblitz'
         - 'downloads'
         - 'incomplete'
 
