@@ -68,10 +68,9 @@ NOTE: PG Clone is a service that automates mergerfs; with mount, rclone,
 and key development to mount user drives and move/store data accordingly.
 Visit the link above before starting this process!
 
-[1] PGClone Method: $transport
+[1] PG Clone Method: $transport
 [Z] Exit
 
-NOTE: Unable to proceed until [1] & [2] are established!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
@@ -124,7 +123,7 @@ transportselect () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Set PG Clone Version ~ http://pgclone.pgblitz.com
+💪 Set PG Clone Method ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 NOTE: Please visit the link and understand what your doing first!
 
@@ -135,6 +134,7 @@ NOTE: Please visit the link and understand what your doing first!
 [5] PGDrive Mode   : Read Only     | Novice  | No Upload Data Transfer
 [6] Local Edition  : Local HDs     | Simple  | No GDrive/TDrive Usage
 [Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
