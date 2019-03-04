@@ -34,9 +34,7 @@ elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
 [1] Client ID & Secret: [Fill Me]
 [2] GDrive OAuth:       [Fill Me]
-[3] TDrive OAuth:       [Fill Me]
-[4] TDrive Label:       [None]
-[5] Passwords:          [Not Set]
+[3] Passwords:          [Not Set]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
@@ -85,49 +83,71 @@ clonestartactions () {
 if [[ "$transport" == "mu" ]]; then
   case $typed in
       1 )
-      echo "mu" > /var/plexguide/pgclone.transport ;;
+          clientsec ;;
       2 )
-      echo "me" > /var/plexguide/pgclone.transport ;;
-      3 )
-      echo "bu" > /var/plexguide/pgclone.transport ;;
-      4 )
-      echo "be" > /var/plexguide/pgclone.transport ;;
-      5 )
-      echo "pd" > /var/plexguide/pgclone.transport ;;
-      6 )
-      echo "le" > /var/plexguide/pgclone.transport ;;
+          gauth ;;
       z )
           exit ;;
       Z )
           exit ;;
       * )
           clonestart ;;
+    esac
 elif [[ "$transport" == "me" ]]; then
-tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
-[3] TDrive OAuth:       [Fill Me]
-[4] TDrive Label:       [None]
-[5] Passwords:          [Not Set]
-EOF
+  case $typed in
+      1 )
+          clientsec ;;
+      2 )
+          gauth ;;
+      3 )
+          cpasswords ;;
+      z )
+          exit ;;
+      Z )
+          exit ;;
+      * )
+          clonestart ;;
+    esac
 elif [[ "$transport" == "bu" ]]; then
-tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
-[3] TDrive OAuth:       [Fill Me]
-[4] TDrive Label:       [None]
-[5] Key Management:     [0] Built
-EOF
+  case $typed in
+        1 )
+            clientsec ;;
+        2 )
+            gauth ;;
+        3 )
+            tauth ;;
+        4 )
+            tlabel ;;
+        5 )
+            keymanagement;;
+        z )
+            exit ;;
+        Z )
+            exit ;;
+        * )
+            clonestart ;;
+      esac
 elif [[ "$transport" == "be" ]]; then
-tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
-[3] TDrive OAuth:       [Fill Me]
-[4] TDrive Label:       [None]
-[5] Passwords:          [Not Set]
-[6] Key Management:     [0] Built
-EOF
+  case $typed in
+        1 )
+            clientsec ;;
+        2 )
+            gauth ;;
+        3 )
+            tauth ;;
+        4 )
+            tlabel ;;
+        5 )
+            keymanagement;;
+        z )
+            exit ;;
+        Z )
+            exit ;;
+        * )
+            clonestart ;;
+      esac
 fi
+
 }
 
 removepgservices () {
