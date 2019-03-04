@@ -118,6 +118,7 @@ case $typed in
         mustset ;;
     * )
         mustset ;;
+    ;;
 esac
     z )
         exit ;;
