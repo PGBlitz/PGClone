@@ -138,6 +138,8 @@ elif [[ "$transport" == "be" ]]; then
         4 )
             tlabel ;;
         5 )
+            cpasswords ;;
+        6 )
             keymanagement;;
         z )
             exit ;;
