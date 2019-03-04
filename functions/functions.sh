@@ -23,6 +23,61 @@ variable () {
   if [ ! -e "$file" ]; then echo "$2" > $1; fi
 }
 
+clonestartoutput () {
+
+if [[ "$transport" == "mu" ]]; then
+tee <<-EOF
+[1] Client ID & Secret: [Fill Me]
+[2] GDrive OAuth:       [Fill Me]
+EOF
+elif [[ "$transport" == "me" ]]; then
+tee <<-EOF
+[1] Client ID & Secret: [Fill Me]
+[2] GDrive OAuth:       [Fill Me]
+[3] TDrive OAuth:       [Fill Me]
+[4] TDrive Label:       [None]
+[5] Passwords:          [Not Set]
+EOF
+elif [[ "$transport" == "bu" ]]; then
+tee <<-EOF
+[1] Client ID & Secret: [Fill Me]
+[2] GDrive OAuth:       [Fill Me]
+[3] TDrive OAuth:       [Fill Me]
+[4] TDrive Label:       [None]
+[5] Key Management:     [0] Built
+EOF
+elif [[ "$transport" == "be" ]]; then
+tee <<-EOF
+[1] Client ID & Secret: [Fill Me]
+[2] GDrive OAuth:       [Fill Me]
+[3] TDrive OAuth:       [Fill Me]
+[4] TDrive Label:       [None]
+[5] Passwords:          [Not Set]
+[6] Key Management:     [0] Built
+EOF
+fi
+}
+
+clonestart () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+clonestartoutput
+
+tee <<-EOF
+
+[A] Deploy:         PG Move /w No Encryption
+[B] Throttle:       9 MB
+[C] Change :        Switch to a Different Transport Method
+[Z] Exit
+
+EOF
+read -p '↘️ Input Selection | Press [ENTER]: ' typed < /dev/tty
+}
+
 removepgservices () {
   ansible-playbook /opt/pgclone/pgservices.yml
 }
@@ -138,7 +193,7 @@ NOTE: Please visit the link and understand what your doing first!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️ Input Selection | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
