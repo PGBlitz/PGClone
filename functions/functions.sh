@@ -24,7 +24,7 @@ variable () {
 }
 
 clonestartoutput () {
-
+pgclonevars 
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret: [Fill Me]
@@ -69,9 +69,9 @@ clonestartoutput
 
 tee <<-EOF
 
-[A] Deploy:         PG Move /w No Encryption
-[B] Throttle:       9 MB
-[C] Change :        Switch to a Different Transport Method
+[A] Deploy         [PG Move /w No Encryption]
+[B] Throttle       [9 MB]
+[C] Change         Switch Transport Method
 [Z] Exit
 
 EOF
@@ -159,7 +159,7 @@ pgclonevars () {
   variable /var/plexguide/pgclone.password ""
   variable /var/plexguide/pgclone.salt ""
 
-  transport=$(cat variable /var/plexguide/pgclone.transport)
+  transport=$(cat /var/plexguide/pgclone.transport)
 }
 
 rcpiece () {
