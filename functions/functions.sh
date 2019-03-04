@@ -73,18 +73,19 @@ Visit the link above before starting this process!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+  read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
-case $typed in
-    1 )
-        transportselect ;;
-    z )
-        exit ;;
-    Z )
-        exit ;;
-    * )
-        mustset ;;
-esac
+  case $typed in
+      1 )
+          transportselect ;;
+      z )
+          exit ;;
+      Z )
+          exit ;;
+      * )
+          mustset ;;
+  esac
+fi
 }
 
 pgclonevars () {
