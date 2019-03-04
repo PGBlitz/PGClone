@@ -56,9 +56,8 @@ keysprocessed () {
 
 mustset () {
 pgclonevars
-tee <<-EOF
 
-if [[ "$transport" != "NOT-SET"; then
+if [[ "$transport" != "NOT-SET" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
