@@ -79,6 +79,48 @@ read -p '↘️ Input Selection | Press [ENTER]' typed < /dev/tty
 
 case $typed in
     1 )
+        transportselect ;;
+    z )
+        exit ;;
+    Z )
+        exit ;;
+    * )
+        mustset ;;
+esac
+}
+
+pgclonevars () {
+  mkdir -p /var/plexguide/rclone
+  variable /var/plexguide/project.account "NOT-SET"
+  variable /var/plexguide/pgclone.project "NOT-SET"
+  variable /var/plexguide/pgclone.teamdrive ""
+  variable /var/plexguide/pgclone.public ""
+  variable /var/plexguide/pgclone.secret ""
+  variable /var/plexguide/rclone/deploy.version "null"
+  variable /var/plexguide/pgclone.transport "NOT-SET"
+  variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
+  variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
+  variable /var/plexguide/move.bw  "9"
+  variable /var/plexguide/blitz.bw  "1000"
+  variable /var/plexguide/pgclone.password ""
+  variable /var/plexguide/pgclone.salt ""
+
+  transport=$(cat variable /var/plexguide/pgclone.transport)
+}
+
+rcpiece () {
+tee "/etc/fuse.conf" > /dev/null <<EOF
+# /etc/fuse.conf - Configuration file for Filesystem in Userspace (FUSE)
+# Set the maximum number of FUSE mounts allowed to non-root users.
+# The default is 1000.
+#mount_max = 1000
+# Allow non-root users to specify the allow_other or allow_root mount options.
+user_allow_other
+EOF
+}
+
+# part of this file / function mustset
+transportselect () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -118,43 +160,5 @@ case $typed in
         mustset ;;
     * )
         mustset ;;
-    ;;
 esac
-    z )
-        exit ;;
-    Z )
-        exit ;;
-    * )
-        mustset ;;
-esac
-}
-
-pgclonevars () {
-  mkdir -p /var/plexguide/rclone
-  variable /var/plexguide/project.account "NOT-SET"
-  variable /var/plexguide/pgclone.project "NOT-SET"
-  variable /var/plexguide/pgclone.teamdrive ""
-  variable /var/plexguide/pgclone.public ""
-  variable /var/plexguide/pgclone.secret ""
-  variable /var/plexguide/rclone/deploy.version "null"
-  variable /var/plexguide/pgclone.transport "NOT-SET"
-  variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
-  variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
-  variable /var/plexguide/move.bw  "9"
-  variable /var/plexguide/blitz.bw  "1000"
-  variable /var/plexguide/pgclone.password ""
-  variable /var/plexguide/pgclone.salt ""
-
-  transport=$(cat variable /var/plexguide/pgclone.transport)
-}
-
-rcpiece () {
-tee "/etc/fuse.conf" > /dev/null <<EOF
-# /etc/fuse.conf - Configuration file for Filesystem in Userspace (FUSE)
-# Set the maximum number of FUSE mounts allowed to non-root users.
-# The default is 1000.
-#mount_max = 1000
-# Allow non-root users to specify the allow_other or allow_root mount options.
-user_allow_other
-EOF
 }
