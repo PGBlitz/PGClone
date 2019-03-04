@@ -24,7 +24,7 @@ variable () {
 }
 
 clonestartoutput () {
-pgclonevars 
+pgclonevars
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret: [Fill Me]
@@ -74,8 +74,9 @@ tee <<-EOF
 [C] Change         Switch Transport Method
 [Z] Exit
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️ Input Selection | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 }
 
 removepgservices () {
