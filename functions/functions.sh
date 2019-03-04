@@ -75,7 +75,7 @@ NOTE: Unable to proceed until [1] & [2] are established!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️ Input Selection | Press [ENTER]' typed < /dev/tty
+read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
@@ -124,7 +124,7 @@ transportselect () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
+💪 Set PG Clone Version ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 NOTE: Please visit the link and understand what your doing first!
 
@@ -134,12 +134,11 @@ NOTE: Please visit the link and understand what your doing first!
 [4] Blitz Encrypted: Data > TDrive | Complex | Exceed 750GB Transport Cap
 [5] PGDrive Mode   : Read Only     | Novice  | No Upload Data Transfer
 [6] Local Edition  : Local HDs     | Simple  | No GDrive/TDrive Usage
-
 [Z] Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️ Input Selection | Press [ENTER]' typed < /dev/tty
+read -p '↘️ Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
