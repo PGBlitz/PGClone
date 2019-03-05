@@ -211,9 +211,9 @@ case $typed in
     2 )
         gauth ;;
     z )
-        exit ;;
+        clonestart ;;
     Z )
-        exit ;;
+        clonestart ;;
     * )
         clonestart ;;
   esac
