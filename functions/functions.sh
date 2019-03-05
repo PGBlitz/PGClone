@@ -246,7 +246,7 @@ read -p '↘️  Input Information | Press [Enter]: ' typed < /dev/tty
 case $typed in
 1 )
     echo "$clientid" > /var/plexguide/pgclone.public
-    echo "$secretid" > /var/plexguide/pgclone.public
+    echo "$secretid" > /var/plexguide/pgclone.secret
     read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
     ;;
 2 )
