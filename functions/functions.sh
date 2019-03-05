@@ -255,6 +255,7 @@ case $typed in
     echo
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Restarting Process | Press [Enter] ' secretid < /dev/tty
+    keyinputpublic
     ;;
 z )
     keyinputpublic
