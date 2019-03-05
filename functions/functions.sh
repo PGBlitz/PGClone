@@ -83,7 +83,7 @@ clonestartactions () {
 if [[ "$transport" == "mu" ]]; then
   case $typed in
       1 )
-          clientsec ;;
+          keyinputpublic ;;
       2 )
           gauth ;;
       z )
@@ -96,7 +96,7 @@ if [[ "$transport" == "mu" ]]; then
 elif [[ "$transport" == "me" ]]; then
   case $typed in
       1 )
-          clientsec ;;
+          keyinputpublic ;;
       2 )
           gauth ;;
       3 )
@@ -111,7 +111,7 @@ elif [[ "$transport" == "me" ]]; then
 elif [[ "$transport" == "bu" ]]; then
   case $typed in
         1 )
-            clientsec ;;
+            keyinputpublic ;;
         2 )
             gauth ;;
         3 )
@@ -130,7 +130,7 @@ elif [[ "$transport" == "bu" ]]; then
 elif [[ "$transport" == "be" ]]; then
   case $typed in
         1 )
-            clientsec ;;
+            keyinputpublic ;;
         2 )
             gauth ;;
         3 )
