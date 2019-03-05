@@ -119,7 +119,7 @@ elif [[ "$transport" == "bu" ]]; then
         4 )
             tlabel ;;
         5 )
-            keymanagement;;
+            keymanagementinterface ;;
         z )
             exit ;;
         Z )
@@ -140,7 +140,7 @@ elif [[ "$transport" == "be" ]]; then
         5 )
             cpasswords ;;
         6 )
-            keymanagement;;
+            keymanagementinterface ;;
         z )
             exit ;;
         Z )
@@ -149,7 +149,7 @@ elif [[ "$transport" == "be" ]]; then
             clonestart ;;
       esac
 fi
-
+clonestart
 }
 
 removepgservices () {
@@ -181,6 +181,41 @@ rcloneconfig () {
 keysprocessed () {
   mkdir -p /opt/appdata/pgblitz/keys/processed
   ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
+}
+
+keymanagementinterface () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1] Google Account Login:  [login]
+[2] Set Project Name:      [pg9u2ur0wue]
+[3] Build Service Keys     [0]
+[4] E-Mail Generator
+
+[A] Keys Backup
+[B] Keys Restore
+[C] Keys Destroy
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+case $typed in
+    1 )
+        clientsec ;;
+    2 )
+        gauth ;;
+    z )
+        exit ;;
+    Z )
+        exit ;;
+    * )
+        clonestart ;;
+  esac
+keymanagementinterface
 }
 
 mustset () {
