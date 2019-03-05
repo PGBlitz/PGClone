@@ -27,31 +27,31 @@ clonestartoutput () {
 pgclonevars
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
+[1] Client ID & Secret  [Fill Me]
+[2] GDrive OAuth        [Fill Me]
 EOF
 elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
-[3] Passwords:          [Not Set]
+[1] Client ID & Secret  [Fill Me]
+[2] GDrive OAuth        [Fill Me]
+[3] Passwords           [Not Set]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
-[3] TDrive OAuth:       [Fill Me]
-[4] TDrive Label:       [None]
-[5] Key Management:     [0] Built
+[1] Client ID & Secret  [Fill Me]
+[2] GDrive OAuth        [Fill Me]
+[3] TDrive OAuth        [Fill Me]
+[4] TDrive Label        [None]
+[5] Key Management      [0] Built
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
-[1] Client ID & Secret: [Fill Me]
-[2] GDrive OAuth:       [Fill Me]
-[3] TDrive OAuth:       [Fill Me]
-[4] TDrive Label:       [None]
-[5] Passwords:          [Not Set]
-[6] Key Management:     [0] Built
+[1] Client ID & Secret  [Fill Me]
+[2] GDrive OAuth        [Fill Me]
+[3] TDrive OAuth        [Fill Me]
+[4] TDrive Label        [None]
+[5] Passwords           [Not Set]
+[6] Key Management      [0] Built
 EOF
 fi
 }
@@ -190,8 +190,8 @@ tee <<-EOF
 💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Google Account Login:  [login]
-[2] Set Project Name:      [pg9u2ur0wue]
+[1] Google Account Login   [login]
+[2] Set Project Name       [pg9u2ur0wue]
 [3] Build Service Keys     [0]
 [4] E-Mail Generator
 
