@@ -183,6 +183,51 @@ keysprocessed () {
   ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
 }
 
+keyinputpublic () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Client ID ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Visit oauth.pgblitz.com in order to generate your Client ID! Ensure that
+you input the CORRECT Client ID from your current project!
+
+Quitting? Type > exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Client ID  | Press [Enter]: ' clientid < /dev/tty
+if [ "$clientid" = "" ]; then keyinput; fi
+if [ "$clientid" = "exit" ]; then clonestart; fi
+keyinputsecret
+}
+
+keyinputsecret () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Secret ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Visit oauth.pgblitz.com in order to generate your Secret! Ensure that
+you input the CORRECT Secret ID from your current project!
+
+Quitting? Type > exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Secret ID  | Press [Enter]: ' secretid < /dev/tty
+if [ "$secretid" = "" ]; then keyinputsecret; fi
+if [ "$secretid" = "exit" ]; then clonestart; fi
+
+
+
+
+echo "$clientid" > /var/plexguide/pgclone.public
+echo "$secretid" > /var/plexguide/pgclone.public
+}
+
 keymanagementinterface () {
 tee <<-EOF
 
