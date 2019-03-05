@@ -221,11 +221,51 @@ read -p '↘️  Secret ID  | Press [Enter]: ' secretid < /dev/tty
 if [ "$secretid" = "" ]; then keyinputsecret; fi
 if [ "$secretid" = "exit" ]; then clonestart; fi
 
+tee <<-EOF
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Output ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+CLIENT ID
+$clientid
 
-echo "$clientid" > /var/plexguide/pgclone.public
-echo "$secretid" > /var/plexguide/pgclone.public
+SECRET ID
+$secretid
+
+Is the following information correct?
+[1] Yes
+[2] No
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Input Information | Press [Enter]: ' typed < /dev/tty
+
+case $typed in
+1 )
+    echo "$clientid" > /var/plexguide/pgclone.public
+    echo "$secretid" > /var/plexguide/pgclone.public
+    echo
+    read -p '↘️  Information Stored | Press [Enter]: ' secretid < /dev/tty
+    ;;
+2 )
+    echo
+    read -p '↘️  Restarting Process | Press [Enter]: ' secretid < /dev/tty
+    ;;
+z )
+    keyinputpublic
+    read -p '↘️  Nothing Saved! Exiting! | Press [Enter]: ' secretid < /dev/tty
+    ;;
+Z )
+    keyinputpublic
+    read -p '↘️  Nothing Saved! Exiting! | Press [Enter]: ' secretid < /dev/tty
+    ;;
+* )
+    clonestart ;;
+esac
+clonestart
 }
 
 keymanagementinterface () {
