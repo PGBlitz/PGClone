@@ -248,19 +248,19 @@ case $typed in
     echo "$clientid" > /var/plexguide/pgclone.public
     echo "$secretid" > /var/plexguide/pgclone.public
     echo
-    read -p '↘️  Information Stored | Press [Enter]: ' secretid < /dev/tty
+    read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
     ;;
 2 )
     echo
-    read -p '↘️  Restarting Process | Press [Enter]: ' secretid < /dev/tty
+    read -p '↘️  Restarting Process | Press [Enter] ' secretid < /dev/tty
     ;;
 z )
     keyinputpublic
-    read -p '↘️  Nothing Saved! Exiting! | Press [Enter]: ' secretid < /dev/tty
+    read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
     ;;
 Z )
     keyinputpublic
-    read -p '↘️  Nothing Saved! Exiting! | Press [Enter]: ' secretid < /dev/tty
+    read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
     ;;
 * )
     clonestart ;;
