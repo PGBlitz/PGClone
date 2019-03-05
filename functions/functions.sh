@@ -197,7 +197,7 @@ Quitting? Type > exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Client ID  | Press [Enter]: ' clientid < /dev/tty
+read -p '↘️  Client ID | Press [Enter]: ' clientid < /dev/tty
 if [ "$clientid" = "" ]; then keyinput; fi
 if [ "$clientid" = "exit" ]; then clonestart; fi
 keyinputsecret
@@ -217,7 +217,7 @@ Quitting? Type > exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Secret ID  | Press [Enter]: ' secretid < /dev/tty
+read -p '↘️  Secret ID | Press [Enter]: ' secretid < /dev/tty
 if [ "$secretid" = "" ]; then keyinputsecret; fi
 if [ "$secretid" = "exit" ]; then clonestart; fi
 
