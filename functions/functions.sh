@@ -203,6 +203,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
+read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+
 case $typed in
     1 )
         clientsec ;;
