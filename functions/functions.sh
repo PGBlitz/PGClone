@@ -247,17 +247,25 @@ case $typed in
 1 )
     echo "$clientid" > /var/plexguide/pgclone.public
     echo "$secretid" > /var/plexguide/pgclone.secret
+    echo
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
     ;;
 2 )
+    echo
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Restarting Process | Press [Enter] ' secretid < /dev/tty
     ;;
 z )
     keyinputpublic
+    echo
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
     ;;
 Z )
     keyinputpublic
+    echo
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
     ;;
 * )
