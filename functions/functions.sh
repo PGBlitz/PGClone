@@ -246,9 +246,9 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 1 )
-    clonestart ;;
-2 )
     a=b ;;
+2 )
+    clonestart ;;
 * )
     keyinputpublic ;;
 esac
