@@ -41,10 +41,34 @@ case $typed in
 1 )
     if [[ "$projectcheck" == "bad" ]]; then
     echo "BAD"
-    projectname; fi
-    echo "GOOD" ;;
+    projectname; fi ;;
 2 )
-    clonestart ;;
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Project Name ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Name of your project? Ensure the PROJECT NAME is one word; all lowercase;
+no spaces!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
+
+date=`date +%m%d`
+rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
+projectid="pg--${date}${rand}"
+gcloud projects create $projectid --account=${pgcloneemail}
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 ID: $projectid ~ Created
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Confirm Info | Press [ENTER]: ' typed < /dev/tty
+    ;;
 Z )
     clonestart ;;
 z )
