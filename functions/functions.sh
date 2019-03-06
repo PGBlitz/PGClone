@@ -296,33 +296,6 @@ EOF
 fi
 }
 
-pgclonevars () {
-  mkdir -p /var/plexguide/rclone
-  variable /var/plexguide/project.account "NOT-SET"
-  variable /var/plexguide/pgclone.project "NOT-SET"
-  variable /var/plexguide/pgclone.email "NOT-SET"
-  variable /var/plexguide/pgclone.teamdrive ""
-  variable /var/plexguide/rclone/deploy.version "null"
-  variable /var/plexguide/pgclone.transport "NOT-SET"
-  variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
-  variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
-  variable /var/plexguide/move.bw  "9"
-  variable /var/plexguide/blitz.bw  "1000"
-  variable /var/plexguide/pgclone.password ""
-  variable /var/plexguide/pgclone.salt ""
-
-  transport=$(cat /var/plexguide/pgclone.transport)
-
-  variable /var/plexguide/pgclone.id "NOT-SET" # output for front interface, changes when users sets id/secret
-  pgcloneid=$(cat /var/plexguide/pgclone.id)
-
-  variable /var/plexguide/pgclone.public ""
-  pgclonepublic=$(cat /var/plexguide/pgclone.public)
-
-  variable /var/plexguide/pgclone.secret ""
-  pgclonesecret=$(cat /var/plexguide/pgclone.secret)
-}
-
 setthrottleblitz () {
 tee <<-EOF
 
