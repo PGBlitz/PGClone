@@ -57,6 +57,12 @@ fi
 }
 
 clonestart () {
+
+# pull throttle speeds based on role
+if [[ "$transport" == "mu" || "$transport" == "me" ]]; then
+throttle=$(cat /var/plexguide/move.bw)
+else throttle=$(cat /var/plexguide/blitz.bw); fi
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -69,7 +75,7 @@ clonestartoutput
 tee <<-EOF
 
 [A] Deploy              [PG Move /w No Encryption]
-[B] Throttle            [9 MB]
+[B] Throttle            [${throttle} MB]
 [C] Change              Switch Transport Method
 [Z] Exit
 
