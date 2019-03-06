@@ -26,8 +26,7 @@ tee <<-EOF
 🚀 PG Clone - Project ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-CURRENT PROJECT
-$pgcloneproject
+CURRENT PROJECT: $pgcloneproject
 
 [1] Project: Use Existing Project
 [2] Project: Build New
