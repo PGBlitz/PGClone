@@ -237,7 +237,7 @@ $pgclonepublic
 SECRET ID
 $pgclonesecret
 
-Do You Wish To Change the Following Stored Values?
+Change the Stored Values?
 [1] Yes
 [2] No
 
