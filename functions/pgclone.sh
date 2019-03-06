@@ -603,20 +603,6 @@ else badinput
   projectmenu; fi
 }
 
-projectcreate () {
-  date=`date +%m%d`
-rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
-projectid="pg-$date-$rand"
-gcloud projects create $projectid
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 ID: $projectid ~ Created
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-read -p '↘️  Confirm Info | Press [ENTER]: ' typed < /dev/tty
-keymenu
-}
-
 projectestablish () {
 
   gcloud projects list > /var/plexguide/projects.list

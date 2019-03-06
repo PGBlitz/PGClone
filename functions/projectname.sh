@@ -8,6 +8,13 @@
 projectname () {
 pgclonevars
 
+############## REMINDERS
+# Prevent User from deleting active project they are on
+# Make destroying piece quiet and create a manual delete confirmatino
+
+############## REMINDERS
+
+
 # prevents user from moving on unless email is set
 if [[ "$pgcloneemail" == "NOT-SET" ]]; then
 echo
