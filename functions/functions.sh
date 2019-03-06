@@ -59,8 +59,7 @@ fi
 clonestart () {
 
 # pull throttle speeds based on role
-if [[ "$transport" == "mu" || "$transport" == "me" ]]; then
-throttle=$(cat /var/plexguide/move.bw)
+if [[ "$transport" == "mu" || "$transport" == "me" ]]; then throttle=$(cat /var/plexguide/move.bw)
 else throttle=$(cat /var/plexguide/blitz.bw); fi
 
 tee <<-EOF
@@ -316,13 +315,16 @@ clonestart
 }
 
 keymanagementinterface () {
+
+glogin=$(cat /var/plexguide/project.account)
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Google Account Login   [login]
+[1] Google Account Login   [$glogin]
 [2] Set Project Name       [pg9u2ur0wue]
 [3] Build Service Keys     [0]
 [4] E-Mail Generator
@@ -339,7 +341,7 @@ read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-        clientsec ;;
+        glogin ;;
     2 )
         gauth ;;
     z )

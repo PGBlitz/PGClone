@@ -9,6 +9,7 @@ source /opt/pgclone/functions/functions.sh
 source /opt/pgclone/functions/keys.sh
 source /opt/pgclone/functions/keyback.sh
 source /opt/pgclone/functions/pgclone.sh
+source /opt/pgclone/functions/keymanagement.sh
 ################################################################################
 
 # (functions.sh) Ensures variables and folders exist
@@ -19,5 +20,5 @@ mustset
 
 # (functions.sh) Ensures that fuse is set correct for rclone
 rcpiece
- 
+
 clonestart
