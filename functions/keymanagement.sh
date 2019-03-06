@@ -33,4 +33,7 @@ read -p '↘️  Input E-Mail | Press [ENTER]: ' typed < /dev/tty
 gcloud auth login --account = $typed
 gcloud info | grep Account: | cut -c 10- > /var/plexguide/project.account
 account=$(cat /var/plexguide/project.account)
+
+
+
 }
