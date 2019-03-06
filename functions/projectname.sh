@@ -26,11 +26,10 @@ tee <<-EOF
 🚀 PG Clone - Project ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SET PROJECT
+CURRENT PROJECT
 $pgclonepublic
 
-Change the Stored Values?
-[1] Project: Establish Existing
+[1] Project: Use Existing Project
 [2] Project: Build New
 [Z] Exit
 
