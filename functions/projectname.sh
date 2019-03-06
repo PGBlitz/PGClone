@@ -105,8 +105,6 @@ if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then ke
 }
 
 
-
-
 projectlist () {
 pnum=0
 mkdir -p /var/plexguide/prolist
@@ -120,5 +118,4 @@ while read p; do
   echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
   echo "[$pnum] ${filler}${p}"
 done </var/plexguide/prolist/prolist.sh
-fi
 }
