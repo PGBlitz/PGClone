@@ -10,6 +10,7 @@ source /opt/pgclone/functions/keys.sh
 source /opt/pgclone/functions/keyback.sh
 source /opt/pgclone/functions/pgclone.sh
 source /opt/pgclone/functions/keymanagement.sh
+source /opt/pgclone/functions/publicsecret.sh
 ################################################################################
 
 # (functions.sh) Ensures variables and folders exist
