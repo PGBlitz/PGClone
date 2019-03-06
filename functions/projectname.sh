@@ -12,7 +12,7 @@ pgclonevars
 if [[ "$pgcloneemail" == "NOT-SET" ]]; then
 echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-read -p '↘️  Set E-Mail First | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  ERROR! E-Mail is not setup! | Press [ENTER] ' typed < /dev/tty
 clonestart; fi
 
 projectcheck="good"
