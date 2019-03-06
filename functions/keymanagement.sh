@@ -30,6 +30,9 @@ EOF
 
 read -p '↘️  Input E-Mail | Press [ENTER]: ' typed < /dev/tty
 
+if [[ "$typed" == "" ]]; then glogin; fi
+if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
+
 gcloud auth login --account = $typed
 gcloud info | grep Account: | cut -c 10- > /var/plexguide/project.account
 account=$(cat /var/plexguide/project.account)
