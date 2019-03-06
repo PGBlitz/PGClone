@@ -109,7 +109,9 @@ destroynumber=$(cat /var/plexguide/prolist/$typed)
 echo
 gcloud projects delete ${destroynumber} --account=${pgcloneemail}
 else destroyproject; fi
-
+echo
+read -p '↘️  Project Deleted | Press [ENTER]: ' typed < /dev/tty
+projectname
 }
 
 
