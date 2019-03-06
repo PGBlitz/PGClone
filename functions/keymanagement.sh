@@ -14,9 +14,23 @@ read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
 
 glogin () {
 
-emailaccount=($ cat /var/plexguide/project.email)
+emailaccount=$(cat /var/plexguide/project.email)
 
-gcloud auth login --account =
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Set E-Mail Address ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+What email address from the Google Console do you want to be associated
+with from your Google GSuite? Ensure that it exists!
+
+Quitting? Type >>> exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Input E-Mail | Press [ENTER]: ' typed < /dev/tty
+
+gcloud auth login --account = $typed
 gcloud info | grep Account: | cut -c 10- > /var/plexguide/project.account
 account=$(cat /var/plexguide/project.account)
 }
