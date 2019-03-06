@@ -99,9 +99,9 @@ if [[ "$transport" == "mu" ]]; then
       * )
           clonestart ;;
       b )
-          setthrottle ;;
+          setthrottlemove ;;
       B )
-          setthrottle ;;
+          setthrottlemove ;;
       c )
           transportselect ;;
       C )
@@ -124,9 +124,9 @@ elif [[ "$transport" == "me" ]]; then
       * )
           clonestart ;;
       b )
-          setthrottle ;;
+          setthrottlemove ;;
       B )
-          setthrottle ;;
+          setthrottlemove ;;
       c )
           transportselect ;;
       C )
@@ -153,9 +153,9 @@ elif [[ "$transport" == "bu" ]]; then
         * )
             clonestart ;;
         b )
-            setthrottle ;;
+            setthrottleblitz ;;
         B )
-            setthrottle ;;
+            setthrottleblitz ;;
         c )
             transportselect ;;
         C )
@@ -182,9 +182,9 @@ elif [[ "$transport" == "be" ]]; then
         Z )
             exit ;;
         b )
-            setthrottle ;;
+            setthrottleblitz ;;
         B )
-            setthrottle ;;
+            setthrottleblitz ;;
         c )
             transportselect ;;
         C )
