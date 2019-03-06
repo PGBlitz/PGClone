@@ -34,6 +34,12 @@ gcloud auth login --account = $typed
 gcloud info | grep Account: | cut -c 10- > /var/plexguide/project.account
 account=$(cat /var/plexguide/project.account)
 
-
+testcheck=$(gcloud auth list | grep "$typed")
+if [[ "testcheck" == "" ]]; then
+echo
+echo "Check: E-Mail Address Added Failed"
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+glogin
+fi
 
 }
