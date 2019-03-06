@@ -27,7 +27,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CURRENT PROJECT
-$pgclonepublic
+$pgcloneproject
 
 [1] Project: Use Existing Project
 [2] Project: Build New
@@ -68,7 +68,11 @@ tee <<-EOF
 🚀 ID: $projectid ~ Created
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+NOTE: Even the project is created, you must now establish it when back
+at the main interface!
+
 EOF
+echo "$projectid" > /var/plexguide/pgclone.project
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
     ;;
 Z )

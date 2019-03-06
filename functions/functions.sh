@@ -233,7 +233,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Google Account Login   $glogin
-[2] Set Project Name       [pg9u2ur0wue]
+[2] Project Name           [$pgcloneproject]
 [3] Build Service Keys     [0]
 [4] E-Mail Generator
 
