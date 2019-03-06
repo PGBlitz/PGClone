@@ -99,11 +99,14 @@ tee <<-EOF
 Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Destroy Which Project? | Press [Enter]: ' typed < /dev/tty
+read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed < /dev/tty
 if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then keymanagementinterface; fi
 
 # Repeats if Users Fails the Range
-if [[ "$typed" -ge "0" && "$typed" -le "$pnum" ]]; then layoutprompt;
+if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
+
+destroynumber=$(cat /var/plexguide/prolist/$typed)
+gcloud projects delete ${destroynumber} --account=${pgcloneemail} 
 else destroyproject; fi
 
 }
