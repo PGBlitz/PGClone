@@ -13,7 +13,10 @@ read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
 }
 
 glogin () {
-gcloud auth login
+
+emailaccount=($ cat /var/plexguide/project.email)
+
+gcloud auth login --account =
 gcloud info | grep Account: | cut -c 10- > /var/plexguide/project.account
 account=$(cat /var/plexguide/project.account)
 }
