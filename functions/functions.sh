@@ -96,8 +96,6 @@ if [[ "$transport" == "mu" ]]; then
           exit ;;
       Z )
           exit ;;
-      * )
-          clonestart ;;
       b )
           setthrottlemove ;;
       B )
@@ -121,8 +119,6 @@ elif [[ "$transport" == "me" ]]; then
           exit ;;
       Z )
           exit ;;
-      * )
-          clonestart ;;
       b )
           setthrottlemove ;;
       B )
