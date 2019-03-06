@@ -153,6 +153,10 @@ elif [[ "$transport" == "be" ]]; then
             exit ;;
         * )
             clonestart ;;
+        c )
+            setthrottle ;;
+        C )
+            setthrottle ;;
       esac
 fi
 clonestart
@@ -369,6 +373,38 @@ pgclonevars () {
   variable /var/plexguide/pgclone.salt ""
 
   transport=$(cat /var/plexguide/pgclone.transport)
+}
+
+setthrottleblitz () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 System Message: BW Limit Notice        📓 Reference: move.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 100MB = 1 Gig Speeds | 1000MB = 10 Gig Speeds - Remember that your
+   upload speeds are still limited to your server's max upload connection
+
+EOF
+  read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/blitz.bw && question1
+else setthrottleblitz; fi
+}
+
+setthrottlemove () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 System Message: BW Limit Notice        📓 Reference: move.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 10MB is a safe limit. If exceeding 10MB and uploading straight for
+24 hours, an upload ban will be triggered.
+
+EOF
+  read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/move.bw && question1;
+else setthrottlemove; fi
 }
 
 rcpiece () {
