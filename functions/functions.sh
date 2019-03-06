@@ -153,10 +153,14 @@ elif [[ "$transport" == "be" ]]; then
             exit ;;
         * )
             clonestart ;;
+        b )
+            setthrottle ;;
+        B )
+            setthrottle ;;
         c )
-            setthrottle ;;
+            transportselect ;;
         C )
-            setthrottle ;;
+            transportselect ;;
       esac
 fi
 clonestart
