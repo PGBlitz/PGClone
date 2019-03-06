@@ -297,13 +297,11 @@ case $typed in
     keyinputpublic
     ;;
 z )
-    keyinputpublic
     echo
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
     ;;
 Z )
-    keyinputpublic
     echo
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
