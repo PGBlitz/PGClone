@@ -27,18 +27,18 @@ clonestartoutput () {
 pgclonevars
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [Fill Me]
+[1] Client ID & Secret  [${pgcloneid}]
 [2] GDrive OAuth        [Fill Me]
 EOF
 elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [Fill Me]
+[1] Client ID & Secret  [${pgcloneid}]
 [2] GDrive OAuth        [Fill Me]
 [3] Passwords           [Not Set]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [Fill Me]
+[1] Client ID & Secret  [${pgcloneid}]
 [2] GDrive OAuth        [Fill Me]
 [3] TDrive OAuth        [Fill Me]
 [4] TDrive Label        [None]
@@ -46,7 +46,7 @@ tee <<-EOF
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [Fill Me]
+[1] Client ID & Secret  [${pgcloneid}]
 [2] GDrive OAuth        [Fill Me]
 [3] TDrive OAuth        [Fill Me]
 [4] TDrive Label        [None]
@@ -289,6 +289,7 @@ case $typed in
     echo
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
+    echo "SET" > /var/plexguide/pgclone.id
     ;;
 2 )
     echo
@@ -404,6 +405,10 @@ pgclonevars () {
   variable /var/plexguide/pgclone.salt ""
 
   transport=$(cat /var/plexguide/pgclone.transport)
+
+  variable /var/plexguide/pgclone.id "NOT-SET" # output for front interface, changes when users sets id/secret
+  pgcloneid=$(cat /var/plexguide/pgclone.id)
+
 }
 
 setthrottleblitz () {
