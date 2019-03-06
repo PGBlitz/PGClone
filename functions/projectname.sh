@@ -57,17 +57,19 @@ no spaces!
 EOF
 read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
 
+echo ""
 date=`date +%m%d`
-rand=$(echo $((1 + RANDOM + RANDOM + RANDOM + RANDOM + RANDOM )))
-projectid="pg--${date}${rand}"
+rand=$(echo $((1 + RANDOM + RANDOM + RANDOM )))
+projectid="pg-$typed-${date}${rand}"
 gcloud projects create $projectid --account=${pgcloneemail}
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 ID: $projectid ~ Created
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
-read -p '↘️  Confirm Info | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
     ;;
 Z )
     clonestart ;;
