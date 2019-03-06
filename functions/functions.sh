@@ -232,10 +232,10 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CLIENT ID
-$clientid
+$pgclonepublic
 
 SECRET ID
-$secretid
+$pgclonesecret
 
 Do You Wish To Change the Following Values?
 [1] Yes
