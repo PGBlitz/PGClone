@@ -228,7 +228,7 @@ if [[ "$pgcloneid" == "SET" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Output ~ pgclone.pgblitz.com
+🚀 PG Clone - Change Values? ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CLIENT ID
@@ -237,7 +237,7 @@ $pgclonepublic
 SECRET ID
 $pgclonesecret
 
-Do You Wish To Change the Following Values?
+Do You Wish To Change the Following Stored Values?
 [1] Yes
 [2] No
 
