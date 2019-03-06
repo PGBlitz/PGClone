@@ -45,4 +45,5 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 glogin
 fi
 
+echo "$typed" > /var/plexguide/pgclone.email
 }
