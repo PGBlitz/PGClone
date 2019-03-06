@@ -106,7 +106,8 @@ if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then ke
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
 
 destroynumber=$(cat /var/plexguide/prolist/$typed)
-gcloud projects delete ${destroynumber} --account=${pgcloneemail} 
+echo
+gcloud projects delete ${destroynumber} --account=${pgcloneemail}
 else destroyproject; fi
 
 }
