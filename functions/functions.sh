@@ -417,7 +417,7 @@ tee <<-EOF
 
 EOF
   read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/blitz.bw && question1
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/blitz.bw
 else setthrottleblitz; fi
 }
 
@@ -433,7 +433,7 @@ tee <<-EOF
 
 EOF
   read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/move.bw && question1;
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/move.bw
 else setthrottlemove; fi
 }
 
