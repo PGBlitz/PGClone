@@ -98,6 +98,16 @@ if [[ "$transport" == "mu" ]]; then
           exit ;;
       * )
           clonestart ;;
+      b )
+          setthrottle ;;
+      B )
+          setthrottle ;;
+      c )
+          transportselect ;;
+      C )
+          transportselect ;;
+      * )
+          clonestart ;;
     esac
 elif [[ "$transport" == "me" ]]; then
   case $typed in
@@ -111,6 +121,16 @@ elif [[ "$transport" == "me" ]]; then
           exit ;;
       Z )
           exit ;;
+      * )
+          clonestart ;;
+      b )
+          setthrottle ;;
+      B )
+          setthrottle ;;
+      c )
+          transportselect ;;
+      C )
+          transportselect ;;
       * )
           clonestart ;;
     esac
@@ -130,6 +150,16 @@ elif [[ "$transport" == "bu" ]]; then
             exit ;;
         Z )
             exit ;;
+        * )
+            clonestart ;;
+        b )
+            setthrottle ;;
+        B )
+            setthrottle ;;
+        c )
+            transportselect ;;
+        C )
+            transportselect ;;
         * )
             clonestart ;;
       esac
