@@ -70,10 +70,10 @@ tee <<-EOF
 EOF
 echo "$projectid" > /var/plexguide/pgclone.project
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
+keymanagementinterface
     ;;
 Z )
-    keymanagementinterface ;;
+    clonestart ;;
 z )
     clonestart ;;
 * )
