@@ -57,6 +57,7 @@ fi
 }
 
 clonestart () {
+pgclonevars
 
 # pull throttle speeds based on role
 if [[ "$transport" == "mu" || "$transport" == "me" ]]; then throttle=$(cat /var/plexguide/move.bw)
