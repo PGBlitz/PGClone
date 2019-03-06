@@ -13,7 +13,7 @@ if [[ "$pgcloneemail" == "NOT-SET" ]]; then
 echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '↘️  ERROR! E-Mail is not setup! | Press [ENTER] ' typed < /dev/tty
-clonestart; fi
+keymanagementinterface; fi
 
 projectcheck="good"
 if [[ $(gcloud projects list --account=${pgcloneemail} | grep "pg-") == "" ]]; then
