@@ -12,6 +12,7 @@ source /opt/pgclone/functions/pgclone.sh
 source /opt/pgclone/functions/gaccount.sh
 source /opt/pgclone/functions/publicsecret.sh
 source /opt/pgclone/functions/variables.sh
+source /opt/pgclone/functions/projectname.sh
 ################################################################################
 
 # (functions.sh) Ensures variables and folders exist

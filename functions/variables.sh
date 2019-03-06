@@ -9,7 +9,6 @@ pgclonevars () {
   mkdir -p /var/plexguide/rclone
   variable /var/plexguide/project.account "NOT-SET"
   variable /var/plexguide/pgclone.project "NOT-SET"
-  variable /var/plexguide/pgclone.email "NOT-SET"
   variable /var/plexguide/pgclone.teamdrive ""
   variable /var/plexguide/rclone/deploy.version "null"
   variable /var/plexguide/pgclone.transport "NOT-SET"
@@ -30,4 +29,8 @@ pgclonevars () {
 
   variable /var/plexguide/pgclone.secret ""
   pgclonesecret=$(cat /var/plexguide/pgclone.secret)
+
+  variable /var/plexguide/pgclone.email "NOT-SET"
+  pgcloneemail=$(cat /var/plexguide/pgclone.email)
+
 }

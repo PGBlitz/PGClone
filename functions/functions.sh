@@ -251,7 +251,7 @@ case $typed in
     1 )
         glogin ;;
     2 )
-        gauth ;;
+        projectname ;;
     z )
         clonestart ;;
     Z )
