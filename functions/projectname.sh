@@ -37,6 +37,7 @@ Change the Stored Values?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
+
 case $typed in
 1 )
     if [[ "$projectcheck" == "bad" ]]; then
@@ -52,3 +53,5 @@ z )
 * )
     keyinputpublic ;;
 esac
+
+}
