@@ -30,6 +30,7 @@ CURRENT PROJECT: $pgcloneproject
 
 [1] Project: Use Existing Project
 [2] Project: Build New
+[3] Project: Destroy
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -72,6 +73,8 @@ echo "$projectid" > /var/plexguide/pgclone.project
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 keymanagementinterface
     ;;
+3 )
+    destroyproject ;;
 Z )
     clonestart ;;
 z )
@@ -80,4 +83,42 @@ z )
     keyinputpublic ;;
 esac
 
+}
+
+destroyproject () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Destroy Project ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+projectlist
+tee <<-EOF
+
+Qutting? Type >>> Exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Destroy Which Project? | Press [Enter]: ' typed < /dev/tty
+if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then keymanagementinterface; fi
+  
+}
+
+
+
+
+projectlist () {
+pnum=0
+mkdir -p /var/plexguide/prolist
+rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+
+gcloud projects list --account=${pgcloneemail} | tail -n +2 | awk '{print $1}' > /var/plexguide/prolist/prolist.sh
+
+while read p; do
+  let "pnum++"
+  echo "$p" > "/var/plexguide/prolist/$pnum"
+  echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+  echo "[$pnum] ${filler}${p}"
+done </var/plexguide/prolist/prolist.sh
+fi
 }
