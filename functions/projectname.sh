@@ -69,7 +69,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-read -p '↘️  Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
     ;;
 Z )
     clonestart ;;
