@@ -16,7 +16,7 @@ read -p '↘️  Set E-Mail First | Press [ENTER]: ' typed < /dev/tty
 clonestart; fi
 
 projectcheck="good"
-if [[ $(projectcheck=$(gcloud projects list --account=${pgcloneemail} | grep "pg-") == "" ]]; then
+if [[ $(gcloud projects list --account=${pgcloneemail} | grep "pg-") == "" ]]; then
 projectcheck="bad"; fi
 
 # prompt user
