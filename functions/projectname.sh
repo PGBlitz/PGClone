@@ -106,7 +106,7 @@ Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed < /dev/tty
-if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then keymanagementinterface; fi
+if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then projectname; fi
 
 # Repeats if Users Fails the Range
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
