@@ -10,5 +10,5 @@
 dlpath=$(cat /var/plexguide/server.hd.path)
 sleep 2
 
-mergerfs -o sync_read,allow_other,direct_io,use_ino,func.getattr=newest,nonempty,security_capability=false,xattr=nosys,category.create=ff,umask=002,uid=1000,gid=1000,fsname=pgunion \
+mergerfs -o ignorepponrename=true,sync_read,allow_other,direct_io,use_ino,func.getattr=newest,nonempty,security_capability=false,xattr=nosys,category.create=ff,umask=002,fsname=pgunion \
 $dlpath/move=RW:$dlpath/downloads=RW:$dlpath/pgblitz/upload=NC:/mnt/tdrive=NC:/mnt/gdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC /mnt/unionfs
