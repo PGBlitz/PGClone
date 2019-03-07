@@ -9,8 +9,8 @@ projectname () {
 pgclonevars
 
 ############## REMINDERS
-# Prevent User from deleting active project they are on
 # Make destroying piece quiet and create a manual delete confirmatino
+# When user creates project, give them the option to switch
 
 ############## REMINDERS
 
@@ -117,7 +117,7 @@ echo
 gcloud config set project ${existingnumber} --account=${pgcloneemail}
 else exisitingproject; fi
 echo
-read -p '↘️  Project Set: ${existingnumber} | Press [ENTER] ' typed < /dev/tty
+read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
 projectname
 }
 
