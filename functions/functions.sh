@@ -9,12 +9,12 @@
 # BAD INPUT
 badinput () {
 echo
-read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
+read -rp '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
 }
 
 badinput1 () {
 echo
-read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
+read -rp '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
 question1
 }
 
@@ -81,7 +81,7 @@ tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 clonestartactions
 }
 
@@ -245,7 +245,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
@@ -281,7 +281,7 @@ Visit the link above before starting this process!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-  read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+  read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
   case $typed in
       1 )
@@ -307,7 +307,7 @@ tee <<-EOF
    upload speeds are still limited to your server's max upload connection
 
 EOF
-  read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
+  read -rp '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/blitz.bw
 else setthrottleblitz; fi
 }
@@ -323,7 +323,7 @@ tee <<-EOF
 24 hours, an upload ban will be triggered.
 
 EOF
-  read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
+  read -rp '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/move.bw
 else setthrottlemove; fi
 }
@@ -359,7 +359,7 @@ NOTE: Please visit the link and understand what your doing first!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
