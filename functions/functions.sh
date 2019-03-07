@@ -23,245 +23,6 @@ variable () {
   if [ ! -e "$file" ]; then echo "$2" > $1; fi
 }
 
-clonestartoutput () {
-pgclonevars
-if [[ "$transport" == "mu" ]]; then
-tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive OAuth        [Fill Me]
-EOF
-elif [[ "$transport" == "me" ]]; then
-tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive OAuth        [Fill Me]
-[3] Passwords           [Not Set]
-EOF
-elif [[ "$transport" == "bu" ]]; then
-tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive OAuth        [Fill Me]
-[3] TDrive OAuth        [Fill Me]
-[4] TDrive Label        [None]
-[5] Key Management      [0] Built
-EOF
-elif [[ "$transport" == "be" ]]; then
-tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive OAuth        [Fill Me]
-[3] TDrive OAuth        [Fill Me]
-[4] TDrive Label        [None]
-[5] Passwords           [Not Set]
-[6] Key Management      [0] Built
-EOF
-fi
-}
-
-clonestart () {
-pgclonevars
-
-# pull throttle speeds based on role
-if [[ "$transport" == "mu" || "$transport" == "me" ]]; then throttle=$(cat /var/plexguide/move.bw)
-else throttle=$(cat /var/plexguide/blitz.bw); fi
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-clonestartoutput
-
-tee <<-EOF
-
-[A] Deploy              [PG Move /w No Encryption]
-[B] Throttle            [${throttle} MB]
-[C] Change              Switch Transport Method
-[Z] Exit
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
-clonestartactions
-}
-
-clonestartactions () {
-if [[ "$transport" == "mu" ]]; then
-  case $typed in
-      1 )
-          keyinputpublic ;;
-      2 )
-          gauth ;;
-      z )
-          exit ;;
-      Z )
-          exit ;;
-      b )
-          setthrottlemove ;;
-      B )
-          setthrottlemove ;;
-      c )
-          transportselect ;;
-      C )
-          transportselect ;;
-      * )
-          clonestart ;;
-    esac
-elif [[ "$transport" == "me" ]]; then
-  case $typed in
-      1 )
-          keyinputpublic ;;
-      2 )
-          gauth ;;
-      3 )
-          cpasswords ;;
-      z )
-          exit ;;
-      Z )
-          exit ;;
-      b )
-          setthrottlemove ;;
-      B )
-          setthrottlemove ;;
-      c )
-          transportselect ;;
-      C )
-          transportselect ;;
-      * )
-          clonestart ;;
-    esac
-elif [[ "$transport" == "bu" ]]; then
-  case $typed in
-        1 )
-            keyinputpublic ;;
-        2 )
-            gauth ;;
-        3 )
-            tauth ;;
-        4 )
-            tlabel ;;
-        5 )
-            keymanagementinterface ;;
-        z )
-            exit ;;
-        Z )
-            exit ;;
-        * )
-            clonestart ;;
-        b )
-            setthrottleblitz ;;
-        B )
-            setthrottleblitz ;;
-        c )
-            transportselect ;;
-        C )
-            transportselect ;;
-        * )
-            clonestart ;;
-      esac
-elif [[ "$transport" == "be" ]]; then
-  case $typed in
-        1 )
-            keyinputpublic ;;
-        2 )
-            gauth ;;
-        3 )
-            tauth ;;
-        4 )
-            tlabel ;;
-        5 )
-            cpasswords ;;
-        6 )
-            keymanagementinterface ;;
-        z )
-            exit ;;
-        Z )
-            exit ;;
-        b )
-            setthrottleblitz ;;
-        B )
-            setthrottleblitz ;;
-        c )
-            transportselect ;;
-        C )
-            transportselect ;;
-        * )
-            clonestart ;;
-      esac
-fi
-clonestart
-}
-
-removepgservices () {
-  ansible-playbook /opt/pgclone/pgservices.yml
-}
-
-readrcloneconfig () {
-  touch /opt/appdata/plexguide/rclone.conf
-  mkdir -p /var/plexguide/rclone/
-
-  gdcheck=$(cat /opt/appdata/plexguide/rclone.conf | grep gdrive)
-  if [ "$gdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/gdrive.status && gdstatus="good";
-  else echo "bad" > /var/plexguide/rclone/gdrive.status && gdstatus="bad"; fi
-
-  gccheck=$(cat /opt/appdata/plexguide/rclone.conf | grep "remote = gdrive:/encrypt")
-  if [ "$gccheck" != "" ]; then echo "good" > /var/plexguide/rclone/gcrypt.status && gcstatus="good";
-  else echo "bad" > /var/plexguide/rclone/gcrypt.status && gcstatus="bad"; fi
-
-  tdcheck=$(cat /opt/appdata/plexguide/rclone.conf | grep tdrive)
-  if [ "$tdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/tdrive.status && tdstatus="good"
-  else echo "bad" > /var/plexguide/rclone/tdrive.status && tdstatus="bad"; fi
-
-}
-
-rcloneconfig () {
-  rclone config --config /opt/appdata/plexguide/rclone.conf
-}
-
-keysprocessed () {
-  mkdir -p /opt/appdata/pgblitz/keys/processed
-  ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
-}
-
-keymanagementinterface () {
-pgclonevars
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[1] Google Account Login   $pgcloneemail
-[2] Project Name           [$pgcloneproject]
-[3] Build Service Keys     [0]
-[4] E-Mail Generator
-
-[A] Keys Backup
-[B] Keys Restore
-[C] Keys Destroy
-[Z] Exit
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-
-read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
-
-case $typed in
-    1 )
-        glogin ;;
-    2 )
-        projectname ;;
-    z )
-        clonestart ;;
-    Z )
-        clonestart ;;
-    * )
-        clonestart ;;
-  esac
-keymanagementinterface
-}
-
 mustset () {
 pgclonevars
 
@@ -337,4 +98,75 @@ tee "/etc/fuse.conf" > /dev/null <<EOF
 # Allow non-root users to specify the allow_other or allow_root mount options.
 user_allow_other
 EOF
+}
+
+
+removepgservices () {
+  ansible-playbook /opt/pgclone/pgservices.yml
+}
+
+readrcloneconfig () {
+  touch /opt/appdata/plexguide/rclone.conf
+  mkdir -p /var/plexguide/rclone/
+
+  gdcheck=$(cat /opt/appdata/plexguide/rclone.conf | grep gdrive)
+  if [ "$gdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/gdrive.status && gdstatus="good";
+  else echo "bad" > /var/plexguide/rclone/gdrive.status && gdstatus="bad"; fi
+
+  gccheck=$(cat /opt/appdata/plexguide/rclone.conf | grep "remote = gdrive:/encrypt")
+  if [ "$gccheck" != "" ]; then echo "good" > /var/plexguide/rclone/gcrypt.status && gcstatus="good";
+  else echo "bad" > /var/plexguide/rclone/gcrypt.status && gcstatus="bad"; fi
+
+  tdcheck=$(cat /opt/appdata/plexguide/rclone.conf | grep tdrive)
+  if [ "$tdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/tdrive.status && tdstatus="good"
+  else echo "bad" > /var/plexguide/rclone/tdrive.status && tdstatus="bad"; fi
+
+}
+
+rcloneconfig () {
+  rclone config --config /opt/appdata/plexguide/rclone.conf
+}
+
+keysprocessed () {
+  mkdir -p /opt/appdata/pgblitz/keys/processed
+  ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
+}
+
+keymanagementinterface () {
+pgclonevars
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1] Google Account Login   $pgcloneemail
+[2] Project Name           [$pgcloneproject]
+[3] Build Service Keys     [0]
+[4] E-Mail Generator
+
+[A] Keys Backup
+[B] Keys Restore
+[C] Keys Destroy
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+
+case $typed in
+    1 )
+        glogin ;;
+    2 )
+        projectname ;;
+    z )
+        clonestart ;;
+    Z )
+        clonestart ;;
+    * )
+        clonestart ;;
+  esac
+keymanagementinterface
 }
