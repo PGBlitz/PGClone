@@ -128,8 +128,6 @@ elif [[ "$transport" == "bu" ]]; then
             exit ;;
         Z )
             exit ;;
-        * )
-            clonestart ;;
         b )
             setthrottleblitz ;;
         B )
