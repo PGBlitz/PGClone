@@ -83,9 +83,9 @@ if [[ "$transport" == "mu" ]]; then
       B )
           setthrottlemove ;;
       c )
-          transportselect
+          transportselect ;;
       C )
-          transportselect
+          transportselect ;;
       * )
           clonestart ;;
     esac
