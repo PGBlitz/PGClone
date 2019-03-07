@@ -11,6 +11,7 @@ pgclonevars
 ############## REMINDERS
 # Make destroying piece quiet and create a manual delete confirmatino
 # When user creates project, give them the option to switch
+# fix existing set project
 
 ############## REMINDERS
 
