@@ -22,7 +22,7 @@ dlpath=$(cat /var/plexguide/server.hd.path)
 rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
---log-level ERROR --stats 5s \
+--log-level ERROR --stats 5s --stats-file-name-length 0 \
 --min-age 1m \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
@@ -36,7 +36,7 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 rclone move "$dlpath/move/" "$ver:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
---log-level INFO --stats 5s \
+--log-level INFO --stats 5s --stats-file-name-length 0 \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
