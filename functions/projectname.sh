@@ -14,7 +14,6 @@ pgclonevars
 
 ############## REMINDERS
 
-
 # prevents user from moving on unless email is set
 if [[ "$pgcloneemail" == "NOT-SET" ]]; then
 echo
@@ -48,7 +47,9 @@ case $typed in
 1 )
     if [[ "$projectcheck" == "bad" ]]; then
     echo "BAD"
-    projectname; fi ;;
+    projectname
+  elif [[ "$projectcheck" == "good" ]]; then
+    exisitingproject; fi ;;
 2 )
 
 tee <<-EOF
@@ -89,6 +90,35 @@ z )
     keyinputpublic ;;
 esac
 
+}
+
+exisitingproject () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Existing Project ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+projectlist
+tee <<-EOF
+
+Qutting? Type >>> Exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed < /dev/tty
+if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then projectname; fi
+
+# Repeats if Users Fails the Range
+if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
+existingnumber=$(cat /var/plexguide/prolist/$typed)
+
+echo
+gcloud config set project ${existingnumber} --account=${pgcloneemail}
+else exisitingproject; fi
+echo
+read -p '↘️  Project Set: ${existingnumber} | Press [ENTER] ' typed < /dev/tty
+projectname
 }
 
 destroyproject () {
