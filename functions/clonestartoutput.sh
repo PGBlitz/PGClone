@@ -106,9 +106,9 @@ elif [[ "$transport" == "me" ]]; then
       B )
           setthrottlemove ;;
       c )
-          transportselect
+          transportselect ;;
       C )
-          transportselect
+          transportselect ;;
       * )
           clonestart ;;
     esac
@@ -133,9 +133,9 @@ elif [[ "$transport" == "bu" ]]; then
         B )
             setthrottleblitz ;;
         c )
-            transportselect
+            transportselect ;;
         C )
-            transportselect
+            transportselect ;;
         * )
             clonestart ;;
       esac
@@ -162,9 +162,9 @@ elif [[ "$transport" == "be" ]]; then
         B )
             setthrottleblitz ;;
         c )
-            transportselect
+            transportselect ;;
         C )
-            transportselect
+            transportselect ;;
         * )
             clonestart ;;
       esac
