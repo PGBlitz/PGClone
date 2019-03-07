@@ -115,7 +115,7 @@ destroynumber=$(cat /var/plexguide/prolist/$typed)
   # Cannot Destroy Active Project
   if [[ $(cat /var/plexguide/pgclone.project) == "$destroynumber" ]]; then
   echo
-  read -p '↘️  Cannot Destroy an Active Project | Press [ENTER]: ' typed < /dev/tty
+  read -p '↘️  Unable to Destroy an Active Project | Press [ENTER] ' typed < /dev/tty
   destroyproject
   fi
 
