@@ -118,6 +118,7 @@ gcloud config set project ${existingnumber} --account=${pgcloneemail}
 else exisitingproject; fi
 echo
 read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
+echo ${exisitingproject} > /var/plexguide/project.account
 projectname
 }
 
