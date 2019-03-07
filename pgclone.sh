@@ -6,12 +6,14 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/pgclone/functions/functions.sh
+source /opt/pgclone/functions/variables.sh
 source /opt/pgclone/functions/keys.sh
 source /opt/pgclone/functions/keyback.sh
 source /opt/pgclone/functions/pgclone.sh
 source /opt/pgclone/functions/gaccount.sh
 source /opt/pgclone/functions/publicsecret.sh
 source /opt/pgclone/functions/variables.sh
+source /opt/pgclone/functions/transportselect.sh
 source /opt/pgclone/functions/projectname.sh
 ################################################################################
 
