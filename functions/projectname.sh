@@ -110,8 +110,15 @@ if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then ke
 
 # Repeats if Users Fails the Range
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
-
 destroynumber=$(cat /var/plexguide/prolist/$typed)
+
+  # Cannot Destroy Active Project
+  if [[ $(cat /var/plexguide/pgclone.project) == "$destroynumber" ]]; then
+  echo
+  read -p '↘️  Cannot Destroy an Active Project | Press [ENTER]: ' typed < /dev/tty
+  destroyproject
+  fi
+
 echo
 gcloud projects delete ${destroynumber} --account=${pgcloneemail}
 else destroyproject; fi
@@ -119,7 +126,6 @@ echo
 read -p '↘️  Project Deleted | Press [ENTER] ' typed < /dev/tty
 projectname
 }
-
 
 projectlist () {
 pnum=0
