@@ -83,9 +83,9 @@ if [[ "$transport" == "mu" ]]; then
       B )
           setthrottlemove ;;
       c )
-          echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+          transportselect
       C )
-          echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+          transportselect
       * )
           clonestart ;;
     esac
@@ -106,9 +106,9 @@ elif [[ "$transport" == "me" ]]; then
       B )
           setthrottlemove ;;
       c )
-          echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+          transportselect
       C )
-          echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+          transportselect
       * )
           clonestart ;;
     esac
@@ -133,9 +133,9 @@ elif [[ "$transport" == "bu" ]]; then
         B )
             setthrottleblitz ;;
         c )
-            echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+            transportselect
         C )
-            echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+            transportselect
         * )
             clonestart ;;
       esac
@@ -162,12 +162,15 @@ elif [[ "$transport" == "be" ]]; then
         B )
             setthrottleblitz ;;
         c )
-            echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+            transportselect
         C )
-            echo "NOT-SET" > /var/plexguide/pgclone.transport ;;
+            transportselect
         * )
             clonestart ;;
       esac
+else
+  echo "NOT-SET" > /var/plexguide/pgclone.transport
+  transportselect
 fi
 clonestart
 }
