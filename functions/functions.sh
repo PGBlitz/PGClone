@@ -46,7 +46,7 @@ EOF
 
   case $typed in
       1 )
-          transportselect ;;
+          echo "NOT-SET" > /var/plexguide/pgclone.transport;;
       z )
           exit ;;
       Z )
