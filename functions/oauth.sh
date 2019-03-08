@@ -74,8 +74,9 @@ else teamdriveselect; fi
 
   name=$(sed -n ${typed}p /var/plexguide/teamdrive.name)
   id=$(sed -n ${typed}p /var/plexguide/teamdrive.id)
-echo "$name" > /var/plexguide/pgclone.teamdrive
-echo "$id" > /var/plexguide/pgclone.teamid
+  echo "$name" > /var/plexguide/pgclone.teamdrive
+  echo "$id" > /var/plexguide/pgclone.teamid
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -83,8 +84,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE: Do not share out your teamdrives to others! The usage counts against
-you and if others share your content, you have no control (and your
-team drive can be shutdown!)
+you and if others share your content, you have no control (and your team
+drive can be shutdown!)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
