@@ -5,9 +5,9 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-
+source /opt/pgclone/functions/oauth.sh
 # BAD INPUT
-oauth () {
+#oauth () {
 
 pgclonevars
 name="TEST"
@@ -29,4 +29,4 @@ EOF
   cat /var/plexguide/pgtokentm.output | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /var/plexguide/pgtokentm2.output
   curl -H "GData-Version: 3.0" -H "Authorization: Bearer $primet" https://www.googleapis.com/drive/v3/teamdrives > /var/plexguide/teamdrive.output
 
-}
+#}
