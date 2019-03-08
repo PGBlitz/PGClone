@@ -55,11 +55,14 @@ if [[ $(cat /var/plexguide/teamdrive.name) == "" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 No Team Drives Exist!
+🚀 No Team Drives Exist or Bad Token!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Create a Team Drive First or Share on to this account and retry the
+NOTE1: Create a Team Drive First or Share on to this account and retry the
 process again!
+
+NOTE2: If a bad token, ensure that you are using the correct account when
+signing in (or conducting a proper copy and paste)!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
