@@ -45,12 +45,12 @@ if [[ "$tdname" == "NOT-SET" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Setup Your TDrive Label First! ~ http://pgclone.pgblitz.com
+🚀 Setup the TDrive Label First! ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE: Set up your TDrive Label First prior to executing the TDrive OAuth.
-Basically, we cannot authorize your TeamDrive without knowing which
-teamdrive that you are utilizing first!
+Basically, we cannot authorize the TeamDrive without knowing which
+teamdrive is being utilizing!
 
 EOF
 read -rp '↘️  Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
