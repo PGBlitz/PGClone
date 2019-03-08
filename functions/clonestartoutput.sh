@@ -148,7 +148,7 @@ elif [[ "$transport" == "be" ]]; then
         3 )
             tauth ;;
         4 )
-            tlabel > /var/plexguide/oauth.type
+            echo "tlabel" > /var/plexguide/oauth.type
             oauth ;;
         5 )
             cpasswords ;;
