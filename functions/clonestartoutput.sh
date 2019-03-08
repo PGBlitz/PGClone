@@ -48,9 +48,9 @@ tee <<-EOF
 🚀 Setup the TDrive Label First! ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Set up your TDrive Label First prior to executing the TDrive OAuth.
-Basically, we cannot authorize the TeamDrive without knowing which
-teamdrive is being utilizing!
+NOTE: Set up your TDrive Label prior to executing the TDrive OAuth.
+Basically, we cannot authorize a TeamDrive without knowing which
+TeamDrive is being utilized first!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
