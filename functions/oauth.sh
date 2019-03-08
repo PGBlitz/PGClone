@@ -8,7 +8,7 @@
 oauth () {
 pgclonevars
 
-if [[ "oauthtype" == "tlabel" ]]; then gtype="https://www.googleapis.com/drive/v3/teamdrives"; fi
+if [[ "$oauthtype" == "tlabel" ]]; then gtype="https://www.googleapis.com/drive/v3/teamdrives"; fi
 
 tee <<-EOF
 
