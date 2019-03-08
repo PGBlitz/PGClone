@@ -20,7 +20,7 @@ pgclonevars () {
   transport=$(cat /var/plexguide/pgclone.transport)
 
   variable /var/plexguide/pgclone.teamdrive  "NOT-SET"
-  tdname=$(cat /var/plexguide/pgclone.public)
+  tdname=$(cat /var/plexguide/pgclone.teamdrive)
 
   variable /var/plexguide/pgclone.id "NOT-SET" # output for front interface, changes when users sets id/secret
   pgcloneid=$(cat /var/plexguide/pgclone.id)
