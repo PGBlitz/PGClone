@@ -141,7 +141,7 @@ tee <<-EOF
 💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Google Account Login   $pgcloneemail
+[1] Google Account Login   [$pgcloneemail]
 [2] Project Name           [$pgcloneproject]
 [3] Build Service Keys     [0]
 [4] E-Mail Generator
