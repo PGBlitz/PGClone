@@ -32,6 +32,9 @@ pgclonevars () {
   variable /var/plexguide/pgclone.email "NOT-SET"
   pgcloneemail=$(cat /var/plexguide/pgclone.email)
 
+  variable /var/plexguide/oauth.type "NOT-SET" #output for auth type
+  oauthtype=$(cat /var/plexguide/oauth.type)
+
   variable /var/plexguide/pgclone.project "NOT-SET"
   pgcloneproject=$(cat /var/plexguide/pgclone.project)
 
