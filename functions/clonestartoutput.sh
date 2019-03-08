@@ -52,8 +52,9 @@ NOTE: Set up your TDrive Label First prior to executing the TDrive OAuth.
 Basically, we cannot authorize the TeamDrive without knowing which
 teamdrive is being utilizing!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -rp '↘️  Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart
 fi
 }
