@@ -29,4 +29,30 @@ EOF
   curl --request POST --data "code=${token}&client_id=${pgclonepublic}&client_secret=${pgclonesecret}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /var/plexguide/token.part1
   curl -H "GData-Version: 3.0" -H "Authorization: Bearer $(cat /var/plexguide/token.part1 | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev)" $gtype > $storage
 
+  if [[ "$oauthtype" == "tlabel" ]]; then teamdriveselect; fi
+}
+
+teamdriveselect () {
+  cat /var/plexguide/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /var/plexguide/teamdrive.id
+  cat /var/plexguide/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev > /var/plexguide/teamdrive.name
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Listed Team Drives
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  A=0
+  while read p; do
+  ((A++))
+  name=$(sed -n ${A}p /var/plexguide/teamdrive.name)
+  echo "[$A] $p - $name"
+done </var/plexguide/teamdrive.id
+
+echo ""
+read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
+if [[ "$typed" -ge "1" && "$typed" -le "$A" ]]; then a=b
+else teamdriveselect; fi
+
 }
