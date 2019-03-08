@@ -31,7 +31,7 @@ tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] GDrive OAuth        [Fill Me]
 [3] TDrive OAuth        [Fill Me]
-[4] TDrive Label        [$tdname
+[4] TDrive Label        [$tdname]
 [5] Passwords           [Not Set]
 [6] Key Management      [0] Built
 EOF
