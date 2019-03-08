@@ -78,10 +78,8 @@ echo "$id" > /var/plexguide/pgclone.teamid
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Process Complete!
+🚀 Process Complete! TeamDrive [$name]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-TeamDrive: $name
 
 NOTE: Do not share out your teamdrives to others! The usage counts against
 you and if others share your content, you have no control (and your
