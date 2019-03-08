@@ -38,6 +38,26 @@ EOF
 fi
 }
 
+errorteamdrive ()
+
+{
+if [[ "$tdname" == "NOT-SET" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Setup Your TDrive Label First! ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: Set up your TDrive Label First prior to executing the TDrive OAuth.
+Basically, we cannot authorize your TeamDrive without knowing which
+teamdrive that you are utilizing first!
+
+EOF
+read -rp '↘️  Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+clonestart
+fi
+}
+
 clonestart () {
 pgclonevars
 
@@ -119,6 +139,7 @@ elif [[ "$transport" == "bu" ]]; then
         2 )
             gauth ;;
         3 )
+            errorteamdrive
             tauth ;;
         4 )
             tlabel ;;
@@ -146,6 +167,7 @@ elif [[ "$transport" == "be" ]]; then
         2 )
             gauth ;;
         3 )
+            errorteamdrive
             tauth ;;
         4 )
             echo "tlabel" > /var/plexguide/oauth.type

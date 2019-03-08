@@ -66,7 +66,7 @@ signing in (and/or conducting a proper copy and paste of the token)!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowlege Info | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Acknowlege Info | Press [ENTER] ' typed < /dev/tty
 clonestart
 fi
 
