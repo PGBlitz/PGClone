@@ -170,7 +170,8 @@ elif [[ "$transport" == "be" ]]; then
         3 )
             cpasswords ;;
         4 )
-            gauth ;;
+            echo "gdrive" > /var/plexguide/rclone/deploy.version
+            oauth ;;
         5 )
             errorteamdrive
             tauth ;;
