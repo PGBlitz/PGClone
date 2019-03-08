@@ -50,9 +50,43 @@ EOF
   echo "[$A] $p - $name"
 done </var/plexguide/teamdrive.id
 
+if [[ $(cat /var/plexguide/teamdrive.name) == "" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 No Team Drives Exist!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: Create a Team Drive First or Share on to this account and retry the
+process again!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowlege Info | Press [ENTER]: ' typed < /dev/tty
+clonestart
+fi
+
 echo ""
 read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
 if [[ "$typed" -ge "1" && "$typed" -le "$A" ]]; then a=b
 else teamdriveselect; fi
 
+  name=$(sed -n ${typed}p /var/plexguide/teamdrive.name)
+  id=$(sed -n ${typed}p /var/plexguide/teamdrive.id)
+echo "$name" > /var/plexguide/pgclone.teamdrive
+echo "$id" > /var/plexguide/pgclone.teamid
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Process Complete!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TeamDrive Name: $name
+
+NOTE: Do not share out your teamdrives to others! The usage counts against
+you and if others share your content, you have no control (and your
+team drive can be shutdown!)
+
+EOF
+  read -p '↘️  Acknowledge Info | PRESS [ENTER] ' temp < /dev/tty
 }
