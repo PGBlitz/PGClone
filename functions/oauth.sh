@@ -5,20 +5,32 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+oauth () {
 
+tee <<-EOF
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Google Auth - ${drive ~ oauth.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
+NOTE: Copy & Paste Url into Browser | Use the Correct Google Account!
+Quitting? Type > exit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
+  if [ "$token" = "exit" ]; then mountsmenu; fi
+  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /opt/appdata/plexguide/pgclone.info
 
+  accesstoken=$(cat /opt/appdata/plexguide/pgclone.info | grep access_token | awk '{print $2}')
+  refreshtoken=$(cat /opt/appdata/plexguide/pgclone.info | grep refresh_token | awk '{print $2}')
+  rcdate=$(date +'%Y-%m-%d')
+  rctime=$(date +"%H:%M:%S" --date="$givenDate 60 minutes")
+  rczone=$(date +"%:z")
+  final=$(echo "${rcdate}T${rctime}${rczone}")
 
-
-
-
-
-
-
-
-
+}
 # (BELOW - SET TEAMDRIVE NAME)##################################################
 tlabeloauth () {
 pgclonevars
@@ -30,11 +42,11 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Google Auth - ${name} ~ oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? Type > exit
-NOTE: Copy & Paste Url into Browser | Utilize the Correct Google Account!
 
 https://accounts.google.com/o/oauth2/auth?client_id=$pgclonepublic&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
+Quitting? Type > exit
+NOTE: Copy & Paste Url into Browser | Utilize the Correct Google Account!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
