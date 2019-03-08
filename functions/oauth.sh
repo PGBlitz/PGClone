@@ -81,12 +81,13 @@ tee <<-EOF
 🚀 Process Complete!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-TeamDrive Name: $name
+TeamDrive: $name
 
 NOTE: Do not share out your teamdrives to others! The usage counts against
 you and if others share your content, you have no control (and your
 team drive can be shutdown!)
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Acknowledge Info | PRESS [ENTER] ' temp < /dev/tty
 }
