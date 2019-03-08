@@ -29,10 +29,10 @@ EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive OAuth        [Fill Me]
-[3] TDrive OAuth        [Fill Me]
-[4] TDrive Label        [$tdname]
-[5] Passwords           [Not Set]
+[2] TDrive Label        [$tdname]
+[3] Passwords           [Not Set]
+[4] GDrive OAuth        [Fill Me]
+[5] TDrive OAuth        [Fill Me]
 [6] Key Management      [0] Built
 EOF
 fi
@@ -166,14 +166,14 @@ elif [[ "$transport" == "be" ]]; then
         1 )
             keyinputpublic ;;
         2 )
-            gauth ;;
+            tlabeloauth ;;
         3 )
+            cpasswords ;;
+        4 )
+            gauth ;;
+        5 )
             errorteamdrive
             tauth ;;
-        4 )
-            tlabeloauth ;;
-        5 )
-            cpasswords ;;
         6 )
             keymanagementinterface ;;
         z )
