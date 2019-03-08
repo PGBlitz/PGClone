@@ -141,7 +141,7 @@ elif [[ "$transport" == "bu" ]]; then
             gauth ;;
         3 )
             errorteamdrive
-            tauth ;;
+            tlabeloauth ;;
         4 )
             tlabel ;;
         5 )
@@ -171,8 +171,7 @@ elif [[ "$transport" == "be" ]]; then
             errorteamdrive
             tauth ;;
         4 )
-            echo "tlabel" > /var/plexguide/oauth.type
-            oauth ;;
+            tlabeloauth ;;
         5 )
             cpasswords ;;
         6 )
