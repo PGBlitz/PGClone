@@ -32,11 +32,12 @@ blitzpasswordsalt () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 SALT (Secondary Password) ~ pgclone.pgblitz.com
+🌎 SALT (SALT Password) ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NOTE: We do not recommended using the same password!
+NOTE: We do not recommended using the same password! SALT adds randomness
+to your original password.
 
-Set a secondary password for data encryption! DO NOT forget the password!
+Set a SALT password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
@@ -59,10 +60,10 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Set Passwords ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Are you happy with the following info? Type y or n!
+Set the Following Passwords? Type y or n!
 
-Primary  : $primarypassword
-Secondary: $secondarypassword
+Primary: $primarypassword
+SALT   : $secondarypassword
 
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
