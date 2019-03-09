@@ -22,25 +22,25 @@ pgclonevars () {
   variable /var/plexguide/pgclone.teamdrive  "NOT-SET"
   tdname=$(cat /var/plexguide/pgclone.teamdrive)
 
-  variable /var/plexguide/pgclone.id "NOT-SET" # output for front interface, changes when users sets id/secret
+  variable /var/plexguide/pgclone.id "⚠️  NOT-SET" # output for front interface, changes when users sets id/secret
   pgcloneid=$(cat /var/plexguide/pgclone.id)
 
   variable /var/plexguide/pgclone.public ""
   pgclonepublic=$(cat /var/plexguide/pgclone.public)
 
   variable /var/plexguide/rclone/deploy.version ""
-  pgclonepublic=$(cat /var/plexguide/rclone/deploy.version)
+  type=$(cat /var/plexguide/rclone/deploy.version)
 
   variable /var/plexguide/pgclone.secret ""
   pgclonesecret=$(cat /var/plexguide/pgclone.secret)
 
-  variable /var/plexguide/pgclone.email "NOT-SET"
+  variable /var/plexguide/pgclone.email "⚠️  NOT-SET"
   pgcloneemail=$(cat /var/plexguide/pgclone.email)
 
-  variable /var/plexguide/oauth.type "NOT-SET" #output for auth type
+  variable /var/plexguide/oauth.type "⚠️  NOT-SET" #output for auth type
   oauthtype=$(cat /var/plexguide/oauth.type)
 
-  variable /var/plexguide/pgclone.project "NOT-SET"
+  variable /var/plexguide/pgclone.project "⚠️  NOT-SET"
   pgcloneproject=$(cat /var/plexguide/pgclone.project)
 
 }
