@@ -22,7 +22,7 @@ Quitting? Type > exit
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
   if [ "$token" = "exit" ]; then mountsmenu; fi
-  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /opt/appdata/plexguide/pgclone.info
+  curl --request POST --data "code=$token&client_id=${pgclonepublic}&client_secret=${pgclonesecret}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /opt/appdata/plexguide/pgclone.info
 
   accesstoken=$(cat /opt/appdata/plexguide/pgclone.info | grep access_token | awk '{print $2}')
   refreshtoken=$(cat /opt/appdata/plexguide/pgclone.info | grep refresh_token | awk '{print $2}')
@@ -34,8 +34,8 @@ EOF
 ########################
 echo "" > /opt/appdata/plexguide/test.conf
 echo "[$type]" >> /opt/appdata/plexguide/test.conf
-echo "client_id = $public" >> /opt/appdata/plexguide/test.conf
-echo "client_secret = $secret" >> /opt/appdata/plexguide/test.conf
+echo "client_id = ${pgclonepublic}" >> /opt/appdata/plexguide/test.conf
+echo "client_secret = ${pgclonesecret}" >> /opt/appdata/plexguide/test.conf
 echo "type = drive" >> /opt/appdata/plexguide/test.conf
 echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /opt/appdata/plexguide/test.conf
 echo "" >> /opt/appdata/plexguide/test.conf
