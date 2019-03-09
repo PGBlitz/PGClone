@@ -16,7 +16,7 @@ elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] Passwords           [Not Set]
-[3] GDrive OAuth        [$gstatus]
+[3] GDrive OAuth        [$gstatus] - GCrypt [$gcstatus]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
@@ -31,8 +31,8 @@ tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] TDrive Label        [$tdname]
 [3] Passwords           [Not Set]
-[4] GDrive OAuth        [$gstatus] - GCrypt [$gstatus]
-[5] TDrive OAuth        [$tstatus] - TCrypt [$tstatus]
+[4] GDrive OAuth        [$gstatus] - GCrypt [$gcstatus]
+[5] TDrive OAuth        [$tstatus] - TCrypt [$tcstatus]
 [6] Key Management      [0] Built
 EOF
 fi
