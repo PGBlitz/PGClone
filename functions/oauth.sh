@@ -16,8 +16,13 @@ tee <<-EOF
 
 https://accounts.google.com/o/oauth2/auth?client_id=$pgclonepublic&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
-NOTE: Copy & Paste Url into Browser | Use the Correct Google Account!
-Quitting? Type > exit
+Copy & Paste the URL into Browser! Ensure to utilize and login with
+the correct Google Account!
+
+PUTTY USERS: Just select and highlight! DO NOT RIGHT CLICK! When you paste
+into the browser, it will just work!
+
+Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
@@ -96,13 +101,18 @@ pgclonevars
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Google Auth - ${name} ~ oauth.pgblitz.com
+🚀 Google Auth - Team Drive Label ~ oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 https://accounts.google.com/o/oauth2/auth?client_id=${pgclonepublic}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
-Quitting? Type > exit
-NOTE: Copy & Paste Url into Browser | Utilize the Correct Google Account!
+Copy & Paste the URL into Browser! Ensure to utilize and login with
+the correct Google Account!
+
+PUTTY USERS: Just select and highlight! DO NOT RIGHT CLICK! When you paste
+into the browser, it will just work!
+
+Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
