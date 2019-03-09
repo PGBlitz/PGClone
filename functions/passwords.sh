@@ -19,6 +19,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Password (Primary)
 $clonepassword57
+
 Password (SALT/Secondary)
 $clonesalt57
 
