@@ -16,27 +16,27 @@ pgclonevars () {
   variable /var/plexguide/pgclone.salt ""
 
   variable /var/plexguide/clone.gdrive "off"
-  if [ ! -e "/opt/appdata/plexguide/.gdrive" ]; then gstatus="⚠️  NOT-SET"
-  else gstatus="⚠️  ACTIVE"; fi
+  if [ ! -e "/opt/appdata/plexguide/.gdrive" ]; then gstatus="NOT-SET"
+  else gstatus="ACTIVE"; fi
 
   variable /var/plexguide/clone.tdrive "off"
-  if [ ! -e "/opt/appdata/plexguide/.tdrive" ]; then tstatus="⚠️  NOT-SET"
-  else tstatus="⚠️  ACTIVE"; fi
+  if [ ! -e "/opt/appdata/plexguide/.tdrive" ]; then tstatus="NOT-SET"
+  else tstatus="ACTIVE"; fi
 
   variable /var/plexguide/clone.tcrypt "off"
-  if [ ! -e "/opt/appdata/plexguide/.tcrypt" ]; then tcstatus="⚠️  NOT-SET"
-  else tcstatus="⚠️  ACTIVE"; fi
+  if [ ! -e "/opt/appdata/plexguide/.tcrypt" ]; then tcstatus="NOT-SET"
+  else tcstatus="ACTIVE"; fi
 
   variable /var/plexguide/clone.gcrypt "off"
-  if [ ! -e "/opt/appdata/plexguide/.gcrypt" ]; then gcstatus="⚠️  NOT-SET"
-  else gcstatus="⚠️  ACTIVE"; fi
+  if [ ! -e "/opt/appdata/plexguide/.gcrypt" ]; then gcstatus="NOT-SET"
+  else gcstatus="ACTIVE"; fi
 
   transport=$(cat /var/plexguide/pgclone.transport)
 
   variable /var/plexguide/pgclone.teamdrive  "NOT-SET"
   tdname=$(cat /var/plexguide/pgclone.teamdrive)
 
-  variable /var/plexguide/pgclone.id "⚠️  NOT-SET" # output for front interface, changes when users sets id/secret
+  variable /var/plexguide/pgclone.id "NOT-SET" # output for front interface, changes when users sets id/secret
   pgcloneid=$(cat /var/plexguide/pgclone.id)
 
   variable /var/plexguide/pgclone.public ""
@@ -48,13 +48,13 @@ pgclonevars () {
   variable /var/plexguide/pgclone.secret ""
   pgclonesecret=$(cat /var/plexguide/pgclone.secret)
 
-  variable /var/plexguide/pgclone.email "⚠️  NOT-SET"
+  variable /var/plexguide/pgclone.email "NOT-SET"
   pgcloneemail=$(cat /var/plexguide/pgclone.email)
 
-  variable /var/plexguide/oauth.type "⚠️  NOT-SET" #output for auth type
+  variable /var/plexguide/oauth.type "NOT-SET" #output for auth type
   oauthtype=$(cat /var/plexguide/oauth.type)
 
-  variable /var/plexguide/pgclone.project "⚠️  NOT-SET"
+  variable /var/plexguide/pgclone.project "NOT-SET"
   pgcloneproject=$(cat /var/plexguide/pgclone.project)
 
 }
