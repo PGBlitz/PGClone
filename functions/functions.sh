@@ -161,6 +161,8 @@ case $typed in
         glogin ;;
     2 )
         projectname ;;
+    3 )
+        keystart ;;
     z )
         clonestart ;;
     Z )
