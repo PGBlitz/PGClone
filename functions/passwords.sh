@@ -33,7 +33,9 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 1 )
-    a=b ;;
+    rm -rf /var/plexguide/clone.password 1>/dev/null 2>&1
+    rm -rf /var/plexguide/clone.salt 1>/dev/null 2>&1
+    ;;
 2 )
     clonestart ;;
 * )
