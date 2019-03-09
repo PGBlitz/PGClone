@@ -116,7 +116,7 @@ done
 }
 
 gdsabuild () {
-clonevars
+pgclonevars
 ####tempbuild is need in order to call the correct gdsa
 rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
 mkdir -p /opt/appdata/plexguide/.keys
