@@ -24,7 +24,7 @@ EOF
 read -p ' ↘️  Type Prime PW | Press [ENTER]: ' typed < /dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
-  if [ "$bpassword" == "" ]; then blitzpassword; fi
+  if [ "$bpassword" == "" ]; then blitzpasswordmain; fi
   primarypassword=$typed
   blitzpasswordsalt
 }
@@ -77,5 +77,5 @@ elif [ "$typed" == "y" ]; then
 echo $primarypassword > /var/plexguide/pgclone.password
 echo $secondarypassword > /var/plexguide/pgclone.salt
 clonestart;
-else blitzpfinal; fi
+else blitzpasswordmain; fi
 }
