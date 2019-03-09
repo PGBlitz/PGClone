@@ -216,3 +216,25 @@ EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart
 }
+
+tlabelchecker () {
+pgclonevars
+if [[ "$tdname" == "NOT-SET" ]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Fail Notice ~ oauth.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  Team Drive Label Not Set!
+
+NOTE: Unless we know your Team Drive name, we have no way of configuring
+the Team Drive! Please complete this first!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
+fi
+}
