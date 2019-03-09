@@ -64,6 +64,7 @@ keystotal=$(cat /var/plexguide/.blitzbuild | wc -l)
 
 keysleft=$num
 count=0
+gdsacount=0
 
 tee <<-EOF
 
@@ -72,12 +73,18 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
+gdsacount () {
+  ((gcount++))
+  if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then tempbuild=0${gcount}
+else tempbuild=${gcount}; fi
+}
+
 keycreate1 () {
     #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
-    #echo "blitz0${count}" > /var/plexguide/json.tempbuild
-    #blitzbuild
+    gdsacount
+    gdsabuild
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     keysleft=$((keysleft-1))
     flip=on
@@ -87,8 +94,8 @@ keycreate2 () {
     #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
-    #echo "blitz${count}" > /var/plexguide/json.tempbuild
-    #blitzbuild
+    gdsacount
+    gdsabuild
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     keysleft=$((keysleft-1))
     flip=on
@@ -110,22 +117,6 @@ done
 
 gdsabuild () {
 clonevars
-  ## what sets if encrypted is on or not
-  encheck=$(cat /var/plexguide/pgclone.transport)
-  bencrypted=no
-  if [ "$encheck" == "eblitz" ]; then bencrypted=yes; fi
-
-  downloadpath=$(cat /var/plexguide/server.hd.path)
-  tempbuild=$(cat /var/plexguide/json.tempbuild)
-  tdrive=$( cat /opt/appdata/plexguide/rclone.conf | grep team_drive | head -n1 )
-  tdrive="${tdrive:13}"
-
-  if [ "$bencrypted" == "yes" ]; then
-  PASSWORD=$(cat /var/plexguide/pgclone.password)
-  SALT=$(cat /var/plexguide/pgclone.salt)
-  ENC_PASSWORD=`rclone obscure "$PASSWORD"`
-  ENC_SALT=`rclone obscure "$SALT"`; fi
-
 ####tempbuild is need in order to call the correct gdsa
 rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
 mkdir -p /opt/appdata/plexguide/.keys
@@ -138,15 +129,19 @@ service_account_file = /opt/appdata/plexguide/.keys/$tempbuild
 team_drive = ${tdname}
 EOF
 
-if [ "$bencrypted" == "yes" ]; then
+if [[ "$transport" == "be" ]]; then
+encpassword=$(rclone obscure "${clonepassword}")
+encsalt=$(rclone obscure "${clonesalt}")
+
 tee >> /opt/appdata/plexguide/.keys <<-EOF
 [${tempbuild}C]
 type = crypt
 remote = $tempbuild:/encrypt
 filename_encryption = standard
 directory_name_encryption = true
-password = ${clonepassword}
-password2 = ${clonesalt}
+password = $encpassword
+password2 = $encsalt
 EOF
+
 fi
 }
