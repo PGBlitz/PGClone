@@ -30,8 +30,11 @@ tee <<-EOF
 
 NOTES:
 1. Did you set up your $oauthcheck accordingly to the wiki?
+2. Is your project active?
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+rm -rf /opt/appdata/plexguide/.$oauthcheck 1>/dev/null 2>&1
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
     clonestart
 else
