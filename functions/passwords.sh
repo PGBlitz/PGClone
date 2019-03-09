@@ -13,7 +13,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Primary Password ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 Set a Primary Password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
@@ -24,7 +23,7 @@ EOF
 read -p '↘️  Type Main Password | Press [ENTER]: ' typed < /dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
-  if [ "$bpassword" == "" ]; then blitzpasswordmain; fi
+  if [[ "$typed" == "" ]]; then blitzpasswordmain; fi
   primarypassword=$typed
   blitzpasswordsalt
 }
@@ -47,7 +46,7 @@ EOF
 read -p '↘️  Type SALT Password | Press [ENTER]: ' typed < /dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
-  if [ "$typed" == "" ]; then blitzpasswordsalt; fi
+  if [[ "$typed" == "" ]]; then blitzpasswordsalt; fi
 
 secondarypassword=$typed
 blitzpasswordfinal
@@ -71,8 +70,8 @@ EOF
 
 read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
-if [ "$typed" == "n" ]; then mountsmenu;
-elif [ "$typed" == "y" ]; then
+if [[ "$typed" == "n" ]]; then mountsmenu;
+elif [[ "$typed" == "y" ]]; then
 echo $primarypassword > /var/plexguide/pgclone.password
 echo $secondarypassword > /var/plexguide/pgclone.salt
 clonestart;
