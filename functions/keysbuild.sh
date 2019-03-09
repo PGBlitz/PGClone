@@ -73,7 +73,7 @@ tee <<-EOF
 EOF
 
 keycreate1 () {
-    echo $count # for tshoot
+    #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     #echo "blitz0${count}" > /var/plexguide/json.tempbuild
@@ -84,7 +84,7 @@ keycreate1 () {
 }
 
 keycreate2 () {
-    echo $count # for tshoot
+    #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     #echo "blitz${count}" > /var/plexguide/json.tempbuild
@@ -102,7 +102,7 @@ while [[ "$keysleft" -gt "0" ]]; do
     if [[ "$count" -ge "1" && "$count" -le "9" ]]; then
       if [[ $(grep "0${count}" /var/plexguide/.blitzbuild) = "" ]]; then keycreate1; fi
     else
-      if [[ $(grep "${count}" /var/plexguide/.blitzbuild) = "" ]]; then keycreate2; fi; fi 
+      if [[ $(grep "${count}" /var/plexguide/.blitzbuild) = "" ]]; then keycreate2; fi; fi
   done
 done
 
