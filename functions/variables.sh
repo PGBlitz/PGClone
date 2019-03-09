@@ -36,7 +36,7 @@ pgclonevars () {
   else tcstatus="ACTIVE"; fi
 
   variable /var/plexguide/clone.gcrypt "NOT-SET"
-  [[ $(cat /opt/appdata/plexguide/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
+  if [[ $(cat /opt/appdata/plexguide/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
   else gcstatus="ACTIVE"; fi
 
   transport=$(cat /var/plexguide/pgclone.transport)
