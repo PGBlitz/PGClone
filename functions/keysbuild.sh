@@ -124,7 +124,7 @@ tee >> /opt/appdata/plexguide/.keys <<-EOF
 [GDSA${tempbuild}]
 type = drive
 scope = drive
-service_account_file = /opt/appdata/plexguide/.keys/$tempbuild
+service_account_file = /opt/appdata/plexguide/.keys/GDSA${tempbuild}
 team_drive = ${tdname}
 
 EOF
@@ -136,7 +136,7 @@ encsalt=$(rclone obscure "${clonesalt}")
 tee >> /opt/appdata/plexguide/.keys <<-EOF
 [GDSA${tempbuild}C]
 type = crypt
-remote = $tempbuild:/encrypt
+remote = gcrypt:/encrypt
 filename_encryption = standard
 directory_name_encryption = true
 password = $encpassword
