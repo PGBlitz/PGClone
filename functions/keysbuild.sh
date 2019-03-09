@@ -121,7 +121,7 @@ pgclonevars
 rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
 touch /opt/appdata/plexguide/.keys
 
-tee >> /opt/appdata/plexguide/.keys/ <<-EOF
+tee >> /opt/appdata/plexguide/.keys <<-EOF
 [$tempbuild]
 type = drive
 scope = drive
