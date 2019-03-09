@@ -24,8 +24,8 @@ Change the Stored Values?
 
 WARNING: Changing the values will RESET & DELETE the following:
 1. GDrive
-2. TDrive 3.
-Service Keys
+2. TDrive
+3. Service Keys
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
