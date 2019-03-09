@@ -136,7 +136,7 @@ encsalt=$(rclone obscure "${clonesalt}")
 tee >> /opt/appdata/plexguide/.keys <<-EOF
 [GDSA${tempbuild}C]
 type = crypt
-remote = gcrypt:/encrypt
+remote = GDSA{$tempbuild}:/encrypt
 filename_encryption = standard
 directory_name_encryption = true
 password = $encpassword
