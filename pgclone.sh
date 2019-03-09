@@ -18,6 +18,7 @@ source /opt/pgclone/functions/projectname.sh
 source /opt/pgclone/functions/clonestartoutput.sh
 source /opt/pgclone/functions/oauth.sh
 source /opt/pgclone/functions/passwords.sh
+source /opt/pgclone/functions/oauthcheck.sh
 ################################################################################
 
 # (functions.sh) Ensures variables and folders exist
