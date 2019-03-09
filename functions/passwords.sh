@@ -75,6 +75,7 @@ if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
 echo $primarypassword > /var/plexguide/pgclone.password
 echo $secondarypassword > /var/plexguide/pgclone.salt
+else blitzpasswordfinal; fi
 
 tee <<-EOF
 
@@ -90,6 +91,5 @@ order to read the data!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart;
-else blitzpasswordmain; fi
+clonestart
 }
