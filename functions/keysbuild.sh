@@ -38,6 +38,7 @@ else keystart; fi
 }
 
 keyphase2 () {
+num=$typed
 
 rm -rf /opt/appdata/plexguide/blitzkeys 1>/dev/null 2>&1
 mkdir -p /opt/appdata/plexguide/blitzkeys
@@ -61,7 +62,6 @@ gcloud --account=${pgcloneemail} iam service-accounts list |  awk '{print $1}' |
 keystotal=$(cat /var/plexguide/.blitzbuild | wc -l)
 # do a 100 calculation - reminder
 
-num=$keys
 keysleft=$num
 count=0
 
@@ -94,6 +94,5 @@ while [[ "$keysleft" -gt "0" ]]; do
     if [[ $(grep "0${count}" /var/plexguide/.blitzbuild) = "" ]]; then keycreate; fi
   done
 done
-
 
 }
