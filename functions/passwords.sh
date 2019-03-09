@@ -97,7 +97,7 @@ clonestart
 passwordcheck () {
 pgclonevars
 
-if [[ "$pstatus" == "NOT-SET"]]; then
+if [[ "$pstatus" == "NOT-SET" ]]; then
 
 tee <<-EOF
 
