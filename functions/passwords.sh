@@ -93,3 +93,25 @@ EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart
 }
+
+passwordcheck () {
+pgclonevars
+
+if [[ "$pstatus" == "NOT-SET"]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Password Notice ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  Utilizing Encryption requires setting passwords first!
+
+NOTE: When setting the passwords, they act as a private key in order
+to encrypt your data!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart; fi
+}

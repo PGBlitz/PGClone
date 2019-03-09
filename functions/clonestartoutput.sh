@@ -118,6 +118,7 @@ elif [[ "$transport" == "me" ]]; then
       2 )
           blitzpasswordmain ;;
       3 )
+          passwordcheck
           echo "gdrive" > /var/plexguide/rclone/deploy.version
           oauth ;;
       z )
@@ -173,9 +174,11 @@ elif [[ "$transport" == "be" ]]; then
         3 )
             blitzpasswordmain ;;
         4 )
+            passwordcheck
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
+            passwordcheck
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         6 )
