@@ -71,7 +71,7 @@ EOF
 
 read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
-if [[ "$typed" == "n" ]]; then mountsmenu;
+if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
 echo $primarypassword > /var/plexguide/pgclone.password
 echo $secondarypassword > /var/plexguide/pgclone.salt
