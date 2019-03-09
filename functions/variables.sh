@@ -12,11 +12,10 @@ pgclonevars () {
   variable /var/plexguide/pgclone.transport "NOT-SET"
   variable /var/plexguide/move.bw  "9"
   variable /var/plexguide/blitz.bw  "1000"
-  variable /var/plexguide/pgclone.password ""
   variable /var/plexguide/pgclone.salt ""
 
-  variable /var/plexguide/pgclone.password "NOT-SET"
-  if [[ $(cat /var/plexguide/pgclone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
+  variable /var/plexguide/clone.password "NOT-SET"
+  if [[ $(cat /var/plexguide/clone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
   else pstatus="ACTIVE"; fi
 
   variable /var/plexguide/clone.gdrive "NOT-SET"

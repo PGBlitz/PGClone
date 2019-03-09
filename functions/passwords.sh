@@ -73,8 +73,8 @@ read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
-echo $primarypassword > /var/plexguide/pgclone.password
-echo $secondarypassword > /var/plexguide/pgclone.salt
+echo $primarypassword > /var/plexguide/clone.password
+echo $secondarypassword > /var/plexguide/clone.salt
 else blitzpasswordfinal; fi
 
 tee <<-EOF
