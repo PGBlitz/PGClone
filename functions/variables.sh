@@ -16,7 +16,7 @@ pgclonevars () {
   variable /var/plexguide/pgclone.salt ""
 
   variable /var/plexguide/clone.gdrive "off"
-  if [ ! -e "/opt/appdata/plexguide/.gclone" ]; then
+  if [ ! -e "/opt/appdata/plexguide/.gdrive" ]; then
     gstatus="⚠️  Not Activated"
     echo "off" > /var/plexguide/gclone.drive
   else
@@ -25,12 +25,12 @@ pgclonevars () {
   fi
 
   variable /var/plexguide/clone.tdrive "off"
-  if [ ! -e "/opt/appdata/plexguide/.gclone" ]; then
+  if [ ! -e "/opt/appdata/plexguide/.tdrive" ]; then
     tstatus="⚠️  Not Activated"
-    echo "off" > /var/plexguide/clone.tdrive
+    echo "off" > /var/plexguide/tclone.tdrive
   else
     tstatus="⚠️  Active"
-    echo "on" > /var/plexguide/gclone.drive
+    echo "on" > /var/plexguide/tclone.drive
   fi
 
   transport=$(cat /var/plexguide/pgclone.transport)
