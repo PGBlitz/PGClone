@@ -94,12 +94,21 @@ if [[ "$transport" == "mu" ]]; then
       1 )
           keyinputpublic ;;
       2 )
+          publicsecretchecker
           echo "gdrive" > /var/plexguide/rclone/deploy.version
           oauth ;;
       z )
           exit ;;
       Z )
           exit ;;
+      a )
+          publicsecretchecker
+          mountchecker
+          ;; ## fill
+      A )
+          publicsecretchecker
+          mountchecker
+          ;; ## flll
       b )
           setthrottlemove ;;
       B )
@@ -116,8 +125,10 @@ elif [[ "$transport" == "me" ]]; then
       1 )
           keyinputpublic ;;
       2 )
+          publicsecretchecker
           blitzpasswordmain ;;
       3 )
+          publicsecretchecker
           passwordcheck
           echo "gdrive" > /var/plexguide/rclone/deploy.version
           oauth ;;
@@ -125,6 +136,16 @@ elif [[ "$transport" == "me" ]]; then
           exit ;;
       Z )
           exit ;;
+      a )
+          publicsecretchecker
+          passwordcheck
+          mountchecker
+          ;; ## fill
+      A )
+          publicsecretchecker
+          passwordcheck
+          mountchecker
+          ;; ## flll
       b )
           setthrottlemove ;;
       B )
@@ -141,11 +162,15 @@ elif [[ "$transport" == "bu" ]]; then
         1 )
             keyinputpublic ;;
         2 )
+            publicsecretchecker
             tlabeloauth ;;
         3 )
+            publicsecretchecker
+            tlabelchecker
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         4 )
+            publicsecretchecker
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
@@ -155,6 +180,16 @@ elif [[ "$transport" == "bu" ]]; then
             exit ;;
         Z )
             exit ;;
+        a )
+            publicsecretchecker
+            tlabelchecker
+            mountchecker
+            ;; ## fill
+        A )
+            publicsecretchecker
+            tlabelchecker
+            mountchecker
+            ;; ## flll
         b )
             setthrottleblitz ;;
         B )
@@ -179,6 +214,7 @@ elif [[ "$transport" == "be" ]]; then
         4 )
             publicsecretchecker
             passwordcheck
+            tlabelchecker
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
@@ -190,6 +226,7 @@ elif [[ "$transport" == "be" ]]; then
         6 )
             publicsecretchecker
             passwordcheck
+            tlabelchecker
             mountchecker
             keymanagementinterface ;;
         z )
@@ -199,11 +236,13 @@ elif [[ "$transport" == "be" ]]; then
         a )
             publicsecretchecker
             passwordcheck
+            tlabelchecker
             mountchecker
             ;; ## fill
         A )
             publicsecretchecker
             passwordcheck
+            tlabelchecker
             mountchecker
             ;; ## flll
         b )
