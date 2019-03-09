@@ -65,6 +65,13 @@ keystotal=$(cat /var/plexguide/.blitzbuild | wc -l)
 keysleft=$num
 count=0
 
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Key Generator ~ [$num] keys
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
 keycreate () {
   if [[ "$count" -ge "1" && "$count" -le "9" ]]; then
     echo $count # for tshoot
@@ -87,6 +94,7 @@ keycreate () {
   fi
 }
 
+keysmade=0
 while [[ "$keysleft" -gt "0" ]]; do
   flip=off
   while [[ "$flip" == "off" ]]; do
