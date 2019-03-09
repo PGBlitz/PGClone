@@ -171,6 +171,7 @@ elif [[ "$transport" == "be" ]]; then
         1 )
             keyinputpublic ;;
         2 )
+            publicsecretchecker
             tlabeloauth ;;
         3 )
             blitzpasswordmain ;;

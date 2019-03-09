@@ -137,3 +137,26 @@ Z )
 esac
 clonestart
 }
+
+publicsecretchecker () {
+pgclonevars
+if [[ "$pgcloneid" == "NOT-SET" ]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Fail Notice ~ oauth.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  Public & Secret Key - NOT SET!
+
+NOTE: Nothing can occur unless the public & secret key are set! Without
+setting them; PGBlitz cannot create keys, nor create rclone configurations
+to mount the required drives!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
+fi
+}
