@@ -36,9 +36,9 @@ case $typed in
     rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
     rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
     rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
-    rm -rf cat /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
-    rm -rf cat /var/plexguide/pgclone.public 1>/dev/null 2>&1
-    rm -rf cat /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
     ;;
 2 )
     clonestart ;;
