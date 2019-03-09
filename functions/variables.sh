@@ -18,19 +18,19 @@ pgclonevars () {
   if [[ $(cat /var/plexguide/clone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
   else pstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.gdrive "NOT-SET"
+  variable /opt/appdata/plexguide/.gdrive "NOT-SET"
   if [[ $(cat /opt/appdata/plexguide/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.gdrive "NOT-SET"
+  variable /opt/appdata/plexguide/.gdrive "NOT-SET"
   if [[ $(cat /opt/appdata/plexguide/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.tdrive "NOT-SET"
+  variable /opt/appdata/plexguide/.tdrive "NOT-SET"
   if [[ $(cat /opt/appdata/plexguide/.tdrive) == "NOT-SET" ]]; then tstatus="NOT-SET"
   else tstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.tcrypt "NOT-SET"
+  variable /opt/appdata/plexguide/.tcrypt "NOT-SET"
   if [[ $(cat /opt/appdata/plexguide/.tcrypt) == "NOT-SET" ]]; then tcstatus="NOT-SET"
   else tcstatus="ACTIVE"; fi
 
