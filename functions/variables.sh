@@ -28,6 +28,9 @@ pgclonevars () {
   variable /var/plexguide/pgclone.public ""
   pgclonepublic=$(cat /var/plexguide/pgclone.public)
 
+  variable /var/plexguide/rclone/deploy.version ""
+  pgclonepublic=$(cat /var/plexguide/rclone/deploy.version)
+
   variable /var/plexguide/pgclone.secret ""
   pgclonesecret=$(cat /var/plexguide/pgclone.secret)
 
