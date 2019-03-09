@@ -32,16 +32,18 @@ EOF
   final=$(echo "${rcdate}T${rctime}${rczone}")
 
 ########################
-echo "" > /opt/appdata/plexguide/test.conf
-echo "[$type]" >> /opt/appdata/plexguide/test.conf
-echo "client_id = $pgclonepublic" >> /opt/appdata/plexguide/test.conf
-echo "client_secret = $pgclonesecret" >> /opt/appdata/plexguide/test.conf
-echo "type = drive" >> /opt/appdata/plexguide/test.conf
-echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /opt/appdata/plexguide/test.conf
-echo "" >> /opt/appdata/plexguide/test.conf
+rm -rf /opt/appdata/plexguide/.${type} 1>/dev/null 2>&1
+
+echo "" > /opt/appdata/plexguide/.${type}
+echo "[$type]" >> /opt/appdata/plexguide/.${type}
+echo "client_id = $pgclonepublic" >> /opt/appdata/plexguide/.${type}
+echo "client_secret = $pgclonesecret" >> /opt/appdata/plexguide/.${type}
+echo "type = drive" >> /opt/appdata/plexguide/.${type}
+echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /opt/appdata/plexguide/.${type}
+echo "" >> /opt/appdata/plexguide/.${type}
 if [ "$type" == "tdrive" ]; then
 teamid=$(cat /var/plexguide/pgclone.teamid)
-echo "team_drive = $teamid" >> /opt/appdata/plexguide/test.conf; fi
+echo "team_drive = $teamid" >> /opt/appdata/plexguide/.tdrive; fi
 echo ""
 
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
@@ -54,14 +56,14 @@ PASSWORD=`cat /var/plexguide/pgclone.password`
 SALT=`cat /var/plexguide/pgclone.salt`
 ENC_PASSWORD=`rclone obscure "$PASSWORD"`
 ENC_SALT=`rclone obscure "$SALT"`
-echo "" >> /opt/appdata/plexguide/test.conf
-echo "[$entype]" >> /opt/appdata/plexguide/test.conf
-echo "type = crypt" >> /opt/appdata/plexguide/test.conf
-echo "remote = $type:/encrypt" >> /opt/appdata/plexguide/test.conf
-echo "filename_encryption = standard" >> /opt/appdata/plexguide/test.conf
-echo "directory_name_encryption = true" >> /opt/appdata/plexguide/test.conf
-echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/test.conf
-echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/test.conf;
+echo "" >> /opt/appdata/plexguide/.${type}
+echo "[$entype]" >> /opt/appdata/plexguide/.${type}
+echo "type = crypt" >> /opt/appdata/plexguide/.${type}
+echo "remote = $type:/encrypt" >> /opt/appdata/plexguide/.${type}
+echo "filename_encryption = standard" >> /opt/appdata/plexguide/.${type}
+echo "directory_name_encryption = true" >> /opt/appdata/plexguide/.${type}
+echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${type}
+echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${type};
 fi
 
 }
