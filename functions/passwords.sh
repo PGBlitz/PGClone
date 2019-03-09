@@ -8,6 +8,39 @@
 blitzpasswordmain () {
 pgclonevars
 
+clonepassword57=$(cat /var/plexguide/clone.password)
+clonesalt57=$(cat /var/plexguide/clone.salt)
+
+if [[ "$pstatus" != "NOT-SET" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Change Values? ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Password (Primary)
+$clonepassword57
+
+Password (SALT/Secondary)
+$clonesalt57
+
+Change the Stored Values?
+[1] Yes
+[2] No
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
+case $typed in
+1 )
+    a=b ;;
+2 )
+    clonestart ;;
+* )
+    blitzpasswordmain ;;
+esac
+fi
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
