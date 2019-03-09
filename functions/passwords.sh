@@ -82,8 +82,10 @@ tee <<-EOF
 🌎 Process Complete ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-SYSTEM MESSAGE: Password & SALT are now SET! Again, do not forget your
-passwords!
+💬  Password & SALT are now SET! Do not forget the data!
+
+NOTE: If you set this up again, ensure to reuse the same passwords in
+order to read the data!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
