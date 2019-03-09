@@ -87,7 +87,7 @@ passwords!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Type SALT Password | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart;
 else blitzpasswordmain; fi
 }
