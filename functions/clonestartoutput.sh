@@ -94,7 +94,8 @@ if [[ "$transport" == "mu" ]]; then
       1 )
           keyinputpublic ;;
       2 )
-          gauth ;;
+          echo "gdrive" > /var/plexguide/rclone/deploy.version
+          oauth ;;
       z )
           exit ;;
       Z )
@@ -117,7 +118,8 @@ elif [[ "$transport" == "me" ]]; then
       2 )
           cpasswords ;;
       3 )
-          gauth ;;
+          echo "gdrive" > /var/plexguide/rclone/deploy.version
+          oauth ;;
       z )
           exit ;;
       Z )
@@ -140,10 +142,11 @@ elif [[ "$transport" == "bu" ]]; then
         2 )
             tlabeloauth ;;
         3 )
-            gauth ;;
+            echo "gdrive" > /var/plexguide/rclone/deploy.version
+            oauth ;;
         4 )
-            errorteamdrive
-            tauth ;;
+            echo "tdrive" > /var/plexguide/rclone/deploy.version
+            oauth ;;
         5 )
             keymanagementinterface ;;
         z )
@@ -173,8 +176,8 @@ elif [[ "$transport" == "be" ]]; then
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
-            errorteamdrive
-            tauth ;;
+            echo "tdrive" > /var/plexguide/rclone/deploy.version
+            oauth ;;
         6 )
             keymanagementinterface ;;
         z )

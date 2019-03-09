@@ -6,6 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 oauth () {
+pgclonevars
 
 tee <<-EOF
 
@@ -29,6 +30,39 @@ EOF
   rctime=$(date +"%H:%M:%S" --date="$givenDate 60 minutes")
   rczone=$(date +"%:z")
   final=$(echo "${rcdate}T${rctime}${rczone}")
+
+########################
+echo "" > /opt/appdata/plexguide/test.conf
+echo "[$type]" >> /opt/appdata/plexguide/test.conf
+echo "client_id = $public" >> /opt/appdata/plexguide/test.conf
+echo "client_secret = $secret" >> /opt/appdata/plexguide/test.conf
+echo "type = drive" >> /opt/appdata/plexguide/test.conf
+echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /opt/appdata/plexguide/test.conf
+echo "" >> /opt/appdata/plexguide/test.conf
+if [ "$type" == "tdrive" ]; then
+teamid=$(cat /var/plexguide/pgclone.teamid)
+echo "team_drive = $teamid" >> /opt/appdata/plexguide/test.conf; fi
+echo ""
+
+## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
+if [[ "$transport" == "be" || "$transport" == "me" ]]; then
+
+if [ "$type" == "gdrive" ]; then entype="gcrypt";
+else entype="tcrypt"; fi
+
+PASSWORD=`cat /var/plexguide/pgclone.password`
+SALT=`cat /var/plexguide/pgclone.salt`
+ENC_PASSWORD=`rclone obscure "$PASSWORD"`
+ENC_SALT=`rclone obscure "$SALT"`
+echo "" >> /opt/appdata/plexguide/test.conf
+echo "[$entype]" >> /opt/appdata/plexguide/test.conf
+echo "type = crypt" >> /opt/appdata/plexguide/test.conf
+echo "remote = $type:/encrypt" >> /opt/appdata/plexguide/test.conf
+echo "filename_encryption = standard" >> /opt/appdata/plexguide/test.conf
+echo "directory_name_encryption = true" >> /opt/appdata/plexguide/test.conf
+echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/test.conf
+echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/test.conf;
+fi
 
 }
 # (BELOW - SET TEAMDRIVE NAME)##################################################
