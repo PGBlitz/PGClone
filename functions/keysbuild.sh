@@ -29,7 +29,7 @@ Quitting? Type >>> exit
 EOF
   read -p '↘️  Type a Number [ 2 thru 20 ] | Press [ENTER]: ' typed < /dev/tty
 
-exitmode
+exitclone
 
 num=$typed
 if [[ "$typed" -le "0" || "$typed" -ge "21" ]]; then keystart
