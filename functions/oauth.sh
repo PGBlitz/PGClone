@@ -70,9 +70,6 @@ echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${entype}
 echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${entype};
 fi
 
-echo ${entype} > /var/plexguide/oauth.check
-oauthcheck
-
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
