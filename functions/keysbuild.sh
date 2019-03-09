@@ -87,6 +87,7 @@ keycreate1 () {
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsacount
     gdsabuild
+    echo "blitz${count} is linked to GDSA0${gcount}"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     keysleft=$((keysleft-1))
     flip=on
@@ -98,6 +99,7 @@ keycreate2 () {
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsacount
     gdsabuild
+    echo "blitz${count} is linked to GDSA${gcount}"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     keysleft=$((keysleft-1))
     flip=on
@@ -136,7 +138,7 @@ encsalt=$(rclone obscure "${clonesalt}")
 tee >> /opt/appdata/plexguide/.keys <<-EOF
 [GDSA${tempbuild}C]
 type = crypt
-remote = GDSA{$tempbuild}:/encrypt
+remote = GDSA${tempbuild}:/encrypt
 filename_encryption = standard
 directory_name_encryption = true
 password = $encpassword
