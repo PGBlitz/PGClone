@@ -7,15 +7,8 @@
 ################################################################################
 
 # BAD INPUT
-badinput () {
-echo
-read -rp '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
-}
-
-badinput1 () {
-echo
-read -rp '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
-question1
+exitclone () {
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
 }
 
 variable () {
