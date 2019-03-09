@@ -33,7 +33,6 @@ EOF
 
 ########################
 rm -rf /opt/appdata/plexguide/.${type} 1>/dev/null 2>&1
-
 echo "" > /opt/appdata/plexguide/.${type}
 echo "[$type]" >> /opt/appdata/plexguide/.${type}
 echo "client_id = $pgclonepublic" >> /opt/appdata/plexguide/.${type}
@@ -56,6 +55,8 @@ PASSWORD=`cat /var/plexguide/pgclone.password`
 SALT=`cat /var/plexguide/pgclone.salt`
 ENC_PASSWORD=`rclone obscure "$PASSWORD"`
 ENC_SALT=`rclone obscure "$SALT"`
+
+rm -rf /opt/appdata/plexguide/.${entype} 1>/dev/null 2>&1
 echo "" >> /opt/appdata/plexguide/.${entype}
 echo "[$entype]" >> /opt/appdata/plexguide/.${entype}
 echo "type = crypt" >> /opt/appdata/plexguide/.${entype}
