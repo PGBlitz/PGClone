@@ -174,16 +174,20 @@ elif [[ "$transport" == "be" ]]; then
             publicsecretchecker
             tlabeloauth ;;
         3 )
+            publicsecretchecker
             blitzpasswordmain ;;
         4 )
+            publicsecretchecker
             passwordcheck
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
+            publicsecretchecker
             passwordcheck
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         6 )
+            publicsecretchecker
             passwordcheck
             mountchecker
             keymanagementinterface ;;
@@ -191,6 +195,16 @@ elif [[ "$transport" == "be" ]]; then
             exit ;;
         Z )
             exit ;;
+        a )
+            publicsecretchecker
+            passwordcheck
+            mountchecker
+            ;; ## fill
+        A )
+            publicsecretchecker
+            passwordcheck
+            mountchecker
+            ;; ## flll
         b )
             setthrottleblitz ;;
         B )
