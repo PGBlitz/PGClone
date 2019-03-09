@@ -10,12 +10,28 @@ pgclonevars () {
   variable /var/plexguide/project.account "NOT-SET"
   variable /var/plexguide/rclone/deploy.version "null"
   variable /var/plexguide/pgclone.transport "NOT-SET"
-  variable /var/plexguide/gdrive.pgclone "⚠️  Not Activated"
-  variable /var/plexguide/tdrive.pgclone "⚠️  Not Activated"
   variable /var/plexguide/move.bw  "9"
   variable /var/plexguide/blitz.bw  "1000"
   variable /var/plexguide/pgclone.password ""
   variable /var/plexguide/pgclone.salt ""
+
+  variable /var/plexguide/clone.gdrive "off"
+  if [ ! -e "/opt/appdata/plexguide/.gclone" ]; then
+    gstatus="⚠️  Not Activated"
+    echo "off" > /var/plexguide/gclone.drive
+  else
+    gstatus="⚠️  Active"
+    echo "on" > /var/plexguide/gclone.drive
+  fi
+
+  variable /var/plexguide/clone.tdrive "off"
+  if [ ! -e "/opt/appdata/plexguide/.gclone" ]; then
+    tstatus="⚠️  Not Activated"
+    echo "off" > /var/plexguide/clone.tdrive
+  else
+    gstatus="⚠️  Active"
+    echo "on" > /var/plexguide/gclone.drive
+  fi
 
   transport=$(cat /var/plexguide/pgclone.transport)
 
