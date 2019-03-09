@@ -56,14 +56,14 @@ PASSWORD=`cat /var/plexguide/pgclone.password`
 SALT=`cat /var/plexguide/pgclone.salt`
 ENC_PASSWORD=`rclone obscure "$PASSWORD"`
 ENC_SALT=`rclone obscure "$SALT"`
-echo "" >> /opt/appdata/plexguide/.${type}
-echo "[$entype]" >> /opt/appdata/plexguide/.${type}
-echo "type = crypt" >> /opt/appdata/plexguide/.${type}
-echo "remote = $type:/encrypt" >> /opt/appdata/plexguide/.${type}
-echo "filename_encryption = standard" >> /opt/appdata/plexguide/.${type}
-echo "directory_name_encryption = true" >> /opt/appdata/plexguide/.${type}
-echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${type}
-echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${type};
+echo "" >> /opt/appdata/plexguide/.${entype}
+echo "[$entype]" >> /opt/appdata/plexguide/.${entype}
+echo "type = crypt" >> /opt/appdata/plexguide/.${entype}
+echo "remote = $type:/encrypt" >> /opt/appdata/plexguide/.${entype}
+echo "filename_encryption = standard" >> /opt/appdata/plexguide/.${entype}
+echo "directory_name_encryption = true" >> /opt/appdata/plexguide/.${entype}
+echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${entype}
+echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${entype};
 fi
 
 }
