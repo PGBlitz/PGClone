@@ -182,7 +182,7 @@ elif [[ "$transport" == "me" ]]; then
 elif [[ "$transport" == "bu" ]]; then
   if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "bu" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE"]]; then mountfail; fi
+  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE" ]]; then mountfail; fi
 fi
 }
 
