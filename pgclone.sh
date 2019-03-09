@@ -17,6 +17,7 @@ source /opt/pgclone/functions/transportselect.sh
 source /opt/pgclone/functions/projectname.sh
 source /opt/pgclone/functions/clonestartoutput.sh
 source /opt/pgclone/functions/oauth.sh
+source /opt/pgclone/functions/passwords.sh
 ################################################################################
 
 # (functions.sh) Ensures variables and folders exist
