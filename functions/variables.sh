@@ -29,7 +29,7 @@ pgclonevars () {
     tstatus="⚠️  Not Activated"
     echo "off" > /var/plexguide/clone.tdrive
   else
-    gstatus="⚠️  Active"
+    tstatus="⚠️  Active"
     echo "on" > /var/plexguide/gclone.drive
   fi
 

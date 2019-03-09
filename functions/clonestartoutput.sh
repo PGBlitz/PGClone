@@ -10,20 +10,20 @@ pgclonevars
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive OAuth        [$tdrive]
+[2] GDrive OAuth        [$gstatus]
 EOF
 elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] Passwords           [Not Set]
-[3] GDrive OAuth        [$gdrive]
+[3] GDrive OAuth        [$gstatus]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] TDrive Label        [$tdname]
-[3] GDrive OAuth        [$gdrive]
-[4] TDrive OAuth        [$tdrive]
+[3] GDrive OAuth        [$gstatus]
+[4] TDrive OAuth        [$tstatus]
 [5] Key Management      [0] Built
 EOF
 elif [[ "$transport" == "be" ]]; then
@@ -31,8 +31,8 @@ tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] TDrive Label        [$tdname]
 [3] Passwords           [Not Set]
-[4] GDrive OAuth        [$gdrive]
-[5] TDrive OAuth        [$tdrive]
+[4] GDrive OAuth        [$gstatus]
+[5] TDrive OAuth        [$tstatus]
 [6] Key Management      [0] Built
 EOF
 fi
