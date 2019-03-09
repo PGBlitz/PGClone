@@ -26,7 +26,7 @@ read -p ' ↘️  Type Prime PW | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
   if [ "$bpassword" == "" ]; then blitzpassword; fi
   primarypassword=$typed
-  blitzsalt
+  blitzpasswordsalt
 }
 
 blitzpasswordsalt () {
@@ -51,7 +51,7 @@ read -p ' ↘️  Type SALT PW | Press [ENTER]: ' typed < /dev/tty
   if [ "$typed" == "" ]; then blitzpasswordsalt; fi
 
 secondarypassword=$typed
-blitzpfinal
+blitzpasswordfinal
 
 }
 

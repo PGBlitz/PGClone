@@ -116,7 +116,7 @@ elif [[ "$transport" == "me" ]]; then
       1 )
           keyinputpublic ;;
       2 )
-          cpasswords ;;
+          blitzpasswordmain ;;
       3 )
           echo "gdrive" > /var/plexguide/rclone/deploy.version
           oauth ;;
@@ -171,7 +171,7 @@ elif [[ "$transport" == "be" ]]; then
         2 )
             tlabeloauth ;;
         3 )
-            cpasswords ;;
+            blitzpasswordmain ;;
         4 )
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
