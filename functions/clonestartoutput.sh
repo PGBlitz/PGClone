@@ -149,6 +149,7 @@ elif [[ "$transport" == "bu" ]]; then
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
+            mountchecker
             keymanagementinterface ;;
         z )
             exit ;;
@@ -183,6 +184,7 @@ elif [[ "$transport" == "be" ]]; then
             oauth ;;
         6 )
             passwordcheck
+            mountchecker
             keymanagementinterface ;;
         z )
             exit ;;

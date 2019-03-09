@@ -172,3 +172,34 @@ drive can be shutdown!)
 EOF
   read -p '↘️  Acknowledge Info | PRESS [ENTER] ' temp < /dev/tty
 }
+
+mountchecker () {
+pgclonevars
+  if [[ "$transport" == "mu" ]]; then
+    if [[ "$gstatus" != "ACTIVE" ]]; then mountfail; fi
+elif [[ "$transport" == "me" ]]; then
+  if [[ "$gstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
+elif [[ "$transport" == "bu" ]]; then
+  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" ]]; then mountfail; fi
+elif [[ "$transport" == "bu" ]]; then
+  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE"]]; then mountfail; fi
+fi
+}
+
+mountfail () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Fail Notice ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  All Mounts Must Be Active!
+
+NOTE: If any mount says [NOT-SET]; that process must be completed first!
+We will continue to block this process until completed!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
+}
