@@ -107,3 +107,46 @@ while [[ "$keysleft" -gt "0" ]]; do
 done
 
 }
+
+gdsabuild () {
+clonevars
+  ## what sets if encrypted is on or not
+  encheck=$(cat /var/plexguide/pgclone.transport)
+  bencrypted=no
+  if [ "$encheck" == "eblitz" ]; then bencrypted=yes; fi
+
+  downloadpath=$(cat /var/plexguide/server.hd.path)
+  tempbuild=$(cat /var/plexguide/json.tempbuild)
+  tdrive=$( cat /opt/appdata/plexguide/rclone.conf | grep team_drive | head -n1 )
+  tdrive="${tdrive:13}"
+
+  if [ "$bencrypted" == "yes" ]; then
+  PASSWORD=$(cat /var/plexguide/pgclone.password)
+  SALT=$(cat /var/plexguide/pgclone.salt)
+  ENC_PASSWORD=`rclone obscure "$PASSWORD"`
+  ENC_SALT=`rclone obscure "$SALT"`; fi
+
+####tempbuild is need in order to call the correct gdsa
+rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
+mkdir -p /opt/appdata/plexguide/.keys
+
+tee >> /opt/appdata/plexguide/.keys <<-EOF
+[$tempbuild]
+type = drive
+scope = drive
+service_account_file = /opt/appdata/plexguide/.keys/$tempbuild
+team_drive = ${tdname}
+EOF
+
+if [ "$bencrypted" == "yes" ]; then
+tee >> /opt/appdata/plexguide/.keys <<-EOF
+[${tempbuild}C]
+type = crypt
+remote = $tempbuild:/encrypt
+filename_encryption = standard
+directory_name_encryption = true
+password = ${clonepassword}
+password2 = ${clonesalt}
+EOF
+fi
+}

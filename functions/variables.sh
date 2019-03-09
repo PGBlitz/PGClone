@@ -19,7 +19,11 @@ pgclonevars () {
 
   variable /var/plexguide/clone.password "NOT-SET"
   if [[ $(cat /var/plexguide/clone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
-  else pstatus="ACTIVE"; fi
+  else
+    pstatus="ACTIVE"
+    clonepassword=$(cat /var/plexguide/clone.password)
+    clonesalt=$(cat /var/plexguide/pgclone.salt)
+  fi
 
   variable /opt/appdata/plexguide/.gdrive "NOT-SET"
   if [[ $(cat /opt/appdata/plexguide/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
