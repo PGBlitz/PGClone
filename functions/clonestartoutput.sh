@@ -22,17 +22,17 @@ elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] TDrive Label        [$tdname]
-[3] GDrive OAuth        [$gstatus]
-[4] TDrive OAuth        [$tstatus]
+[3] TDrive OAuth        [$tstatus]
+[4] GDrive OAuth        [$gstatus]
 [5] Key Management      [0] Built
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
-[2] TDrive Label        [$tdname]
-[3] Passwords           [$pstatus]
-[4] GDrive | GCrypt     [$gstatus] - [$gcstatus]
-[5] TDrive | TCrypt     [$tstatus] - [$tcstatus]
+[2] Passwords           [$pstatus]
+[3] TDrive Label        [$tdname]
+[4] TDrive | TCrypt     [$tstatus] - [$tcstatus]
+[5] GDrive | GCrypt     [$gstatus] - [$gcstatus]
 [6] Key Management      [0] Built
 EOF
 fi
@@ -143,10 +143,10 @@ elif [[ "$transport" == "bu" ]]; then
         2 )
             tlabeloauth ;;
         3 )
-            echo "gdrive" > /var/plexguide/rclone/deploy.version
+            echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         4 )
-            echo "tdrive" > /var/plexguide/rclone/deploy.version
+            echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         5 )
             mountchecker
@@ -172,20 +172,21 @@ elif [[ "$transport" == "be" ]]; then
             keyinputpublic ;;
         2 )
             publicsecretchecker
-            tlabeloauth ;;
+            blitzpasswordmain ;;
         3 )
             publicsecretchecker
-            blitzpasswordmain ;;
+            tlabeloauth ;;
         4 )
-            publicsecretchecker
-            passwordcheck
-            echo "gdrive" > /var/plexguide/rclone/deploy.version
-            oauth ;;
-        5 )
             publicsecretchecker
             passwordcheck
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
+        5 )
+            publicsecretchecker
+            passwordcheck
+            echo "gdrive" > /var/plexguide/rclone/deploy.version
+            oauth ;;
+
         6 )
             publicsecretchecker
             passwordcheck
