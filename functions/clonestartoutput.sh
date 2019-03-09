@@ -220,7 +220,6 @@ elif [[ "$transport" == "be" ]]; then
         5 )
             publicsecretchecker
             passwordcheck
-            tlabelchecker
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
 
