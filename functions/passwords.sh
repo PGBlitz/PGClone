@@ -17,10 +17,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Change Values? ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 Password (Primary)
 $clonepassword57
-
 Password (SALT/Secondary)
 $clonesalt57
 
@@ -28,7 +26,9 @@ Change the Stored Values?
 [1] No [2] Yes
 
 WARNING: Changing the values will RESET & DELETE the following:
-1. GDrive 2. TDrive 3. Service Keys
+1. GDrive
+2. TDrive
+3. Service Keys
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
