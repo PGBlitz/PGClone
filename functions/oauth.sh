@@ -14,7 +14,7 @@ tee <<-EOF
 🚀 Google Auth - ${type} ~ oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
+https://accounts.google.com/o/oauth2/auth?client_id=$pgclonepublic&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
 NOTE: Copy & Paste Url into Browser | Use the Correct Google Account!
 Quitting? Type > exit
@@ -77,7 +77,7 @@ tee <<-EOF
 🚀 Google Auth - ${name} ~ oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-https://accounts.google.com/o/oauth2/auth?client_id=$pgclonepublic&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
+https://accounts.google.com/o/oauth2/auth?client_id=${pgclonepublic}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
 Quitting? Type > exit
 NOTE: Copy & Paste Url into Browser | Utilize the Correct Google Account!
@@ -85,7 +85,7 @@ NOTE: Copy & Paste Url into Browser | Utilize the Correct Google Account!
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
 
-  if [[ "$token" = "exit" ]]; then mountsmenu; fi
+  if [[ "$token" = "exit" || "$token" == "Exit" || "$token" == "EXIT" ]]; then mountsmenu; fi
   curl --request POST --data "code=${token}&client_id=${pgclonepublic}&client_secret=${pgclonesecret}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /var/plexguide/token.part1
   curl -H "GData-Version: 3.0" -H "Authorization: Bearer $(cat /var/plexguide/token.part1 | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev)" $gtype > $storage
 
