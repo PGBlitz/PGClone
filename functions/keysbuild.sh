@@ -82,9 +82,10 @@ else tempbuild=${gcount}; fi
 }
 
 keycreate1 () {
+    mkdir
     #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsacount
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
@@ -97,7 +98,7 @@ keycreate1 () {
 keycreate2 () {
     #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsacount
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
@@ -128,7 +129,7 @@ tee >> /opt/appdata/plexguide/.keys <<-EOF
 [GDSA${tempbuild}]
 type = drive
 scope = drive
-service_account_file = /opt/appdata/plexguide/.keys/GDSA${tempbuild}
+service_account_file = /opt/appdata/plexguide/.blitzkeys/GDSA${tempbuild}
 team_drive = ${tdname}
 
 EOF
