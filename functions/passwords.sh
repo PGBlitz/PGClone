@@ -21,7 +21,7 @@ risk of encryption; forgetfulness will cost you!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p ' ↘️  Type Prime PW | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Type Main Password | Press [ENTER]: ' typed < /dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
   if [ "$bpassword" == "" ]; then blitzpasswordmain; fi
@@ -44,7 +44,7 @@ risk of encryption; forgetfulness will cost you!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p ' ↘️  Type SALT PW | Press [ENTER]: ' typed < /dev/tty
+read -p '↘️  Type SALT Password | Press [ENTER]: ' typed < /dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
   if [ "$typed" == "" ]; then blitzpasswordsalt; fi
