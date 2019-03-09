@@ -36,8 +36,8 @@ NOTES:
 EOF
 rm -rf /opt/appdata/plexguide/.$oauthcheck 1>/dev/null 2>&1
 
-    if [[ "$oauthcheck" == "gdrive" ]]; then rm -rf /opt/appdata/plexguide/.$gcrypt 1>/dev/null 2>&1; fi
-    if [[ "$oauthcheck" == "tdrive" ]]; then rm -rf /opt/appdata/plexguide/.$tcrypt 1>/dev/null 2>&1; fi
+    if [[ "$oauthcheck" == "gdrive" ]]; then rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1; fi
+    if [[ "$oauthcheck" == "tdrive" ]]; then rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1; fi
 
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
     clonestart
