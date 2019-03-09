@@ -25,18 +25,28 @@ Password (SALT/Secondary)
 $clonesalt57
 
 Change the Stored Values?
-[1] Yes
-[2] No
+[1] No [2] Yes
+
+WARNING: Changing the values will RESET & DELETE the following:
+1. GDrive 2. TDrive 3. Service Keys
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
-1 )
+2 )
     rm -rf /var/plexguide/clone.password 1>/dev/null 2>&1
     rm -rf /var/plexguide/clone.salt 1>/dev/null 2>&1
+
+    rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
+    rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
+    rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
+    rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
     ;;
-2 )
+1 )
     clonestart ;;
 * )
     blitzpasswordmain ;;
