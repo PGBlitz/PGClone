@@ -21,15 +21,23 @@ SECRET ID
 $pgclonesecret
 
 Change the Stored Values?
-[1] Yes
-[2] No
+[1] Yes [2] No
+
+WARNING: Changing these values will RESET the gdrive and/or teamdrive
+label and tdrive mounts. If teamdrive service accounts keys were
+generated, they will be deleted also!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 1 )
-    a=b ;;
+    rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
+    rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
+    rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
+    rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
+    rm -rf cat /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
+    ;;
 2 )
     clonestart ;;
 * )
