@@ -73,7 +73,7 @@ tee <<-EOF
 🌎 Process Complete ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💬  ${type} is now set!
+💬  [${type}] is now established!
 
 NOTE: If you change projects or use a different login, rerun this again!
 If not, nothing will work!
