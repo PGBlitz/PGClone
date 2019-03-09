@@ -47,7 +47,7 @@ if [ -e "/opt/appdata/plexguide/.tdrive" ]; then cat /opt/appdata/plexguide/.tdr
 if [ -e "/opt/appdata/plexguide/.gcrypt" ]; then cat /opt/appdata/plexguide/.gcrypt >> /opt/appdata/plexguide/.keytemp; fi
 if [ -e "/opt/appdata/plexguide/.tcrypt" ]; then cat /opt/appdata/plexguide/.tcrypt >> /opt/appdata/plexguide/.keytemp; fi
 
-gcloud --account=${pgcloneproject} iam service-accounts list |  awk '{print $1}' | \
+gcloud --account=${pgcloneemail} iam service-accounts list |  awk '{print $1}' | \
        tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq > /var/plexguide/.gcloudblitz
 
  rm -rf /var/plexguide/.blitzbuild 1>/dev/null 2>&1
@@ -68,8 +68,8 @@ count=0
 keycreate () {
   if [[ "$count" -ge "1" && "$count" -le "9" ]]; then
     echo $count # for tshoot
-    gcloud --account=${pgcloneproject} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
-    gcloud --account=${pgcloneproject} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     #echo "blitz0${count}" > /var/plexguide/json.tempbuild
     #blitzbuild
     #echo ""
@@ -77,8 +77,8 @@ keycreate () {
     flip=on
   else
     echo $count # for tshoot
-    gcloud --account=${pgcloneproject} iam service-accounts create blitz${count} --display-name “blitz${count}”
-    gcloud --account=${pgcloneproject} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/blitz${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     #echo "blitz${count}" > /var/plexguide/json.tempbuild
     #blitzbuild
     #echo ""
