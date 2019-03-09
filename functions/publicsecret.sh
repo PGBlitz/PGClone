@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 keyinputpublic () {
-
+pgclonevars
 if [[ "$pgcloneid" == "ACTIVE" ]]; then
 tee <<-EOF
 
