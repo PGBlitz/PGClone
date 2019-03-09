@@ -21,14 +21,17 @@ EOF
     rcheck=$(rclone lsd --config /opt/appdata/plexguide/.$oauthcheck $oauthcheck: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$authocheck" == "tcrypt" || "$authocheck" == "gcrypt" ]]; then
-    echeck=$(rclone lsd --config /opt/appdata/plexguide/.$oauthcheck $oauthcheck: | grep -oP encrypt | head -n1)
+  if [[ $oauthcheck == "tcrypt" ]]; then encrypt27=tdrive; fi
+  if [[ $oauthcheck == "gcrypt" ]]; then encrypt27=gdrive; fi
+
+  if [[ "$encrypt27" == "tdrive" || "$encrypt27" == "gdrive" ]]; then
+    echeck=$(rclone lsd --config /opt/appdata/plexguide/.${encrypt27} ${encrypt27}: | grep -oP encrypt | head -n1)
     if [[ "$echeck" != "encrypt" ]]; then
-      rclone mkdir --config /opt/appdata/plexguide/.$oauthcheck $oauthcheck:/encrypt
+      rclone mkdir --config /opt/appdata/plexguide/.${encrypt27} ${encrypt27}:/encrypt
     fi
   fi
 
-  if [ "$rcheck" != "plexguide" ];then
+  if [ "$rcheck" != "plexguide" ]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
