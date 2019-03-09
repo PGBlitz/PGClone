@@ -75,6 +75,19 @@ if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
 echo $primarypassword > /var/plexguide/pgclone.password
 echo $secondarypassword > /var/plexguide/pgclone.salt
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Process Complete ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SYSTEM MESSAGE: Password & SALT are now SET! Again, do not forget your
+passwords!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Type SALT Password | Press [ENTER]: ' typed < /dev/tty
 clonestart;
 else blitzpasswordmain; fi
 }
