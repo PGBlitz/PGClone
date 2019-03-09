@@ -15,7 +15,7 @@ EOF
 elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
-[2] Passwords           [Not Set]
+[2] Passwords           [$pstatus]
 [3] GDrive              [$gstatus] - [$gcstatus]
 EOF
 elif [[ "$transport" == "bu" ]]; then
@@ -30,7 +30,7 @@ elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
 [1] Client ID & Secret  [${pgcloneid}]
 [2] TDrive Label        [$tdname]
-[3] Passwords           [Not Set]
+[3] Passwords           [$pstatus]
 [4] GDrive | GCrypt     [$gstatus] - [$gcstatus]
 [5] TDrive | TCrypt     [$tstatus] - [$tcstatus]
 [6] Key Management      [0] Built

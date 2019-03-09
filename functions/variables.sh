@@ -15,20 +15,28 @@ pgclonevars () {
   variable /var/plexguide/pgclone.password ""
   variable /var/plexguide/pgclone.salt ""
 
-  variable /var/plexguide/clone.gdrive "off"
-  if [ ! -e "/opt/appdata/plexguide/.gdrive" ]; then gstatus="NOT-SET"
+  variable /var/plexguide/pgclone.password "NOT-SET"
+  if [[ $(cat /var/plexguide/pgclone.password == "NOT-SET") ]]; then pstatus="NOT-SET"
+  else pstatus="ACTIVE"; fi
+
+  variable /var/plexguide/clone.gdrive "NOT-SET"
+  if [[ $(cat /opt/appdata/plexguide/.gdrive == "NOT-SET") ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.tdrive "off"
-  if [ ! -e "/opt/appdata/plexguide/.tdrive" ]; then tstatus="NOT-SET"
+  variable /var/plexguide/clone.gdrive "NOT-SET"
+  if [[ $(cat /opt/appdata/plexguide/.gdrive == "NOT-SET") ]]; then gstatus="NOT-SET"
+  else gstatus="ACTIVE"; fi
+
+  variable /var/plexguide/clone.tdrive "NOT-SET"
+  if [[ $(cat /opt/appdata/plexguide/.tdrive == "NOT-SET") ]]; then tstatus="NOT-SET"
   else tstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.tcrypt "off"
-  if [ ! -e "/opt/appdata/plexguide/.tcrypt" ]; then tcstatus="NOT-SET"
+  variable /var/plexguide/clone.tcrypt "NOT-SET"
+  if [[ $(cat /opt/appdata/plexguide/.tcrypt == "NOT-SET") ]]; then tcstatus="NOT-SET"
   else tcstatus="ACTIVE"; fi
 
-  variable /var/plexguide/clone.gcrypt "off"
-  if [ ! -e "/opt/appdata/plexguide/.gcrypt" ]; then gcstatus="NOT-SET"
+  variable /var/plexguide/clone.gcrypt "NOT-SET"
+  [[ $(cat /opt/appdata/plexguide/.gcrypt == "NOT-SET") ]]; then gcstatus="NOT-SET"
   else gcstatus="ACTIVE"; fi
 
   transport=$(cat /var/plexguide/pgclone.transport)
