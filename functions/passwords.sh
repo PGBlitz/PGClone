@@ -35,13 +35,12 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SALT (Secondary Password) ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? Type > Exit
+NOTE: We do not recommended using the same password!
 
 Set a secondary password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
-NOTE: We do not recommended using the same password!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
