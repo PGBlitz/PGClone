@@ -14,6 +14,10 @@ pgclonevars () {
   variable /var/plexguide/blitz.bw  "1000"
   variable /var/plexguide/pgclone.salt ""
 
+
+  variable /var/plexguide/oauth.check ""
+  oauthcheck=$(cat /var/plexguide/oauth.check)
+
   variable /var/plexguide/clone.password "NOT-SET"
   if [[ $(cat /var/plexguide/clone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
   else pstatus="ACTIVE"; fi

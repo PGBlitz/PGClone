@@ -45,6 +45,9 @@ teamid=$(cat /var/plexguide/pgclone.teamid)
 echo "team_drive = $teamid" >> /opt/appdata/plexguide/.tdrive; fi
 echo ""
 
+echo ${type} > /var/plexguide/oauth.check
+oauthcheck
+
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
 if [[ "$transport" == "be" || "$transport" == "me" ]]; then
 
@@ -66,6 +69,9 @@ echo "directory_name_encryption = true" >> /opt/appdata/plexguide/.${entype}
 echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${entype}
 echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${entype};
 fi
+
+echo ${entype} > /var/plexguide/oauth.check
+oauthcheck
 
 tee <<-EOF
 
