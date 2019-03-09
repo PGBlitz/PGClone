@@ -67,6 +67,22 @@ echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${entype}
 echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${entype};
 fi
 
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Process Complete ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  ${type} is now set!
+
+NOTE: If you change projects or use a different login, rerun this again!
+If not, nothing will work!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
+
 }
 # (BELOW - SET TEAMDRIVE NAME)##################################################
 tlabeloauth () {
