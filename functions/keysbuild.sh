@@ -157,8 +157,8 @@ echo "" /opt/appdata/plexguide/.keys
 gdsaemail () {
 tee <<-EOF
 
-🚀 Process Complete! Next > E-Mails Must be Shared with the Team Drive
 EOF
-read -rp '↘️  Ready? | Press [ENTER] ' typed < /dev/tty
+
+read -rp '↘️  Process Complete! Ready to Share E-Mails? | Press [ENTER] ' typed < /dev/tty
 emailgen
 }
