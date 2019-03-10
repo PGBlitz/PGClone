@@ -155,9 +155,12 @@ case $typed in
     2 )
         projectname ;;
     3 )
+        projectnamecheck
         keystart
         gdsaemail ;;
     4 )
+        projectnamecheck
+        deployblitzstartcheck
         emailgen ;;
     z )
         clonestart ;;

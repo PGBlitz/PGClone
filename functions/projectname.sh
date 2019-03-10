@@ -173,3 +173,27 @@ while read p; do
   echo "[$pnum] ${filler}${p}"
 done </var/plexguide/prolist/prolist.sh
 }
+
+projectnamecheck () {
+
+pgclonevars
+if [[ "$pgcloneproject" == "NOT-SET" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Fail Notice ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  The PROJECT must be set first!
+
+NOTE: Without setting a project, PG Blitz is unable to establish, build
+keys, and deploy the proper GDSA Accounts for the Team Drive
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
+fi
+
+}
