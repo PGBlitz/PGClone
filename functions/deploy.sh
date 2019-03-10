@@ -34,9 +34,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Conducting RClone Mount Checks ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
-
 ginital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
 tinital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
 kinital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
@@ -53,6 +51,7 @@ tsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep 
 ksecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
 
 fail=0
+echo ""
 if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 if [[ "$tsecond" == "plexguide" ]]; then echo "TDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA01: Failed" && fail=1; fi
@@ -68,10 +67,12 @@ tee <<-EOF
 🚀 RClone Mount Checks - Failed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+CANNOT DEPLOY PGBLITZ!
+
 POSSIBLE REASONS:
 1. GSuite Account is no longer valid or suspended
 2. User forgot to share out GDSA E-Mail to Team Drive
-3. Conducted a Blitz Key restore and keys are no longer valid
+3. Conducted a blitz key restore and keys are no longer valid
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
