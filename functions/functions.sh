@@ -141,7 +141,7 @@ tee <<-EOF
 
 [A] Keys Backup  ~ NOT READY
 [B] Keys Restore ~ NOT READY
-[C] Keys Destroy ~ NOT READY
+[C] Keys Destroy
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -162,6 +162,10 @@ case $typed in
         projectnamecheck
         deployblitzstartcheck
         emailgen ;;
+    c )
+        deletekeys ;;
+    C )
+        deletekeys ;;
     z )
         clonestart ;;
     Z )

@@ -164,3 +164,61 @@ EOF
 read -rp '↘️  Process Complete! Ready to Share E-Mails? | Press [ENTER] ' typed < /dev/tty
 emailgen
 }
+
+deletekeys () {
+pgclonevars
+gcloud --account=${pgcloneproject} iam service-accounts list > /var/plexguide/.deletelistpart1
+  while read p; do
+  echo $p > /var/plexguide/.listpart1
+  writelist=$(grep pg-bumpnono-143619 /var/plexguide/.listpart1)
+  if [[ "$writelist" != "" ]]; then echo $writelist >> /var/plexguide/.listpart2; fi
+done </var/plexguide/.deletelistpart1
+
+cat /var/plexguide/.listpart2 |  awk '{print $2}' | \
+    tail -n +2 |  sort | uniq > /var/plexguide/.gcloudblitz
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Keys to Delete?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+cat /var/plexguide/.gcloudblitz
+tee <<-EOF
+
+Delete All Keys for Project ~ ${pgcloneproject}?
+
+WARNING: If Plex, Emby, and/or JellyFin are using these keys, stop the
+containers! Deleting keys in use by this project will result in those
+containers losing metadata (due to them being unable to access teamdrives)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Type y or n | PRESS [ENTER]: ' token < /dev/tty
+
+case $typed in
+    y )
+        yesdeletekeys ;;
+    Y )
+        yesdeletekeys ;;
+    N )
+        keymanagementinterface ;;
+    n )
+        keymanagementinterface ;;
+    * )
+        deletekeys ;;
+esac
+}
+
+yesdeletekeys () {
+
+while read p; do
+gcloud --account=${pgcloneemail} iam service-accounts delete $p --quiet
+done </var/plexguide/.gcloudblitz
+
+echo
+read -p '↘️  Process Complete! | PRESS [ENTER]: ' token < /dev/tty
+keymanagementinterface
+}
