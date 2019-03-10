@@ -67,6 +67,8 @@ count=0
 gdsacount=0
 rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
 touch /opt/appdata/plexguide/.keys
+rm -rf /opt/appdata/plexguide/.blitzkeys
+mkdir -p /opt/appdata/plexguide/.blitzkeys
 echo "" > /opt/appdata/plexguide/.keys
 
 tee <<-EOF
@@ -83,10 +85,9 @@ else tempbuild=${gcount}; fi
 }
 
 keycreate1 () {
-    mkdir
     #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${count} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${gcount} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsacount
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
@@ -99,7 +100,7 @@ keycreate1 () {
 keycreate2 () {
     #echo $count # for tshoot
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA${count} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA${gcount} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsacount
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
@@ -127,10 +128,10 @@ gdsabuild () {
 pgclonevars
 ####tempbuild is need in order to call the correct gdsa
 tee >> /opt/appdata/plexguide/.keys <<-EOF
-[GDSA${tempbuild}]
+[GDSA${gcount}]
 type = drive
 scope = drive
-service_account_file = /opt/appdata/plexguide/.blitzkeys/GDSA${tempbuild}
+service_account_file = /opt/appdata/plexguide/.blitzkeys/GDSA${gcount}
 team_drive = ${tdname}
 
 EOF
@@ -142,7 +143,7 @@ encsalt=$(rclone obscure "${clonesalt}")
 tee >> /opt/appdata/plexguide/.keys <<-EOF
 [GDSA${tempbuild}C]
 type = crypt
-remote = GDSA${tempbuild}:/encrypt
+remote = gdsa${tempbuild}:/encrypt
 filename_encryption = standard
 directory_name_encryption = true
 password = $encpassword
