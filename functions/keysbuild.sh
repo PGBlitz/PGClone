@@ -87,6 +87,7 @@ else tempbuild=$gcount; fi
 keycreate1 () {
     #echo $count # for tshoot
     gdsacount
+    echo "create1"
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${gcount} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
@@ -100,6 +101,7 @@ keycreate1 () {
 keycreate2 () {
     #echo $count # for tshoot
     gdsacount
+    echo "create2"
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA${gcount} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
