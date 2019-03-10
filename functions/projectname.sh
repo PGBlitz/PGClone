@@ -78,8 +78,18 @@ EOF
 
 gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
 echo "$projectid" > /var/plexguide/pgclone.project
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - RESETTING THE CLIENT ID & SECRET ! ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+rm -rf /var/plexguide/pgclone.secret
+rm -rf /var/plexguide/pgclone.public
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-projectname ;;
+clonestart ;;
 3 )
     destroyproject ;;
 Z )
@@ -216,7 +226,8 @@ tee <<-EOF
 WARNING:
 Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
 this project to be created! As a result when finished; this will result in
-RESETTING EVERYTHING because it has to work with that NEW PROJECT!
+RESETTING THE CLIENT ID & SECREET because you must SET A NEW ONE from
+this PROJECT!
 
 Do You Want to Processed?
 [1] No
