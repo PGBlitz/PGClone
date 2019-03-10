@@ -66,9 +66,9 @@ pgclonevars
 if [[ "$transport" == "mu" || "$transport" == "me" ]]; then throttle=$(cat /var/plexguide/move.bw)
 else throttle=$(cat /var/plexguide/blitz.bw); fi
 
-if [[ "$transport" != "mu" || "$transport" != "me" || "$transport" != "bu" || "$transport" != "me" ]]; then
+if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "me" ]]; then
 rm -rf /var/plexguide/pgclone.transport 1>/dev/null 2>&1
-mustset; fi 
+mustset; fi
 
 tee <<-EOF
 
