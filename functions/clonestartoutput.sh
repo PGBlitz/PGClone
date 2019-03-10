@@ -184,11 +184,13 @@ elif [[ "$transport" == "bu" ]]; then
             publicsecretchecker
             tlabelchecker
             mountchecker
+            deploypgblitz
             ;; ## fill
         A )
             publicsecretchecker
             tlabelchecker
             mountchecker
+            deploypgblitz
             ;; ## flll
         b )
             setthrottleblitz ;;
@@ -238,12 +240,14 @@ elif [[ "$transport" == "be" ]]; then
             passwordcheck
             tlabelchecker
             mountchecker
+            deploypgblitz
             ;; ## fill
         A )
             publicsecretchecker
             passwordcheck
             tlabelchecker
             mountchecker
+            deploypgblitz
             ;; ## flll
         b )
             setthrottleblitz ;;

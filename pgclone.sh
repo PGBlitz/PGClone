@@ -21,6 +21,7 @@ source /opt/pgclone/functions/passwords.sh
 source /opt/pgclone/functions/oauthcheck.sh
 source /opt/pgclone/functions/keysbuild.sh
 source /opt/pgclone/functions/emails.sh
+source /opt/pgclone/functions/deploy.sh
 ################################################################################
 
 # (functions.sh) Ensures variables and folders exist
