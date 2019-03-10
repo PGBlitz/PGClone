@@ -193,7 +193,7 @@ keymanagementinterface; fi
 done </var/plexguide/.deletelistpart1
 
 cat /var/plexguide/.listpart2 |  awk '{print $2}' | \
-    tail -n +2 |  sort | uniq > /var/plexguide/.gcloudblitz
+    sort | uniq > /var/plexguide/.gcloudblitz
 
 tee <<-EOF
 
