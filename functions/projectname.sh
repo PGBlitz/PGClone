@@ -207,6 +207,33 @@ fi
 }
 
 projectnameset () {
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - WARNING! PROJECT CREATION! ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WARNING:
+Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
+this project to be created! As a result when finished; this will result in
+RESETTING EVERYTHING because it has to work with that NEW PROJECT!
+
+Do You Want to Processed?
+[1] No
+[2] Yes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+case $typed in
+1 )
+  keymanagementinterface ;;
+2 )
+  a=bc ;;
+* )
+  projectnameset ;;
+esac
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -219,5 +246,5 @@ no spaces!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
-if [[ "$typed" == "" ]]; then projectnameset; fi 
+if [[ "$typed" == "" ]]; then projectnameset; fi
 }
