@@ -91,7 +91,7 @@ keycreate1 () {
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${gcount} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
-    else echo "blitz${count} is linked to GDSA${gcount}"; fi
+    else echo "blitz0${count} is linked to GDSA0${gcount}"; fi
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     keysleft=$((keysleft-1))
     flip=on
