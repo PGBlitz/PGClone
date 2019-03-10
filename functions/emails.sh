@@ -8,6 +8,7 @@
 emailgen () {
 
 rm -rf /var/plexguide/.emailbuildlist 1>/dev/null 2>&1
+rm -rf /var/plexguide/.emaillist  1>/dev/null 2>&1
 
 ls -la /opt/appdata/plexguide/.blitzkeys | awk '{print $9}' | tail -n +4 > /var/plexguide/.emailbuildlist
 while read p; do
