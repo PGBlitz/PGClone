@@ -196,7 +196,7 @@ containers losing metadata (due to them being unable to access teamdrives)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Type y or n | PRESS [ENTER]: ' token < /dev/tty
+read -p '↘️  Type y or n | PRESS [ENTER]: ' typed < /dev/tty
 
 case $typed in
     y )
