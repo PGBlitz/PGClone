@@ -21,3 +21,4 @@ if [ -e "/opt/appdata/plexguide/.tcrypt" ]; then
 cat /opt/appdata/plexguide/.tcrypt >> /opt/appdata/plexguide/tclone.conf; fi
 
 cat /opt/appdata/plexguide/.keys >> /opt/appdata/plexguide/rclone.conf
+}

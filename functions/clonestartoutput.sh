@@ -24,7 +24,7 @@ tee <<-EOF
 [2] TDrive Label        [$tdname]
 [3] TDrive OAuth        [$tstatus]
 [4] GDrive OAuth        [$gstatus]
-[5] Key Management      [0] Built
+[5] Key Management      [$displaykeys] Built
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
@@ -33,7 +33,7 @@ tee <<-EOF
 [3] TDrive Label        [$tdname]
 [4] TDrive | TCrypt     [$tstatus] - [$tcstatus]
 [5] GDrive | GCrypt     [$gstatus] - [$gcstatus]
-[6] Key Management      [0] Built
+[6] Key Management      [$displaykeys] Built
 EOF
 fi
 }
