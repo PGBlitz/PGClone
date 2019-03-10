@@ -104,10 +104,12 @@ if [[ "$transport" == "mu" ]]; then
       a )
           publicsecretchecker
           mountchecker
+          deploypgmove
           ;; ## fill
       A )
           publicsecretchecker
           mountchecker
+          deploypgmove
           ;; ## flll
       b )
           setthrottlemove ;;
@@ -140,11 +142,13 @@ elif [[ "$transport" == "me" ]]; then
           publicsecretchecker
           passwordcheck
           mountchecker
+          deploypgmove
           ;; ## fill
       A )
           publicsecretchecker
           passwordcheck
           mountchecker
+          deploypgmove
           ;; ## flll
       b )
           setthrottlemove ;;
