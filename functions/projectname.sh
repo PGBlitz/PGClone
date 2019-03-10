@@ -193,7 +193,7 @@ keys, and deploy the proper GDSA Accounts for the Team Drive
 EOF
 
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
+keymanagementinterface
 fi
 
 }
