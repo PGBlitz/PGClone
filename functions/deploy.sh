@@ -6,9 +6,9 @@
 # GNU:        General Public License v3.0
 ################################################################################
 deploypgblitz () {
-echo "------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
-echo "RClone Rewrite | Visit https://pgblitz.com" > /opt/appdata/plexguide/rclone.conf
-echo "------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
+echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
+echo "#RClone Rewrite | Visit https://pgblitz.com" > /opt/appdata/plexguide/rclone.conf
+echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
 
 cat /opt/appdata/plexguide/.gdrive >> /opt/appdata/plexguide/rclone.conf
 
