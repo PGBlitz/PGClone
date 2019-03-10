@@ -86,9 +86,9 @@ else tempbuild=${gcount}; fi
 
 keycreate1 () {
     #echo $count # for tshoot
+    gdsacount
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${gcount} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
-    gdsacount
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
     else echo "blitz${count} is linked to GDSA${gcount}"; fi
@@ -99,9 +99,9 @@ keycreate1 () {
 
 keycreate2 () {
     #echo $count # for tshoot
+    gdsacount
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA${gcount} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
-    gdsacount
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${gcount}"
     else echo "blitz${count} is linked to GDSA${gcount}"; fi
