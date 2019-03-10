@@ -182,7 +182,7 @@ are detected! Exiting!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowledge Info! | PRESS [ENTER]: ' token < /dev/tty
+read -p '↘️  Acknowledge Info! | PRESS [ENTER] ' token < /dev/tty
 keymanagementinterface; fi
 
   rm -rf /var/plexguide/.listpart2 1>/dev/null 2>&1
