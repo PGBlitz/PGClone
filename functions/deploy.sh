@@ -52,11 +52,12 @@ gsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep 
 tsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
 ksecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
 
-if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed"; fi
-if [[ "$tsecond" == "plexguide" ]]; then echo "TDRIVE: Passed"; else echo "GDRIVE: Failed"; fi
-if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA01: Failed"; fi
+fail=0
+if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
+if [[ "$tsecond" == "plexguide" ]]; then echo "TDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
+if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA01: Failed" && fail=1; fi
 
-if [[ "$gsecond" == "plexguide" && "$tsecond" == "plexguide" && "$ksecond" == "plexguide" ]]; then
+if [[ "$fail" == "1" ]]; then
   echo ""
   read -p '↘️  BLITZ DEPLOY NOT READY ~ PASSED TEST | Press [ENTER] ' typed2 < /dev/tty
   #pgblitzpass
