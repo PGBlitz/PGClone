@@ -128,10 +128,10 @@ gdsabuild () {
 pgclonevars
 ####tempbuild is need in order to call the correct gdsa
 tee >> /opt/appdata/plexguide/.keys <<-EOF
-[GDSA${gcount}]
+[GDSA${tempbuild}]
 type = drive
 scope = drive
-service_account_file = /opt/appdata/plexguide/.blitzkeys/GDSA${gcount}
+service_account_file = /opt/appdata/plexguide/.blitzkeys/GDSA${tempbuild}
 team_drive = ${tdname}
 
 EOF
