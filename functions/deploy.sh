@@ -89,7 +89,7 @@ echo "#------------------------------------------" >> /opt/appdata/plexguide/rcl
 
 cat /opt/appdata/plexguide/.gdrive > /opt/appdata/plexguide/rclone.conf
 
-if [[ $(cat "/opt/appdata/plexguide/.gcrypt") != "NOT-SET" ]; then
+if [[ $(cat "/opt/appdata/plexguide/.gcrypt") != "NOT-SET" ]]; then
 echo ""
 cat /opt/appdata/plexguide/.gcrypt >> /opt/appdata/plexguide/rclone.conf; fi
 deploymovecheck
