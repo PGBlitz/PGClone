@@ -164,7 +164,7 @@ case $typed in
     Z )
         clonestart ;;
     * )
-        clonestart ;;
+        keymanagementinterface ;;
   esac
 keymanagementinterface
 }
