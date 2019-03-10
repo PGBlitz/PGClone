@@ -56,7 +56,7 @@ pgclonevars () {
   pgclonepublic=$(cat /var/plexguide/pgclone.public)
 
   mkdir -p /opt/appdata/plexguide/.blitzkeys
-  displaykey=$(ls /opt/appdata/plexguide/.blitzkeys)
+  displaykey=$(ls /opt/appdata/plexguide/.blitzkeys | wc -l)
 
   variable /var/plexguide/pgclone.secret ""
   pgclonesecret=$(cat /var/plexguide/pgclone.secret)
