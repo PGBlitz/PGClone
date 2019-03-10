@@ -36,7 +36,7 @@ tee <<-EOF
 CURRENT PROJECT: $pgcloneproject
 
 [1] Project: Use Existing Project
-[2] Project: Build New
+[2] Project: Build New & Set Project
 [3] Project: Destroy
 [Z] Exit
 
@@ -71,6 +71,7 @@ date=`date +%m%d`
 rand=$(echo $((1 + RANDOM + RANDOM + RANDOM )))
 projectid="pg-$typed-${date}${rand}"
 gcloud projects create $projectid --account=${pgcloneemail}
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -78,6 +79,16 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Enabling the API (Standby) ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+
+gcloud services enable drive.googleapis.com --project ${existingnumber} --account=${pgcloneemail}
 echo "$projectid" > /var/plexguide/pgclone.project
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 projectname ;;
@@ -116,6 +127,15 @@ existingnumber=$(cat /var/plexguide/prolist/$typed)
 
 echo
 gcloud config set project ${existingnumber} --account=${pgcloneemail}
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Enabling Your API (Standby) ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+gcloud services enable drive.googleapis.com --project ${existingnumber} --account=${pgcloneemail}
 else exisitingproject; fi
 echo
 read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
