@@ -89,7 +89,7 @@ echo "#------------------------------------------" >> /opt/appdata/plexguide/rcl
 
 cat /opt/appdata/plexguide/.gdrive > /opt/appdata/plexguide/rclone.conf
 
-if [ -e "/opt/appdata/plexguide/.gcrypt" ]; then
+if [[ $(cat "/opt/appdata/plexguide/.gcrypt") != "NOT-SET" ]; then
 echo ""
 cat /opt/appdata/plexguide/.gcrypt >> /opt/appdata/plexguide/rclone.conf; fi
 deploymovecheck
@@ -104,8 +104,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-
-
 
 ginital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
 
