@@ -139,9 +139,9 @@ tee <<-EOF
 [3] Build Service Keys     [$displaykey]
 [4] E-Mail Generator
 
-[A] Keys Backup
-[B] Keys Restore
-[C] Keys Destroy
+[A] Keys Backup  ~ NOT READY
+[B] Keys Restore ~ NOT READY
+[C] Keys Destroy ~ NOT READY
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

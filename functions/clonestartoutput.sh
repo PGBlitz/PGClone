@@ -77,7 +77,7 @@ clonestartoutput
 
 tee <<-EOF
 
-[A] Deploy              [PG Move /w No Encryption]
+[A] Deploy              [Not Deployed]
 [B] Throttle            [${throttle} MB]
 [C] Change              Switch Transport Method
 [Z] Exit
