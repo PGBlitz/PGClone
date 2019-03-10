@@ -155,7 +155,8 @@ case $typed in
     2 )
         projectname ;;
     3 )
-        keystart ;;
+        keystart
+        gdsaemail ;;
     4 )
         emailgen ;;
     z )

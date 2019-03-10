@@ -152,6 +152,9 @@ EOF
 
 fi
 echo "" /opt/appdata/plexguide/.keys
+}
+
+gdsaemail () {
 emailgen
 
 tee <<-EOF
