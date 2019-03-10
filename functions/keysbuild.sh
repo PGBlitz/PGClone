@@ -67,6 +67,7 @@ count=0
 gdsacount=0
 rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
 touch /opt/appdata/plexguide/.keys
+echo "" > /opt/appdata/plexguide/.keys
 
 tee <<-EOF
 
