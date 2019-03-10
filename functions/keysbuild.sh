@@ -90,7 +90,7 @@ keycreate1 () {
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
     gcloud --account=${pgcloneemail} iam service-accounts keys create /opt/appdata/plexguide/.blitzkeys/GDSA0${tempbuild} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA0${tempbuild}"
-    else echo "blitz0${count} is linked to GDSA0${gcount}"; fi
+    else echo "blitz0${count} is linked to GDSA${gcount}"; fi
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     keysleft=$((keysleft-1))
     flip=on
@@ -131,7 +131,7 @@ tee >> /opt/appdata/plexguide/.keys <<-EOF
 type = drive
 scope = drive
 service_account_file = /opt/appdata/plexguide/.blitzkeys/GDSA${tempbuild}
-team_drive = ${tdname}
+team_drive = ${tdid}
 
 EOF
 
