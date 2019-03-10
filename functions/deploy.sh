@@ -58,7 +58,6 @@ if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA0
 if [[ "$gsecond" == "plexguide" || "$tsecond" == "plexguide" || "$ksecond" == "plexguide" ]]; then
   read -p '↘️  BLITZ DEPLOY NOT READY | Press [ENTER] ' typed2 < /dev/tty
   #pgblitzpass
-fi
 else
 tee <<-EOF
 
@@ -75,4 +74,5 @@ POSSIBLE REASONS:
 EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
 clonestart
+fi 
 }
