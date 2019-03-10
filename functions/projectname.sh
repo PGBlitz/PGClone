@@ -224,7 +224,7 @@ Do You Want to Processed?
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
+read -p '↘️  Input Choice | Press [Enter]: ' typed < /dev/tty
 case $typed in
 1 )
   keymanagementinterface ;;
