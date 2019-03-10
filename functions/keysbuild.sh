@@ -81,7 +81,7 @@ EOF
 gdsacount () {
   ((gcount++))
   if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then tempbuild=0${gcount}
-else tempbuild=${gcount}; fi
+else tempbuild=$gcount; fi
 }
 
 keycreate1 () {
