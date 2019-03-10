@@ -56,6 +56,7 @@ if [[ "$tsecond" == "plexguide" ]]; then echo "TDRIVE: Passed"; else echo "GDRIV
 if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA01: Failed"; fi
 
 if [[ "$gsecond" == "plexguide" || "$tsecond" == "plexguide" || "$ksecond" == "plexguide" ]]; then
+  echo ""
   read -p '↘️  BLITZ DEPLOY NOT READY | Press [ENTER] ' typed2 < /dev/tty
   #pgblitzpass
 else
@@ -74,5 +75,5 @@ POSSIBLE REASONS:
 EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
 clonestart
-fi 
+fi
 }
