@@ -43,7 +43,7 @@ pgclonevars () {
 
   transport=$(cat /var/plexguide/pgclone.transport)
 
-  variable /var/plexguide/pgclone.teamdrive  "NOT-SET"
+  variable /var/plexguide/pgclone.teamdrive "NOT-SET"
   tdname=$(cat /var/plexguide/pgclone.teamdrive)
 
   variable /var/plexguide/pgclone.teamid ""
