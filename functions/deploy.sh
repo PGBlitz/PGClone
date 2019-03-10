@@ -7,8 +7,8 @@
 ################################################################################
 deploypgblitz () {
 # RCLONE BUILD
-echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
-echo "#RClone Rewrite | Visit https://pgblitz.com" > /opt/appdata/plexguide/rclone.conf
+echo "#------------------------------------------" > /opt/appdata/plexguide/rclone.conf
+echo "#RClone Rewrite | Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
 echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
 
 cat /opt/appdata/plexguide/.gdrive >> /opt/appdata/plexguide/rclone.conf
@@ -82,13 +82,14 @@ fi
 
 deploypgmove () {
 # RCLONE BUILD
-echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
-echo "#RClone Rewrite | Visit https://pgblitz.com" > /opt/appdata/plexguide/rclone.conf
+echo "#------------------------------------------" > /opt/appdata/plexguide/rclone.conf
+echo "#RClone Rewrite | Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
 echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
 
-cat /opt/appdata/plexguide/.gdrive >> /opt/appdata/plexguide/rclone.conf
+cat /opt/appdata/plexguide/.gdrive > /opt/appdata/plexguide/rclone.conf
 
 if [ -e "/opt/appdata/plexguide/.gcrypt" ]; then
+echo ""
 cat /opt/appdata/plexguide/.gcrypt >> /opt/appdata/plexguide/rclone.conf; fi
 deploymovecheck
 }
@@ -102,6 +103,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
+
+
 
 ginital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
 
