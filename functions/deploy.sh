@@ -56,7 +56,7 @@ if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIV
 if [[ "$tsecond" == "plexguide" ]]; then echo "TDRIVE: Passed"; else echo "GDRIVE: Failed"; fi
 if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA01: Failed"; fi
 
-if [[ "$gsecond" == "plexguide" || "$tsecond" == "plexguide" || "$ksecond" == "plexguide" ]]; then
+if [[ "$gsecond" == "plexguide" && "$tsecond" == "plexguide" && "$ksecond" == "plexguide" ]]; then
   echo ""
   read -p '↘️  BLITZ DEPLOY NOT READY ~ PASSED TEST | Press [ENTER] ' typed2 < /dev/tty
   #pgblitzpass
