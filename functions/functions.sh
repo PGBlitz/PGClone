@@ -156,6 +156,8 @@ case $typed in
         projectname ;;
     3 )
         keystart ;;
+    4 )
+        emailgen ;;
     z )
         clonestart ;;
     Z )
