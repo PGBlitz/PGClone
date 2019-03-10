@@ -136,7 +136,7 @@ tee <<-EOF
 
 [1] Google Account Login   [$pgcloneemail]
 [2] Project Name           [$pgcloneproject]
-[3] Build Service Keys     [$displaykeys]
+[3] Build Service Keys     [$displaykey]
 [4] E-Mail Generator
 
 [A] Keys Backup
