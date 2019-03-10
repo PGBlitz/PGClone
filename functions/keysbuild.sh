@@ -191,13 +191,12 @@ Delete All Keys for Project ~ ${pgcloneproject}?
 
 WARNING: If Plex, Emby, and/or JellyFin are using these keys, stop the
 containers! Deleting keys in use by this project will result in those
-containers losing metadata (due to them being unable to access teamdrives)
+containers losing metadata (due to being unable to access teamdrives)!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
 read -p '↘️  Type y or n | PRESS [ENTER]: ' typed < /dev/tty
-
 case $typed in
     y )
         yesdeletekeys ;;
@@ -213,7 +212,8 @@ esac
 }
 
 yesdeletekeys () {
-
+ls -la /opt/appdata/plexguide/.blitzkeys/*
+echo ""
 while read p; do
 gcloud --account=${pgcloneemail} iam service-accounts delete $p --quiet
 done </var/plexguide/.gcloudblitz
