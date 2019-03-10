@@ -230,7 +230,7 @@ esac
 }
 
 yesdeletekeys () {
-ls -la /opt/appdata/plexguide/.blitzkeys/*
+rm -rf /opt/appdata/plexguide/.blitzkeys/* 1>/dev/null 2>&1
 echo ""
 while read p; do
 gcloud --account=${pgcloneemail} iam service-accounts delete $p --quiet
