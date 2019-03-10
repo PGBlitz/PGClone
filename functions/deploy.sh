@@ -127,10 +127,11 @@ tee <<-EOF
 🚀 RClone Mount Checks - Failed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+CANNOT DEPLOY PGMOVE!
+
 POSSIBLE REASONS:
 1. GSuite Account is no longer valid or suspended
-2. User forgot to share out GDSA E-Mail to Team Drive
-3. Conducted a Blitz Key restore and keys are no longer valid
+2. Keys are Invalid
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
