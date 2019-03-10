@@ -52,19 +52,7 @@ case $typed in
   elif [[ "$projectcheck" == "good" ]]; then
     exisitingproject; fi ;;
 2 )
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Project Name ~ pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Name of your project? Ensure the PROJECT NAME is one word; all lowercase;
-no spaces!
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
+projectnameset
 
 echo ""
 date=`date +%m%d`
@@ -88,7 +76,7 @@ tee <<-EOF
 
 EOF
 
-gcloud services enable drive.googleapis.com --project ${existingnumber} --account=${pgcloneemail}
+gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
 echo "$projectid" > /var/plexguide/pgclone.project
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 projectname ;;
@@ -216,4 +204,20 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 keymanagementinterface
 fi
 
+}
+
+projectnameset () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Project Name ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Name of your project? Ensure the PROJECT NAME is one word; all lowercase;
+no spaces!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
+if [[ "$typed" == "" ]]; then projectnameset; fi 
 }
