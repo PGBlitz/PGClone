@@ -65,6 +65,8 @@ keystotal=$(cat /var/plexguide/.blitzbuild | wc -l)
 keysleft=$num
 count=0
 gdsacount=0
+gcount=0
+tempbuild=0
 rm -rf /opt/appdata/plexguide/.keys 1>/dev/null 2>&1
 touch /opt/appdata/plexguide/.keys
 rm -rf /opt/appdata/plexguide/.blitzkeys

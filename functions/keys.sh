@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
 # Author(s):  Admin9705 ~ Physik - FlickerRate
