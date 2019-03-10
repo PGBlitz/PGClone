@@ -5,6 +5,9 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+source /opt/pgclone/functions/deploy.sh
+################################################################################
+
 clonestartoutput () {
 pgclonevars
 if [[ "$transport" == "mu" ]]; then
