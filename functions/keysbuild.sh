@@ -167,7 +167,25 @@ emailgen
 
 deletekeys () {
 pgclonevars
-gcloud --account=${pgcloneproject} iam service-accounts list > /var/plexguide/.deletelistpart1
+gcloud --account=user@dunn.cloud iam service-accounts list > /var/plexguide/.deletelistpart1
+
+  if [[ $(cat /var/plexguide/.deletelistpart1) == "" ]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Error! Nothing To Delete!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: No KEYS/Service Accounts for Project $pgcloneproject
+are detected! Exiting!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p '↘️  Acknowledge Info! | PRESS [ENTER]: ' token < /dev/tty
+keymanagementinterface; fi
+
+  rm -rf /var/plexguide/.listpart2 1>/dev/null 2>&1
   while read p; do
   echo $p > /var/plexguide/.listpart1
   writelist=$(grep pg-bumpnono-143619 /var/plexguide/.listpart1)
