@@ -150,4 +150,5 @@ password2 = $encsalt
 EOF
 
 fi
+echo "" /opt/appdata/plexguide/.keys
 }
