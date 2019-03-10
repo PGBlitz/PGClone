@@ -6,6 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 deploypgblitz () {
+  deployblitzstartcheck
 # RCLONE BUILD
 echo "#------------------------------------------" > /opt/appdata/plexguide/rclone.conf
 echo "#RClone Rewrite | Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
@@ -136,4 +137,28 @@ EOF
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
 clonestart
 fi
+}
+
+deployblitzstartcheck () {
+
+pgclonevars
+if [[ "$displaykey" == "0" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎 Fail Notice ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬  There are [0] keys generated for PG Blitz! Create those first!
+
+NOTE: Without any keys, PG Blitz cannot upload any data without the use
+of service accounts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
+fi
+
 }
