@@ -14,13 +14,15 @@ echo "#------------------------------------------" >> /opt/appdata/plexguide/rcl
 
 cat /opt/appdata/plexguide/.gdrive >> /opt/appdata/plexguide/rclone.conf
 
-if [ -e "/opt/appdata/plexguide/.gcrypt" ]; then
+if [[ $(cat "/opt/appdata/plexguide/.gcrypt") != "NOT-SET" ]]; then
+echo ""
 cat /opt/appdata/plexguide/.gcrypt >> /opt/appdata/plexguide/rclone.conf; fi
 
 cat /opt/appdata/plexguide/.tdrive >> /opt/appdata/plexguide/rclone.conf
 
-if [ -e "/opt/appdata/plexguide/.tcrypt" ]; then
-cat /opt/appdata/plexguide/.tcrypt >> /opt/appdata/plexguide/tclone.conf; fi
+if [[ $(cat "/opt/appdata/plexguide/.tcrypt") != "NOT-SET" ]]; then
+echo ""
+cat /opt/appdata/plexguide/.tcrypt >> /opt/appdata/plexguide/rclone.conf; fi
 
 cat /opt/appdata/plexguide/.keys >> /opt/appdata/plexguide/rclone.conf
 
