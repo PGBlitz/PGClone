@@ -19,13 +19,13 @@ $pgclonepublic
 SECRET ID
 $pgclonesecret
 
-Change the Stored Values?
-[1] No [2] Yes
-
 WARNING: Changing the values will RESET & DELETE the following:
 1. GDrive
 2. TDrive
 3. Service Keys
+
+Change the Stored Values?
+[1] No [2] Yes
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
