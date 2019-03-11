@@ -14,16 +14,7 @@ source /opt/pgclone/functions/pgclone.sh
 ################################ Forces RClone Installer ######## START
 echo "15" > /var/plexguide/pg.rcloneprime
 
-rcpiece () {
-tee "/etc/fuse.conf" > /dev/null <<EOF
-# /etc/fuse.conf - Configuration file for Filesystem in Userspace (FUSE)
-# Set the maximum number of FUSE mounts allowed to non-root users.
-# The default is 1000.
-#mount_max = 1000
-# Allow non-root users to specify the allow_other or allow_root mount options.
-user_allow_other
-EOF
-}
+
 
 core () {
     touch /var/plexguide/pg."${1}".stored

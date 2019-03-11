@@ -1,4 +1,3 @@
-#!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
 # Author(s):  Admin9705 ~ Physik - FlickerRate
@@ -345,7 +344,7 @@ gdsabuild () {
   ENC_SALT=`rclone obscure "$SALT"`; fi
 
   ####tempbuild is need in order to call the correct gdsa
-  mkdir -p $downloadpath/pgblitz/$tempbuild
+  mkdir -p $downloadpath/move/$tempbuild
   echo "" >> $rpath
   echo "[$tempbuild]" >> $rpath
   echo "type = drive" >> $rpath
@@ -525,8 +524,8 @@ ufsbuilder () {
   if [ -e "$file" ]; then rm -rf /var/plexguide/unionfs.pgpath && touch /var/plexguide/unionfs.pgpath; fi
 
   while read p; do
-  mkdir -p $downloadpath/pgblitz/$p
-  echo -n "$downloadpath/pgblitz/$p=RO:" >> /var/plexguide/unionfs.pgpath
+  mkdir -p $downloadpath/move/$p
+  echo -n "$downloadpath/move/$p=RO:" >> /var/plexguide/unionfs.pgpath
   done </tmp/pg.gdsa.ufs
   builder=$(cat /var/plexguide/unionfs.pgpath)
 }
