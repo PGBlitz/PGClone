@@ -317,10 +317,10 @@ tee <<-EOF
 💪 Options Interface ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[A] Transport Select         | INFO: Change Transport Type
-[B] Destroy All Service Keys | WARN: Wipes All Keys for the Project
-[C] Create New Project       | WARN: Resets Everything
-[D] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
+[1] Transport Select         | INFO: Change Transport Type
+[2] Destroy All Service Keys | WARN: Wipes All Keys for the Project
+[3] Create New Project       | WARN: Resets Everything
+[4] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -336,9 +336,9 @@ case $typed in
           transportselect ;;
       2 )
           deletekeys ;;
-      d )
-          demomode ;;
-      D )
+      3 )
+          projectnameset ;;
+      4 )
           demomode ;;
       Z )
           clonestart ;;
