@@ -22,7 +22,9 @@ source /opt/pgclone/functions/oauthcheck.sh
 source /opt/pgclone/functions/keysbuild.sh
 source /opt/pgclone/functions/emails.sh
 source /opt/pgclone/functions/deploy.sh
+source /opt/pgclone/functions/rcloneinstall.sh
 ################################################################################
+rcloneinstall
 
 # (functions.sh) Ensures variables and folders exist
 pgclonevars
