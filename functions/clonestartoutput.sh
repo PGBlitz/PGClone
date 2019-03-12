@@ -92,7 +92,7 @@ tee <<-EOF
 
 [A] Deploy                [Not Deployed]
 [B] Throttle              [${throttle} MB]
-[C] Options
+$output1
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
