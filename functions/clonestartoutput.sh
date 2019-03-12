@@ -201,13 +201,15 @@ elif [[ "$transport" == "bu" ]]; then
             oauth ;;
         7 )
             publicsecretchecker
-            passwordcheck
             tlabelchecker
             mountchecker
             projectnamecheck
             keystart
             gdsaemail ;;
         8 )
+            publicsecretchecker
+            tlabelchecker
+            mountchecker
             projectnamecheck
             deployblitzstartcheck
             emailgen ;;
@@ -273,6 +275,10 @@ elif [[ "$transport" == "be" ]]; then
             keystart
             gdsaemail ;;
         9 )
+            publicsecretchecker
+            passwordcheck
+            tlabelchecker
+            mountchecker
             projectnamecheck
             deployblitzstartcheck
             emailgen ;;
