@@ -329,5 +329,15 @@ esac
 demomode () {
   if [[ "$demo" = "OFF" ]]; then echo "ON " > /var/plexguide/pgclone.demo
   else echo "OFF" > /var/plexguide/pgclone.demo; fi
-  optionsmenu
+
+pgclonevars
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 DEMO MODE IS NOW: $demo | PRESS [ENTER] to CONFIRM!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -rp '' typed < /dev/tty
+optionsmenu
+
 }
