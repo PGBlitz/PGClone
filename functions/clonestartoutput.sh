@@ -317,13 +317,12 @@ case $typed in
       D )
           demomode ;;
       Z )
-          clonestart ;;
+          clonestartoutput ;;
       z )
-          clonestart ;;
+          clonestartoutput ;;
       * )
           optionsmenu ;;
 esac
-
 }
 
 demomode () {
