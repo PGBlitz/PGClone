@@ -14,7 +14,7 @@ if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
 touch /root/.config/rclone/rclone.conf; fi
 
 rcheck1=$(rclone --version 2>&1)
-rcheck2=$(echo $rcheck1 | head -n 1)
+rcheck2=$(echo $rcheck1 | cut -c1-12)
 
 if [[ "rclone v$rversion" != "$rcheck2" ]]; then
 
