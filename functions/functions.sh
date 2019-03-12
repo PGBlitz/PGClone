@@ -125,7 +125,7 @@ keysprocessed () {
   ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
 }
 
-clonestart () {
+deletemelateron () {
 pgclonevars
 
 tee <<-EOF

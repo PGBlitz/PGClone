@@ -43,7 +43,6 @@ tee <<-EOF
 [7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
 [9] EMail Share Generator
-
 EOF
 fi
 }
@@ -185,7 +184,7 @@ elif [[ "$transport" == "bu" ]]; then
         1 )
             glogin ;;
         2 )
-            projectname ;;
+            exisitingproject ;;
         3 )
             keyinputpublic ;;
         4 )
@@ -201,8 +200,13 @@ elif [[ "$transport" == "bu" ]]; then
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
         7 )
+            publicsecretchecker
+            passwordcheck
+            tlabelchecker
             mountchecker
-            clonestart ;;
+            projectnamecheck
+            keystart
+            gdsaemail ;;
         8 )
             projectnamecheck
             deployblitzstartcheck
@@ -236,6 +240,10 @@ elif [[ "$transport" == "bu" ]]; then
       esac
 elif [[ "$transport" == "be" ]]; then
   case $typed in
+        1 )
+            glogin ;;
+        2 )
+            exisitingproject ;;
         3 )
             keyinputpublic ;;
         4 )
@@ -261,7 +269,9 @@ elif [[ "$transport" == "be" ]]; then
             passwordcheck
             tlabelchecker
             mountchecker
-            clonestart ;;
+            projectnamecheck
+            keystart
+            gdsaemail ;;
         9 )
             projectnamecheck
             deployblitzstartcheck
@@ -325,8 +335,7 @@ case $typed in
       1 )
           transportselect ;;
       2 )
-          publicsecretchecker
-          blitzpasswordmain ;;
+          deletekeys ;;
       d )
           demomode ;;
       D )
