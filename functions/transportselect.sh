@@ -19,7 +19,6 @@ NOTE: Please visit the link and understand what your doing first!
 [4] Blitz Encrypted: Data > TDrive | Complex | Exceed 750GB Transport Cap
 [5] PGDrive Mode   : Read Only     | Easy    | >>> NOT READY
 [6] Local Edition  : Local HDs     | Easy    | >>> NOT READY
-[Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -39,11 +38,11 @@ case $typed in
     #echo "pd" > /var/plexguide/pgclone.transport ;;
     #6 )
     #echo "le" > /var/plexguide/pgclone.transport ;;
-    z )
-        mustset ;;
-    Z )
-        mustset ;;
+    #z )
+    #    mustset ;;
+    #Z )
+    #    mustset ;;
     * )
-        mustset ;;
+        transportselect ;;
 esac
 }

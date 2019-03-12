@@ -9,35 +9,35 @@ clonestartoutput () {
 pgclonevars
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] GDrive              [$gstatus]
+[1] Client ID & Secret    [${pgcloneid}]
+[2] GDrive                [$gstatus]
 EOF
 elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] Passwords           [$pstatus]
-[3] GDrive              [$gstatus] - [$gcstatus]
+[1] Client ID & Secret    [${pgcloneid}]
+[2] Passwords             [$pstatus]
+[3] GDrive                [$gstatus] - [$gcstatus]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
-[1] Google Account Login [$pgcloneemail]
-[2] Project Name         [$pgcloneproject]
-[3] Client ID & Secret  [${pgcloneid}]
-[4] TDrive Label        [$tdname]
-[5] TDrive OAuth        [$tstatus]
-[6] GDrive OAuth        [$gstatus]
-[7] Key Management      [$displaykey] Built
+[1] Google Account Login  [$pgcloneemail]
+[2] Project Name          [$pgcloneproject]
+[3] Client ID & Secret    [${pgcloneid}]
+[4] TDrive Label          [$tdname]
+[5] TDrive OAuth          [$tstatus]
+[6] GDrive OAuth          [$gstatus]
+[7] Key Management        [$displaykey] Built
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
-[1] Google Account Login [$pgcloneemail]
-[2] Project Name         [$pgcloneproject]
-[3] Client ID & Secret   [${pgcloneid}]
-[4] Passwords            [$pstatus]
-[5] TDrive Label         [$tdname]
-[6] TDrive | TCrypt      [$tstatus] - [$tcstatus]
-[7] GDrive | GCrypt      [$gstatus] - [$gcstatus]
-[8] Key Management       [$displaykey] Built
+[1] Google Account Login  [$pgcloneemail]
+[2] Project Name          [$pgcloneproject]
+[3] Client ID & Secret    [${pgcloneid}]
+[4] Passwords             [$pstatus]
+[5] TDrive Label          [$tdname]
+[6] TDrive | TCrypt       [$tstatus] - [$tcstatus]
+[7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
+[8] Key Management        [$displaykey] Built
 EOF
 fi
 }
