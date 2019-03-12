@@ -309,7 +309,7 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 case $typed in
       1 )
           transportselect ;;
-      z )
+      2 )
           publicsecretchecker
           blitzpasswordmain ;;
       d )
@@ -317,9 +317,9 @@ case $typed in
       D )
           demomode ;;
       Z )
-          clonestartoutput ;;
+          clonestart ;;
       z )
-          clonestartoutput ;;
+          clonestart ;;
       * )
           optionsmenu ;;
 esac
