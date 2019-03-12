@@ -36,6 +36,6 @@ tee "/etc/fuse.conf" > /dev/null <<EOF
 user_allow_other
 EOF
 
-ansible-playbook ansible-playbook /opt/pgclone/pg.yml; fi
+ansible-playbook /opt/pgclone/rclone.yml; fi
 
 }
