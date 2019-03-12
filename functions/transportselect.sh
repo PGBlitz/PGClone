@@ -34,14 +34,6 @@ case $typed in
     echo "bu" > /var/plexguide/pgclone.transport ;;
     4 )
     echo "be" > /var/plexguide/pgclone.transport ;;
-    #5 )
-    #echo "pd" > /var/plexguide/pgclone.transport ;;
-    #6 )
-    #echo "le" > /var/plexguide/pgclone.transport ;;
-    #z )
-    #    mustset ;;
-    #Z )
-    #    mustset ;;
     * )
         transportselect ;;
 esac
