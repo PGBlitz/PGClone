@@ -20,20 +20,24 @@ tee <<-EOF
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] TDrive Label        [$tdname]
-[3] TDrive OAuth        [$tstatus]
-[4] GDrive OAuth        [$gstatus]
-[5] Key Management      [$displaykey] Built
+[1] Google Account Login [$pgcloneemail]
+[2] Project Name         [$pgcloneproject]
+[3] Client ID & Secret  [${pgcloneid}]
+[4] TDrive Label        [$tdname]
+[5] TDrive OAuth        [$tstatus]
+[6] GDrive OAuth        [$gstatus]
+[7] Key Management      [$displaykey] Built
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
-[1] Client ID & Secret  [${pgcloneid}]
-[2] Passwords           [$pstatus]
-[3] TDrive Label        [$tdname]
-[4] TDrive | TCrypt     [$tstatus] - [$tcstatus]
-[5] GDrive | GCrypt     [$gstatus] - [$gcstatus]
-[6] Key Management      [$displaykey] Built
+[1] Google Account Login [$pgcloneemail]
+[2] Project Name         [$pgcloneproject]
+[3] Client ID & Secret   [${pgcloneid}]
+[4] Passwords            [$pstatus]
+[5] TDrive Label         [$tdname]
+[6] TDrive | TCrypt      [$tstatus] - [$tcstatus]
+[7] GDrive | GCrypt      [$gstatus] - [$gcstatus]
+[8] Key Management       [$displaykey] Built
 EOF
 fi
 }
