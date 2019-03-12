@@ -13,7 +13,10 @@ rversion=1.46
 if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
 touch /root/.config/rclone/rclone.conf; fi
 
-if [[ "rclone v$rversion" != $(rclone --version | head -n 1) ]]; then
+rcheck1=$(rclone --version 2>&1)
+rcheck2=$(echo $rcheck1 | head -n 1)
+
+if [[ "rclone v$rversion" != "$rcheck2" ]]; then
 
 tee <<-EOF
 
