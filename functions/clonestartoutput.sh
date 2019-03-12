@@ -67,8 +67,13 @@ clonestart () {
 pgclonevars
 
 # pull throttle speeds based on role
-if [[ "$transport" == "mu" || "$transport" == "me" ]]; then throttle=$(cat /var/plexguide/move.bw)
-else throttle=$(cat /var/plexguide/blitz.bw); fi
+if [[ "$transport" == "mu" || "$transport" == "me" ]]; then
+throttle=$(cat /var/plexguide/move.bw)
+output1="[C] Transport Select"
+else
+throttle=$(cat /var/plexguide/blitz.bw)
+output1="[C] Options"
+fi
 
 if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "me" ]]; then
 rm -rf /var/plexguide/pgclone.transport 1>/dev/null 2>&1
@@ -85,9 +90,9 @@ clonestartoutput
 
 tee <<-EOF
 
-[A] Deploy              [Not Deployed]
-[B] Throttle            [${throttle} MB]
-[C] Change              Switch Transport Method
+[A] Deploy                [Not Deployed]
+[B] Throttle              [${throttle} MB]
+[C] Options
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -209,9 +214,9 @@ elif [[ "$transport" == "bu" ]]; then
         B )
             setthrottleblitz ;;
         c )
-            transportselect ;;
+            optionsmenu ;;
         C )
-            transportselect ;;
+            optionsmenu ;;
         * )
             clonestart ;;
       esac
@@ -266,12 +271,46 @@ elif [[ "$transport" == "be" ]]; then
         B )
             setthrottleblitz ;;
         c )
-            transportselect ;;
+            optionsmenu ;;
         C )
-            transportselect ;;
+            optionsmenu ;;
         * )
             clonestart ;;
       esac
 fi
 clonestart
+}
+
+optionsmenu () {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Options Interface ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[A] Transport Select         | INFO: Change Transport Type
+[B] Destroy All Service Keys | WARN: Wipes All Keys for the Project
+[C] Create New Project       | WARN: Resets Everything!
+[Z] Exit
+
+NOTE: When creating a NEW PROJECT (option C), the USER must create the
+CLIENT ID and SECRET for that project! We will assist in creating the
+project and enabling the API! Everything reets when complete!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+
+case $typed in
+      1 )
+          transportselect ;;
+      z )
+          publicsecretchecker
+          blitzpasswordmain ;;
+      Z )
+          clonestart ;;
+      z )
+          clonestart ;;
+esac
+
 }
