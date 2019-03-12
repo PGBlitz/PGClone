@@ -313,13 +313,15 @@ case $typed in
           publicsecretchecker
           blitzpasswordmain ;;
       d )
-          optionsmenu ;;
+          demomode ;;
       D )
-          optionsmenu ;;
+          demomode ;;
       Z )
           clonestart ;;
       z )
           clonestart ;;
+      * )
+          optionsmenu ;;
 esac
 
 }
