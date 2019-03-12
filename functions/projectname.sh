@@ -48,7 +48,7 @@ case $typed in
 1 )
     if [[ "$projectcheck" == "bad" ]]; then
     echo "BAD"
-    projectname
+    clonestart
   elif [[ "$projectcheck" == "good" ]]; then
     exisitingproject; fi ;;
 2 )
@@ -117,7 +117,7 @@ Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed < /dev/tty
-if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then projectname; fi
+if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
 
 # Repeats if Users Fails the Range
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
@@ -138,7 +138,7 @@ else exisitingproject; fi
 echo
 read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
 echo "${existingnumber}" > /var/plexguide/pgclone.project
-projectname
+clonestart
 }
 
 destroyproject () {
@@ -156,7 +156,7 @@ Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed < /dev/tty
-if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then projectname; fi
+if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then optionsmenu; fi
 
 # Repeats if Users Fails the Range
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
@@ -174,7 +174,7 @@ gcloud projects delete ${destroynumber} --account=${pgcloneemail}
 else destroyproject; fi
 echo
 read -p '↘️  Project Deleted | Press [ENTER] ' typed < /dev/tty
-projectname
+optionsmenu
 }
 
 projectlist () {
@@ -242,7 +242,7 @@ case $typed in
 2 )
   a=bc ;;
 * )
-  projectnameset ;;
+  optionsmenu ;;
 esac
 
 tee <<-EOF
