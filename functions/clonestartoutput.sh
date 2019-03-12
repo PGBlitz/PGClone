@@ -30,6 +30,7 @@ tee <<-EOF
 [5] TDrive OAuth          [$tstatus]
 [6] GDrive OAuth          [$gstatus]
 [7] Key Management        [$displaykey] Built
+[8] EMail Share Generator
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
@@ -41,6 +42,8 @@ tee <<-EOF
 [6] TDrive | TCrypt       [$tstatus] - [$tcstatus]
 [7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
+[9] EMail Share Generator
+
 EOF
 fi
 }
@@ -180,22 +183,30 @@ elif [[ "$transport" == "me" ]]; then
 elif [[ "$transport" == "bu" ]]; then
   case $typed in
         1 )
-            keyinputpublic ;;
+            glogin ;;
         2 )
+            projectname ;;
+        3 )
+            keyinputpublic ;;
+        4 )
             publicsecretchecker
             tlabeloauth ;;
-        3 )
+        5 )
             publicsecretchecker
             tlabelchecker
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
-        4 )
+        6 )
             publicsecretchecker
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
-        5 )
+        7 )
             mountchecker
-            keymanagementinterface ;;
+            clonestart ;;
+        8 )
+            projectnamecheck
+            deployblitzstartcheck
+            emailgen ;;
         z )
             exit ;;
         Z )
@@ -225,32 +236,36 @@ elif [[ "$transport" == "bu" ]]; then
       esac
 elif [[ "$transport" == "be" ]]; then
   case $typed in
-        1 )
+        3 )
             keyinputpublic ;;
-        2 )
+        4 )
             publicsecretchecker
             blitzpasswordmain ;;
-        3 )
+        5 )
             publicsecretchecker
             tlabeloauth ;;
-        4 )
+        6 )
             publicsecretchecker
             passwordcheck
             tlabelchecker
             echo "tdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
-        5 )
+        7 )
             publicsecretchecker
             passwordcheck
             echo "gdrive" > /var/plexguide/rclone/deploy.version
             oauth ;;
 
-        6 )
+        8 )
             publicsecretchecker
             passwordcheck
             tlabelchecker
             mountchecker
-            keymanagementinterface ;;
+            clonestart ;;
+        9 )
+            projectnamecheck
+            deployblitzstartcheck
+            emailgen ;;
         z )
             exit ;;
         Z )
@@ -294,7 +309,7 @@ tee <<-EOF
 
 [A] Transport Select         | INFO: Change Transport Type
 [B] Destroy All Service Keys | WARN: Wipes All Keys for the Project
-[C] Create New Project       | WARN: Resets Everything!
+[C] Create New Project       | WARN: Resets Everything
 [D] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
 [Z] Exit
 

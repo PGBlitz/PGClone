@@ -125,7 +125,7 @@ keysprocessed () {
   ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
 }
 
-keymanagementinterface () {
+clonestart () {
 pgclonevars
 
 tee <<-EOF
@@ -171,7 +171,7 @@ case $typed in
     Z )
         clonestart ;;
     * )
-        keymanagementinterface ;;
+        clonestart ;;
   esac
-keymanagementinterface
+clonestart
 }

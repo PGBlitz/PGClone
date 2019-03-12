@@ -31,6 +31,6 @@ cat /var/plexguide/.emaillist
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -rp '↘️  Completed? | Press [ENTER] ' typed < /dev/tty
-keymanagementinterface
+clonestart
 
 }

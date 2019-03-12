@@ -20,7 +20,7 @@ if [[ "$pgcloneemail" == "NOT-SET" ]]; then
 echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '↘️  ERROR! E-Mail is not setup! | Press [ENTER] ' typed < /dev/tty
-keymanagementinterface; fi
+clonestart; fi
 
 projectcheck="good"
 if [[ $(gcloud projects list --account=${pgcloneemail} | grep "pg-") == "" ]]; then
@@ -211,7 +211,7 @@ keys, and deploy the proper GDSA Accounts for the Team Drive
 EOF
 
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-keymanagementinterface
+clonestart
 fi
 
 }
@@ -238,7 +238,7 @@ EOF
 read -p '↘️  Input Choice | Press [Enter]: ' typed < /dev/tty
 case $typed in
 1 )
-  keymanagementinterface ;;
+  clonestart ;;
 2 )
   a=bc ;;
 * )

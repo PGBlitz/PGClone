@@ -184,7 +184,7 @@ are detected! Exiting!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Acknowledge Info! | PRESS [ENTER] ' token < /dev/tty
-keymanagementinterface; fi
+clonestart; fi
 
   rm -rf /var/plexguide/.listpart2 1>/dev/null 2>&1
   while read p; do
@@ -222,9 +222,9 @@ case $typed in
     Y )
         yesdeletekeys ;;
     N )
-        keymanagementinterface ;;
+        clonestart ;;
     n )
-        keymanagementinterface ;;
+        clonestart ;;
     * )
         deletekeys ;;
 esac
@@ -239,5 +239,5 @@ done </var/plexguide/.gcloudblitz
 
 echo
 read -p '↘️  Process Complete! | PRESS [ENTER]: ' token < /dev/tty
-keymanagementinterface
+clonestart
 }
