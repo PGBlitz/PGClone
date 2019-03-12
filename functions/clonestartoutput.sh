@@ -7,6 +7,9 @@
 ################################################################################
 clonestartoutput () {
 pgclonevars
+
+if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
+
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret    [${pgcloneid}]
@@ -20,7 +23,7 @@ tee <<-EOF
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
-[1] Google Account Login  [$pgcloneemail]
+[1] Google Account Login  [$mainid]
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
 [4] TDrive Label          [$tdname]
@@ -30,7 +33,7 @@ tee <<-EOF
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
-[1] Google Account Login  [$pgcloneemail]
+[1] Google Account Login  [$mainid]
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
 [4] Passwords             [$pstatus]
@@ -282,6 +285,7 @@ clonestart
 }
 
 optionsmenu () {
+pgclonevars
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -291,6 +295,7 @@ tee <<-EOF
 [A] Transport Select         | INFO: Change Transport Type
 [B] Destroy All Service Keys | WARN: Wipes All Keys for the Project
 [C] Create New Project       | WARN: Resets Everything!
+[D] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -307,10 +312,20 @@ case $typed in
       z )
           publicsecretchecker
           blitzpasswordmain ;;
+      d )
+          optionsmenu ;;
+      D )
+          optionsmenu ;;
       Z )
           clonestart ;;
       z )
           clonestart ;;
 esac
 
+}
+
+demomode () {
+  if [[ "$demo" = "OFF" ]]; then echo "ON " > /var/plexguide/pgclone.demo
+  else echo "OFF" > /var/plexguide/pgclone.demo; fi
+  optionsmenu
 }

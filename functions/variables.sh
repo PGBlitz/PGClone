@@ -46,6 +46,9 @@ pgclonevars () {
   variable /var/plexguide/pgclone.teamdrive "NOT-SET"
   tdname=$(cat /var/plexguide/pgclone.teamdrive)
 
+  variable /var/plexguide/pgclone.demo "OFF"
+  demo=$(cat /var/plexguide/pgclone.demo)
+
   variable /var/plexguide/pgclone.teamid ""
   tdid=$(cat /var/plexguide/pgclone.teamid)
 
