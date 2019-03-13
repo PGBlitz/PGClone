@@ -119,9 +119,9 @@ gsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep 
 if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed"; fi
 
 if [[ "$gsecond" == "plexguide" ]]; then
-  echo ""
-  read -p '↘️  PG MOVE DEPLOYMENT NOT READY | Press [ENTER]' typed2 < /dev/tty
-  #pgblitzpass
+
+  # executes function when everything is good to deploy move 
+  deploymove
 else
 tee <<-EOF
 
