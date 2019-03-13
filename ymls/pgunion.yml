@@ -24,17 +24,17 @@
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
         path: 'remotes = gdrive: gcrypt: {{hdpath.stdout}}/move'
-      when: "{{transport}}" == "mu"
+      when: "{{transport}} == mu"
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: {{hdpath.stdout}}/move'
-      when: "{{transport}}" == "bu"
+      when: "{{transport}} == bu"
 
     - name: 'If Fact Matches - UnEncrypted Move'
       set_fact:
         path: 'remotes = gdrive: {{hdpath.stdout}}/move'
-      when: "{{transport}}" == "mu"
+      when: "{{transport}} == mu"
 
     - name: Creating required paths
       file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
@@ -97,8 +97,8 @@
             state: reloaded
             name: pgblitz
 
-      when: ("{{transport}}" == "be") or
-        ("{{transport}}" == "bu")
+      when: ("{{transport}} == be") or
+        ("{{transport}} == bu")
 
     - name: 'PG Move Execution'
       block:
@@ -133,8 +133,8 @@
             state: reloaded
             name: pgmove
 
-      when: ("{{transport}}" == "mu") or
-        ("{{transport}}" == "mu")
+      when: ("{{transport}} == mu") or
+        ("{{transport}} == mu")
 
     - name: Install PGUnion Script
       template:
