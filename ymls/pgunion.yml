@@ -10,35 +10,31 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-      include_tasks: '/opt/pgclone/alias.yml'
+      include_tasks: '/opt/pgclone/ymls/alias.yml'
 
     - name: Register HD Path
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
 
-    - name: Transport Type
-      shell: 'cat /var/plexguide/pgclone.transport'
-      register: transport55
-
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
-      when: transport55.stdout == "eblitz"
+      when: {{transport}}.stdout == "be"
 
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
         path: 'remotes = gdrive: gcrypt: {{hdpath.stdout}}/move'
-      when: transport55.stdout == "emove"
+      when: {{transport}} == "mu"
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: {{hdpath.stdout}}/move'
-      when: transport55.stdout == "ublitz"
+      when: {{transport}}.stdout == "bu"
 
     - name: 'If Fact Matches - UnEncrypted Move'
       set_fact:
         path: 'remotes = gdrive: {{hdpath.stdout}}/move'
-      when: transport55.stdout == "umove"
+      when: {{transport}}.stdout == "mu"
 
     - name: Creating required paths
       file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
@@ -66,9 +62,8 @@
 
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
-    #      register: transport
 
-    - name: Line Remover
+    - name: Line Rmur
       shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /opt/appdata/plexguide/rclone.conf'
 
     - name: Transport Type
@@ -76,7 +71,6 @@
         echo "[pgunion]" >> /opt/appdata/plexguide/rclone.conf
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
-    #      register: transport
 
     - name: 'PG Blitz Execution'
       block:
@@ -103,8 +97,8 @@
             state: reloaded
             name: pgblitz
 
-      when: (transport55.stdout == "eblitz") or
-        (transport55.stdout == "ublitz")
+      when: ({{transport}}.stdout == "be") or
+        ({{transport}}.stdout == "bu")
 
     - name: 'PG Move Execution'
       block:
@@ -139,8 +133,8 @@
             state: reloaded
             name: pgmove
 
-      when: (transport55.stdout == "emove") or
-        (transport55.stdout == "umove")
+      when: ({{transport}}.stdout == "mu") or
+        ({{transport}}.stdout == "mu")
 
     - name: Install PGUnion Script
       template:

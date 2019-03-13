@@ -15,6 +15,12 @@ ansible-playbook /opt/pgclone/ymls/remove.yml
 ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
 
 # deploy only if pgmove is using encryption
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"
+if [[ "$transport" == "ge" ]]; then
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"; fi
+
+# deploy union
+
+
+# deploy move script
 
 }
