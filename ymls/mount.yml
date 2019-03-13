@@ -22,7 +22,7 @@
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        name: "{{drive}}.service"
+        name: "{{drive}}"
 
     - name: "Creating Folder - /mnt/{{drive}}"
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
