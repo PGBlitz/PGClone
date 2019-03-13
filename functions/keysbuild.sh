@@ -159,7 +159,7 @@ fi
 
 gdsaemail () {
 tee <<-EOF
-
+pgclonevars
 EOF
 
 read -rp '↘️  Process Complete! Ready to Share E-Mails? | Press [ENTER] ' typed < /dev/tty
@@ -168,7 +168,7 @@ emailgen
 
 deletekeys () {
 pgclonevars
-gcloud --account=user@dunn.cloud iam service-accounts list > /var/plexguide/.deletelistpart1
+gcloud --account=${pgcloneemail} iam service-accounts list > /var/plexguide/.deletelistpart1
 
   if [[ $(cat /var/plexguide/.deletelistpart1) == "" ]]; then
 
