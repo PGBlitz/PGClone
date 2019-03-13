@@ -7,7 +7,7 @@
 ################################################################################
 
 [Unit]
-Description={{drive}}Daemon
+Description={{drive}} Daemon
 After=multi-user.target
 
 [Service]

@@ -12,7 +12,9 @@ pgclonevars
 ansible-playbook /opt/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
-echo "gdrive" > /var/plexguide/.drive
-ansible-playbook /opt/pgclone/ymls/mount.yml
+ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
+
+# deploy only if pgmove is using encryption
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"
 
 }
