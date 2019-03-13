@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-deploymove () {
+executemove () {
 pgclonevars
 
 # to remove all service running prior to ensure a clean launch

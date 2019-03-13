@@ -120,8 +120,8 @@ if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIV
 
 if [[ "$gsecond" == "plexguide" ]]; then
 
-  # executes function when everything is good to deploy move 
-  deploymove
+  # executes function when everything is good to deploy move
+  executemove
 else
 tee <<-EOF
 
