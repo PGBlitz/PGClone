@@ -7,7 +7,7 @@
 ################################################################################
 
 [Unit]
-Description="{{drive}} Daemon"
+Description={{drive}}Daemon
 After=multi-user.target
 
 [Service]
@@ -31,7 +31,7 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/"{{drive}}" \
 --drive-chunk-size 128M \
 --buffer-size 64M
 
-ExecStop=/bin/fusermount -uz /mnt/"{{drive}}""
+ExecStop=/bin/fusermount -uz /mnt/"{{drive}}"
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes
