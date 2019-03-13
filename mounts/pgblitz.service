@@ -5,13 +5,16 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-deploymove () {
-pgclonevars
+[Unit]
+Description='PGBlitz Loaded Balanced Multi SA GDrive Uploader'
+After=multi-user.target network-online.target
 
-# to remove all service running prior to ensure a clean launch
-ansible-playbook /opt/pgclone/ymls/remove.yml
+[Service]
+User=0
+Group=0
+Type=simple
+ExecStart=/bin/bash /opt/appdata/pgblitz/pgblitz.sh
+KillMode=process
 
-# gdrive deploys by standard
-ansible-playbook /opt/pgclone/ymls/mount.yml
-
-}
+[Install]
+WantedBy=multi-user.target

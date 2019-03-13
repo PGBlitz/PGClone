@@ -10,21 +10,21 @@
   gather_facts: false
   tasks:
 
-    - name: "Install - Service {{mount.stdout}}"
+    - name: "Install - Service {{drive.stdout}}"
       template:
-        src: "/opt/pgclone/templates/{{mount.stdout}}.service"
-        dest: "/etc/systemd/system/{{mount.stdout}}.service"
+        src: "/opt/pgclone/mounts/drive.service"
+        dest: "/etc/systemd/system/{{drive.stdout}}.service"
         force: yes
       ignore_errors: yes
 
-    - name: "Reload Service - {{mount.stdout}} "
+    - name: "Reload Service - {{drive.stdout}}"
       systemd:
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        name: "{{mount.stdout}}.service"
+        name: "{{drive.stdout}}.service"
 
-    - name: "Creating Folder - /mnt/{{mount.stdout}}"
+    - name: "Creating Folder - /mnt/{{drive.stdout}}"
       file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
-        - "/mnt/{{mount.stdout}}"
+        - "/mnt/{{drive.stdout}}"

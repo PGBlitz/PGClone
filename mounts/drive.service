@@ -5,33 +5,33 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+
 [Unit]
-Description=TCrypt Daemon
+Description={{drive.stdout}}Daemon
 After=multi-user.target
 
 [Service]
 Type=simple
 User=0
 Group=0
-ExecStart=/usr/bin/rclone mount tcrypt: /mnt/tcrypt \
+ExecStart=/usr/bin/rclone mount tdrive: /mnt/{{drive.stdout}} \
 --config /opt/appdata/plexguide/rclone.conf \
 --allow-non-empty \
 --allow-other \
 --size-only \
 --uid=1000 --gid=1000 \
 --umask 002 \
---log-file=/var/plexguide/logs/rclone-tcrypt.log \
+--log-file=/var/plexguide/logs/rclone-{{drive.stdout}}.log \
 --log-level ERROR \
 --timeout 1h \
 --dir-cache-time 2m \
 --vfs-cache-max-age 72h \
---vfs-cache-mode writes \
 --vfs-read-chunk-size 64M \
 --vfs-read-chunk-size-limit 5G \
 --drive-chunk-size 128M \
 --buffer-size 64M
 
-ExecStop=/bin/fusermount -uz /mnt/tcrypt
+ExecStop=/bin/fusermount -uz /mnt/{{drive.stdout}}
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes
