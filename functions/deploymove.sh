@@ -19,7 +19,7 @@ if [[ "$transport" == "ge" ]]; then
 ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"; fi
 
 # deploy union
-
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "transport=${transport}"; fi
 
 # deploy move script
 
