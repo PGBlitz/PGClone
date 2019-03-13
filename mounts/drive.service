@@ -14,14 +14,14 @@ After=multi-user.target
 Type=simple
 User=0
 Group=0
-ExecStart=/usr/bin/rclone mount tdrive: /mnt/"{{drive}}" \
+ExecStart=/usr/bin/rclone mount tdrive: /mnt/{{drive}} \
 --config /opt/appdata/plexguide/rclone.conf \
 --allow-non-empty \
 --allow-other \
 --size-only \
 --uid=1000 --gid=1000 \
 --umask 002 \
---log-file=/var/plexguide/logs/rclone-"{{drive}}".log \
+--log-file=/var/plexguide/logs/rclone-{{drive}}.log \
 --log-level ERROR \
 --timeout 1h \
 --dir-cache-time 2m \
@@ -31,7 +31,7 @@ ExecStart=/usr/bin/rclone mount tdrive: /mnt/"{{drive}}" \
 --drive-chunk-size 128M \
 --buffer-size 64M
 
-ExecStop=/bin/fusermount -uz /mnt/"{{drive}}"
+ExecStop=/bin/fusermount -uz /mnt/{{drive}}
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes
