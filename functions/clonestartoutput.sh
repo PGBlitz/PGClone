@@ -339,7 +339,7 @@ tee <<-EOF
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
 CLIENT ID and SECRET for that project! We will assist in creating the
-project and enabling the API! Everything reets when complete!
+project and enabling the API! Everything resets when complete!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
