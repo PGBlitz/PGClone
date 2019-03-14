@@ -8,7 +8,7 @@
 clonestartoutput () {
 pgclonevars
 
-echo "ACTIVELY DEPLOYED: [$dversionoutput]
+echo "ACTIVELY DEPLOYED: [$dversionoutput]"
 echo ""
 
 if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
