@@ -12,14 +12,17 @@ pgclonevars
 ansible-playbook /opt/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
+echo "gdrive" > /var/plexguide/deploy.version
+type=gdrive
 ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "ge" ]]; then
+type=gcrypt
 ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"; fi
 
 # deploy union
-ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "transport=mu"
+ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "transport=$transport type=$type"
 
 # deploy move script
 
