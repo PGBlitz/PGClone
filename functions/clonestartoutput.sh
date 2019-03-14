@@ -8,7 +8,7 @@
 clonestartoutput () {
 pgclonevars
 
-echo "ACTIVE DEPLOYMENT: [$dversionoutput] ~ STATUS: [NOT READY]"
+echo "ACTIVELY DEPLOYED: [$dversionoutput]
 echo ""
 
 if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
@@ -92,7 +92,7 @@ mustset; fi
   elif [[ "$transport" == "bu" ]]; then outputversion="Unencrypted Blitz"
   elif [[ "$transport" == "be" ]]; then outputversion="Encrypted Blitz"
   fi
-  
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
