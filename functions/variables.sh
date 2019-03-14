@@ -14,6 +14,9 @@ pgclonevars () {
   variable /var/plexguide/blitz.bw  "1000"
   variable /var/plexguide/pgclone.salt ""
 
+  variable /var/plexguide/server.hd.path "/mnt"
+  hdpath=$(cat /var/plexguide/server.hd.path)
+
   variable /var/plexguide/oauth.check ""
   oauthcheck=$(cat /var/plexguide/oauth.check)
 

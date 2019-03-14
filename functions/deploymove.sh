@@ -17,12 +17,15 @@ type=gdrive
 ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
 
 # deploy only if pgmove is using encryption
-if [[ "$transport" == "ge" ]]; then
+if [[ "$transport" == "me" ]]; then
 type=gcrypt
 ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"; fi
 
 # deploy union
-ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "transport=$transport type=$type"
+ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
+  transport=$transport \
+  type=$type
+  hdpath=$hdpath"
 
 # deploy move script
 
