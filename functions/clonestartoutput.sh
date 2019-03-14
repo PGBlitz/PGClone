@@ -8,6 +8,9 @@
 clonestartoutput () {
 pgclonevars
 
+echo "Active Deployment: $dversionoutput - Status: NOT READY"
+echo ""
+
 if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
 
 if [[ "$transport" == "mu" ]]; then
@@ -369,4 +372,10 @@ EOF
 read -rp '' typed < /dev/tty
 optionsmenu
 
+}
+
+deployedversion {
+
+
+  if [ -e "/etc/systemd/system/tdrive.service" ]; then echo "[NOT SET]" > /var/plexguide/project.final; fi
 }
