@@ -12,6 +12,8 @@
     - name: include PGClone aliases
       include_tasks: '/opt/pgclone/ymls/alias.yml'
 
+    - debug: msg="PGBlitz Type - {{transport}}"
+
     - name: Register HD Path
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
