@@ -99,8 +99,8 @@
             state: reloaded
             name: pgblitz
 
-      when: ("{{transport}} == be") or
-        ("{{transport}} == bu")
+      when: (transport == "be") or
+        (transport == "bu")
 
     - name: 'PG Move Execution'
       block:
@@ -135,8 +135,8 @@
             state: reloaded
             name: pgmove
 
-      when: ("{{transport}} == mu") or
-        ("{{transport}} == mu")
+      when: (transport == "me") or
+        (transport == "mu")
 
     - name: Install PGUnion Script
       template:
