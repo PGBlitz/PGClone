@@ -21,12 +21,12 @@
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
-      when: "'{{transport}}' == 'be'"
+      when: "'transport' == 'be'"
 
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
         path: 'remotes = gdrive: gcrypt: {{hdpath.stdout}}/move'
-      when: "{{transport}} == mu"
+      when: "'transport' == 'mu'"
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
