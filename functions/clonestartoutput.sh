@@ -8,7 +8,7 @@
 clonestartoutput () {
 pgclonevars
 
-echo "ACTIVE DEPLOYMENT: $dversionoutput - STATUS: NOT READY"
+echo "ACTIVE DEPLOYMENT: [$dversionoutput] ~ STATUS: [NOT READY]"
 echo ""
 
 if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
@@ -87,6 +87,12 @@ if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$
 rm -rf /var/plexguide/pgclone.transport 1>/dev/null 2>&1
 mustset; fi
 
+    if [[ "$transport" == "mu" ]]; then outputversion="Unencrypted Move"
+  elif [[ "$transport" == "me" ]]; then outputversion="Encrypted Move"
+  elif [[ "$transport" == "bu" ]]; then outputversion="Unencrypted Blitz"
+  elif [[ "$transport" == "be" ]]; then outputversion="Encrypted Blitz"
+  fi
+  
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -97,7 +103,7 @@ clonestartoutput
 
 tee <<-EOF
 
-[A] Deploy                [Not Deployed]
+[A] Deploy $outputversion
 [B] Throttle              [${throttle} MB]
 $output1
 [Z] Exit
