@@ -86,6 +86,6 @@ pgclonevars () {
 elif [[ "$dversion" == "me" ]]; then dversionoutput="Encrypted Move"
 elif [[ "$dversion" == "bu" ]]; then dversionoutput="Unencrypted Blitz"
 elif [[ "$dversion" == "be" ]]; then dversionoutput="Encrypted Blitz"
-else dversionoutput="Nothing Deployed"; fi
+else dversionoutput="None"; fi
 
 }

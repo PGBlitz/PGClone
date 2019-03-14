@@ -8,7 +8,7 @@
 clonestartoutput () {
 pgclonevars
 
-echo "Active Deployment: $dversionoutput - Status: NOT READY"
+echo "ACTIVE DEPLOYMENT: $dversionoutput - STATUS: NOT READY"
 echo ""
 
 if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
