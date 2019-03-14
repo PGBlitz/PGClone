@@ -82,10 +82,10 @@ pgclonevars () {
   variable /var/plexguide/deployed.version ""
   dversion=$(cat /var/plexguide/deployed.version)
 
-  if [[ "$dversion" == "mu" ]]; then "$dversionoutput" == "Unencrypted Move"
-elif [[ "$dversion" == "me" ]]; then "$dversionoutput" == "Encrypted Move"
-elif [[ "$dversion" == "bu" ]]; then "$dversionoutput" == "Unencrypted Blitz"
-elif [[ "$dversion" == "be" ]]; then "$dversionoutput" == "Encrypted Blitz"
-else "$dversionoutput" == "Nothing Deployed"; fi
+  if [[ "$dversion" == "mu" ]]; then dversionoutput="Unencrypted Move"
+elif [[ "$dversion" == "me" ]]; then dversionoutput="Encrypted Move"
+elif [[ "$dversion" == "bu" ]]; then dversionoutput="Unencrypted Blitz"
+elif [[ "$dversion" == "be" ]]; then dversionoutput="Encrypted Blitz"
+else dversionoutput="Nothing Deployed"; fi
 
 }
