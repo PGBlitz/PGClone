@@ -48,6 +48,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -rp '↘️  Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
