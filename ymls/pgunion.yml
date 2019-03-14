@@ -21,22 +21,22 @@
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/move'
-      when: "'transport' == 'be'"
+      when: transport == "be"
 
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
         path: 'remotes = gdrive: gcrypt: {{hdpath.stdout}}/move'
-      when: "'transport' == 'mu'"
+      when: transport == "me"
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: {{hdpath.stdout}}/move'
-      when: "{{transport}} == bu"
+      when: transport == "bu"
 
     - name: 'If Fact Matches - UnEncrypted Move'
       set_fact:
         path: 'remotes = gdrive: {{hdpath.stdout}}/move'
-      when: "{{transport}} == mu"
+      when: transport == "mu"
 
     - name: Creating required paths
       file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
