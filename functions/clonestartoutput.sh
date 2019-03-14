@@ -373,9 +373,3 @@ read -rp '' typed < /dev/tty
 optionsmenu
 
 }
-
-deployedversion {
-
-
-  if [ -e "/etc/systemd/system/tdrive.service" ]; then echo "[NOT SET]" > /var/plexguide/project.final; fi
-}
