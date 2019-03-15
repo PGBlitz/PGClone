@@ -85,6 +85,6 @@ done </var/plexguide/.blitzfinal
 
 # keeps the function in a loop
 cheeseballs=0
-while [[ "$cheeseballs" != "0" ]]; do
+while [[ "$cheeseballs" == "0" ]]; do
 startscript
 done
