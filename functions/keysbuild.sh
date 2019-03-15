@@ -159,7 +159,6 @@ fi
 
 gdsaemail () {
 tee <<-EOF
-pgclonevars
 EOF
 
 read -rp '↘️  Process Complete! Ready to Share E-Mails? | Press [ENTER] ' typed < /dev/tty
