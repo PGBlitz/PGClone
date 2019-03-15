@@ -20,7 +20,7 @@ chmod -R 755 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
-  if [[ "{{type}}" == "tcrypt" ]]; then eddition="C"; else eddtion=""; fi
+  if [[ "{{type}}" == "tcrypt" ]]; then eddition="C"; else eddition=""; fi
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
