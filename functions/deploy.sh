@@ -76,8 +76,8 @@ if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA0
 
 # For Encryption
 if [[ "$transport" == "be" ]]; then
-if [[ "$c1inital" == "encrypt" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi
-if [[ "$c2inital" == "plexguide" ]]; then echo "CRYPT3: Passed"; else echo "CRYPT3: Failed" && fail=1; fi; fi
+if [[ "$c1inital" == "encrypt" ]]; then echo "CRYPT1: Passed"; else echo "CRYPT1: Failed" && fail=1; fi
+if [[ "$c2inital" == "plexguide" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi; fi
 
 if [[ "$fail" != "1" ]]; then
   echo ""
