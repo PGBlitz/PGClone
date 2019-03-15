@@ -59,8 +59,6 @@ while [ 1 ]; do
   --min-age 2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -75,8 +73,6 @@ while [ 1 ]; do
   --log-level INFO --stats 5s --stats-file-name-length 0 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -103,8 +99,6 @@ while [ 1 ]; do
   --drive-chunk-size=128M \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \

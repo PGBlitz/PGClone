@@ -26,8 +26,6 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --min-age 2m \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
---exclude="**_HIDDEN~" --exclude=".unionfs/**" \
---exclude="**partial~" --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -47,8 +45,6 @@ rclone move "$dlpath/move/" "$ver:/" \
 --max-size=300G \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
---exclude="**_HIDDEN~" --exclude=".unionfs/**" \
---exclude="**partial~" --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
