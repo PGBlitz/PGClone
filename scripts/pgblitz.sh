@@ -51,8 +51,6 @@ while [ 1 ]; do
   --min-age 2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -60,7 +58,6 @@ while [ 1 ]; do
   --exclude="**jdownloader**" --exclude="**makemkv**" \
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
-
 
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
@@ -80,8 +77,6 @@ while [ 1 ]; do
   --drive-chunk-size=128M \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
