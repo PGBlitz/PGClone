@@ -79,7 +79,7 @@
 
         - name: Install PG Blitz Script
           template:
-            src: /opt/pgclone/templates/pgblitz.sh
+            src: /opt/pgclone/scripts/pgblitz.sh
             dest: /opt/appdata/pgblitz/pgblitz.sh
             force: yes
 

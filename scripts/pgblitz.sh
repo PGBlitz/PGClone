@@ -32,8 +32,8 @@ while [ 1 ]; do
   dlpath=$(cat /var/plexguide/server.hd.path)
 
   # Permissions
-  chown -R 1000:1000 "$dlpath/move"
-  chmod -R 755 "$dlpath/move"
+  chown -R 1000:1000 "{{hdpath}}/move"
+  chmod -R 755 "{{hdpath}}/move"
 
   if [ "$keylast" == "$keyuse" ]; then keycurrent=0; fi
 
@@ -44,7 +44,7 @@ while [ 1 ]; do
     if [ "$encheck" == "eblitz" ]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
-  rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
+  rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
@@ -65,7 +65,7 @@ while [ 1 ]; do
   echo "" >> /var/plexguide/logs/pgblitz.log
   echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
 
-  rclone moveto "$dlpath/move" "$keytransfer:/" \
+  rclone moveto "{{hdpath}}/move" "$keytransfer:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -91,9 +91,9 @@ while [ 1 ]; do
   sleep 30
 
 # Remove empty directories
-find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -exec rm -rf {} \;
-find "$dlpath/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
-find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
+find "{{hdpath}}/downloads" -mindepth 2 -mmin +5 -type d -empty -exec rm -rf {} \;
+find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
+find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 done
