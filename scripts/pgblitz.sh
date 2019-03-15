@@ -22,7 +22,6 @@ rm -rf /tmp/test1
 startscript () {
 while read p; do
 
-
   if [[ "{{type}}" == "gcrypt" ]]; then
   keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
@@ -70,13 +69,13 @@ while read p; do
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
   cat /var/plexguide/logs/pgblitz.log | tail -200 > cat /var/plexguide/logs/pgblitz.log
   #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
-  sleep 30
+  sleep 2
 
-# Remove empty directories
-find "{{hdpath}}/downloads" -mindepth 2 -mmin +5 -type d -empty -exec rm -rf {} \;
-find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
-find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
-find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+  # Remove empty directories
+  find "{{hdpath}}/downloads" -mindepth 2 -mmin +5 -type d -empty -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
+  find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+  find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 echo "$p" >> /tmp/test
 
@@ -85,6 +84,4 @@ done </var/plexguide/.blitzfinal
 
 # keeps the function in a loop
 cheeseballs=0
-while [[ "$cheeseballs" == "0" ]]; do
-startscript
-done
+while [[ "$cheeseballs" == "0" ]]; do startscript; done
