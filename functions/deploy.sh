@@ -152,7 +152,7 @@ if [[ "$c2inital" != "encrypt" && "transport" == "me" ]]; then
 if [[ "$c3inital" != "plexguide" && "transport" == "me" ]]; then
   rclone mkdir --config /opt/appdata/plexguide/rclone.conf gcrypt:/plexguide; fi
 
-if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1;; fi
+if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 
 if [[ "transport" == "me "]]; then
 # For Encryption
