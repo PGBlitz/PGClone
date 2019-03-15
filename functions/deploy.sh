@@ -40,6 +40,11 @@ ginital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep 
 tinital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
 kinital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
 
+# For Encryption
+c1inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
+c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP encrypt | head -n1)
+c3initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP plexguide | head -n1)
+
 if [[ "$ginital" != "plexguide" ]]; then
   rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide; fi
 if [[ "$tinital" != "plexguide" ]]; then
@@ -47,15 +52,33 @@ if [[ "$tinital" != "plexguide" ]]; then
 if [[ "$kinital" != "plexguide" ]]; then
   rclone mkdir --config /opt/appdata/plexguide/rclone.conf GDSA01:/plexguide; fi
 
+# For Encryption
+if [[ "$c1inital" != "plexguide" && "transport" == "me" ]]; then
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide; fi
+if [[ "$c2inital" != "encrypt" && "transport" == "me" ]]; then
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/encrypt; fi
+if [[ "$c3inital" != "plexguide" && "transport" == "me" ]]; then
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gcrypt:/plexguide; fi
+
 gsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
 tsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
 ksecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
+
+# For Encryption
+c1inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
+c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP encrypt | head -n1)
+c3inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP encrypt | head -n1)
 
 fail=0
 echo ""
 if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 if [[ "$tsecond" == "plexguide" ]]; then echo "TDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 if [[ "$ksecond" == "plexguide" ]]; then echo "GDSA01: Passed"; else echo "GDSA01: Failed" && fail=1; fi
+
+# For Encryption
+if [[ "$c1inital" == "plexguide" ]]; then echo "CRYPT1: Passed"; else echo "CRYPT1: Failed" && fail=1; fi
+if [[ "$c2inital" == "encrypt" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi
+if [[ "$c3inital" == "plexguide" ]]; then echo "CRYPT3: Passed"; else echo "CRYPT3: Failed" && fail=1; fi
 
 if [[ "$fail" == "0" ]]; then
   echo ""
