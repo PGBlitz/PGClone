@@ -66,7 +66,7 @@ ksecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep 
 # For Encryption
 if [[ "$transport" == "be" ]]; then
 c1inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP encrypt | head -n1)
-c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP encrypt | head -n1); fi
+c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP plexguide| head -n1); fi
 
 fail=0
 echo ""
