@@ -138,7 +138,7 @@ if [[ "$ginital" != "plexguide" ]]; then
 gsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
 
 # For Encryption
-if [[ "transport" == "me" ]]; then
+if [[ "$transport" == "me" ]]; then
 c1inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP encrypt | head -n1)
 c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP plexguide | head -n1); fi
 
