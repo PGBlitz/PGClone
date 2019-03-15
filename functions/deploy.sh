@@ -155,7 +155,7 @@ if [[ "$transport" == "me" ]]; then
 if [[ "$c1inital" == "encrypt" ]]; then echo "CRYPT1: Passed"; else echo "CRYPT1: Failed" && fail=1; fi
 if [[ "$c2inital" == "plexguide" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi; fi
 
-if [[ "$gfail" != "1" ]]; then
+if [[ "$fail" != "1" ]]; then
 
   # executes function when everything is good to deploy move
   executemove
