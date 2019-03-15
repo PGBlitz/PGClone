@@ -20,8 +20,6 @@ chmod -R 755 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
-  if [[ "{{type}}" == "tcrypt" ]]; then eddition="C"; else eddition=""; fi
-
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
@@ -41,9 +39,9 @@ while read p; do
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
   echo "" >> /var/plexguide/logs/pgblitz.log
-  echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
+  echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
 
-  rclone moveto "{{hdpath}}/move" "${p}${eaddtion}:/" \
+  rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
