@@ -6,9 +6,6 @@
 # GNU:        General Public License v3.0
 ################################################################################
 
-# Outside Variables
-dlpath=$(cat /var/plexguide/server.hd.path)
-
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
 
@@ -29,8 +26,6 @@ echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
 while [ 1 ]; do
 
-  dlpath=$(cat /var/plexguide/server.hd.path)
-
   # Permissions
   chown -R 1000:1000 "{{hdpath}}/move"
   chmod -R 755 "{{hdpath}}/move"
@@ -40,8 +35,7 @@ while [ 1 ]; do
   let "keycurrent++"
   keyuse=$(sed -n ''$keycurrent'p' < /opt/appdata/plexguide/key.list)
 
-  encheck=$(cat /var/plexguide/pgclone.transport)
-    if [ "$encheck" == "eblitz" ]; then
+    if [[ "{{type}}" == "gcrypt" ]]; then
     keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
