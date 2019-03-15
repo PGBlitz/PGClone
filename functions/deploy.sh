@@ -82,8 +82,9 @@ if [[ "$c3inital" == "plexguide" ]]; then echo "CRYPT3: Passed"; else echo "CRYP
 
 if [[ "$fail" == "0" ]]; then
   echo ""
-  read -p '↘️  BLITZ DEPLOY NOT READY ~ PASSED TEST | Press [ENTER] ' typed2 < /dev/tty
-  #pgblitzpass
+
+  # executes function when everything is good to deploy move
+  executeblitz
 else
 tee <<-EOF
 

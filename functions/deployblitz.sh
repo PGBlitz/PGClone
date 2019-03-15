@@ -8,7 +8,7 @@
 # NOTES
 # Variable recall comes from /functions/variables.sh
 ################################################################################
-executemove () {
+executeblitz () {
 
 # Reset Front Display
 rm -rf plexguide/deployed.version
