@@ -26,6 +26,9 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --min-age 2m \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+--exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+--exclude="**partial~" --exclude=".unionfs-fuse/**" \
+--exclude=".fuse_hidden**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
@@ -37,13 +40,22 @@ rclone move "$dlpath/move/" "$ver:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
+--min-age 2m \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
 --max-size=300G \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
---exclude="**partial~" --exclude=".unionfs-fuse/**"
-
+--exclude='**partial~' --exclude=".unionfs-fuse/**" \
+--exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+--exclude="**partial~" --exclude=".unionfs-fuse/**" \
+--exclude=".fuse_hidden**" \
+--exclude="**sabnzbd**" --exclude="**nzbget**" \
+--exclude="**qbittorrent**" --exclude="**rutorrent**" \
+--exclude="**deluge**" --exclude="**transmission**" \
+--exclude="**jdownloader**" --exclude="**makemkv**" \
+--exclude="**handbrake**" --exclude="**bazarr**" \
+--exclude="**ignore**"  --exclude="**inProgress**"
 sleep 5
 
 # Remove empty directories
