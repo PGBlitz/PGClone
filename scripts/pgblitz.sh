@@ -9,34 +9,22 @@
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
 
-# Inside Variables
-ls -la /opt/appdata/pgblitz/keys/processed | awk '{print $9}' | grep gdsa > /opt/appdata/plexguide/key.list
-keytotal=$(wc -l /opt/appdata/plexguide/key.list | awk '{ print $1 }')
-
-keyfirst=$(cat /opt/appdata/plexguide/key.list | head -n1)
-keylast=$(cat /opt/appdata/plexguide/key.list | tail -n1)
-
-keycurrent=0
-cyclecount=0
-
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
-while [ 1 ]; do
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 755 "{{hdpath}}/move"
 
-  # Permissions
-  chown -R 1000:1000 "{{hdpath}}/move"
-  chmod -R 755 "{{hdpath}}/move"
+rm -rf /tmp/test1
 
-  if [ "$keylast" == "$keyuse" ]; then keycurrent=0; fi
+startscript () {
+while read p; do
 
-  let "keycurrent++"
-  keyuse=$(sed -n ''$keycurrent'p' < /opt/appdata/plexguide/key.list)
 
-    if [[ "{{type}}" == "gcrypt" ]]; then
-    keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
+  if [[ "{{type}}" == "gcrypt" ]]; then
+  keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
@@ -59,7 +47,7 @@ while [ 1 ]; do
   echo "" >> /var/plexguide/logs/pgblitz.log
   echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
 
-  rclone moveto "{{hdpath}}/move" "$keytransfer:/" \
+  rclone moveto "{{hdpath}}/move" "$p:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -90,4 +78,13 @@ find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm 
 find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
+echo "$p" >> /tmp/test
+
+done </var/plexguide/.blitzfinal
+}
+
+# keeps the function in a loop
+cheeseballs=0
+while [[ "$cheeseballs" != "0" ]]; do
+startscript
 done
