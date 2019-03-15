@@ -20,7 +20,7 @@ chmod -R 755 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
-  if [[ "{{type}}" == "gcrypt" ]]; then
+  if [[ "{{type}}" == "tcrypt" ]]; then
   keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
