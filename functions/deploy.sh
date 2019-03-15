@@ -154,7 +154,7 @@ if [[ "$c3inital" != "plexguide" && "transport" == "me" ]]; then
 
 if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 
-if [[ "transport" == "me "]]; then
+if [[ "transport" == "me" ]]; then
 # For Encryption
 if [[ "$c1inital" == "plexguide" ]]; then echo "CRYPT1: Passed"; else echo "CRYPT1: Failed" && fail=1; fi
 if [[ "$c2inital" == "encrypt" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi
