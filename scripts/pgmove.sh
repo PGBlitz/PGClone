@@ -24,6 +24,7 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --min-age 2m \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+--exclude=".fuse_hidden**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
@@ -40,7 +41,14 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --checkers=16 \
 --max-size=300G \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
---exclude="**partial~" --exclude=".unionfs-fuse/**"
+--exclude='**partial~' --exclude=".unionfs-fuse/**" \
+--exclude=".fuse_hidden**" \
+--exclude="**sabnzbd**" --exclude="**nzbget**" \
+--exclude="**qbittorrent**" --exclude="**rutorrent**" \
+--exclude="**deluge**" --exclude="**transmission**" \
+--exclude="**jdownloader**" --exclude="**makemkv**" \
+--exclude="**handbrake**" --exclude="**bazarr**" \
+--exclude="**ignore**"  --exclude="**inProgress**"
 
 sleep 5
 
