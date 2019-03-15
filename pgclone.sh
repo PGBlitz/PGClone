@@ -24,6 +24,7 @@ source /opt/pgclone/functions/emails.sh
 source /opt/pgclone/functions/deploy.sh
 source /opt/pgclone/functions/rcloneinstall.sh
 source /opt/pgclone/functions/deploymove.sh
+source /opt/pgclone/functions/deployblitz.sh
 ################################################################################
 rcloneinstall
 
