@@ -51,12 +51,16 @@ while [ 1 ]; do
   --min-age 2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+  --exclude=".fuse_hidden**" \
   --exclude="**sabnzbd**" --exclude="**nzbget**" \
   --exclude="**qbittorrent**" --exclude="**rutorrent**" \
   --exclude="**deluge**" --exclude="**transmission**" \
   --exclude="**jdownloader**" --exclude="**makemkv**" \
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
+
 
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
@@ -75,7 +79,16 @@ while [ 1 ]; do
   --max-size=300G \
   --drive-chunk-size=128M \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  --exclude="**partial~" --exclude=".unionfs-fuse/**"
+  --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+  --exclude=".fuse_hidden**" \
+  --exclude="**sabnzbd**" --exclude="**nzbget**" \
+  --exclude="**qbittorrent**" --exclude="**rutorrent**" \
+  --exclude="**deluge**" --exclude="**transmission**" \
+  --exclude="**jdownloader**" --exclude="**makemkv**" \
+  --exclude="**handbrake**" --exclude="**bazarr**" \
+  --exclude="**ignore**"  --exclude="**inProgress**"
 
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
   cat /var/plexguide/logs/pgblitz.log | tail -200 > cat /var/plexguide/logs/pgblitz.log
