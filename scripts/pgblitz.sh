@@ -20,8 +20,7 @@ chmod -R 755 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
-  if [[ "{{type}}" == "tcrypt" ]]; then
-  keytransfer="${keyuse}C"; else keytransfer="$keyuse"; fi
+  if [[ "{{type}}" == "tcrypt" ]]; then eddition="C"; else eddtion=""; fi
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
@@ -44,7 +43,7 @@ while read p; do
   echo "" >> /var/plexguide/logs/pgblitz.log
   echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
 
-  rclone moveto "{{hdpath}}/move" "$p:/" \
+  rclone moveto "{{hdpath}}/move" "${p}${eaddtion}:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
