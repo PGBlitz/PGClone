@@ -138,9 +138,28 @@ if [[ "$ginital" != "plexguide" ]]; then
 
 gsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
 
-if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed"; fi
+# For Encryption
+if [[ "transport" == "me "]]; then
+c1inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
+c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP encrypt | head -n1)
+c3inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP encrypt | head -n1); fi
 
-if [[ "$gsecond" == "plexguide" ]]; then
+# For Encryption
+if [[ "$c1inital" != "plexguide" && "transport" == "me" ]]; then
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide; fi
+if [[ "$c2inital" != "encrypt" && "transport" == "me" ]]; then
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/encrypt; fi
+if [[ "$c3inital" != "plexguide" && "transport" == "me" ]]; then
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gcrypt:/plexguide; fi
+
+if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1;; fi
+
+# For Encryption
+if [[ "$c1inital" == "plexguide" ]]; then echo "CRYPT1: Passed"; else echo "CRYPT1: Failed" && fail=1; fi
+if [[ "$c2inital" == "encrypt" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi
+if [[ "$c3inital" == "plexguide" ]]; then echo "CRYPT3: Passed"; else echo "CRYPT3: Failed" && fail=1; fi
+
+if [[ "$gfail" == "1" ]]; then
 
   # executes function when everything is good to deploy move
   executemove
