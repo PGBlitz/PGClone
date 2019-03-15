@@ -16,4 +16,4 @@
 #
 #################################################################################
 
-sudo nano /opt/appdata/pgblitz/pgblitz.sh && systemctl daemon-reload
+sudo nano /opt/appdata/pgblitz/pgblitz.sh && sudo systemctl restart pgblitz

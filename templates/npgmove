@@ -16,4 +16,4 @@
 #
 #################################################################################
 
-sudo nano /opt/appdata/plexguide/pgmove.sh && systemctl daemon-reload
+sudo nano /opt/appdata/plexguide/pgmove.sh && sudo systemctl restart pgmove

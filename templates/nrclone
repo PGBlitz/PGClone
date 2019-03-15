@@ -16,4 +16,4 @@
 #
 #################################################################################
 
-sudo nano /opt/appdata/plexguide/rclone.conf && systemctl daemon-reload
+sudo nano /opt/appdata/plexguide/rclone.conf && sudo systemctl daemon-reload

@@ -16,4 +16,4 @@
 #
 #################################################################################
 
-sudo nano /etc/systemd/system/tcrypt.service && systemctl daemon-reload
+sudo nano /etc/systemd/system/tcrypt.service && sudo systemctl restart tcrypt
