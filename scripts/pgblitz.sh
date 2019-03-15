@@ -17,8 +17,6 @@ echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 755 "{{hdpath}}/move"
 
-rm -rf /tmp/test1
-
 startscript () {
 while read p; do
 
@@ -76,8 +74,6 @@ while read p; do
   find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
   find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
   find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
-
-echo "$p" >> /tmp/test
 
 done </var/plexguide/.blitzfinal
 }
