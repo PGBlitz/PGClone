@@ -15,4 +15,4 @@
 #   under the GPL along with build & install instructions.
 #
 #################################################################################
-sudo nano /opt/appdata/plexguide/pgunion.sh && systemctl daemon-reload
+sudo nano /opt/appdata/plexguide/pgunion.sh && sudo systemctl restart pgunion
