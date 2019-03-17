@@ -142,15 +142,15 @@ c1inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep
 c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP plexguide | head -n1); fi
 
 # For Encryption
-if [[ "$c1inital" != "encrypt" && "$transport" == "me" ]]; then
+if [[ "$c1inital" != "encrypt" && "$transport" == "me" || "$c2inital" != "plexguide" && "$transport" == "be" ]]; then
   rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/encrypt; fi
-if [[ "$c2inital" != "plexguide" && "$transport" == "me" ]]; then
+if [[ "$c2inital" != "plexguide" && "$transport" == "me" || "$c2inital" != "plexguide" && "$transport" == "be" ]]; then
   rclone mkdir --config /opt/appdata/plexguide/rclone.conf gcrypt:/plexguide; fi
 
 if [[ "$gsecond" == "plexguide" ]]; then echo "GDRIVE: Passed"; else echo "GDRIVE: Failed" && fail=1; fi
 
 # For Encryption
-if [[ "$transport" == "me" ]]; then
+if [[ "$transport" == "me" || "$transport" == "be" ]]; then
 if [[ "$c1inital" == "encrypt" ]]; then echo "CRYPT1: Passed"; else echo "CRYPT1: Failed" && fail=1; fi
 if [[ "$c2inital" == "plexguide" ]]; then echo "CRYPT2: Passed"; else echo "CRYPT2: Failed" && fail=1; fi; fi
 
