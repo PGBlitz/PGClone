@@ -55,11 +55,11 @@ if [[ "$kinital" != "plexguide" ]]; then
 
 # For Encryption
 if [[ "$transport" == "be" ]]; then
-  if [[ "$c1inital" != "encrypt" && "transport" == "be" ]]; then
+  if [[ "$c1inital" != "encrypt" ]]; then
     rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdrive:/encrypt; fi
-  if [[ "$c2inital" != "plexguide" && "transport" == "be" ]]; then
+  if [[ "$c2inital" != "plexguide" ]]; then
     rclone mkdir --config /opt/appdata/plexguide/rclone.conf gcrypt:/plexguide; fi
-  if [[ "$c3inital" != "plexguide" && "transport" == "be" ]]; then
+  if [[ "$c3inital" != "plexguide" ]]; then
     rclone mkdir --config /opt/appdata/plexguide/rclone.conf GDSA01C:/plexguide; fi; fi
 
 gsecond=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
