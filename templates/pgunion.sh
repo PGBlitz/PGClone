@@ -8,6 +8,12 @@
 
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
+chown -R 1000:1000 "$dlpath/move"
+chmod -R 775 "$dlpath/move"
+chown -R 1000:1000 "$dlpath/pgblitz"
+chmod -R 775 "$dlpath/pgblitz"
+chown -R 1000:1000 "$dlpath/downloads"
+chmod -R 775 "$dlpath/downloads"
 sleep 2
 
 mergerfs -o func.getattr=newest,category.create=ff,direct_io,use_ino,atomic_o_trunc,big_writes,default_permissions,splice_move,splice_read,splice_write,allow_other,sync_read,minfreespace=0,umask=002,fsname=pgunion \
