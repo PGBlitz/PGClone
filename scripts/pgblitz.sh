@@ -24,7 +24,7 @@ while read p; do
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
-  --min-age 2m \
+  --min-age 2m --umask 002 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
@@ -45,6 +45,7 @@ while read p; do
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
+  --min-age 2m --umask 002 \
   --tpslimit 12 \
   --checkers=20 \
   --transfers=16 \
