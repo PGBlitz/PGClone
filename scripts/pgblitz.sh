@@ -14,11 +14,13 @@ echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 755 "{{hdpath}}/move"
-
 startscript () {
 while read p; do
+
+chown -R 1000:1000 "{{hdpath}}/downloads"
+chmod -R 755 "{{hdpath}}/downloads"
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 755 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
@@ -34,6 +36,9 @@ while read p; do
   --exclude="**jdownloader**" --exclude="**makemkv**" \
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
+
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 755 "{{hdpath}}/move"
 
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
