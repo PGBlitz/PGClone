@@ -37,9 +37,6 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 755 "{{hdpath}}/move"
-
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
