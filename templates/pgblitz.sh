@@ -109,6 +109,11 @@ while [ 1 ]; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
+  chown -R 1000:1000 "$dlpath/move"
+  chown -R 1000:1000 "$dlpath/pgblitz/upload"
+  chmod -R 755 "$dlpath/move"
+  chown -R 755 "$dlpath/pgblitz/upload"
+
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
   cat /var/plexguide/logs/pgblitz.log | tail -200 > cat /var/plexguide/logs/pgblitz.log
   #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log

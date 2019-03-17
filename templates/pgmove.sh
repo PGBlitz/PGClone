@@ -16,6 +16,8 @@ while true
 do
 
 dlpath=$(cat /var/plexguide/server.hd.path)
+chown -R 1000:1000 "$dlpath/move"
+chmod -R 755 "$dlpath/move"
 
 ## Sync, Sleep 2 Minutes, Repeat. BWLIMIT 9 Prevents Google 750GB Google Upload Ban
 
@@ -52,6 +54,10 @@ rclone move "$dlpath/move/" "$ver:/" \
 --exclude="**jdownloader**" --exclude="**makemkv**" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**"
+
+chown -R 1000:1000 "$dlpath/move"
+chmod -R 755 "$dlpath/move"
+
 sleep 5
 
 # Remove empty directories
