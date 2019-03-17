@@ -14,19 +14,19 @@ echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
-startscript () {
-while read p; do
-
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 755 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 755 "{{hdpath}}/move"
 
+startscript () {
+while read p; do
+
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
-  --min-age 2m --umask 0002 --uid 1000 --gid 1000 \
+  --min-age 2m --umask 002 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
@@ -50,7 +50,7 @@ chmod -R 755 "{{hdpath}}/move"
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
-  --min-age 2m --umask 0002 --uid 1000 --gid 1000 \
+  --min-age 2m --umask 0002 \
   --tpslimit 12 \
   --checkers=20 \
   --transfers=16 \

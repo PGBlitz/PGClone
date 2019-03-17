@@ -13,20 +13,28 @@ if pidof -o %PPID -x "$0"; then
    exit 1
 fi
 
-sleep 10
-while true
-do
+touch /var/plexguide/logs/pgmove.log
+
+echo "" >> /var/plexguide/logs/pgmove.log
+echo "" >> /var/plexguide/logs/pgmove.log
+echo "----------------------------" >> /var/plexguide/logs/pgmove.log
+echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 755 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 755 "{{hdpath}}/move"
 
+sleep 10
+while true
+do
+
+
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
---min-age 2m --umask 0002 --uid 1000 --gid 1000 \
+--min-age 2m --umask 002  \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
@@ -37,14 +45,11 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**"
 
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 755 "{{hdpath}}/move"
-
 rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
---min-age 2m --umask 0002 --uid 1000 --gid 1000 \
+--min-age 2m --umask 002 \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
