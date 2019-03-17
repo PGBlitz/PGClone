@@ -26,7 +26,7 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
---min-age 2m --umask 002 \
+--min-age 2m --umask 0002 --uid 1000 --gid 1000 \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
@@ -44,7 +44,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
---min-age 2m --umask 002 \
+--min-age 2m --umask 0002 --uid 1000 --gid 1000 \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
