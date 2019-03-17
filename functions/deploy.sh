@@ -91,7 +91,7 @@ if [[ "$fail" != "1" ]]; then
   executeblitz
 else
 
-if [[ "transport" == "be" ]]; then
+if [[ "$transport" == "be" ]]; then
 emessage="
 CRYPT1 = Encrypt Folder Failed to Create @ GDRIVE
 CRYPT2 = GCrypt is Failing
