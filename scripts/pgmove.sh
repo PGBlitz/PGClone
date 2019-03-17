@@ -21,9 +21,9 @@ echo "----------------------------" >> /var/plexguide/logs/pgmove.log
 echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
-chmod -R 755 "{{hdpath}}/downloads"
+chmod -R 775 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 755 "{{hdpath}}/move"
+chmod -R 775 "{{hdpath}}/move"
 
 sleep 10
 while true

@@ -15,9 +15,9 @@ echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
-chmod -R 755 "{{hdpath}}/downloads"
+chmod -R 775 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 755 "{{hdpath}}/move"
+chmod -R 775 "{{hdpath}}/move"
 
 startscript () {
 while read p; do
