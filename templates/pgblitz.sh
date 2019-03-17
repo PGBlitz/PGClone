@@ -32,16 +32,17 @@ echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
+chown -R 1000:1000 "$dlpath/move"
+chown -R 1000:1000 "$dlpath/pgblitz/upload"
+chmod -R 775 "$dlpath/move"
+chown -R 775 "$dlpath/pgblitz"
+
 while [ 1 ]; do
 
   dlpath=$(cat /var/plexguide/server.hd.path)
   mkdir -p /$dlpath/pgblitz/upload
 
   # Permissions
-  chown -R 1000:1000 "$dlpath/move"
-  chown -R 1000:1000 "$dlpath/pgblitz/upload"
-  chmod -R 755 "$dlpath/move"
-  chown -R 755 "$dlpath/pgblitz/upload"
 
   if [ "$keylast" == "$keyuse" ]; then keycurrent=0; fi
 
@@ -108,11 +109,6 @@ while [ 1 ]; do
   --exclude="**jdownloader**" --exclude="**makemkv**" \
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
-
-  chown -R 1000:1000 "$dlpath/move"
-  chown -R 1000:1000 "$dlpath/pgblitz/upload"
-  chmod -R 755 "$dlpath/move"
-  chown -R 755 "$dlpath/pgblitz/upload"
 
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
   cat /var/plexguide/logs/pgblitz.log | tail -200 > cat /var/plexguide/logs/pgblitz.log

@@ -11,13 +11,20 @@ fi
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
 ver=$(cat /var/plexguide/rclone/deploy.version)
+
+echo "" >> /var/plexguide/logs/pgmove.log
+echo "" >> /var/plexguide/logs/pgmove.log
+echo "----------------------------" >> /var/plexguide/logs/pgmove.log
+echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgmove.log
+
+chown -R 1000:1000 "$dlpath/move"
+chmod -R 775 "$dlpath/move"
+
 sleep 10
 while true
 do
 
 dlpath=$(cat /var/plexguide/server.hd.path)
-chown -R 1000:1000 "$dlpath/move"
-chmod -R 755 "$dlpath/move"
 
 ## Sync, Sleep 2 Minutes, Repeat. BWLIMIT 9 Prevents Google 750GB Google Upload Ban
 
@@ -54,9 +61,6 @@ rclone move "$dlpath/move/" "$ver:/" \
 --exclude="**jdownloader**" --exclude="**makemkv**" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**"
-
-chown -R 1000:1000 "$dlpath/move"
-chmod -R 755 "$dlpath/move"
 
 sleep 5
 
