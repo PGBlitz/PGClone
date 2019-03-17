@@ -138,7 +138,7 @@
     - name: Install PGUnion Script
       template:
         src: /opt/pgclone/scripts/pgunion.sh
-        dest: /opt/appdata/plexguide/pgunion.sh
+        dest: /opt/appdata/pgblitz/pgunion.sh
         force: yes
 
     - name: Install PGUnion Service
