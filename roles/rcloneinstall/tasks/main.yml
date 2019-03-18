@@ -68,7 +68,7 @@
     mode: 0755
     owner: root
     group: root
-    remote_src: true
+    remote_src: True
   become: yes
 
 - name: install rclone - make dir for local manpages
@@ -87,7 +87,7 @@
     mode: 0644
     owner: root
     group: root
-    remote_src: true
+    remote_src: True
   become: yes
 
 - name: install rclone - install manpage
