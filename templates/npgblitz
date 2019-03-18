@@ -16,4 +16,4 @@
 #
 #################################################################################
 
-sudo nano /opt/appdata/pgblitz/pgblitz.sh && sudo systemctl restart pgblitz
+sudo nano /opt/appdata/plexguide/pgblitz.sh && sudo systemctl restart pgblitz

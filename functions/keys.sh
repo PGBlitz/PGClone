@@ -275,7 +275,7 @@ if [ "$choicedel" != "" ]; then
   gcloud iam service-accounts delete $p --quiet
   done </var/plexguide/gdsa.cut
 
-rm -rf /opt/appdata/pgblitz/keys/processed/* 1>/dev/null 2>&1
+rm -rf /opt/appdata/plexguide/keys/processed/* 1>/dev/null 2>&1
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -332,7 +332,7 @@ gdsabuild () {
 
   downloadpath=$(cat /var/plexguide/server.hd.path)
   tempbuild=$(cat /var/plexguide/json.tempbuild)
-  path=/opt/appdata/pgblitz/keys
+  path=/opt/appdata/plexguide/keys
   rpath=/opt/appdata/plexguide/rclone.conf
   tdrive=$( cat /opt/appdata/plexguide/rclone.conf | grep team_drive | head -n1 )
   tdrive="${tdrive:13}"
@@ -352,7 +352,7 @@ gdsabuild () {
   echo "client_secret =" >> $rpath
   echo "scope = drive" >> $rpath
   echo "root_folder_id =" >> $rpath
-  echo "service_account_file = /opt/appdata/pgblitz/keys/processed/$tempbuild" >> $rpath
+  echo "service_account_file = /opt/appdata/plexguide/keys/processed/$tempbuild" >> $rpath
   echo "team_drive = $tdrive" >> $rpath
 
   if [ "$bencrypted" == "yes" ]; then
@@ -405,8 +405,8 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
   project=$(cat /var/plexguide/pgclone.project)
 
   ##wipe previous keys stuck there
-  mkdir -p /opt/appdata/pgblitz/keys/processed/
-  rm -rf /opt/appdata/pgblitz/keys/processed/* 1>/dev/null 2>&1
+  mkdir -p /opt/appdata/plexguide/keys/processed/
+  rm -rf /opt/appdata/plexguide/keys/processed/* 1>/dev/null 2>&1
 
   ## purpose of the rewrite is to save gdrive and tdrive info and toss old GDSAs
       cat /opt/appdata/plexguide/rclone.conf | grep -w "\[tdrive\]" -A 5 > /opt/appdata/plexguide/tdrive.info
@@ -431,13 +431,13 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
 
     if [ "$count" -ge 1 -a "$count" -le 9 ]; then
       gcloud iam service-accounts create gdsa$rand --display-name “gdsa0$count”
-      gcloud iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/gdsa0$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
+      gcloud iam service-accounts keys create /opt/appdata/plexguide/keys/processed/gdsa0$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
       echo "gdsa0$count" > /var/plexguide/json.tempbuild
       gdsabuild
       echo ""
     else
       gcloud iam service-accounts create gdsa$rand --display-name “gdsa$count”
-      gcloud iam service-accounts keys create /opt/appdata/pgblitz/keys/processed/gdsa$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
+      gcloud iam service-accounts keys create /opt/appdata/plexguide/keys/processed/gdsa$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
       echo "gdsa$count" > /var/plexguide/json.tempbuild
       gdsabuild
       echo ""
@@ -502,7 +502,7 @@ read -p '🌍 Process Complete | Press [ENTER] ' typed2 < /dev/tty
 
 ufsbuilder () {
   downloadpath=$(cat /var/plexguide/server.hd.path)
-  ls -la /opt/appdata/pgblitz/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
+  ls -la /opt/appdata/plexguide/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
   rm -rf /tmp/pg.gdsa.build 1>/dev/null 2>&1
   #echo -n "/mnt/tdrive=RO:" > /tmp/pg.gdsa.build
   #echo -n "/mnt/gdrive=RO:" >> /tmp/pg.gdsa.build
