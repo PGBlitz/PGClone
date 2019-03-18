@@ -30,6 +30,9 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=tdrive"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "be" ]]; then
+type=tcrypt
+encryptbit="C"
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"
 echo "be" > /var/plexguide/deployed.version
 type=tcrypt
 encryptbit="C"

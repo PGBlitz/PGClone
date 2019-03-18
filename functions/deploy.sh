@@ -29,6 +29,7 @@ cat /opt/appdata/plexguide/.keys >> /opt/appdata/plexguide/rclone.conf
 
 deploydrives
 }
+
 deploypgmove () {
 # RCLONE BUILD
 echo "#------------------------------------------" > /opt/appdata/plexguide/rclone.conf
