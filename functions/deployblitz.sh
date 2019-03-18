@@ -22,8 +22,10 @@ ansible-playbook /opt/pgclone/ymls/remove.yml
 # gdrive deploys by standard
 echo "tdrive" > /var/plexguide/deploy.version
 echo "bu" > /var/plexguide/deployed.version
-type=tdrive
+type=gdrive
 encryptbit=""
+ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
+type=tdrive
 ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=tdrive"
 
 # deploy only if pgmove is using encryption

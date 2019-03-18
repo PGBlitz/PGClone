@@ -9,7 +9,7 @@ mkdir -p "$dlpath/move"
 
 # Permissions
 chown -R 1000:1000 "$dlpath/move"
-chmod -R 755 "$dlpath/move"
+chmod -R 775 "$dlpath/move"
 
 # Execution
 find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete
