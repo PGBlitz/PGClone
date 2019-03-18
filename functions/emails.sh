@@ -18,8 +18,11 @@ done </var/plexguide/.emailbuildlist
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Welcome to the PGBlitz - EMail Share Generator ~ pgclone.pgblitz.com
+🚀 EMail Share Generator ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PURPOSE: Share out the service accounts for the TeamDrives. Failing to do
+so will result in PGBlitz Failing!
 
 Shortcut to Google Team Drives >>> td.pgblitz.com
 
