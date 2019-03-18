@@ -83,11 +83,10 @@ if [[ "$logcheck" == "" ]]; then
 
 else
 
-  if [[ "$transport" == "be" ]]; then
+  if [[ "$transport" == "me" || "$transport" == "be" ]]; then
   emessage="
-  CRYPT1 = Encrypt Folder Failed to Create @ GDRIVE
-  CRYPT2 = GCrypt is Failing
-  CRYPT3 = TCrypt is Failing
+  NOTE1: User forgot to share out GDSA E-Mail to Team Drive
+  NOTE2: Conducted a blitz key restore and keys are no longer valid
   "; fi
 
 tee <<-EOF
@@ -100,8 +99,7 @@ CANNOT DEPLOY!
 
 POSSIBLE REASONS:
 1. GSuite Account is no longer valid or suspended
-2. User forgot to share out GDSA E-Mail to Team Drive
-3. Conducted a blitz key restore and keys are no longer valid
+2. Client ID and/or Secret are invalid and/or no longer exist
 $emessage
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
