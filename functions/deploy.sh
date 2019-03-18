@@ -120,7 +120,7 @@ gdrivemod ()
     inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$inital" == "plexguide" ]]; then echo "GDRIVE : Passed" >> /opt/var/.drivelog; else echo "GDRIVE : Failed" >> /opt/var/.drivelog; fi
+  if [[ "$inital" == "plexguide" ]]; then echo "GDRIVE :  Passed" >> /opt/var/.drivelog; else echo "GDRIVE :  Failed" >> /opt/var/.drivelog; fi
 }
 tdrivemod ()
 {
@@ -131,7 +131,7 @@ tdrivemod ()
     inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$inital" == "plexguide" ]]; then echo "TDRIVE : Passed" >> /opt/var/.drivelog; else echo "TDRIVE : Failed" >> /opt/var/.drivelog; fi
+  if [[ "$inital" == "plexguide" ]]; then echo "TDRIVE :  Passed" >> /opt/var/.drivelog; else echo "TDRIVE :  Failed" >> /opt/var/.drivelog; fi
 }
 gcryptmod ()
 {
@@ -147,8 +147,8 @@ gcryptmod ()
     c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1inital" == "encrypt" ]]; then echo "GCRYPT1: Passed" >> /opt/var/.drivelog; else echo "GCRYPT1: Failed" >> /opt/var/.drivelog; fi
-  if [[ "$c2inital" == "plexguide" ]]; then echo "GCRYPT2: Passed" >> /opt/var/.drivelog; else echo "GCRYPT2: Failed" >> /opt/var/.drivelog; fi
+  if [[ "$c1inital" == "encrypt" ]]; then echo "GCRYPT1:  Passed" >> /opt/var/.drivelog; else echo "GCRYPT1:  Failed" >> /opt/var/.drivelog; fi
+  if [[ "$c2inital" == "plexguide" ]]; then echo "GCRYPT2:  Passed" >> /opt/var/.drivelog; else echo "GCRYPT2:  Failed" >> /opt/var/.drivelog; fi
 }
 tcryptmod ()
 {
@@ -164,8 +164,8 @@ tcryptmod ()
     c2inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tcrypt: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1inital" == "encrypt" ]]; then echo "TCRYPT1: Passed" >> /opt/var/.drivelog; else echo "TCRYPT1: Failed" >> /opt/var/.drivelog; fi
-  if [[ "$c2inital" == "plexguide" ]]; then echo "TCRYPT2: Passed" >> /opt/var/.drivelog; else echo "TCRYPT2: Failed" >> /opt/var/.drivelog; fi
+  if [[ "$c1inital" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >> /opt/var/.drivelog; else echo "TCRYPT1:  Failed" >> /opt/var/.drivelog; fi
+  if [[ "$c2inital" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >> /opt/var/.drivelog; else echo "TCRYPT2:  Failed" >> /opt/var/.drivelog; fi
 }
 gdsamod ()
 {
@@ -176,7 +176,7 @@ gdsamod ()
     inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 : Passed" >> /opt/var/.drivelog; else echo "GDSA01 : Failed" >> /opt/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 :  Passed" >> /opt/var/.drivelog; else echo "GDSA01 :  Failed" >> /opt/var/.drivelog; fi
 }
 gdsacryptmod ()
 {
@@ -187,7 +187,7 @@ gdsacryptmod ()
     inital=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01C: | grep -oP encrypt | head -n1)
   fi
 
-  if [[ "$inital" == "plexguide" ]]; then echo "GDSA01C: Passed" >> /opt/var/.drivelog; else echo "GDSA01: Failed" >> /opt/var/.drivelog; fi
+  if [[ "$inital" == "plexguide" ]]; then echo "GDSA01C:  Passed" >> /opt/var/.drivelog; else echo "GDSA01C:  Failed" >> /opt/var/.drivelog; fi
 }
 ################################################################################
 deployblitzstartcheck () {
