@@ -184,7 +184,7 @@ gdsacryptmod ()
 
   if [[ "$initial" != "plexguide" ]]; then
     rclone mkdir --config /opt/appdata/plexguide/rclone.conf GDSA01C:/plexguide
-    initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01C: | grep -oP encrypt | head -n1)
+    initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01C: | grep -oP plexguide | head -n1)
   fi
 
   if [[ "$initial" == "plexguide" ]]; then echo "GDSA01C:  Passed" >> /opt/var/.drivelog; else echo "GDSA01C:  Failed" >> /opt/var/.drivelog; fi
