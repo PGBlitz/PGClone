@@ -254,6 +254,10 @@ elif [[ "$transport" == "bu" ]]; then
             optionsmenu ;;
         C )
             optionsmenu ;;
+        d )
+            mountnumbers ;;
+        D )
+            mountnumbers ;;
         * )
             clonestart ;;
       esac
@@ -325,6 +329,10 @@ elif [[ "$transport" == "be" ]]; then
             optionsmenu ;;
         C )
             optionsmenu ;;
+        d )
+            mountnumbers ;;
+        D )
+            mountnumbers ;;
         * )
             clonestart ;;
       esac
@@ -341,10 +349,9 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Transport Select         | INFO: Change Transport Type
-[2] RClone VFS Mount Settings| INFO: Change Mount Variable Performance
-[3] Destroy All Service Keys | WARN: Wipes All Keys for the Project
-[4] Create New Project       | WARN: Resets Everything
-[5] Demo Mode - ${demo}      | Hide the E-Mail Address on the Front
+[2] Destroy All Service Keys | WARN: Wipes All Keys for the Project
+[3] Create New Project       | WARN: Resets Everything
+[4] Demo Mode - ${demo}      | Hide the E-Mail Address on the Front
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -359,12 +366,10 @@ case $typed in
       1 )
           transportselect ;;
       2 )
-          mountnumbers ;;
-      3 )
           deletekeys ;;
-      4 )
+      3 )
           projectnameset ;;
-      5 )
+      4 )
           demomode ;;
       Z )
           clonestart ;;
