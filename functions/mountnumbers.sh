@@ -11,8 +11,10 @@ pgclonevars
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RClone Variable Name           Default ~ Current Settings
+VFS RClone Mount Settings ~ vfs.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RClone Variable Name           Default ~ Current Settings
 
 [1] Buffer-Size                64        [$vfs_bs] MB
 [2] Drive-Chunk-Size           128       [$vfs_dcs] MB
