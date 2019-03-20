@@ -75,7 +75,7 @@ Setting Variable ~ $name $endinfo
 Please type a range from $start1 through $end1! Please ensure to read the
 wiki on how changing these numbers impact the server! Nothing takes
 affect until PGMove/PGBlitz is deployed/redeployed!
-$note
+$note1
 
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
