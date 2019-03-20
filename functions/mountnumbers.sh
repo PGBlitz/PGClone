@@ -73,7 +73,7 @@ tee <<-EOF
 Setting Variable ~ $name $endinfo
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Type a Number from [$start1] through [$end]
+Type a Number from [$start1] through [$end1]
 
 NOTE1: Read the wiki on how changing these numbers impact the server!
 Nothing takes affect until PGMove/PGBlitz is deployed/redeployed again!
