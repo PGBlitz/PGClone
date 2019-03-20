@@ -286,8 +286,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE: If Plex, Emby, and/or JellyFin was deployed; redeploy them through
-PG Box when complete! We wanted to ensure that your containers do not
-self erase meta-data due to the drives being down!
+PG Box when complete! Ensuring that the containers do not self erase
+meta-data due to the mounts being offline!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF

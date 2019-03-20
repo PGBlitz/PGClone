@@ -33,7 +33,7 @@ tee <<-EOF
 [5] TDrive OAuth          [$tstatus]
 [6] GDrive OAuth          [$gstatus]
 [7] Key Management        [$displaykey] Built
-[8] EMail Share Generator
+[8] TDrive (E-Mail Share Generator)
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
@@ -45,7 +45,7 @@ tee <<-EOF
 [6] TDrive | TCrypt       [$tstatus] - [$tcstatus]
 [7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
-[9] EMail Share Generator
+[9] TDrive (E-Mail Share Generator)
 EOF
 fi
 }
