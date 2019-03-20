@@ -199,7 +199,7 @@ mounts. Emby, Plex, and JellyFin Docker containers will also be REMOVED
 to prevent any meta-data loss. When set, just redeploy them and will be
 good to!
 
-Do You Want to Processed?
+Do You Want to Proceed?
 [1] No
 [2] Yes
 
