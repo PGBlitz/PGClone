@@ -68,11 +68,12 @@ being too high, it is possible for the mounts to crash and dismount!"
 fi
 
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Setting Variable ~ $name $endinfo
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Please type a range from $start1 through $end1! Please ensure to read the
+Please type a number from $start1 through $end1! Please ensure to read the
 wiki on how changing these numbers impact the server! Nothing takes
 affect until PGMove/PGBlitz is deployed/redeployed!
 $note1
