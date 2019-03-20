@@ -24,17 +24,48 @@ echo "tdrive" > /var/plexguide/deploy.version
 echo "bu" > /var/plexguide/deployed.version
 type=gdrive
 encryptbit=""
-ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
+ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+  vfs_bs=$vfs_bs
+  vfs_dcs=$vfs_dcs
+  vfs_dct=$vfs_dct
+  vfs_cma=$vfs_cma
+  vfs_rcs=$vfs_rcs
+  vfs_rcsl=$vfs_rcsl
+  drive=gdrive"
+
 type=tdrive
-ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=tdrive"
+ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+  vfs_bs=$vfs_bs
+  vfs_dcs=$vfs_dcs
+  vfs_dct=$vfs_dct
+  vfs_cma=$vfs_cma
+  vfs_rcs=$vfs_rcs
+  vfs_rcsl=$vfs_rcsl
+  drive=tdrive"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "be" ]]; then
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+  vfs_bs=$vfs_bs
+  vfs_dcs=$vfs_dcs
+  vfs_dct=$vfs_dct
+  vfs_cma=$vfs_cma
+  vfs_rcs=$vfs_rcs
+  vfs_rcsl=$vfs_rcsl
+  drive=gcrypt"
+
 echo "be" > /var/plexguide/deployed.version
 type=tcrypt
 encryptbit="C"
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=tcrypt"; fi
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+  vfs_bs=$vfs_bs
+  vfs_dcs=$vfs_dcs
+  vfs_dct=$vfs_dct
+  vfs_cma=$vfs_cma
+  vfs_rcs=$vfs_rcs
+  vfs_rcsl=$vfs_rcsl
+  drive=tcrypt" 
+fi
 
 # builds the list
 ls -la /opt/appdata/plexguide/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /var/plexguide/.blitzlist

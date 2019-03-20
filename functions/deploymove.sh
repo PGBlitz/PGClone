@@ -36,7 +36,15 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
 if [[ "$transport" == "me" ]]; then
 echo "me" > /var/plexguide/deployed.version
 type=gcrypt
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"; fi
+ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+  vfs_bs=$vfs_bs
+  vfs_dcs=$vfs_dcs
+  vfs_dct=$vfs_dct
+  vfs_cma=$vfs_cma
+  vfs_rcs=$vfs_rcs
+  vfs_rcsl=$vfs_rcsl
+  drive=gcrypt" 
+fi
 
 # deploy union
 ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
