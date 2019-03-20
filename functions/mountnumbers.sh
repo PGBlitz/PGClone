@@ -28,27 +28,21 @@ NOTE2: Changed the Vaules? Must REDEPLOY to go into AFFECT!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat < /dev/tty
 
 case $typed in
     1 )
-        mountset
-        mountselection=${typed} ;;
+        mountset ;;
     2 )
-        mountset
-        mountselection=${typed} ;;
+        mountset ;;
     3 )
-        mountset
-        mountselection=${typed} ;;
+        mountset ;;
     4 )
-        mountset
-        mountselection=${typed} ;;
+        mountset ;;
     5 )
-        mountset
-        mountselection=${typed} ;;
+        mountset ;;
     6 )
-        mountset
-        mountselection=${typed} ;;
+        mountset ;;
     z )
         clonestart ;;
     Z )
@@ -60,6 +54,8 @@ case $typed in
 }
 
 mountset () {
+
+mountselection="$fluffycat"
 
 if [[ "$mountselection" == "1" ]]; then
   name="Buffer-Size"
@@ -89,7 +85,7 @@ Quitting? Type >>> exit
 EOF
 
 read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
-
+echo "$mountselection" #test
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
 if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
