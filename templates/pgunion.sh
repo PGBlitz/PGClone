@@ -16,5 +16,5 @@ chown -R 1000:1000 "$dlpath/downloads"
 chmod -R 775 "$dlpath/downloads"
 sleep 2
 
-mergerfs -o func.getattr=newest,category.create=ff,direct_io,use_ino,atomic_o_trunc,big_writes,default_permissions,splice_move,splice_read,splice_write,allow_other,sync_read,minfreespace=0,umask=002,fsname=pgunion \
+mergerfs -o func.getattr=newest,category.create=ff,direct_io,use_ino,atomic_o_trunc,big_writes,default_permissions,splice_move,splice_read,splice_write,allow_other,sync_read,minfreespace=0,umask=002,gid=1000,uid=1000,fsname=pgunion \
 $dlpath/downloads=RW:$dlpath/pgblitz/upload=NC:$dlpath/move=RW:/mnt/tdrive=NC:/mnt/gdrive=NC:/mnt/tcrypt=NC:/mnt/gcrypt=NC /mnt/unionfs

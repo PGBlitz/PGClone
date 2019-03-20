@@ -68,6 +68,9 @@ while [ 1 ]; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
+chown -R 1000:1000 "$dlpath/move"
+chmod -R 775 "$dlpath/move"
+
   rclone moveto "$dlpath/move/" "$dlpath/pgblitz/upload" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
@@ -88,6 +91,9 @@ while [ 1 ]; do
   echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
   echo "" >> /var/plexguide/logs/pgblitz.log
   echo "Utilizing: $keytransfer" >> /var/plexguide/logs/pgblitz.log
+
+chown -R 1000:1000 "$dlpath/pgblitz/upload"
+chown -R 775 "$dlpath/pgblitz/upload"
 
   rclone moveto "$dlpath/pgblitz/upload" "$keytransfer:/" \
   --config /opt/appdata/plexguide/rclone.conf \

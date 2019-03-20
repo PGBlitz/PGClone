@@ -43,6 +43,9 @@ rclone moveto "$dlpath/downloads/" "$dlpath/move/" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**"
 
+chown -R 1000:1000 "$dlpath/move"
+chmod -R 775 "$dlpath/move"
+
 rclone move "$dlpath/move/" "$ver:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
