@@ -184,10 +184,11 @@ fi
 projectnameset () {
 
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - WARNING! PROJECT CREATION! ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-WARNING ~ WARNING ~ WARNING
+WARNING ~ WARNING ~ WARNING ~ WARNING ~ WARNING ~ WARNING ~ WARNING
 
 Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
 this project to be created! As a result when finished; this will also
