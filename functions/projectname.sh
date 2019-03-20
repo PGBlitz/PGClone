@@ -191,9 +191,9 @@ tee <<-EOF
 WARNING:
 
 Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
-this project to be created! As a result when finished; this will result in
-RESETTING THE CLIENT ID & SECREET because you must SET A NEW ONE from
-this PROJECT!
+this project to be created! As a result when finished; this will also
+result in destroying the set gdrive/tdrive information due to the new
+project being created!
 
 Do You Want to Processed?
 [1] No
@@ -258,8 +258,14 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-rm -rf /var/plexguide/pgclone.secret
-rm -rf /var/plexguide/pgclone.public
+rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
+rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
+rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
+rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
+rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
+
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart
 }
