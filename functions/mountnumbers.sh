@@ -60,12 +60,59 @@ mountselection="$fluffycat"
 if [[ "$mountselection" == "1" ]]; then
   name="Buffer-Size"
   endinfo="MB"
-  start1="16"
+  start1="8"
   end1="1024"
   note1="
 NOTE2: Utilizes RAM for each deployed stream. Increasing the size improves
 the load time/performance; but if the server runs out of RAM due to the
 settings being too high, the mounts can crash and dismount!"
+fi
+
+if [[ "$mountselection" == "2" ]]; then
+  name="Drive-Chunk-Size"
+  endinfo="MB"
+  start1="8"
+  end1="1024"
+  note1="
+NOTE2: Impacts the chunk size of the files being broken up to stream!"
+fi
+
+if [[ "$mountselection" == "3" ]]; then
+  name="Dir-Cache-Time"
+  endinfo="Minutes"
+  start1="1"
+  end1="1024"
+  note1="
+NOTE2: Impacts the refresh rate of the files being seen! Setting this high
+will result in low refresh rates of the mounts! This can be bad when a file
+is uploaded, but a program delays seeing the file for over 5 minutes!"
+fi
+
+if [[ "$mountselection" == "4" ]]; then
+  name="VFS-Cache-Max-Age"
+  endinfo="Hours"
+  start1="1"
+  end1="96"
+  note1="
+NOTE2: Impacts how long a file remains to be seen after a refresh!"
+fi
+
+if [[ "$mountselection" == "5" ]]; then
+  name="VFS-Read-Chunk-Size"
+  endinfo="MB"
+  start1="8"
+  end1="1024"
+  note1="
+NOTE2: No Info Yet!"
+fi
+
+if [[ "$mountselection" == "6" ]]; then
+  name="VFS-Read-Chunk-Size-Limit"
+  endinfo="GB"
+  start1="1"
+  end1="100"
+  note1="
+NOTE2: No Info Yet!"
 fi
 
 tee <<-EOF
@@ -89,7 +136,14 @@ echo "$mountselection" #test
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
 if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
+
   if [[ "$mountselection" == "1" ]]; then echo "$typed" > /var/plexguide/vfs_bs; fi
+  if [[ "$mountselection" == "2" ]]; then echo "$typed" > /var/plexguide/vfs_dcs; fi
+  if [[ "$mountselection" == "3" ]]; then echo "$typed" > /var/plexguide/vfs_dct; fi
+  if [[ "$mountselection" == "4" ]]; then echo "$typed" > /var/plexguide/vfs_cma; fi
+  if [[ "$mountselection" == "5" ]]; then echo "$typed" > /var/plexguide/vfs_rcs; fi
+  if [[ "$mountselection" == "6" ]]; then echo "$typed" > /var/plexguide/vfs_rcsl; fi
+
 fi
 
 mountnumbers
