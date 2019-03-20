@@ -148,8 +148,8 @@ tee <<-EOF
 Power of Two Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Note: Drive-Chunk-Size must set by a power of two (IE: 8, 16, 32, 64, 128
-256, 512, or 1024)
+NOTE: Drive-Chunk-Size must set by a power of two!
+[8] [16] [32] [64] [128] [256] [512] [1024]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
