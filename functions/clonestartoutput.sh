@@ -189,6 +189,10 @@ elif [[ "$transport" == "me" ]]; then
           transportselect ;;
       C )
           transportselect ;;
+      d )
+          mountnumbers ;;
+      D )
+          mountnumbers ;;
       * )
           clonestart ;;
     esac

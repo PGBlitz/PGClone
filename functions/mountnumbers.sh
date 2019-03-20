@@ -58,6 +58,10 @@ case $typed in
         transportselect ;;
     C )
         transportselect ;;
+    d )
+        mountnumbers ;;
+    D )
+        mountnumbers ;;
     * )
         clonestart ;;
   esac
