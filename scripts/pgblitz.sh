@@ -14,10 +14,10 @@ echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 
-chown -R 1000:1000 "{{hdpath}}/downloads"
-chmod -R 775 "{{hdpath}}/downloads"
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 775 "{{hdpath}}/move"
+chown -R 1000:1000 "/mnt/downloads"
+chmod -R 775 "/mnt/downloads"
+chown -R 1000:1000 "/mnt/move"
+chmod -R 775 "/mnt/move"
 
 startscript () {
 while read p; do
@@ -28,7 +28,7 @@ while read p; do
   echo "" >> /var/plexguide/logs/pgblitz.log
   echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
 
-  rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
+  rclone moveto "/mnt/downloads/" "/mnt/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
@@ -42,10 +42,9 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  chown -R 1000:1000 "{{hdpath}}/move"
-  chmod -R 775 "{{hdpath}}/move"
+  chown -R 1000:1000 "/mnt/move"
 
-  rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
+  rclone moveto "/mnt/move" "${p}{{encryptbit}}:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -71,8 +70,8 @@ while read p; do
   sleep 2
 
   # Remove empty directories
-  find "{{hdpath}}/downloads" -mindepth 2 -mmin +666 -type d -size -100M -exec rm -rf {} \;
-  find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+  find "/mnt/downloads" -mindepth 2 -mmin +666 -type d -size -100M -exec rm -rf {} \;
+  find "/mnt/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 done </var/plexguide/.blitzfinal
 }
