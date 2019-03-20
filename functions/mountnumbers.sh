@@ -76,7 +76,8 @@ if [[ "$mountselection" == "2" ]]; then
   start1="8"
   end1="1024"
   note1="
-NOTE2: Impacts the chunk size of the files being broken up to stream!"
+NOTE2: Impacts the chunk size of the files being broken up to stream!
+NOTE3: Input Must Be Power of 2! (IE) 8, 16, 32, 64, 128, 256, 512, 1024"
 fi
 
 if [[ "$mountselection" == "3" ]]; then
@@ -135,6 +136,25 @@ EOF
 
 read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
+
+# This Select Requires Answers to be In the Power of Two
+if [[ "$mountselection" == "2" ]]; then
+  if [[ "$typed" != "8" || "$typed" != "16" || "$typed" != "32" || "$typed" != "64" || "$typed" != "128" || "$typed" != "256" || "$typed" != "512" || "$typed" != "1024" ]]; then
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Power of Two Notice
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Note: Drive-Chunk-Size must set by a power of two (IE: 8, 16, 32, 64, 128
+256, 512, or 1024)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+
+fi; fi
+
 
 if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
 
