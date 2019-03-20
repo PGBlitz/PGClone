@@ -84,7 +84,7 @@ Quitting? Type >>> exit
 EOF
 
 read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
-
+echo "$mountselection" #test
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
 if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
