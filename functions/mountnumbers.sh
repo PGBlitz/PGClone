@@ -154,7 +154,7 @@ NOTE: Drive-Chunk-Size must set by a power of two!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-
+mountset
 fi; fi
 
 
