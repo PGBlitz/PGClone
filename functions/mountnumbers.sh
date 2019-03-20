@@ -30,7 +30,7 @@ EOF
 
 read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat < /dev/tty
 
-case $typed in
+case $fluffycat in
     1 )
         mountset ;;
     2 )
