@@ -261,7 +261,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Resetting Prior Stored Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
 rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
 rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
@@ -288,7 +287,8 @@ tee <<-EOF
 
 NOTE: If Plex, Emby, and/or JellyFin was deployed; redeploy them through
 PG Box when complete! We wanted to ensure that your containers do not
-self erase meta-data due to your drives being down!
+self erase meta-data due to the drives being down!
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
