@@ -32,17 +32,23 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-        mountset ;;
+        mountset
+        mountselection=${typed} ;;
     2 )
-        mountset ;;
+        mountset
+        mountselection=${typed} ;;
     3 )
-        mountset ;;
+        mountset
+        mountselection=${typed} ;;
     4 )
-        mountset ;;
+        mountset
+        mountselection=${typed} ;;
     5 )
-        mountset ;;
+        mountset
+        mountselection=${typed} ;;
     6 )
-        mountset ;;
+        mountset
+        mountselection=${typed} ;;
     z )
         clonestart ;;
     Z )
@@ -54,7 +60,6 @@ case $typed in
 }
 
 mountset () {
-mountselection=${typed}
 
 if [[ "$mountselection" == "1" ]]; then
   name="Buffer-Size"
@@ -84,7 +89,7 @@ Quitting? Type >>> exit
 EOF
 
 read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
-echo "$mountselection" #test
+
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
 if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
