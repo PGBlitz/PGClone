@@ -224,6 +224,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WARNING:
+
 Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
 this project to be created! As a result when finished; this will result in
 RESETTING THE CLIENT ID & SECREET because you must SET A NEW ONE from
@@ -257,5 +258,5 @@ no spaces!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
-if [[ "$typed" == "" ]]; then projectnameset; fi
+if [[ "$typed" != "" ]]; then projectnameset; fi
 }
