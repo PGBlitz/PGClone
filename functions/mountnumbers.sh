@@ -141,7 +141,7 @@ if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mo
 
 # This Select Requires Answers to be In the Power of Two
 if [[ "$mountselection" == "2" ]]; then
-  if [[ "$typed" != "8" || "$typed" != "16" || "$typed" != "32" || "$typed" != "64" || "$typed" != "128" || "$typed" != "256" || "$typed" != "512" || "$typed" != "1024" ]]; then
+  if [[ "$typed" != "8" && "$typed" != "16" && "$typed" != "32" && "$typed" != "64" && "$typed" != "128" && "$typed" != "256" && "$typed" != "512" && "$typed" != "1024" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
