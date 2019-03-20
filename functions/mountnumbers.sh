@@ -62,8 +62,12 @@ case $typed in
         mountnumbers ;;
     D )
         mountnumbers ;;
-    * )
+    z )
         clonestart ;;
+    Z )
+        clonestart ;;
+    * )
+        mountnumbers ;;
   esac
 
 }
