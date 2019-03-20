@@ -106,6 +106,7 @@ tee <<-EOF
 [A] Deploy $outputversion
 [B] Throttle              [${throttle} MB]
 $output1
+[D] RClone VFS Mount Settings
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -145,6 +146,10 @@ if [[ "$transport" == "mu" ]]; then
           transportselect ;;
       C )
           transportselect ;;
+      d )
+          mountnumbers ;;
+      D )
+          mountnumbers ;;
       * )
           clonestart ;;
     esac
@@ -332,9 +337,10 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Transport Select         | INFO: Change Transport Type
-[2] Destroy All Service Keys | WARN: Wipes All Keys for the Project
-[3] Create New Project       | WARN: Resets Everything
-[4] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
+[2] RClone VFS Mount Settings| INFO: Change Mount Variable Performance
+[3] Destroy All Service Keys | WARN: Wipes All Keys for the Project
+[4] Create New Project       | WARN: Resets Everything
+[5] Demo Mode - ${demo}      | Hide the E-Mail Address on the Front
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -349,10 +355,12 @@ case $typed in
       1 )
           transportselect ;;
       2 )
-          deletekeys ;;
+          mountnumbers ;;
       3 )
-          projectnameset ;;
+          deletekeys ;;
       4 )
+          projectnameset ;;
+      5 )
           demomode ;;
       Z )
           clonestart ;;

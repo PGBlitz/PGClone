@@ -25,6 +25,7 @@ source /opt/pgclone/functions/deploy.sh
 source /opt/pgclone/functions/rcloneinstall.sh
 source /opt/pgclone/functions/deploymove.sh
 source /opt/pgclone/functions/deployblitz.sh
+source /opt/pgclone/functions/mountnumbers.sh
 ################################################################################
 rcloneinstall
 
