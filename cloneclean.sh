@@ -12,6 +12,5 @@ chown -R 1000:1000 "$dlpath/move"
 chmod -R 775 "$dlpath/move"
 
 # Execution
-find "$dlpath/downloads" -mindepth 2 -mmin +5 -type d -empty -delete
-find "$dlpath/downloads" -mindepth 3 -mmin +360 -type d -size -100M -delete
-find "$dlpath/move" -mindepth 2 -mmin +5 -type d -empty -delete
+find "{{hdpath}}/downloads" -mindepth 2 -mmin +666 -type d -size -100M -exec rm -rf {} \;
+find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete

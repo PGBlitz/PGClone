@@ -29,12 +29,10 @@ sleep 10
 while true
 do
 
-
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
---min-age 2m  \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
@@ -45,11 +43,13 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**"
 
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 775 "{{hdpath}}/move"
+
 rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
---min-age 2m \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
@@ -67,8 +67,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 sleep 5
 
 # Remove empty directories
-find "{{hdpath}}/downloads" -mindepth 2 -mmin +5 -type d -empty -exec rm -rf {} \;
-find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
+find "{{hdpath}}/downloads" -mindepth 2 -mmin +666 -type d -size -100M -exec rm -rf {} \;
 find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 done

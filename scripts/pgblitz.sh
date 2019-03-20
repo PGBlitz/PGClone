@@ -22,11 +22,16 @@ chmod -R 775 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
+  let "cyclecount++"
+  echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
+  echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
+  echo "" >> /var/plexguide/logs/pgblitz.log
+  echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
+
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
-  --min-age 2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
@@ -37,17 +42,13 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  let "cyclecount++"
-  echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-  echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
-  echo "" >> /var/plexguide/logs/pgblitz.log
-  echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
+  chown -R 1000:1000 "{{hdpath}}/move"
+  chmod -R 775 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
-  --min-age 2m \
   --tpslimit 12 \
   --checkers=20 \
   --transfers=16 \
@@ -70,9 +71,7 @@ while read p; do
   sleep 2
 
   # Remove empty directories
-  find "{{hdpath}}/downloads" -mindepth 2 -mmin +5 -type d -empty -exec rm -rf {} \;
-  find "{{hdpath}}/downloads" -mindepth 3 -mmin +360 -type d -size -100M -exec rm -rf {} \;
-  find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+  find "{{hdpath}}/downloads" -mindepth 2 -mmin +666 -type d -size -100M -exec rm -rf {} \;
   find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 done </var/plexguide/.blitzfinal
