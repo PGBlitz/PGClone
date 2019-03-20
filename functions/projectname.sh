@@ -15,45 +15,6 @@ pgclonevars
 
 ############## REMINDERS
 
-buildproject () {
-echo ""
-date=`date +%m%d`
-rand=$(echo $((1 + RANDOM + RANDOM + RANDOM )))
-projectid="pg-$typed-${date}${rand}"
-gcloud projects create $projectid --account=${pgcloneemail}
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 ID: $projectid ~ Created
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Enabling the API (Standby) ~ pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-
-gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
-echo "$projectid" > /var/plexguide/pgclone.project
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - RESETTING THE CLIENT ID & SECRET ! ~ pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-rm -rf /var/plexguide/pgclone.secret
-rm -rf /var/plexguide/pgclone.public
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
-}
-
 # prevents user from moving on unless email is set
 if [[ "$pgcloneemail" == "NOT-SET" ]]; then
 echo
@@ -263,4 +224,43 @@ no spaces!
 EOF
 read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
 if [[ "$typed" == "" ]]; then projectnameset; else buildproject; fi
+}
+
+buildproject () {
+echo ""
+date=`date +%m%d`
+rand=$(echo $((1 + RANDOM + RANDOM + RANDOM )))
+projectid="pg-$typed-${date}${rand}"
+gcloud projects create $projectid --account=${pgcloneemail}
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 ID: $projectid ~ Created
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Enabling the API (Standby) ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+
+gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
+echo "$projectid" > /var/plexguide/pgclone.project
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - RESETTING THE CLIENT ID & SECRET ! ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+rm -rf /var/plexguide/pgclone.secret
+rm -rf /var/plexguide/pgclone.public
+read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+clonestart
 }
