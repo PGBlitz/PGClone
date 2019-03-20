@@ -23,7 +23,14 @@ ansible-playbook /opt/pgclone/ymls/remove.yml
 echo "gdrive" > /var/plexguide/deploy.version
 echo "mu" > /var/plexguide/deployed.version
 type=gdrive
-ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
+ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+  vfs_bs=$vfs_bs
+  vfs_dcs=$vfs_dcs
+  vfs_dct=$vfs_dct
+  vfs_cma=$vfs_cma
+  vfs_rcs=$vfs_rcs
+  vfs_rcsl=$vfs_rcsl
+  drive=gdrive"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "me" ]]; then
