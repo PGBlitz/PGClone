@@ -132,7 +132,6 @@ Quitting? Type >>> exit
 EOF
 
 read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
-echo "$mountselection" #test
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
 if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
@@ -143,15 +142,6 @@ if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
   if [[ "$mountselection" == "4" ]]; then echo "$typed" > /var/plexguide/vfs_cma; fi
   if [[ "$mountselection" == "5" ]]; then echo "$typed" > /var/plexguide/vfs_rcs; fi
   if [[ "$mountselection" == "6" ]]; then echo "$typed" > /var/plexguide/vfs_rcsl; fi
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Information Saved!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 fi
 
