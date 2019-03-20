@@ -32,7 +32,6 @@ while read p; do
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
-  --min-age 2m \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
@@ -43,14 +42,13 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 775 "{{hdpath}}/move"
+  chown -R 1000:1000 "{{hdpath}}/move"
+  chmod -R 775 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
-  --min-age 2m \
   --tpslimit 12 \
   --checkers=20 \
   --transfers=16 \
