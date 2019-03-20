@@ -269,7 +269,7 @@ rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
 rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
 rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
 rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.teamid 1>/dev/null 2>&1
+rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
 
 docker stop jellyfin 1>/dev/null 2>&1
 docker stop plex 1>/dev/null 2>&1
