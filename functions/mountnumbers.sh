@@ -77,7 +77,9 @@ if [[ "$mountselection" == "2" ]]; then
   end1="1024"
   note1="
 NOTE2: Impacts the chunk size of the files being broken up to stream!
-NOTE3: Input Must Be Power of 2! (IE) 8, 16, 32, 64, 128, 256, 512, 1024"
+
+NOTE3: Input has to be a Power by 2 Answer! (IE 8, 16, 32, 64, 128, 256, 512,
+1024)"
 fi
 
 if [[ "$mountselection" == "3" ]]; then
