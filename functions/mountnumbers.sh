@@ -62,9 +62,9 @@ if [[ "$mountselection" == "1" ]]; then
   start1="16"
   end1="1024"
   note1="
-This setting utilize RAM for each stream. Increasing the size improves
-load time and performance; but if the server runs out of RAM due to this
-being too high, it is possible for the mounts to crash and dismount!"
+NOTE2: Utilizes RAM for each deployed stream. Increasing the size improves
+the load time/performance; but if the server runs out of RAM due to the
+settings being too high, the mounts can crash and dismount!"
 fi
 
 tee <<-EOF
@@ -73,9 +73,10 @@ tee <<-EOF
 Setting Variable ~ $name $endinfo
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Please type a number from $start1 through $end1! Please ensure to read the
-wiki on how changing these numbers impact the server! Nothing takes
-affect until PGMove/PGBlitz is deployed/redeployed!
+Type a number from $start1 through $end1!
+
+NOTE1: Read the wiki on how changing these numbers impact the server!
+Nothing takes affect until PGMove/PGBlitz is deployed/redeployed again!
 $note1
 
 Quitting? Type >>> exit
