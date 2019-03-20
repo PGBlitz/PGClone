@@ -87,7 +87,7 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
-if [[ "$typed" -lt "$start" || "$typed" -gt "$end1" ]]; then mountset; else
+if [[ "$typed" -lt "$start1" || "$typed" -gt "$end1" ]]; then mountset; else
   if [[ "$mountselection" == "1" ]]; then echo "$typed" > /var/plexguide/vfs_bs; fi
 fi
 
