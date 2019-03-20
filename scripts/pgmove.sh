@@ -29,7 +29,6 @@ sleep 10
 while true
 do
 
-
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
@@ -44,6 +43,9 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --exclude="**jdownloader**" --exclude="**makemkv**" \
 --exclude="**handbrake**" --exclude="**bazarr**" \
 --exclude="**ignore**"  --exclude="**inProgress**"
+
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 775 "{{hdpath}}/move"
 
 rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --config /opt/appdata/plexguide/rclone.conf \

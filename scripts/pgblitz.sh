@@ -22,6 +22,12 @@ chmod -R 775 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
+  let "cyclecount++"
+  echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
+  echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
+  echo "" >> /var/plexguide/logs/pgblitz.log
+  echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
+
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /opt/appdata/plexguide/rclone.conf \
   --log-file=/var/plexguide/logs/pgblitz.log \
@@ -37,11 +43,8 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  let "cyclecount++"
-  echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-  echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
-  echo "" >> /var/plexguide/logs/pgblitz.log
-  echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 775 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
   --config /opt/appdata/plexguide/rclone.conf \
