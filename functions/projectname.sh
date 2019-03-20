@@ -187,13 +187,17 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - WARNING! PROJECT CREATION! ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-WARNING:
+WARNING ~ WARNING ~ WARNING
 
 Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
 this project to be created! As a result when finished; this will also
 result in destroying the set gdrive/tdrive information due to the new
 project being created!
+
+This will also destroy any TRANSPORT MODE deployed and including any
+mounts. Emby, Plex, and JellyFin Docker containers will also be REMOVED
+to prevent any meta-data loss. When set, just redeploy them and will be
+good to!
 
 Do You Want to Processed?
 [1] No
@@ -254,7 +258,7 @@ echo "$projectid" > /var/plexguide/pgclone.project
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Prior Stored Information is Reset!
+🚀 PG Clone - Resetting Prior Stored Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -266,6 +270,26 @@ rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
 rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
 rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
 rm -rf /var/plexguide/pgclone.teamid 1>/dev/null 2>&1
+
+docker stop jellyfin 1>/dev/null 2>&1
+docker stop plex 1>/dev/null 2>&1
+docker stop emby 1>/dev/null 2>&1
+docker rm jellyfin 1>/dev/null 2>&1
+docker rm plex 1>/dev/null 2>&1
+docker rm emby 1>/dev/null 2>&1
+
+ansible-playbook /opt/pgclone/ymls/remove.yml
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 PG Clone - Prior Stored Information is Reset!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: If Plex, Emby, and/or JellyFin was deployed; redeploy them through
+PG Box when complete! We wanted to ensure that your containers do not
+self erase meta-data due to your drives being down!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
 
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart
