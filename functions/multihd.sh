@@ -8,10 +8,11 @@
 multihdreadonly () {
   pgclonevars
 
+  rm -rf /var/plexguide/.tmp.multihd 1>/dev/null 2>&1
   if [[ $(cat /var/plexguide/multihd.paths) != "" ]]; then
     while read p; do
-       echo "$p=NC" >> /var/plexguide/.tmp.multihd
+       echo "$p=NC:" >> /var/plexguide/.tmp.multihd
     done </var/plexguide/multihd.paths
-  fi 
+  fi
 
 }
