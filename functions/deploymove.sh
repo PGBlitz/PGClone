@@ -43,12 +43,13 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=gcrypt" 
+  drive=gcrypt"
 fi
 
 # deploy union
 ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   transport=$transport \
+  multihds=$multihds
   type=$type
   hdpath=$hdpath"
 

@@ -13,14 +13,6 @@
     - name: include PGClone aliases
       include_tasks: '/opt/pgclone/alias.yml'
 
-    - name: MultiHD
-      shell: 'cat /var/plexguide/.tmp.multihd'
-      register: multihds
-
-    - name: Process Path
-      shell: 'cat /var/plexguide/server.hd.path'
-      register: hdpath
-
     - name: Transport Type
       shell: 'cat /var/plexguide/pgclone.transport'
       register: transport55

@@ -93,6 +93,9 @@ pgclonevars () {
   variable /var/plexguide/deployed.version ""
   dversion=$(cat /var/plexguide/deployed.version)
 
+  variablet /var/plexguide/.tmp.multihd
+  multihds=$(cat /var/plexguide/.tmp.multihd)
+
   if [[ "$dversion" == "mu" ]]; then dversionoutput="Unencrypted Move"
 elif [[ "$dversion" == "me" ]]; then dversionoutput="Encrypted Move"
 elif [[ "$dversion" == "bu" ]]; then dversionoutput="Unencrypted Blitz"

@@ -64,7 +64,7 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=tcrypt" 
+  drive=tcrypt"
 fi
 
 # builds the list
@@ -81,6 +81,7 @@ done </var/plexguide/.blitzlist
 ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   transport=$transport \
   type=$type
+  multihds=$multihds
   encryptbit=$encryptbit
   hdpath=$hdpath"
 
