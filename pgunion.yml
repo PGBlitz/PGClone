@@ -13,6 +13,14 @@
     - name: include PGClone aliases
       include_tasks: '/opt/pgclone/alias.yml'
 
+    - name: MultiHD
+      shell: 'cat /var/plexguide/.tmp.multihd'
+      register: multihds
+
+    - name: Process Path
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
+
     - name: Transport Type
       shell: 'cat /var/plexguide/pgclone.transport'
       register: transport55
@@ -138,14 +146,6 @@
 
       when: (transport55.stdout == "emove") or
         (transport55.stdout == "umove")
-
-    - name: MultiHD
-      shell: 'cat /var/plexguide/.tmp.multihd'
-      register: multipath
-
-    - name: Process Path
-      shell: 'cat /var/plexguide/server.hd.path'
-      register: hdpath
 
     - name: Install PGUnion Script
       template:
