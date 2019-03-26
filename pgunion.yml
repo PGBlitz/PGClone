@@ -139,6 +139,14 @@
       when: (transport55.stdout == "emove") or
         (transport55.stdout == "umove")
 
+    - name: Bandwidth Limit
+      shell: '/var/plexguide/.tmp.multihd'
+      register: multipath
+
+    - name: Bandwidth Limit
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
+
     - name: Install PGUnion Script
       template:
         src: /opt/pgclone/scripts/pgunion.sh
