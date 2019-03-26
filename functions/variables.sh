@@ -12,11 +12,7 @@ pgclonevars () {
     if [ ! -e "$file" ]; then touch "$1"; fi
   }
 
-  # touch paths only if not existant
-  variablet /var/plexguide/multihd.paths
-
   # rest standard
-
   mkdir -p /var/plexguide/rclone
   variable /var/plexguide/project.account "NOT-SET"
   variable /var/plexguide/rclone/deploy.version "null"
