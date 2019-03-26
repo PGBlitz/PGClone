@@ -12,6 +12,8 @@ multihdreadonly () {
   if [[ $(cat /var/plexguide/multihd.paths) != "" ]]; then
     while read p; do
        echo -n "$p=NC:" >> /var/plexguide/.tmp.multihd
+       chown -R 1000:1000 "$p"
+       chmod -R 755 "$p"
     done </var/plexguide/multihd.paths
   fi
 
