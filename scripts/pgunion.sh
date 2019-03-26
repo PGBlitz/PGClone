@@ -10,7 +10,7 @@
 hdpath=$(cat /var/plexguide/server.hd.path)
 
 # Generates from Function - MultiHD
-multipath=$(cat /var/plexguide/multihd.paths)
+multipath=$(cat /var/plexguide/.tmp.multihd)
 
 sleep 2
 
