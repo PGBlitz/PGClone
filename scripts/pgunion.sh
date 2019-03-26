@@ -8,6 +8,8 @@
 
 # Outside Variables
 hdpath=$(cat /var/plexguide/server.hd.path)
+
+# Generates from Function - MultiHD
 multipath=$(cat /var/plexguide/multihd.paths)
 
 sleep 2
