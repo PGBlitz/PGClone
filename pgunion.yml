@@ -139,11 +139,11 @@
       when: (transport55.stdout == "emove") or
         (transport55.stdout == "umove")
 
-    - name: Bandwidth Limit
+    - name: MultiHD
       shell: '/var/plexguide/.tmp.multihd'
       register: multipath
 
-    - name: Bandwidth Limit
+    - name: Process Path
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
 
