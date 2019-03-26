@@ -5,9 +5,6 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-
-# Outside Variables
-hdpath=$(cat /var/plexguide/server.hd.path)
 sleep 2
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
