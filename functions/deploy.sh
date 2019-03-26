@@ -5,6 +5,15 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+multihd () {
+  pgclonevars
+
+  if [[ $(cat /var/plexguide/multihd.paths) != "" ]]; then
+    
+
+
+}
+
 deploypgblitz () {
   deployblitzstartcheck # At Bottom - Ensure Keys Are Made
 
