@@ -140,7 +140,7 @@
         (transport55.stdout == "umove")
 
     - name: MultiHD
-      shell: '/var/plexguide/.tmp.multihd'
+      shell: 'cat /var/plexguide/.tmp.multihd'
       register: multipath
 
     - name: Process Path
