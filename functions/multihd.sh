@@ -10,9 +10,8 @@ multihdreadonly () {
 
   if [[ $(cat /var/plexguide/multihd.paths) != "" ]]; then
     while read p; do
-       echo "$p=NC" >> /var/plexguide/.tmp.multihd; fi
+       echo "$p=NC" >> /var/plexguide/.tmp.multihd
     done </var/plexguide/multihd.paths
-
-  fi
+  fi 
 
 }
