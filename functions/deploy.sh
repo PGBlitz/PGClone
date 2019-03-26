@@ -5,15 +5,6 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-multihd () {
-  pgclonevars
-
-  if [[ $(cat /var/plexguide/multihd.paths) != "" ]]; then
-    
-
-
-}
-
 deploypgblitz () {
   deployblitzstartcheck # At Bottom - Ensure Keys Are Made
 
@@ -68,13 +59,16 @@ touch /opt/var/.drivelog
 
   if [[ "$transport" = "mu" ]]; then
     gdrivemod
+    multihdreadonly
   elif [[ "$transport" == "me" ]]; then
     gdrivemod
     gcryptmod
+    multihdreadonly
   elif [[ "$transport" == "bu" ]]; then
     gdrivemod
     tdrivemod
     gdsamod
+    multihdreadonly
   elif [[ "$transport" == "be" ]]; then
     gdrivemod
     tdrivemod
@@ -82,6 +76,7 @@ touch /opt/var/.drivelog
     gcryptmod
     tcryptmod
     gdsacryptmod
+    multihdreadonly
   fi
 
 cat /opt/var/.drivelog

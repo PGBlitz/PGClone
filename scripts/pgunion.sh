@@ -8,6 +8,8 @@
 
 # Outside Variables
 hdpath=$(cat /var/plexguide/server.hd.path)
+multipath=$(cat /var/plexguide/multihd.paths)
+
 sleep 2
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
