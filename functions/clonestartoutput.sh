@@ -134,7 +134,7 @@ tee <<-EOF
 
 [A] Deploy $outputversion
 [B] Throttle              [${throttle} MB]
-$output1
+[C] Options
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -191,9 +191,9 @@ if [[ "$transport" == "mu" ]]; then
       B )
           setthrottlemove ;;
       c )
-          transportselect ;;
+          optionsmenumove ;;
       C )
-          transportselect ;;
+          optionsmenumove ;;
       * )
           clonestart ;;
     esac
@@ -230,13 +230,9 @@ elif [[ "$transport" == "me" ]]; then
       B )
           setthrottlemove ;;
       c )
-          transportselect ;;
+          optionsmenumove ;;
       C )
-          transportselect ;;
-      d )
-          mountnumbers ;;
-      D )
-          mountnumbers ;;
+          optionsmenumove ;;
       * )
           clonestart ;;
     esac
