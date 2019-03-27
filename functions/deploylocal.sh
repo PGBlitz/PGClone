@@ -19,6 +19,9 @@ pgclonevars
 # to remove all service running prior to ensure a clean launch
 ansible-playbook /opt/pgclone/ymls/remove.yml
 
+# builds multipath
+multihdreadonly
+
 # deploy union
 ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
 
