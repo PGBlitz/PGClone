@@ -26,6 +26,9 @@ multihdreadonly
 multihds=$(cat /var/plexguide/.tmp.multihd)
 ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
 
+# stores deployed version
+echo "le" > /var/plexguide/deployed.version
+
 # display edition final
 tee <<-EOF
 
