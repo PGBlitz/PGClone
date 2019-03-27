@@ -17,8 +17,7 @@ NOTE: Please visit the link and understand what your doing first!
 [2] Move  Encrypted: Data > GDrive | Novice  | 750GB Daily Transfer Max
 [3] Blitz Unencrypt: Data > TDrive | Complex | Exceed 750GB Transport Cap
 [4] Blitz Encrypted: Data > TDrive | Complex | Exceed 750GB Transport Cap
-[5] PGDrive Mode   : Read Only     | Novice  | >>> NOT READY
-[6] Local Edition  : Local HDs     | Easy    |
+[5] Local Edition  : Local HDs     | Easy    | Utilizes System's HD's Only
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -34,7 +33,7 @@ case $typed in
     echo "bu" > /var/plexguide/pgclone.transport ;;
     4 )
     echo "be" > /var/plexguide/pgclone.transport ;;
-    6 )
+    5 )
     echo "le" > /var/plexguide/pgclone.transport ;;
     * )
         transportselect ;;
