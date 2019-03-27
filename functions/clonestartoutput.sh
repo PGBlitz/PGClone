@@ -49,7 +49,6 @@ tee <<-EOF
 EOF
 elif [[ "$transport" == "le" ]]; then
 tee <<-EOF
-
 NOTE: The default drive is already factored in! Only additional locations
 or hard drives are required to be added!
 EOF
@@ -89,7 +88,7 @@ throttle=$(cat /var/plexguide/blitz.bw)
 output1="[C] Options"
 fi
 
-if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "be" ]]; then
+if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "be" && "$transport" != "le" ]]; then
 rm -rf /var/plexguide/pgclone.transport 1>/dev/null 2>&1
 mustset; fi
 
