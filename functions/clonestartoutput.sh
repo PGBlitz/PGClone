@@ -109,8 +109,9 @@ clonestartoutput
 
 tee <<-EOF
 
-[A] Deploy  :  Local HD/Mounts
-[B] MultiHD :  Add Various Mounts xor Hard Drives
+[1] Deploy   :  Local HD/Mounts
+[2] MultiHD  :  Add Various Mounts xor Hard Drives
+[3] Transport:  Change the Transportion Mode
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -148,6 +149,8 @@ localstartoutput () {
       keyinputpublic ;;
   2 )
       bash /opt/plexguide/menu/pgcloner/multihd.sh ;;
+  3 )
+      transportselect ;;
   z )
       exit ;;
   Z )
