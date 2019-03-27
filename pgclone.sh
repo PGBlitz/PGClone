@@ -27,6 +27,7 @@ source /opt/pgclone/functions/rcloneinstall.sh
 source /opt/pgclone/functions/deploymove.sh
 source /opt/pgclone/functions/deployblitz.sh
 source /opt/pgclone/functions/multihd.sh
+source /opt/pglcone/fucntions/deploylocal.sh
 ################################################################################
 rcloneinstall
 
