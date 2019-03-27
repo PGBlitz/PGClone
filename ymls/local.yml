@@ -31,11 +31,5 @@
         state: reloaded
         name: pgunion
 
-    - name: 'Waiting for PGUnion to initialize'
-      wait_for:
-        path: /mnt/unionfs/plexguide
-        timeout: 15
-        delay: 2
-
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
