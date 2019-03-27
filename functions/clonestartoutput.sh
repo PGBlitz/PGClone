@@ -394,7 +394,7 @@ tee <<-EOF
 [3] Multi-HD Option          | INFO: Add Multi-Points and Options
 [4] Destroy All Service Keys | WARN: Wipes All Keys for the Project
 [5] Create New Project       | WARN: Resets Everything
-[6] Demo Mode - ${demo}         | Hide the E-Mail Address on the Front
+[6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -407,7 +407,8 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
       1 )
-          transportselect ;;
+          transportselect
+          clonestart ;;
       2 )
           mountnumbers ;;
       3 )
@@ -452,7 +453,8 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
       1 )
-          transportselect ;;
+          transportselect 
+          clonestart ;;
       2 )
           mountnumbers ;;
       3 )
