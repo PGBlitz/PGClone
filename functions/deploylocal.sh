@@ -20,13 +20,9 @@ pgclonevars
 ansible-playbook /opt/pgclone/ymls/remove.yml
 
 # deploy union
-ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
-  transport=$transport \
-  multihds=$multihds
-  type=$type
-  path=null
-  hdpath=$hdpath"
+ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
 
+# display edition final
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

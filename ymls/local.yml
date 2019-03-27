@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Title:      PGBlitz (Reference Title File)
+# Author(s):  Admin9705 - Deiteq
+# URL:        https://pgblitz.com - http://github.pgblitz.com
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: include PGClone aliases
+      include_tasks: '/opt/pgclone/ymls/alias.yml'
+
+    - name: Install Union Script
+      template:
+        src: /opt/pgclone/scripts/local.sh
+        dest: /opt/appdata/plexguide/pgunion.sh
+        force: yes
+
+    - name: Install PGUnion Service
+      template:
+        src: /opt/pgclone/mounts/pgunion.service
+        dest: /etc/systemd/system/pgunion.service
+        force: yes
+
+    - name: Reload PGUnion Service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded
+        name: pgunion
+
+    - name: 'Waiting for PGUnion to initialize'
+      wait_for:
+        path: /mnt/unionfs/plexguide
+        timeout: 15
+        delay: 2
+
+    - name: Restart All Docker Containers
+      shell: docker restart $(docker ps -a -q)
