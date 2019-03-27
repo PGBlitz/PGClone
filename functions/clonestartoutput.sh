@@ -110,9 +110,9 @@ clonestartoutput
 
 tee <<-EOF
 
-[1] Deploy   :  Local HD/Mounts
-[2] MultiHD  :  Add Various Mounts xor Hard Drives
-[3] Transport:  Change the Transportion Mode
+[1] Deploy     (Local HD/Mounts)
+[2] MultiHD    (Add Mounts xor Hard Drives)
+[3] Transport  (Change Transportion Mode)
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
