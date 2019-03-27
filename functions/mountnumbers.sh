@@ -46,9 +46,9 @@ case $fluffycat in
     6 )
         mountset ;;
     z )
-        clonestart ;;
+        a=b ;;
     Z )
-        clonestart ;;
+        a=b ;;
     * )
         mountnumbers ;;
   esac
