@@ -96,6 +96,7 @@ pgclonevars () {
 elif [[ "$dversion" == "me" ]]; then dversionoutput="Encrypted Move"
 elif [[ "$dversion" == "bu" ]]; then dversionoutput="Unencrypted Blitz"
 elif [[ "$dversion" == "be" ]]; then dversionoutput="Encrypted Blitz"
+elif [[ "$dversion" == "le" ]]; then dversionoutput="Local HD/Mount"
 else dversionoutput="None"; fi
 
 # For PG Blitz Mounts
