@@ -31,5 +31,8 @@
         state: reloaded
         name: pgunion
 
+    - name: Sleep 2 Seconds
+      wait_for: timeout=2
+
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
