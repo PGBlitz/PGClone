@@ -17,7 +17,7 @@ multihdreadonly () {
     while read p; do
 
        # prevents copying blanks areas
-       if [[ $(echo $p) != "" ]]; then
+       if [[ "$p" != "" ]]; then
          echo -n "$p=NC:" >> /var/plexguide/.tmp.multihd
          chown -R 1000:1000 "$p"
          chmod -R 755 "$p"

@@ -12,6 +12,8 @@
     - name: include PGClone aliases
       include_tasks: '/opt/pgclone/ymls/alias.yml'
 
+    - debug: msg="Combined Path - {{multihds}}"
+
     - name: Install Union Script
       template:
         src: /opt/pgclone/scripts/local.sh

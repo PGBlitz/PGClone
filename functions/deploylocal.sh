@@ -23,6 +23,7 @@ ansible-playbook /opt/pgclone/ymls/remove.yml
 multihdreadonly
 
 # deploy union
+multihds=$(cat /var/plexguide/.tmp.multihd)
 ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
 
 # display edition final
