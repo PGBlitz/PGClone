@@ -411,7 +411,7 @@ case $typed in
       2 )
           mountnumbers ;;
       3 )
-          projectnameset ;;
+          bash /opt/plexguide/menu/pgcloner/multihd.sh ;;
       4 )
           deletekeys ;;
       5 )
@@ -425,6 +425,7 @@ case $typed in
       * )
           optionsmenu ;;
 esac
+optionsmenu
 }
 
 # For Move
@@ -455,7 +456,7 @@ case $typed in
       2 )
           mountnumbers ;;
       3 )
-          projectnameset ;;
+          bash /opt/plexguide/menu/pgcloner/multihd.sh ;;
       4 )
           demomode ;;
       Z )
@@ -465,6 +466,7 @@ case $typed in
       * )
           optionsmenu ;;
 esac
+optionsmenu
 }
 
 demomode () {
