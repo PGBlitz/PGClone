@@ -47,6 +47,12 @@ tee <<-EOF
 [8] Key Management        [$displaykey] Built
 [9] TDrive (E-Mail Share Generator)
 EOF
+elif [[ "$transport" == "le" ]]; then
+tee <<-EOF
+
+NOTE: The default drive is already factored in! Only additional locations
+or hard drives are required to be added!
+EOF
 fi
 }
 
@@ -91,8 +97,30 @@ mustset; fi
   elif [[ "$transport" == "me" ]]; then outputversion="Encrypted Move"
   elif [[ "$transport" == "bu" ]]; then outputversion="Unencrypted Blitz"
   elif [[ "$transport" == "be" ]]; then outputversion="Encrypted Blitz"
+  elif [[ "$transport" == "le" ]]; then outputversion="Local Hard Drives"
   fi
 
+if [[ "$transport" == "le" ]]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+clonestartoutput
+
+tee <<-EOF
+
+[A] Deploy  :  Local HD/Mounts
+[B] MultiHD :  Add Various Mounts xor Hard Drives
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+
+localstartoutput
+
+else
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -106,14 +134,31 @@ tee <<-EOF
 [A] Deploy $outputversion
 [B] Throttle              [${throttle} MB]
 $output1
-[D] RClone VFS Mount Settings
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 clonestartactions
+fi
 }
+
+localstartoutput () {
+  case $typed in
+  1 )
+      keyinputpublic ;;
+  2 )
+      bash /opt/plexguide/menu/pgcloner/multihd.sh ;;
+  z )
+      exit ;;
+  Z )
+      exit ;;
+  * )
+      clonestart ;;
+  esac
+clonestart
+}
+
 
 clonestartactions () {
 if [[ "$transport" == "mu" ]]; then
@@ -146,10 +191,6 @@ if [[ "$transport" == "mu" ]]; then
           transportselect ;;
       C )
           transportselect ;;
-      d )
-          mountnumbers ;;
-      D )
-          mountnumbers ;;
       * )
           clonestart ;;
     esac
@@ -340,6 +381,7 @@ fi
 clonestart
 }
 
+# For Blitz
 optionsmenu () {
 pgclonevars
 tee <<-EOF
@@ -367,6 +409,46 @@ case $typed in
           transportselect ;;
       2 )
           deletekeys ;;
+      3 )
+          projectnameset ;;
+      4 )
+          demomode ;;
+      Z )
+          clonestart ;;
+      z )
+          clonestart ;;
+      * )
+          optionsmenu ;;
+esac
+}
+
+# For Move
+optionsmenumove () {
+pgclonevars
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Options Interface ~ http://pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[1] Transport Select         | INFO: Change Transport Type
+[2] RClone VFS Mount Setting | INFO: Change Varibles to for the Mount
+[3] Multi-HD Option          | INFO: Add Multi-Points and Options
+[Z] Exit
+
+NOTE: When creating a NEW PROJECT (option C), the USER must create the
+CLIENT ID and SECRET for that project! We will assist in creating the
+project and enabling the API! Everything resets when complete!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+
+case $typed in
+      1 )
+          transportselect ;;
+      2 )
+          mountnumbers ;;
       3 )
           projectnameset ;;
       4 )
