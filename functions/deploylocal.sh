@@ -24,6 +24,7 @@ ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   transport=$transport \
   multihds=$multihds
   type=$type
+  path=null
   hdpath=$hdpath"
 
 tee <<-EOF
