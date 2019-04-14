@@ -29,11 +29,11 @@ EOF
   if [[ "$token" == "exit" || "$token" == "Exit" || "$token" == "EXIT" ]]; then clonestart; fi
   curl --request POST --data "code=$token&client_id=$pgclonepublic&client_secret=$pgclonesecret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /opt/appdata/plexguide/pgclone.info
 
-  token=$(cat /opt/appdata/plexguide/pgclone.info)
+  accesstoken=$(cat /opt/appdata/plexguide/pgclone.info | grep access_token | awk '{print $2}')
 
   curl --request POST \
-    'https://www.googleapis.com/drive/v3/teamdrives?requestId=pg-media' \
-    --header "Authorization: Bearer ${token}" \
+    'https://www.googleapis.com/drive/v3/teamdrives?requestId=pg2-media' \
+    --header "Authorization: Bearer ${accesstoken}" \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
     --data '{"name":"pg-media","backgroundImageLink":"https://pgblitz.com/styles/io_dark/images/pgblitz4.png"}' \
