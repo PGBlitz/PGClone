@@ -32,7 +32,7 @@ EOF
   accesstoken=$(cat /opt/appdata/plexguide/pgclone.info | grep access_token | awk '{print $2}')
 
   curl --request POST \
-    'https://www.googleapis.com/drive/v3/teamdrives?requestId=pg2-media' \
+    'https://www.googleapis.com/drive/v3/teamdrives?requestId=pgmedia' \
     --header "Authorization: Bearer ${accesstoken}" \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
