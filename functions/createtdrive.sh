@@ -5,8 +5,6 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/pgclone/functions/variables.sh
-
 ctdrive () {
 pgclonevars
 
