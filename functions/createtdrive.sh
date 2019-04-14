@@ -33,11 +33,9 @@ EOF
 
   curl --request POST \
     'https://www.googleapis.com/drive/v3/teamdrives?requestId=pg-media' \
-    --header 'Authorization: Bearer ${token}' \
+    --header "Authorization: Bearer ${token}" \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
     --data '{"name":"pg-media","backgroundImageLink":"https://pgblitz.com/styles/io_dark/images/pgblitz4.png"}' \
     --compressed
 }
-
-ctdrive
