@@ -54,7 +54,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --tpslimit 6 \
 --checkers=16 \
 --max-size=300G \
---drive-chunk-size={{vfs_dcs}} \
+--drive-chunk-size={{vfs_dcs}}M \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
