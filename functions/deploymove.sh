@@ -51,6 +51,7 @@ ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   transport=$transport \
   multihds=$multihds
   type=$type
+  vfs_dcs=$vfs_dcs
   hdpath=$hdpath"
 
 # output final display

@@ -79,7 +79,7 @@ if [[ "$mountselection" == "2" ]]; then
   start1="8"
   end1="1024"
   note1="
-NOTE2: Upload chunk size, only impacts uploading
+NOTE2: Upload chunk size, only impacts uploading, not recommended to change!
 
 NOTE3: Input must be one of the following numbers below (power of 2)!
 [8] [16] [32] [64] [128] [256] [512] [1024]"

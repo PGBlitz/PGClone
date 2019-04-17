@@ -83,6 +83,7 @@ ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   type=$type
   multihds=$multihds
   encryptbit=$encryptbit
+  vfs_dcs=$vfs_dcs
   hdpath=$hdpath"
 
 # output final display

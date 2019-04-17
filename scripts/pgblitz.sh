@@ -54,7 +54,7 @@ while read p; do
   --transfers=16 \
   --bwlimit {{bandwidth.stdout}}M \
   --max-size=300G \
-  --drive-chunk-size=128M \
+  --drive-chunk-size={{vfs_dcs}} \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
