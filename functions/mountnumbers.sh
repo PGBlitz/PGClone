@@ -16,12 +16,12 @@ VFS RClone Mount Settings ~ vfs.pgblitz.com
 
 RClone Variable Name           Default ~ Current Settings
 
-[1] Buffer-Size                64        [$vfs_bs] MB
-[2] Drive-Chunk-Size           128       [$vfs_dcs] MB
+[1] Buffer-Size                32        [$vfs_bs] MB
+[2] Drive-Chunk-Size           32       [$vfs_dcs] MB
 [3] Dir-Cache-Time             2         [$vfs_dct] Minutes
 [4] VFS-Cache-Max-Age          72        [$vfs_cma] Hours
 [5] VFS-Read-Chunk-Size        64        [$vfs_rcs] MB
-[6] VFS-Read-Chunk-Size-Limit  5         [$vfs_rcsl] GB
+[6] VFS-Read-Chunk-Size-Limit  2         [$vfs_rcsl] GB
 [Z] Exit
 
 NOTE1: Visit the URL! Bad settings causes mount performance issues!
@@ -67,7 +67,10 @@ if [[ "$mountselection" == "1" ]]; then
   note1="
 NOTE2: Utilizes RAM for each deployed stream. Increasing the size improves
 the load time/performance; but if the server runs out of RAM due to the
-settings being too high, the mounts can crash and dismount!"
+settings being too high, the mounts can crash and dismount!
+
+NOTE3: Must be less than the vfs-read-chunk-size to prevent too many open file requests!"
+
 fi
 
 if [[ "$mountselection" == "2" ]]; then
@@ -76,7 +79,7 @@ if [[ "$mountselection" == "2" ]]; then
   start1="8"
   end1="1024"
   note1="
-NOTE2: Impacts the chunk size of the files being broken up to stream!
+NOTE2: Upload chunk size, only impacts uploading
 
 NOTE3: Input must be one of the following numbers below (power of 2)!
 [8] [16] [32] [64] [128] [256] [512] [1024]"
@@ -88,9 +91,11 @@ if [[ "$mountselection" == "3" ]]; then
   start1="1"
   end1="1024"
   note1="
-NOTE2: Impacts the refresh rate of the files being seen! Setting this high
-will result in low refresh rates of the mounts! This can be bad when a file
-is uploaded, but a program delays seeing the file for over 5 minutes!"
+NOTE2: This controls the cache time for directory information and contents. 
+Local changes on the server are not impacted. 
+However, this does impact remote changes (such as from gdrive website)! 
+This can delay external changes from being seen until the cache expires.
+You should set this high if you don't regulary add/modify files outside of your server."
 fi
 
 if [[ "$mountselection" == "4" ]]; then
@@ -99,16 +104,16 @@ if [[ "$mountselection" == "4" ]]; then
   start1="1"
   end1="96"
   note1="
-NOTE2: Impacts how long a file remains to be seen after a refresh!"
+NOTE2: Impacts how long a directory is cached in memory!"
 fi
 
 if [[ "$mountselection" == "5" ]]; then
   name="VFS-Read-Chunk-Size"
   endinfo="MB"
-  start1="8"
+  start1="16"
   end1="1024"
   note1="
-NOTE2: No Info Yet!"
+NOTE2: Must be greater than the buffer-size to prevent too many open file requests!"
 fi
 
 if [[ "$mountselection" == "6" ]]; then
