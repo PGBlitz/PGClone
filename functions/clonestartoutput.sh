@@ -395,6 +395,7 @@ tee <<-EOF
 [4] Destroy All Service Keys | WARN: Wipes All Keys for the Project
 [5] Create New Project       | WARN: Resets Everything
 [6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
+[7] Create a TeamDrive
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -419,6 +420,8 @@ case $typed in
           projectnameset ;;
       6 )
           demomode ;;
+      7 )
+          ctdrive ;;
       Z )
           clonestart ;;
       z )
@@ -453,7 +456,7 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
       1 )
-          transportselect 
+          transportselect
           clonestart ;;
       2 )
           mountnumbers ;;
