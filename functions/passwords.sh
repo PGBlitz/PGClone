@@ -8,8 +8,8 @@
 blitzpasswordmain () {
 pgclonevars
 
-clonepassword57=$(cat /var/plexguide/clone.password)
-clonesalt57=$(cat /var/plexguide/clone.salt)
+clonepassword57=$(cat /var/plexguide/pgclone.password)
+clonesalt57=$(cat /var/plexguide/pgclone.salt)
 
 if [[ "$pstatus" != "NOT-SET" ]]; then
 tee <<-EOF
@@ -37,8 +37,8 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
-    rm -rf /var/plexguide/clone.password 1>/dev/null 2>&1
-    rm -rf /var/plexguide/clone.salt 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.password 1>/dev/null 2>&1
+    rm -rf /var/plexguide/pgclone.salt 1>/dev/null 2>&1
 
     rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
     rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
@@ -118,8 +118,8 @@ read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
-echo $primarypassword > /var/plexguide/clone.password
-echo $secondarypassword > /var/plexguide/clone.salt
+echo $primarypassword > /var/plexguide/pgclone.password
+echo $secondarypassword > /var/plexguide/pgclone.salt
 else blitzpasswordfinal; fi
 
 tee <<-EOF
