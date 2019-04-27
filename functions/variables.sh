@@ -27,11 +27,11 @@ pgclonevars () {
   variable /var/plexguide/oauth.check ""
   oauthcheck=$(cat /var/plexguide/oauth.check)
 
-  variable /var/plexguide/clone.password "NOT-SET"
-  if [[ $(cat /var/plexguide/clone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
+  variable /var/plexguide/pgclone.password "NOT-SET"
+  if [[ $(cat /var/plexguide/pgclone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
   else
     pstatus="ACTIVE"
-    clonepassword=$(cat /var/plexguide/clone.password)
+    clonepassword=$(cat /var/plexguide/pgclone.password)
     clonesalt=$(cat /var/plexguide/pgclone.salt)
   fi
 
