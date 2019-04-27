@@ -32,8 +32,8 @@ EOF
 exitclone
 
 num=$typed
-if [[ "$typed" -le "0" || "$typed" -ge "21" ]]; then keystart
-elif [[ "$typed" -ge "1" && "$typed" -le "20" ]]; then keyphase2
+if [[ "$typed" -le "0" || "$typed" -ge "51" ]]; then keystart
+elif [[ "$typed" -ge "1" && "$typed" -le "50" ]]; then keyphase2
 else keystart; fi
 }
 
