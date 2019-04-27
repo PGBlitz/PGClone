@@ -79,9 +79,8 @@ mountset () {
         Plex opens several files during library scans and each file open will consume up to the amount of RAM specified.
         If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
         
-        Recommendations: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 16-32MB | 16GB+ RAM: 64MB-128MB
-        
-        NOTICE: This value must be less than the vfs-read-chunk-size to prevent 'too many open file requests' errors!
+        RECOMMENDATIONS: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 16-32MB | 16GB+ RAM: 64MB-128MB
+        This value must be less than the vfs-read-chunk-size to prevent 'too many open file requests' errors!
         "
 
     fi
@@ -111,7 +110,8 @@ mountset () {
         sizeSuffix="MB"
         start="16"
         end="1024"
-        note="Must be greater than the buffer-size to prevent too many open file requests!"
+        note="This allows reading the source objects in parts, by requesting only chunks from the remote that are actually read at the cost of an increased number of requests.
+        Must be greater than the buffer-size to prevent too many open file requests!"
     fi
     
     if [[ "$mountselection" == "5" ]]; then
@@ -119,7 +119,8 @@ mountset () {
         sizeSuffix="GB"
         start="1"
         end="100"
-        note="The chunk size for each open file will get doubled for each chunk read, until this limit is reached."
+        note="The chunk size for each open file will get doubled for each chunk read, until the specified value is reached.
+        This limit must be greater than vfs-read-chunk-size and it's only used when the vfs-cache-mode is not set to full."
     fi
     
     if [[ "$mountselection" == "6" ]]; then
@@ -128,22 +129,22 @@ mountset () {
         start="1"
         end="4"
         note="1) off:
-    - Files opened for read OR write will NOT be buffered to disks.
-    - Files can’t be opened for both read AND write.
-    - Files opened for write can’t be seeked.
+    ◽️ Files opened for read OR write will NOT be buffered to disks.
+    ◽️ Files can’t be opened for both read AND write.
+    ◽️ Files opened for write can’t be seeked.
 
 2) minimal:
-    - Files opened for read/write will be buffered to disks.
-    - Files opened for write only can’t be seeked
+    ◽️ Files opened for read/write will be buffered to disks.
+    ◽️ Files opened for write only can’t be seeked
 
 3) writes: 
-    - Write only and read/write files are buffered to disk first.
-    - This mode should support all normal file system operations.
+    ◽️ Write only and read/write files are buffered to disk first.
+    ◽️ This mode should support all normal file system operations.
 
 4) full: 
-    - All files are buffered to and from disk. 
-    - When a file is opened for read it will be downloaded in its entirety first.
-    - This mode should support all normal file system operations."
+    ◽️ All files are buffered to and from disk. 
+    ◽️ When a file is opened for read it will be downloaded in its entirety first.
+    ◽️ This mode should support all normal file system operations."
 fi
 
 if [[ "$mountselection" == "7" ]]; then
