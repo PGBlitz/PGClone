@@ -395,7 +395,7 @@ tee <<-EOF
 [4] Destroy All Service Keys | WARN: Wipes All Keys for the Project
 [5] Create New Project       | WARN: Resets Everything
 [6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
-[7] Clone Clean - Destroy Garbage Files every [$cloneminutes] minutes
+[7] Clone Clean - Destroy Garbage Files every [$cloneclean] minutes
 [8] Create a TeamDrive
 [Z] Exit
 
