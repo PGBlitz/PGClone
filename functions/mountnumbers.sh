@@ -91,9 +91,9 @@ mountset () {
       sizeSuffix="MB"
       start="8"
       end="1024"
-      note="Upload chunk size, increasing the chunk size may increase upload speed, however it can result it mor
-            Input must be one of the following numbers (power of 2)!
-            [8] [16] [32] [64] [128] [256] [512] [1024]"
+      note="Upload chunk size, increasing the chunk size may increase upload speed, however it uses more RAM.
+      Input must be one of the following numbers (power of 2)!
+      [8] [16] [32] [64] [128] [256] [512] [1024]"
     fi
     
     if [[ "$mountselection" == "3" ]]; then
@@ -128,23 +128,23 @@ mountset () {
         start="1"
         end="4"
         note="1) off:
-            - Files opened for read OR write will NOT be buffered to disks.
-            - Files can’t be opened for both read AND write.
-            - Files opened for write can’t be seeked.
-            
-            2) minimal:
-                - Files opened for read/write will be buffered to disks.
-                - Files opened for write only can’t be seeked
-              
-            3) writes: 
-                - Write only and read/write files are buffered to disk first.
-                - This mode should support all normal file system operations.
+    - Files opened for read OR write will NOT be buffered to disks.
+    - Files can’t be opened for both read AND write.
+    - Files opened for write can’t be seeked.
 
-            4) full: 
-                - All files are buffered to and from disk. 
-                - When a file is opened for read it will be downloaded in its entirety first.
-                - This mode should support all normal file system operations."
-  fi
+2) minimal:
+    - Files opened for read/write will be buffered to disks.
+    - Files opened for write only can’t be seeked
+
+3) writes: 
+    - Write only and read/write files are buffered to disk first.
+    - This mode should support all normal file system operations.
+
+4) full: 
+    - All files are buffered to and from disk. 
+    - When a file is opened for read it will be downloaded in its entirety first.
+    - This mode should support all normal file system operations."
+fi
 
 if [[ "$mountselection" == "7" ]]; then
   name="VFS-Cache-Max-Age"
