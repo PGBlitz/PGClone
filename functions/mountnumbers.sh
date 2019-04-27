@@ -17,7 +17,7 @@ VFS RClone Mount Settings ~ vfs.pgblitz.com
 RClone Variable Name           Default ~ Current Settings
 
 [1] Buffer-Size                16MB        [$vfs_bs] MB
-[2] Drive-Chunk-Size           256MB       [$vfs_dcs] MB
+[2] Drive-Chunk-Size           64MB       [$vfs_dcs] MB
 [3] Dir-Cache-Time             2M          [$vfs_dct] Minutes
 [4] VFS-Read-Chunk-Size        64MB        [$vfs_rcs] MB
 [5] VFS-Read-Chunk-Size-Limit  2GB         [$vfs_rcsl] GB
