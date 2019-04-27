@@ -100,16 +100,16 @@ elif [[ "$dversion" == "le" ]]; then dversionoutput="Local HD/Mount"
 else dversionoutput="None"; fi
 
 # For PG Blitz Mounts
-  variable /var/plexguide/vfs_bs "32"
+  variable /var/plexguide/vfs_bs "16"
   vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-  variable /var/plexguide/vfs_dcs "32"
+  variable /var/plexguide/vfs_dcs "256"
   vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
   variable /var/plexguide/vfs_dct "2"
   vfs_dct=$(cat /var/plexguide/vfs_dct)
 
-  variable /var/plexguide/vfs_cma "72"
+  variable /var/plexguide/vfs_cma "168"
   vfs_cma=$(cat /var/plexguide/vfs_cma)
 
   variable /var/plexguide/vfs_rcs "64"
@@ -117,5 +117,12 @@ else dversionoutput="None"; fi
 
   variable /var/plexguide/vfs_rcsl "2"
   vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
+  
+  variable /var/plexguide/vfs_cm "off"
+  vfs_rcsl=$(cat /var/plexguide/vfs_cm)
+
+  variable /var/plexguide/vfs_cms "100"
+  vfs_rcsl=$(cat /var/plexguide/vfs_cm)
+
 
 }
