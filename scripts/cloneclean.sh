@@ -3,6 +3,7 @@
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
 
+
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
 mkdir -p "$dlpath/move"

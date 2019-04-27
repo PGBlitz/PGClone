@@ -22,6 +22,8 @@ chmod -R 775 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
+  cleaner="$(cat /var/plexguide/cloneclean)"
+
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
@@ -71,7 +73,7 @@ while read p; do
   sleep 2
 
   # Remove empty directories
-  find "{{hdpath}}/downloads" -mindepth 2 -mmin +666 -type d -size -100M -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -mmin +$cloneclean -type d -size -100M -exec rm -rf {} \;
   find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 done </var/plexguide/.blitzfinal

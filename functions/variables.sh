@@ -101,7 +101,7 @@ else dversionoutput="None"; fi
 
 # For Clone Clean
   variable /var/plexguide/cloneclean "600"
-  cloneclean=$(cat /var/plexguide/clone.clean)
+  cloneclean=$(cat /var/plexguide/cloneclean)
 
 # For PG Blitz Mounts
   variable /var/plexguide/vfs_bs "32"

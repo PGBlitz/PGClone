@@ -29,6 +29,8 @@ sleep 10
 while true
 do
 
+  cleaner="$(cat /var/plexguide/cloneclean)"
+
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
 --log-file=/var/plexguide/logs/pgmove.log \
@@ -68,7 +70,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 sleep 5
 
 # Remove empty directories
-find "{{hdpath}}/downloads" -mindepth 2 -mmin +{{hdpath}} -type d -size -100M -exec rm -rf {} \;
+find "{{hdpath}}/downloads" -mindepth 2 -mmin +$cloneclean -type d -size -100M -exec rm -rf {} \;
 find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
 
 done
