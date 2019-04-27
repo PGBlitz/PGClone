@@ -103,7 +103,7 @@ else dversionoutput="None"; fi
   variable /var/plexguide/vfs_bs "16"
   vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-  variable /var/plexguide/vfs_dcs "256"
+  variable /var/plexguide/vfs_dcs "64"
   vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
   variable /var/plexguide/vfs_dct "2"
