@@ -395,7 +395,8 @@ tee <<-EOF
 [4] Destroy All Service Keys | WARN: Wipes All Keys for the Project
 [5] Create New Project       | WARN: Resets Everything
 [6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
-[7] Create a TeamDrive
+[7] Clone Clean - Destroy Garbage Files every [$cloneminutes] minutes
+[8] Create a TeamDrive
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -421,6 +422,8 @@ case $typed in
       6 )
           demomode ;;
       7 )
+          cloneclean ;;
+      8 )
           ctdrive ;;
       Z )
           clonestart ;;
@@ -444,6 +447,7 @@ tee <<-EOF
 [1] Transport Select         | INFO: Change Transport Type
 [2] RClone VFS Mount Setting | INFO: Change Varibles to for the Mount
 [3] Multi-HD Option          | INFO: Add Multi-Points and Options
+[4] Clone Clean - Destroy Garbage Files Every [$cloneminutes] Minutes
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -463,7 +467,7 @@ case $typed in
       3 )
           bash /opt/plexguide/menu/pgcloner/multihd.sh ;;
       4 )
-          demomode ;;
+          cloneclean ;;
       Z )
           clonestart ;;
       z )

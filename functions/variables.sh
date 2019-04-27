@@ -99,6 +99,10 @@ elif [[ "$dversion" == "be" ]]; then dversionoutput="Encrypted Blitz"
 elif [[ "$dversion" == "le" ]]; then dversionoutput="Local HD/Mount"
 else dversionoutput="None"; fi
 
+# For Clone Clean
+  variable /var/plexguide/cloneclean "600"
+  cloneclean=$(cat /var/plexguide/clone.clean)
+
 # For PG Blitz Mounts
   variable /var/plexguide/vfs_bs "32"
   vfs_bs=$(cat /var/plexguide/vfs_bs)

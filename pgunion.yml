@@ -170,3 +170,9 @@
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
+
+    - cron:
+        name: Hourly Clean PG Clone Clean
+        special_time: "hourly"
+        job: "bash /opt/pgclone/cloneclean.sh"
+        state: present
