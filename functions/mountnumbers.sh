@@ -69,8 +69,7 @@ mountset () {
         sizeSuffix="MB"
         start="8"
         end="1024"
-        note="
-        Open files will be buffered to RAM up to this limit. This limit is per opened file.
+        note="Open files will be buffered to RAM up to this limit. This limit is per opened file.
         
         The buffer size should be a relatively small amount. It's intended to smooth out network congestion and blips.
         The buffer will get cleared when you seek in plex or when the file is closed.
@@ -128,29 +127,31 @@ mountset () {
         sizeSuffix=""
         start="1"
         end="4"
-        note="
-        1) off:
-          - Files opened for read OR write will NOT be buffered to disks.
-          - Files can’t be opened for both read AND write.
-          - Files opened for write can’t be seeked.
-        2) minimal:
-          - Files opened for read/write will be buffered to disks.
-          - Files opened for write only can’t be seeked
-        3) writes: 
-          - Write only and read/write files are buffered to disk first.
-          - This mode should support all normal file system operations.
-        4) full: 
-          - All files are buffered to and from disk. 
-          - When a file is opened for read it will be downloaded in its entirety first.
-          - This mode should support all normal file system operations."
-fi
+        note="1) off:
+            - Files opened for read OR write will NOT be buffered to disks.
+            - Files can’t be opened for both read AND write.
+            - Files opened for write can’t be seeked.
+            
+            2) minimal:
+                - Files opened for read/write will be buffered to disks.
+                - Files opened for write only can’t be seeked
+              
+            3) writes: 
+                - Write only and read/write files are buffered to disk first.
+                - This mode should support all normal file system operations.
+
+            4) full: 
+                - All files are buffered to and from disk. 
+                - When a file is opened for read it will be downloaded in its entirety first.
+                - This mode should support all normal file system operations."
+  fi
 
 if [[ "$mountselection" == "7" ]]; then
   name="VFS-Cache-Max-Age"
   sizeSuffix="Hours"
   start="1"
   end="360"
-  note="Only used if vfs-cache-mode is NOT off, impacts how long files are cached in memory!"
+  note="Impacts how long files are cached on disk, only used if vfs-cache-mode is NOT off!"
 fi
 
 if [[ "$mountselection" == "8" ]]; then
@@ -158,7 +159,7 @@ if [[ "$mountselection" == "8" ]]; then
   sizeSuffix="GB"
   start="1"
   end="1000"
-  note="Only used if vfs-cache-mode is NOT off, impacts how long files are cached on disk. Value is the max total size of objects in the cache."
+  note="The max total size of objects in the cache, only used if vfs-cache-mode is NOT off."
 fi
     
 tee <<-EOF
