@@ -447,7 +447,7 @@ tee <<-EOF
 [1] Transport Select         | INFO: Change Transport Type
 [2] RClone VFS Mount Setting | INFO: Change Varibles to for the Mount
 [3] Multi-HD Option          | INFO: Add Multi-Points and Options
-[4] Clone Clean - Destroy Garbage Files Every [$cloneminutes] Minutes
+[4] Clone Clean - Destroy Garbage Files Every [$cloneclean] Minutes
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
