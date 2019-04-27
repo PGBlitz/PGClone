@@ -16,19 +16,18 @@ VFS RClone Mount Settings ~ vfs.pgblitz.com
 
 RClone Variable Name           Default ~ Current Settings
 
-[1] Buffer-Size                16MB        [$vfs_bs] MB
-[2] Drive-Chunk-Size           64MB       [$vfs_dcs] MB
-[3] Dir-Cache-Time             2M          [$vfs_dct] Minutes
-[4] VFS-Read-Chunk-Size        64MB        [$vfs_rcs] MB
-[5] VFS-Read-Chunk-Size-Limit  2GB         [$vfs_rcsl] GB
-[6] VFS-Cache-Mode             off         [$vfs_cm]
-[7] VFS-Cache-Max-Age          168H        [$vfs_cma] Hours
-[8] VFS-Cache-Max-Size         100GB       [$vfs_cms] GB
+[1] Buffer-Size                16M        [$vfs_bs] MB
+[2] Drive-Chunk-Size           64M        [$vfs_dcs] MB
+[3] Dir-Cache-Time             2M         [$vfs_dct] Minutes
+[4] VFS-Read-Chunk-Size        64M        [$vfs_rcs] MB
+[5] VFS-Read-Chunk-Size-Limit  2G         [$vfs_rcsl] GB
+[6] VFS-Cache-Mode             off        [$vfs_cm]
+[7] VFS-Cache-Max-Age          168H       [$vfs_cma] Hours
+[8] VFS-Cache-Max-Size         100G       [$vfs_cms] GB
 [Z] Exit
 
-note: Visit the URL! Bad settings causes mount performance issues!
-NOTE2: Changed the Vaules? Must REDEPLOY to go into AFFECT!
-
+Please read the wiki on how changing these settings impact stability and performance!
+After you change these settings, you must redeploy the mounts for them to take effect.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
     
@@ -86,17 +85,16 @@ mountset () {
         NOTICE: This value must be less than the vfs-read-chunk-size to prevent 'too many open file requests' errors!
         "
 
-fi
+    fi
 
-if [[ "$mountselection" == "2" ]]; then
-  name="Drive-Chunk-Size"
-  sizeSuffix="MB"
-  start="8"
-  end="1024"
-        note="
-        Upload chunk size, increasing the chunk size may increase upload speed, however it can result it mor
-        Input must be one of the following numbers (power of 2)!
-        [8] [16] [32] [64] [128] [256] [512] [1024]"
+    if [[ "$mountselection" == "2" ]]; then
+      name="Drive-Chunk-Size"
+      sizeSuffix="MB"
+      start="8"
+      end="1024"
+      note="Upload chunk size, increasing the chunk size may increase upload speed, however it can result it mor
+            Input must be one of the following numbers (power of 2)!
+            [8] [16] [32] [64] [128] [256] [512] [1024]"
     fi
     
     if [[ "$mountselection" == "3" ]]; then
@@ -144,8 +142,7 @@ if [[ "$mountselection" == "2" ]]; then
         4) full: 
           - All files are buffered to and from disk. 
           - When a file is opened for read it will be downloaded in its entirety first.
-          - This mode should support all normal file system operations.
-"
+          - This mode should support all normal file system operations."
 fi
 
 if [[ "$mountselection" == "7" ]]; then
@@ -170,10 +167,7 @@ tee <<-EOF
 Setting Variable >>> $name
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Type a number between [$start] and [$end] ($sizeSuffix)
-
-Please read the wiki on how changing these settings impact stability and performance!
-After you change these settings, you must redeploy the mounts for them to take effect.
+Type a number between [$start] and [$end] $sizeSuffix
 
 $note
 
