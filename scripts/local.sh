@@ -14,6 +14,3 @@ chmod -R 755 "{{hdpath}}/move"
 
 mergerfs -o func.getattr=newest,category.create=ff,direct_io,use_ino,atomic_o_trunc,big_writes,default_permissions,splice_move,splice_read,splice_write,allow_other,sync_read,minfreespace=15,umask=002,uid=1000,gid=1000,fsname=pgunion,nonempty \
 {{hdpath}}/move=RO:{{hdpath}}/downloads=RW:{{multihds}} /mnt/unionfs
-
-# old mergerfs pg7 reference
-###ExecStart=/usr/bin/mergerfs -o defaults,allow_other,direct_io,nonempty,use_ino,category.create=eplfs,moveonenospc=true,minfreespace=15G,fsname=pgPool {{mergerfs_path.stdout}} /mnt/unionfs
