@@ -119,10 +119,9 @@ else dversionoutput="None"; fi
   vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
   
   variable /var/plexguide/vfs_cm "off"
-  vfs_rcsl=$(cat /var/plexguide/vfs_cm)
+  vfs_cm=$(cat /var/plexguide/vfs_cm)
 
   variable /var/plexguide/vfs_cms "100"
-  vfs_rcsl=$(cat /var/plexguide/vfs_cm)
-
+  vfs_cms=$(cat /var/plexguide/vfs_cms)
 
 }
