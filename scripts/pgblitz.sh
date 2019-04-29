@@ -73,8 +73,8 @@ while read p; do
   sleep 2
 
   # Remove empty directories
-  find "{{hdpath}}/downloads" -mindepth 2 -mmin +$cloneclean -type d -size -100M -exec rm -rf {} \;
-  find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+  find "{{hdpath}}/downloads" -mindepth 2 -cmin +$cloneclean -type d -size -100M -exec rm -rf {} \;
+  find "{{hdpath}}/move" -mindepth 2 -cmin +5 -type d -empty -delete
 
 done </var/plexguide/.blitzfinal
 }
