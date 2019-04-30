@@ -73,7 +73,7 @@ while read p; do
   sleep 2
 
   # Remove empty directories
-  find "{{hdpath}}/move" -mindepth 2 -cmin +5 -type d -empty -exec rm -rf {} \;
+  find "{{hdpath}}/move/*" -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage
   find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rm -rf {} \;
