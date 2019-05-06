@@ -68,7 +68,7 @@ mountset () {
         name="Buffer-Size"
         sizeSuffix="MB"
         start="8"
-        end="1024"
+        end="8096"
         note="Open files will be buffered to RAM up to this limit. This limit is per opened file.
         
         The buffer size should be a relatively small amount. It's intended to smooth out network congestion and blips.
