@@ -16,7 +16,7 @@ User=0
 Group=0
 ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --config /opt/appdata/plexguide/rclone.conf \
---cache-db-purge
+--cache-db-purge \
 --allow-non-empty \
 --allow-other \
 --size-only \
