@@ -17,7 +17,7 @@ VFS RClone Mount Settings ~ vfs.pgblitz.com
 RClone Variable Name           Default ~ Current Settings
 
 [1] Buffer-Size                16M        [$vfs_bs] MB
-[2] Drive-Chunk-Size           64M        [$vfs_dcs] MB
+[2] Drive-Chunk-Size           256M       [$vfs_dcs] MB
 [3] Dir-Cache-Time             2M         [$vfs_dct] Minutes
 [4] VFS-Read-Chunk-Size        64M        [$vfs_rcs] MB
 [5] VFS-Read-Chunk-Size-Limit  2G         [$vfs_rcsl] GB
@@ -79,8 +79,7 @@ mountset () {
         Plex opens several files during library scans and each file open will consume up to the amount of RAM specified.
         If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
         
-        RECOMMENDATIONS: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 16-32MB | 16GB+ RAM: 64MB-128MB
-        This value must be less than the vfs-read-chunk-size to prevent 'too many open file requests' errors!
+        RECOMMENDATIONS: 2GB RAM: 16MB | 4GB RAM: 16-32| 8GB RAM: 32-64MB | 16GB RAM: 64-128MB | 32GB RAM: 512MB
         "
 
     fi
@@ -111,7 +110,7 @@ mountset () {
         start="16"
         end="1024"
         note="This allows reading the source objects in parts, by requesting only chunks from the remote that are actually read at the cost of an increased number of requests.
-        Must be greater than the buffer-size to prevent too many open file requests!"
+        Setting this too small will result in API bans for too many reads, setting this too high will waste download quota."
     fi
     
     if [[ "$mountselection" == "5" ]]; then
@@ -137,12 +136,12 @@ mountset () {
     ◽️ Files opened for read/write will be buffered to disks.
     ◽️ Files opened for write only can’t be seeked
 
-3) writes: 
+3) writes (recommended): 
     ◽️ Write only and read/write files are buffered to disk first.
     ◽️ This mode should support all normal file system operations.
 
-4) full: 
-    ◽️ All files are buffered to and from disk. 
+4) full (not recommended, scanning issues): 
+    ◽️ All files are buffered to and from disk, files are fully downloaded on open, even on scans.
     ◽️ When a file is opened for read it will be downloaded in its entirety first.
     ◽️ This mode should support all normal file system operations."
 fi
