@@ -30,6 +30,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --buffer-size {{vfs_bs}}M \
 --vfs-cache-mode {{vfs_cm}} \
 --vfs-cache-max-age {{vfs_cma}}h \
+--vfs-cache-max-size {{vfs_cms}}G \
 --vfs-read-chunk-size {{vfs_rcs}}M \
 --vfs-read-chunk-size-limit {{vfs_rcsl}}G
 
