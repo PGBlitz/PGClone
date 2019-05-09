@@ -104,28 +104,28 @@ else dversionoutput="None"; fi
   cloneclean=$(cat /var/plexguide/cloneclean)
 
 # For PG Blitz Mounts
-  variable /var/plexguide/vfs_bs "16"
+  variable /var/plexguide/vfs_bs "16M"
   vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-  variable /var/plexguide/vfs_dcs "256"
+  variable /var/plexguide/vfs_dcs "128M"
   vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
-  variable /var/plexguide/vfs_dct "2"
+  variable /var/plexguide/vfs_dct "2m"
   vfs_dct=$(cat /var/plexguide/vfs_dct)
 
   variable /var/plexguide/vfs_cm "writes"
   vfs_cm=$(cat /var/plexguide/vfs_cm)
 
-  variable /var/plexguide/vfs_cma "1"
+  variable /var/plexguide/vfs_cma "1h"
   vfs_cma=$(cat /var/plexguide/vfs_cma)
 
-  variable /var/plexguide/vfs_cms "100"
+  variable /var/plexguide/vfs_cms "off"
   vfs_cms=$(cat /var/plexguide/vfs_cms)
 
-  variable /var/plexguide/vfs_rcs "64"
+  variable /var/plexguide/vfs_rcs "128M"
   vfs_rcs=$(cat /var/plexguide/vfs_rcs)
 
-  variable /var/plexguide/vfs_rcsl "2"
+  variable /var/plexguide/vfs_rcsl "off"
   vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
 
 }
