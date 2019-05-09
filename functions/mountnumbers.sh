@@ -17,12 +17,12 @@ VFS RClone Mount Settings ~ vfs.pgblitz.com
 RClone Variable Name           Default ~ Current Settings
 
 [1] Buffer-Size                16M        [$vfs_bs] MB
-[2] Drive-Chunk-Size           64M        [$vfs_dcs] MB
+[2] Drive-Chunk-Size           256M       [$vfs_dcs] MB
 [3] Dir-Cache-Time             2M         [$vfs_dct] Minutes
 [4] VFS-Read-Chunk-Size        64M        [$vfs_rcs] MB
 [5] VFS-Read-Chunk-Size-Limit  2G         [$vfs_rcsl] GB
-[6] VFS-Cache-Mode             off        [$vfs_cm]
-[7] VFS-Cache-Max-Age          168H       [$vfs_cma] Hours
+[6] VFS-Cache-Mode             writes     [$vfs_cm]
+[7] VFS-Cache-Max-Age          1H         [$vfs_cma] Hours
 [8] VFS-Cache-Max-Size         100G       [$vfs_cms] GB
 [Z] Exit
 
@@ -68,20 +68,19 @@ mountset () {
         name="Buffer-Size"
         sizeSuffix="MB"
         start="8"
-        end="1024"
+        end="8096"
         note="Open files will be buffered to RAM up to this limit. This limit is per opened file.
+
+The buffer size should be a relatively small amount. It's intended to smooth out network congestion and blips.
+The buffer will get cleared when you seek in plex or when the file is closed.
+Having a larger buffer may cause slower video start times.
         
-        The buffer size should be a relatively small amount. It's intended to smooth out network congestion and blips.
-        The buffer will get cleared when you seek in plex or when the file is closed.
-        Having a larger buffer may cause slower video start times.
+WARNING: This is highly dependent on the amount of RAM and number of opened files.
+Apps open several files during library scans and each file open will consume up to the amount of RAM specified.
+If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
         
-        WARNING: This is highly dependent on the amount of RAM and number of opened files.
-        Plex opens several files during library scans and each file open will consume up to the amount of RAM specified.
-        If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
-        
-        RECOMMENDATIONS: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 16-32MB | 16GB+ RAM: 64MB-128MB
-        This value must be less than the vfs-read-chunk-size to prevent 'too many open file requests' errors!
-        "
+RECOMMENDATIONS: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 32-64MB | 16GB RAM: 64-128MB | 32GB RAM: 512-1024MB
+"
 
     fi
 
@@ -90,9 +89,12 @@ mountset () {
       sizeSuffix="MB"
       start="8"
       end="1024"
-      note="Upload chunk size, increasing the chunk size may increase upload speed, however it uses more RAM.
-      Input must be one of the following numbers (power of 2)!
-      [8] [16] [32] [64] [128] [256] [512] [1024]"
+      note="Upload chunk size, increasing the chunk size increases upload speed, however it uses more RAM.
+
+128-256MB will max out a 1G upload connection, it's recommended to set the BWLimit to prevent consuming all bandwidth.
+
+Input must be one of the following numbers (power of 2)!
+[8] [16] [32] [64] [128] [256] [512] [1024]"
     fi
     
     if [[ "$mountselection" == "3" ]]; then
@@ -101,8 +103,8 @@ mountset () {
         start="1"
         end="7620"
         note="This controls the cache time for remote directory information and contents.
-        This may delay external changes (such as from gdrive website) from being seen on your server until the cache expires.
-        You should set this high unless you make lots of external changes."
+This may delay external changes (such as from gdrive website) from being seen on your server until the cache expires.
+You should set this high unless you make lots of external changes."
     fi
     
     if [[ "$mountselection" == "4" ]]; then
@@ -111,7 +113,7 @@ mountset () {
         start="16"
         end="1024"
         note="This allows reading the source objects in parts, by requesting only chunks from the remote that are actually read at the cost of an increased number of requests.
-        Must be greater than the buffer-size to prevent too many open file requests!"
+Setting this too small will result in API bans for too many reads, setting this too high will waste download quota and it will take longer to start playback."
     fi
     
     if [[ "$mountselection" == "5" ]]; then
@@ -120,7 +122,7 @@ mountset () {
         start="1"
         end="100"
         note="The chunk size for each open file will get doubled for each chunk read, until the specified value is reached.
-        This limit must be greater than vfs-read-chunk-size and it's only used when the vfs-cache-mode is not set to full."
+This limit must be greater than vfs-read-chunk-size and it's only used when the vfs-cache-mode is not set to full."
     fi
     
     if [[ "$mountselection" == "6" ]]; then
@@ -137,12 +139,12 @@ mountset () {
     ◽️ Files opened for read/write will be buffered to disks.
     ◽️ Files opened for write only can’t be seeked
 
-3) writes: 
+3) writes (recommended): 
     ◽️ Write only and read/write files are buffered to disk first.
     ◽️ This mode should support all normal file system operations.
 
-4) full: 
-    ◽️ All files are buffered to and from disk. 
+4) full (not recommended, scanning issues): 
+    ◽️ All files are buffered to and from disk, files are fully downloaded on open, even on scans.
     ◽️ When a file is opened for read it will be downloaded in its entirety first.
     ◽️ This mode should support all normal file system operations."
 fi
@@ -169,9 +171,9 @@ tee <<-EOF
 Setting Variable >>> $name
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Type a number between [$start] and [$end] $sizeSuffix
-
 $note
+
+Type a number between [$start] and [$end] $sizeSuffix
 
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
