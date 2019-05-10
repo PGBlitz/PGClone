@@ -2,7 +2,7 @@
 
 # Outside Variables
 dlpath=$(cat /var/plexguide/server.hd.path)
-
+cleaner="$(cat /var/plexguide/cloneclean)"
 
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
@@ -12,6 +12,9 @@ mkdir -p "$dlpath/move"
 chown -R 1000:1000 "$dlpath/move"
 chmod -R 775 "$dlpath/move"
 
-# Execution
-find "{{hdpath}}/downloads" -mindepth 2 -mmin +{{hdpath}} -type d -size -100M -exec rm -rf {} \;
-find "{{hdpath}}/move" -mindepth 2 -mmin +5 -type d -empty -delete
+# Remove empty directories
+find "$dlpath/move/*" -type d -mmin +2 -empty -exec rm -rf {} \;
+
+# Removes garbage
+find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rm -rf {} \;
+find "$dlpath/downloads" -mindepth 2 -type f -cmin +$cleaner -size +1M -exec rm -rf {} \;

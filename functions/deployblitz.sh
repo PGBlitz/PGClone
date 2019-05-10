@@ -28,7 +28,9 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
+  vfs_cm=$vfs_cm
   vfs_cma=$vfs_cma
+  vfs_cms=$vfs_cms
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   drive=gdrive"
@@ -38,7 +40,9 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
+  vfs_cm=$vfs_cm
   vfs_cma=$vfs_cma
+  vfs_cms=$vfs_cms
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   drive=tdrive"
@@ -49,7 +53,9 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
+  vfs_cm=$vfs_cm
   vfs_cma=$vfs_cma
+  vfs_cms=$vfs_cms
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   drive=gcrypt"
@@ -61,7 +67,9 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
+  vfs_cm=$vfs_cm
   vfs_cma=$vfs_cma
+  vfs_cms=$vfs_cms
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   drive=tcrypt"

@@ -104,28 +104,58 @@ else dversionoutput="None"; fi
   cloneclean=$(cat /var/plexguide/cloneclean)
 
 # For PG Blitz Mounts
-  variable /var/plexguide/vfs_bs "16"
+  variable /var/plexguide/vfs_bs "16M"
   vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-  variable /var/plexguide/vfs_dcs "64"
+  variable /var/plexguide/vfs_dcs "128M"
   vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
-  variable /var/plexguide/vfs_dct "2"
+  variable /var/plexguide/vfs_dct "2m"
   vfs_dct=$(cat /var/plexguide/vfs_dct)
 
-  variable /var/plexguide/vfs_cma "1"
-  vfs_cma=$(cat /var/plexguide/vfs_cma)
-
-  variable /var/plexguide/vfs_rcs "64"
-  vfs_rcs=$(cat /var/plexguide/vfs_rcs)
-
-  variable /var/plexguide/vfs_rcsl "2"
-  vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
-
-  variable /var/plexguide/vfs_cm "off"
+  variable /var/plexguide/vfs_cm "writes"
   vfs_cm=$(cat /var/plexguide/vfs_cm)
 
-  variable /var/plexguide/vfs_cms "100"
+  variable /var/plexguide/vfs_cma "1h"
+  vfs_cma=$(cat /var/plexguide/vfs_cma)
+
+  variable /var/plexguide/vfs_cms "off"
   vfs_cms=$(cat /var/plexguide/vfs_cms)
+
+  variable /var/plexguide/vfs_rcs "128M"
+  vfs_rcs=$(cat /var/plexguide/vfs_rcs)
+
+  variable /var/plexguide/vfs_rcsl "off"
+  vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
+
+#Upgrade old vars by resetting to new defaults. Can probably remove after August 2019.
+
+if [[ $(cat /var/plexguide/vfs_bs) != "*M" ]]; then
+  echo "16M" > /var/plexguide/vfs_bs;
+fi
+
+if [[ $(cat /var/plexguide/vfs_dcs) != "*M" ]]; then
+  echo "128M" > /var/plexguide/vfs_dcs;
+fi
+
+if [[ $(cat /var/plexguide/vfs_dct) != "*m" ]]; then
+  echo "2m" > /var/plexguide/vfs_dct;
+fi
+
+if [[ $(cat /var/plexguide/vfs_cma) != "*h" ]]; then
+  echo "1h" > /var/plexguide/vfs_cma;
+fi
+
+if [[ $(cat /var/plexguide/vfs_cms) != "*G" && $(cat /var/plexguide/vfs_cms) != "off" ]]; then
+  echo "off" > /var/plexguide/vfs_cms;
+fi
+
+if [[ $(cat /var/plexguide/vfs_rcs) != "*M" ]]; then
+  echo "128M" > /var/plexguide/vfs_rcs;
+fi
+
+if [[ $(cat /var/plexguide/vfs_rcsl) != "*M" && $(cat /var/plexguide/vfs_rcsl) != "off" ]]; then
+  echo "off" > /var/plexguide/vfs_rcsl;
+fi
 
 }
