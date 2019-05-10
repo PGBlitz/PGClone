@@ -70,7 +70,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 sleep 5
 
 # Remove empty directories
-find "{{hdpath}}/move/*" -type d -mmin +2 -empty -exec rm -rf {} \;
+find "{{hdpath}}/move/" -type d -mmin +2 -empty -exec rm -rf {} \;
 
 # Removes garbage
 find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rm -rf {} \;
