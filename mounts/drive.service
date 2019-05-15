@@ -29,7 +29,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --vfs-read-chunk-size {{vfs_rcs}}M \
 --vfs-read-chunk-size-limit {{vfs_rcsl}}G \
 --drive-chunk-size {{vfs_dcs}}M \
---user-agent= {{uagent}} \
+--user-agent={{uagent}} \
 --buffer-size {{vfs_bs}}M
 
 ExecStop=/bin/fusermount -uz /mnt/{{drive}}
