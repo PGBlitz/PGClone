@@ -22,7 +22,6 @@ startscript () {
 while read p; do
 
   cleaner="$(cat /var/plexguide/cloneclean)"
-  uagent="$(cat /var/plexguide/uagent)"
 
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
@@ -56,7 +55,6 @@ while read p; do
   --transfers=16 \
   --bwlimit {{bandwidth.stdout}}M \
   --max-size=300G \
-  --user-agent="${uagent}" \
   --drive-chunk-size={{vfs_dcs}} \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
