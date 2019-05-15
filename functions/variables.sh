@@ -107,25 +107,25 @@ else dversionoutput="None"; fi
   variable /var/plexguide/vfs_bs "16"
   vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-  variable /var/plexguide/vfs_dcs "256"
+  variable /var/plexguide/vfs_dcs "64"
   vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
   variable /var/plexguide/vfs_dct "2"
   vfs_dct=$(cat /var/plexguide/vfs_dct)
 
-  variable /var/plexguide/vfs_cm "writes"
-  vfs_cm=$(cat /var/plexguide/vfs_cm)
-
   variable /var/plexguide/vfs_cma "1"
   vfs_cma=$(cat /var/plexguide/vfs_cma)
-
-  variable /var/plexguide/vfs_cms "100"
-  vfs_cms=$(cat /var/plexguide/vfs_cms)
 
   variable /var/plexguide/vfs_rcs "64"
   vfs_rcs=$(cat /var/plexguide/vfs_rcs)
 
   variable /var/plexguide/vfs_rcsl "2"
   vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
+
+  variable /var/plexguide/vfs_cm "off"
+  vfs_cm=$(cat /var/plexguide/vfs_cm)
+
+  variable /var/plexguide/vfs_cms "100"
+  vfs_cms=$(cat /var/plexguide/vfs_cms)
 
 }
