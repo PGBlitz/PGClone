@@ -209,10 +209,12 @@ EOF
 
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
 
-        touch /tmp/rclone.values
+        touch /tmp/$mountselection.mountselect
 
         if [[ "$mountselection" == "1" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; fi
+            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs
+            echo "${typed}${sizeSuffix}" > /tmp.valuemounttest
+        fi
 
         if [[ "$mountselection" == "2" ]]; then
             echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs; fi
