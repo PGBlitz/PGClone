@@ -30,6 +30,7 @@ while true
 do
 
   cleaner="$(cat /var/plexguide/cloneclean)"
+  useragent="$(cat /var/plexguide/uagent)"
 
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
@@ -57,6 +58,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --checkers=16 \
 --max-size=300G \
 --drive-chunk-size={{vfs_dcs}}M \
+--useragent="$useragent"
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
