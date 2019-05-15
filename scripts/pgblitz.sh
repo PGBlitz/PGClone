@@ -13,7 +13,6 @@ echo "" >> /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
-
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
@@ -56,6 +55,7 @@ while read p; do
   --transfers=16 \
   --bwlimit {{bandwidth.stdout}}M \
   --max-size=300G \
+  --user-agent= {{uagent}} \
   --drive-chunk-size={{vfs_dcs}} \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \

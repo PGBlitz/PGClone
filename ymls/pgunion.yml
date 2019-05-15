@@ -73,6 +73,11 @@
 
     - name: 'PG Blitz Execution'
       block:
+
+        - name: Registered Agent
+          shell: 'cat /var/plexguide/uagent'
+          register: uagent
+
         - name: Bandwidth Limit
           shell: 'cat /var/plexguide/blitz.bw'
           register: bandwidth
