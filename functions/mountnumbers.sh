@@ -207,7 +207,7 @@ EOF
     fi; fi
 
 
-    if [[ "$typed" -ge "$start" || "$typed" -le "$end" ]]; then mountset; else
+    if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
 
         if [[ "$mountselection" == "1" ]]; then
             echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; fi
