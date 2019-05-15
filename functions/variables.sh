@@ -137,9 +137,9 @@ if [[ $(cat /var/plexguide/vfs_cma) != *h* ]]; then echo "1h" > /var/plexguide/v
 if [[ $(cat /var/plexguide/vfs_rcs) != *M* ]]; then echo "128M" > /var/plexguide/vfs_rcs; fi
 
 vfs_rcs10=$(cat /var/plexguide/vfs_rcs)
-if [[ "$vfs_rcs10" != *G* ]] && [[ "$vfs_rcs10" != "off" ]]; then echo "128M" > /var/plexguide/vfs_rcs; fi
+if [[ "$vfs_rcs10" != *G* ]] && [[ "$vfs_rcs10" != "off" ]]; then echo "off" > /var/plexguide/vfs_rcs; fi
 
 vfs_rcsl10=$(cat /var/plexguide/vfs_rcsl)
-if [[ "$vfs_rcsl10" != *G* ]] && [[ "vfs_rcsl10" != "off" ]]; then echo "128M" > /var/plexguide/vfs_rcsl; fi
+if [[ "$vfs_rcsl10" != *M* ]] && [[ "vfs_rcsl10" != "off" ]]; then echo "off" > /var/plexguide/vfs_rcsl; fi
 
 }
