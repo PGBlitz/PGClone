@@ -15,6 +15,10 @@
       with_items:
         - "/mnt/{{drive}}"
 
+    - name: Register Agent
+      shell: 'cat /var/plexguide/uagent'
+      register: uagent
+
     - name: "Install - Service {{drive}}"
       template:
         src: "/opt/pgclone/mounts/crypt.service"
