@@ -7,7 +7,7 @@
 ################################################################################
 mountnumbers () {
     pgclonevars
-
+    
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -30,9 +30,9 @@ Please read the wiki on how changing these settings impact stability and perform
 After you change these settings, you must redeploy the mounts for them to take effect.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
+    
     read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat < /dev/tty
-
+    
     case $fluffycat in
         1 )
         mountset ;;
@@ -57,13 +57,13 @@ EOF
         * )
         mountnumbers ;;
     esac
-
+    
 }
 
 mountset () {
-
+    
     mountselection="$fluffycat"
-
+    
     if [[ "$mountselection" == "1" ]]; then
         name="Buffer-Size"
         sizeSuffix="M"
@@ -73,7 +73,7 @@ mountset () {
 
 The buffer size should be a relatively small amount. It's intended to smooth out network congestion and blips.
 Having a larger buffer is not better! The buffer will get cleared when the file is closed or if the file is seeked backwards.
-
+        
 WARNING: This is highly dependent on the amount of RAM and number of opened files.
 Apps open several files during library scans and each file open will consume up to the amount of RAM specified.
 If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
@@ -81,7 +81,7 @@ If you set this too high and don't have enough free RAM, you will cause the moun
 buffer-size should be smaller than the vfs-read-chunk-size to prevent too many requests from being sent when opening a file.
 
 Set this value to 0 to disable the buffer.
-
+        
 RECOMMENDATIONS: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 32-64MB | 16GB RAM: 64-512MB | 32GB RAM: 512-1024MB"
     fi
 
@@ -97,7 +97,7 @@ RECOMMENDATIONS: 2GB RAM: 8MB | 4GB RAM: 16MB | 8GB RAM: 32-64MB | 16GB RAM: 64-
 Input must be one of the following numbers (power of 2)!
 [8] [16] [32] [64] [128] [256] [512] [1024]"
     fi
-
+    
     if [[ "$mountselection" == "3" ]]; then
         name="Dir-Cache-Time"
         sizeSuffix="m"
@@ -107,7 +107,7 @@ Input must be one of the following numbers (power of 2)!
 This may delay external changes (such as from gdrive website) from being seen on your server until the cache expires.
 You should set this high unless you make lots of external changes."
     fi
-
+    
     if [[ "$mountselection" == "4" ]]; then
         name="VFS-Read-Chunk-Size"
         sizeSuffix="M"
@@ -118,7 +118,7 @@ Setting this too small will result in API bans for too many reads, setting this 
 
 vfs-read-chunk-size should be greater than buffer-size to prevent too many requests from being sent when opening a file."
     fi
-
+    
     if [[ "$mountselection" == "5" ]]; then
         name="VFS-Read-Chunk-Size-Limit"
         sizeSuffix="M"
@@ -129,7 +129,7 @@ This limit must be greater than vfs-read-chunk-size and it's only used when the 
 
 Set this value to 0 for unlimited growth."
     fi
-
+    
     if [[ "$mountselection" == "6" ]]; then
         name="VFS-Cache-Mode"
         sizeSuffix=""
@@ -144,11 +144,11 @@ Set this value to 0 for unlimited growth."
     ◽️ Files opened for read/write will be buffered to disks.
     ◽️ Files opened for write only can’t be seeked
 
-3) writes (recommended):
+3) writes (recommended): 
     ◽️ Write only and read/write files are buffered to disk first.
     ◽️ This mode should support all normal file system operations.
 
-4) full (not recommended, scanning issues):
+4) full (not recommended, scanning issues): 
     ◽️ All files are buffered to and from disk, files are fully downloaded on open, even on scans.
     ◽️ When a file is opened for read it will be downloaded in its entirety first.
     ◽️ This mode should support all normal file system operations."
@@ -170,7 +170,7 @@ Set this value to 0 for unlimited growth."
         note="The max total size of objects in the cache, only used if vfs-cache-mode is NOT off.
 Set this value to 0 to disable."
     fi
-
+    
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -184,10 +184,10 @@ Type a number between [$start] and [$end]$sizeSuffix
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
+    
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
     if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
-
+    
     # This Select Requires Answers to be In the Power of Two
     if [[ "$mountselection" == "2" ]]; then
         if [[ "$typed" != "8" && "$typed" != "16" && "$typed" != "32" && "$typed" != "64" && "$typed" != "128" && "$typed" != "256" && "$typed" != "512" && "$typed" != "1024" ]]; then
@@ -205,40 +205,47 @@ EOF
             read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
             mountset
     fi; fi
-
-
+    
+    
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
-
-        if [[ "$mountselection" == "1" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; fi
+        
+        if [[ "$mountselection" == "1" ]]; then 
+            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; 
+        fi
 
         if [[ "$mountselection" == "2" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs; fi
+            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs;
+        fi
 
         if [[ "$mountselection" == "3" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dct; fi
+            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dct;
+        fi
 
         if [[ "$mountselection" == "4" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcs; fi
+            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcs; 
+        fi
 
         if [[ "$mountselection" == "5" ]]; then
             if [[ "$typed" == "0" ]]; then
                 echo "off" > /var/plexguide/vfs_rcsl;
             else
-                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcsl; fi
+                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcsl; 
+            fi
         fi
 
         if [[ "$mountselection" == "7" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cma; fi
+            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cma; 
+        fi
 
         if [[ "$mountselection" == "8" ]]; then
             if [[ "$typed" == "0" ]]; then
                  echo "off" > /var/plexguide/vfs_cms;
             else
-                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cms; fi
+                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cms;
+            fi
         fi
 
-        if [[ "$mountselection" == "6" ]]; then
+        if [[ "$mountselection" == "6" ]]; then 
             if [[ "$typed" == "1" ]]; then echo "off" > /var/plexguide/vfs_cm; fi
             if [[ "$typed" == "2" ]]; then echo "minimal" > /var/plexguide/vfs_cm; fi
             if [[ "$typed" == "3" ]]; then echo "writes" > /var/plexguide/vfs_cm; fi
@@ -246,6 +253,6 @@ EOF
         fi
 
     fi
-
+    
     mountnumbers
 }
