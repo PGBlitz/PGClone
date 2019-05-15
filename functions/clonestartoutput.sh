@@ -451,7 +451,7 @@ tee <<-EOF
 [2] RClone VFS Mount Setting | INFO: Change Varibles to for the Mount
 [3] Multi-HD Option          | INFO: Add Multi-Points and Options
 [4] Clone Clean - Destroy Garbage Files Every [$cloneclean] Minutes
-[5]
+[5] User Agent
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
