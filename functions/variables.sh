@@ -132,5 +132,5 @@ else dversionoutput="None"; fi
   randomagent=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 
   variable /var/plexguide/uagent "$randomagent"
-  vfs_cms=$(cat /var/plexguide/uagent)
+  uagent=$(cat /var/plexguide/uagent)
 }
