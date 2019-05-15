@@ -70,7 +70,7 @@ while read p; do
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
   cat /var/plexguide/logs/pgblitz.log | tail -200 > /var/plexguide/logs/pgblitz.log
   #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
-  sleep 2
+  sleep 30
 
   # Remove empty directories
   find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
