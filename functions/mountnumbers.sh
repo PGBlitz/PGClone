@@ -209,6 +209,8 @@ EOF
 
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
 
+        touch /tmp/rclone.values
+
         if [[ "$mountselection" == "1" ]]; then
             echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; fi
 
