@@ -24,14 +24,15 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-{{drive}}.log \
 --log-level INFO \
---dir-cache-time {{vfs_dct}} \
---drive-chunk-size {{vfs_dcs}} \
---buffer-size {{vfs_bs}} \
+--timeout 1h \
+--dir-cache-time {{vfs_dct}}m \
+--drive-chunk-size {{vfs_dcs}}M \
+--buffer-size {{vfs_bs}}M \
 --vfs-cache-mode {{vfs_cm}} \
---vfs-cache-max-age {{vfs_cma}} \
---vfs-cache-max-size {{vfs_cms}} \
---vfs-read-chunk-size {{vfs_rcs}} \
---vfs-read-chunk-size-limit {{vfs_rcsl}}
+--vfs-cache-max-age {{vfs_cma}}h \
+--vfs-cache-max-size {{vfs_cms}}G \
+--vfs-read-chunk-size {{vfs_rcs}}M \
+--vfs-read-chunk-size-limit {{vfs_rcsl}}G
 
 ExecStop=/bin/fusermount -uz /mnt/{{drive}}
 TimeoutStopSec=20
