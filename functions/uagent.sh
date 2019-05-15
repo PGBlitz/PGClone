@@ -14,7 +14,7 @@ tee <<-EOF
 🚀 User Agent for RClone
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Current User Agent: ${useragent}
+Current User Agent: ${uagent}
 
 Changing the useragent is useful when experience 429 problems from Google
 Examples:
