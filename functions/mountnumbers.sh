@@ -68,7 +68,7 @@ mountset () {
 
     if [[ "$mountselection" == "1" ]]; then
         name="Buffer-Size"
-        sizeSuffix="MB"
+        sizeSuffix="M"
         start="8"
         end="1024"
         note="Open files will be buffered to RAM up to this limit. This limit is per opened file.
@@ -89,7 +89,7 @@ mountset () {
 
     if [[ "$mountselection" == "2" ]]; then
       name="Drive-Chunk-Size"
-      sizeSuffix="MB"
+      sizeSuffix="M"
       start="8"
       end="1024"
       note="Upload chunk size, increasing the chunk size may increase upload speed, however it uses more RAM.
@@ -99,7 +99,7 @@ mountset () {
 
     if [[ "$mountselection" == "3" ]]; then
         name="Dir-Cache-Time"
-        sizeSuffix="Minutes"
+        sizeSuffix="M"
         start="1"
         end="7620"
         note="This controls the cache time for remote directory information and contents.
@@ -109,7 +109,7 @@ mountset () {
 
     if [[ "$mountselection" == "4" ]]; then
         name="VFS-Read-Chunk-Size"
-        sizeSuffix="MB"
+        sizeSuffix="M"
         start="16"
         end="1024"
         note="This allows reading the source objects in parts, by requesting only chunks from the remote that are actually read at the cost of an increased number of requests.
@@ -118,7 +118,7 @@ mountset () {
 
     if [[ "$mountselection" == "5" ]]; then
         name="VFS-Read-Chunk-Size-Limit"
-        sizeSuffix="GB"
+        sizeSuffix="G"
         start="1"
         end="100"
         note="The chunk size for each open file will get doubled for each chunk read, until the specified value is reached.
@@ -151,7 +151,7 @@ fi
 
 if [[ "$mountselection" == "7" ]]; then
   name="VFS-Cache-Max-Age"
-  sizeSuffix="Hours"
+  sizeSuffix="H"
   start="1"
   end="360"
   note="Impacts how long files are cached on disk, only used if vfs-cache-mode is NOT off!"
@@ -159,7 +159,7 @@ fi
 
 if [[ "$mountselection" == "8" ]]; then
   name="VFS-Cache-Max-Size"
-  sizeSuffix="GB"
+  sizeSuffix="G"
   start="1"
   end="1000"
   note="The max total size of objects in the cache, only used if vfs-cache-mode is NOT off."
