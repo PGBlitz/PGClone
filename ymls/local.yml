@@ -14,10 +14,6 @@
 
     - debug: msg="Combined Path - {{multihds}}"
 
-    - name: Registered Agent
-      shell: 'cat /var/plexguide/uagent'
-      register: uagent
-
     - name: Install Union Script
       template:
         src: /opt/pgclone/scripts/local.sh
