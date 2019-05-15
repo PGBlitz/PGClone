@@ -130,32 +130,16 @@ else dversionoutput="None"; fi
 
 #Upgrade old vars by resetting to new defaults. Can probably remove after August 2019.
 
-if [[ $(cat /var/plexguide/vfs_bs) != "*M" ]]; then
-  echo "16M" > /var/plexguide/vfs_bs;
-fi
+if [[ $(cat /var/plexguide/vfs_bs) != *M* ]]; then echo "16M" > /var/plexguide/vfs_bs; fi
+if [[ $(cat /var/plexguide/vfs_dcs) != *M* ]]; then echo "128M" > /var/plexguide/vfs_dcs; fi
+if [[ $(cat /var/plexguide/vfs_dct) != *m* ]]; then echo "2m" > /var/plexguide/vfs_dct; fi
+if [[ $(cat /var/plexguide/vfs_cma) != *h* ]]; then echo "1h" > /var/plexguide/vfs_cma; fi
+if [[ $(cat /var/plexguide/vfs_rcs) != *M* ]]; then echo "128M" > /var/plexguide/vfs_rcs; fi
 
-if [[ $(cat /var/plexguide/vfs_dcs) != "*M" ]]; then
-  echo "128M" > /var/plexguide/vfs_dcs;
-fi
+vfs_rcs10=$(cat /var/plexguide/vfs_rcs)
+if [[ "$vfs_rcs10" != *G* ]] && [[ "$vfs_rcs10" != "off" ]]; then echo "128M" > /var/plexguide/vfs_rcs; fi
 
-if [[ $(cat /var/plexguide/vfs_dct) != "*m" ]]; then
-  echo "2m" > /var/plexguide/vfs_dct;
-fi
-
-if [[ $(cat /var/plexguide/vfs_cma) != "*h" ]]; then
-  echo "1h" > /var/plexguide/vfs_cma;
-fi
-
-if [[ $(cat /var/plexguide/vfs_cms) != "*G" && $(cat /var/plexguide/vfs_cms) != "off" ]]; then
-  echo "off" > /var/plexguide/vfs_cms;
-fi
-
-if [[ $(cat /var/plexguide/vfs_rcs) != "*M" ]]; then
-  echo "128M" > /var/plexguide/vfs_rcs;
-fi
-
-if [[ $(cat /var/plexguide/vfs_rcsl) != "*M" && $(cat /var/plexguide/vfs_rcsl) != "off" ]]; then
-  echo "off" > /var/plexguide/vfs_rcsl;
-fi
+vfs_rcsl10=$(cat /var/plexguide/vfs_rcsl)
+if [[ "$vfs_rcsl10" != *G* ]] && [[ "vfs_rcsl10" != "off" ]]; then echo "128M" > /var/plexguide/vfs_rcsl; fi
 
 }
