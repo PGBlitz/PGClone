@@ -216,8 +216,6 @@ EOF
             echo "${typed}${sizeSuffix}" > /tmp.valuemounttest
         fi
 
-        echo "${typed}${sizeSuffix}" > /tmp.outsidetest
-
         if [[ "$mountselection" == "2" ]]; then
             echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs; fi
 
