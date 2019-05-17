@@ -22,7 +22,8 @@ startscript () {
 while read p; do
 
   cleaner="$(cat /var/plexguide/cloneclean)"
-
+  useragent="$(cat /var/plexguide/uagent)"
+  
   let "cyclecount++"
   echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
