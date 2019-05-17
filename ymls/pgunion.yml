@@ -73,6 +73,7 @@
 
     - name: 'PG Blitz Execution'
       block:
+
         - name: Bandwidth Limit
           shell: 'cat /var/plexguide/blitz.bw'
           register: bandwidth

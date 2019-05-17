@@ -13,7 +13,6 @@ echo "" >> /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
-
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
@@ -56,7 +55,8 @@ while read p; do
   --transfers=16 \
   --bwlimit {{bandwidth.stdout}}M \
   --max-size=300G \
-  --drive-chunk-size={{vfs_dcs}} \
+  --user-agent="$useragent" \
+  --drive-chunk-size={{vfs_dcs}}M \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude='**partial~' --exclude=".unionfs-fuse/**" \
   --exclude=".fuse_hidden**" \
@@ -70,14 +70,14 @@ while read p; do
   echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
   cat /var/plexguide/logs/pgblitz.log | tail -200 > /var/plexguide/logs/pgblitz.log
   #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
-  sleep 2
+  sleep 30
 
   # Remove empty directories
-  find "{{hdpath}}/move/*" -type d -mmin +2 -empty -exec rm -rf {} \;
+  find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage
-  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rm -rf {} \;
-  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner -size +1M -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -empty -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -size +1M -exec rm -rf {} \;
 
 done </var/plexguide/.blitzfinal
 }

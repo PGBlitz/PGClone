@@ -16,7 +16,6 @@ User=0
 Group=0
 ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --config /opt/appdata/plexguide/rclone.conf \
---cache-db-purge \
 --allow-non-empty \
 --allow-other \
 --size-only \
@@ -24,14 +23,15 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --umask 002 \
 --log-file=/var/plexguide/logs/rclone-{{drive}}.log \
 --log-level INFO \
---dir-cache-time {{vfs_dct}} \
---drive-chunk-size {{vfs_dcs}} \
---buffer-size {{vfs_bs}} \
---vfs-cache-mode {{vfs_cm}} \
---vfs-cache-max-age {{vfs_cma}} \
---vfs-cache-max-size {{vfs_cms}} \
---vfs-read-chunk-size {{vfs_rcs}} \
---vfs-read-chunk-size-limit {{vfs_rcsl}}
+--timeout 1h \
+--vfs-cache-mode writes \
+--dir-cache-time {{vfs_dct}}m \
+--vfs-cache-max-age {{vfs_cma}}h \
+--vfs-read-chunk-size {{vfs_rcs}}M \
+--vfs-read-chunk-size-limit {{vfs_rcsl}}G \
+--drive-chunk-size {{vfs_dcs}}M \
+--user-agent={{uagent.stdout}} \
+--buffer-size {{vfs_bs}}M
 
 ExecStop=/bin/fusermount -uz /mnt/{{drive}}
 TimeoutStopSec=20

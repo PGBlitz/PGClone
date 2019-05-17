@@ -30,6 +30,7 @@ while true
 do
 
   cleaner="$(cat /var/plexguide/cloneclean)"
+  useragent="$(cat /var/plexguide/uagent)"
 
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /opt/appdata/plexguide/rclone.conf \
@@ -56,7 +57,8 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --tpslimit 6 \
 --checkers=16 \
 --max-size=300G \
---drive-chunk-size={{vfs_dcs}} \
+--drive-chunk-size={{vfs_dcs}}M \
+--user-agent="$useragent" \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
 --exclude=".fuse_hidden**" \
@@ -70,10 +72,10 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 sleep 5
 
 # Remove empty directories
-find "{{hdpath}}/move/*" -type d -mmin +2 -empty -exec rm -rf {} \;
+find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
 # Removes garbage
-find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rm -rf {} \;
-find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner -size +1M -exec rm -rf {} \;
+find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -empty -exec rm -rf {} \;
+find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  -size +1M -exec rm -rf {} \;
 
 done
