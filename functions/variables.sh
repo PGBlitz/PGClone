@@ -104,58 +104,33 @@ else dversionoutput="None"; fi
   cloneclean=$(cat /var/plexguide/cloneclean)
 
 # For PG Blitz Mounts
-  variable /var/plexguide/vfs_bs "16M"
+  variable /var/plexguide/vfs_bs "16"
   vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-  variable /var/plexguide/vfs_dcs "128M"
+
+  variable /var/plexguide/vfs_dcs "64"
   vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
-  variable /var/plexguide/vfs_dct "2m"
+  variable /var/plexguide/vfs_dct "2"
   vfs_dct=$(cat /var/plexguide/vfs_dct)
 
-  variable /var/plexguide/vfs_cm "writes"
-  vfs_cm=$(cat /var/plexguide/vfs_cm)
-
-  variable /var/plexguide/vfs_cma "1h"
+  variable /var/plexguide/vfs_cma "1"
   vfs_cma=$(cat /var/plexguide/vfs_cma)
 
-  variable /var/plexguide/vfs_cms "off"
-  vfs_cms=$(cat /var/plexguide/vfs_cms)
-
-  variable /var/plexguide/vfs_rcs "128M"
+  variable /var/plexguide/vfs_rcs "64"
   vfs_rcs=$(cat /var/plexguide/vfs_rcs)
 
-  variable /var/plexguide/vfs_rcsl "off"
+  variable /var/plexguide/vfs_rcsl "2"
   vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
 
-#Upgrade old vars by resetting to new defaults. Can probably remove after August 2019.
+  variable /var/plexguide/vfs_cm "off"
+  vfs_cm=$(cat /var/plexguide/vfs_cm)
 
-if [[ $(cat /var/plexguide/vfs_bs) != "*M" ]]; then
-  echo "16M" > /var/plexguide/vfs_bs;
-fi
+  variable /var/plexguide/vfs_cms "100"
+  vfs_cms=$(cat /var/plexguide/vfs_cms)
 
-if [[ $(cat /var/plexguide/vfs_dcs) != "*M" ]]; then
-  echo "128M" > /var/plexguide/vfs_dcs;
-fi
+  randomagent=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 
-if [[ $(cat /var/plexguide/vfs_dct) != "*m" ]]; then
-  echo "2m" > /var/plexguide/vfs_dct;
-fi
-
-if [[ $(cat /var/plexguide/vfs_cma) != "*h" ]]; then
-  echo "1h" > /var/plexguide/vfs_cma;
-fi
-
-if [[ $(cat /var/plexguide/vfs_cms) != "*G" && $(cat /var/plexguide/vfs_cms) != "off" ]]; then
-  echo "off" > /var/plexguide/vfs_cms;
-fi
-
-if [[ $(cat /var/plexguide/vfs_rcs) != "*M" ]]; then
-  echo "128M" > /var/plexguide/vfs_rcs;
-fi
-
-if [[ $(cat /var/plexguide/vfs_rcsl) != "*M" && $(cat /var/plexguide/vfs_rcsl) != "off" ]]; then
-  echo "off" > /var/plexguide/vfs_rcsl;
-fi
-
+  variable /var/plexguide/uagent "$randomagent"
+  uagent=$(cat /var/plexguide/uagent)
 }
