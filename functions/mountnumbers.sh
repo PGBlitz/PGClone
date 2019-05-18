@@ -203,13 +203,13 @@ EOF
 
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
 
-        if [[ "$mountselection" == "1" ]]; then echo "$typed" > /var/plexguide/vfs_bs; fi
-        if [[ "$mountselection" == "2" ]]; then echo "$typed" > /var/plexguide/vfs_dcs; fi
-        if [[ "$mountselection" == "3" ]]; then echo "$typed" > /var/plexguide/vfs_dct; fi
-        if [[ "$mountselection" == "4" ]]; then echo "$typed" > /var/plexguide/vfs_rcs; fi
-        if [[ "$mountselection" == "5" ]]; then echo "$typed" > /var/plexguide/vfs_rcsl; fi
-        if [[ "$mountselection" == "7" ]]; then echo "$typed" > /var/plexguide/vfs_cma; fi
-        if [[ "$mountselection" == "8" ]]; then echo "$typed" > /var/plexguide/vfs_cms; fi
+        if [[ "$mountselection" == "1" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_bs; fi
+        if [[ "$mountselection" == "2" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_dcs; fi
+        if [[ "$mountselection" == "3" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_dct; fi
+        if [[ "$mountselection" == "4" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_rcs; fi
+        if [[ "$mountselection" == "5" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_rcsl; fi
+        if [[ "$mountselection" == "7" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_cma; fi
+        if [[ "$mountselection" == "8" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_cms; fi
 
 
       if [[ "$mountselection" == "6" ]]; then
