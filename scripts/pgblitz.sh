@@ -73,12 +73,19 @@ while read p; do
   #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
   sleep 30
 
+  #Quick fix
   # Remove empty directories
-  find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
+  find "$dlpath/downloads/" -mindepth 2 -type d -empty -exec rm -rf {} \;
+  find "$dlpath/move/" -type d -empty -exec rm -rf {} \;
+  find "$dlpath/move/" -mindepth 2 -type f -cmin +5 -size +1M -exec rm -rf {} \;
+
+  # I will check it later what is failed  MrDoob
+  # Remove empty directories
+  #find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage
-  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -empty -exec rm -rf {} \;
-  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -size +1M -exec rm -rf {} \;
+  #find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -empty -exec rm -rf {} \;
+  #find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -size +1M -exec rm -rf {} \;
 
 done </var/plexguide/.blitzfinal
 }
