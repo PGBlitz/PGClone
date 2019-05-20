@@ -9,7 +9,7 @@ touch /var/plexguide/logs/pgblitz.log
 mkdir -p "$dlpath/move"
 
 # Repull excluded folder 
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /opt/pgclone/functions/
+ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
 
 # Permissions
 chown -R 1000:1000 "$dlpath/move"
@@ -19,5 +19,5 @@ chmod -R 775 "$dlpath/move"
 find "$dlpath/move/" -type d -mmin +2 -empty -exec rm -rf {} \;
 
 # Removes garbage
-find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -empty -exec rm -rf {} \;
-find "$dlpath/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -name %s " $(cat /opt/pgclone/functions/exclude)) -size +1M -exec rm -rf {} \;
+find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
+find "$dlpath/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;
