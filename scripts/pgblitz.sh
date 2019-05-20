@@ -9,9 +9,6 @@
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
 
-# Repull excluded folder 
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
-
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
@@ -24,6 +21,9 @@ chmod -R 775 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
+# Repull excluded folder 
+ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
+ 
   cleaner="$(cat /var/plexguide/cloneclean)"
   useragent="$(cat /var/plexguide/uagent)"
   
