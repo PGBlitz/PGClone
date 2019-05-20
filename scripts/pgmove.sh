@@ -15,9 +15,6 @@ fi
 
 touch /var/plexguide/logs/pgmove.log
 
-# Repull excluded folder 
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
-
 echo "" >> /var/plexguide/logs/pgmove.log
 echo "" >> /var/plexguide/logs/pgmove.log
 echo "----------------------------" >> /var/plexguide/logs/pgmove.log
@@ -32,6 +29,9 @@ sleep 10
 while true
 do
 
+# Repull excluded folder 
+ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
+ 
   cleaner="$(cat /var/plexguide/cloneclean)"
   useragent="$(cat /var/plexguide/uagent)"
 
