@@ -26,6 +26,7 @@ RClone Variable Name           Default ~ Current Settings
 [6] VFS-Cache-Mode             off        [$vfs_cm]
 [7] VFS-Cache-Max-Age          1h         [$vfs_cma]
 [8] VFS-Cache-Max-Size         off        [$vfs_cms]
+[9] Log-Level                  INFO       [$vfs_ll]
 [Z] Exit
 
 Please read the wiki on how changing these settings impact stability and performance!
@@ -51,6 +52,8 @@ EOF
         7 )
         mountset ;;
         8 )
+        mountset ;;
+        9 )
         mountset ;;
         z )
         a=b ;;
@@ -172,6 +175,17 @@ Set this value to 0 for unlimited growth."
         note="The max total size of objects in the cache, only used if vfs-cache-mode is NOT off.
 Set this value to 0 to disable."
     fi
+
+    if [[ "$mountselection" == "9" ]]; then
+        name="Log-Level"
+        sizeSuffix=""
+        start="1"
+        end="4"
+        note="1) DEBUG: It outputs lots of debug info, useful for bug reports and vfs options tuning.
+2) INFO (recommended): It outputs information about each transfer and prints stats once a minute by default.
+3) NOTICE: It outputs very little when things are working normally. It outputs warnings and significant events.
+4) ERROR: It only outputs error messages."
+    fi
     
 tee <<-EOF
 
@@ -181,7 +195,7 @@ Setting Variable >>> $name
 
 $note
 
-Type a number between [$start] and [$end], do not add a size suffix!
+Type only a number between [$start] and [$end], do not add a size suffix!
 
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -252,6 +266,13 @@ EOF
             if [[ "$typed" == "2" ]]; then echo "minimal" > /var/plexguide/vfs_cm; fi
             if [[ "$typed" == "3" ]]; then echo "writes" > /var/plexguide/vfs_cm; fi
             if [[ "$typed" == "4" ]]; then echo "full" > /var/plexguide/vfs_cm; fi
+        fi
+
+        if [[ "$mountselection" == "9" ]]; then 
+            if [[ "$typed" == "1" ]]; then echo "DEBUG" > /var/plexguide/vfs_ll; fi
+            if [[ "$typed" == "2" ]]; then echo "INFO" > /var/plexguide/vfs_ll; fi
+            if [[ "$typed" == "3" ]]; then echo "NOTICE" > /var/plexguide/vfs_ll; fi
+            if [[ "$typed" == "4" ]]; then echo "ERROR" > /var/plexguide/vfs_ll; fi
         fi
 
     fi

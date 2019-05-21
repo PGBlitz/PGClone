@@ -32,6 +32,7 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_cms=$vfs_cms
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
+  vfs_ll=$vfs_ll
   drive=gdrive"
 
 # deploy only if pgmove is using encryption
@@ -47,6 +48,7 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_cms=$vfs_cms
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
+  vfs_ll=$vfs_ll
   drive=gcrypt"
 fi
 
