@@ -160,7 +160,7 @@ else dversionoutput="None"; fi
     fi
     
     if [[ $(cat /var/plexguide/vfs_rcsl) != *"M" && $(cat /var/plexguide/vfs_rcsl) != "off" ]]; then
-        echo "2G" > /var/plexguide/vfs_rcsl;
+        echo "2048M" > /var/plexguide/vfs_rcsl;
     fi
     
     randomagent=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
