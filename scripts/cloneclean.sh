@@ -8,8 +8,8 @@ cleaner="$(cat /var/plexguide/cloneclean)"
 touch /var/plexguide/logs/pgblitz.log
 mkdir -p "$dlpath/move"
 
-# Repull excluded folder 
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
+# Repull excluded folder
+wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
 
 # Permissions
 chown -R 1000:1000 "$dlpath/move"

@@ -222,12 +222,17 @@ EOF
             mountset
     fi; fi
 
+    if ! [[ "$typed" =~ ^[0-9]+$ ]];
+        then echo "Input must only be a valid positive integer. Do not include ${sizeSuffix} in your entry."; mountset;
+    fi
 
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
         
-        if [[ "$mountselection" == "1" ]]; then 
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; 
-        fi
+        if [[ "$mountselection" == "1" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; fi
+        if [[ "$mountselection" == "2" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs; fi
+        if [[ "$mountselection" == "3" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dct; fi
+        if [[ "$mountselection" == "4" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcs; fi
+        if [[ "$mountselection" == "7" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cma; fi
 
         if [[ "$mountselection" == "2" ]]; then
             echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs;
@@ -245,7 +250,7 @@ EOF
             if [[ "$typed" == "0" ]]; then
                 echo "off" > /var/plexguide/vfs_rcsl;
             else
-                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcsl; 
+                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcsl;
             fi
         fi
 
