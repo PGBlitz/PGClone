@@ -140,7 +140,7 @@ Set this value to 0 for unlimited growth."
         sizeSuffix=""
         start="1"
         end="4"
-        note="1) off:
+        note="1) off (recommended):
     ◽️ Files opened for read OR write will NOT be buffered to disks.
     ◽️ Files can’t be opened for both read AND write.
     ◽️ Files opened for write can’t be seeked.
@@ -149,11 +149,11 @@ Set this value to 0 for unlimited growth."
     ◽️ Files opened for read/write will be buffered to disks.
     ◽️ Files opened for write only can’t be seeked
 
-3) writes (recommended): 
+3) writes: 
     ◽️ Write only and read/write files are buffered to disk first.
     ◽️ This mode should support all normal file system operations.
 
-4) full (not recommended, scanning issues): 
+4) full (not recommended!): 
     ◽️ All files are buffered to and from disk, files are fully downloaded on open, even on scans.
     ◽️ When a file is opened for read it will be downloaded in its entirety first.
     ◽️ This mode should support all normal file system operations."
