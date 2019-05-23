@@ -20,10 +20,10 @@ echo "" >> /var/plexguide/logs/pgmove.log
 echo "----------------------------" >> /var/plexguide/logs/pgmove.log
 echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
 
-chown -R 1000:1000 "{{hdpath}}/downloads"
-chmod -R 775 "{{hdpath}}/downloads"
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 775 "{{hdpath}}/move"
+# chown -R 1000:1000 "{{hdpath}}/downloads"
+# chmod -R 775 "{{hdpath}}/downloads"
+# chown -R 1000:1000 "{{hdpath}}/move"
+# chmod -R 775 "{{hdpath}}/move"
 
 sleep 10
 while true
@@ -49,8 +49,8 @@ do
     --exclude="**handbrake**" --exclude="**bazarr**" \
     --exclude="**ignore**"  --exclude="**inProgress**"
     
-    chown -R 1000:1000 "{{hdpath}}/move"
-    chmod -R 775 "{{hdpath}}/move"
+    # chown -R 1000:1000 "{{hdpath}}/move"
+    # chmod -R 755 "{{hdpath}}/move"
     
     rclone move "{{hdpath}}/move/" "{{type}}:/" \
     --config /opt/appdata/plexguide/rclone.conf \

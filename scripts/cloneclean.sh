@@ -12,8 +12,8 @@ mkdir -p "$dlpath/move"
 wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
 
 # Permissions
-chown -R 1000:1000 "$dlpath/move"
-chmod -R 775 "$dlpath/move"
+# chown -R 1000:1000 "$dlpath/move"
+# chmod -R 755 "$dlpath/move"
 
 # Remove empty directories
 find "$dlpath/move/" -type d -mmin +2 -empty -exec rm -rf {} \;
