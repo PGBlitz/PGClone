@@ -33,10 +33,22 @@ startscript () {
         echo "" >> /var/plexguide/logs/pgblitz.log
         echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
         
-        rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
+        # find "/mnt/downloads" -mindepth 1 -maxdepth 1 -type d \
+        # -name 'sabnzbd' -prune -o \
+        # -name 'nzbget' -prune -o \
+        # -name 'qbittorrent' -prune -o \
+        # -name 'rutorrent' -prune -o \
+        # -name 'deluge' -prune -o \
+        # -name 'transmission' -prune -o \
+        # -name 'makemkv*' -prune -o \
+        # -name 'jdownloader*' -prune -o \
+        # -name 'handbrake*' -prune -o \
+        # -name 'inProgress' -prune -o \
+        # -name 'ignore' -prune -o \
+        # -exec echo mv '{}' "/mnt/move/" \;
+
+        sudo rclone moveto "/mnt/downloads/" "/mnt/move/" \
         --config /opt/appdata/plexguide/rclone.conf \
-        --log-file=/var/plexguide/logs/pgblitz.log \
-        --log-level ERROR --stats 5s --stats-file-name-length 0 \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" \
@@ -47,8 +59,9 @@ startscript () {
         --exclude="**handbrake**" --exclude="**bazarr**" \
         --exclude="**ignore**"  --exclude="**inProgress**"
         
-        #chown -R 1000:1000 "{{hdpath}}/move"
-        #chmod -R 755 "{{hdpath}}/move"
+        # Set permissions since this script runs as root, any created folders are owned by root.
+        chown -R 1000:1000 "{{hdpath}}/move"
+        chmod -R 755 "{{hdpath}}/move"
         
         rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
         --config /opt/appdata/plexguide/rclone.conf \
@@ -75,19 +88,14 @@ startscript () {
         cat /var/plexguide/logs/pgblitz.log | tail -200 > /var/plexguide/logs/pgblitz.log
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30
-        
-        #Quick fix
-        # Remove empty directories
-        #find "$dlpath/downloads/" -mindepth 2 -type d -empty -exec rm -rf {} \;
-        #find "$dlpath/move/" -type d -empty -exec rm -rf {} \;
-        #find "$dlpath/move/" -mindepth 2 -type f -cmin +5 -size +1M -exec rm -rf {} \;
-        
+            
         # Remove empty directories
         find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
         
-        # Removes garbage | torrent folder excluded
-        find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-        find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;
+        # Removes garbage | torrent folder excluded        
+        find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -path %s " $(cat /var/plexguide/exclude)) -size -1000M -exec rm -rf {} \;
+        find "{{hdpath}}/downloads" -mindepth 2 -type d $(printf "! -path %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
+
         
     done </var/plexguide/.blitzfinal
 }

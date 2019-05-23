@@ -49,8 +49,9 @@ do
     --exclude="**handbrake**" --exclude="**bazarr**" \
     --exclude="**ignore**"  --exclude="**inProgress**"
     
-    # chown -R 1000:1000 "{{hdpath}}/move"
-    # chmod -R 755 "{{hdpath}}/move"
+            # Set permissions since this script runs as root, any created folders are owned by root.
+    chown -R 1000:1000 "{{hdpath}}/move"
+    chmod -R 755 "{{hdpath}}/move"
     
     rclone move "{{hdpath}}/move/" "{{type}}:/" \
     --config /opt/appdata/plexguide/rclone.conf \
