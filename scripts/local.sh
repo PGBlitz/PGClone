@@ -7,5 +7,5 @@
 ################################################################################
 sleep 1
 
-mergerfs -o defaults,sync_read,direct_io,use_ino,allow_other,func.getattr=newest,category.create=ff,minfreespace=0,nonempty,fsname=pgunion \
+mergerfs -o defaults,sync_read,direct_io,use_ino,allow_other,func.getattr=newest,category.create=ff,minfreespace=0,fsname=pgunion \
 {{hdpath}}/move=RO:{{hdpath}}/downloads=RW:{{multihds}} /mnt/unionfs
