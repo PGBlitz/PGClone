@@ -23,7 +23,6 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --log-level {{vfs_ll}} \
 --timeout 1h \
 --dir-cache-time {{vfs_dct}} \
---drive-chunk-size {{vfs_dcs}} \
 --buffer-size {{vfs_bs}} \
 --vfs-cache-mode {{vfs_cm}} \
 --vfs-cache-max-age {{vfs_cma}} \
