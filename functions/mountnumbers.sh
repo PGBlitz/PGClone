@@ -84,10 +84,15 @@ Apps open several files during library scans and each file open will consume up 
 If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
 
 buffer-size should be smaller than the vfs-read-chunk-size to prevent too many requests from being sent when opening a file.
+Setting this too high will slow down scans and cause buffering with direct plays.
+Some plex clients open and close the file during playback, this means the buffer is constantly cleared.
+RClone will always try to fill the buffer-size, so having it higher will slow down plex scans and loading the page for it in plex.
+This is not the plex client buffer, that's controlled by the plex client.
 
 Set this value to 0 to disable the buffer.
         
-RECOMMENDATIONS: 2GB RAM: 16MB | 4GB RAM: 32MB | 8GB RAM: 32-64MB | 16GB RAM: 64-512MB | 32GB RAM: 512-1024MB"
+RECOMMENDATIONS:
+Set the buffer size to 1/2 the value of the read-chunk-size for the best results."
     fi
 
     if [[ "$mountselection" == "2" ]]; then
@@ -95,9 +100,9 @@ RECOMMENDATIONS: 2GB RAM: 16MB | 4GB RAM: 32MB | 8GB RAM: 32-64MB | 16GB RAM: 64
         sizeSuffix="M"
         start="8"
         end="1024"
-        note="Upload chunk size, increasing the chunk size increases upload speed, however it uses more RAM.
+        note="The larger the chunk size, the faster uploads will be, however it uses more RAM.
 
-64-128MB will max out a 1G upload connection, it's recommended to set the BWLimit to prevent consuming all bandwidth.
+64-128MB will max out a 1G upload connection, it's recommended to set the BWLimit to prevent consuming all bandwidth for uploading.
 
 Input must be one of the following numbers (power of 2)!
 [8] [16] [32] [64] [128] [256] [512] [1024]"
@@ -121,7 +126,15 @@ You should set this high unless you make lots of external changes."
         note="This allows reading the source objects in parts, by requesting only chunks from the remote that are actually read at the cost of an increased number of requests.
 Setting this too small will result in API bans for too many reads, setting this too high will waste download quota and it will take longer to start playback.
 
-vfs-read-chunk-size should be greater than buffer-size to prevent too many requests from being sent when opening a file."
+vfs-read-chunk-size should be greater than buffer-size to prevent too many requests from being sent when opening a file.
+The larger the read chunk size, the faster larger files start playback, but smaller files will take longer to start.
+
+Recommendations:
+initial scan: 16MB for the fastest possible scans. Not recommended for normal playback since it makes starting a stream longer.
+normal usage: 64MB-128MB, 64MB is recommended for most people and libraries.
+Direct Play: 32-64MB recommended, with a buffer-size 1/2 of this value.
+Transcoding: 64MB-128MB recommended.
+4K Remux: 128MB if you direct play big remux files for faster start times, however smaller files will take longer to start playback."
     fi
 
     if [[ "$mountselection" == "5" ]]; then
@@ -132,7 +145,11 @@ vfs-read-chunk-size should be greater than buffer-size to prevent too many reque
         note="The chunk size for each open file will get doubled for each chunk read, until the specified value is reached.
 This limit must be greater than vfs-read-chunk-size and it's only used when the vfs-cache-mode is not set to full.
 
-Set this value to 0 for unlimited growth."
+Set this value to 0 for unlimited growth.
+
+This value is mostly used during transcodes or direct stream, it's not used for direct plays.
+
+Recommendations: 2048 or 0 (for unlimited growth)."
     fi
 
     if [[ "$mountselection" == "6" ]]; then
@@ -153,7 +170,8 @@ Set this value to 0 for unlimited growth."
     ◽️ Write only and read/write files are buffered to disk first.
     ◽️ This mode should support all normal file system operations.
 
-4) full (not recommended!): 
+4) full (not recommended):
+    ◽️ Playback will take a long time for bigger files as the file must be fully downloaded before playback begins.
     ◽️ All files are buffered to and from disk, files are fully downloaded on open, even on scans.
     ◽️ When a file is opened for read it will be downloaded in its entirety first.
     ◽️ This mode should support all normal file system operations."
