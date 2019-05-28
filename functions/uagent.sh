@@ -14,10 +14,7 @@ tee <<-EOF
 🚀 User Agent for RClone
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Please never use this code below !!!
-NOTE: some user try it and all mounts are stoped
-
---user-agent:="Mozilla/5.0 (Windows NT 10.0; WOW64) ......"
+NOTE: Don't use Google Chrome user agent strings, your mounts may go down.
 
 Current User Agent: ${uagent}
 
