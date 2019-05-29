@@ -33,7 +33,7 @@ startscript () {
         --config /opt/appdata/plexguide/rclone.conf \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-        --exclude=".fuse_hidden**" \
+        --exclude=".fuse_hidden**" --exclude="**.grab/**" \
         --exclude="**sabnzbd**" --exclude="**nzbget**" \
         --exclude="**qbittorrent**" --exclude="**rutorrent**" \
         --exclude="**deluge**" --exclude="**transmission**" \
@@ -58,7 +58,7 @@ startscript () {
         --drive-chunk-size={{vfs_dcs}} \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude='**partial~' --exclude=".unionfs-fuse/**" \
-        --exclude=".fuse_hidden**" \
+        --exclude=".fuse_hidden**" --exclude="**.grab/**" \
         --exclude="**sabnzbd**" --exclude="**nzbget**" \
         --exclude="**qbittorrent**" --exclude="**rutorrent**" \
         --exclude="**deluge**" --exclude="**transmission**" \
