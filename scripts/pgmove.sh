@@ -41,7 +41,7 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
---exclude=".fuse_hidden**" \
+--exclude=".fuse_hidden**" --exclude="**.grab/**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
@@ -64,7 +64,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --user-agent="$useragent" \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude='**partial~' --exclude=".unionfs-fuse/**" \
---exclude=".fuse_hidden**" \
+--exclude=".fuse_hidden**" --exclude="**.grab/**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
