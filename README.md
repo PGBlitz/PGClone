@@ -7,7 +7,7 @@
   <a href="https://pgblitz.com/threads/plexguide-install-instructions.243/" target="_blank" /a><img src="https://pgblitz.com/wikipics/logo-pg-install.png" width="160"/> 
   <a href="https://pgblitz.com/account/upgrades" target="_blank" /a><img src="https://pgblitz.com/wikipics/logo-donate.png" width="160"/>
 </p>
-
+ 
 * 📂 [**[Click Here]**](https://goo.gl/7NR3Da) - Google G-Suite (Unlimited Hard Drive Space & Storage)
 * 📂 [**[Click Here]**](https://controlpanel.newshosting.com/signup/index.php?promo=partners&a_aid=5a65169240efd&a_bid=5ecfe99b) - Top Performance NewsHost! - Blitz Members Receive a 58% Discount
 ----
