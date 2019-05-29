@@ -19,8 +19,8 @@ NOTE: Don't use Google Chrome user agent strings, your mounts may go down.
 Current User Agent: ${uagent}
 
 Changing the useragent is useful when experience 429 problems from Google
-Examples:
 
+Do not wrap the string in double quotes!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF

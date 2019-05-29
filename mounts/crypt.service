@@ -32,7 +32,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --vfs-cache-max-size {{vfs_cms}} \
 --vfs-read-chunk-size {{vfs_rcs}} \
 --vfs-read-chunk-size-limit {{vfs_rcsl}} \
---user-agent={{uagent.stdout}}
+--user-agent="{{uagent.stdout}}"
 
 ExecStop=/bin/fusermount -uz /mnt/{{drive}}
 TimeoutStopSec=20
