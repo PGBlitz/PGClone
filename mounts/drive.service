@@ -24,6 +24,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --log-file=/var/plexguide/logs/rclone-{{drive}}.log \
 --log-level INFO \
 --timeout 1h \
+--drive-use-trash=false \
 --dir-cache-time {{vfs_dct}}m \
 --vfs-cache-max-age {{vfs_cma}}h \
 --vfs-read-chunk-size {{vfs_rcs}}M \
