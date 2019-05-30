@@ -5,4 +5,4 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-tail -100 /var/plexguide/logs/pgmove.log
+tail -100 /var/plexguide/logs/*.log
