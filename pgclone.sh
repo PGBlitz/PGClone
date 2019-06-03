@@ -5,32 +5,32 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/pgclone/functions/functions.sh
-source /opt/pgclone/functions/variables.sh
-source /opt/pgclone/functions/mountnumbers.sh
-source /opt/pgclone/functions/keys.sh
-source /opt/pgclone/functions/keyback.sh
-source /opt/pgclone/functions/pgclone.sh
-source /opt/pgclone/functions/gaccount.sh
-source /opt/pgclone/functions/publicsecret.sh
-source /opt/pgclone/functions/variables.sh
-source /opt/pgclone/functions/transportselect.sh
-source /opt/pgclone/functions/projectname.sh
-source /opt/pgclone/functions/clonestartoutput.sh
-source /opt/pgclone/functions/oauth.sh
-source /opt/pgclone/functions/passwords.sh
-source /opt/pgclone/functions/oauthcheck.sh
-source /opt/pgclone/functions/keysbuild.sh
-source /opt/pgclone/functions/emails.sh
-source /opt/pgclone/functions/deploy.sh
-source /opt/pgclone/functions/rcloneinstall.sh
-source /opt/pgclone/functions/deploymove.sh
-source /opt/pgclone/functions/deployblitz.sh
-source /opt/pgclone/functions/multihd.sh
-source /opt/pgclone/functions/deploylocal.sh
-source /opt/pgclone/functions/createtdrive.sh
-source /opt/pgclone/functions/cloneclean.sh
-source /opt/pgclone/functions/uagent.sh
+source /pg/pgclone/functions/functions.sh
+source /pg/pgclone/functions/variables.sh
+source /pg/pgclone/functions/mountnumbers.sh
+source /pg/pgclone/functions/keys.sh
+source /pg/pgclone/functions/keyback.sh
+source /pg/pgclone/functions/pgclone.sh
+source /pg/pgclone/functions/gaccount.sh
+source /pg/pgclone/functions/publicsecret.sh
+source /pg/pgclone/functions/variables.sh
+source /pg/pgclone/functions/transportselect.sh
+source /pg/pgclone/functions/projectname.sh
+source /pg/pgclone/functions/clonestartoutput.sh
+source /pg/pgclone/functions/oauth.sh
+source /pg/pgclone/functions/passwords.sh
+source /pg/pgclone/functions/oauthcheck.sh
+source /pg/pgclone/functions/keysbuild.sh
+source /pg/pgclone/functions/emails.sh
+source /pg/pgclone/functions/deploy.sh
+source /pg/pgclone/functions/rcloneinstall.sh
+source /pg/pgclone/functions/deploymove.sh
+source /pg/pgclone/functions/deployblitz.sh
+source /pg/pgclone/functions/multihd.sh
+source /pg/pgclone/functions/deploylocal.sh
+source /pg/pgclone/functions/createtdrive.sh
+source /pg/pgclone/functions/cloneclean.sh
+source /pg/pgclone/functions/uagent.sh
 ################################################################################
 rcloneinstall
 

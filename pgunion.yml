@@ -174,5 +174,5 @@
     - cron:
         name: Hourly Clean PG Clone Clean
         special_time: "hourly"
-        job: "bash /opt/pgclone/functions/cloneclean.sh"
+        job: "bash /pg/pgclone/functions/cloneclean.sh"
         state: present
