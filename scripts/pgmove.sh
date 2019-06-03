@@ -40,8 +40,8 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --log-file=/var/plexguide/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
---exclude='**partial~' --exclude=".unionfs-fuse/**" \
---exclude=".fuse_hidden**" \
+--exclude="**partial~" --exclude=".unionfs-fuse/**" \
+--exclude=".fuse_hidden**" --exclude="**.grab/**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
@@ -63,8 +63,8 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --drive-chunk-size={{vfs_dcs}}M \
 --user-agent="$useragent" \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
---exclude='**partial~' --exclude=".unionfs-fuse/**" \
---exclude=".fuse_hidden**" \
+--exclude="**partial~" --exclude=".unionfs-fuse/**" \
+--exclude=".fuse_hidden**" --exclude="**.grab/**" \
 --exclude="**sabnzbd**" --exclude="**nzbget**" \
 --exclude="**qbittorrent**" --exclude="**rutorrent**" \
 --exclude="**deluge**" --exclude="**transmission**" \
