@@ -21,7 +21,7 @@
 
     - name: "Install - Service {{drive}}"
       template:
-        src: "/opt/pgclone/mounts/crypt.service"
+        src: "/pg/pgclone/mounts/crypt.service"
         dest: "/etc/systemd/system/{{drive}}.service"
         force: yes
       ignore_errors: yes

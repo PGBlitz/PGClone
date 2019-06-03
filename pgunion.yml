@@ -11,7 +11,7 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-      include_tasks: '/opt/pgclone/alias.yml'
+      include_tasks: '/pg/pgclone/alias.yml'
 
     - name: Transport Type
       shell: 'cat /pg/var/pgclone.transport'
@@ -83,13 +83,13 @@
 
         - name: Install PG Blitz Script
           template:
-            src: /opt/pgclone/scripts/pgblitz.sh
+            src: /pg/pgclone/scripts/pgblitz.sh
             dest: /pg/data/blitz/pgblitz.sh
             force: yes
 
         - name: Install PG Blitz Service
           template:
-            src: /opt/pgclone/mounts/pgblitz.service
+            src: /pg/pgclone/mounts/pgblitz.service
             dest: /etc/systemd/system/pgblitz.service
             force: yes
 
@@ -119,13 +119,13 @@
 
         - name: Install MOVE Script
           template:
-            src: /opt/pgclone/scripts/pgmove.sh
+            src: /pg/pgclone/scripts/pgmove.sh
             dest: /pg/data/blitz/pgmove.sh
             force: yes
 
         - name: Install MOVE Service
           template:
-            src: /opt/pgclone/mounts/pgmove.service
+            src: /pg/pgclone/mounts/pgmove.service
             dest: /etc/systemd/system/pgmove.service
             force: yes
 
@@ -141,13 +141,13 @@
 
     - name: Install PGUnion Script
       template:
-        src: /opt/pgclone/scripts/pgunion.sh
+        src: /pg/pgclone/scripts/pgunion.sh
         dest: /pg/data/blitz/pgunion.sh
         force: yes
 
     - name: Install PGUnion Service
       template:
-        src: /opt/pgclone/mounts/pgunion.service
+        src: /pg/pgclone/mounts/pgunion.service
         dest: /etc/systemd/system/pgunion.service
         force: yes
 

@@ -95,7 +95,7 @@ EOF
 
 
 removepgservices () {
-  ansible-playbook /opt/pgclone/pgservices.yml
+  ansible-playbook /pg/pgclone/pgservices.yml
 }
 
 readrcloneconfig () {

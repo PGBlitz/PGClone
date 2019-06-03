@@ -10,19 +10,19 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-      include_tasks: '/opt/pgclone/ymls/alias.yml'
+      include_tasks: '/pg/pgclone/ymls/alias.yml'
 
     - debug: msg="Combined Path - {{multihds}}"
 
     - name: Install Union Script
       template:
-        src: /opt/pgclone/scripts/local.sh
+        src: /pg/pgclone/scripts/local.sh
         dest: /pg/data/blitz/pgunion.sh
         force: yes
 
     - name: Install PGUnion Service
       template:
-        src: /opt/pgclone/mounts/pgunion.service
+        src: /pg/pgclone/mounts/pgunion.service
         dest: /etc/systemd/system/pgunion.service
         force: yes
 

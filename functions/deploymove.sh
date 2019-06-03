@@ -17,13 +17,13 @@ rm -rf plexguide/deployed.version
 pgclonevars
 
 # to remove all service running prior to ensure a clean launch
-ansible-playbook /opt/pgclone/ymls/remove.yml
+ansible-playbook /pg/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
 echo "gdrive" > /pg/var/deploy.version
 echo "mu" > /pg/var/deployed.version
 type=gdrive
-ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
@@ -36,7 +36,7 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
 if [[ "$transport" == "me" ]]; then
 echo "me" > /pg/var/deployed.version
 type=gcrypt
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
@@ -47,7 +47,7 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
 fi
 
 # deploy union
-ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
+ansible-playbook /pg/pgclone/ymls/pgunion.yml -e "\
   transport=$transport \
   multihds=$multihds
   type=$type

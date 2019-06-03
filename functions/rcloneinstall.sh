@@ -10,9 +10,6 @@ rcloneinstall () {
 # install what version of rclone
 rversion=1.47
 
-if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
-touch /root/.config/rclone/rclone.conf; fi
-
 rcheck1=$(rclone --version 2>&1)
 rcheck2=$(echo $rcheck1 | cut -c1-12)
 
@@ -36,6 +33,6 @@ tee "/etc/fuse.conf" > /dev/null <<EOF
 user_allow_other
 EOF
 
-ansible-playbook /opt/pgclone/rclone.yml; fi
+ansible-playbook /pg/pgclone/rclone.yml; fi
 
 }

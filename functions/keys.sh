@@ -669,7 +669,7 @@ elif [ "$typed" == "3" ]; then
   deploykeys
   keymenu; fi
 elif [ "$typed" == "4" ]; then
-  bash /opt/pgclone/emails.sh && echo
+  bash /pg/pgclone/emails.sh && echo
   read -p '↘️  Confirm Info | Press [ENTER]: ' typed < /dev/tty
   keymenu
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
