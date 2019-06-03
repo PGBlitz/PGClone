@@ -14,7 +14,7 @@
       include_tasks: '/opt/pgclone/alias.yml'
 
     - name: Transport Type
-      shell: 'cat /var/plexguide/pgclone.transport'
+      shell: 'cat /pg/var/pgclone.transport'
       register: transport55
 
     - name: 'If Fact Matches - Encrypted Blitz'
@@ -45,7 +45,7 @@
         - 'incomplete'
 
     - name: 'Setting ownership on logs'
-      shell: 'chown -R 1000:1000 /var/plexguide/logs'
+      shell: 'chown -R 1000:1000 /pg/var/logs'
 
     - name: 'Setting ownership'
       shell: 'chown -R 1000:1000 {{hdpath}}/{{item}}'
@@ -62,29 +62,29 @@
         - 'incomplete'
 
     - name: Transport Type
-      shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
+      shell: 'echo "" >> /pg/data/blitz/rclone.conf'
     #      register: transport
 
     - name: Line Remover
-      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /opt/appdata/plexguide/rclone.conf'
+      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /pg/data/blitz/rclone.conf'
 
     - name: Transport Type
       shell: |
-        echo "[pgunion]" >> /opt/appdata/plexguide/rclone.conf
-        echo "type = union" >> /opt/appdata/plexguide/rclone.conf
-        echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
+        echo "[pgunion]" >> /pg/data/blitz/rclone.conf
+        echo "type = union" >> /pg/data/blitz/rclone.conf
+        echo "{{path}}" >> /pg/data/blitz/rclone.conf
     #      register: transport
 
     - name: 'PG Blitz Execution'
       block:
         - name: Bandwidth Limit
-          shell: 'cat /var/plexguide/blitz.bw'
+          shell: 'cat /pg/var/blitz.bw'
           register: bandwidth
 
         - name: Install PG Blitz Script
           template:
             src: /opt/pgclone/scripts/pgblitz.sh
-            dest: /opt/appdata/plexguide/pgblitz.sh
+            dest: /pg/data/blitz/pgblitz.sh
             force: yes
 
         - name: Install PG Blitz Service
@@ -106,21 +106,21 @@
     - name: 'PG Move Execution'
       block:
         - name: Bandwidth Limit
-          shell: 'cat /var/plexguide/move.bw'
+          shell: 'cat /pg/var/move.bw'
           register: bandwidth
 
         - name: Deploy Version
-          shell: 'cat /var/plexguide/rclone/deploy.version'
+          shell: 'cat /pg/var/rclone/deploy.version'
           register: ver
 
         - name: Register HD Path
-          shell: 'cat /var/plexguide/server.hd.path'
+          shell: 'cat /pg/var/server.hd.path'
           register: hdpath
 
         - name: Install MOVE Script
           template:
             src: /opt/pgclone/scripts/pgmove.sh
-            dest: /opt/appdata/plexguide/pgmove.sh
+            dest: /pg/data/blitz/pgmove.sh
             force: yes
 
         - name: Install MOVE Service
@@ -142,7 +142,7 @@
     - name: Install PGUnion Script
       template:
         src: /opt/pgclone/scripts/pgunion.sh
-        dest: /opt/appdata/plexguide/pgunion.sh
+        dest: /pg/data/blitz/pgunion.sh
         force: yes
 
     - name: Install PGUnion Service
@@ -165,7 +165,7 @@
         delay: 2
 
     - name: Register HD Path
-      shell: 'cat /var/plexguide/server.hd.path'
+      shell: 'cat /pg/var/server.hd.path'
       register: hdpath
 
     - name: Restart All Docker Containers

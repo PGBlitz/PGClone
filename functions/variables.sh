@@ -13,84 +13,84 @@ pgclonevars () {
   }
 
   # rest standard
-  mkdir -p /var/plexguide/rclone
-  variable /var/plexguide/project.account "NOT-SET"
-  variable /var/plexguide/rclone/deploy.version "null"
-  variable /var/plexguide/pgclone.transport "NOT-SET"
-  variable /var/plexguide/move.bw  "9"
-  variable /var/plexguide/blitz.bw  "1000"
-  variable /var/plexguide/pgclone.salt ""
+  mkdir -p /pg/var/rclone
+  variable /pg/var/project.account "NOT-SET"
+  variable /pg/var/rclone/deploy.version "null"
+  variable /pg/var/pgclone.transport "NOT-SET"
+  variable /pg/var/move.bw  "9"
+  variable /pg/var/blitz.bw  "1000"
+  variable /pg/var/pgclone.salt ""
 
-  variable /var/plexguide/server.hd.path "/mnt"
-  hdpath=$(cat /var/plexguide/server.hd.path)
+  variable /pg/var/server.hd.path "/mnt"
+  hdpath=$(cat /pg/var/server.hd.path)
 
-  variable /var/plexguide/oauth.check ""
-  oauthcheck=$(cat /var/plexguide/oauth.check)
+  variable /pg/var/oauth.check ""
+  oauthcheck=$(cat /pg/var/oauth.check)
 
-  variable /var/plexguide/pgclone.password "NOT-SET"
-  if [[ $(cat /var/plexguide/pgclone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
+  variable /pg/var/pgclone.password "NOT-SET"
+  if [[ $(cat /pg/var/pgclone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
   else
     pstatus="ACTIVE"
-    clonepassword=$(cat /var/plexguide/pgclone.password)
-    clonesalt=$(cat /var/plexguide/pgclone.salt)
+    clonepassword=$(cat /pg/var/pgclone.password)
+    clonesalt=$(cat /pg/var/pgclone.salt)
   fi
 
-  variable /opt/appdata/plexguide/.gdrive "NOT-SET"
-  if [[ $(cat /opt/appdata/plexguide/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
+  variable /pg/data/blitz/.gdrive "NOT-SET"
+  if [[ $(cat /pg/data/blitz/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
-  variable /opt/appdata/plexguide/.tdrive "NOT-SET"
-  if [[ $(cat /opt/appdata/plexguide/.tdrive) == "NOT-SET" ]]; then tstatus="NOT-SET"
+  variable /pg/data/blitz/.tdrive "NOT-SET"
+  if [[ $(cat /pg/data/blitz/.tdrive) == "NOT-SET" ]]; then tstatus="NOT-SET"
   else tstatus="ACTIVE"; fi
 
-  variable /opt/appdata/plexguide/.tcrypt "NOT-SET"
-  if [[ $(cat /opt/appdata/plexguide/.tcrypt) == "NOT-SET" ]]; then tcstatus="NOT-SET"
+  variable /pg/data/blitz/.tcrypt "NOT-SET"
+  if [[ $(cat /pg/data/blitz/.tcrypt) == "NOT-SET" ]]; then tcstatus="NOT-SET"
   else tcstatus="ACTIVE"; fi
 
-  variable /opt/appdata/plexguide/.gcrypt "NOT-SET"
-  if [[ $(cat /opt/appdata/plexguide/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
+  variable /pg/data/blitz/.gcrypt "NOT-SET"
+  if [[ $(cat /pg/data/blitz/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
   else gcstatus="ACTIVE"; fi
 
-  transport=$(cat /var/plexguide/pgclone.transport)
+  transport=$(cat /pg/var/pgclone.transport)
 
-  variable /var/plexguide/pgclone.teamdrive "NOT-SET"
-  tdname=$(cat /var/plexguide/pgclone.teamdrive)
+  variable /pg/var/pgclone.teamdrive "NOT-SET"
+  tdname=$(cat /pg/var/pgclone.teamdrive)
 
-  variable /var/plexguide/pgclone.demo "OFF"
-  demo=$(cat /var/plexguide/pgclone.demo)
+  variable /pg/var/pgclone.demo "OFF"
+  demo=$(cat /pg/var/pgclone.demo)
 
-  variable /var/plexguide/pgclone.teamid ""
-  tdid=$(cat /var/plexguide/pgclone.teamid)
+  variable /pg/var/pgclone.teamid ""
+  tdid=$(cat /pg/var/pgclone.teamid)
 
-  variable /var/plexguide/rclone/deploy.version ""
-  type=$(cat /var/plexguide/rclone/deploy.version)
+  variable /pg/var/rclone/deploy.version ""
+  type=$(cat /pg/var/rclone/deploy.version)
 
-  variable /var/plexguide/pgclone.public ""
-  pgclonepublic=$(cat /var/plexguide/pgclone.public)
+  variable /pg/var/pgclone.public ""
+  pgclonepublic=$(cat /pg/var/pgclone.public)
 
-  mkdir -p /opt/appdata/plexguide/.blitzkeys
-  displaykey=$(ls /opt/appdata/plexguide/.blitzkeys | wc -l)
+  mkdir -p /pg/data/blitz/.blitzkeys
+  displaykey=$(ls /pg/data/blitz/.blitzkeys | wc -l)
 
-  variable /var/plexguide/pgclone.secret ""
-  pgclonesecret=$(cat /var/plexguide/pgclone.secret)
+  variable /pg/var/pgclone.secret ""
+  pgclonesecret=$(cat /pg/var/pgclone.secret)
 
   if [[ "$pgclonesecret" == "" || "$pgclonepublic" == "" ]]; then pgcloneid="NOT-SET"; fi
   if [[ "$pgclonesecret" != "" && "$pgclonepublic" != "" ]]; then pgcloneid="ACTIVE"; fi
 
-  variable /var/plexguide/pgclone.email "NOT-SET"
-  pgcloneemail=$(cat /var/plexguide/pgclone.email)
+  variable /pg/var/pgclone.email "NOT-SET"
+  pgcloneemail=$(cat /pg/var/pgclone.email)
 
-  variable /var/plexguide/oauth.type "NOT-SET" #output for auth type
-  oauthtype=$(cat /var/plexguide/oauth.type)
+  variable /pg/var/oauth.type "NOT-SET" #output for auth type
+  oauthtype=$(cat /pg/var/oauth.type)
 
-  variable /var/plexguide/pgclone.project "NOT-SET"
-  pgcloneproject=$(cat /var/plexguide/pgclone.project)
+  variable /pg/var/pgclone.project "NOT-SET"
+  pgcloneproject=$(cat /pg/var/pgclone.project)
 
-  variable /var/plexguide/deployed.version ""
-  dversion=$(cat /var/plexguide/deployed.version)
+  variable /pg/var/deployed.version ""
+  dversion=$(cat /pg/var/deployed.version)
 
-  variablet /var/plexguide/.tmp.multihd
-  multihds=$(cat /var/plexguide/.tmp.multihd)
+  variablet /pg/var/.tmp.multihd
+  multihds=$(cat /pg/var/.tmp.multihd)
 
   if [[ "$dversion" == "mu" ]]; then dversionoutput="Unencrypted Move"
 elif [[ "$dversion" == "me" ]]; then dversionoutput="Encrypted Move"
@@ -100,37 +100,37 @@ elif [[ "$dversion" == "le" ]]; then dversionoutput="Local HD/Mount"
 else dversionoutput="None"; fi
 
 # For Clone Clean
-  variable /var/plexguide/cloneclean "600"
-  cloneclean=$(cat /var/plexguide/cloneclean)
+  variable /pg/var/cloneclean "600"
+  cloneclean=$(cat /pg/var/cloneclean)
 
 # For PG Blitz Mounts
-  variable /var/plexguide/vfs_bs "16"
-  vfs_bs=$(cat /var/plexguide/vfs_bs)
+  variable /pg/var/vfs_bs "16"
+  vfs_bs=$(cat /pg/var/vfs_bs)
 
 
-  variable /var/plexguide/vfs_dcs "64"
-  vfs_dcs=$(cat /var/plexguide/vfs_dcs)
+  variable /pg/var/vfs_dcs "64"
+  vfs_dcs=$(cat /pg/var/vfs_dcs)
 
-  variable /var/plexguide/vfs_dct "2"
-  vfs_dct=$(cat /var/plexguide/vfs_dct)
+  variable /pg/var/vfs_dct "2"
+  vfs_dct=$(cat /pg/var/vfs_dct)
 
-  variable /var/plexguide/vfs_cma "1"
-  vfs_cma=$(cat /var/plexguide/vfs_cma)
+  variable /pg/var/vfs_cma "1"
+  vfs_cma=$(cat /pg/var/vfs_cma)
 
-  variable /var/plexguide/vfs_rcs "64"
-  vfs_rcs=$(cat /var/plexguide/vfs_rcs)
+  variable /pg/var/vfs_rcs "64"
+  vfs_rcs=$(cat /pg/var/vfs_rcs)
 
-  variable /var/plexguide/vfs_rcsl "2"
-  vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
+  variable /pg/var/vfs_rcsl "2"
+  vfs_rcsl=$(cat /pg/var/vfs_rcsl)
 
-  variable /var/plexguide/vfs_cm "off"
-  vfs_cm=$(cat /var/plexguide/vfs_cm)
+  variable /pg/var/vfs_cm "off"
+  vfs_cm=$(cat /pg/var/vfs_cm)
 
-  variable /var/plexguide/vfs_cms "100"
-  vfs_cms=$(cat /var/plexguide/vfs_cms)
+  variable /pg/var/vfs_cms "100"
+  vfs_cms=$(cat /pg/var/vfs_cms)
 
   randomagent=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
 
-  variable /var/plexguide/uagent "$randomagent"
-  uagent=$(cat /var/plexguide/uagent)
+  variable /pg/var/uagent "$randomagent"
+  uagent=$(cat /pg/var/uagent)
 }

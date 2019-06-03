@@ -62,7 +62,7 @@ tee <<-EOF
 
 EOF
   read -rp '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/blitz.bw
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /pg/var/blitz.bw
 else setthrottleblitz; fi
 }
 
@@ -78,7 +78,7 @@ tee <<-EOF
 
 EOF
   read -rp '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /var/plexguide/move.bw
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /pg/var/move.bw
 else setthrottlemove; fi
 }
 
@@ -99,30 +99,30 @@ removepgservices () {
 }
 
 readrcloneconfig () {
-  touch /opt/appdata/plexguide/rclone.conf
-  mkdir -p /var/plexguide/rclone/
+  touch /pg/data/blitz/rclone.conf
+  mkdir -p /pg/var/rclone/
 
-  gdcheck=$(cat /opt/appdata/plexguide/rclone.conf | grep gdrive)
-  if [ "$gdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/gdrive.status && gdstatus="good";
-  else echo "bad" > /var/plexguide/rclone/gdrive.status && gdstatus="bad"; fi
+  gdcheck=$(cat /pg/data/blitz/rclone.conf | grep gdrive)
+  if [ "$gdcheck" != "" ]; then echo "good" > /pg/var/rclone/gdrive.status && gdstatus="good";
+  else echo "bad" > /pg/var/rclone/gdrive.status && gdstatus="bad"; fi
 
-  gccheck=$(cat /opt/appdata/plexguide/rclone.conf | grep "remote = gdrive:/encrypt")
-  if [ "$gccheck" != "" ]; then echo "good" > /var/plexguide/rclone/gcrypt.status && gcstatus="good";
-  else echo "bad" > /var/plexguide/rclone/gcrypt.status && gcstatus="bad"; fi
+  gccheck=$(cat /pg/data/blitz/rclone.conf | grep "remote = gdrive:/encrypt")
+  if [ "$gccheck" != "" ]; then echo "good" > /pg/var/rclone/gcrypt.status && gcstatus="good";
+  else echo "bad" > /pg/var/rclone/gcrypt.status && gcstatus="bad"; fi
 
-  tdcheck=$(cat /opt/appdata/plexguide/rclone.conf | grep tdrive)
-  if [ "$tdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/tdrive.status && tdstatus="good"
-  else echo "bad" > /var/plexguide/rclone/tdrive.status && tdstatus="bad"; fi
+  tdcheck=$(cat /pg/data/blitz/rclone.conf | grep tdrive)
+  if [ "$tdcheck" != "" ]; then echo "good" > /pg/var/rclone/tdrive.status && tdstatus="good"
+  else echo "bad" > /pg/var/rclone/tdrive.status && tdstatus="bad"; fi
 
 }
 
 rcloneconfig () {
-  rclone config --config /opt/appdata/plexguide/rclone.conf
+  rclone config --config /pg/data/blitz/rclone.conf
 }
 
 keysprocessed () {
-  mkdir -p /opt/appdata/plexguide/keys/processed
-  ls -1 /opt/appdata/plexguide/keys/processed | wc -l > /var/plexguide/project.keycount
+  mkdir -p /pg/data/blitz/keys/processed
+  ls -1 /pg/data/blitz/keys/processed | wc -l > /pg/var/project.keycount
 }
 
 deletemelateron () {

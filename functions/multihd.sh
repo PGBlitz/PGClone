@@ -11,18 +11,18 @@ multihdreadonly () {
   pgclonevars
 
   # removes the temporary variable when starting
-  rm -rf /var/plexguide/.tmp.multihd 1>/dev/null 2>&1
+  rm -rf /pg/var/.tmp.multihd 1>/dev/null 2>&1
 
     # reads the list of paths
     while read p; do
 
        # prevents copying blanks areas
        if [[ "$p" != "" ]]; then
-         echo -n "$p=NC:" >> /var/plexguide/.tmp.multihd
+         echo -n "$p=NC:" >> /pg/var/.tmp.multihd
          chown -R 1000:1000 "$p"
          chmod -R 755 "$p"
        fi
 
-    done </var/plexguide/multihd.paths
+    done </pg/var/multihd.paths
 
 }

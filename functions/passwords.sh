@@ -8,8 +8,8 @@
 blitzpasswordmain () {
 pgclonevars
 
-clonepassword57=$(cat /var/plexguide/pgclone.password)
-clonesalt57=$(cat /var/plexguide/pgclone.salt)
+clonepassword57=$(cat /pg/var/pgclone.password)
+clonesalt57=$(cat /pg/var/pgclone.salt)
 
 if [[ "$pstatus" != "NOT-SET" ]]; then
 tee <<-EOF
@@ -37,14 +37,14 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
-    rm -rf /var/plexguide/pgclone.password 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.salt 1>/dev/null 2>&1
+    rm -rf /pg/var/pgclone.password 1>/dev/null 2>&1
+    rm -rf /pg/var/pgclone.salt 1>/dev/null 2>&1
 
-    rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.gcrypt 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.gdrive 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.tcrypt 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.tdrive 1>/dev/null 2>&1
+    rm -rf /pg/var/pgclone.teamdrive 1>/dev/null 2>&1
     ;;
 1 )
     clonestart ;;
@@ -118,8 +118,8 @@ read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
-echo $primarypassword > /var/plexguide/pgclone.password
-echo $secondarypassword > /var/plexguide/pgclone.salt
+echo $primarypassword > /pg/var/pgclone.password
+echo $secondarypassword > /pg/var/pgclone.salt
 else blitzpasswordfinal; fi
 
 tee <<-EOF

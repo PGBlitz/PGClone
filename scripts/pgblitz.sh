@@ -7,12 +7,12 @@
 ################################################################################
 
 # Starting Actions
-touch /var/plexguide/logs/pgblitz.log
+touch /pg/var/logs/pgblitz.log
 
-echo "" >> /var/plexguide/logs/pgblitz.log
-echo "" >> /var/plexguide/logs/pgblitz.log
-echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
+echo "" >> /pg/var/logs/pgblitz.log
+echo "" >> /pg/var/logs/pgblitz.log
+echo "----------------------------" >> /pg/var/logs/pgblitz.log
+echo "PG Blitz Log - First Startup" >> /pg/var/logs/pgblitz.log
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
@@ -22,20 +22,20 @@ startscript () {
 while read p; do
 
 # Repull excluded folder 
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
+ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
  
-  cleaner="$(cat /var/plexguide/cloneclean)"
-  useragent="$(cat /var/plexguide/uagent)"
+  cleaner="$(cat /pg/var/cloneclean)"
+  useragent="$(cat /pg/var/uagent)"
   
   let "cyclecount++"
-  echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-  echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
-  echo "" >> /var/plexguide/logs/pgblitz.log
-  echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
+  echo "----------------------------" >> /pg/var/logs/pgblitz.log
+  echo "PG Blitz Log - Cycle $cyclecount" >> /pg/var/logs/pgblitz.log
+  echo "" >> /pg/var/logs/pgblitz.log
+  echo "Utilizing: $p" >> /pg/var/logs/pgblitz.log
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-  --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/var/plexguide/logs/pgblitz.log \
+  --config /pg/data/blitz/rclone.conf \
+  --log-file=/pg/var/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude="**partial~" --exclude=".unionfs-fuse/**" \
@@ -51,8 +51,8 @@ while read p; do
   chmod -R 775 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
-  --config /opt/appdata/plexguide/rclone.conf \
-  --log-file=/var/plexguide/logs/pgblitz.log \
+  --config /pg/data/blitz/rclone.conf \
+  --log-file=/pg/var/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
   --tpslimit 12 \
   --checkers=20 \
@@ -71,9 +71,9 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
-  cat /var/plexguide/logs/pgblitz.log | tail -200 > /var/plexguide/logs/pgblitz.log
-  #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
+  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /pg/var/logs/pgblitz.log
+  cat /pg/var/logs/pgblitz.log | tail -200 > /pg/var/logs/pgblitz.log
+  #sed -i -e "/Duplicate directory found in destination/d" /pg/var/logs/pgblitz.log
   sleep 30
 
   #Quick fix
@@ -86,10 +86,10 @@ while read p; do
   find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage | torrent folder excluded 
-  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
 
-done </var/plexguide/.blitzfinal
+done </pg/var/.blitzfinal
 }
 
 # keeps the function in a loop

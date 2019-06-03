@@ -20,8 +20,8 @@ pgclonevars
 ansible-playbook /opt/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
-echo "gdrive" > /var/plexguide/deploy.version
-echo "mu" > /var/plexguide/deployed.version
+echo "gdrive" > /pg/var/deploy.version
+echo "mu" > /pg/var/deployed.version
 type=gdrive
 ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
@@ -34,7 +34,7 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "me" ]]; then
-echo "me" > /var/plexguide/deployed.version
+echo "me" > /pg/var/deployed.version
 type=gcrypt
 ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs

@@ -203,20 +203,20 @@ EOF
 
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
 
-        if [[ "$mountselection" == "1" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_bs; fi
-        if [[ "$mountselection" == "2" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_dcs; fi
-        if [[ "$mountselection" == "3" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_dct; fi
-        if [[ "$mountselection" == "4" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_rcs; fi
-        if [[ "$mountselection" == "5" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_rcsl; fi
-        if [[ "$mountselection" == "7" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_cma; fi
-        if [[ "$mountselection" == "8" ]]; then echo "$typed" | grep -o '[0-9]*' > /var/plexguide/vfs_cms; fi
+        if [[ "$mountselection" == "1" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_bs; fi
+        if [[ "$mountselection" == "2" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_dcs; fi
+        if [[ "$mountselection" == "3" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_dct; fi
+        if [[ "$mountselection" == "4" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_rcs; fi
+        if [[ "$mountselection" == "5" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_rcsl; fi
+        if [[ "$mountselection" == "7" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_cma; fi
+        if [[ "$mountselection" == "8" ]]; then echo "$typed" | grep -o '[0-9]*' > /pg/var/vfs_cms; fi
 
 
       if [[ "$mountselection" == "6" ]]; then
-        if [[ "$typed" == "1" ]]; then echo "off" > /var/plexguide/vfs_cm; fi
-        if [[ "$typed" == "2" ]]; then echo "minimal" > /var/plexguide/vfs_cm; fi
-        if [[ "$typed" == "3" ]]; then echo "writes" > /var/plexguide/vfs_cm; fi
-        if [[ "$typed" == "4" ]]; then echo "full" > /var/plexguide/vfs_cm; fi
+        if [[ "$typed" == "1" ]]; then echo "off" > /pg/var/vfs_cm; fi
+        if [[ "$typed" == "2" ]]; then echo "minimal" > /pg/var/vfs_cm; fi
+        if [[ "$typed" == "3" ]]; then echo "writes" > /pg/var/vfs_cm; fi
+        if [[ "$typed" == "4" ]]; then echo "full" > /pg/var/vfs_cm; fi
       fi
 
     fi

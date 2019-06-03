@@ -20,8 +20,8 @@ pgclonevars
 ansible-playbook /opt/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
-echo "tdrive" > /var/plexguide/deploy.version
-echo "bu" > /var/plexguide/deployed.version
+echo "tdrive" > /pg/var/deploy.version
+echo "bu" > /pg/var/deployed.version
 type=gdrive
 encryptbit=""
 ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
@@ -54,7 +54,7 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_rcsl=$vfs_rcsl
   drive=gcrypt"
 
-echo "be" > /var/plexguide/deployed.version
+echo "be" > /pg/var/deployed.version
 type=tcrypt
 encryptbit="C"
 ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
@@ -68,14 +68,14 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
 fi
 
 # builds the list
-ls -la /opt/appdata/plexguide/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /var/plexguide/.blitzlist
-rm -rf /var/plexguide/.blitzfinal 1>/dev/null 2>&1
-touch /var/plexguide/.blitzbuild
+ls -la /pg/data/blitz/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /pg/var/.blitzlist
+rm -rf /pg/var/.blitzfinal 1>/dev/null 2>&1
+touch /pg/var/.blitzbuild
 while read p; do
-  echo $p > /var/plexguide/.blitztemp
-  blitzcheck=$(grep "GDSA" /var/plexguide/.blitztemp)
-  if [[ "$blitzcheck" != "" ]]; then echo $p >> /var/plexguide/.blitzfinal; fi
-done </var/plexguide/.blitzlist
+  echo $p > /pg/var/.blitztemp
+  blitzcheck=$(grep "GDSA" /pg/var/.blitztemp)
+  if [[ "$blitzcheck" != "" ]]; then echo $p >> /pg/var/.blitzfinal; fi
+done </pg/var/.blitzlist
 
 # deploy union
 ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\

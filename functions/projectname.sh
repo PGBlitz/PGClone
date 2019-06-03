@@ -86,7 +86,7 @@ if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then cl
 
 # Repeats if Users Fails the Range
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
-existingnumber=$(cat /var/plexguide/prolist/$typed)
+existingnumber=$(cat /pg/var/prolist/$typed)
 
 echo
 gcloud config set project ${existingnumber} --account=${pgcloneemail}
@@ -102,7 +102,7 @@ gcloud services enable drive.googleapis.com --project ${existingnumber} --accoun
 else exisitingproject; fi
 echo
 read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
-echo "${existingnumber}" > /var/plexguide/pgclone.project
+echo "${existingnumber}" > /pg/var/pgclone.project
 clonestart
 }
 
@@ -125,10 +125,10 @@ if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then op
 
 # Repeats if Users Fails the Range
 if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
-destroynumber=$(cat /var/plexguide/prolist/$typed)
+destroynumber=$(cat /pg/var/prolist/$typed)
 
   # Cannot Destroy Active Project
-  if [[ $(cat /var/plexguide/pgclone.project) == "$destroynumber" ]]; then
+  if [[ $(cat /pg/var/pgclone.project) == "$destroynumber" ]]; then
   echo
   read -p '↘️  Unable to Destroy an Active Project | Press [ENTER] ' typed < /dev/tty
   destroyproject
@@ -144,17 +144,17 @@ optionsmenu
 
 projectlist () {
 pnum=0
-mkdir -p /var/plexguide/prolist
-rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+mkdir -p /pg/var/prolist
+rm -rf /pg/var/prolist/* 1>/dev/null 2>&1
 
-gcloud projects list --account=${pgcloneemail} | tail -n +2 | awk '{print $1}' > /var/plexguide/prolist/prolist.sh
+gcloud projects list --account=${pgcloneemail} | tail -n +2 | awk '{print $1}' > /pg/var/prolist/prolist.sh
 
 while read p; do
   let "pnum++"
-  echo "$p" > "/var/plexguide/prolist/$pnum"
-  echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+  echo "$p" > "/pg/var/prolist/$pnum"
+  echo "[$pnum] $p" >> /pg/var/prolist/final.sh
   echo "[$pnum] ${filler}${p}"
-done </var/plexguide/prolist/prolist.sh
+done </pg/var/prolist/prolist.sh
 }
 
 projectnamecheck () {
@@ -254,7 +254,7 @@ tee <<-EOF
 EOF
 
 gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
-echo "$projectid" > /var/plexguide/pgclone.project
+echo "$projectid" > /pg/var/pgclone.project
 
 tee <<-EOF
 
@@ -262,15 +262,15 @@ tee <<-EOF
 🚀 PG Clone - Resetting Prior Stored Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
-rm -rf /var/plexguide/deployed.version 1>/dev/null 2>&1
+rm -rf /pg/var/pgclone.secret 1>/dev/null 2>&1
+rm -rf /pg/var/pgclone.public 1>/dev/null 2>&1
+rm -rf /pg/var/pgclone.secret 1>/dev/null 2>&1
+rm -rf /pg/data/blitz/.tdrive 1>/dev/null 2>&1
+rm -rf /pg/data/blitz/.gdrive 1>/dev/null 2>&1
+rm -rf /pg/data/blitz/.gcrypt 1>/dev/null 2>&1
+rm -rf /pg/data/blitz/.tcrypt 1>/dev/null 2>&1
+rm -rf /pg/var/pgclone.teamdrive 1>/dev/null 2>&1
+rm -rf /pg/var/deployed.version 1>/dev/null 2>&1
 
 docker stop jellyfin 1>/dev/null 2>&1
 docker stop plex 1>/dev/null 2>&1

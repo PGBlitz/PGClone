@@ -32,13 +32,13 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
-    rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.gcrypt 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.gdrive 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.tcrypt 1>/dev/null 2>&1
+    rm -rf /pg/data/blitz/.tdrive 1>/dev/null 2>&1
+    rm -rf /pg/var/pgclone.teamdrive 1>/dev/null 2>&1
+    rm -rf /pg/var/pgclone.public 1>/dev/null 2>&1
+    rm -rf /pg/var/pgclone.secret 1>/dev/null 2>&1
     ;;
 1 )
     clonestart ;;
@@ -109,12 +109,12 @@ read -p '↘️  Input Information | Press [Enter]: ' typed < /dev/tty
 
 case $typed in
 1 )
-    echo "$clientid" > /var/plexguide/pgclone.public
-    echo "$secretid" > /var/plexguide/pgclone.secret
+    echo "$clientid" > /pg/var/pgclone.public
+    echo "$secretid" > /pg/var/pgclone.secret
     echo
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
-    echo "SET" > /var/plexguide/pgclone.id
+    echo "SET" > /pg/var/pgclone.id
     ;;
 2 )
     echo

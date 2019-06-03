@@ -13,12 +13,12 @@ if pidof -o %PPID -x "$0"; then
    exit 1
 fi
 
-touch /var/plexguide/logs/pgmove.log
+touch /pg/var/logs/pgmove.log
 
-echo "" >> /var/plexguide/logs/pgmove.log
-echo "" >> /var/plexguide/logs/pgmove.log
-echo "----------------------------" >> /var/plexguide/logs/pgmove.log
-echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
+echo "" >> /pg/var/logs/pgmove.log
+echo "" >> /pg/var/logs/pgmove.log
+echo "----------------------------" >> /pg/var/logs/pgmove.log
+echo "PG Move Log - First Startup" >> /pg/var/logs/pgmove.log
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
@@ -30,14 +30,14 @@ while true
 do
 
 # Repull excluded folder 
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
+ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
  
-  cleaner="$(cat /var/plexguide/cloneclean)"
-  useragent="$(cat /var/plexguide/uagent)"
+  cleaner="$(cat /pg/var/cloneclean)"
+  useragent="$(cat /pg/var/uagent)"
 
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
---config /opt/appdata/plexguide/rclone.conf \
---log-file=/var/plexguide/logs/pgmove.log \
+--config /pg/data/blitz/rclone.conf \
+--log-file=/pg/var/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude="**partial~" --exclude=".unionfs-fuse/**" \
@@ -53,8 +53,8 @@ chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 775 "{{hdpath}}/move"
 
 rclone move "{{hdpath}}/move/" "{{type}}:/" \
---config /opt/appdata/plexguide/rclone.conf \
---log-file=/var/plexguide/logs/pgmove.log \
+--config /pg/data/blitz/rclone.conf \
+--log-file=/pg/var/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
@@ -84,7 +84,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
   find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage | torrent folder excluded 
-  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
 
 done
