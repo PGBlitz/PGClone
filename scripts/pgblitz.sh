@@ -34,7 +34,7 @@ while read p; do
   echo "Utilizing: $p" >> /pg/var/logs/pgblitz.log
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-  --config /pg/data/blitz/rclone.conf \
+  --config /pg/var/rclone/blitz.conf \
   --log-file=/pg/var/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -51,7 +51,7 @@ while read p; do
   chmod -R 775 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
-  --config /pg/data/blitz/rclone.conf \
+  --config /pg/var/rclone/blitz.conf \
   --log-file=/pg/var/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
   --tpslimit 12 \

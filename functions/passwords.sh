@@ -40,10 +40,10 @@ case $typed in
     rm -rf /pg/var/pgclone.password 1>/dev/null 2>&1
     rm -rf /pg/var/pgclone.salt 1>/dev/null 2>&1
 
-    rm -rf /pg/data/blitz/.gcrypt 1>/dev/null 2>&1
-    rm -rf /pg/data/blitz/.gdrive 1>/dev/null 2>&1
-    rm -rf /pg/data/blitz/.tcrypt 1>/dev/null 2>&1
-    rm -rf /pg/data/blitz/.tdrive 1>/dev/null 2>&1
+    rm -rf /pg/var/.gcrypt 1>/dev/null 2>&1
+    rm -rf /pg/var/.gdrive 1>/dev/null 2>&1
+    rm -rf /pg/var/.tcrypt 1>/dev/null 2>&1
+    rm -rf /pg/var/.tdrive 1>/dev/null 2>&1
     rm -rf /pg/var/pgclone.teamdrive 1>/dev/null 2>&1
     ;;
 1 )

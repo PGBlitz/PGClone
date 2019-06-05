@@ -10,9 +10,9 @@ emailgen () {
 rm -rf /pg/var/.emailbuildlist 1>/dev/null 2>&1
 rm -rf /pg/var/.emaillist  1>/dev/null 2>&1
 
-ls -la /pg/data/blitz/.blitzkeys | awk '{print $9}' | tail -n +4 > /pg/var/.emailbuildlist
+ls -la /pg/var/.blitzkeys | awk '{print $9}' | tail -n +4 > /pg/var/.emailbuildlist
 while read p; do
-  cat /pg/data/blitz/.blitzkeys/$p | grep client_email | awk '{print $2}' | sed 's/"//g' | sed 's/,//g' >> /pg/var/.emaillist
+  cat /pg/var/.blitzkeys/$p | grep client_email | awk '{print $2}' | sed 's/"//g' | sed 's/,//g' >> /pg/var/.emaillist
 done </pg/var/.emailbuildlist
 
 tee <<-EOF

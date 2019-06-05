@@ -35,20 +35,20 @@ pgclonevars () {
     clonesalt=$(cat /pg/var/pgclone.salt)
   fi
 
-  variable /pg/data/blitz/.gdrive "NOT-SET"
-  if [[ $(cat /pg/data/blitz/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
+  variable /pg/var/.gdrive "NOT-SET"
+  if [[ $(cat /pg/var/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
-  variable /pg/data/blitz/.tdrive "NOT-SET"
-  if [[ $(cat /pg/data/blitz/.tdrive) == "NOT-SET" ]]; then tstatus="NOT-SET"
+  variable /pg/var/.tdrive "NOT-SET"
+  if [[ $(cat /pg/var/.tdrive) == "NOT-SET" ]]; then tstatus="NOT-SET"
   else tstatus="ACTIVE"; fi
 
-  variable /pg/data/blitz/.tcrypt "NOT-SET"
-  if [[ $(cat /pg/data/blitz/.tcrypt) == "NOT-SET" ]]; then tcstatus="NOT-SET"
+  variable /pg/var/.tcrypt "NOT-SET"
+  if [[ $(cat /pg/var/.tcrypt) == "NOT-SET" ]]; then tcstatus="NOT-SET"
   else tcstatus="ACTIVE"; fi
 
-  variable /pg/data/blitz/.gcrypt "NOT-SET"
-  if [[ $(cat /pg/data/blitz/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
+  variable /pg/var/.gcrypt "NOT-SET"
+  if [[ $(cat /pg/var/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
   else gcstatus="ACTIVE"; fi
 
   transport=$(cat /pg/var/pgclone.transport)
@@ -68,8 +68,8 @@ pgclonevars () {
   variable /pg/var/pgclone.public ""
   pgclonepublic=$(cat /pg/var/pgclone.public)
 
-  mkdir -p /pg/data/blitz/.blitzkeys
-  displaykey=$(ls /pg/data/blitz/.blitzkeys | wc -l)
+  mkdir -p /pg/var/.blitzkeys
+  displaykey=$(ls /pg/var/.blitzkeys | wc -l)
 
   variable /pg/var/pgclone.secret ""
   pgclonesecret=$(cat /pg/var/pgclone.secret)

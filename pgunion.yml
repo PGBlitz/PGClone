@@ -62,17 +62,17 @@
         - 'incomplete'
 
     - name: Transport Type
-      shell: 'echo "" >> /pg/data/blitz/rclone.conf'
+      shell: 'echo "" >> /pg/var/rclone/blitz.conf'
     #      register: transport
 
     - name: Line Remover
-      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /pg/data/blitz/rclone.conf'
+      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /pg/var/rclone/blitz.conf'
 
     - name: Transport Type
       shell: |
-        echo "[pgunion]" >> /pg/data/blitz/rclone.conf
-        echo "type = union" >> /pg/data/blitz/rclone.conf
-        echo "{{path}}" >> /pg/data/blitz/rclone.conf
+        echo "[pgunion]" >> /pg/var/rclone/blitz.conf
+        echo "type = union" >> /pg/var/rclone/blitz.conf
+        echo "{{path}}" >> /pg/var/rclone/blitz.conf
     #      register: transport
 
     - name: 'PG Blitz Execution'
@@ -84,7 +84,7 @@
         - name: Install PG Blitz Script
           template:
             src: /pg/pgclone/scripts/pgblitz.sh
-            dest: /pg/data/blitz/pgblitz.sh
+            dest: /pg/var/pgblitz.sh
             force: yes
 
         - name: Install PG Blitz Service
@@ -120,7 +120,7 @@
         - name: Install MOVE Script
           template:
             src: /pg/pgclone/scripts/pgmove.sh
-            dest: /pg/data/blitz/pgmove.sh
+            dest: /pg/var/pgmove.sh
             force: yes
 
         - name: Install MOVE Service
@@ -142,7 +142,7 @@
     - name: Install PGUnion Script
       template:
         src: /pg/pgclone/scripts/pgunion.sh
-        dest: /pg/data/blitz/pgunion.sh
+        dest: /pg/var/pgunion.sh
         force: yes
 
     - name: Install PGUnion Service

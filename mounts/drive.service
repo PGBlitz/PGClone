@@ -15,7 +15,7 @@ Type=simple
 User=0
 Group=0
 ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
---config /pg/data/blitz/rclone.conf \
+--config /pg/var/rclone/blitz.conf \
 --allow-non-empty \
 --allow-other \
 --size-only \

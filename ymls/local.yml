@@ -17,7 +17,7 @@
     - name: Install Union Script
       template:
         src: /pg/pgclone/scripts/local.sh
-        dest: /pg/data/blitz/pgunion.sh
+        dest: /pg/var/pgunion.sh
         force: yes
 
     - name: Install PGUnion Service

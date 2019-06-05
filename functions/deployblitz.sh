@@ -68,7 +68,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
 fi
 
 # builds the list
-ls -la /pg/data/blitz/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /pg/var/.blitzlist
+ls -la /pg/var/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /pg/var/.blitzlist
 rm -rf /pg/var/.blitzfinal 1>/dev/null 2>&1
 touch /pg/var/.blitzbuild
 while read p; do

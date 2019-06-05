@@ -36,7 +36,7 @@ do
   useragent="$(cat /pg/var/uagent)"
 
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
---config /pg/data/blitz/rclone.conf \
+--config /pg/var/rclone/blitz.conf \
 --log-file=/pg/var/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -53,7 +53,7 @@ chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 775 "{{hdpath}}/move"
 
 rclone move "{{hdpath}}/move/" "{{type}}:/" \
---config /pg/data/blitz/rclone.conf \
+--config /pg/var/rclone/blitz.conf \
 --log-file=/pg/var/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
 --bwlimit {{bandwidth.stdout}}M \

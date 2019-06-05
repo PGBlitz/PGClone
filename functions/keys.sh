@@ -27,7 +27,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf $type:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35,7 +35,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -78,7 +78,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf $type:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -86,7 +86,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -127,7 +127,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf $type:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -135,7 +135,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -176,7 +176,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf $type:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -184,7 +184,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -226,7 +226,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf $type:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -234,7 +234,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -275,7 +275,7 @@ if [ "$choicedel" != "" ]; then
   gcloud iam service-accounts delete $p --quiet
   done </pg/var/gdsa.cut
 
-rm -rf /pg/data/blitz/keys/processed/* 1>/dev/null 2>&1
+rm -rf /pg/var/keys/processed/* 1>/dev/null 2>&1
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -332,9 +332,9 @@ gdsabuild () {
 
   downloadpath=$(cat /pg/var/server.hd.path)
   tempbuild=$(cat /pg/var/json.tempbuild)
-  path=/pg/data/blitz/keys
-  rpath=/pg/data/blitz/rclone.conf
-  tdrive=$( cat /pg/data/blitz/rclone.conf | grep team_drive | head -n1 )
+  path=/pg/var/keys
+  rpath=/pg/var/rclone/blitz.conf
+  tdrive=$( cat /pg/var/rclone/blitz.conf | grep team_drive | head -n1 )
   tdrive="${tdrive:13}"
 
   if [ "$bencrypted" == "yes" ]; then
@@ -352,7 +352,7 @@ gdsabuild () {
   echo "client_secret =" >> $rpath
   echo "scope = drive" >> $rpath
   echo "root_folder_id =" >> $rpath
-  echo "service_account_file = /pg/data/blitz/keys/processed/$tempbuild" >> $rpath
+  echo "service_account_file = /pg/var/keys/processed/$tempbuild" >> $rpath
   echo "team_drive = $tdrive" >> $rpath
 
   if [ "$bencrypted" == "yes" ]; then
@@ -405,25 +405,25 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
   project=$(cat /pg/var/pgclone.project)
 
   ##wipe previous keys stuck there
-  mkdir -p /pg/data/blitz/keys/processed/
-  rm -rf /pg/data/blitz/keys/processed/* 1>/dev/null 2>&1
+  mkdir -p /pg/var/keys/processed/
+  rm -rf /pg/var/keys/processed/* 1>/dev/null 2>&1
 
   ## purpose of the rewrite is to save gdrive and tdrive info and toss old GDSAs
-      cat /pg/data/blitz/rclone.conf | grep -w "\[tdrive\]" -A 5 > /pg/data/blitz/tdrive.info
-      cat /pg/data/blitz/rclone.conf | grep -w "\[gdrive\]" -A 4 > /pg/data/blitz/gdrive.info
-      cat /pg/data/blitz/rclone.conf | grep -w "\[tcrypt\]" -A 6 > /pg/data/blitz/tcrypt.info
-      cat /pg/data/blitz/rclone.conf | grep -w "\[gcrypt\]" -A 6 > /pg/data/blitz/gcrypt.info
+      cat /pg/var/rclone/blitz.conf | grep -w "\[tdrive\]" -A 5 > /pg/var/tdrive.info
+      cat /pg/var/rclone/blitz.conf | grep -w "\[gdrive\]" -A 4 > /pg/var/gdrive.info
+      cat /pg/var/rclone/blitz.conf | grep -w "\[tcrypt\]" -A 6 > /pg/var/tcrypt.info
+      cat /pg/var/rclone/blitz.conf | grep -w "\[gcrypt\]" -A 6 > /pg/var/gcrypt.info
 
-      echo "#### rclone rewrite generated by pgblitz.com" > /pg/data/blitz/rclone.conf
-      echo "" >> /pg/data/blitz/rclone.conf
-      echo "" >> /pg/data/blitz/rclone.conf
-      cat /pg/data/blitz/gdrive.info >> /pg/data/blitz/rclone.conf
-      echo "" >> /pg/data/blitz/rclone.conf
-      cat /pg/data/blitz/tdrive.info >> /pg/data/blitz/rclone.conf
-      echo "" >> /pg/data/blitz/rclone.conf
-      cat /pg/data/blitz/tcrypt.info >> /pg/data/blitz/rclone.conf
-      echo "" >> /pg/data/blitz/rclone.conf
-      cat /pg/data/blitz/gcrypt.info >> /pg/data/blitz/rclone.conf
+      echo "#### rclone rewrite generated by pgblitz.com" > /pg/var/rclone/blitz.conf
+      echo "" >> /pg/var/rclone/blitz.conf
+      echo "" >> /pg/var/rclone/blitz.conf
+      cat /pg/var/gdrive.info >> /pg/var/rclone/blitz.conf
+      echo "" >> /pg/var/rclone/blitz.conf
+      cat /pg/var/tdrive.info >> /pg/var/rclone/blitz.conf
+      echo "" >> /pg/var/rclone/blitz.conf
+      cat /pg/var/tcrypt.info >> /pg/var/rclone/blitz.conf
+      echo "" >> /pg/var/rclone/blitz.conf
+      cat /pg/var/gcrypt.info >> /pg/var/rclone/blitz.conf
 
     while [ "$count" != "$keys" ]; do
     ((count++))
@@ -431,13 +431,13 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
 
     if [ "$count" -ge 1 -a "$count" -le 9 ]; then
       gcloud iam service-accounts create gdsa$rand --display-name “gdsa0$count”
-      gcloud iam service-accounts keys create /pg/data/blitz/keys/processed/gdsa0$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
+      gcloud iam service-accounts keys create /pg/var/keys/processed/gdsa0$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
       echo "gdsa0$count" > /pg/var/json.tempbuild
       gdsabuild
       echo ""
     else
       gcloud iam service-accounts create gdsa$rand --display-name “gdsa$count”
-      gcloud iam service-accounts keys create /pg/data/blitz/keys/processed/gdsa$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
+      gcloud iam service-accounts keys create /pg/var/keys/processed/gdsa$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
       echo "gdsa$count" > /pg/var/json.tempbuild
       gdsabuild
       echo ""
@@ -502,13 +502,13 @@ read -p '🌍 Process Complete | Press [ENTER] ' typed2 < /dev/tty
 
 ufsbuilder () {
   downloadpath=$(cat /pg/var/server.hd.path)
-  ls -la /pg/data/blitz/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
+  ls -la /pg/var/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
   rm -rf /tmp/pg.gdsa.build 1>/dev/null 2>&1
   #echo -n "/mnt/tdrive=RO:" > /tmp/pg.gdsa.build
   #echo -n "/mnt/gdrive=RO:" >> /tmp/pg.gdsa.build
   ##### Encryption Portion ### Start
-  #tcrypt=$(grep "tcrypt" /pg/data/blitz/rclone.conf)
-  #gcrypt=$(grep "gcrypt" /pg/data/blitz/rclone.conf)
+  #tcrypt=$(grep "tcrypt" /pg/var/rclone/blitz.conf)
+  #gcrypt=$(grep "gcrypt" /pg/var/rclone/blitz.conf)
 
   #if [ "$tcrypt" == "[tcrypt]" ]  && [ "$gcrypt" == "[gcrypt]" ]; then
   #    encryption="on"
@@ -545,7 +545,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf gdsa01:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf gdsa01:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -553,7 +553,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf gdsa01: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf gdsa01: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -586,7 +586,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/data/blitz/rclone.conf tdrive:/plexguide
+  rclone mkdir --config /pg/var/rclone/blitz.conf tdrive:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -594,7 +594,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/data/blitz/rclone.conf tdrive: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf tdrive: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF

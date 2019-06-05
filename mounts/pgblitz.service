@@ -13,7 +13,7 @@ After=multi-user.target network-online.target
 User=0
 Group=0
 Type=simple
-ExecStart=/bin/bash /pg/data/blitz/pgblitz.sh
+ExecStart=/bin/bash /pg/var/pgblitz.sh
 KillMode=process
 
 [Install]

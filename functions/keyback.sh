@@ -20,9 +20,9 @@ tee <<-EOF
 NOTE: Standby, takes a minute!
 
 EOF
-rclone purge --config /pg/data/blitz/rclone.conf gdrive:/plexguide/backup/keys/$serverid
-rclone copy --config /pg/data/blitz/rclone.conf /pg/data/blitz/rclone.conf gdrive:/plexguide/backup/keys/$serverid/conf -v --checksum --drive-chunk-size=64M
-rclone copy --config /pg/data/blitz/rclone.conf /pg/data/blitz/keys/processed/ gdrive:/plexguide/backup/keys/$serverid/keys -v --checksum --drive-chunk-size=64M
+rclone purge --config /pg/var/rclone/blitz.conf gdrive:/plexguide/backup/keys/$serverid
+rclone copy --config /pg/var/rclone/blitz.conf /pg/var/rclone/blitz.conf gdrive:/plexguide/backup/keys/$serverid/conf -v --checksum --drive-chunk-size=64M
+rclone copy --config /pg/var/rclone/blitz.conf /pg/var/keys/processed/ gdrive:/plexguide/backup/keys/$serverid/keys -v --checksum --drive-chunk-size=64M
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -40,7 +40,7 @@ tee <<-EOF
 🚀 Standby! Conducting Key Restore Check!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rclone lsd --config /pg/data/blitz/rclone.conf gdrive:/plexguide/backup/keys/ | awk '{ print $5 }' > /tmp/service.keys
+rclone lsd --config /pg/var/rclone/blitz.conf gdrive:/plexguide/backup/keys/ | awk '{ print $5 }' > /tmp/service.keys
 checkcheck=$(cat /tmp/service.keys)
 
 if [ "$checkcheck" == "" ];then
@@ -83,7 +83,7 @@ EOF
 keyrestore; fi
 
 serverid="$typed"
-mkdir -p /pg/data/blitz/processed
+mkdir -p /pg/var/processed
 
 tee <<-EOF
 
@@ -92,8 +92,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-rclone copy --config /pg/data/blitz/rclone.conf gdrive:/plexguide/backup/keys/$serverid/conf /pg/data/blitz/  -v --checksum --drive-chunk-size=64M
-rclone copy --config /pg/data/blitz/rclone.conf gdrive:/plexguide/backup/keys/$serverid/keys /pg/data/blitz/keys/processed/  -v --checksum --drive-chunk-size=64M
+rclone copy --config /pg/var/rclone/blitz.conf gdrive:/plexguide/backup/keys/$serverid/conf /pg/var/  -v --checksum --drive-chunk-size=64M
+rclone copy --config /pg/var/rclone/blitz.conf gdrive:/plexguide/backup/keys/$serverid/keys /pg/var/keys/processed/  -v --checksum --drive-chunk-size=64M
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

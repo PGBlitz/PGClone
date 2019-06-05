@@ -40,13 +40,13 @@ else keystart; fi
 keyphase2 () {
 num=$typed
 
-rm -rf /pg/data/blitz/blitzkeys 1>/dev/null 2>&1
-mkdir -p /pg/data/blitz/blitzkeys
+rm -rf /pg/var/blitzkeys 1>/dev/null 2>&1
+mkdir -p /pg/var/blitzkeys
 
-cat /pg/data/blitz/.gdrive > /pg/data/blitz/rclone.conf
-if [ -e "/pg/data/blitz/.tdrive" ]; then cat /pg/data/blitz/.tdrive >> /pg/data/blitz/.keytemp; fi
-if [ -e "/pg/data/blitz/.gcrypt" ]; then cat /pg/data/blitz/.gcrypt >> /pg/data/blitz/.keytemp; fi
-if [ -e "/pg/data/blitz/.tcrypt" ]; then cat /pg/data/blitz/.tcrypt >> /pg/data/blitz/.keytemp; fi
+cat /pg/var/.gdrive > /pg/var/rclone/blitz.conf
+if [ -e "/pg/var/.tdrive" ]; then cat /pg/var/.tdrive >> /pg/var/.keytemp; fi
+if [ -e "/pg/var/.gcrypt" ]; then cat /pg/var/.gcrypt >> /pg/var/.keytemp; fi
+if [ -e "/pg/var/.tcrypt" ]; then cat /pg/var/.tcrypt >> /pg/var/.keytemp; fi
 
 gcloud --account=${pgcloneemail} iam service-accounts list |  awk '{print $1}' | \
        tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq > /pg/var/.gcloudblitz
@@ -67,11 +67,11 @@ count=0
 gdsacount=0
 gcount=0
 tempbuild=0
-rm -rf /pg/data/blitz/.keys 1>/dev/null 2>&1
-touch /pg/data/blitz/.keys
-rm -rf /pg/data/blitz/.blitzkeys
-mkdir -p /pg/data/blitz/.blitzkeys
-echo "" > /pg/data/blitz/.keys
+rm -rf /pg/var/.keys 1>/dev/null 2>&1
+touch /pg/var/.keys
+rm -rf /pg/var/.blitzkeys
+mkdir -p /pg/var/.blitzkeys
+echo "" > /pg/var/.keys
 
 tee <<-EOF
 
@@ -90,7 +90,7 @@ keycreate1 () {
     #echo $count # for tshoot
     gdsacount
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /pg/data/blitz/.blitzkeys/GDSA${tempbuild} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /pg/var/.blitzkeys/GDSA${tempbuild} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz0${count} is linked to GDSA${tempbuild}"
     else echo "blitz0${count} is linked to GDSA${gcount}"; fi
@@ -103,7 +103,7 @@ keycreate2 () {
     #echo $count # for tshoot
     gdsacount
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /pg/data/blitz/.blitzkeys/GDSA${tempbuild} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create /pg/var/.blitzkeys/GDSA${tempbuild} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA${tempbuild}"
     else echo "blitz${count} is linked to GDSA${gcount}"; fi
@@ -129,11 +129,11 @@ done
 gdsabuild () {
 pgclonevars
 ####tempbuild is need in order to call the correct gdsa
-tee >> /pg/data/blitz/.keys <<-EOF
+tee >> /pg/var/.keys <<-EOF
 [GDSA${tempbuild}]
 type = drive
 scope = drive
-service_account_file = /pg/data/blitz/.blitzkeys/GDSA${tempbuild}
+service_account_file = /pg/var/.blitzkeys/GDSA${tempbuild}
 team_drive = ${tdid}
 
 EOF
@@ -142,7 +142,7 @@ if [[ "$transport" == "be" ]]; then
 encpassword=$(rclone obscure "${clonepassword}")
 encsalt=$(rclone obscure "${clonesalt}")
 
-tee >> /pg/data/blitz/.keys <<-EOF
+tee >> /pg/var/.keys <<-EOF
 [GDSA${tempbuild}C]
 type = crypt
 remote = GDSA${tempbuild}:/encrypt
@@ -154,7 +154,7 @@ password2 = $encsalt
 EOF
 
 fi
-#echo "" /pg/data/blitz/.keys
+#echo "" /pg/var/.keys
 }
 
 gdsaemail () {
@@ -230,7 +230,7 @@ esac
 }
 
 yesdeletekeys () {
-rm -rf /pg/data/blitz/.blitzkeys/* 1>/dev/null 2>&1
+rm -rf /pg/var/.blitzkeys/* 1>/dev/null 2>&1
 echo ""
 while read p; do
 gcloud --account=${pgcloneemail} iam service-accounts delete $p --quiet
