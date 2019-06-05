@@ -504,8 +504,8 @@ ufsbuilder () {
   downloadpath=$(cat /pg/var/server.hd.path)
   ls -la /pg/var/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
   rm -rf /tmp/pg.gdsa.build 1>/dev/null 2>&1
-  #echo -n "/mnt/tdrive=RO:" > /tmp/pg.gdsa.build
-  #echo -n "/mnt/gdrive=RO:" >> /tmp/pg.gdsa.build
+  #echo -n "/pg/sd=RO:" > /tmp/pg.gdsa.build
+  #echo -n "/pg/gd=RO:" >> /tmp/pg.gdsa.build
   ##### Encryption Portion ### Start
   #tcrypt=$(grep "tcrypt" /pg/var/rclone/blitz.conf)
   #gcrypt=$(grep "gcrypt" /pg/var/rclone/blitz.conf)
@@ -517,7 +517,7 @@ ufsbuilder () {
   #fi
 
   #if [ "$encryption" == "on" ]; then
-  #  echo -n "/mnt/gcrypt=RO:" >> /tmp/pg.gdsa.build
+  #  echo -n "/pg/gc=RO:" >> /tmp/pg.gdsa.build
   #fi
   ##### Encryption Portion ### END
   file="/pg/var/unionfs.pgpath"

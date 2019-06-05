@@ -157,7 +157,7 @@
 
     - name: 'Waiting for PGUnion to initialize'
       wait_for:
-        path: /mnt/unionfs/plexguide
+        path: /pg/unity/plexguide
         timeout: 15
         delay: 2
 
