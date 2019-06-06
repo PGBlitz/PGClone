@@ -15,5 +15,5 @@ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclud
 find "$dlpath/move/" -type d -mmin +2 -empty -exec rm -rf {} \;
 
 # Removes garbage
-find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-find "$dlpath/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size -1000M -exec rm -rf {} \;
+find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rmdir {} \;
+find "$dlpath/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;

@@ -35,7 +35,7 @@ do
     --log-file=/var/plexguide/logs/pgmove.log \
     --log-level ERROR --stats 5s --stats-file-name-length 0 \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+    --exclude="**partial~" --exclude=".unionfs-fuse/**" \
     --exclude=".fuse_hidden**" --exclude="**.grab/**" \
     --exclude="**sabnzbd**" --exclude="**nzbget**" \
     --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -44,9 +44,8 @@ do
     --exclude="**handbrake**" --exclude="**bazarr**" \
     --exclude="**ignore**"  --exclude="**inProgress**"
     
-            # Set permissions since this script runs as root, any created folders are owned by root.
     chown -R 1000:1000 "{{hdpath}}/move"
-    chmod -R 755 "{{hdpath}}/move"
+    chmod -R 775 "{{hdpath}}/move"
     
     rclone move "{{hdpath}}/move/" "{{type}}:/" \
     --config /opt/appdata/plexguide/rclone.conf \
@@ -59,7 +58,7 @@ do
     --drive-chunk-size={{vfs_dcs}} \
     --user-agent="$useragent" \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+    --exclude="**partial~" --exclude=".unionfs-fuse/**" \
     --exclude=".fuse_hidden**" --exclude="**.grab/**" \
     --exclude="**sabnzbd**" --exclude="**nzbget**" \
     --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -81,6 +80,6 @@ do
     
     # Removes garbage | torrent folder excluded
     find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-    find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size -1000M -exec rm -rf {} \;
+    find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;
     
 done

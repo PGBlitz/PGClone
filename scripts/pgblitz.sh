@@ -29,10 +29,10 @@ startscript () {
         echo "" >> /var/plexguide/logs/pgblitz.log
         echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
         
-        sudo rclone moveto "/mnt/downloads/" "/mnt/move/" \
+        sudo rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
         --config /opt/appdata/plexguide/rclone.conf \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-        --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+        --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
         --exclude="**sabnzbd**" --exclude="**nzbget**" \
         --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -43,7 +43,6 @@ startscript () {
         
         # Set permissions since this script runs as root, any created folders are owned by root.
         chown -R 1000:1000 "{{hdpath}}/move"
-        chmod -R 755 "{{hdpath}}/move"
         
         rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
         --config /opt/appdata/plexguide/rclone.conf \
@@ -57,7 +56,7 @@ startscript () {
         --user-agent="$useragent" \
         --drive-chunk-size={{vfs_dcs}} \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-        --exclude='**partial~' --exclude=".unionfs-fuse/**" \
+        --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
         --exclude="**sabnzbd**" --exclude="**nzbget**" \
         --exclude="**qbittorrent**" --exclude="**rutorrent**" \
@@ -70,14 +69,13 @@ startscript () {
         cat /var/plexguide/logs/pgblitz.log | tail -200 > /var/plexguide/logs/pgblitz.log
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30
-            
+        
         # Remove empty directories
         find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
         
-        # Removes garbage | torrent folder excluded        
+        # Removes garbage | torrent folder excluded
         find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -path %s " $(cat /var/plexguide/exclude)) -size -1000M -exec rm -rf {} \;
         find "{{hdpath}}/downloads" -mindepth 2 -type d $(printf "! -path %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-
         
     done </var/plexguide/.blitzfinal
 }
