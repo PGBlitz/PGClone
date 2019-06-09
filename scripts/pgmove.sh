@@ -23,10 +23,6 @@ echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
 sleep 10
 while true
 do
-    
-    # Repull excluded folder
-    wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
-    
     cleaner="$(cat /var/plexguide/cloneclean)"
     useragent="$(cat /var/plexguide/uagent)"
     
@@ -68,12 +64,6 @@ do
     --exclude="**ignore**"  --exclude="**inProgress**"
     
     sleep 30
-    
-    #Quick fix
-    # Remove empty directories
-    #find "$dlpath/downloads/" -mindepth 2 -type d -empty -exec rm -rf {} \;
-    #find "$dlpath/move/" -type d -empty -exec rm -rf {} \;
-    #find "$dlpath/move/" -mindepth 2 -type f -cmin +5 -size +1M -exec rm -rf {} \;
     
     # Remove empty directories
     find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;

@@ -43,6 +43,7 @@ startscript () {
         
         # Set permissions since this script runs as root, any created folders are owned by root.
         chown -R 1000:1000 "{{hdpath}}/move"
+        chmod -R 775 "{{hdpath}}/move"
         
         rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
         --config /opt/appdata/plexguide/rclone.conf \
@@ -71,11 +72,12 @@ startscript () {
         sleep 30
         
         # Remove empty directories
-        find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
+        find "$dlpath/move" -type d -mmin +2 -empty -exec rmdir {} \;
+        find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rmdir {} \;
         
-        # Removes garbage | torrent folder excluded
-        find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner $(printf "! -path %s " $(cat /var/plexguide/exclude)) -size -1000M -exec rm -rf {} \;
-        find "{{hdpath}}/downloads" -mindepth 2 -type d $(printf "! -path %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
+        # nzb cleanup, delete files < 3G
+        find "$dlpath/downloads/sabnzbd" -mindepth 1 -type f -cmin +$cleaner -size -3G -exec rm -rf {} \;
+        find "$dlpath/downloads/nzbget" -mindepth 1 -type f -cmin +$cleaner -size -3G -exec rm -rf {} \;
         
     done </var/plexguide/.blitzfinal
 }
