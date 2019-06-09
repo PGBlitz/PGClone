@@ -396,7 +396,7 @@ tee <<-EOF
 [5] Create New Project       | WARN: Resets Everything
 [6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
 [7] Clone Clean - Destroy Garbage Files every [$cloneclean] minutes
-[8] Change User Agent - ${uagent}
+[8] Change User Agent - "${uagent}"
 [9] Create a TeamDrive
 [Z] Exit
 
