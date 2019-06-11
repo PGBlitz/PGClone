@@ -89,7 +89,7 @@ else gcstatus="ACTIVE"; fi
     variable /var/plexguide/deployed.version ""
     dversion=$(cat /var/plexguide/deployed.version)
     
-    variable /var/plexguide/.tmp.multihd
+    variablet /var/plexguide/.tmp.multihd
     multihds=$(cat /var/plexguide/.tmp.multihd)
     
     if [[ "$dversion" == "mu" ]]; then dversionoutput="Unencrypted Move"
