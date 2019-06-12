@@ -18,6 +18,8 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --config /opt/appdata/plexguide/rclone.conf \
 --allow-other --allow-non-empty \
 --size-only \
+--fast-list \
+--use-mmap \
 --uid=1000 --gid=1000 \
 --umask 002 \
 --drive-skip-gdocs \
