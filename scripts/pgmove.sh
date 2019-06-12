@@ -53,6 +53,7 @@ do
     --max-size=300G \
     --no-traverse \
     --fast-list \
+    --delete-empty-src-dirs \
     --drive-chunk-size={{vfs_dcs}} \
     --user-agent="$useragent" \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \

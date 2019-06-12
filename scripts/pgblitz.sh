@@ -54,6 +54,7 @@ startscript () {
         --transfers=8 \
         --no-traverse \
         --fast-list \
+        --delete-empty-src-dirs \
         --bwlimit {{bandwidth.stdout}}M \
         --max-size=300G \
         --user-agent="$useragent" \
