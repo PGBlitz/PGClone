@@ -47,7 +47,7 @@ do
     --config /opt/appdata/plexguide/rclone.conf \
     --log-file=/var/plexguide/logs/pgmove.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
-    --bwlimit {{bandwidth.stdout}}M \
+    --bwlimit {{bandwidth.stdout}} \
     --tpslimit 10 \
     --checkers=16 \
     --max-size=300G \

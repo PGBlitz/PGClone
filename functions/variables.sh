@@ -17,8 +17,8 @@ pgclonevars () {
     variable /var/plexguide/project.account "NOT-SET"
     variable /var/plexguide/rclone/deploy.version "null"
     variable /var/plexguide/pgclone.transport "NOT-SET"
-    variable /var/plexguide/move.bw  "9"
-    variable /var/plexguide/blitz.bw  "1000"
+    variable /var/plexguide/move.bw  "9M"
+    variable /var/plexguide/blitz.bw  "1000M"
     variable /var/plexguide/pgclone.salt ""
     
     variable /var/plexguide/server.hd.path "/mnt"
@@ -132,19 +132,26 @@ else dversionoutput="None"; fi
     vfs_ll=$(cat /var/plexguide/vfs_ll)
     
     
-    #Upgrade old vars by resetting to new defaults. Can probably remove after August 2019.
-    
+    # Upgrade old var format to new var format
+
+    if [[ $(cat /var/plexguide/blitz.bw) != *"M" ]]; then
+        echo "$(cat /var/plexguide/blitz.bw)M" > /var/plexguide/blitz.bw;
+    fi
+
+    if [[ $(cat /var/plexguide/move.bw) != *"M" ]]; then
+        echo "$(cat /var/plexguide/move.bw)M" > /var/plexguide/move.bw;
+    fi
     
     if [[ $(cat /var/plexguide/vfs_bs) != *"M" ]]; then
-        echo "16M" > /var/plexguide/vfs_bs;
+        echo "$(cat /var/plexguide/vfs_bs)M" > /var/plexguide/vfs_bs;
     fi
     
     if [[ $(cat /var/plexguide/vfs_dcs) != *"M" ]]; then
-        echo "64M" > /var/plexguide/vfs_dcs;
+        echo "$(cat /var/plexguide/vfs_dcs)M" > /var/plexguide/vfs_dcs;
     fi
     
     if [[ $(cat /var/plexguide/vfs_dct) != *"m" ]]; then
-        echo "2m" > /var/plexguide/vfs_dct;
+        echo "$(cat /var/plexguide/vfs_dct)m" > /var/plexguide/vfs_dct;
     fi
     
     if [[ $(cat /var/plexguide/vfs_cma) != *"h" ]]; then
@@ -156,7 +163,7 @@ else dversionoutput="None"; fi
     fi
     
     if [[ $(cat /var/plexguide/vfs_rcs) != *"M" ]]; then
-        echo "64M" > /var/plexguide/vfs_rcs;
+        echo "$(cat /var/plexguide/vfs_rcs)M" > /var/plexguide/vfs_rcs;
     fi
     
     if [[ $(cat /var/plexguide/vfs_rcsl) != *"M" && $(cat /var/plexguide/vfs_rcsl) != "off" ]]; then

@@ -55,7 +55,7 @@ startscript () {
         --no-traverse \
         --fast-list \
         --delete-empty-src-dirs \
-        --bwlimit {{bandwidth.stdout}}M \
+        --bwlimit {{bandwidth.stdout}} \
         --max-size=300G \
         --user-agent="$useragent" \
         --drive-chunk-size={{vfs_dcs}} \
