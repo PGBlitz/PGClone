@@ -133,7 +133,7 @@ clonestartoutput
 tee <<-EOF
 
 [A] Deploy $outputversion
-[B] Throttle              [${throttle} MB]
+[B] Throttle              [${throttle}]
 [C] Options
 [Z] Exit
 
