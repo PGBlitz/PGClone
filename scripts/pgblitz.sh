@@ -17,9 +17,8 @@ echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
 startscript () {
     while read p; do
 
-        # Repull excluded folder
-        wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /var/plexguide/
-
+	#Outside Variables
+	dlpath=$(cat /var/plexguide/server.hd.path)
         cleaner="$(cat /var/plexguide/cloneclean)"
         useragent="$(cat /var/plexguide/uagent)"
 
@@ -74,8 +73,8 @@ startscript () {
         sleep 30
 
         # Remove empty directories
-        find "$dlpath/move" -type d -mmin +2 -empty -exec rmdir {} \;
-        find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rmdir {} \;
+        find "$dlpath/move" -type d -mmin +2 -empty -exec -delete \{\} \;
+        find "$dlpath/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec -delete \{\} \;
         
         # nzb cleanup, delete files < 3G
         find "$dlpath/downloads/sabnzbd" -mindepth 1 -type f -cmin +$cleaner -size -3G -exec rm -rf {} \;
