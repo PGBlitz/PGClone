@@ -18,7 +18,7 @@ startscript () {
     while read p; do
 
 	#Outside Variables
-	dlpath=$(cat /var/plexguide/server.hd.path)
+	dlpath="$(cat /var/plexguide/server.hd.path)"
         cleaner="$(cat /var/plexguide/cloneclean)"
         useragent="$(cat /var/plexguide/uagent)"
 
