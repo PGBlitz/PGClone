@@ -178,6 +178,8 @@
 
     - cron:
         name: Drive Used Space cronjob added
-        special_time: "weekly"
+        weekday: "7"
+        minute: "0"
+        hour: "6"
         job: "bash /opt/plexguide/menu/pgui/gtused.sh  >/dev/null 2>&1"
         state: present
