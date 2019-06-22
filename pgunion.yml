@@ -170,14 +170,14 @@
         state: present
         #adds
 
-    - name: Install PGUnion Service
+    - name: Install PG-Localspace Service
       template:
         src: /opt/plexguide/menu/pgui/localspace.service
         dest: /etc/systemd/system/localspace.service
         force: yes
 
     - cron:
-        name: Drive Used Space
-        special_time: "0 6 * * 0"
+        name: Drive Used Space cronjob added
+        special_time: "weekly"
         job: "bash /opt/plexguide/menu/pgui/gtused.sh  >/dev/null 2>&1"
         state: present
