@@ -24,7 +24,7 @@ RClone Variable Name           Default ~ Current Settings
 [6] VFS-Cache-Mode             off        [$vfs_cm]
 [7] VFS-Cache-Max-Age          1h         [$vfs_cma]
 [8] VFS-Cache-Max-Size         off        [$vfs_cms]
-[9] Log-Level                  INFO       [$vfs_ll]
+[9] Log-Level                  NOTICE     [$vfs_ll]
 [Z] Exit
 
 Please read the wiki on how changing these settings impact stability and performance!
@@ -198,8 +198,8 @@ Set this value to 0 to disable."
         start="1"
         end="4"
         note="1) DEBUG: It outputs lots of debug info, useful for bug reports and vfs options tuning.
-2) INFO (recommended): It outputs information about each transfer and prints stats once a minute by default.
-3) NOTICE: It outputs very little when things are working normally. It outputs warnings and significant events.
+2) INFO: It outputs information about each transfer and prints stats once a minute by default.
+3) NOTICE (recommended): It outputs very little when things are working normally. It outputs warnings and significant events.
 4) ERROR: It only outputs error messages."
     fi
     
