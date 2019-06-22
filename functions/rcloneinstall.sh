@@ -8,7 +8,7 @@
 rcloneinstall () {
 
 # install what version of rclone
-rversion=1.47
+rversion=1.48
 
 if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
 touch /root/.config/rclone/rclone.conf; fi

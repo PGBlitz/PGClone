@@ -128,7 +128,7 @@ else dversionoutput="None"; fi
     variable /var/plexguide/vfs_rcsl "2048M"
     vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
     
-    variable /var/plexguide/vfs_ll "INFO"
+    variable /var/plexguide/vfs_ll "NOTICE"
     vfs_ll=$(cat /var/plexguide/vfs_ll)
     
     
