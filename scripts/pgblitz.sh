@@ -70,14 +70,6 @@ startscript () {
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30
 
-        # Remove empty directories
-        find "{{hdpath}}/move" -mindepth 2 -type d -mmin +2 -empty -exec rmdir \{} \;
-        find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rmdir \{} \;
-        
-        # nzb cleanup, delete files < 3G
-        find "{{hdpath}}/downloads/sabnzbd" -mindepth 1 -type f -cmin +$cleaner -size -3G -exec rm -rf {} \;
-        find "{{hdpath}}/downloads/nzbget" -mindepth 1 -type f -cmin +$cleaner -size -3G -exec rm -rf {} \;
-
     done </var/plexguide/.blitzfinal
 }
 

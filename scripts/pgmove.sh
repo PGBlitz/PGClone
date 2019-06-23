@@ -66,12 +66,5 @@ do
     --exclude="**ignore**"  --exclude="**inProgress**"
 
     sleep 30
-
-    # Remove empty directories
-    find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
-
-    # Removes garbage | torrent folder excluded
-    find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -empty -exec rm -rf {} \;
-    find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /var/plexguide/exclude)) -size +1M -exec rm -rf {} \;
-
+    
 done
