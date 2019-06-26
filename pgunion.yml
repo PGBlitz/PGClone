@@ -17,6 +17,10 @@
       shell: 'cat /var/plexguide/pgclone.transport'
       register: transport55
 
+    - name: Register HD Path
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
+
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
         path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath}}/move'
@@ -74,6 +78,20 @@
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
     #      register: transport
+
+    - name: Remove old Cleaner Service
+    - cron:
+        name: Hourly Clean PG Clone Clean
+        special_time: "hourly"
+        job: "bash /opt/pgclone/templates/cloneclean.sh"
+        state: absent
+
+    - name: Install Cleaner Service
+    - cron:
+        name: Hourly downloads cleaner
+        special_time: "hourly"
+        job: "bash /opt/pgclone/scripts/cloneclean.sh"
+        state: present
 
     - name: 'PG Blitz Execution'
       block:
@@ -156,30 +174,5 @@
         timeout: 15
         delay: 2
 
-    - name: Register HD Path
-      shell: 'cat /var/plexguide/server.hd.path'
-      register: hdpath
-
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
-
-    - cron:
-        name: Hourly Clean PG Clone Clean
-        special_time: "hourly"
-        job: "bash /opt/pgclone/scripts/cloneclean.sh"
-        state: present
-        #adds
-
-    - name: Install PG-Localspace Service
-      template:
-        src: /opt/plexguide/menu/pgui/localspace.service
-        dest: /etc/systemd/system/localspace.service
-        force: yes
-
-    - cron:
-        name: Drive Used Space cronjob added
-        weekday: "7"
-        minute: "0"
-        hour: "6"
-        job: "bash /opt/plexguide/menu/pgui/gtused.sh  >/dev/null 2>&1"
-        state: present
