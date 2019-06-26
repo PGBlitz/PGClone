@@ -135,7 +135,6 @@ else dversionoutput="None"; fi
     # Upgrade old var format to new var format
 
     if [[ $(cat /var/plexguide/uagent) != *"\""* ]]; then
-        uagent=$(sed -e 's/^"//' -e 's/"$//' <<< $(cat /var/plexguide/uagent));
         echo $(sed -e 's/^"//' -e 's/"$//' <<< $(cat /var/plexguide/uagent)) > /var/plexguide/uagent;
     fi
 
