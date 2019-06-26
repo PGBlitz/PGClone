@@ -134,10 +134,8 @@ else dversionoutput="None"; fi
     
     # Upgrade old var format to new var format
 
-    if [[ $(cat /var/plexguide/uagent) != *"\""* ]]; then
-        echo $(sed -e 's/^"//' -e 's/"$//' <<< $(cat /var/plexguide/uagent)) > /var/plexguide/uagent;
-    fi
-
+    echo $(sed -e 's/^"//' -e 's/"$//' <<< $(cat /var/plexguide/uagent)) > /var/plexguide/uagent;
+    
     if [[ $(cat /var/plexguide/blitz.bw) != *"M"* ]]; then
         echo "$(cat /var/plexguide/blitz.bw)M" > /var/plexguide/blitz.bw;
     fi
