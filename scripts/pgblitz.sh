@@ -12,22 +12,25 @@ touch /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-echo "PG Blitz Log - First Startup" >> /var/plexguide/logs/pgblitz.log
+echo "Starting Blitz" >> /var/plexguide/logs/pgblitz.log
 
 startscript () {
     while read p; do
 
+        # Update the vars
         cleaner="$(cat /var/plexguide/cloneclean)"
         useragent="$(cat /var/plexguide/uagent)"
+        bwlimit="$(cat /var/plexguide/blitz.bw)"
+        vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
 
         let "cyclecount++"
         echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-        echo "PG Blitz Log - Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
+        echo "Starting Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
         echo "" >> /var/plexguide/logs/pgblitz.log
         echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
 
         rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-        --config /opt/appdata/plexguide/rclone.conf \
+        --config=/opt/appdata/plexguide/rclone.conf \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -43,18 +46,18 @@ startscript () {
         chmod -R 775 "{{hdpath}}/move"
 
         rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
-        --config /opt/appdata/plexguide/rclone.conf \
+        --config=/opt/appdata/plexguide/rclone.conf \
         --log-file=/var/plexguide/logs/pgblitz.log \
-        --log-level INFO --stats 5s --stats-file-name-length 0 \
-        --tpslimit 10 \
+        --log-level=INFO --stats=5s --stats-file-name-length=0 \
+        --max-size=300G \
+        --tpslimit=10 \
         --checkers=16 \
         --transfers=8 \
         --no-traverse \
         --fast-list \
-        --bwlimit {{bandwidth.stdout}} \
-        --max-size=300G \
+        --bwlimit="$bwlimit" \
+        --drive-chunk-size=$vfs_dcs \
         --user-agent="$useragent" \
-        --drive-chunk-size={{vfs_dcs}} \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -65,7 +68,7 @@ startscript () {
         --exclude="**handbrake**" --exclude="**bazarr**" \
         --exclude="**ignore**"  --exclude="**inProgress**"
 
-        echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
+        echo "Completed Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
         cat /var/plexguide/logs/pgblitz.log | tail -200 > /var/plexguide/logs/pgblitz.log
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30

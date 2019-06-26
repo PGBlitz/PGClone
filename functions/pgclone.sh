@@ -15,6 +15,8 @@ tee <<-EOF
 💬 10MB is a safe limit. If exceeding 10MB and uploading straight for
 24 hours, an upload ban will be triggered.
 
+This change will take effect immediately.
+
 EOF
   read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "${typed}M" > /var/plexguide/move.bw && question1;
@@ -30,6 +32,8 @@ tee <<-EOF
 
 💬 100MB = 1 Gig Speeds | 1000MB = 10 Gig Speeds - Remember that your
    upload speeds are still limited to your server's max upload connection
+
+This change will take effect immediately
 
 EOF
   read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty

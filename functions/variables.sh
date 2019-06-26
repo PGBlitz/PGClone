@@ -134,11 +134,11 @@ else dversionoutput="None"; fi
     
     # Upgrade old var format to new var format
 
-    if [[ $(cat /var/plexguide/blitz.bw) != *"M" ]]; then
+    if [[ $(cat /var/plexguide/blitz.bw) != *"M"* ]]; then
         echo "$(cat /var/plexguide/blitz.bw)M" > /var/plexguide/blitz.bw;
     fi
 
-    if [[ $(cat /var/plexguide/move.bw) != *"M" ]]; then
+    if [[ $(cat /var/plexguide/move.bw) != *"M"* ]]; then
         echo "$(cat /var/plexguide/move.bw)M" > /var/plexguide/move.bw;
     fi
     

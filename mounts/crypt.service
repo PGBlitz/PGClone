@@ -24,7 +24,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --fast-list \
 --use-mmap \
 --timeout=1h \
---user-agent={{uagent.stdout}} \
+--user-agent="{{uagent.stdout}}" \
 --dir-cache-time={{vfs_dct}} \
 --vfs-cache-mode={{vfs_cm}} \
 --vfs-cache-max-age={{vfs_cma}} \

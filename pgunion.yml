@@ -77,10 +77,6 @@
 
     - name: 'PG Blitz Execution'
       block:
-        - name: Bandwidth Limit
-          shell: 'cat /var/plexguide/blitz.bw'
-          register: bandwidth
-
         - name: Install PG Blitz Script
           template:
             src: /opt/pgclone/scripts/pgblitz.sh
@@ -105,10 +101,6 @@
 
     - name: 'PG Move Execution'
       block:
-        - name: Bandwidth Limit
-          shell: 'cat /var/plexguide/move.bw'
-          register: bandwidth
-
         - name: Deploy Version
           shell: 'cat /var/plexguide/rclone/deploy.version'
           register: ver

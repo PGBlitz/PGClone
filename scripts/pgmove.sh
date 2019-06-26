@@ -25,11 +25,11 @@ while true
 do
     cleaner="$(cat /var/plexguide/cloneclean)"
     useragent="$(cat /var/plexguide/uagent)"
+    bwlimit="$(cat /var/plexguide/move.bw)"
+    vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
 
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-    --config /opt/appdata/plexguide/rclone.conf \
-    --log-file=/var/plexguide/logs/pgmove.log \
-    --log-level ERROR --stats 5s --stats-file-name-length 0 \
+    --config=/opt/appdata/plexguide/rclone.conf \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
     --exclude="**partial~" --exclude=".unionfs-fuse/**" \
     --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -44,16 +44,16 @@ do
     chmod -R 775 "{{hdpath}}/move"
 
     rclone move "{{hdpath}}/move/" "{{type}}:/" \
-    --config /opt/appdata/plexguide/rclone.conf \
+    --config=/opt/appdata/plexguide/rclone.conf \
     --log-file=/var/plexguide/logs/pgmove.log \
-    --log-level INFO --stats 5s --stats-file-name-length 0 \
-    --bwlimit {{bandwidth.stdout}} \
-    --tpslimit 10 \
-    --checkers=16 \
+    --log-level=INFO --stats=5s --stats-file-name-length=0 \
     --max-size=300G \
+    --tpslimit=10 \
+    --checkers=16 \
     --no-traverse \
     --fast-list \
-    --drive-chunk-size={{vfs_dcs}} \
+    --bwlimit="$bwlimit" \
+    --drive-chunk-size=$vfs_dcs \
     --user-agent="$useragent" \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
     --exclude="**partial~" --exclude=".unionfs-fuse/**" \

@@ -54,11 +54,16 @@ setthrottleblitz () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: BW Limit Notice        📓 Reference: move.pgblitz.com
+🚀 System Message: BW Limit Notice        📓 Reference: blitz.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💬 100MB = 1 Gig Speeds | 1000MB = 10 Gig Speeds - Remember that your
-   upload speeds are still limited to your server's max upload connection
+💬  This restricts upload bandwidth, useful to prevent network saturation. 
+    upload speeds are limited by your server's max upload connection and gdrive limits.
+
+    We recommend setting this between 30-60% of your total server bandwidth,
+    as you should reserve bandwidth for streaming.
+
+This change will take effect immediately.
 
 EOF
   read -rp '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
@@ -73,8 +78,13 @@ tee <<-EOF
 🚀 System Message: BW Limit Notice        📓 Reference: move.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💬 10MB is a safe limit. If exceeding 10MB and uploading straight for
-24 hours, an upload ban will be triggered.
+💬 This restricts upload bandwidth. 
+
+    [9] is default limit to allow up to 750gb a day.
+    A higher value is not advised!
+    Allowing more than 750gb in 24 hours, will cause a 24 hour ban.
+
+This change will take effect immediately.
 
 EOF
   read -rp '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
