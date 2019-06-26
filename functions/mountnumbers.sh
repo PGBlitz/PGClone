@@ -100,7 +100,7 @@ Set the buffer size to 1/2 the value of the read-chunk-size for the best results
         end="1024"
         note="The larger the chunk size, the faster uploads will be, however it uses more RAM.
 
-64-128MB will max out a 1G upload connection, it's recommended to set the BWLimit to prevent consuming all bandwidth for uploading.
+64-128MB will max out 1Gbps. Values over 128 are not recommended.
 
 Input must be one of the following numbers (power of 2)!
 [8] [16] [32] [64] [128] [256] [512] [1024]"
