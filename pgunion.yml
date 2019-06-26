@@ -168,3 +168,18 @@
         special_time: "hourly"
         job: "bash /opt/pgclone/scripts/cloneclean.sh"
         state: present
+        #adds
+
+    - name: Install PG-Localspace Service
+      template:
+        src: /opt/plexguide/menu/pgui/localspace.service
+        dest: /etc/systemd/system/localspace.service
+        force: yes
+
+    - cron:
+        name: Drive Used Space cronjob added
+        weekday: "7"
+        minute: "0"
+        hour: "6"
+        job: "bash /opt/plexguide/menu/pgui/gtused.sh  >/dev/null 2>&1"
+        state: present
