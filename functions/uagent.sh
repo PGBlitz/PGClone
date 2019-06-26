@@ -27,5 +27,5 @@ EOF
   read -p '↘️  Type User Agent | PRESS [ENTER]: ' varinput < /dev/tty
   if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" ]]; then clonestart; fi
 
-  echo "$varinput" > /var/plexguide/uagent
+  echo $varinput > /var/plexguide/uagent
 }

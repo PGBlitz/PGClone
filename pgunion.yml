@@ -67,7 +67,6 @@
 
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
-    #      register: transport
 
     - name: Line Remover
       shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /opt/appdata/plexguide/rclone.conf'
@@ -77,7 +76,6 @@
         echo "[pgunion]" >> /opt/appdata/plexguide/rclone.conf
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
-    #      register: transport
 
     - name: Remove old Cleaner Service
     - cron:
