@@ -9,9 +9,9 @@
 # Outside Variables
 hdpath=$(cat /var/plexguide/server.hd.path)
 cleaner="$(cat /var/plexguide/cloneclean)"
-nzb="$(tree -d -L 1 /opt/appdata -I nzbhydra | awk '{print $2}' | tail -n +2 | head -n -2 | grep nzb )"
+nzb="$(tree -d -L 1  /opt/appdata -I 'nzbhydra|nzbhydra2' | awk '{print $2}' | tail -n +2 | head -n -2 | grep nzb)"
 ## Need to exclude nzbhydra2 
-## done 
+## done nzbhydra and nzbhydra2 excluded
 
 # nzb cleanup, delete files < 10G
 find "$hdpath/downloads/"$nzb -mindepth 1 -type f -cmin +$cleaner -size -10G 2>/dev/null -exec rm -rf {} \;
