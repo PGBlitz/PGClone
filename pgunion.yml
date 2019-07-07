@@ -78,14 +78,14 @@
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
 
     - name: Remove old Cleaner Service
-    - cron:
+      cron:
         name: Hourly Clean PG Clone Clean
         special_time: "hourly"
         job: "bash /opt/pgclone/templates/cloneclean.sh"
         state: absent
 
     - name: Install Cleaner Service
-    - cron:
+      cron:
         name: Hourly downloads cleaner
         special_time: "hourly"
         job: "bash /opt/pgclone/scripts/cloneclean.sh"

@@ -130,10 +130,12 @@ else dversionoutput="None"; fi
     
     variable /var/plexguide/vfs_ll "NOTICE"
     vfs_ll=$(cat /var/plexguide/vfs_ll)
-    
+
     
     # Upgrade old var format to new var format
 
+    echo $(sed -e 's/^"//' -e 's/"$//' <<< $(cat /var/plexguide/uagent)) > /var/plexguide/uagent;
+    
     if [[ $(cat /var/plexguide/blitz.bw) != *"M"* ]]; then
         echo "$(cat /var/plexguide/blitz.bw)M" > /var/plexguide/blitz.bw;
     fi
