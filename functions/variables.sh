@@ -22,7 +22,7 @@ pgclonevars () {
     variable /var/plexguide/pgclone.salt ""
     
     variable /var/plexguide/server.hd.path "/mnt"
-    hdpath=$(cat /var/plexguide/server.hd.path)
+    hdpath="$(cat /var/plexguide/server.hd.path)"
     
     variable /var/plexguide/oauth.check ""
     oauthcheck=$(cat /var/plexguide/oauth.check)
