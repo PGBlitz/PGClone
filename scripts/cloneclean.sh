@@ -7,7 +7,7 @@
 ################################################################################
 
 # Outside Variables
-hdpath=$(cat /var/plexguide/server.hd.path)
+hdpath="$(cat /var/plexguide/server.hd.path)"
 cleaner="$(cat /var/plexguide/cloneclean)"
 #nzb="$(tree -d -L 1 /opt/appdata | awk '{print $2}' | tail -n +2 | head -n -2 | grep nzb )"
 ## Need to exclude nzbhydra2
