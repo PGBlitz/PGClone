@@ -113,7 +113,7 @@ else dversionoutput="None"; fi
     variable /var/plexguide/vfs_dct "2m"
     vfs_dct=$(cat /var/plexguide/vfs_dct)
     
-    variable /var/plexguide/vfs_cm "off"
+    variable /var/plexguide/vfs_cm "writes"
     vfs_cm=$(cat /var/plexguide/vfs_cm)
     
     variable /var/plexguide/vfs_cma "1h"

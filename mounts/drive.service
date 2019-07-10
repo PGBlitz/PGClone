@@ -22,7 +22,6 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --allow-non-empty \
 --allow-other \
 --fast-list \
---use-mmap \
 --timeout=1h \
 --user-agent="{{uagent.stdout}}" \
 --dir-cache-time={{vfs_dct}} \
@@ -33,7 +32,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --vfs-read-chunk-size={{vfs_rcs}} \
 --buffer-size={{vfs_bs}}
 
-ExecStop=/bin/fusermount -uzq /mnt/{{drive}}
+ExecStop=/bin/fusermount -u /mnt/{{drive}}
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes

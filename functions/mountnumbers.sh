@@ -21,7 +21,7 @@ RClone Variable Name           Default ~ Current Settings
 [3] Dir-Cache-Time             2m         [$vfs_dct]
 [4] VFS-Read-Chunk-Size        64M        [$vfs_rcs]
 [5] VFS-Read-Chunk-Size-Limit  2048M      [$vfs_rcsl]
-[6] VFS-Cache-Mode             off        [$vfs_cm]
+[6] VFS-Cache-Mode             writes     [$vfs_cm]
 [7] VFS-Cache-Max-Age          1h         [$vfs_cma]
 [8] VFS-Cache-Max-Size         off        [$vfs_cms]
 [9] Log-Level                  NOTICE     [$vfs_ll]
@@ -155,7 +155,10 @@ Recommendations: 2048 or 0 (for unlimited growth)."
         sizeSuffix=""
         start="1"
         end="4"
-        note="1) off (recommended):
+        note="This setting determines if a temp vfs cache is used and the overall level of file system compatability provided.
+writes is recommended for use when using encrypt or when using some community apps, such as bazarr.
+
+1) off:
     ◽️ Files opened for read OR write will NOT be buffered to disks.
     ◽️ Files can’t be opened for both read AND write.
     ◽️ Files opened for write can’t be seeked.
@@ -164,7 +167,8 @@ Recommendations: 2048 or 0 (for unlimited growth)."
     ◽️ Files opened for read/write will be buffered to disks.
     ◽️ Files opened for write only can’t be seeked
 
-3) writes: 
+3) writes (recommended): 
+    ◽️ Bazarr and some other apps require this mode to function.
     ◽️ Write only and read/write files are buffered to disk first.
     ◽️ This mode should support all normal file system operations.
 
