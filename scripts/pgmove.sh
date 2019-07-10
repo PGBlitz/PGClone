@@ -27,7 +27,7 @@ do
     useragent="$(cat /var/plexguide/uagent)"
     bwlimit="$(cat /var/plexguide/move.bw)"
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
-
+    
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
     --config=/opt/appdata/plexguide/rclone.conf \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -39,10 +39,10 @@ do
     --exclude="**jdownloader**" --exclude="**makemkv**" \
     --exclude="**handbrake**" --exclude="**bazarr**" \
     --exclude="**ignore**"  --exclude="**inProgress**"
-
+    
     chown -R 1000:1000 "{{hdpath}}/move"
     chmod -R 775 "{{hdpath}}/move"
-
+    
     rclone move "{{hdpath}}/move/" "{{type}}:/" \
     --config=/opt/appdata/plexguide/rclone.conf \
     --log-file=/var/plexguide/logs/pgmove.log \
@@ -64,11 +64,11 @@ do
     --exclude="**jdownloader**" --exclude="**makemkv**" \
     --exclude="**handbrake**" --exclude="**bazarr**" \
     --exclude="**ignore**"  --exclude="**inProgress**"
-
+    
     sleep 30
-
+    
     # Remove empty directories
-    find "{{hdpath}}/move" -mindepth 2 -type d -mmin +2 -empty -exec rmdir \{} \;
-    find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner -empty -exec rmdir \{} \;
+    find "{{hdpath}}/move" -type d -mmin +2 -empty -exec rmdir {} \;
+    find "{{hdpath}}/downloads" -mindepth 1 -type d -mmin +2 -empty -exec rmdir {} \;
     
 done
