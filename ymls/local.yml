@@ -12,6 +12,9 @@
     - name: include PGClone aliases
       include_tasks: '/opt/pgclone/ymls/alias.yml'
 
+    - name: include PGClone cron jobs
+      include_tasks: '/opt/pgclone/ymls/cron.yml'
+
     - debug: msg="Combined Path - {{multihds}}"
 
     - name: Install Union Script
