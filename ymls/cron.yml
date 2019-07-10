@@ -25,5 +25,5 @@
     - cron:
         name: Weekly log cleaner
         special_time: "weekly"
-        job: "truncate -s 0 /var/plexguide/logs/*.log"
+        job: "tlogs"
         state: present
