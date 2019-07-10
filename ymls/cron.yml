@@ -6,24 +6,21 @@
 # GNU:        General Public License v3.0
 ################################################################################
 ---
-- hosts: localhost
-  gather_facts: false
-  tasks:
-    - cron:
-        name: Hourly Clean PG Clone Clean
-        special_time: "hourly"
-        job: "bash /opt/pgclone/templates/cloneclean.sh"
-        state: absent
-      ignore_errors: yes
+- cron:
+    name: Hourly Clean PG Clone Clean
+    special_time: "hourly"
+    job: "bash /opt/pgclone/templates/cloneclean.sh"
+    state: absent
+  ignore_errors: yes
 
-    - cron:
-        name: Hourly downloads cleaner
-        special_time: "hourly"
-        job: "bash /opt/pgclone/scripts/cloneclean.sh"
-        state: present
+- cron:
+    name: Hourly downloads cleaner
+    special_time: "hourly"
+    job: "bash /opt/pgclone/scripts/cloneclean.sh"
+    state: present
 
-    - cron:
-        name: Weekly log cleaner
-        special_time: "weekly"
-        job: "tlogs"
-        state: present
+- cron:
+    name: Weekly log cleaner
+    special_time: "weekly"
+    job: "tlogs"
+    state: present
