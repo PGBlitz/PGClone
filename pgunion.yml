@@ -91,6 +91,13 @@
         job: "bash /opt/pgclone/scripts/cloneclean.sh"
         state: present
 
+    - name: Install Log Cleaner Service
+      cron:
+        name: Weekly log cleaner
+        special_time: "weekly"
+        job: "truncate -s 0 /var/plexguide/logs/*.log"
+        state: present
+
     - name: 'PG Blitz Execution'
       block:
         - name: Install PG Blitz Script
