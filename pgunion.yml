@@ -10,9 +10,6 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: include PGClone aliases
-      include_tasks: '/opt/pgclone/alias.yml'
-
     - name: Transport Type
       shell: 'cat /var/plexguide/pgclone.transport'
       register: transport55
@@ -76,27 +73,6 @@
         echo "[pgunion]" >> /opt/appdata/plexguide/rclone.conf
         echo "type = union" >> /opt/appdata/plexguide/rclone.conf
         echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
-
-    - name: Remove old Cleaner Service
-      cron:
-        name: Hourly Clean PG Clone Clean
-        special_time: "hourly"
-        job: "bash /opt/pgclone/templates/cloneclean.sh"
-        state: absent
-
-    - name: Install Cleaner Service
-      cron:
-        name: Hourly downloads cleaner
-        special_time: "hourly"
-        job: "bash /opt/pgclone/scripts/cloneclean.sh"
-        state: present
-
-    - name: Install Log Cleaner Service
-      cron:
-        name: Weekly log cleaner
-        special_time: "weekly"
-        job: "truncate -s 0 /var/plexguide/logs/*.log"
-        state: present
 
     - name: 'PG Blitz Execution'
       block:
@@ -181,3 +157,9 @@
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
+
+    - name: include PGClone aliases
+      include_tasks: '/opt/pgclone/alias.yml'
+
+    - name: include PGClone cron jobs
+      include_tasks: '/opt/pgclone/cron.yml'
