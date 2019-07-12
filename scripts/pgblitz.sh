@@ -74,8 +74,8 @@ startscript () {
         sleep 30
         
         # Remove empty directories
-        find "{{hdpath}}/move" -mindepth 1 -type d -mmin +2 -empty -exec rmdir {} \;
-        find "{{hdpath}}/downloads" -mindepth 1 -type d -mmin +2 -empty -exec rmdir {} \;
+        find "{{hdpath}}/move" -mindepth 2 -type d -mmin +2 -empty -exec rmdir {} \;
+        find "{{hdpath}}/downloads" -mindepth 2 -type d -mmin +2 -empty -exec rmdir {} \;
         
     done </var/plexguide/.blitzfinal
 }

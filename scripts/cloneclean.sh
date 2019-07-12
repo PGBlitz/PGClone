@@ -15,5 +15,5 @@ nzb="$(tree -d -L 1 /opt/appdata -I 'nzbhydra|nzbhydra2' | awk '{print $2}' | ta
 find "$hdpath/downloads/"$nzb -mindepth 1 -type f -cmin +$cleaner -size -10G -exec rm -rf {} \;
 
 # Remove empty directories
-find "$hdpath/move" -mindepth 1 -type d -mmin +2 -empty -exec rmdir {} \;
-find "$hdpath/downloads" -mindepth 1 -type d -mmin +2 -empty -exec rmdir {} \;
+find "$hdpath/move" -mindepth 2 -type d -mmin +2 -empty -exec rmdir {} \;
+find "$hdpath/downloads" -mindepth 2 -type d -mmin +2 -empty -exec rmdir {} \;
