@@ -17,7 +17,7 @@ rm -rf plexguide/deployed.version
 pgclonevars
 
 # to remove all service running prior to ensure a clean launch
-ansible-playbook /opt/pgclone/ymls/remove.yml
+ansible-playbook /opt/pgclone/ymls/remove.yml -e "hdpath=$hdpath"
 
 # builds multipath
 multihdreadonly

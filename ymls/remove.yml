@@ -28,20 +28,38 @@
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
 
-    - name: Checking Existing Service Name
+    - name: Get existing services
       stat:
         path: "/etc/systemd/system/{{ item.name }}"
       with_items: "{{ service_vars }}"
       register: check_service_name
 
-    - name: Stop If Service Is Running
+    - name: Stop services
       systemd: state=stopped name={{ item.item.name }} daemon_reload=yes enabled=no
       with_items: "{{ check_service_name.results }}"
       when: item.stat.exists
 
-    - name: Remove Services
+    - name: Remove services
       file:
         path: "/etc/systemd/system/{{ item.item.name }}"
         state: absent
       with_items: "{{ check_service_name.results }}"
       when: item.stat.exists
+
+    - name: truncating logs
+      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
+
+    - name: Ensuring gdrive path is empty when unmounted
+      shell: 'rm -rf {{hdpath}}/gdrive/*'
+
+    - name: Ensuring tdrive path is empty when unmounted
+      shell: 'rm -rf {{hdpath}}/tdrive/*'
+      
+    - name: Ensuring gcrypt path is empty when unmounted
+      shell: 'rm -rf {{hdpath}}/gcrypt/*'
+
+    - name: Ensuring tcrypt path is empty when unmounted
+      shell: 'rm -rf {{hdpath}}/tcrypt/*'
+
+    - name: Ensuring pgunion path is empty when unmounted
+      shell: 'rm -rf {{hdpath}}/unionfs/*'
