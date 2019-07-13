@@ -15,6 +15,10 @@
     - name: include PGClone cron jobs
       include_tasks: '/opt/pgclone/ymls/cron.yml'
 
+    - name: Register HD Path
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
+
     - debug: msg="PGBlitz Type - {{transport}}"
     - debug: msg="HD Path - {{hdpath}}"
 
@@ -160,10 +164,6 @@
 
     - name: 'Waiting for PGUnion to initialize'
       wait_for: timeout=2
-
-    - name: Register HD Path
-      shell: 'cat /var/plexguide/server.hd.path'
-      register: hdpath
 
     - name: Restart All Docker Containers
       shell: docker restart $(docker ps -a -q)
