@@ -28,6 +28,9 @@
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
 
+    - name: truncating logs
+      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
+
     - name: Get existing services
       stat:
         path: "/etc/systemd/system/{{ item.name }}"
@@ -46,8 +49,8 @@
       with_items: "{{ check_service_name.results }}"
       when: item.stat.exists
 
-    - name: truncating logs
-      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
+    - name: 'Waiting for 2 seconds'
+      wait_for: timeout=2
       
     - name: Ensuring gdrive path is empty when unmounted
       shell: 'rm -rf /mnt/gdrive/*'
