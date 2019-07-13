@@ -279,7 +279,7 @@ docker rm jellyfin 1>/dev/null 2>&1
 docker rm plex 1>/dev/null 2>&1
 docker rm emby 1>/dev/null 2>&1
 
-ansible-playbook /opt/pgclone/ymls/remove.yml -e "hdpath=$hdpath"
+ansible-playbook /opt/pgclone/ymls/remove.yml
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
