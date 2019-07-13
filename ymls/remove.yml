@@ -48,6 +48,10 @@
 
     - name: truncating logs
       shell: 'truncate -s 0 /var/plexguide/logs/*.log'
+      
+    - name: Register HD Path
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
 
     - name: Ensuring gdrive path is empty when unmounted
       shell: 'rm -rf {{hdpath}}/gdrive/*'
