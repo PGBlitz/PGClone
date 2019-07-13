@@ -49,21 +49,17 @@
     - name: truncating logs
       shell: 'truncate -s 0 /var/plexguide/logs/*.log'
       
-    - name: Register HD Path
-      shell: 'cat /var/plexguide/server.hd.path'
-      register: hdpath
-
     - name: Ensuring gdrive path is empty when unmounted
-      shell: 'rm -rf {{hdpath}}/gdrive/*'
+      shell: 'rm -rf /mnt/gdrive/*'
 
     - name: Ensuring tdrive path is empty when unmounted
-      shell: 'rm -rf {{hdpath}}/tdrive/*'
+      shell: 'rm -rf /mnt/tdrive/*'
       
     - name: Ensuring gcrypt path is empty when unmounted
-      shell: 'rm -rf {{hdpath}}/gcrypt/*'
+      shell: 'rm -rf /mnt/gcrypt/*'
 
     - name: Ensuring tcrypt path is empty when unmounted
-      shell: 'rm -rf {{hdpath}}/tcrypt/*'
+      shell: 'rm -rf /mnt/tcrypt/*'
 
     - name: Ensuring pgunion path is empty when unmounted
-      shell: 'rm -rf {{hdpath}}/unionfs/*'
+      shell: 'rm -rf /mnt/unionfs/*'
