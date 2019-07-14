@@ -66,6 +66,7 @@ Error details: $erroroutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ DEPLOY FAILED: $finaldeployoutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     else
         docker restart "$(docker ps -a -q)"
