@@ -12,6 +12,8 @@ After=multi-user.target
 
 [Service]
 Type=notify
+KillMode=none
+TimeoutSec=900
 
 ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --config=/opt/appdata/plexguide/rclone.conf \
