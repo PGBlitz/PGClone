@@ -18,12 +18,12 @@
       - { name: tcrypt.service }
       - { name: supertransfer2.service }
       - { name: unionfs.service }
-      - { name: pgunion.service }
       - { name: pgmove.service }
       - { name: move.service }
       - { name: pgblitz.service }
       - { name: plexdrive.service }
       - { name: st2monitor.service }
+      - { name: pgunion.service }
   tasks:
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
