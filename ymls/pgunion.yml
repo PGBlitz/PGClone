@@ -80,7 +80,6 @@
 
     - name: 'PG Blitz Execution'
       block:
-
         - name: Bandwidth Limit
           shell: 'cat /var/plexguide/blitz.bw'
           register: bandwidth
@@ -164,6 +163,3 @@
 
     - name: 'Waiting for PGUnion to initialize'
       wait_for: timeout=2
-
-    - name: Restart All Docker Containers
-      shell: docker restart $(docker ps -a -q)

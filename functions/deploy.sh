@@ -10,7 +10,7 @@ deploypgblitz () {
 
 # RCLONE BUILD
 echo "#------------------------------------------" > /opt/appdata/plexguide/rclone.conf
-echo "#RClone Rewrite | Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
+echo "#PGClone| Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
 echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
 
 cat /opt/appdata/plexguide/.gdrive >> /opt/appdata/plexguide/rclone.conf
@@ -33,7 +33,7 @@ deploydrives
 deploypgmove () {
 # RCLONE BUILD
 echo "#------------------------------------------" > /opt/appdata/plexguide/rclone.conf
-echo "#RClone Rewrite | Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
+echo "#PGClone| Visit https://pgblitz.com" >> /opt/appdata/plexguide/rclone.conf
 echo "#------------------------------------------" >> /opt/appdata/plexguide/rclone.conf
 
 cat /opt/appdata/plexguide/.gdrive > /opt/appdata/plexguide/rclone.conf
@@ -216,3 +216,11 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 clonestart
 fi
 }
+################################################################################
+cleanlogs () {
+    echo "flush, rotate, and vaccum service logs..."
+    journalctl --flush
+    journalctl --rotate --vacuum-time=1s
+    truncate -s 0 /var/plexguide/logs/*.log
+}
+################################################################################

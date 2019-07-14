@@ -9,34 +9,72 @@
 # Variable recall comes from /functions/variables.sh
 ################################################################################
 executelocal () {
+    
+    # Reset Front Display
+    rm -rf plexguide/deployed.version
+    
+    # Call Variables
+    pgclonevars
+    
+    # flush and clear service logs
+    cleanlogs
+    
+    # to remove all service running prior to ensure a clean launch
+    ansible-playbook /opt/pgclone/ymls/remove.yml
+    
+    # builds multipath
+    multihdreadonly
+    
+    # deploy union
+    multihds=$(cat /var/plexguide/.tmp.multihd)
+    ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
+    
+    # stores deployed version
+    echo "le" > /var/plexguide/deployed.version
+    
+    
+    # check if services are active and running
+    failed=false;
+    
+    pgunioncheck=$(systemctl is-active pgunion)
+    if [[ "$pgunioncheck" != "active" ]]; then failed=true; fi
+    
+    if [[ $failed == true ]]; then
+        erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager -S today -n 20)"
+        
+tee <<-EOF
 
-# Reset Front Display
-rm -rf plexguide/deployed.version
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: PG Local Edition
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# Call Variables
-pgclonevars
+An error has occurred when deploying PGClone.
+Your apps are currently stopped to prevent data loss.
 
-# to remove all service running prior to ensure a clean launch
-ansible-playbook /opt/pgclone/ymls/remove.yml
+Things to try: If you just finished the initial setup, you likely made a typo
+or other error when configuring PGClone. Please redo the pgclone config first
+before reporting an issue.
 
-# builds multipath
-multihdreadonly
+If this issue still persists:
 
-# deploy union
-multihds=$(cat /var/plexguide/.tmp.multihd)
-ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
+Please share this error on discord or the forums before proceeding.
 
-# stores deployed version
-echo "le" > /var/plexguide/deployed.version
+Error details: $erroroutput
 
-# display edition final
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+    else
+        docker restart $(docker ps -a -q)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: PG Local Edition
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
-read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-
+    fi
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+    
 }

@@ -10,59 +10,76 @@
   gather_facts: false
   vars:
     service_vars:
-      - {name: crypt.service}
-      - {name: pgdrive.service}
-      - {name: gdrive.service}
-      - {name: gcrypt.service}
-      - {name: tdrive.service}
-      - {name: tcrypt.service}
-      - {name: supertransfer2.service}
-      - {name: unionfs.service}
-      - {name: pgunion.service}
-      - {name: pgmove.service}
-      - {name: move.service}
-      - {name: pgblitz.service}
-      - {name: plexdrive.service}
-      - {name: st2monitor.service}
+      - { name: crypt.service }
+      - { name: pgdrive.service }
+      - { name: gdrive.service }
+      - { name: gcrypt.service }
+      - { name: tdrive.service }
+      - { name: tcrypt.service }
+      - { name: supertransfer2.service }
+      - { name: unionfs.service }
+      - { name: pgunion.service }
+      - { name: pgmove.service }
+      - { name: move.service }
+      - { name: pgblitz.service }
+      - { name: plexdrive.service }
+      - { name: st2monitor.service }
   tasks:
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
 
-    - name: truncating logs
-      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
-
     - name: Get existing services
       stat:
-        path: "/etc/systemd/system/{{ item.name }}"
-      with_items: "{{ service_vars }}"
+        path: '/etc/systemd/system/{{ item.name }}'
+      with_items: '{{ service_vars }}'
       register: check_service_name
 
     - name: Stop services
       systemd: state=stopped name={{ item.item.name }} daemon_reload=yes enabled=no
-      with_items: "{{ check_service_name.results }}"
+      with_items: '{{ check_service_name.results }}'
       when: item.stat.exists
+
+    - name: 'Waiting for 2 seconds for services to stop'
+      wait_for: timeout=2
 
     - name: Remove services
       file:
-        path: "/etc/systemd/system/{{ item.item.name }}"
+        path: '/etc/systemd/system/{{ item.item.name }}'
         state: absent
-      with_items: "{{ check_service_name.results }}"
+      with_items: '{{ check_service_name.results }}'
       when: item.stat.exists
 
-    - name: 'Waiting for 2 seconds'
-      wait_for: timeout=2
-      
+    - stat:
+        path: /mnt/gdrive
+      register: gdrive_stat_result
     - name: Ensuring gdrive path is empty when unmounted
       shell: 'rm -rf /mnt/gdrive/*'
+      when: gdrive_stat_result.stat.exists and gdrive_stat_result.stat.size < 100000000 and gdrive_stat_result.stat.size > 4096
 
+    - stat:
+        path: /mnt/tdrive
+      register: tdrive_stat_result
     - name: Ensuring tdrive path is empty when unmounted
       shell: 'rm -rf /mnt/tdrive/*'
-      
+      when: tdrive_stat_result.stat.exists and tdrive_stat_result.stat.size < 100000000 and tdrive_stat_result.stat.size > 4096
+
+    - stat:
+        path: /mnt/gcrypt
+      register: gcrypt_stat_result
     - name: Ensuring gcrypt path is empty when unmounted
       shell: 'rm -rf /mnt/gcrypt/*'
+      when: gcrypt_stat_result.stat.exists and gcrypt_stat_result.stat.size < 100000000 and gcrypt_stat_result.stat.size > 4096
 
+    - stat:
+        path: /mnt/tcrypt
+      register: tcrypt_stat_result
     - name: Ensuring tcrypt path is empty when unmounted
       shell: 'rm -rf /mnt/tcrypt/*'
+      when: tcrypt_stat_result.stat.exists and tcrypt_stat_result.stat.size < 100000000 and tcrypt_stat_result.stat.size > 4096
 
+    - stat:
+        path: /mnt/unionfs
+      register: pgunion_stat_result
     - name: Ensuring pgunion path is empty when unmounted
       shell: 'rm -rf /mnt/unionfs/*'
+      when: pgunion_stat_result.stat.exists and pgunion_stat_result.stat.size < 100000000 and pgunion_stat_result.stat.size > 4096
