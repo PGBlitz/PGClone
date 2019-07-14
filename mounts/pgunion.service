@@ -8,12 +8,13 @@
 [Unit]
 Description=PGUnion
 After=multi-user.target
+
 [Service]
 Type=simple
 User=0
 Group=0
 ExecStart=/bin/bash /opt/appdata/plexguide/pgunion.sh
-ExecStop=/bin/fusermount -uzq /mnt/unionfs
+ExecStop=/bin/fusermount -u /mnt/unionfs
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes
