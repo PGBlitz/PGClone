@@ -15,7 +15,7 @@ User=0
 Group=0
 ExecStart=/bin/bash /opt/appdata/plexguide/pgunion.sh
 ExecStop=/bin/fusermount -uz /mnt/unionfs
-TimeoutStopSec=20
+TimeoutStopSec=60
 KillMode=process
 RemainAfterExit=yes
 

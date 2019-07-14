@@ -31,7 +31,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --buffer-size={{vfs_bs}}
 
 ExecStop=/bin/fusermount -uz /mnt/{{drive}}
-TimeoutStopSec=20
+TimeoutStopSec=60
 KillMode=process
 RemainAfterExit=yes
 
