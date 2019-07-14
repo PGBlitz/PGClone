@@ -220,7 +220,8 @@ fi
 cleanlogs () {
     echo "flush, rotate, and vaccum service logs..."
     journalctl --flush
-    journalctl --rotate --vacuum-time=1s
+    journalctl --rotate
+    journalctl --vacuum-time=1s
     truncate -s 0 /var/plexguide/logs/*.log
 }
 ################################################################################
