@@ -6,67 +6,71 @@
 # GNU:        General Public License v3.0
 ################################################################################
 ---
-- name: Check if gdrive is running
-  shell: systemctl status gdrive
-  ignore_errors: yes
-  changed_when: false
-  register: service_gdrive_status
-- name: Check status of gdrive
-  fail:
-    msg: |
-      gdrive has failed and is not running. Your apps are stopped to prevent data loss.
-      Error:
-      {{ service_gdrive_status.stderr }}
-  when: service_gdrive_status.rc != 0
+- hosts: localhost
+  gather_facts: false
+  any_errors_fatal: true
+  tasks:
+    - name: Check if gdrive is running
+      shell: systemctl status gdrive
+      ignore_errors: yes
+      changed_when: false
+      register: service_gdrive_status
+    - name: Check status of gdrive
+      fail:
+        msg: |
+          gdrive has failed and is not running. Your apps are stopped to prevent data loss.
+          Error:
+          {{ service_gdrive_status.stderr }}
+      when: service_gdrive_status.rc != 0
 
-- name: Check if tdrive is running
-  shell: systemctl status tdrive
-  ignore_errors: yes
-  changed_when: false
-  register: service_tdrive_status
-- name: Check status of tdrive
-  fail:
-    msg: |
-      tdrive has failed and is not running. Your apps are stopped to prevent data loss.
-      Error:
-      {{ service_tdrive_status.stderr }}
-  when: (service_tdrive_status.rc != 0) and (transport == "bu" or transport == "be")
+    - name: Check if tdrive is running
+      shell: systemctl status tdrive
+      ignore_errors: yes
+      changed_when: false
+      register: service_tdrive_status
+    - name: Check status of tdrive
+      fail:
+        msg: |
+          tdrive has failed and is not running. Your apps are stopped to prevent data loss.
+          Error:
+          {{ service_tdrive_status.stderr }}
+      when: (service_tdrive_status.rc != 0) and (transport == "bu" or transport == "be")
 
-- name: Check if tcrypt is running
-  shell: systemctl status tcrypt
-  ignore_errors: yes
-  changed_when: false
-  register: service_tcrypt_status
-- name: Check status of tcrypt
-  fail:
-    msg: |
-      tcrypt has failed and is not running. Your apps are stopped to prevent data loss.
-      Error:
-      {{ service_tcrypt_status.stderr }}
-  when: (service_tcrypt_status.rc != 0) and (transport == "be")
+    - name: Check if tcrypt is running
+      shell: systemctl status tcrypt
+      ignore_errors: yes
+      changed_when: false
+      register: service_tcrypt_status
+    - name: Check status of tcrypt
+      fail:
+        msg: |
+          tcrypt has failed and is not running. Your apps are stopped to prevent data loss.
+          Error:
+          {{ service_tcrypt_status.stderr }}
+      when: (service_tcrypt_status.rc != 0) and (transport == "be")
 
-- name: Check if gcrypt is running
-  shell: systemctl status gcrypt
-  ignore_errors: yes
-  changed_when: false
-  register: service_gcrypt_status
-- name: Check status of gcrypt
-  fail:
-    msg: |
-      gcrypt has failed and is not running. Your apps are stopped to prevent data loss.
-      Error:
-      {{ service_gcrypt_status.stderr }}
-  when: (service_gcrypt_status.rc != 0) and (transport == "me" or transport == "be")
+    - name: Check if gcrypt is running
+      shell: systemctl status gcrypt
+      ignore_errors: yes
+      changed_when: false
+      register: service_gcrypt_status
+    - name: Check status of gcrypt
+      fail:
+        msg: |
+          gcrypt has failed and is not running. Your apps are stopped to prevent data loss.
+          Error:
+          {{ service_gcrypt_status.stderr }}
+      when: (service_gcrypt_status.rc != 0) and (transport == "me" or transport == "be")
 
-- name: Check if pgunion is running
-  shell: systemctl status pgunion
-  ignore_errors: yes
-  changed_when: false
-  register: service_pgunion_status
-- name: Check status of pgunion
-  fail:
-    msg: |
-      pgunion has failed and is not running. Your apps are stopped to prevent data loss.
-      Error:
-      {{ service_pgunion_status.stderr }}
-  when: service_pgunion_status.rc != 0
+    - name: Check if pgunion is running
+      shell: systemctl status pgunion
+      ignore_errors: yes
+      changed_when: false
+      register: service_pgunion_status
+    - name: Check status of pgunion
+      fail:
+        msg: |
+          pgunion has failed and is not running. Your apps are stopped to prevent data loss.
+          Error:
+          {{ service_pgunion_status.stderr }}
+      when: service_pgunion_status.rc != 0

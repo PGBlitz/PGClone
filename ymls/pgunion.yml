@@ -8,7 +8,6 @@
 ---
 - hosts: localhost
   gather_facts: false
-  any_errors_fatal: true
   tasks:
     - name: include PGClone aliases
       include_tasks: '/opt/pgclone/ymls/alias.yml'
