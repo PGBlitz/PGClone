@@ -122,6 +122,7 @@ else finaldeployoutput="PG Blitz - Encrypted"; fi
     
     if [[ $failed == true ]]; then
         erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager -S today -n 20)"
+        logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -139,7 +140,9 @@ If this issue still persists:
 
 Please share this error on discord or the forums before proceeding.
 
-Error details: $erroroutput
+Error details: 
+$erroroutput
+$logoutput
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ DEPLOY FAILED: $finaldeployoutput
