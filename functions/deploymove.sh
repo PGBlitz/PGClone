@@ -110,7 +110,7 @@ $logoutput
 
 EOF
     else
-        docker restart $(docker ps -a -q)
+        restartapps
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

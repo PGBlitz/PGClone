@@ -258,6 +258,8 @@ if [[ "$transport" == "be" ]]; then
     echo "tcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/tcrypt/*
   fi
 fi
+}
 
-
+restartapps () {
+  docker restart $(docker ps -a -q) > /dev/null
 }
