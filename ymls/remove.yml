@@ -49,9 +49,6 @@
       with_items: '{{ check_service_name.results }}'
       when: item.stat.exists
 
-    - name: truncating logs
-      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
-
     - stat:
         path: /mnt/gdrive
       register: gdrive_stat_result

@@ -17,10 +17,8 @@ executemove () {
     pgclonevars
     
     # flush and clear service logs
-    echo "flush, rotate, and vaccum service logs..."
-    journalctl --flush
-    journalctl --rotate --vacuum-time=1s
-    
+    cleanlogs
+
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
     
