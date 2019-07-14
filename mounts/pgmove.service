@@ -14,10 +14,7 @@ Type=simple
 User=0
 Group=0
 ExecStart=/bin/bash /opt/appdata/plexguide/pgmove.sh
-TimeoutStopSec=20
 KillMode=process
-RemainAfterExit=yes
-Restart=always
 
 [Install]
 WantedBy=multi-user.target
