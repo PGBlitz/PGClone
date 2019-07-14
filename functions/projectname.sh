@@ -280,6 +280,7 @@ docker rm plex 1>/dev/null 2>&1
 docker rm emby 1>/dev/null 2>&1
 
 ansible-playbook /opt/pgclone/ymls/remove.yml
+cleanmounts
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

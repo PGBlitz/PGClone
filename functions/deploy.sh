@@ -220,7 +220,47 @@ fi
 cleanlogs () {
     echo "flush, rotate, and vaccum service logs..."
     journalctl --flush
-    journalctl --rotate --vacuum-time=1s
+    journalctl --rotate
+    journalctl --vacuum-time=1s
     truncate -s 0 /var/plexguide/logs/*.log
 }
 ################################################################################
+cleanmounts (){
+
+  maxsize=10000000
+  pgunion_size=$(du -s -B K /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $pgunion_size -gt 4 && $pgunion_size -lt $maxsize ]]; then
+    echo "pgunion is NOT empty when unmounted, fixing..." && rm -rf /mnt/unionfs/*
+  fi
+
+  gdrive_size=$(du -s -B K /mnt/gdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $gdrive_size -gt 4 && $gdrive_size -lt $maxsize ]]; then
+    echo "gdrive is NOT empty when unmounted, fixing..." && rm -rf /mnt/gdrive/*
+  fi
+
+
+if [[ "$transport" == "me" || "$transport" == "be" ]]; then
+  gcrypt_size=$(du -s -B K /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $gcrypt_size -gt 4 && $gcrypt_size -lt $maxsize ]]; then
+    echo "gcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/gcrypt/*
+  fi
+fi
+
+if [[ "$transport" == "bu" || "$transport" == "be" ]]; then
+  tdrive_size=$(du -s -B K /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $tdrive_size -gt 4 && $tdrive_size -lt $maxsize ]]; then
+    echo "tdrive is NOT empty when unmounted, fixing..." && rm -rf /mnt/tdrive/*
+  fi
+fi
+
+if [[ "$transport" == "be" ]]; then
+  tcrypt_size=$(du -s -B K /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $tcrypt_size -gt 4 && $tcrypt_size -lt $maxsize ]]; then
+    echo "tcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/tcrypt/*
+  fi
+fi
+}
+
+restartapps () {
+  docker restart $(docker ps -a -q) > /dev/null
+}

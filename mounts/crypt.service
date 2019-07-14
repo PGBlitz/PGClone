@@ -11,9 +11,8 @@ Description={{drive}} Daemon
 After=multi-user.target
 
 [Service]
-Type=simple
-User=0
-Group=0
+Type=notify
+
 ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --config=/opt/appdata/plexguide/rclone.conf \
 --uid=1000 --gid=1000 --umask=002 \
@@ -25,15 +24,14 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --dir-cache-time={{vfs_dct}} \
 --vfs-cache-mode={{vfs_cm}} \
 --vfs-cache-max-age={{vfs_cma}} \
---vfs-cache-max-size={{vfs_cms}} \
 --vfs-read-chunk-size-limit={{vfs_rcsl}} \
 --vfs-read-chunk-size={{vfs_rcs}} \
 --buffer-size={{vfs_bs}}
-
 ExecStop=/bin/fusermount -uz /mnt/{{drive}}
-TimeoutStopSec=20
-KillMode=process
-RemainAfterExit=yes
+TimeoutStopSec=60
+Restart=on-failure
+User=0
+Group=0
 
 [Install]
 WantedBy=multi-user.target

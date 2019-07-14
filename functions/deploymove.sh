@@ -21,6 +21,8 @@ executemove () {
     
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
+
+    cleanmounts
     
     # gdrive deploys by standard
     echo "gdrive" > /var/plexguide/deploy.version
@@ -80,6 +82,7 @@ else finaldeployoutput="PG Move - Encrypted"; fi
     
     if [[ $failed == true ]]; then
         erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager -S today -n 20)"
+        logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -97,7 +100,9 @@ If this issue still persists:
 
 Please share this error on discord or the forums before proceeding.
 
-Error details: $erroroutput
+Error details: 
+$erroroutput
+$logoutput
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ DEPLOY FAILED: $finaldeployoutput
@@ -105,12 +110,15 @@ Error details: $erroroutput
 
 EOF
     else
-        docker restart $(docker ps -a -q)
+        restartapps
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: $finaldeployoutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PGClone has been deployed sucessfully and all services are active and running.
+
 EOF
     fi
     read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
