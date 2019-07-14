@@ -58,6 +58,7 @@ Error:
 EOF
 echo | journalctl -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
 else 
+        docker restart $(docker ps -a -q)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
