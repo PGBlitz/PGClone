@@ -58,11 +58,44 @@ ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   multihds=$multihds
   type=$type
   vfs_dcs=$vfs_dcs
-  hdpath=$hdpath"
+  hdpath=$hdpath"  
 
 # output final display
 if [[ "$type" == "gdrive" ]]; then finaldeployoutput="PG Move - Unencrypted"
 else finaldeployoutput="PG Move - Encrypted"; fi
+
+# check if services are active and running
+failed=false;
+
+gdrivecheck=$(systemctl is-active gdrive)
+gcryptcheck=$(systemctl is-active gcrypt)
+pgunioncheck=$(systemctl is-active pgunion)
+
+if [[ "$gdrivecheck" != "active" || "$pgunioncheck" != "active" ]]; then failed=true; fi
+if [[ "$gcryptcheck" != "active" && "$transport" == "me" ]]; then failed=true; fi
+
+if [[ $failed == true ]]; then 
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+An error has occurred when deploying PGClone.
+Your apps are currently stopped to prevent data loss.
+
+Things to try: If you just finished the initial setup, you likely made a typo
+or other error when configuring PGClone. Please redo the pgclone config first
+before reporting an issue.
+
+If this issue still persists:
+
+Please share this error on discord or the forums before proceeding.
+
+Error:
+EOF
+echo | journalctl -u gdrive -u tdrive -u tcrypt -u gcrypt -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
+else
 
 tee <<-EOF
 

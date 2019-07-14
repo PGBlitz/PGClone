@@ -29,7 +29,35 @@ ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpa
 # stores deployed version
 echo "le" > /var/plexguide/deployed.version
 
-# display edition final
+
+# check if services are active and running
+failed=false;
+
+pgunioncheck=$(systemctl is-active pgunion)
+if [[ "$pgunioncheck" != "active" ]]; then failed=true; fi
+
+if [[ $failed == true ]]; then 
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: PG Local Edition
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+An error has occurred when deploying PGClone.
+Your apps are currently stopped to prevent data loss.
+
+Things to try: If you just finished the initial setup, you likely made a typo
+or other error when configuring PGClone. Please redo the pgclone config first
+before reporting an issue.
+
+If this issue still persists:
+
+Please share this error on discord or the forums before proceeding.
+
+Error:
+EOF
+echo | journalctl -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
+else 
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

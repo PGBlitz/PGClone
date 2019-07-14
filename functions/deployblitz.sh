@@ -9,22 +9,22 @@
 # Variable recall comes from /functions/variables.sh
 ################################################################################
 executeblitz () {
-
-# Reset Front Display
-rm -rf plexguide/deployed.version
-
-# Call Variables
-pgclonevars
-
-# to remove all service running prior to ensure a clean launch
-ansible-playbook /opt/pgclone/ymls/remove.yml
-
-# gdrive deploys by standard
-echo "tdrive" > /var/plexguide/deploy.version
-echo "bu" > /var/plexguide/deployed.version
-type=gdrive
-encryptbit=""
-ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+    
+    # Reset Front Display
+    rm -rf plexguide/deployed.version
+    
+    # Call Variables
+    pgclonevars
+    
+    # to remove all service running prior to ensure a clean launch
+    ansible-playbook /opt/pgclone/ymls/remove.yml
+    
+    # gdrive deploys by standard
+    echo "tdrive" > /var/plexguide/deploy.version
+    echo "bu" > /var/plexguide/deployed.version
+    type=gdrive
+    encryptbit=""
+    ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
@@ -34,10 +34,10 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   vfs_ll=$vfs_ll
-  drive=gdrive"
-
-type=tdrive
-ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+    drive=gdrive"
+    
+    type=tdrive
+    ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
@@ -47,11 +47,11 @@ ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   vfs_ll=$vfs_ll
-  drive=tdrive"
-
-# deploy only if pgmove is using encryption
-if [[ "$transport" == "be" ]]; then
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+    drive=tdrive"
+    
+    # deploy only if using encryption
+    if [[ "$transport" == "be" ]]; then
+        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
@@ -61,12 +61,12 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   vfs_ll=$vfs_ll
-  drive=gcrypt"
-
-echo "be" > /var/plexguide/deployed.version
-type=tcrypt
-encryptbit="C"
-ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+        drive=gcrypt"
+        
+        echo "be" > /var/plexguide/deployed.version
+        type=tcrypt
+        encryptbit="C"
+        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
   vfs_dct=$vfs_dct
@@ -76,39 +76,76 @@ ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
   vfs_ll=$vfs_ll
-  drive=tcrypt"
-fi
-
-# builds the list
-ls -la /opt/appdata/plexguide/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /var/plexguide/.blitzlist
-rm -rf /var/plexguide/.blitzfinal 1>/dev/null 2>&1
-touch /var/plexguide/.blitzbuild
-while read p; do
-  echo $p > /var/plexguide/.blitztemp
-  blitzcheck=$(grep "GDSA" /var/plexguide/.blitztemp)
-  if [[ "$blitzcheck" != "" ]]; then echo $p >> /var/plexguide/.blitzfinal; fi
-done </var/plexguide/.blitzlist
-
-# deploy union
-ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
+        drive=tcrypt"
+    fi
+    
+    # builds the list
+    ls -la /opt/appdata/plexguide/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /var/plexguide/.blitzlist
+    rm -rf /var/plexguide/.blitzfinal 1>/dev/null 2>&1
+    touch /var/plexguide/.blitzbuild
+    while read p; do
+        echo $p > /var/plexguide/.blitztemp
+        blitzcheck=$(grep "GDSA" /var/plexguide/.blitztemp)
+        if [[ "$blitzcheck" != "" ]]; then echo $p >> /var/plexguide/.blitzfinal; fi
+    done </var/plexguide/.blitzlist
+    
+    # deploy union
+    ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
   transport=$transport \
   type=$type
   multihds=$multihds
   encryptbit=$encryptbit
   vfs_dcs=$vfs_dcs
-  hdpath=$hdpath"
-
-# output final display
-if [[ "$type" == "tdrive" ]]; then finaldeployoutput="PG Blitz - Unencrypted"
+    hdpath=$hdpath"
+    
+    
+    
+    # output final display
+    if [[ "$type" == "tdrive" ]]; then finaldeployoutput="PG Blitz - Unencrypted"
 else finaldeployoutput="PG Blitz - Encrypted"; fi
+    
+    # check if services are active and running
+    failed=false;
+    
+    gdrivecheck=$(systemctl is-active gdrive)
+    gcryptcheck=$(systemctl is-active gcrypt)
+    tdrivecheck=$(systemctl is-active tdrive)
+    tcryptcheck=$(systemctl is-active tcrypt)
+    pgunioncheck=$(systemctl is-active pgunion)
+    
+    if [[ "$gdrivecheck" != "active" || "$tdrivecheck" != "active" || "$pgunioncheck" != "active" ]]; then failed=true; fi
+    if [[ "$gcryptcheck" != "active" || "$tcryptcheck" != "active" ]] && [[ "$transport" == "be" ]]; then failed=true; fi
+    
+    if [[ $failed == true ]]; then
+tee <<-EOF
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+An error has occurred when deploying PGClone.
+Your apps are currently stopped to prevent data loss.
+
+Things to try: If you just finished the initial setup, you likely made a typo
+or other error when configuring PGClone. Please redo the pgclone config first
+before reporting an issue.
+
+If this issue still persists:
+
+Please share this error on discord or the forums before proceeding.
+
+Error:
+EOF
+        echo | journalctl -u gdrive -u tdrive -u tcrypt -u gcrypt -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
+    else
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: $finaldeployoutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
-read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-
+    fi
+    
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+    
 }
