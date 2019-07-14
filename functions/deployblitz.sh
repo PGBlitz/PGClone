@@ -17,8 +17,8 @@ executeblitz () {
     pgclonevars
 
     # flush and clear service logs
-    journalctl --flush --rotate
-    journalctl --vacuum-time=1s
+    journalctl --flush 
+    journalctl --rotate --vacuum-time=1s
     
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
@@ -139,9 +139,9 @@ If this issue still persists:
 
 Please share this error on discord or the forums before proceeding.
 
-Error:
+Error details:
 EOF
-        echo | journalctl -u gdrive -u tdrive -u tcrypt -u gcrypt -u pgunion -u pgblitz -b -q -p 6 --no-tail -e --no-pager -S today
+        echo | journalctl -u gdrive -u tdrive -u tcrypt -u gcrypt -u pgunion -u pgblitz -b -q -p 6 --no-tail -e --no-pager -S today -n 20
     else
         
         docker start "$(docker ps -a -q)"
