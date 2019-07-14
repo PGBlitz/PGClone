@@ -51,7 +51,6 @@
 
     - name: Ensuring gdrive path is empty when unmounted
       shell: 'rm -rf /mnt/gdrive/*'
-      when: gdrive_stat_result.stat.exists
 
     - name: Ensuring tdrive path is empty when unmounted
       shell: 'rm -rf /mnt/tdrive/*'
