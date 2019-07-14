@@ -9,34 +9,34 @@
 # Variable recall comes from /functions/variables.sh
 ################################################################################
 executelocal () {
-
-# Reset Front Display
-rm -rf plexguide/deployed.version
-
-# Call Variables
-pgclonevars
-
-# to remove all service running prior to ensure a clean launch
-ansible-playbook /opt/pgclone/ymls/remove.yml
-
-# builds multipath
-multihdreadonly
-
-# deploy union
-multihds=$(cat /var/plexguide/.tmp.multihd)
-ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
-
-# stores deployed version
-echo "le" > /var/plexguide/deployed.version
-
-
-# check if services are active and running
-failed=false;
-
-pgunioncheck=$(systemctl is-active pgunion)
-if [[ "$pgunioncheck" != "active" ]]; then failed=true; fi
-
-if [[ $failed == true ]]; then 
+    
+    # Reset Front Display
+    rm -rf plexguide/deployed.version
+    
+    # Call Variables
+    pgclonevars
+    
+    # to remove all service running prior to ensure a clean launch
+    ansible-playbook /opt/pgclone/ymls/remove.yml
+    
+    # builds multipath
+    multihdreadonly
+    
+    # deploy union
+    multihds=$(cat /var/plexguide/.tmp.multihd)
+    ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
+    
+    # stores deployed version
+    echo "le" > /var/plexguide/deployed.version
+    
+    
+    # check if services are active and running
+    failed=false;
+    
+    pgunioncheck=$(systemctl is-active pgunion)
+    if [[ "$pgunioncheck" != "active" ]]; then failed=true; fi
+    
+    if [[ $failed == true ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -56,16 +56,16 @@ Please share this error on discord or the forums before proceeding.
 
 Error:
 EOF
-echo | journalctl -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
-else 
-        docker restart $(docker ps -a -q)
+        echo | journalctl -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
+    else
+        docker restart "$(docker ps -a -q)"
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: PG Local Edition
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
-read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-
+    fi
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+    
 }

@@ -25,57 +25,57 @@ executeblitz () {
     type=gdrive
     encryptbit=""
     ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cm=$vfs_cm
-  vfs_cma=$vfs_cma
-  vfs_cms=$vfs_cms
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
-  vfs_ll=$vfs_ll
+    vfs_bs=$vfs_bs
+    vfs_dcs=$vfs_dcs
+    vfs_dct=$vfs_dct
+    vfs_cm=$vfs_cm
+    vfs_cma=$vfs_cma
+    vfs_cms=$vfs_cms
+    vfs_rcs=$vfs_rcs
+    vfs_rcsl=$vfs_rcsl
+    vfs_ll=$vfs_ll
     drive=gdrive"
     
     type=tdrive
     ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cm=$vfs_cm
-  vfs_cma=$vfs_cma
-  vfs_cms=$vfs_cms
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
-  vfs_ll=$vfs_ll
+    vfs_bs=$vfs_bs
+    vfs_dcs=$vfs_dcs
+    vfs_dct=$vfs_dct
+    vfs_cm=$vfs_cm
+    vfs_cma=$vfs_cma
+    vfs_cms=$vfs_cms
+    vfs_rcs=$vfs_rcs
+    vfs_rcsl=$vfs_rcsl
+    vfs_ll=$vfs_ll
     drive=tdrive"
     
     # deploy only if using encryption
     if [[ "$transport" == "be" ]]; then
         ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cm=$vfs_cm
-  vfs_cma=$vfs_cma
-  vfs_cms=$vfs_cms
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
-  vfs_ll=$vfs_ll
+        vfs_bs=$vfs_bs
+        vfs_dcs=$vfs_dcs
+        vfs_dct=$vfs_dct
+        vfs_cm=$vfs_cm
+        vfs_cma=$vfs_cma
+        vfs_cms=$vfs_cms
+        vfs_rcs=$vfs_rcs
+        vfs_rcsl=$vfs_rcsl
+        vfs_ll=$vfs_ll
         drive=gcrypt"
         
         echo "be" > /var/plexguide/deployed.version
         type=tcrypt
         encryptbit="C"
         ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cm=$vfs_cm
-  vfs_cma=$vfs_cma
-  vfs_cms=$vfs_cms
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
-  vfs_ll=$vfs_ll
+        vfs_bs=$vfs_bs
+        vfs_dcs=$vfs_dcs
+        vfs_dct=$vfs_dct
+        vfs_cm=$vfs_cm
+        vfs_cma=$vfs_cma
+        vfs_cms=$vfs_cms
+        vfs_rcs=$vfs_rcs
+        vfs_rcsl=$vfs_rcsl
+        vfs_ll=$vfs_ll
         drive=tcrypt"
     fi
     
@@ -91,11 +91,11 @@ executeblitz () {
     
     # deploy union
     ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
-  transport=$transport \
-  type=$type
-  multihds=$multihds
-  encryptbit=$encryptbit
-  vfs_dcs=$vfs_dcs
+    transport=$transport \
+    type=$type
+    multihds=$multihds
+    encryptbit=$encryptbit
+    vfs_dcs=$vfs_dcs
     hdpath=$hdpath"
     
     
@@ -112,8 +112,9 @@ else finaldeployoutput="PG Blitz - Encrypted"; fi
     tdrivecheck=$(systemctl is-active tdrive)
     tcryptcheck=$(systemctl is-active tcrypt)
     pgunioncheck=$(systemctl is-active pgunion)
-    
-    if [[ "$gdrivecheck" != "active" || "$tdrivecheck" != "active" || "$pgunioncheck" != "active" ]]; then failed=true; fi
+    pgblitzcheck=$(systemctl is-active pgblitz)
+
+    if [[ "$gdrivecheck" != "active" || "$tdrivecheck" != "active" || "$pgunioncheck" != "active" || "$pgblitzcheck" != "active" ]]; then failed=true; fi
     if [[ "$gcryptcheck" != "active" || "$tcryptcheck" != "active" ]] && [[ "$transport" == "be" ]]; then failed=true; fi
     
     if [[ $failed == true ]]; then
@@ -136,10 +137,10 @@ Please share this error on discord or the forums before proceeding.
 
 Error:
 EOF
-        echo | journalctl -u gdrive -u tdrive -u tcrypt -u gcrypt -u pgunion -b -q -p 5 --no-tail -e --no-pager -S today
+        echo | journalctl -u gdrive -u tdrive -u tcrypt -u gcrypt -u pgunion -u pgblitz -b -q -p 5 --no-tail -e --no-pager -S today
     else
         
-        docker restart $(docker ps -a -q)
+        docker start "$(docker ps -a -q)"
         
 tee <<-EOF
 
