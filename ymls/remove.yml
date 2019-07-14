@@ -28,9 +28,6 @@
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
 
-    - name: truncating logs
-      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
-
     - name: Get existing services
       stat:
         path: '/etc/systemd/system/{{ item.name }}'
@@ -51,6 +48,9 @@
 
     - name: 'Waiting for 2 seconds for services to stop'
       wait_for: timeout=2
+
+    - name: truncating logs
+      shell: 'truncate -s 0 /var/plexguide/logs/*.log'
 
     - stat:
         path: /mnt/gdrive
