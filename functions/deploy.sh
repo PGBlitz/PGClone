@@ -227,7 +227,10 @@ cleanlogs () {
 ################################################################################
 cleanmounts (){
 
+  echo "checking for empty mounts..."
+
   maxsize=10000000
+  
   pgunion_size=$(du -s -B K /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev)
   if [[ $pgunion_size -gt 4 && $pgunion_size -lt $maxsize ]]; then
     echo "pgunion is NOT empty when unmounted, fixing..." && rm -rf /mnt/unionfs/*
@@ -262,5 +265,6 @@ fi
 }
 
 restartapps () {
+  echo "restarting apps..."
   docker restart $(docker ps -a -q) > /dev/null
 }
