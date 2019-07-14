@@ -53,28 +53,28 @@
       register: gdrive_size
     - name: Ensuring gdrive path is empty when unmounted
       shell: 'rm -rf /mnt/gdrive/*'
-      when: gdrive_size < 10
+      when: gdrive_size.stdout < 10
 
     - shell: '[ -d "/mnt/tdrive" ] && du -s -B G /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev'
       register: tdrive_size
     - name: Ensuring tdrive path is empty when unmounted
       shell: 'rm -rf /mnt/tdrive/*'
-      when: tdrive_size < 10
+      when: tdrive_size.stdout < 10
 
     - shell: '[ -d "/mnt/gcrypt" ] && du -s -B G /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev'
       register: gcrypt_size
     - name: Ensuring gcrypt path is empty when unmounted
       shell: 'rm -rf /mnt/gcrypt/*'
-      when: gcrypt_size < 10
+      when: gcrypt_size.stdout < 10
 
     - shell: '[ -d "/mnt/tcrypt" ] && du -s -B G /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev'
       register: tcrypt_size
     - name: Ensuring tcrypt path is empty when unmounted
       shell: 'rm -rf /mnt/tcrypt/*'
-      when: tcrypt_size < 10
+      when: tcrypt_size.stdout < 10
 
     - shell: '[ -d "/mnt/unionfs" ] && du -s -B G /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev'
       register: pgunion_size
     - name: Ensuring pgunion path is empty when unmounted
       shell: 'rm -rf /mnt/unionfs/*'
-      when: pgunion_size < 10
+      when: pgunion_size.stdout < 10
