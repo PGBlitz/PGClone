@@ -20,7 +20,9 @@ executeblitz () {
     cleanlogs
     
     # to remove all service running prior to ensure a clean launch
-    ansible-playbook /opt/pgclone/ymls/remove.yml
+    ansible-playbook /opt/pgclone/ymls/
+    
+    cleanmounts
     
     # gdrive deploys by standard
     echo "tdrive" > /var/plexguide/deploy.version

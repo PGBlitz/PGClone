@@ -21,6 +21,8 @@ executemove () {
     
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
+
+    cleanmounts
     
     # gdrive deploys by standard
     echo "gdrive" > /var/plexguide/deploy.version

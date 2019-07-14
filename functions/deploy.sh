@@ -225,3 +225,39 @@ cleanlogs () {
     truncate -s 0 /var/plexguide/logs/*.log
 }
 ################################################################################
+cleanmounts (){
+
+  pgunion_size=$(du -s -B G /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $pgunion_size -gt 0 && $pgunion_size -lt 10 ]]; then
+    echo "pgunion is NOT empty when unmounted, fixing..." && rm -rf /mnt/unionfs/*
+  fi
+
+  gdrive_size=$(du -s -B G /mnt/gdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $gdrive_size -gt 0 && $gdrive_size -lt 10 ]]; then
+    echo "gdrive is NOT empty when unmounted, fixing..." && rm -rf /mnt/gdrive/*
+  fi
+
+
+if [[ "$transport" == "me" || "$transport" == "be" ]]; then
+  gcrypt_size=$(du -s -B G /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $gcrypt_size -gt 0 && $gcrypt_size -lt 10 ]]; then
+    echo "gcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/gcrypt/*
+  fi
+fi
+
+if [[ "$transport" == "bu" || "$transport" == "be" ]]; then
+  tdrive_size=$(du -s -B G /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $tdrive_size -gt 0 && $tdrive_size -lt 10 ]]; then
+    echo "tdrive is NOT empty when unmounted, fixing..." && rm -rf /mnt/tdrive/*
+  fi
+fi
+
+if [[ "$transport" == "be" ]]; then
+  tcrypt_size=$(du -s -B G /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
+  if [[ $tcrypt_size -gt 0 && $tcrypt_size -lt 10 ]]; then
+    echo "tcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/tcrypt/*
+  fi
+fi
+
+
+}
