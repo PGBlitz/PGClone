@@ -67,7 +67,7 @@ Error details: $erroroutput
 
 EOF
     else
-        docker restart "$(docker ps -a -q)"
+        docker restart $(docker ps -a -q)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

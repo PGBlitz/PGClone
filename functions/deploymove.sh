@@ -18,7 +18,7 @@ executemove () {
     
     # flush and clear service logs
     cleanlogs
-
+    
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
     
@@ -105,7 +105,7 @@ Error details: $erroroutput
 
 EOF
     else
-        docker restart "$(docker ps -a -q)"
+        docker restart $(docker ps -a -q)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
