@@ -20,7 +20,7 @@ executeblitz () {
     cleanlogs
     
     # to remove all service running prior to ensure a clean launch
-    ansible-playbook /opt/pgclone/ymls/
+    ansible-playbook /opt/pgclone/ymls/remove.yml
     
     cleanmounts
     
