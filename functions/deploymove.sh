@@ -15,9 +15,10 @@ executemove () {
     
     # Call Variables
     pgclonevars
-
+    
     # flush and clear service logs
-    journalctl --flush 
+    echo "flush, rotate, and vaccum service logs..."
+    journalctl --flush
     journalctl --rotate --vacuum-time=1s
     
     # to remove all service running prior to ensure a clean launch
@@ -80,6 +81,7 @@ else finaldeployoutput="PG Move - Encrypted"; fi
     if [[ "$gcryptcheck" != "active" && "$transport" == "me" ]]; then failed=true; fi
     
     if [[ $failed == true ]]; then
+        erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager -S today -n 20)"
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -97,9 +99,12 @@ If this issue still persists:
 
 Please share this error on discord or the forums before proceeding.
 
-Error details:
+Error details: $erroroutput
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-        echo | journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager -S today -n 20
     else
         docker restart "$(docker ps -a -q)"
 tee <<-EOF
