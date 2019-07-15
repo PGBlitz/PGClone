@@ -46,7 +46,7 @@ startscript () {
         chmod -R 775 "{{hdpath}}/move"
         
         move_size=$(du -s -B K "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
-        if [[ $move_size -gt 4 ]]; then
+        if [[ $move_size -gt 60 ]]; then
             rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
             --config=/opt/appdata/plexguide/rclone.conf \
             --log-file=/var/plexguide/logs/pgblitz.log \
@@ -71,7 +71,7 @@ startscript () {
             --exclude="**ignore**"  --exclude="**inProgress**"
             
         else
-            echo "Nothing to upload" >> /var/plexguide/logs/pgblitz.log
+            echo "No files in {{hdpath}}/move to upload." >> /var/plexguide/logs/pgblitz.log
         fi
         echo "Completed Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
         echo "$(tail -n 200 /var/plexguide/logs/pgblitz.log)" > /var/plexguide/logs/pgblitz.log
