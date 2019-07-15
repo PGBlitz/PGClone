@@ -81,7 +81,7 @@ else finaldeployoutput="PG Move - Encrypted"; fi
     if [[ "$gcryptcheck" != "active" && "$transport" == "me" ]]; then failed=true; fi
     
     if [[ $failed == true ]]; then
-        erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager -S today -n 20)"
+        erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
         logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
 tee <<-EOF
 
