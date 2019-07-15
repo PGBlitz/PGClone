@@ -54,7 +54,7 @@ tee <<-EOF
 
 EOF
 
-if [ -e "/opt/var/.drivelog" ]; then rm -rf /opt/var/.drivelog; fi
+if [ -e "/opt/var/.drivelog" ]; then mv /opt/var/.drivelog; fi
 touch /opt/var/.drivelog
 
   if [[ "$transport" = "mu" ]]; then
@@ -228,38 +228,35 @@ cleanlogs () {
 cleanmounts (){
 
   echo "checking for empty mounts..."
-
-  maxsize=10000000
   
   pgunion_size=$(du -s -B K /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev)
-  if [[ $pgunion_size -gt 4 && $pgunion_size -lt $maxsize ]]; then
-    echo "pgunion is NOT empty when unmounted, fixing..." && rm -rf /mnt/unionfs/*
+  if [[ $pgunion_size -gt 4 ]]; then
+    echo "pgunion is not empty when unmounted, fixing..." && mv /mnt/unionfs/* /mnt/move/
   fi
 
   gdrive_size=$(du -s -B K /mnt/gdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
-  if [[ $gdrive_size -gt 4 && $gdrive_size -lt $maxsize ]]; then
-    echo "gdrive is NOT empty when unmounted, fixing..." && rm -rf /mnt/gdrive/*
+  if [[ $gdrive_size -gt 4 ]]; then
+    echo "gdrive is not empty when unmounted, fixing..." && mv /mnt/gdrive/* /mnt/move/
   fi
-
 
 if [[ "$transport" == "me" || "$transport" == "be" ]]; then
   gcrypt_size=$(du -s -B K /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
-  if [[ $gcrypt_size -gt 4 && $gcrypt_size -lt $maxsize ]]; then
-    echo "gcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/gcrypt/*
+  if [[ $gcrypt_size -gt 4 ]]; then
+    echo "gcrypt is not empty when unmounted, fixing..." && mv /mnt/gcrypt/* /mnt/move/
   fi
 fi
 
 if [[ "$transport" == "bu" || "$transport" == "be" ]]; then
   tdrive_size=$(du -s -B K /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
-  if [[ $tdrive_size -gt 4 && $tdrive_size -lt $maxsize ]]; then
-    echo "tdrive is NOT empty when unmounted, fixing..." && rm -rf /mnt/tdrive/*
+  if [[ $tdrive_size -gt 4 ]]; then
+    echo "tdrive is not empty when unmounted, fixing..." && mv /mnt/tdrive/* /mnt/move/
   fi
 fi
 
 if [[ "$transport" == "be" ]]; then
   tcrypt_size=$(du -s -B K /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
-  if [[ $tcrypt_size -gt 4 && $tcrypt_size -lt $maxsize ]]; then
-    echo "tcrypt is NOT empty when unmounted, fixing..." && rm -rf /mnt/tcrypt/*
+  if [[ $tcrypt_size -gt 4 ]]; then
+    echo "tcrypt is not empty when unmounted, fixing..." && mv /mnt/tcrypt/* /mnt/move/
   fi
 fi
 }
