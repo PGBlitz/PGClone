@@ -45,29 +45,34 @@ startscript () {
         chown -R 1000:1000 "{{hdpath}}/move"
         chmod -R 775 "{{hdpath}}/move"
         
-        rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
-        --config=/opt/appdata/plexguide/rclone.conf \
-        --log-file=/var/plexguide/logs/pgblitz.log \
-        --log-level=INFO --stats=5s --stats-file-name-length=0 \
-        --max-size=300G \
-        --tpslimit=10 \
-        --checkers=16 \
-        --transfers=8 \
-        --no-traverse \
-        --fast-list \
-        --bwlimit="$bwlimit" \
-        --drive-chunk-size=$vfs_dcs \
-        --user-agent="$useragent" \
-        --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-        --exclude="**partial~" --exclude=".unionfs-fuse/**" \
-        --exclude=".fuse_hidden**" --exclude="**.grab/**" \
-        --exclude="**sabnzbd**" --exclude="**nzbget**" \
-        --exclude="**qbittorrent**" --exclude="**rutorrent**" \
-        --exclude="**deluge**" --exclude="**transmission**" \
-        --exclude="**jdownloader**" --exclude="**makemkv**" \
-        --exclude="**handbrake**" --exclude="**bazarr**" \
-        --exclude="**ignore**"  --exclude="**inProgress**"
-        
+        move_size=$(du -s -B K "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
+        if [[ $move_size -gt 4 ]]; then
+            rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
+            --config=/opt/appdata/plexguide/rclone.conf \
+            --log-file=/var/plexguide/logs/pgblitz.log \
+            --log-level=INFO --stats=5s --stats-file-name-length=0 \
+            --max-size=300G \
+            --tpslimit=10 \
+            --checkers=16 \
+            --transfers=8 \
+            --no-traverse \
+            --fast-list \
+            --bwlimit="$bwlimit" \
+            --drive-chunk-size=$vfs_dcs \
+            --user-agent="$useragent" \
+            --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+            --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+            --exclude=".fuse_hidden**" --exclude="**.grab/**" \
+            --exclude="**sabnzbd**" --exclude="**nzbget**" \
+            --exclude="**qbittorrent**" --exclude="**rutorrent**" \
+            --exclude="**deluge**" --exclude="**transmission**" \
+            --exclude="**jdownloader**" --exclude="**makemkv**" \
+            --exclude="**handbrake**" --exclude="**bazarr**" \
+            --exclude="**ignore**"  --exclude="**inProgress**"
+            
+        else
+            echo "Nothing to upload" >> /var/plexguide/logs/pgblitz.log
+        fi
         echo "Completed Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
         echo "$(tail -n 200 /var/plexguide/logs/pgblitz.log)" > /var/plexguide/logs/pgblitz.log
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
