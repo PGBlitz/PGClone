@@ -76,4 +76,5 @@ do
     # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
     find "{{hdpath}}/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \)  -empty -delete
 
+    echo "$(tail -n 200 /var/plexguide/logs/pgmove.log)" > /var/plexguide/logs/pgmove.log
 done
