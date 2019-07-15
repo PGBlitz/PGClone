@@ -17,16 +17,20 @@ touch /var/plexguide/logs/pgmove.log
 
 echo "" >> /var/plexguide/logs/pgmove.log
 echo "" >> /var/plexguide/logs/pgmove.log
-echo "----------------------------" >> /var/plexguide/logs/pgmove.log
-echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
-
+echo "--------------Starting Move--------------" >> /var/plexguide/logs/pgmove.log
 sleep 10
 while true
 do
+    
     cleaner="$(cat /var/plexguide/cloneclean)"
     useragent="$(cat /var/plexguide/uagent)"
     bwlimit="$(cat /var/plexguide/move.bw)"
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
+    
+    let "cyclecount++"
+    echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgmove.log
+    echo "Checking for files to upload..." >> /var/plexguide/logs/pgmove.log
+    echo "" >> /var/plexguide/logs/pgmove.log
     
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
     --config=/opt/appdata/plexguide/rclone.conf \
@@ -81,6 +85,8 @@ do
     # This was done to address lazylibrarian having an issue if the ebooks/abooks category underneath the downloader is missing.
     # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
     find "{{hdpath}}/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \)  -empty -delete
+    
+    echo "Completed Cycle $cyclecount - $(date "+%Y-%m-%d %H:%M:%S")" >> /var/plexguide/logs/pgmove.log
     
     echo "$(tail -n 200 /var/plexguide/logs/pgmove.log)" > /var/plexguide/logs/pgmove.log
 done

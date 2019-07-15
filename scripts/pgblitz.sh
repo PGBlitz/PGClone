@@ -11,8 +11,7 @@ touch /var/plexguide/logs/pgblitz.log
 
 echo "" >> /var/plexguide/logs/pgblitz.log
 echo "" >> /var/plexguide/logs/pgblitz.log
-echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-echo "Starting Blitz" >> /var/plexguide/logs/pgblitz.log
+echo "--------------Starting Blitz--------------" >> /var/plexguide/logs/pgblitz.log
 
 startscript () {
     while read p; do
@@ -24,11 +23,10 @@ startscript () {
         vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
         
         let "cyclecount++"
-        echo "----------------------------" >> /var/plexguide/logs/pgblitz.log
-        echo "Starting Cycle $cyclecount" >> /var/plexguide/logs/pgblitz.log
+        echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgblitz.log
+        echo "Checking for files to upload..." >> /var/plexguide/logs/pgblitz.log
         echo "" >> /var/plexguide/logs/pgblitz.log
-        echo "Utilizing: $p" >> /var/plexguide/logs/pgblitz.log
-        
+
         rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
         --config=/opt/appdata/plexguide/rclone.conf \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -73,7 +71,9 @@ startscript () {
         else
             echo "No files in {{hdpath}}/move to upload." >> /var/plexguide/logs/pgblitz.log
         fi
-        echo "Completed Cycle $cyclecount - Sleeping for 30 Seconds" >> /var/plexguide/logs/pgblitz.log
+
+        echo "Completed Cycle $cyclecount - $(date "+%Y-%m-%d %H:%M:%S")" >> /var/plexguide/logs/pgblitz.log
+        
         echo "$(tail -n 200 /var/plexguide/logs/pgblitz.log)" > /var/plexguide/logs/pgblitz.log
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30
