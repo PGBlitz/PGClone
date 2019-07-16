@@ -27,10 +27,15 @@ do
     bwlimit="$(cat /var/plexguide/move.bw)"
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
     
+    if [[ $cyclecount -gt 4294967295]]; then
+        $cyclecount = 0
+    fi
+    
     let "cyclecount++"
+    echo "" >> /var/plexguide/logs/pgmove.log
     echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgmove.log
     echo "Checking for files to upload..." >> /var/plexguide/logs/pgmove.log
-    
+    echo "" >> /var/plexguide/logs/pgmove.log
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
     --config=/opt/appdata/plexguide/rclone.conf \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
