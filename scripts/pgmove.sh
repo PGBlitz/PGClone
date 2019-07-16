@@ -26,12 +26,13 @@ do
     useragent="$(cat /var/plexguide/uagent)"
     bwlimit="$(cat /var/plexguide/move.bw)"
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
+    let "cyclecount++"
     
     if [[ $cyclecount -gt 4294967295]]; then
         $cyclecount = 0
     fi
     
-    let "cyclecount++"
+
     echo "" >> /var/plexguide/logs/pgmove.log
     echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >> /var/plexguide/logs/pgmove.log
     echo "Checking for files to upload..." >> /var/plexguide/logs/pgmove.log

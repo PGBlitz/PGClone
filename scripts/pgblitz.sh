@@ -21,12 +21,12 @@ startscript () {
         useragent="$(cat /var/plexguide/uagent)"
         bwlimit="$(cat /var/plexguide/blitz.bw)"
         vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
-        
-        if [[ $cyclecount -gt 4294967295]]; then
-            $cyclecount = 0
-        fi
-        
         let "cyclecount++"
+
+        if [[ $cyclecount -gt 4294967295]]; then
+            $cyclecount=0
+        fi
+
         echo "" >> /var/plexguide/logs/pgblitz.log
         echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >> /var/plexguide/logs/pgblitz.log
         echo "Checking for files to upload..." >> /var/plexguide/logs/pgblitz.log
