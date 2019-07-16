@@ -28,7 +28,7 @@ do
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
     let "cyclecount++"
 
-    if [[ $cyclecount -gt 4294967295]]; then
+    if [[ $cyclecount -gt 4294967295 ]]; then
         $cyclecount=0
     fi
 
