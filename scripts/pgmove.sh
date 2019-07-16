@@ -30,7 +30,6 @@ do
     let "cyclecount++"
     echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgmove.log
     echo "Checking for files to upload..." >> /var/plexguide/logs/pgmove.log
-    echo "" >> /var/plexguide/logs/pgmove.log
     
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
     --config=/opt/appdata/plexguide/rclone.conf \

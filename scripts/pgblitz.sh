@@ -25,7 +25,6 @@ startscript () {
         let "cyclecount++"
         echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgblitz.log
         echo "Checking for files to upload..." >> /var/plexguide/logs/pgblitz.log
-        echo "" >> /var/plexguide/logs/pgblitz.log
 
         rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
         --config=/opt/appdata/plexguide/rclone.conf \
@@ -73,7 +72,6 @@ startscript () {
         fi
 
         echo "Completed Cycle $cyclecount - $(date "+%Y-%m-%d %H:%M:%S")" >> /var/plexguide/logs/pgblitz.log
-        
         echo "$(tail -n 200 /var/plexguide/logs/pgblitz.log)" > /var/plexguide/logs/pgblitz.log
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30
