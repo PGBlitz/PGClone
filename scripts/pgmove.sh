@@ -27,11 +27,10 @@ do
     bwlimit="$(cat /var/plexguide/move.bw)"
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
     let "cyclecount++"
-    
+
     if [[ $cyclecount -gt 4294967295]]; then
-        $cyclecount = 0
+        $cyclecount=0
     fi
-    
 
     echo "" >> /var/plexguide/logs/pgmove.log
     echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >> /var/plexguide/logs/pgmove.log
