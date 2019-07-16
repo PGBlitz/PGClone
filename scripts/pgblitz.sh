@@ -29,7 +29,6 @@ startscript () {
         let "cyclecount++"
         echo "" >> /var/plexguide/logs/pgblitz.log
         echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgblitz.log
-        echo "" >> /var/plexguide/logs/pgblitz.log
         echo "Checking for files to upload..." >> /var/plexguide/logs/pgblitz.log
 
         rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
