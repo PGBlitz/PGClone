@@ -17,7 +17,7 @@ touch /var/plexguide/logs/pgmove.log
 
 echo "" >> /var/plexguide/logs/pgmove.log
 echo "" >> /var/plexguide/logs/pgmove.log
-echo "--------------Starting Move--------------" >> /var/plexguide/logs/pgmove.log
+echo "---Starting Move: $(date "+%Y-%m-%d %H:%M:%S")---" >> /var/plexguide/logs/pgmove.log
 sleep 10
 while true
 do
@@ -33,9 +33,9 @@ do
     
     let "cyclecount++"
     echo "" >> /var/plexguide/logs/pgmove.log
-    echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgmove.log
+    echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >> /var/plexguide/logs/pgmove.log
     echo "Checking for files to upload..." >> /var/plexguide/logs/pgmove.log
-
+    
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
     --config=/opt/appdata/plexguide/rclone.conf \
     --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -90,7 +90,7 @@ do
     # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
     find "{{hdpath}}/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \)  -empty -delete
     
-    echo "Completed Cycle $cyclecount - $(date "+%Y-%m-%d %H:%M:%S")" >> /var/plexguide/logs/pgmove.log
+    echo "---Completed cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >> /var/plexguide/logs/pgmove.log
     
     echo "$(tail -n 200 /var/plexguide/logs/pgmove.log)" > /var/plexguide/logs/pgmove.log
 done
