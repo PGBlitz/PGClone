@@ -17,16 +17,19 @@ touch /var/plexguide/logs/pgmove.log
 
 echo "" >> /var/plexguide/logs/pgmove.log
 echo "" >> /var/plexguide/logs/pgmove.log
-echo "----------------------------" >> /var/plexguide/logs/pgmove.log
-echo "PG Move Log - First Startup" >> /var/plexguide/logs/pgmove.log
-
+echo "--------------Starting Move--------------" >> /var/plexguide/logs/pgmove.log
 sleep 10
 while true
 do
+    
     cleaner="$(cat /var/plexguide/cloneclean)"
     useragent="$(cat /var/plexguide/uagent)"
     bwlimit="$(cat /var/plexguide/move.bw)"
     vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
+    
+    let "cyclecount++"
+    echo "--------------cycle $cyclecount: $p--------------" >> /var/plexguide/logs/pgmove.log
+    echo "Checking for files to upload..." >> /var/plexguide/logs/pgmove.log
     
     rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
     --config=/opt/appdata/plexguide/rclone.conf \
@@ -43,28 +46,34 @@ do
     chown -R 1000:1000 "{{hdpath}}/move"
     chmod -R 775 "{{hdpath}}/move"
     
-    rclone move "{{hdpath}}/move/" "{{type}}:/" \
-    --config=/opt/appdata/plexguide/rclone.conf \
-    --log-file=/var/plexguide/logs/pgmove.log \
-    --log-level=INFO --stats=5s --stats-file-name-length=0 \
-    --max-size=300G \
-    --tpslimit=10 \
-    --checkers=16 \
-    --no-traverse \
-    --fast-list \
-    --bwlimit="$bwlimit" \
-    --drive-chunk-size=$vfs_dcs \
-    --user-agent="$useragent" \
-    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-    --exclude="**partial~" --exclude=".unionfs-fuse/**" \
-    --exclude=".fuse_hidden**" --exclude="**.grab/**" \
-    --exclude="**sabnzbd**" --exclude="**nzbget**" \
-    --exclude="**qbittorrent**" --exclude="**rutorrent**" \
-    --exclude="**deluge**" --exclude="**transmission**" \
-    --exclude="**jdownloader**" --exclude="**makemkv**" \
-    --exclude="**handbrake**" --exclude="**bazarr**" \
-    --exclude="**ignore**"  --exclude="**inProgress**"
-    
+    move_size=$(du -s -B K "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
+    if [[ $move_size -gt 50 ]]; then
+        
+        rclone move "{{hdpath}}/move/" "{{type}}:/" \
+        --config=/opt/appdata/plexguide/rclone.conf \
+        --log-file=/var/plexguide/logs/pgmove.log \
+        --log-level=INFO --stats=5s --stats-file-name-length=0 \
+        --max-size=300G \
+        --tpslimit=10 \
+        --checkers=16 \
+        --no-traverse \
+        --fast-list \
+        --bwlimit="$bwlimit" \
+        --drive-chunk-size=$vfs_dcs \
+        --user-agent="$useragent" \
+        --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+        --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+        --exclude=".fuse_hidden**" --exclude="**.grab/**" \
+        --exclude="**sabnzbd**" --exclude="**nzbget**" \
+        --exclude="**qbittorrent**" --exclude="**rutorrent**" \
+        --exclude="**deluge**" --exclude="**transmission**" \
+        --exclude="**jdownloader**" --exclude="**makemkv**" \
+        --exclude="**handbrake**" --exclude="**bazarr**" \
+        --exclude="**ignore**"  --exclude="**inProgress**"
+        
+    else
+        echo "No files in {{hdpath}}/move to upload." >> /var/plexguide/logs/pgmove.log
+    fi
     sleep 30
     
     # Remove empty directories
@@ -75,5 +84,8 @@ do
     # This was done to address lazylibrarian having an issue if the ebooks/abooks category underneath the downloader is missing.
     # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
     find "{{hdpath}}/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \)  -empty -delete
-
+    
+    echo "Completed Cycle $cyclecount - $(date "+%Y-%m-%d %H:%M:%S")" >> /var/plexguide/logs/pgmove.log
+    
+    echo "$(tail -n 200 /var/plexguide/logs/pgmove.log)" > /var/plexguide/logs/pgmove.log
 done
