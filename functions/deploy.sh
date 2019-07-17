@@ -57,7 +57,7 @@ deploydrives() {
 
 EOF
 
-  if [ -e "/opt/var/.drivelog" ]; then mv /opt/var/.drivelog; fi
+  if [ -e "/opt/var/.drivelog" ]; then rm -rf /opt/var/.drivelog; fi
   touch /opt/var/.drivelog
 
   if [[ "$transport" == "mu" ]]; then
