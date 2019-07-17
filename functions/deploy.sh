@@ -240,11 +240,9 @@ cleanmounts() {
   fi
 
   if [ -d "/mnt/gcrypt" ]; then
-    if [[ "$transport" == "me" || "$transport" == "be" ]]; then
-      gcrypt_size=$(du -s -B K /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
-      if [[ $gcrypt_size -gt 4 ]]; then
-        echo "gcrypt is not empty when unmounted, fixing..." && mv /mnt/gcrypt/* /mnt/move/
-      fi
+    gcrypt_size=$(du -s -B K /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
+    if [[ $gcrypt_size -gt 4 ]]; then
+      echo "gcrypt is not empty when unmounted, fixing..." && mv /mnt/gcrypt/* /mnt/move/
     fi
   fi
   if [ -d "/mnt/tdrive" ]; then
