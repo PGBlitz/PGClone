@@ -18,7 +18,8 @@ touch /var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "---Starting Move: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
-sleep 10
+move_threshold=60
+
 while true; do
 
     useragent="$(cat /var/plexguide/uagent)"
@@ -34,8 +35,8 @@ while true; do
     echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
     echo "Checking for files to upload..." >>/var/plexguide/logs/pgmove.log
 
-    rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-        --config=/opt/appdata/plexguide/rclone.conf \
+    rsync "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
+        -aq --remove-source-files --link-dest="{{hdpath}}/downloads/" \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -46,11 +47,8 @@ while true; do
         --exclude="**handbrake**" --exclude="**bazarr**" \
         --exclude="**ignore**" --exclude="**inProgress**"
 
-    chown -R 1000:1000 "{{hdpath}}/move"
-    chmod -R 775 "{{hdpath}}/move"
-
-    move_size=$(du -s -B K "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
-    if [[ $move_size -gt 50 ]]; then
+    move_size=$(du -s "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
+    if [ "$move_size" -gt "$move_threshold" ]; then
 
         rclone move "{{hdpath}}/move/" "{{type}}:/" \
             --config=/opt/appdata/plexguide/rclone.conf \

@@ -12,6 +12,7 @@ touch /var/plexguide/logs/pgblitz.log
 echo "" >>/var/plexguide/logs/pgblitz.log
 echo "" >>/var/plexguide/logs/pgblitz.log
 echo "---Starting Blitz: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgblitz.log
+move_threshold=60
 
 startscript() {
     while read p; do
@@ -30,8 +31,8 @@ startscript() {
         echo "---Begin cycle $cyclecount - $p: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgblitz.log
         echo "Checking for files to upload..." >>/var/plexguide/logs/pgblitz.log
 
-        rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-            --config=/opt/appdata/plexguide/rclone.conf \
+        rsync "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
+            -aq --remove-source-files --link-dest="{{hdpath}}/downloads/" \
             --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
             --exclude="**partial~" --exclude=".unionfs-fuse/**" \
             --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -42,12 +43,8 @@ startscript() {
             --exclude="**handbrake**" --exclude="**bazarr**" \
             --exclude="**ignore**" --exclude="**inProgress**"
 
-        # Set permissions since this script runs as root, any created folders are owned by root.
-        chown -R 1000:1000 "{{hdpath}}/move"
-        chmod -R 775 "{{hdpath}}/move"
-
-        move_size=$(du -s -B K "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
-        if [[ $move_size -gt 60 ]]; then
+        move_size=$(du -s "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
+        if [ "$move_size" -gt "$move_threshold" ]; then
             rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
                 --config=/opt/appdata/plexguide/rclone.conf \
                 --log-file=/var/plexguide/logs/pgblitz.log \
