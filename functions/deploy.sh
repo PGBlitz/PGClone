@@ -231,7 +231,7 @@ cleanmounts() {
     pgunion_check=$(ls -a /mnt/unionfs | wc -l)
     if [ "$pgunion_check" -ne "$emtpycheck" ]; then
       echo "pgunion is not empty when unmounted, fixing..."
-      mv -f /mnt/unionfs/* /mnt/move/
+      rsync -aq /mnt/unionfs/ /mnt/move/
       rm -rf /mnt/unionfs/*
     fi
   fi
@@ -239,7 +239,7 @@ cleanmounts() {
     gdrive_check=$(ls -a /mnt/gdrive | wc -l)
     if [ "$gdrive_check" -ne "$emtpycheck" ]; then
       echo "gdrive is not empty when unmounted, fixing..."
-      mv -f /mnt/gdrive/* /mnt/move/
+      rsync -aq /mnt/gdrive/ /mnt/move/
       rm -rf /mnt/gdrive/*
     fi
   fi
@@ -248,7 +248,7 @@ cleanmounts() {
     gcrypt_check=$(ls -a /mnt/gcrypt | wc -l)
     if [ "$gcrypt_check" -ne "$emtpycheck" ]; then
       echo "gcrypt is not empty when unmounted, fixing..."
-      mv -f /mnt/gcrypt/* /mnt/move/
+      rsync -aq /mnt/gcrypt/ /mnt/move/
       rm -rf /mnt/gcrypt/*
     fi
   fi
@@ -256,7 +256,7 @@ cleanmounts() {
     tdrive_check=$(ls -a /mnt/tdrive | wc -l)
     if [ "$tdrive_check" -ne "$emtpycheck" ]; then
       echo "tdrive is not empty when unmounted, fixing..."
-      mv -f /mnt/tdrive/* /mnt/move/
+      rsync -aq /mnt/tdrive/ /mnt/move/
       rm -rf /mnt/tdrive/*
     fi
   fi
@@ -264,7 +264,7 @@ cleanmounts() {
     tcrypt_check=$(ls -a /mnt/tcrypt | wc -l)
     if [ "$tcrypt_check" -ne "$emtpycheck" ]; then
       echo "tcrypt is not empty when unmounted, fixing..."
-      mv -f /mnt/tcrypt/* /mnt/move/
+      rsync -aq /mnt/tcrypt/ /mnt/move/
       rm -rf /mnt/tcrypt/*
     fi
   fi
