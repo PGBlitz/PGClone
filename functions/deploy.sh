@@ -216,7 +216,7 @@ EOF
 }
 ################################################################################
 cleanlogs() {
-  echo "flush, rotate, and vaccum service logs..."
+  echo "Prune service logs..."
   journalctl --flush
   journalctl --rotate
   journalctl --vacuum-time=1s
@@ -224,7 +224,7 @@ cleanlogs() {
 }
 
 prunedocker() {
-  echo "Pruning docker..."
+  echo "Prune docker images and volumes..."
   docker system prune --volumes -f
 }
 ################################################################################
