@@ -19,7 +19,7 @@
 
     - name: Install Union Script
       template:
-        src: /opt/pgclone/scripts/local.sh
+        src: /opt/pgclone/mounts/local.sh
         dest: /opt/appdata/plexguide/pgunion.sh
         force: yes
 
