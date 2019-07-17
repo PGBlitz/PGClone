@@ -69,7 +69,7 @@
     - name: Transport Type
       shell: 'echo "" >> /opt/appdata/plexguide/rclone.conf'
 
-    - name: Line Rmur
+    - name: Transport Type
       shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /opt/appdata/plexguide/rclone.conf'
 
     - name: Transport Type
