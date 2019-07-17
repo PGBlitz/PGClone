@@ -5,10 +5,10 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-mountnumbers () {
+mountnumbers() {
     pgclonevars
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 VFS RClone Mount Settings ~ pgclone.pgblitz.com
@@ -32,38 +32,50 @@ After you change these settings, you must redeploy the mounts for them to take e
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-    read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat < /dev/tty
+    read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat </dev/tty
 
     case $fluffycat in
-        1 )
-        mountset ;;
-        2 )
-        mountset ;;
-        3 )
-        mountset ;;
-        4 )
-        mountset ;;
-        5 )
-        mountset ;;
-        6 )
-        mountset ;;
-        7 )
-        mountset ;;
-        8 )
-        mountset ;;
-        9 )
-        mountset ;;
-        z )
-        a=b ;;
-        Z )
-        a=b ;;
-        * )
-        mountnumbers ;;
+    1)
+        mountset
+        ;;
+    2)
+        mountset
+        ;;
+    3)
+        mountset
+        ;;
+    4)
+        mountset
+        ;;
+    5)
+        mountset
+        ;;
+    6)
+        mountset
+        ;;
+    7)
+        mountset
+        ;;
+    8)
+        mountset
+        ;;
+    9)
+        mountset
+        ;;
+    z)
+        a=b
+        ;;
+    Z)
+        a=b
+        ;;
+    *)
+        mountnumbers
+        ;;
     esac
 
 }
 
-mountset () {
+mountset() {
 
     mountselection="$fluffycat"
 
@@ -206,8 +218,8 @@ Set this value to 0 to disable."
 3) NOTICE (recommended): It outputs very little when things are working normally. It outputs warnings and significant events.
 4) ERROR: It only outputs error messages."
     fi
-    
-tee <<-EOF
+
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Setting Variable >>> $name
@@ -221,13 +233,13 @@ Input must be a valid positive integer. Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-    read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
+    read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
     if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
 
     # This Select Requires Answers to be In the Power of Two
     if [[ "$mountselection" == "2" ]]; then
         if [[ "$typed" != "8" && "$typed" != "16" && "$typed" != "32" && "$typed" != "64" && "$typed" != "128" && "$typed" != "256" && "$typed" != "512" && "$typed" != "1024" ]]; then
-tee <<-EOF
+            tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Power of Two Notice
@@ -238,12 +250,13 @@ NOTE: The value you enter must be a power of two!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-            read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+            read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
             mountset
-    fi; fi
+        fi
+    fi
 
-    if ! [[ "$typed" =~ ^[0-9]+$ ]]; then 
-tee <<-EOF
+    if ! [[ "$typed" =~ ^[0-9]+$ ]]; then
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Invalid Input Notice
@@ -253,62 +266,62 @@ NOTE: The value must be a valid positive integer.
 Do not input suffix letters (M,G,H)!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-        read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+        read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
         mountset
     fi
 
     if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
-        
-        if [[ "$mountselection" == "1" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_bs; fi
-        if [[ "$mountselection" == "2" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs; fi
-        if [[ "$mountselection" == "3" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dct; fi
-        if [[ "$mountselection" == "4" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcs; fi
-        if [[ "$mountselection" == "7" ]]; then echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cma; fi
+
+        if [[ "$mountselection" == "1" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_bs; fi
+        if [[ "$mountselection" == "2" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dcs; fi
+        if [[ "$mountselection" == "3" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dct; fi
+        if [[ "$mountselection" == "4" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcs; fi
+        if [[ "$mountselection" == "7" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cma; fi
 
         if [[ "$mountselection" == "2" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dcs;
+            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dcs
         fi
 
         if [[ "$mountselection" == "3" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_dct;
+            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dct
         fi
 
         if [[ "$mountselection" == "4" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcs; 
+            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcs
         fi
 
         if [[ "$mountselection" == "5" ]]; then
             if [[ "$typed" == "0" ]]; then
-                echo "off" > /var/plexguide/vfs_rcsl;
+                echo "off" >/var/plexguide/vfs_rcsl
             else
-                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_rcsl;
+                echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcsl
             fi
         fi
 
         if [[ "$mountselection" == "7" ]]; then
-            echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cma; 
+            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cma
         fi
 
         if [[ "$mountselection" == "8" ]]; then
             if [[ "$typed" == "0" ]]; then
-                 echo "off" > /var/plexguide/vfs_cms;
+                echo "off" >/var/plexguide/vfs_cms
             else
-                echo "${typed}${sizeSuffix}" > /var/plexguide/vfs_cms;
+                echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cms
             fi
         fi
 
-        if [[ "$mountselection" == "6" ]]; then 
-            if [[ "$typed" == "1" ]]; then echo "off" > /var/plexguide/vfs_cm; fi
-            if [[ "$typed" == "2" ]]; then echo "minimal" > /var/plexguide/vfs_cm; fi
-            if [[ "$typed" == "3" ]]; then echo "writes" > /var/plexguide/vfs_cm; fi
-            if [[ "$typed" == "4" ]]; then echo "full" > /var/plexguide/vfs_cm; fi
+        if [[ "$mountselection" == "6" ]]; then
+            if [[ "$typed" == "1" ]]; then echo "off" >/var/plexguide/vfs_cm; fi
+            if [[ "$typed" == "2" ]]; then echo "minimal" >/var/plexguide/vfs_cm; fi
+            if [[ "$typed" == "3" ]]; then echo "writes" >/var/plexguide/vfs_cm; fi
+            if [[ "$typed" == "4" ]]; then echo "full" >/var/plexguide/vfs_cm; fi
         fi
 
-        if [[ "$mountselection" == "9" ]]; then 
-            if [[ "$typed" == "1" ]]; then echo "DEBUG" > /var/plexguide/vfs_ll; fi
-            if [[ "$typed" == "2" ]]; then echo "INFO" > /var/plexguide/vfs_ll; fi
-            if [[ "$typed" == "3" ]]; then echo "NOTICE" > /var/plexguide/vfs_ll; fi
-            if [[ "$typed" == "4" ]]; then echo "ERROR" > /var/plexguide/vfs_ll; fi
+        if [[ "$mountselection" == "9" ]]; then
+            if [[ "$typed" == "1" ]]; then echo "DEBUG" >/var/plexguide/vfs_ll; fi
+            if [[ "$typed" == "2" ]]; then echo "INFO" >/var/plexguide/vfs_ll; fi
+            if [[ "$typed" == "3" ]]; then echo "NOTICE" >/var/plexguide/vfs_ll; fi
+            if [[ "$typed" == "4" ]]; then echo "ERROR" >/var/plexguide/vfs_ll; fi
         fi
 
     fi

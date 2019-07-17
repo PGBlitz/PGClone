@@ -8,7 +8,7 @@
 ---
 - name: Removing old service helpers
   file:
-    path: "/bin/{{item}}"
+    path: '/bin/{{item}}'
     state: absent
   with_items:
     - blitz
@@ -39,7 +39,7 @@
 
 - name: Installing service helpers
   template:
-    src: "/opt/pgclone/templates/{{item}}"
+    src: '/opt/pgclone/templates/{{item}}'
     dest: /bin/{{item}}
     force: yes
     mode: 0775

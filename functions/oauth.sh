@@ -5,10 +5,10 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-oauth () {
-pgclonevars
+oauth() {
+  pgclonevars
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Google Auth - ${type} ~ oauth.pgblitz.com
@@ -25,9 +25,9 @@ into the browser, it will just work!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
+  read -p '↘️  Token | PRESS [ENTER]: ' token </dev/tty
   if [[ "$token" == "exit" || "$token" == "Exit" || "$token" == "EXIT" ]]; then clonestart; fi
-  curl --request POST --data "code=$token&client_id=$pgclonepublic&client_secret=$pgclonesecret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /opt/appdata/plexguide/pgclone.info
+  curl --request POST --data "code=$token&client_id=$pgclonepublic&client_secret=$pgclonesecret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token >/opt/appdata/plexguide/pgclone.info
 
   accesstoken=$(cat /opt/appdata/plexguide/pgclone.info | grep access_token | awk '{print $2}')
   refreshtoken=$(cat /opt/appdata/plexguide/pgclone.info | grep refresh_token | awk '{print $2}')
@@ -36,46 +36,48 @@ EOF
   rczone=$(date +"%:z")
   final=$(echo "${rcdate}T${rctime}${rczone}")
 
-########################
-rm -rf /opt/appdata/plexguide/.${type} 1>/dev/null 2>&1
-echo "" > /opt/appdata/plexguide/.${type}
-echo "[$type]" >> /opt/appdata/plexguide/.${type}
-echo "client_id = $pgclonepublic" >> /opt/appdata/plexguide/.${type}
-echo "client_secret = $pgclonesecret" >> /opt/appdata/plexguide/.${type}
-echo "type = drive" >> /opt/appdata/plexguide/.${type}
-echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /opt/appdata/plexguide/.${type}
-echo "" >> /opt/appdata/plexguide/.${type}
-if [ "$type" == "tdrive" ]; then
-teamid=$(cat /var/plexguide/pgclone.teamid)
-echo "team_drive = $teamid" >> /opt/appdata/plexguide/.tdrive; fi
-echo ""
+  ########################
+  rm -rf /opt/appdata/plexguide/.${type} 1>/dev/null 2>&1
+  echo "" >/opt/appdata/plexguide/.${type}
+  echo "[$type]" >>/opt/appdata/plexguide/.${type}
+  echo "client_id = $pgclonepublic" >>/opt/appdata/plexguide/.${type}
+  echo "client_secret = $pgclonesecret" >>/opt/appdata/plexguide/.${type}
+  echo "type = drive" >>/opt/appdata/plexguide/.${type}
+  echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >>/opt/appdata/plexguide/.${type}
+  echo "" >>/opt/appdata/plexguide/.${type}
+  if [ "$type" == "tdrive" ]; then
+    teamid=$(cat /var/plexguide/pgclone.teamid)
+    echo "team_drive = $teamid" >>/opt/appdata/plexguide/.tdrive
+  fi
+  echo ""
 
-echo ${type} > /var/plexguide/oauth.check
-oauthcheck
+  echo ${type} >/var/plexguide/oauth.check
+  oauthcheck
 
-## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
-if [[ "$transport" == "be" || "$transport" == "me" ]]; then
+  ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
+  if [[ "$transport" == "be" || "$transport" == "me" ]]; then
 
-if [ "$type" == "gdrive" ]; then entype="gcrypt";
-else entype="tcrypt"; fi
+    if [ "$type" == "gdrive" ]; then
+      entype="gcrypt"
+    else entype="tcrypt"; fi
 
-PASSWORD=`cat /var/plexguide/pgclone.password`
-SALT=`cat /var/plexguide/pgclone.salt`
-ENC_PASSWORD=`rclone obscure "$PASSWORD"`
-ENC_SALT=`rclone obscure "$SALT"`
+    PASSWORD=$(cat /var/plexguide/pgclone.password)
+    SALT=$(cat /var/plexguide/pgclone.salt)
+    ENC_PASSWORD=$(rclone obscure "$PASSWORD")
+    ENC_SALT=$(rclone obscure "$SALT")
 
-rm -rf /opt/appdata/plexguide/.${entype} 1>/dev/null 2>&1
-echo "" >> /opt/appdata/plexguide/.${entype}
-echo "[$entype]" >> /opt/appdata/plexguide/.${entype}
-echo "type = crypt" >> /opt/appdata/plexguide/.${entype}
-echo "remote = $type:/encrypt" >> /opt/appdata/plexguide/.${entype}
-echo "filename_encryption = standard" >> /opt/appdata/plexguide/.${entype}
-echo "directory_name_encryption = true" >> /opt/appdata/plexguide/.${entype}
-echo "password = $ENC_PASSWORD" >> /opt/appdata/plexguide/.${entype}
-echo "password2 = $ENC_SALT" >> /opt/appdata/plexguide/.${entype};
-fi
+    rm -rf /opt/appdata/plexguide/.${entype} 1>/dev/null 2>&1
+    echo "" >>/opt/appdata/plexguide/.${entype}
+    echo "[$entype]" >>/opt/appdata/plexguide/.${entype}
+    echo "type = crypt" >>/opt/appdata/plexguide/.${entype}
+    echo "remote = $type:/encrypt" >>/opt/appdata/plexguide/.${entype}
+    echo "filename_encryption = standard" >>/opt/appdata/plexguide/.${entype}
+    echo "directory_name_encryption = true" >>/opt/appdata/plexguide/.${entype}
+    echo "password = $ENC_PASSWORD" >>/opt/appdata/plexguide/.${entype}
+    echo "password2 = $ENC_SALT" >>/opt/appdata/plexguide/.${entype}
+  fi
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Process Complete ~ pgclone.pgblitz.com
@@ -88,17 +90,17 @@ If not, nothing will work!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+  clonestart
 
 }
 # (BELOW - SET TEAMDRIVE NAME)##################################################
-tlabeloauth () {
-pgclonevars
+tlabeloauth() {
+  pgclonevars
   gtype="https://www.googleapis.com/drive/v3/teamdrives"
   storage="/var/plexguide/teamdrive.output"
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Google Auth - Team Drive Label ~ oauth.pgblitz.com
@@ -115,20 +117,20 @@ into the browser, it will just work!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
+  read -p '↘️  Token | PRESS [ENTER]: ' token </dev/tty
 
-  if [[ "$token" = "exit" || "$token" == "Exit" || "$token" == "EXIT" ]]; then clonestart; fi
-  curl --request POST --data "code=${token}&client_id=${pgclonepublic}&client_secret=${pgclonesecret}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /var/plexguide/token.part1
-  curl -H "GData-Version: 3.0" -H "Authorization: Bearer $(cat /var/plexguide/token.part1 | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev)" $gtype > $storage
+  if [[ "$token" == "exit" || "$token" == "Exit" || "$token" == "EXIT" ]]; then clonestart; fi
+  curl --request POST --data "code=${token}&client_id=${pgclonepublic}&client_secret=${pgclonesecret}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token >/var/plexguide/token.part1
+  curl -H "GData-Version: 3.0" -H "Authorization: Bearer $(cat /var/plexguide/token.part1 | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev)" $gtype >$storage
 
   teamdriveselect
 }
 
-teamdriveselect () {
-  cat /var/plexguide/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /var/plexguide/teamdrive.id
-  cat /var/plexguide/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev > /var/plexguide/teamdrive.name
+teamdriveselect() {
+  cat /var/plexguide/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev >/var/plexguide/teamdrive.id
+  cat /var/plexguide/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev >/var/plexguide/teamdrive.name
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Listed Team Drives
@@ -137,13 +139,13 @@ tee <<-EOF
 EOF
   A=0
   while read p; do
-  ((A++))
-  name=$(sed -n ${A}p /var/plexguide/teamdrive.name)
-  echo "[$A] $p - $name"
-done </var/plexguide/teamdrive.id
+    ((A++))
+    name=$(sed -n ${A}p /var/plexguide/teamdrive.name)
+    echo "[$A] $p - $name"
+  done </var/plexguide/teamdrive.id
 
-if [[ $(cat /var/plexguide/teamdrive.name) == "" ]]; then
-tee <<-EOF
+  if [[ $(cat /var/plexguide/teamdrive.name) == "" ]]; then
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 No Team Drives Exist or Bad Token!
@@ -157,21 +159,22 @@ signing in (and/or conducting a proper copy and paste of the token)!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowlege Info | Press [ENTER] ' typed < /dev/tty
-clonestart
-fi
+    read -p '↘️  Acknowlege Info | Press [ENTER] ' typed </dev/tty
+    clonestart
+  fi
 
-echo ""
-read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
-if [[ "$typed" -ge "1" && "$typed" -le "$A" ]]; then a=b
-else teamdriveselect; fi
+  echo ""
+  read -p '↘️  Type Number | Press [ENTER]: ' typed </dev/tty
+  if [[ "$typed" -ge "1" && "$typed" -le "$A" ]]; then
+    a=b
+  else teamdriveselect; fi
 
   name=$(sed -n ${typed}p /var/plexguide/teamdrive.name)
   id=$(sed -n ${typed}p /var/plexguide/teamdrive.id)
-  echo "$name" > /var/plexguide/pgclone.teamdrive
-  echo "$id" > /var/plexguide/pgclone.teamid
+  echo "$name" >/var/plexguide/pgclone.teamdrive
+  echo "$id" >/var/plexguide/pgclone.teamid
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Process Complete! TeamDrive [$name]
@@ -183,24 +186,24 @@ drive can be shutdown!)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Acknowledge Info | PRESS [ENTER] ' temp < /dev/tty
+  read -p '↘️  Acknowledge Info | PRESS [ENTER] ' temp </dev/tty
 }
 
-mountchecker () {
-pgclonevars
+mountchecker() {
+  pgclonevars
   if [[ "$transport" == "mu" ]]; then
     if [[ "$gstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "me" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "bu" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "be" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE" ]]; then mountfail; fi
-fi
+  elif [[ "$transport" == "me" ]]; then
+    if [[ "$gstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
+  elif [[ "$transport" == "bu" ]]; then
+    if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" ]]; then mountfail; fi
+  elif [[ "$transport" == "be" ]]; then
+    if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE" ]]; then mountfail; fi
+  fi
 }
 
-mountfail () {
-tee <<-EOF
+mountfail() {
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Fail Notice ~ pgclone.pgblitz.com
@@ -213,15 +216,15 @@ We will continue to block this process until completed!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+  clonestart
 }
 
-tlabelchecker () {
-pgclonevars
-if [[ "$tdname" == "NOT-SET" ]]; then
+tlabelchecker() {
+  pgclonevars
+  if [[ "$tdname" == "NOT-SET" ]]; then
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Fail Notice ~ oauth.pgblitz.com
@@ -234,7 +237,7 @@ the Team Drive! Please complete this first!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
-fi
+    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+    clonestart
+  fi
 }

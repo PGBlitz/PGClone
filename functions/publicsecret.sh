@@ -5,10 +5,10 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-keyinputpublic () {
-pgclonevars
-if [[ "$pgcloneid" == "ACTIVE" ]]; then
-tee <<-EOF
+keyinputpublic() {
+    pgclonevars
+    if [[ "$pgcloneid" == "ACTIVE" ]]; then
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Change Values? ~ pgclone.pgblitz.com
@@ -29,26 +29,28 @@ Change the Stored Values?
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
-case $typed in
-2 )
-    rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
-    rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
-    rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
-    ;;
-1 )
-    clonestart ;;
-* )
-    keyinputpublic ;;
-esac
+        read -p '↘️  Input Value | Press [Enter]: ' typed </dev/tty
+        case $typed in
+        2)
+            rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
+            rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
+            rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
+            rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
+            rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
+            rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
+            rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+            ;;
+        1)
+            clonestart
+            ;;
+        *)
+            keyinputpublic
+            ;;
+        esac
 
-fi
+    fi
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Client ID ~ pgclone.pgblitz.com
@@ -61,14 +63,14 @@ Quitting? Type > exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Client ID | Press [Enter]: ' clientid < /dev/tty
-if [ "$clientid" = "" ]; then keyinput; fi
-if [ "$clientid" = "exit" ]; then clonestart; fi
-keyinputsecret
+    read -p '↘️  Client ID | Press [Enter]: ' clientid </dev/tty
+    if [ "$clientid" = "" ]; then keyinput; fi
+    if [ "$clientid" = "exit" ]; then clonestart; fi
+    keyinputsecret
 }
 
-keyinputsecret () {
-tee <<-EOF
+keyinputsecret() {
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Secret ~ pgclone.pgblitz.com
@@ -81,11 +83,11 @@ Quitting? Type > exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Secret ID | Press [Enter]: ' secretid < /dev/tty
-if [ "$secretid" = "" ]; then keyinputsecret; fi
-if [ "$secretid" = "exit" ]; then clonestart; fi
+    read -p '↘️  Secret ID | Press [Enter]: ' secretid </dev/tty
+    if [ "$secretid" = "" ]; then keyinputsecret; fi
+    if [ "$secretid" = "exit" ]; then clonestart; fi
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Output ~ pgclone.pgblitz.com
@@ -105,44 +107,45 @@ Is the following information correct?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Input Information | Press [Enter]: ' typed < /dev/tty
+    read -p '↘️  Input Information | Press [Enter]: ' typed </dev/tty
 
-case $typed in
-1 )
-    echo "$clientid" > /var/plexguide/pgclone.public
-    echo "$secretid" > /var/plexguide/pgclone.secret
-    echo
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
-    echo "SET" > /var/plexguide/pgclone.id
-    ;;
-2 )
-    echo
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    read -p '↘️  Restarting Process | Press [Enter] ' secretid < /dev/tty
-    keyinputpublic
-    ;;
-z )
-    echo
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
-    ;;
-Z )
-    echo
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid < /dev/tty
-    ;;
-* )
-    clonestart ;;
-esac
-clonestart
+    case $typed in
+    1)
+        echo "$clientid" >/var/plexguide/pgclone.public
+        echo "$secretid" >/var/plexguide/pgclone.secret
+        echo
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        read -p '↘️  Information Stored | Press [Enter] ' secretid </dev/tty
+        echo "SET" >/var/plexguide/pgclone.id
+        ;;
+    2)
+        echo
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        read -p '↘️  Restarting Process | Press [Enter] ' secretid </dev/tty
+        keyinputpublic
+        ;;
+    z)
+        echo
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid </dev/tty
+        ;;
+    Z)
+        echo
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        read -p '↘️  Nothing Saved! Exiting! | Press [Enter] ' secretid </dev/tty
+        ;;
+    *)
+        clonestart
+        ;;
+    esac
+    clonestart
 }
 
-publicsecretchecker () {
-pgclonevars
-if [[ "$pgcloneid" == "NOT-SET" ]]; then
+publicsecretchecker() {
+    pgclonevars
+    if [[ "$pgcloneid" == "NOT-SET" ]]; then
 
-tee <<-EOF
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Fail Notice ~ oauth.pgblitz.com
@@ -156,7 +159,7 @@ to mount the required drives!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
-fi
+        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+        clonestart
+    fi
 }

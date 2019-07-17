@@ -7,16 +7,16 @@
 ################################################################################
 
 # BAD INPUT
-badinput () {
-echo
-read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
+badinput() {
+    echo
+    read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed </dev/tty
 }
 
-glogin () {
+glogin() {
 
-emailaccount=$(cat /var/plexguide/project.email)
+    emailaccount=$(cat /var/plexguide/project.email)
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Set E-Mail Address ~ http://pgclone.pgblitz.com
@@ -28,22 +28,22 @@ Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Input E-Mail | Press [ENTER]: ' typed < /dev/tty
+    read -p '↘️  Input E-Mail | Press [ENTER]: ' typed </dev/tty
 
-if [[ "$typed" == "" ]]; then glogin; fi
-if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
+    if [[ "$typed" == "" ]]; then glogin; fi
+    if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
 
-gcloud auth login --account = $typed
-gcloud info | grep Account: | cut -c 10- > /var/plexguide/project.account
-account=$(cat /var/plexguide/project.account)
+    gcloud auth login --account = $typed
+    gcloud info | grep Account: | cut -c 10- >/var/plexguide/project.account
+    account=$(cat /var/plexguide/project.account)
 
-testcheck=$(gcloud auth list | grep "$typed")
-if [[ "$testcheck" == "" ]]; then
-echo
-echo "INFO CHECK: E-Mail Address Failed!"
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-glogin
-fi
+    testcheck=$(gcloud auth list | grep "$typed")
+    if [[ "$testcheck" == "" ]]; then
+        echo
+        echo "INFO CHECK: E-Mail Address Failed!"
+        read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+        glogin
+    fi
 
-echo "$typed" > /var/plexguide/pgclone.email
+    echo "$typed" >/var/plexguide/pgclone.email
 }
