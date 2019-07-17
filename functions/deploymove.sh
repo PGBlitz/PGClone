@@ -8,25 +8,25 @@
 # NOTES
 # Variable recall comes from /functions/variables.sh
 ################################################################################
-executemove () {
-    
+executemove() {
+
     # Reset Front Display
     rm -rf plexguide/deployed.version
-    
+
     # Call Variables
     pgclonevars
-    
+
     # flush and clear service logs
     cleanlogs
-    
+
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
 
     cleanmounts
-    
+
     # gdrive deploys by standard
-    echo "gdrive" > /var/plexguide/deploy.version
-    echo "mu" > /var/plexguide/deployed.version
+    echo "gdrive" >/var/plexguide/deploy.version
+    echo "mu" >/var/plexguide/deployed.version
     type=gdrive
     ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
     vfs_bs=$vfs_bs
@@ -39,10 +39,10 @@ executemove () {
     vfs_rcsl=$vfs_rcsl
     vfs_ll=$vfs_ll
     drive=gdrive"
-    
+
     # deploy only if pgmove is using encryption
     if [[ "$transport" == "me" ]]; then
-        echo "me" > /var/plexguide/deployed.version
+        echo "me" >/var/plexguide/deployed.version
         type=gcrypt
         ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
         vfs_bs=$vfs_bs
@@ -56,7 +56,7 @@ executemove () {
         vfs_ll=$vfs_ll
         drive=gcrypt"
     fi
-    
+
     # deploy union
     ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
     transport=$transport \
@@ -64,26 +64,27 @@ executemove () {
     type=$type
     vfs_dcs=$vfs_dcs
     hdpath=$hdpath"
-    
+
     # output final display
-    if [[ "$type" == "gdrive" ]]; then finaldeployoutput="PG Move - Unencrypted"
-else finaldeployoutput="PG Move - Encrypted"; fi
-    
+    if [[ "$type" == "gdrive" ]]; then
+        finaldeployoutput="PG Move - Unencrypted"
+    else finaldeployoutput="PG Move - Encrypted"; fi
+
     # check if services are active and running
-    failed=false;
-    
+    failed=false
+
     gdrivecheck=$(systemctl is-active gdrive)
     gcryptcheck=$(systemctl is-active gcrypt)
     pgunioncheck=$(systemctl is-active pgunion)
     pgmovecheck=$(systemctl is-active pgmove)
-    
+
     if [[ "$gdrivecheck" != "active" || "$pgunioncheck" != "active" || "$pgmovecheck" != "active" ]]; then failed=true; fi
     if [[ "$gcryptcheck" != "active" && "$transport" == "me" ]]; then failed=true; fi
-    
+
     if [[ $failed == true ]]; then
         erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
         logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
-tee <<-EOF
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ DEPLOY FAILED: $finaldeployoutput
@@ -111,7 +112,7 @@ $logoutput
 EOF
     else
         restartapps
-tee <<-EOF
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: $finaldeployoutput
@@ -121,6 +122,6 @@ PGClone has been deployed sucessfully and all services are active and running.
 
 EOF
     fi
-    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-    
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+
 }

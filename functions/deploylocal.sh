@@ -8,43 +8,42 @@
 # NOTES
 # Variable recall comes from /functions/variables.sh
 ################################################################################
-executelocal () {
-    
+executelocal() {
+
     # Reset Front Display
     rm -rf plexguide/deployed.version
-    
+
     # Call Variables
     pgclonevars
-    
+
     # flush and clear service logs
     cleanlogs
-    
+
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
 
     cleanmounts
-    
+
     # builds multipath
     multihdreadonly
-    
+
     # deploy union
     multihds=$(cat /var/plexguide/.tmp.multihd)
     ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
-    
+
     # stores deployed version
-    echo "le" > /var/plexguide/deployed.version
-    
-    
+    echo "le" >/var/plexguide/deployed.version
+
     # check if services are active and running
-    failed=false;
-    
+    failed=false
+
     pgunioncheck=$(systemctl is-active pgunion)
     if [[ "$pgunioncheck" != "active" ]]; then failed=true; fi
-    
+
     if [[ $failed == true ]]; then
         erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
         logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
-tee <<-EOF
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ DEPLOY FAILED: PG Local Edition
@@ -72,7 +71,7 @@ $logoutput
 EOF
     else
         restartapps
-tee <<-EOF
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: PG Local Edition
@@ -82,6 +81,6 @@ PGClone has been deployed sucessfully and all services are active and running.
 
 EOF
     fi
-    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-    
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+
 }
