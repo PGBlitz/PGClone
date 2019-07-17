@@ -226,43 +226,51 @@ cleanlogs() {
 cleanmounts() {
 
   echo "checking for empty mounts..."
+  emtpycheck=2
   if [ -d "/mnt/unionfs" ]; then
-    pgunion_size=$(du -s -B K /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev)
-    if [[ $pgunion_size -gt 4 ]]; then
-      echo "pgunion is not empty when unmounted, fixing..." && mv /mnt/unionfs/* /mnt/move/
+    pgunion_check=$(ls -a /mnt/unionfs | wc -l)
+    if [ "$pgunion_check" -ne "$emtpycheck" ]; then
+      echo "pgunion is not empty when unmounted, fixing..."
+      rsync -aq /mnt/unionfs/ /mnt/move/
+      rm -rf /mnt/unionfs/*
     fi
   fi
   if [ -d "/mnt/gdrive" ]; then
-    gdrive_size=$(du -s -B K /mnt/gdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
-    if [[ $gdrive_size -gt 4 ]]; then
-      echo "gdrive is not empty when unmounted, fixing..." && mv /mnt/gdrive/* /mnt/move/
+    gdrive_check=$(ls -a /mnt/gdrive | wc -l)
+    if [ "$gdrive_check" -ne "$emtpycheck" ]; then
+      echo "gdrive is not empty when unmounted, fixing..."
+      rsync -aq /mnt/gdrive/ /mnt/move/
+      rm -rf /mnt/gdrive/*
     fi
   fi
 
   if [ -d "/mnt/gcrypt" ]; then
-    if [[ "$transport" == "me" || "$transport" == "be" ]]; then
-      gcrypt_size=$(du -s -B K /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
-      if [[ $gcrypt_size -gt 4 ]]; then
-        echo "gcrypt is not empty when unmounted, fixing..." && mv /mnt/gcrypt/* /mnt/move/
-      fi
+    gcrypt_check=$(ls -a /mnt/gcrypt | wc -l)
+    if [ "$gcrypt_check" -ne "$emtpycheck" ]; then
+      echo "gcrypt is not empty when unmounted, fixing..."
+      rsync -aq /mnt/gcrypt/ /mnt/move/
+      rm -rf /mnt/gcrypt/*
     fi
   fi
   if [ -d "/mnt/tdrive" ]; then
-    if [[ "$transport" == "bu" || "$transport" == "be" ]]; then
-      tdrive_size=$(du -s -B K /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
-      if [[ $tdrive_size -gt 4 ]]; then
-        echo "tdrive is not empty when unmounted, fixing..." && mv /mnt/tdrive/* /mnt/move/
-      fi
+    tdrive_check=$(ls -a /mnt/tdrive | wc -l)
+    if [ "$tdrive_check" -ne "$emtpycheck" ]; then
+      echo "tdrive is not empty when unmounted, fixing..."
+      rsync -aq /mnt/tdrive/ /mnt/move/
+      rm -rf /mnt/tdrive/*
     fi
   fi
   if [ -d "/mnt/tcrypt" ]; then
-    if [[ "$transport" == "be" ]]; then
-      tcrypt_size=$(du -s -B K /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
-      if [[ $tcrypt_size -gt 4 ]]; then
-        echo "tcrypt is not empty when unmounted, fixing..." && mv /mnt/tcrypt/* /mnt/move/
-      fi
+    tcrypt_check=$(ls -a /mnt/tcrypt | wc -l)
+    if [ "$tcrypt_check" -ne "$emtpycheck" ]; then
+      echo "tcrypt is not empty when unmounted, fixing..."
+      rsync -aq /mnt/tcrypt/ /mnt/move/
+      rm -rf /mnt/tcrypt/*
     fi
   fi
+
+  echo "sleeping for 30s"
+  sleep 30
 }
 
 restartapps() {
