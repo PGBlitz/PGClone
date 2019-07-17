@@ -229,32 +229,42 @@ cleanmounts() {
   if [ -d "/mnt/unionfs" ]; then
     pgunion_size=$(du -s /mnt/unionfs | cut -f1 | bc -l | rev | cut -c 2- | rev)
     if [[ $pgunion_size -gt 4 ]]; then
-      echo "pgunion is not empty when unmounted, fixing..." && mv /mnt/unionfs/* /mnt/move/
+      echo "pgunion is not empty when unmounted, fixing..."
+      mv /mnt/unionfs/* /mnt/move/
+      rm -rf /mnt/unionfs/*
     fi
   fi
   if [ -d "/mnt/gdrive" ]; then
     gdrive_size=$(du -s /mnt/gdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
     if [[ $gdrive_size -gt 4 ]]; then
-      echo "gdrive is not empty when unmounted, fixing..." && mv /mnt/gdrive/* /mnt/move/
+      echo "gdrive is not empty when unmounted, fixing..."
+      mv /mnt/gdrive/* /mnt/move/
+      rm -rf /mnt/gdrive/*
     fi
   fi
 
   if [ -d "/mnt/gcrypt" ]; then
     gcrypt_size=$(du -s /mnt/gcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
     if [[ $gcrypt_size -gt 4 ]]; then
-      echo "gcrypt is not empty when unmounted, fixing..." && mv /mnt/gcrypt/* /mnt/move/
+      echo "gcrypt is not empty when unmounted, fixing..."
+      mv /mnt/gcrypt/* /mnt/move/
+      rm -rf /mnt/gcrypt/*
     fi
   fi
   if [ -d "/mnt/tdrive" ]; then
     tdrive_size=$(du -s /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
     if [[ $tdrive_size -gt 4 ]]; then
-      echo "tdrive is not empty when unmounted, fixing..." && mv /mnt/tdrive/* /mnt/move/
+      echo "tdrive is not empty when unmounted, fixing..."
+      mv /mnt/tdrive/* /mnt/move/
+      rm -rf /mnt/tdrive/*
     fi
   fi
   if [ -d "/mnt/tcrypt" ]; then
     tcrypt_size=$(du -s /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
     if [[ $tcrypt_size -gt 4 ]]; then
-      echo "tcrypt is not empty when unmounted, fixing..." && mv /mnt/tcrypt/* /mnt/move/
+      echo "tcrypt is not empty when unmounted, fixing..."
+      mv /mnt/tcrypt/* /mnt/move/
+      rm -rf /mnt/tcrypt/*
     fi
   fi
 }
