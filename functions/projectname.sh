@@ -5,29 +5,31 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-projectname () {
-pgclonevars
+projectname() {
+  pgclonevars
 
-############## REMINDERS
-# Make destroying piece quiet and create a manual delete confirmatino
-# When user creates project, give them the option to switch
-# fix existing set project
+  ############## REMINDERS
+  # Make destroying piece quiet and create a manual delete confirmatino
+  # When user creates project, give them the option to switch
+  # fix existing set project
 
-############## REMINDERS
+  ############## REMINDERS
 
-# prevents user from moving on unless email is set
-if [[ "$pgcloneemail" == "NOT-SET" ]]; then
-echo
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-read -p '↘️  ERROR! E-Mail is not setup! | Press [ENTER] ' typed < /dev/tty
-clonestart; fi
+  # prevents user from moving on unless email is set
+  if [[ "$pgcloneemail" == "NOT-SET" ]]; then
+    echo
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    read -p '↘️  ERROR! E-Mail is not setup! | Press [ENTER] ' typed </dev/tty
+    clonestart
+  fi
 
-projectcheck="good"
-if [[ $(gcloud projects list --account=${pgcloneemail} | grep "pg-") == "" ]]; then
-projectcheck="bad"; fi
+  projectcheck="good"
+  if [[ $(gcloud projects list --account=${pgcloneemail} | grep "pg-") == "" ]]; then
+    projectcheck="bad"
+  fi
 
-# prompt user
-tee <<-EOF
+  # prompt user
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Project ~ pgclone.pgblitz.com
@@ -42,126 +44,133 @@ CURRENT PROJECT: $pgcloneproject
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
+  read -p '↘️  Input Value | Press [Enter]: ' typed </dev/tty
 
-case $typed in
-1 )
+  case $typed in
+  1)
     if [[ "$projectcheck" == "bad" ]]; then
-    echo "BAD"
-    clonestart
-  elif [[ "$projectcheck" == "good" ]]; then
-    exisitingproject; fi ;;
-2 )
+      echo "BAD"
+      clonestart
+    elif [[ "$projectcheck" == "good" ]]; then
+      exisitingproject
+    fi
+    ;;
+  2)
     projectnameset
-    buildproject ;;
+    buildproject
+    ;;
 
-3 )
-    destroyproject ;;
-Z )
-    clonestart ;;
-z )
-    clonestart ;;
-* )
-    keyinputpublic ;;
-esac
+  3)
+    destroyproject
+    ;;
+  Z)
+    clonestart
+    ;;
+  z)
+    clonestart
+    ;;
+  *)
+    keyinputpublic
+    ;;
+  esac
 
 }
 
-exisitingproject () {
-tee <<-EOF
+exisitingproject() {
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Existing Project ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-projectlist
-tee <<-EOF
+  projectlist
+  tee <<-EOF
 
 Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed < /dev/tty
-if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
+  read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed </dev/tty
+  if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
 
-# Repeats if Users Fails the Range
-if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
-existingnumber=$(cat /var/plexguide/prolist/$typed)
+  # Repeats if Users Fails the Range
+  if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
+    existingnumber=$(cat /var/plexguide/prolist/$typed)
 
-echo
-gcloud config set project ${existingnumber} --account=${pgcloneemail}
+    echo
+    gcloud config set project ${existingnumber} --account=${pgcloneemail}
 
-tee <<-EOF
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Enabling Your API (Standby) ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-gcloud services enable drive.googleapis.com --project ${existingnumber} --account=${pgcloneemail}
-else exisitingproject; fi
-echo
-read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
-echo "${existingnumber}" > /var/plexguide/pgclone.project
-clonestart
+    gcloud services enable drive.googleapis.com --project ${existingnumber} --account=${pgcloneemail}
+  else exisitingproject; fi
+  echo
+  read -p '↘️  Existing Project Set | Press [ENTER] ' typed </dev/tty
+  echo "${existingnumber}" >/var/plexguide/pgclone.project
+  clonestart
 }
 
-destroyproject () {
-tee <<-EOF
+destroyproject() {
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Destroy Project ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-projectlist
-tee <<-EOF
+  projectlist
+  tee <<-EOF
 
 Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed < /dev/tty
-if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then optionsmenu; fi
+  read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed </dev/tty
+  if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then optionsmenu; fi
 
-# Repeats if Users Fails the Range
-if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
-destroynumber=$(cat /var/plexguide/prolist/$typed)
+  # Repeats if Users Fails the Range
+  if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
+    destroynumber=$(cat /var/plexguide/prolist/$typed)
 
-  # Cannot Destroy Active Project
-  if [[ $(cat /var/plexguide/pgclone.project) == "$destroynumber" ]]; then
+    # Cannot Destroy Active Project
+    if [[ $(cat /var/plexguide/pgclone.project) == "$destroynumber" ]]; then
+      echo
+      read -p '↘️  Unable to Destroy an Active Project | Press [ENTER] ' typed </dev/tty
+      destroyproject
+    fi
+
+    echo
+    gcloud projects delete ${destroynumber} --account=${pgcloneemail}
+  else destroyproject; fi
   echo
-  read -p '↘️  Unable to Destroy an Active Project | Press [ENTER] ' typed < /dev/tty
-  destroyproject
-  fi
-
-echo
-gcloud projects delete ${destroynumber} --account=${pgcloneemail}
-else destroyproject; fi
-echo
-read -p '↘️  Project Deleted | Press [ENTER] ' typed < /dev/tty
-optionsmenu
+  read -p '↘️  Project Deleted | Press [ENTER] ' typed </dev/tty
+  optionsmenu
 }
 
-projectlist () {
-pnum=0
-mkdir -p /var/plexguide/prolist
-rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+projectlist() {
+  pnum=0
+  mkdir -p /var/plexguide/prolist
+  rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
-gcloud projects list --account=${pgcloneemail} | tail -n +2 | awk '{print $1}' > /var/plexguide/prolist/prolist.sh
+  gcloud projects list --account=${pgcloneemail} | tail -n +2 | awk '{print $1}' >/var/plexguide/prolist/prolist.sh
 
-while read p; do
-  let "pnum++"
-  echo "$p" > "/var/plexguide/prolist/$pnum"
-  echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
-  echo "[$pnum] ${filler}${p}"
-done </var/plexguide/prolist/prolist.sh
+  while read p; do
+    let "pnum++"
+    echo "$p" >"/var/plexguide/prolist/$pnum"
+    echo "[$pnum] $p" >>/var/plexguide/prolist/final.sh
+    echo "[$pnum] ${filler}${p}"
+  done </var/plexguide/prolist/prolist.sh
 }
 
-projectnamecheck () {
+projectnamecheck() {
 
-pgclonevars
-if [[ "$pgcloneproject" == "NOT-SET" ]]; then
-tee <<-EOF
+  pgclonevars
+  if [[ "$pgcloneproject" == "NOT-SET" ]]; then
+    tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Fail Notice ~ pgclone.pgblitz.com
@@ -175,15 +184,15 @@ keys, and deploy the proper GDSA Accounts for the Team Drive
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
-fi
+    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+    clonestart
+  fi
 
 }
 
-projectnameset () {
+projectnameset() {
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - WARNING! PROJECT CREATION! ~ pgclone.pgblitz.com
@@ -206,17 +215,20 @@ Do You Want to Proceed?
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Input Choice | Press [Enter]: ' typed < /dev/tty
-case $typed in
-1 )
-  clonestart ;;
-2 )
-  a=bc ;;
-* )
-  optionsmenu ;;
-esac
+  read -p '↘️  Input Choice | Press [Enter]: ' typed </dev/tty
+  case $typed in
+  1)
+    clonestart
+    ;;
+  2)
+    a=bc
+    ;;
+  *)
+    optionsmenu
+    ;;
+  esac
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Project Name ~ pgclone.pgblitz.com
@@ -227,25 +239,25 @@ no spaces!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p '↘️  Input Name | Press [Enter]: ' typed < /dev/tty
-if [[ "$typed" == "" ]]; then projectnameset; else buildproject; fi
+  read -p '↘️  Input Name | Press [Enter]: ' typed </dev/tty
+  if [[ "$typed" == "" ]]; then projectnameset; else buildproject; fi
 }
 
-buildproject () {
-echo ""
-date=`date +%m%d`
-rand=$(echo $((1 + RANDOM + RANDOM + RANDOM )))
-projectid="pg-$typed-${date}${rand}"
-gcloud projects create $projectid --account=${pgcloneemail}
+buildproject() {
+  echo ""
+  date=$(date +%m%d)
+  rand=$(echo $((1 + RANDOM + RANDOM + RANDOM)))
+  projectid="pg-$typed-${date}${rand}"
+  gcloud projects create $projectid --account=${pgcloneemail}
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 ID: $projectid ~ Created
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Enabling the API (Standby)!
@@ -253,35 +265,35 @@ tee <<-EOF
 
 EOF
 
-gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
-echo "$projectid" > /var/plexguide/pgclone.project
+  gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
+  echo "$projectid" >/var/plexguide/pgclone.project
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Resetting Prior Stored Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
-rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
-rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
-rm -rf /var/plexguide/deployed.version 1>/dev/null 2>&1
+  rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+  rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
+  rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
+  rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
+  rm -rf /opt/appdata/plexguide/.gdrive 1>/dev/null 2>&1
+  rm -rf /opt/appdata/plexguide/.gcrypt 1>/dev/null 2>&1
+  rm -rf /opt/appdata/plexguide/.tcrypt 1>/dev/null 2>&1
+  rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
+  rm -rf /var/plexguide/deployed.version 1>/dev/null 2>&1
 
-docker stop jellyfin 1>/dev/null 2>&1
-docker stop plex 1>/dev/null 2>&1
-docker stop emby 1>/dev/null 2>&1
-docker rm jellyfin 1>/dev/null 2>&1
-docker rm plex 1>/dev/null 2>&1
-docker rm emby 1>/dev/null 2>&1
+  docker stop jellyfin 1>/dev/null 2>&1
+  docker stop plex 1>/dev/null 2>&1
+  docker stop emby 1>/dev/null 2>&1
+  docker rm jellyfin 1>/dev/null 2>&1
+  docker rm plex 1>/dev/null 2>&1
+  docker rm emby 1>/dev/null 2>&1
 
-ansible-playbook /opt/pgclone/ymls/remove.yml
-cleanmounts
-tee <<-EOF
+  ansible-playbook /opt/pgclone/ymls/remove.yml
+  cleanmounts
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Prior Stored Information is Reset!
@@ -294,6 +306,6 @@ meta-data due to the mounts being offline!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-clonestart
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+  clonestart
 }

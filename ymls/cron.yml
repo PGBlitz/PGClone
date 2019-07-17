@@ -8,19 +8,19 @@
 ---
 - cron:
     name: Hourly Clean PG Clone Clean
-    special_time: "hourly"
-    job: "bash /opt/pgclone/templates/cloneclean.sh"
+    special_time: 'hourly'
+    job: 'bash /opt/pgclone/templates/cloneclean.sh'
     state: absent
   ignore_errors: yes
 
 - cron:
     name: Hourly downloads cleaner
-    special_time: "hourly"
-    job: "bash /opt/pgclone/scripts/cloneclean.sh"
+    special_time: 'hourly'
+    job: 'bash /opt/pgclone/scripts/cloneclean.sh'
     state: present
 
 - cron:
     name: Weekly log cleaner
-    special_time: "weekly"
-    job: "tlogs"
+    special_time: 'weekly'
+    job: 'tlogs'
     state: present

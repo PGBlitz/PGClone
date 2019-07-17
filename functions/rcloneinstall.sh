@@ -5,29 +5,30 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-rcloneinstall () {
+rcloneinstall() {
 
-# install what version of rclone
-rversion=1.48
+    # install what version of rclone
+    rversion=1.48
 
-if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
-touch /root/.config/rclone/rclone.conf; fi
+    if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
+        touch /root/.config/rclone/rclone.conf
+    fi
 
-rcheck1=$(rclone --version 2>&1)
-rcheck2=$(echo $rcheck1 | cut -c1-12)
+    rcheck1=$(rclone --version 2>&1)
+    rcheck2=$(echo $rcheck1 | cut -c1-12)
 
-if [[ "rclone v$rversion" != "$rcheck2" ]]; then
+    if [[ "rclone v$rversion" != "$rcheck2" ]]; then
 
-tee <<-EOF
+        tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Installing RClone Version ~ $rversion
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-sleep 1.5
+        sleep 1.5
 
-tee "/etc/fuse.conf" > /dev/null <<EOF
+        tee "/etc/fuse.conf" >/dev/null <<EOF
 # /etc/fuse.conf - Configuration file for Filesystem in Userspace (FUSE)
 # Set the maximum number of FUSE mounts allowed to non-root users.
 # The default is 1000.
@@ -36,6 +37,7 @@ tee "/etc/fuse.conf" > /dev/null <<EOF
 user_allow_other
 EOF
 
-ansible-playbook /opt/pgclone/rclone.yml; fi
+        ansible-playbook /opt/pgclone/rclone.yml
+    fi
 
 }

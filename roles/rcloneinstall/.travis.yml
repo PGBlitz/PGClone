@@ -1,6 +1,6 @@
 ---
 language: python
-python: "2.7"
+python: '2.7'
 
 sudo: required
 dist: bionic
@@ -28,10 +28,10 @@ before_install:
 
 script:
   # 1. Syntax check
-  - "sudo docker exec ansible-rclone ansible-playbook /etc/ansible/roles/ansible-rclone/tests/test.yml -i tests/inventory --syntax-check"
+  - 'sudo docker exec ansible-rclone ansible-playbook /etc/ansible/roles/ansible-rclone/tests/test.yml -i tests/inventory --syntax-check'
 
   # 2. Run playbook to execute role
-  - "sudo docker exec ansible-rclone ansible-playbook /etc/ansible/roles/ansible-rclone/tests/test.yml -i tests/inventory --connection=local"
+  - 'sudo docker exec ansible-rclone ansible-playbook /etc/ansible/roles/ansible-rclone/tests/test.yml -i tests/inventory --connection=local'
 
   # 3. HERE, WRITE SOME TESTS to verify that your role has produced the desired
   # effect on the target system. Your tests should be bash commands that
@@ -49,7 +49,6 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-
 
 notifications:
   webhooks:

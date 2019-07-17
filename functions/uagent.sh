@@ -5,10 +5,10 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-uagent () {
-pgclonevars
+uagent() {
+  pgclonevars
 
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 User Agent for RClone
@@ -24,8 +24,8 @@ Do not wrap the string in double quotes!
 Quitting? Type >>> exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Type User Agent | PRESS [ENTER]: ' varinput < /dev/tty
+  read -p '↘️  Type User Agent | PRESS [ENTER]: ' varinput </dev/tty
   if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" ]]; then clonestart; fi
 
-  echo "$varinput" > /var/plexguide/uagent
+  echo "$varinput" >/var/plexguide/uagent
 }
