@@ -222,6 +222,14 @@ cleanlogs() {
   journalctl --vacuum-time=1s
   truncate -s 0 /var/plexguide/logs/*.log
 }
+
+prunedocker() {
+  echo "Pruning docker..."
+  journalctl --flush
+  journalctl --rotate
+  journalctl --vacuum-time=1s
+  truncate -s 0 /var/plexguide/logs/*.log
+}
 ################################################################################
 cleanmounts() {
 
@@ -268,9 +276,6 @@ cleanmounts() {
       rm -rf /mnt/tcrypt/*
     fi
   fi
-
-  echo "sleeping for 30s"
-  sleep 30
 }
 
 restartapps() {
