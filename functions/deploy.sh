@@ -225,10 +225,7 @@ cleanlogs() {
 
 prunedocker() {
   echo "Pruning docker..."
-  journalctl --flush
-  journalctl --rotate
-  journalctl --vacuum-time=1s
-  truncate -s 0 /var/plexguide/logs/*.log
+  docker system prune --volumes -f
 }
 ################################################################################
 cleanmounts() {
