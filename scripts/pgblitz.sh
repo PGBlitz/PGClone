@@ -27,7 +27,7 @@ startscript() {
         fi
 
         echo "" >>/var/plexguide/logs/pgblitz.log
-        echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgblitz.log
+        echo "---Begin cycle $cyclecount - $p: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgblitz.log
         echo "Checking for files to upload..." >>/var/plexguide/logs/pgblitz.log
 
         rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
