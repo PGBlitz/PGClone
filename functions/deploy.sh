@@ -248,19 +248,15 @@ cleanmounts() {
     fi
   fi
   if [ -d "/mnt/tdrive" ]; then
-    if [[ "$transport" == "bu" || "$transport" == "be" ]]; then
-      tdrive_size=$(du -s -B K /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
-      if [[ $tdrive_size -gt 4 ]]; then
-        echo "tdrive is not empty when unmounted, fixing..." && mv /mnt/tdrive/* /mnt/move/
-      fi
+    tdrive_size=$(du -s -B K /mnt/tdrive | cut -f1 | bc -l | rev | cut -c 2- | rev)
+    if [[ $tdrive_size -gt 4 ]]; then
+      echo "tdrive is not empty when unmounted, fixing..." && mv /mnt/tdrive/* /mnt/move/
     fi
   fi
   if [ -d "/mnt/tcrypt" ]; then
-    if [[ "$transport" == "be" ]]; then
-      tcrypt_size=$(du -s -B K /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
-      if [[ $tcrypt_size -gt 4 ]]; then
-        echo "tcrypt is not empty when unmounted, fixing..." && mv /mnt/tcrypt/* /mnt/move/
-      fi
+    tcrypt_size=$(du -s -B K /mnt/tcrypt | cut -f1 | bc -l | rev | cut -c 2- | rev)
+    if [[ $tcrypt_size -gt 4 ]]; then
+      echo "tcrypt is not empty when unmounted, fixing..." && mv /mnt/tcrypt/* /mnt/move/
     fi
   fi
 }
