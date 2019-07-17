@@ -86,13 +86,13 @@
 
         - name: Install PG Blitz Script
           template:
-            src: /opt/pgclone/scripts/pgblitz.sh
+            src: /opt/pgclone/transport/pgblitz.sh
             dest: /opt/appdata/plexguide/pgblitz.sh
             force: yes
 
         - name: Install PG Blitz Service
           template:
-            src: /opt/pgclone/mounts/pgblitz.service
+            src: /opt/pgclone/transport/pgblitz.service
             dest: /etc/systemd/system/pgblitz.service
             force: yes
 
@@ -122,13 +122,13 @@
 
         - name: Install MOVE Script
           template:
-            src: /opt/pgclone/scripts/pgmove.sh
+            src: /opt/pgclone/transport/pgmove.sh
             dest: /opt/appdata/plexguide/pgmove.sh
             force: yes
 
         - name: Install MOVE Service
           template:
-            src: /opt/pgclone/mounts/pgmove.service
+            src: /opt/pgclone/transport/pgmove.service
             dest: /etc/systemd/system/pgmove.service
             force: yes
 
@@ -144,7 +144,7 @@
 
     - name: Install PGUnion Script
       template:
-        src: /opt/pgclone/scripts/pgunion.sh
+        src: /opt/pgclone/mounts/pgunion.sh
         dest: /opt/appdata/plexguide/pgunion.sh
         force: yes
 
