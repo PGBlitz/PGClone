@@ -20,7 +20,7 @@ executelocal() {
     cleanlogs
     # This must be called before docker apps are stopped!
     #prunedocker
-    
+
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
 
