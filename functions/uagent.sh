@@ -21,11 +21,11 @@ Current User Agent: ${uagent}
 Changing the useragent is useful when experience 429 problems from Google
 
 Do not wrap the string in double quotes!
-Quitting? Type >>> exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type User Agent | PRESS [ENTER]: ' varinput </dev/tty
-  if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" ]]; then clonestart; fi
+  if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" || "$varinput" == "z" || "$varinput" == "Z" ]]; then clonestart; fi
 
   echo "$varinput" >/var/plexguide/uagent
 }

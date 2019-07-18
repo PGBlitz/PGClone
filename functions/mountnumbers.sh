@@ -229,12 +229,12 @@ $note
 
 Type a number between [$start] and [$end]
 
-Input must be a valid positive integer. Quitting? Type >>> exit
+Input must be a valid positive integer. To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
-    if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then mountnumbers; fi
+    if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then mountnumbers; fi
 
     # This Select Requires Answers to be In the Power of Two
     if [[ "$mountselection" == "2" ]]; then

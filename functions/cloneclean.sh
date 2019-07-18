@@ -23,11 +23,11 @@ number of minutes. (IE - 1440 minutes = 1 day | 14440 minutes = 10 days)
 
 WARNING: Do not set this too low because legitmate files!
 
-Quitting? Type >>> exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Minutes (Minimum is 120) | PRESS [ENTER]: ' varinput </dev/tty
-  if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" ]]; then clonestart; fi
+  if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" || "$varinput" == "z" || "$varinput" == "Z" ]]; then clonestart; fi
 
   if [[ "$varinput" -lt "120" ]]; then cloneclean; fi
 
