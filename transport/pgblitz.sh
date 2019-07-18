@@ -66,6 +66,7 @@ startscript() {
                 --exclude="**handbrake**" --exclude="**bazarr**" \
                 --exclude="**ignore**" --exclude="**inProgress**"
 
+            echo "Upload has finished." >>/var/plexguide/logs/pgblitz.log
         else
             echo "No files in {{hdpath}}/move to upload." >>/var/plexguide/logs/pgblitz.log
         fi
