@@ -19,3 +19,5 @@ All changes require a PGClone redeploy to get them!
 - Fixes "Fatal error: failed to umount FUSE fs: exit status 1: fusermount: failed to unmount" error.
 - Fixes Move/Blitz logs from being truncated (blank) when nothing is active
 - Fixes 0 files 0% progress logs that rclone will output when there is no files to upload. Now it will say there are no files to upload.
+- Fixes cleaner script
+- Fixes cleaner script cron job from not being created.
