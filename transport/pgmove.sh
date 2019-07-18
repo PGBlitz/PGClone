@@ -18,7 +18,6 @@ touch /var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "---Starting Move: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
-move_threshold=60
 
 while true; do
 
@@ -47,8 +46,7 @@ while true; do
         --exclude="**handbrake**" --exclude="**bazarr**" \
         --exclude="**ignore**" --exclude="**inProgress**"
 
-    move_size=$(du -s "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
-    if [ "$move_size" -gt "$move_threshold" ]; then
+    if [[ $(find "{{hdpath}}/move" -type f | wc -l) -gt 0 ]]; then
 
         rclone move "{{hdpath}}/move/" "{{type}}:/" \
             --config=/opt/appdata/plexguide/rclone.conf \

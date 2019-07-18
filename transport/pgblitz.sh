@@ -12,7 +12,6 @@ touch /var/plexguide/logs/pgblitz.log
 echo "" >>/var/plexguide/logs/pgblitz.log
 echo "" >>/var/plexguide/logs/pgblitz.log
 echo "---Starting Blitz: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgblitz.log
-move_threshold=60
 
 startscript() {
     while read p; do
@@ -43,8 +42,7 @@ startscript() {
             --exclude="**handbrake**" --exclude="**bazarr**" \
             --exclude="**ignore**" --exclude="**inProgress**"
 
-        move_size=$(du -s "{{hdpath}}/move" | cut -f1 | bc -l | rev | cut -c 2- | rev)
-        if [ "$move_size" -gt "$move_threshold" ]; then
+        if [[ $(find "{{hdpath}}/move" -type f | wc -l) -gt 0 ]]; then
             rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
                 --config=/opt/appdata/plexguide/rclone.conf \
                 --log-file=/var/plexguide/logs/pgblitz.log \
