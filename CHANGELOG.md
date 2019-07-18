@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the PGClone will be added to this repo. For changes to the core projeect, see it's changelog.
+All notable changes to the PGClone will be added to this repo. For changes to the core project, see [PGBlitz changelog](https://github.com/PGBlitz/PGBlitz.com/blob/v8.6base/CHANGELOG.md).
 
 All changes require a PGClone redeploy to get them!
 
