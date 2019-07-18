@@ -59,7 +59,7 @@ EOF
 Visit oauth.pgblitz.com in order to generate your Client ID! Ensure that
 you input the CORRECT Client ID from your current project!
 
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
@@ -79,7 +79,7 @@ keyinputsecret() {
 Visit oauth.pgblitz.com in order to generate your Secret! Ensure that
 you input the CORRECT Secret ID from your current project!
 
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 

@@ -64,12 +64,12 @@ Set a Primary Password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Main Password | Press [ENTER]: ' typed </dev/tty
 
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then clonestart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
   if [[ "$typed" == "" ]]; then blitzpasswordmain; fi
   primarypassword=$typed
   blitzpasswordsalt
@@ -88,12 +88,12 @@ Set a SALT password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type SALT Password | Press [ENTER]: ' typed </dev/tty
 
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then clonestart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
   if [[ "$typed" == "" ]]; then blitzpasswordsalt; fi
 
   secondarypassword=$typed
@@ -112,7 +112,7 @@ Set the Following Passwords? Type y or n!
 Primary: $primarypassword
 SALT   : $secondarypassword
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 

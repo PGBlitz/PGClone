@@ -99,7 +99,7 @@ tmgen() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Google Auth - Team Drives           📓 Reference: oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 NOTE: Copy & Paste Url into Browser | Use Correct Google Account!
 
 https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
@@ -198,7 +198,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 System Message: Google Auth          📓 Reference: oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 NOTE: Copy & Paste Url into Browser | Use Correct Google Account!
 
 https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
@@ -489,7 +489,7 @@ blitzpasswords() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Primary Password                   📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 
 Please set a Primary Password for Encryption! Do not forget it! If you do,
 you will be locked out from all your data!
@@ -501,7 +501,7 @@ EOF
   if [ "$bpassword" == "" ]; then
     badinput
     blitzpasswords
-  elif [ "$bpassword" == "exit" ]; then mountsmenu; fi
+  elif [[ "$bpassword" == "exit" || "$bpassword" == "Exit" || "$bpassword" == "EXIT" || "$bpassword" == "z" || "$bpassword" == "Z" ]]; then mountsmenu; fi
   blitzsalt
 }
 
@@ -511,7 +511,7 @@ blitzsalt() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 SALT (Secondary Password)          📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 
 Please set a Secondary Password (SALT) for Encryption! Do not forget it!
 If you do, you will be locked out from all your data!  SALT randomizes
@@ -525,7 +525,7 @@ EOF
   if [ "$bsalt" == "" ]; then
     badinput
     blitzsalt
-  elif [ "$bsalt" == "exit" ]; then mountsmenu; fi
+  elif [[ "$bsalt" == "exit" || "$bsalt" == "Exit" || "$bsalt" == "EXIT" || "$bsalt" == "z" || "$bsalt" == "Z" ]]; then mountsmenu; fi
   blitzpfinal
 
 }
@@ -536,7 +536,7 @@ blitzpfinal() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎 Set Passwords?                     📓 Reference: pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 
 Are you happy with the following info? Type y or n!
 
@@ -566,7 +566,7 @@ publickeyinput() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Google OAuth Keys - Client ID        📓 Reference: oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 NOTE: Visit reference for Google OAuth Keys!
 
 EOF
@@ -591,7 +591,7 @@ secretkeyinput() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Google OAuth Keys - Secret Key       📓 Reference: oauth.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quitting? TYPE > q or exit
+To quit, type >>> z or exit
 NOTE: Visit reference for Google OAuth Keys!
 
 EOF

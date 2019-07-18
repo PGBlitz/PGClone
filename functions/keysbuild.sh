@@ -24,7 +24,7 @@ NOTE 2: Realistic key generation for most are 6 keys
 NOTE 3: Generating 100 keys over time, you must delete them all to create
         more, which is why making tons of keys is not ideal!
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type a Number [ 2 thru 20 ] | Press [ENTER]: ' typed </dev/tty

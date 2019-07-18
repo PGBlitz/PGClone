@@ -68,7 +68,7 @@ EOF
   echo
   read -p '🌍 Type Name | Press [ENTER]: ' typed </dev/tty
 
-  if [ "$typed" == "exit" ] || [ "$typed" == "q" ] || [ "$typed" == "Q" ]; then keymenu; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then keymenu; fi
 
   grepcheck=$(cat /tmp/service.keys | grep $typed)
   if [ "$grepcheck" == "" ]; then
