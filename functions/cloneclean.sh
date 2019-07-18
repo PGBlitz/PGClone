@@ -23,7 +23,7 @@ number of minutes. (IE - 1440 minutes = 1 day | 14440 minutes = 10 days)
 
 WARNING: Do not set this too low because legitmate files!
 
-Quitting? Type >>> exit
+Quitting? Type >>> q or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Type Minutes (Minimum is 120) | PRESS [ENTER]: ' varinput </dev/tty

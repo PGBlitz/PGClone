@@ -91,7 +91,7 @@ Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then clonestart; fi
 
   # Repeats if Users Fails the Range
   if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
@@ -130,7 +130,7 @@ Qutting? Type >>> Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then optionsmenu; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then optionsmenu; fi
 
   # Repeats if Users Fails the Range
   if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then

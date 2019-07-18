@@ -24,14 +24,14 @@ glogin() {
 What email address from the Google Console do you want to be associated
 with from your Google GSuite? Ensure that it exists!
 
-Quitting? Type >>> exit
+Quitting? Type >>> q or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
     read -p '↘️  Input E-Mail | Press [ENTER]: ' typed </dev/tty
 
     if [[ "$typed" == "" ]]; then glogin; fi
-    if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
+    if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then clonestart; fi
 
     gcloud auth login --account = $typed
     gcloud info | grep Account: | cut -c 10- >/var/plexguide/project.account

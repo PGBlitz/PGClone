@@ -22,7 +22,7 @@ the correct Google Account!
 PUTTY USERS: Just select and highlight! DO NOT RIGHT CLICK! When you paste
 into the browser, it will just work!
 
-Quitting? Type >>> exit
+Quitting? Type >>> q or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token </dev/tty
@@ -114,7 +114,7 @@ the correct Google Account!
 PUTTY USERS: Just select and highlight! DO NOT RIGHT CLICK! When you paste
 into the browser, it will just work!
 
-Quitting? Type >>> exit
+Quitting? Type >>> q or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token </dev/tty

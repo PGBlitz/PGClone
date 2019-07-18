@@ -8,7 +8,7 @@
 
 # BAD INPUT
 exitclone() {
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then clonestart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then clonestart; fi
 }
 
 variable() {
