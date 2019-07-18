@@ -70,6 +70,7 @@ while true; do
             --exclude="**handbrake**" --exclude="**bazarr**" \
             --exclude="**ignore**" --exclude="**inProgress**"
 
+        echo "Upload has finished." >>/var/plexguide/logs/pgmove.log
     else
         echo "No files in {{hdpath}}/move to upload." >>/var/plexguide/logs/pgmove.log
     fi

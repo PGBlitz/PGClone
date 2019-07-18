@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the PGClone will be added to this repo. For changes to the core projeect, see it's changelog.
+All notable changes to the PGClone will be added to this repo. For changes to the core project, see [PGBlitz changelog](https://github.com/PGBlitz/PGBlitz.com/blob/v8.6base/CHANGELOG.md).
 
 All changes require a PGClone redeploy to get them!
 
@@ -19,3 +19,5 @@ All changes require a PGClone redeploy to get them!
 - Fixes "Fatal error: failed to umount FUSE fs: exit status 1: fusermount: failed to unmount" error.
 - Fixes Move/Blitz logs from being truncated (blank) when nothing is active
 - Fixes 0 files 0% progress logs that rclone will output when there is no files to upload. Now it will say there are no files to upload.
+- Fixes cleaner script
+- Fixes cleaner script cron job from not being created.
