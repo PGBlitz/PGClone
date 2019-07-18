@@ -21,7 +21,7 @@ executemove() {
 
     # This must be called before docker apps are stopped!
     #prunedocker
-    
+
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
 
@@ -121,7 +121,8 @@ EOF
 💪 DEPLOYED: $finaldeployoutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-PGClone has been deployed sucessfully and all services are active and running.
+PGClone has been deployed sucessfully!
+All services are active and running normally.
 
 EOF
     fi
