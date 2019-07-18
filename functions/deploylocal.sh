@@ -79,7 +79,8 @@ EOF
 💪 DEPLOYED: PG Local Edition
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-PGClone has been deployed sucessfully and all services are active and running.
+PGClone has been deployed sucessfully!
+All services are active and running normally.
 
 EOF
     fi
