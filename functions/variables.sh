@@ -94,8 +94,8 @@ pgclonevars() {
     variable /var/plexguide/deployed.version ""
     dversion=$(cat /var/plexguide/deployed.version)
 
-    variablet /var/plexguide/.tmp.multihd
-    multihds=$(cat /var/plexguide/.tmp.multihd)
+    variable /var/plexguide/multihd.paths
+    multihds=$(cat /var/plexguide/multihd.paths)
 
     if [[ "$dversion" == "mu" ]]; then
         dversionoutput="Move"

@@ -7,5 +7,6 @@
 ################################################################################
 sleep 2
 hdpath="$(cat /var/plexguide/server.hd.path)"
+multihds="$(cat /var/plexguide/multihd.paths)"
 mergerfs -o sync_read,auto_cache,dropcacheonclose=true,use_ino,allow_other,func.getattr=newest,category.create=ff,minfreespace=0,fsname=pgunion \
-$hdpath/move=RO:$hdpath/downloads=RW:{{multihds}} /mnt/unionfs
+$hdpath/move=RO:$hdpath/downloads=RW:$multihds /mnt/unionfs
