@@ -13,7 +13,7 @@ After=multi-user.target
 [Service]
 Type=simple
 ExecStart=/bin/bash /opt/appdata/plexguide/{{drive}}.sh
-ExecStop=/bin/fusermount -uz /mnt/{{drive}}
+ExecStop=/bin/fusermount -uz /mnt/{{drive}} > /dev/null
 TimeoutSec=60
 KillMode=process
 User=0

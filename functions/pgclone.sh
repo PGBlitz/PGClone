@@ -69,7 +69,7 @@ EOF
     rclone config delete $type --config /opt/appdata/plexguide/rclone.conf
 
     encheck=$(cat /var/plexguide/pgclone.transport)
-    if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
+    if [[ "$encheck" == "be" || "$encheck" == "me" ]]; then
       if [ "$type" == "gdrive" ]; then
         rclone config delete gcrypt --config /opt/appdata/plexguide/rclone.conf
       fi
@@ -696,15 +696,15 @@ EOF
 
 transportdisplay() {
   temp=$(cat /var/plexguide/pgclone.transport)
-  if [ "$temp" == "umove" ]; then
+  if [ "$temp" == "mu" ]; then
     transport="PG Move /w No Encryption"
-  elif [ "$temp" == "emove" ]; then
+  elif [ "$temp" == "me" ]; then
     transport="PG Move /w Encryption"
-  elif [ "$temp" == "ublitz" ]; then
+  elif [ "$temp" == "bu" ]; then
     transport="PG Blitz /w No Encryption"
-  elif [ "$temp" == "eblitz" ]; then
+  elif [ "$temp" == "be" ]; then
     transport="PG Blitz /w Encryption"
-  elif [ "$temp" == "solohd" ]; then
+  elif [ "$temp" == "le" ]; then
     transport="PG Local"
   else transport="NOT-SET"; fi
 }
@@ -727,15 +727,15 @@ EOF
   read -p '↘️  Set Choice | Press [ENTER]: ' typed </dev/tty
 
   if [ "$typed" == "1" ]; then
-    echo "umove" >/var/plexguide/pgclone.transport && echo
+    echo "mu" >/var/plexguide/pgclone.transport && echo
   elif [ "$typed" == "2" ]; then
-    echo "emove" >/var/plexguide/pgclone.transport && echo
+    echo "me" >/var/plexguide/pgclone.transport && echo
   elif [ "$typed" == "3" ]; then
-    echo "ublitz" >/var/plexguide/pgclone.transport && echo
+    echo "bu" >/var/plexguide/pgclone.transport && echo
   elif [ "$typed" == "4" ]; then
-    echo "eblitz" >/var/plexguide/pgclone.transport && echo
+    echo "be" >/var/plexguide/pgclone.transport && echo
   elif [ "$typed" == "5" ]; then
-    echo "solohd" >/var/plexguide/pgclone.transport && echo
+    echo "le" >/var/plexguide/pgclone.transport && echo
   elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
 
     # If a New Installer, User Cannot Exit & Must Select a Version
@@ -806,7 +806,7 @@ testphase() {
 
   ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
   encheck=$(cat /var/plexguide/pgclone.transport)
-  if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
+  if [[ "$encheck" == "be" || "$encheck" == "me" ]]; then
 
     if [ "$type" == "gdrive" ]; then
       entype="gcrypt"
