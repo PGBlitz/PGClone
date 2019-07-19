@@ -31,7 +31,7 @@ executeblitz() {
     echo "bu" >/var/plexguide/deployed.version
     type=gdrive
     encryptbit=""
-    ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "\
     vfs_bs=$vfs_bs \
     vfs_dcs=$vfs_dcs \
     vfs_dct=$vfs_dct \
@@ -44,7 +44,7 @@ executeblitz() {
     drive=gdrive"
 
     type=tdrive
-    ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
+    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "\
     vfs_bs=$vfs_bs \
     vfs_dcs=$vfs_dcs \
     vfs_dct=$vfs_dct \
@@ -58,7 +58,7 @@ executeblitz() {
 
     # deploy only if using encryption
     if [[ "$transport" == "be" ]]; then
-        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
+        ansible-playbook /opt/pgclone/ymls/crypt.yml -vvv -e "\
         vfs_bs=$vfs_bs \
         vfs_dcs=$vfs_dcs \
         vfs_dct=$vfs_dct \
