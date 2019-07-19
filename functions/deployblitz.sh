@@ -98,7 +98,7 @@ executeblitz() {
 
     # deploy union
     ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
-    transport=$transport \
+    transport=$transport
     type=$type
     multihds=$multihds
     encryptbit=$encryptbit
