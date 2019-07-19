@@ -380,9 +380,9 @@ deploykeys3() {
 [1] Create 2 Keys:  Daily Limit - 1.5  TB
 [2] Create 4 Keys:  Daily Limit - 3.0  TB
 [3] Create 6 Keys:  Daily Limit - 4.5  TB  <--- Realistic
-[4] Create 8 Keys:  Daily Limit - 6.0  TB
-[5] Create 10 Keys: Daily Limit - 7.5  TB
-[6] Create 20 Keys: Daily Limit - 15   TB  <--- only GCE-FEEDER !
+[4] Create 8 Keys:  Daily Limit - 6.0  TB  <--- The max you'll ever need
+[5] Create 10 Keys: Daily Limit - 7.5  TB  <--- only GCE-FEEDER, it won't unless your on GCE!
+[6] Create 20 Keys: Daily Limit - 15   TB <--- only GCE-FEEDER, it won't unless your on GCE!
 
 💬 # of Keys Generated Sets Your Daily Upload Limit!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
