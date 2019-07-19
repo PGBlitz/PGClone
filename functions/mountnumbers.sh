@@ -11,7 +11,7 @@ mountnumbers() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-VFS RClone Mount Settings ~ pgclone.pgblitz.com
+💪 VFS RClone Mount Settings ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 RClone Variable Name           Default ~ Current Settings
@@ -87,7 +87,7 @@ reloadservices() {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quick Deploy ~ pgclone.pgblitz.com
+🚀 Quick Deploy ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 This will restart the rclone services for vfs option changes take effect.
@@ -110,7 +110,7 @@ systemctl restart tcrypt 2> /dev/null
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Quick Deploy Complete ~ pgclone.pgblitz.com
+💪 Quick Deploy Complete ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 RClone services have been reloaded and your VFS options have now taken effect!
