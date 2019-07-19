@@ -17,7 +17,7 @@
     - name: Register hdpath
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
-      
+
     - name: Register Agent
       shell: 'cat /var/plexguide/uagent'
       register: uagent\
@@ -60,7 +60,7 @@
 
     - name: 'Install - Service {{drive}}'
       template:
-        src: '/opt/pgclone/mounts/crypt.service'
+        src: '/opt/pgclone/mounts/drive.service'
         dest: '/etc/systemd/system/{{drive}}.service'
         force: yes
       ignore_errors: yes
