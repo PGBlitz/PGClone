@@ -58,12 +58,17 @@
       shell: 'cat /var/plexguide/vfs_ll'
       register: vfs_ll
 
+    - name: 'Install - Script {{drive}}'
+      template:
+        src: '/opt/pgclone/mounts/drive.sh'
+        dest: '/opt/appdata/plexguide/{{drive}}.sh'
+        force: yes
+
     - name: 'Install - Service {{drive}}'
       template:
         src: '/opt/pgclone/mounts/drive.service'
         dest: '/etc/systemd/system/{{drive}}.service'
         force: yes
-      ignore_errors: yes
 
     - name: 'Reload Service - {{drive}}'
       systemd:
