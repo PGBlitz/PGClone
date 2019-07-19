@@ -231,11 +231,11 @@ prunedocker() {
 cleanmounts() {
 
   echo "checking for empty mounts..."
-  emtpycheck=2
+  emptycheck=2
   if [ -d "/mnt/unionfs" ]; then
     echo "Checking if unionfs is not empty when unmounted..."
     pgunion_check=$(ls -a /mnt/unionfs | wc -l)
-    if [ "$pgunion_check" -ne "$emtpycheck" ]; then
+    if [ "$pgunion_check" -ne "$emptycheck" ]; then
       echo "pgunion is not empty when unmounted, fixing..."
       rsync -aq /mnt/unionfs/ /mnt/move/
       rm -rf /mnt/unionfs/*
@@ -244,7 +244,7 @@ cleanmounts() {
   if [ -d "/mnt/gdrive" ]; then
     echo "Checking if gdrive is not empty when unmounted..."
     gdrive_check=$(ls -a /mnt/gdrive | wc -l)
-    if [ "$gdrive_check" -ne "$emtpycheck" ]; then
+    if [ "$gdrive_check" -ne "$emptycheck" ]; then
       echo "gdrive is not empty when unmounted, fixing..."
       rsync -aq /mnt/gdrive/ /mnt/move/
       rm -rf /mnt/gdrive/*
@@ -254,7 +254,7 @@ cleanmounts() {
   if [ -d "/mnt/gcrypt" ]; then
     echo "Checking if gcrypt is not empty when unmounted..."
     gcrypt_check=$(ls -a /mnt/gcrypt | wc -l)
-    if [ "$gcrypt_check" -ne "$emtpycheck" ]; then
+    if [ "$gcrypt_check" -ne "$emptycheck" ]; then
       echo "gcrypt is not empty when unmounted, fixing..."
       rsync -aq /mnt/gcrypt/ /mnt/move/
       rm -rf /mnt/gcrypt/*
@@ -263,7 +263,7 @@ cleanmounts() {
   if [ -d "/mnt/tdrive" ]; then
     echo "Checking if tdrive is not empty when unmounted..."
     tdrive_check=$(ls -a /mnt/tdrive | wc -l)
-    if [ "$tdrive_check" -ne "$emtpycheck" ]; then
+    if [ "$tdrive_check" -ne "$emptycheck" ]; then
       echo "tdrive is not empty when unmounted, fixing..."
       rsync -aq /mnt/tdrive/ /mnt/move/
       rm -rf /mnt/tdrive/*
@@ -271,7 +271,7 @@ cleanmounts() {
   fi
   if [ -d "/mnt/tcrypt" ]; then
     tcrypt_check=$(ls -a /mnt/tcrypt | wc -l)
-    if [ "$tcrypt_check" -ne "$emtpycheck" ]; then
+    if [ "$tcrypt_check" -ne "$emptycheck" ]; then
       echo "tcrypt is not empty when unmounted, fixing..."
       rsync -aq /mnt/tcrypt/ /mnt/move/
       rm -rf /mnt/tcrypt/*
