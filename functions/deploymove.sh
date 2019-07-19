@@ -31,13 +31,13 @@ executemove() {
     echo "gdrive" >/var/plexguide/deploy.version
     echo "mu" >/var/plexguide/deployed.version
     type=gdrive
-    ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
+    ansible-playbook /opt/pgclone/ymls/drive.yml -e "drive=gdrive"
 
     # deploy only if pgmove is using encryption
     if [[ "$transport" == "me" ]]; then
         echo "me" >/var/plexguide/deployed.version
         type=gcrypt
-        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"
+        ansible-playbook /opt/pgclone/ymls/drive.yml -e "drive=gcrypt"
     fi
 
     # deploy union
