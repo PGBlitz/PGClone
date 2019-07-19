@@ -11,12 +11,11 @@ Description={{drive}} Daemon
 After=multi-user.target
 
 [Service]
-Type=notify
-KillMode=none
-TimeoutSec=60
+Type=simple
 ExecStart=/bin/bash /opt/appdata/plexguide/{{drive}}.sh
-ExecStop=/bin/fusermount -uzq /mnt/{{drive}}
-Restart=on-failure
+ExecStop=/bin/fusermount -uz /mnt/{{drive}}
+TimeoutSec=60
+KillMode=process
 User=0
 Group=0
 
