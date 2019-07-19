@@ -67,7 +67,7 @@ risk of encryption; forgetfulness will cost you!
 To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Type Main Password | Press [ENTER]: ' typed </dev/tty
+  read -p -r '↘️  Type Main Password | Press [ENTER]: ' typed </dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
   if [[ "$typed" == "" ]]; then blitzpasswordmain; fi
@@ -91,7 +91,7 @@ risk of encryption; forgetfulness will cost you!
 To quit, type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  read -p '↘️  Type SALT Password | Press [ENTER]: ' typed </dev/tty
+  read -p -r '↘️  Type SALT Password | Press [ENTER]: ' typed </dev/tty
 
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
   if [[ "$typed" == "" ]]; then blitzpasswordsalt; fi
