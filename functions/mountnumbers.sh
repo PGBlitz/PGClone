@@ -99,8 +99,9 @@ scanning before continuing. Restarting these services during scans is unpredicta
 
 EOF
 
-read -p '↘️  Acknowledge Info | Press [ENTER] to deploy' typed </dev/tty
+read -p '↘️  Press [ENTER] to deploy' typed </dev/tty
 
+systemctl daemon-reload
 systemctl restart gdrive 2> /dev/null
 systemctl restart gcrypt 2> /dev/null
 systemctl restart tdrive 2> /dev/null
