@@ -18,7 +18,7 @@ touch /var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "---Starting Move: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
-
+hdpath="$(cat /var/plexguide/server.hd.path)"
 while true; do
 
     useragent="$(cat /var/plexguide/uagent)"
@@ -34,8 +34,8 @@ while true; do
     echo "---Begin cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
     echo "Checking for files to upload..." >>/var/plexguide/logs/pgmove.log
 
-    rsync "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
-        -aq --remove-source-files --link-dest="{{hdpath}}/downloads/" \
+    rsync "$hdpath/downloads/" "$hdpath/move/" \
+        -aq --remove-source-files --link-dest="$hdpath/downloads/" \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -46,9 +46,9 @@ while true; do
         --exclude="**handbrake**" --exclude="**bazarr**" \
         --exclude="**ignore**" --exclude="**inProgress**"
 
-    if [[ $(find "{{hdpath}}/move" -type f | wc -l) -gt 0 ]]; then
+    if [[ $(find "$hdpath/move" -type f | wc -l) -gt 0 ]]; then
 
-        rclone move "{{hdpath}}/move/" "{{type}}:/" \
+        rclone move "$hdpath/move/" "{{type}}:/" \
             --config=/opt/appdata/plexguide/rclone.conf \
             --log-file=/var/plexguide/logs/pgmove.log \
             --log-level=INFO --stats=5s --stats-file-name-length=0 \
@@ -72,18 +72,18 @@ while true; do
 
         echo "Upload has finished." >>/var/plexguide/logs/pgmove.log
     else
-        echo "No files in {{hdpath}}/move to upload." >>/var/plexguide/logs/pgmove.log
+        echo "No files in $hdpath/move to upload." >>/var/plexguide/logs/pgmove.log
     fi
     sleep 30
 
     # Remove empty directories
-    find "{{hdpath}}/move" -mindepth 2 -type d -empty -delete
+    find "$hdpath/move" -mindepth 2 -type d -empty -delete
     #DO NOT decrease DEPTH on this, leave it at 3. Leave this alone!
-    find "{{hdpath}}/downloads" -mindepth 3 -empty -delete
+    find "$hdpath/downloads" -mindepth 3 -empty -delete
     # Prevents category folders underneath the downloaders from being deleted, while removing empties from sonarr moving the files.
     # This was done to address lazylibrarian having an issue if the ebooks/abooks category underneath the downloader is missing.
     # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
-    find "{{hdpath}}/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
+    find "$hdpath/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
 
     echo "---Completed cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
 
