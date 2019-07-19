@@ -31,14 +31,14 @@ executeblitz() {
     echo "bu" >/var/plexguide/deployed.version
     type=gdrive
     encryptbit=""
-    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "drive=gdrive"
+    ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=gdrive"
 
     type=tdrive
-    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "drive=tdrive"
+    ansible-playbook /opt/pgclone/ymls/mount.yml -e "drive=tdrive"
 
     # deploy only if using encryption
     if [[ "$transport" == "be" ]]; then
-        ansible-playbook /opt/pgclone/ymls/crypt.yml -vvv -e "drive=gcrypt"
+        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=gcrypt"
 
         echo "be" >/var/plexguide/deployed.version
         type=tcrypt
