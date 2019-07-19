@@ -21,4 +21,4 @@ find "$hdpath/downloads" -mindepth 3 -empty -delete
 # Prevents category folders underneath the downloaders from being deleted, while removing empties from sonarr moving the files.
 # This was done to address lazylibrarian having an issue if the ebooks/abooks category underneath the downloader is missing.
 # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
-find $hdpath"/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
+find "$hdpath/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
