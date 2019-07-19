@@ -31,6 +31,7 @@ RClone Variable Name           Default ~ Current Settings
 
 Please read the wiki on how changing these settings impact stability and performance!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat </dev/tty
@@ -84,6 +85,7 @@ EOF
 
 reloadservices() {
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Quick Deploy ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -105,6 +107,7 @@ systemctl restart tdrive 2> /dev/null
 systemctl restart tcrypt 2> /dev/null
 
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Quick Deploy Complete ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
