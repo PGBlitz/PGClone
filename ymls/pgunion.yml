@@ -19,6 +19,10 @@
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
 
+    - name: Register vfs_dcs
+      shell: 'cat /var/plexguide/vfs_dcs'
+      register: vfs_dcs
+
     - debug: msg="PGBlitz Type - {{transport}}"
     - debug: msg="HD Path - {{hdpath}}"
 

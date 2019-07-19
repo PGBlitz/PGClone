@@ -31,59 +31,19 @@ executeblitz() {
     echo "bu" >/var/plexguide/deployed.version
     type=gdrive
     encryptbit=""
-    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "\
-    vfs_bs=$vfs_bs \
-    vfs_dcs=$vfs_dcs \
-    vfs_dct=$vfs_dct \
-    vfs_cm=$vfs_cm \
-    vfs_cma=$vfs_cma \
-    vfs_cms=$vfs_cms \
-    vfs_rcs=$vfs_rcs \
-    vfs_rcsl=$vfs_rcsl \
-    vfs_ll=$vfs_ll \
-    drive=gdrive"
+    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "drive=gdrive"
 
     type=tdrive
-    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "\
-    vfs_bs=$vfs_bs \
-    vfs_dcs=$vfs_dcs \
-    vfs_dct=$vfs_dct \
-    vfs_cm=$vfs_cm \
-    vfs_cma=$vfs_cma \
-    vfs_cms=$vfs_cms \
-    vfs_rcs=$vfs_rcs \
-    vfs_rcsl=$vfs_rcsl \
-    vfs_ll=$vfs_ll \
-    drive=tdrive"
+    ansible-playbook /opt/pgclone/ymls/mount.yml -vvv -e "drive=tdrive"
 
     # deploy only if using encryption
     if [[ "$transport" == "be" ]]; then
-        ansible-playbook /opt/pgclone/ymls/crypt.yml -vvv -e "\
-        vfs_bs=$vfs_bs \
-        vfs_dcs=$vfs_dcs \
-        vfs_dct=$vfs_dct \
-        vfs_cm=$vfs_cm \
-        vfs_cma=$vfs_cma \
-        vfs_cms=$vfs_cms \
-        vfs_rcs=$vfs_rcs \
-        vfs_rcsl=$vfs_rcsl \
-        vfs_ll=$vfs_ll \
-        drive=gcrypt"
+        ansible-playbook /opt/pgclone/ymls/crypt.yml -vvv -e "drive=gcrypt"
 
         echo "be" >/var/plexguide/deployed.version
         type=tcrypt
         encryptbit="C"
-        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
-        vfs_bs=$vfs_bs \
-        vfs_dcs=$vfs_dcs \
-        vfs_dct=$vfs_dct \
-        vfs_cm=$vfs_cm \
-        vfs_cma=$vfs_cma \
-        vfs_cms=$vfs_cms \
-        vfs_rcs=$vfs_rcs \
-        vfs_rcsl=$vfs_rcsl \
-        vfs_ll=$vfs_ll \
-        drive=tcrypt"
+        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "drive=tcrypt"
     fi
 
     # builds the list
@@ -97,13 +57,7 @@ executeblitz() {
     done </var/plexguide/.blitzlist
 
     # deploy union
-    ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
-    transport=$transport \
-    type=$type \
-    multihds=$multihds \
-    encryptbit=$encryptbit \
-    vfs_dcs=$vfs_dcs \
-    hdpath=$hdpath"
+    ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "transport=$transport type=$type multihds=$multihds encryptbit=$encryptbit"
 
     # output final display
     if [[ "$type" == "tdrive" ]]; then

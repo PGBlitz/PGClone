@@ -16,7 +16,43 @@
 
     - name: Register Agent
       shell: 'cat /var/plexguide/uagent'
-      register: uagent
+      register: uagent\
+
+    - name: Register vfs_bs
+      shell: 'cat /var/plexguide/vfs_bs'
+      register: vfs_bs
+
+    - name: Register vfs_dcs
+      shell: 'cat /var/plexguide/vfs_dcs'
+      register: vfs_dcs
+
+    - name: Register vfs_dct
+      shell: 'cat /var/plexguide/vfs_dct'
+      register: vfs_dct
+
+    - name: Register vfs_cm
+      shell: 'cat /var/plexguide/vfs_cm'
+      register: vfs_cm
+
+    - name: Register vfs_cma
+      shell: 'cat /var/plexguide/vfs_cma'
+      register: vfs_cma
+
+    - name: Register vfs_cms
+      shell: 'cat /var/plexguide/vfs_cms'
+      register: vfs_cms
+
+    - name: Register vfs_rcs
+      shell: 'cat /var/plexguide/vfs_rcs'
+      register: vfs_rcs
+
+    - name: Register vfs_rcsl
+      shell: 'cat /var/plexguide/vfs_rcsl'
+      register: vfs_rcsl
+
+    - name: Register vfs_ll
+      shell: 'cat /var/plexguide/vfs_ll'
+      register: vfs_ll
 
     - name: 'Install - Service {{drive}}'
       template:
