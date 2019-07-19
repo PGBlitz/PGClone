@@ -3,6 +3,16 @@
 All notable changes to the PGClone will be added to this repo. For changes to the core project, see [PGBlitz changelog](https://github.com/PGBlitz/PGBlitz.com/blob/v8.6base/CHANGELOG.md).
 
 All changes require a PGClone redeploy to get them!
+## 2019-07-19
+
+**New features**
+
+- VFS Options can now be Quick-Deployed, which is much faster than a full deploy. It doesn't stop the apps, it now just restarts the rclone services!
+
+**Bugfixes**
+
+- Fixes bug in cleaner (again sigh)
+- Fixes issue with rclone services not exiting
 
 ## 2019-07-18
 
@@ -12,7 +22,6 @@ All changes require a PGClone redeploy to get them!
 - Log format has been updated to be more useful
 - When no files are to be uploaded, it will now say that instead of running rclone and outputting a zeroed out progress log that was confusing to users.
 - The deployment process now truncates your logs
-
 
 **Bugfixes**
 
