@@ -14,7 +14,7 @@ After=multi-user.target
 Type=notify
 KillMode=none
 TimeoutSec=60
-ExecStart=ExecStart=/bin/bash /opt/appdata/plexguide/{{drive}}.sh
+ExecStart=/bin/bash /opt/appdata/plexguide/{{drive}}.sh
 ExecStop=/bin/fusermount -uzq /mnt/{{drive}}
 Restart=on-failure
 User=0

@@ -39,8 +39,8 @@
       with_items: '{{ check_service_name.results }}'
       when: item.stat.exists
 
-    - name: 'Waiting for 15 seconds for services to stop and mounts to unmount cleanly.'
-      wait_for: timeout=15
+    - name: 'Waiting for 5 seconds for services to stop and mounts to unmount cleanly.'
+      wait_for: timeout=5
 
     - name: Remove services
       file:
