@@ -98,15 +98,15 @@ pgclonevars() {
     multihds=$(cat /var/plexguide/.tmp.multihd)
 
     if [[ "$dversion" == "mu" ]]; then
-        dversionoutput="Unencrypted Move"
+        dversionoutput="Move"
     elif [[ "$dversion" == "me" ]]; then
-        dversionoutput="Encrypted Move"
+        dversionoutput="Move: Encrypted"
     elif [[ "$dversion" == "bu" ]]; then
-        dversionoutput="Unencrypted Blitz"
+        dversionoutput="Blitz"
     elif [[ "$dversion" == "be" ]]; then
-        dversionoutput="Encrypted Blitz"
+        dversionoutput="Blitz: Encrypted"
     elif [[ "$dversion" == "le" ]]; then
-        dversionoutput="Local HD/Mount"
+        dversionoutput="Local"
     else dversionoutput="None"; fi
 
     # For Clone Clean
