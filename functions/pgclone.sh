@@ -812,10 +812,10 @@ testphase() {
       entype="gcrypt"
     else entype="tcrypt"; fi
 
-    PASSWORD=$(cat /var/plexguide/pgclone.password)
-    SALT=$(cat /var/plexguide/pgclone.salt)
-    ENC_PASSWORD=$(rclone obscure "$PASSWORD")
-    ENC_SALT=$(rclone obscure "$SALT")
+    PASSWORD=`cat /var/plexguide/pgclone.password`
+    SALT=`cat /var/plexguide/pgclone.salt`
+    ENC_PASSWORD=`rclone obscure "$PASSWORD"`
+    ENC_SALT=`rclone obscure "$SALT"`
     echo "" >>/opt/appdata/plexguide/test.conf
     echo "[$entype]" >>/opt/appdata/plexguide/test.conf
     echo "type = crypt" >>/opt/appdata/plexguide/test.conf

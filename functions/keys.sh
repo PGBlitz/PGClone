@@ -342,8 +342,8 @@ gdsabuild() {
   if [ "$bencrypted" == "yes" ]; then
     PASSWORD=$(cat /var/plexguide/pgclone.password)
     SALT=$(cat /var/plexguide/pgclone.salt)
-    ENC_PASSWORD=$(rclone obscure "$PASSWORD")
-    ENC_SALT=$(rclone obscure "$SALT")
+    ENC_PASSWORD=`rclone obscure "$PASSWORD"`
+    ENC_SALT=`rclone obscure "$SALT"`; 
   fi
 
   ####tempbuild is need in order to call the correct gdsa

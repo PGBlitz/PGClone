@@ -61,10 +61,10 @@ EOF
       entype="gcrypt"
     else entype="tcrypt"; fi
 
-    PASSWORD=$(cat /var/plexguide/pgclone.password)
-    SALT=$(cat /var/plexguide/pgclone.salt)
-    ENC_PASSWORD=$(rclone obscure "$PASSWORD")
-    ENC_SALT=$(rclone obscure "$SALT")
+    PASSWORD=`cat /var/plexguide/pgclone.password`
+    SALT=`cat /var/plexguide/pgclone.salt`
+    ENC_PASSWORD=`rclone obscure "$PASSWORD"`
+    ENC_SALT=`rclone obscure "$SALT"`
 
     rm -rf /opt/appdata/plexguide/.${entype} 1>/dev/null 2>&1
     echo "" >>/opt/appdata/plexguide/.${entype}
