@@ -25,11 +25,13 @@ RClone Variable Name           Default ~ Current Settings
 [7] VFS-Cache-Max-Age          1h         [$vfs_cma]
 [8] VFS-Cache-Max-Size         off        [$vfs_cms]
 [9] Log-Level                  NOTICE     [$vfs_ll]
+
+[A] Quick Deploy VFS Options
 [Z] Exit
 
 Please read the wiki on how changing these settings impact stability and performance!
-After you change these settings, you must redeploy the mounts for them to take effect.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat </dev/tty
@@ -62,6 +64,12 @@ EOF
     9)
         mountset
         ;;
+    a)
+        reloadservices
+        ;;
+    A)
+        reloadservices
+        ;;
     z)
         a=b
         ;;
@@ -73,6 +81,44 @@ EOF
         ;;
     esac
 
+}
+
+reloadservices() {
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Quick Deploy ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This will restart the rclone services for vfs option changes take effect.
+
+Warning!
+
+Please check Plex/Emby/Jellyfin and Sonarr/Radarr/Lidarr to see if they are
+scanning before continuing. Restarting these services during scans is unpredictable!
+
+EOF
+
+read -p '↘️  Acknowledge Info | Press [ENTER] to deploy' typed </dev/tty
+
+systemctl restart gdrive 2> /dev/null
+systemctl restart gcrypt 2> /dev/null
+systemctl restart tdrive 2> /dev/null
+systemctl restart tcrypt 2> /dev/null
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Quick Deploy Complete ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RClone services have been reloaded and your VFS options have now taken effect!
+
+EOF
+
+read -p '↘️  Acknowledge Info | Press [ENTER]' typed </dev/tty
+
+mountnumbers
 }
 
 mountset() {
@@ -323,7 +369,6 @@ EOF
             if [[ "$typed" == "3" ]]; then echo "NOTICE" >/var/plexguide/vfs_ll; fi
             if [[ "$typed" == "4" ]]; then echo "ERROR" >/var/plexguide/vfs_ll; fi
         fi
-
     fi
 
     mountnumbers
