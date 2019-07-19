@@ -32,57 +32,57 @@ executeblitz() {
     type=gdrive
     encryptbit=""
     ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
-    vfs_bs=$vfs_bs
-    vfs_dcs=$vfs_dcs
-    vfs_dct=$vfs_dct
-    vfs_cm=$vfs_cm
-    vfs_cma=$vfs_cma
-    vfs_cms=$vfs_cms
-    vfs_rcs=$vfs_rcs
-    vfs_rcsl=$vfs_rcsl
-    vfs_ll=$vfs_ll
+    vfs_bs=$vfs_bs \
+    vfs_dcs=$vfs_dcs \
+    vfs_dct=$vfs_dct \
+    vfs_cm=$vfs_cm \
+    vfs_cma=$vfs_cma \
+    vfs_cms=$vfs_cms \
+    vfs_rcs=$vfs_rcs \
+    vfs_rcsl=$vfs_rcsl \
+    vfs_ll=$vfs_ll \
     drive=gdrive"
 
     type=tdrive
     ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
-    vfs_bs=$vfs_bs
-    vfs_dcs=$vfs_dcs
-    vfs_dct=$vfs_dct
-    vfs_cm=$vfs_cm
-    vfs_cma=$vfs_cma
-    vfs_cms=$vfs_cms
-    vfs_rcs=$vfs_rcs
-    vfs_rcsl=$vfs_rcsl
-    vfs_ll=$vfs_ll
+    vfs_bs=$vfs_bs \
+    vfs_dcs=$vfs_dcs \
+    vfs_dct=$vfs_dct \
+    vfs_cm=$vfs_cm \
+    vfs_cma=$vfs_cma \
+    vfs_cms=$vfs_cms \
+    vfs_rcs=$vfs_rcs \
+    vfs_rcsl=$vfs_rcsl \
+    vfs_ll=$vfs_ll \
     drive=tdrive"
 
     # deploy only if using encryption
     if [[ "$transport" == "be" ]]; then
         ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
-        vfs_bs=$vfs_bs
-        vfs_dcs=$vfs_dcs
-        vfs_dct=$vfs_dct
-        vfs_cm=$vfs_cm
-        vfs_cma=$vfs_cma
-        vfs_cms=$vfs_cms
-        vfs_rcs=$vfs_rcs
-        vfs_rcsl=$vfs_rcsl
-        vfs_ll=$vfs_ll
+        vfs_bs=$vfs_bs \
+        vfs_dcs=$vfs_dcs \
+        vfs_dct=$vfs_dct \
+        vfs_cm=$vfs_cm \
+        vfs_cma=$vfs_cma \
+        vfs_cms=$vfs_cms \
+        vfs_rcs=$vfs_rcs \
+        vfs_rcsl=$vfs_rcsl \
+        vfs_ll=$vfs_ll \
         drive=gcrypt"
 
         echo "be" >/var/plexguide/deployed.version
         type=tcrypt
         encryptbit="C"
         ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
-        vfs_bs=$vfs_bs
-        vfs_dcs=$vfs_dcs
-        vfs_dct=$vfs_dct
-        vfs_cm=$vfs_cm
-        vfs_cma=$vfs_cma
-        vfs_cms=$vfs_cms
-        vfs_rcs=$vfs_rcs
-        vfs_rcsl=$vfs_rcsl
-        vfs_ll=$vfs_ll
+        vfs_bs=$vfs_bs \
+        vfs_dcs=$vfs_dcs \
+        vfs_dct=$vfs_dct \
+        vfs_cm=$vfs_cm \
+        vfs_cma=$vfs_cma \
+        vfs_cms=$vfs_cms \
+        vfs_rcs=$vfs_rcs \
+        vfs_rcsl=$vfs_rcsl \
+        vfs_ll=$vfs_ll \
         drive=tcrypt"
     fi
 
@@ -98,11 +98,11 @@ executeblitz() {
 
     # deploy union
     ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
-    transport=$transport
-    type=$type
-    multihds=$multihds
-    encryptbit=$encryptbit
-    vfs_dcs=$vfs_dcs
+    transport=$transport \
+    type=$type \
+    multihds=$multihds \
+    encryptbit=$encryptbit \
+    vfs_dcs=$vfs_dcs \
     hdpath=$hdpath"
 
     # output final display
