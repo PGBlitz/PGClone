@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Title:      PGBlitz (Reference Title File)
+# Author(s):  Admin9705 - Deiteq
+# URL:        https://pgblitz.com - http://github.pgblitz.com
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: 'Creating Folder - /mnt/{{drive}}'
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
+      with_items:
+        - '/mnt/{{drive}}'
+
+    - name: Register hdpath
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: hdpath
+      
+    - name: Register Agent
+      shell: 'cat /var/plexguide/uagent'
+      register: uagent
+
+    - name: Register vfs_bs
+      shell: 'cat /var/plexguide/vfs_bs'
+      register: vfs_bs
+
+    - name: Register vfs_dcs
+      shell: 'cat /var/plexguide/vfs_dcs'
+      register: vfs_dcs
+
+    - name: Register vfs_dct
+      shell: 'cat /var/plexguide/vfs_dct'
+      register: vfs_dct
+
+    - name: Register vfs_cm
+      shell: 'cat /var/plexguide/vfs_cm'
+      register: vfs_cm
+
+    - name: Register vfs_cma
+      shell: 'cat /var/plexguide/vfs_cma'
+      register: vfs_cma
+
+    - name: Register vfs_cms
+      shell: 'cat /var/plexguide/vfs_cms'
+      register: vfs_cms
+
+    - name: Register vfs_rcs
+      shell: 'cat /var/plexguide/vfs_rcs'
+      register: vfs_rcs
+
+    - name: Register vfs_rcsl
+      shell: 'cat /var/plexguide/vfs_rcsl'
+      register: vfs_rcsl
+
+    - name: Register vfs_ll
+      shell: 'cat /var/plexguide/vfs_ll'
+      register: vfs_ll
+
+    - name: 'Install - Script {{drive}}'
+      template:
+        src: '/opt/pgclone/mounts/drive.sh'
+        dest: '/opt/appdata/plexguide/{{drive}}.sh'
+        force: yes
+
+    - name: 'Install - Service {{drive}}'
+      template:
+        src: '/opt/pgclone/mounts/drive.service'
+        dest: '/etc/systemd/system/{{drive}}.service'
+        force: yes
+
+    - name: 'Reload Service - {{drive}}'
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: reloaded
+        name: '{{drive}}'

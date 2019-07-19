@@ -31,7 +31,7 @@ executelocal() {
 
     # deploy union
     multihds=$(cat /var/plexguide/.tmp.multihd)
-    ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
+    ansible-playbook /opt/pgclone/ymls/local.yml -e "multihds=$multihds"
 
     # stores deployed version
     echo "le" >/var/plexguide/deployed.version

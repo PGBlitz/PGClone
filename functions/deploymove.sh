@@ -31,42 +31,17 @@ executemove() {
     echo "gdrive" >/var/plexguide/deploy.version
     echo "mu" >/var/plexguide/deployed.version
     type=gdrive
-    ansible-playbook /opt/pgclone/ymls/mount.yml -e "\
-    vfs_bs=$vfs_bs
-    vfs_dcs=$vfs_dcs
-    vfs_dct=$vfs_dct
-    vfs_cm=$vfs_cm
-    vfs_cma=$vfs_cma
-    vfs_cms=$vfs_cms
-    vfs_rcs=$vfs_rcs
-    vfs_rcsl=$vfs_rcsl
-    vfs_ll=$vfs_ll
-    drive=gdrive"
+    ansible-playbook /opt/pgclone/ymls/drive.yml -e "drive=gdrive"
 
     # deploy only if pgmove is using encryption
     if [[ "$transport" == "me" ]]; then
         echo "me" >/var/plexguide/deployed.version
         type=gcrypt
-        ansible-playbook /opt/pgclone/ymls/crypt.yml -e "\
-        vfs_bs=$vfs_bs
-        vfs_dcs=$vfs_dcs
-        vfs_dct=$vfs_dct
-        vfs_cm=$vfs_cm
-        vfs_cma=$vfs_cma
-        vfs_cms=$vfs_cms
-        vfs_rcs=$vfs_rcs
-        vfs_rcsl=$vfs_rcsl
-        vfs_ll=$vfs_ll
-        drive=gcrypt"
+        ansible-playbook /opt/pgclone/ymls/drive.yml -e "drive=gcrypt"
     fi
 
     # deploy union
-    ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "\
-    transport=$transport \
-    multihds=$multihds
-    type=$type
-    vfs_dcs=$vfs_dcs
-    hdpath=$hdpath"
+    ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "transport=$transport multihds=$multihds type=$type"
 
     # output final display
     if [[ "$type" == "gdrive" ]]; then

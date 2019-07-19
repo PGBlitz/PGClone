@@ -20,7 +20,7 @@ pgclonevars() {
     variable /var/plexguide/move.bw "9M"
     variable /var/plexguide/blitz.bw "1000M"
     variable /var/plexguide/pgclone.salt ""
-
+    variable /var/plexguide/multihd.paths ""
     variable /var/plexguide/server.hd.path "/mnt"
     hdpath="$(cat /var/plexguide/server.hd.path)"
 

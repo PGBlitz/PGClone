@@ -11,26 +11,11 @@ Description={{drive}} Daemon
 After=multi-user.target
 
 [Service]
-Type=notify
-KillMode=none
-TimeoutSec=900
-
-ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
---config=/opt/appdata/plexguide/rclone.conf \
---uid=1000 --gid=1000 --umask=002 \
---log-file=/var/plexguide/logs/rclone-{{drive}}.log \
---log-level={{vfs_ll}} \
---allow-other \
---timeout=1h \
---user-agent="{{uagent.stdout}}" \
---dir-cache-time={{vfs_dct}} \
---vfs-cache-mode={{vfs_cm}} \
---vfs-cache-max-age={{vfs_cma}} \
---vfs-read-chunk-size-limit={{vfs_rcsl}} \
---vfs-read-chunk-size={{vfs_rcs}} \
---buffer-size={{vfs_bs}}
-ExecStop=/bin/fusermount -uzq /mnt/{{drive}}
-Restart=on-failure
+Type=simple
+ExecStart=/bin/bash /opt/appdata/plexguide/{{drive}}.sh
+ExecStop=/bin/fusermount -uz /mnt/{{drive}}
+TimeoutSec=60
+KillMode=process
 User=0
 Group=0
 

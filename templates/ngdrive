@@ -5,4 +5,4 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-nano /etc/systemd/system/gdrive.service && systemctl daemon-reload
+nano /opt/appdata/plexguide/gdrive.sh && systemctl daemon-reload
