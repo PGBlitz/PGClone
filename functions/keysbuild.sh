@@ -50,8 +50,7 @@ keyphase2() {
   if [ -e "/opt/appdata/plexguide/.gcrypt" ]; then cat /opt/appdata/plexguide/.gcrypt >>/opt/appdata/plexguide/.keytemp; fi
   if [ -e "/opt/appdata/plexguide/.tcrypt" ]; then cat /opt/appdata/plexguide/.tcrypt >>/opt/appdata/plexguide/.keytemp; fi
 
-  gcloud --account=${pgcloneemail} iam service-accounts list | awk '{print $1}' |
-    tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq >/var/plexguide/.gcloudblitz
+  gcloud --account=${pgcloneemail} iam service-accounts list | awk '{print $1}' | tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq >/var/plexguide/.gcloudblitz
 
   rm -rf /var/plexguide/.blitzbuild 1>/dev/null 2>&1
   touch /var/plexguide/.blitzbuild
