@@ -13,6 +13,7 @@ All changes require a PGClone redeploy to get them!
 
 - Fixes bug in cleaner (again sigh)
 - Fixes issue with rclone services not exiting
+  - Due to this bug, if you deployed 7-18 changes, you have to redeploy PGClone, then reboot your machine (important), then redeploy PGClone after reboot to fix.
 
 ## 2019-07-18
 
