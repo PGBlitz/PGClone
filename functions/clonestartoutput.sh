@@ -117,9 +117,11 @@ EOF
 [1] Deploy     (Local HD/Mounts)
 [2] MultiHD    (Add Mounts xor Hard Drives)
 [3] Transport  (Change Transportion Mode)
+
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
 
@@ -131,6 +133,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         clonestartoutput
 
@@ -139,9 +142,11 @@ EOF
 [A] Deploy $outputversion
 [B] Throttle              [${throttle}]
 [C] Options
+
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
         clonestartactions
@@ -461,13 +466,17 @@ optionsmenu() {
 [7] Clone Clean - Destroy Garbage Files every [$cloneclean] minutes
 [8] Change User Agent - ${uagent}
 [9] Create a TeamDrive
+
 [Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
 CLIENT ID and SECRET for that project! We will assist in creating the
 project and enabling the API! Everything resets when complete!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
 
@@ -527,6 +536,7 @@ optionsmenumove() {
 [3] Multi-HD Option          | INFO: Add Multi-Points and Options
 [4] Clone Clean - Destroy Garbage Files Every [$cloneclean] Minutes
 [5] Change User Agent - $uagent
+
 [Z] Exit
 
 NOTE: When creating a NEW PROJECT (option C), the USER must create the
@@ -534,6 +544,7 @@ CLIENT ID and SECRET for that project! We will assist in creating the
 project and enabling the API! Everything resets when complete!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
 

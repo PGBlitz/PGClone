@@ -59,8 +59,10 @@ EOF
 Visit oauth.pgblitz.com in order to generate your Client ID! Ensure that
 you input the CORRECT Client ID from your current project!
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p '↘️  Client ID | Press [Enter]: ' clientid </dev/tty
@@ -79,8 +81,10 @@ keyinputsecret() {
 Visit oauth.pgblitz.com in order to generate your Secret! Ensure that
 you input the CORRECT Secret ID from your current project!
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p '↘️  Secret ID | Press [Enter]: ' secretid </dev/tty
@@ -102,9 +106,11 @@ $secretid
 Is the following information correct?
 [1] Yes
 [2] No
+
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p '↘️  Input Information | Press [Enter]: ' typed </dev/tty

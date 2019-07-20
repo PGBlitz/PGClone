@@ -40,9 +40,11 @@ CURRENT PROJECT: $pgcloneproject
 [1] Project: Use Existing Project
 [2] Project: Build New & Set Project
 [3] Project: Destroy
+
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Input Value | Press [Enter]: ' typed </dev/tty
 
