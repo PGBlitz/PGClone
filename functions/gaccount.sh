@@ -24,8 +24,10 @@ glogin() {
 What email address from the Google Console do you want to be associated
 with from your Google GSuite? Ensure that it exists!
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p '↘️  Input E-Mail | Press [ENTER]: ' typed </dev/tty

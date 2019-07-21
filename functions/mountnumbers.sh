@@ -30,6 +30,7 @@ RClone Variable Name           Default ~ Current Settings
 [Z] Exit
 
 Please read the wiki on how changing these settings impact stability and performance!
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -83,45 +84,6 @@ EOF
 
 }
 
-reloadservices() {
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Quick Deploy ~ pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-This will restart the rclone services for vfs option changes take effect.
-
-Warning!
-
-Please check Plex/Emby/Jellyfin and Sonarr/Radarr/Lidarr to see if they are
-scanning before continuing. Restarting these services during scans is unpredictable!
-
-EOF
-
-read -p '↘️  Press [ENTER] to deploy' typed </dev/tty
-
-systemctl daemon-reload
-systemctl restart gdrive 2> /dev/null
-systemctl restart gcrypt 2> /dev/null
-systemctl restart tdrive 2> /dev/null
-systemctl restart tcrypt 2> /dev/null
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Quick Deploy Complete ~ pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-RClone services have been reloaded and your VFS options have now taken effect!
-
-EOF
-
-read -p '↘️  Acknowledge Info | Press [ENTER]' typed </dev/tty
-
-mountnumbers
-}
-
 mountset() {
 
     mountselection="$fluffycat"
@@ -136,19 +98,24 @@ mountset() {
 The buffer size should be a relatively small amount. It's intended to smooth out network congestion and blips.
 Having a larger buffer is not better! The buffer will get cleared when the file is closed or if the file is seeked backwards.
         
-WARNING: This is highly dependent on the amount of RAM and number of opened files.
+WARNING: 
+
+This is highly dependent on the amount of RAM and number of opened files.
 Apps open several files during library scans and each file open will consume up to the amount of RAM specified.
 If you set this too high and don't have enough free RAM, you will cause the mounts to crash!
 
 buffer-size should be smaller than the [vfs-read-chunk-size] to prevent too many requests from being sent when opening a file.
+
 Setting this too high will slow down scans and cause buffering with direct plays.
 Some plex clients open and close the file during playback, this means the buffer is constantly cleared.
+
 RClone will always try to fill the buffer-size, so having it higher will slow down plex scans and loading the page for it in plex.
 This is not the plex client buffer, that's controlled by the plex client.
 
 Set this value to 0 to disable the buffer.
         
 RECOMMENDATIONS:
+
 Set the buffer size to 1/2 the value of the read-chunk-size for the best results."
     fi
 
@@ -276,85 +243,67 @@ $note
 
 Type a number between [$start] and [$end]
 
-Input must be a valid positive integer. To quit, type >>> z or exit
+Input must be a valid positive integer. 
+
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
-    read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
-    if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then mountnumbers; fi
+    read -p '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
+    if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then
+        mountnumbers
+    else
+        if ! [[ "$typed" =~ ^[0-9]+$ ]]; then
+            invalidInputNotice
+        elif [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then
+            invalidInputNoticeNotice
+        elif [[ "$mountselection" == "2" && "$typed" != "8" && "$typed" != "16" && "$typed" != "32" && "$typed" != "64" && "$typed" != "128" && "$typed" != "256" && "$typed" != "512" && "$typed" != "1024" ]]; then
+            invalidPowerInputNotice
+        else
+            processInput
+        fi
+    fi
+}
 
-    # This Select Requires Answers to be In the Power of Two
+processInput() {
+
+    if [[ "$mountselection" == "1" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_bs; fi
+    if [[ "$mountselection" == "2" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dcs; fi
+    if [[ "$mountselection" == "3" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dct; fi
+    if [[ "$mountselection" == "4" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcs; fi
+    if [[ "$mountselection" == "7" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cma; fi
+
     if [[ "$mountselection" == "2" ]]; then
-        if [[ "$typed" != "8" && "$typed" != "16" && "$typed" != "32" && "$typed" != "64" && "$typed" != "128" && "$typed" != "256" && "$typed" != "512" && "$typed" != "1024" ]]; then
-            tee <<-EOF
+        echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dcs
+    fi
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Power of Two Notice
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    if [[ "$mountselection" == "3" ]]; then
+        echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dct
+    fi
 
-NOTE: The value you enter must be a power of two!
-[8] [16] [32] [64] [128] [256] [512] [1024]
+    if [[ "$mountselection" == "4" ]]; then
+        echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcs
+    fi
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-            read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-            mountset
+    if [[ "$mountselection" == "5" ]]; then
+        if [[ "$typed" == "0" ]]; then
+            echo "off" >/var/plexguide/vfs_rcsl
+        else
+            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcsl
         fi
     fi
 
-    if ! [[ "$typed" =~ ^[0-9]+$ ]]; then
-        tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Invalid Input Notice
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NOTE: The value must be a valid positive integer.
-Do not input suffix letters (M,G,H)!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-        read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-        mountset
+    if [[ "$mountselection" == "7" ]]; then
+        echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cma
     fi
 
-    if [[ "$typed" -lt "$start" || "$typed" -gt "$end" ]]; then mountset; else
-
-        if [[ "$mountselection" == "1" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_bs; fi
-        if [[ "$mountselection" == "2" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dcs; fi
-        if [[ "$mountselection" == "3" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dct; fi
-        if [[ "$mountselection" == "4" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcs; fi
-        if [[ "$mountselection" == "7" ]]; then echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cma; fi
-
-        if [[ "$mountselection" == "2" ]]; then
-            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dcs
-        fi
-
-        if [[ "$mountselection" == "3" ]]; then
-            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_dct
-        fi
-
-        if [[ "$mountselection" == "4" ]]; then
-            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcs
-        fi
-
-        if [[ "$mountselection" == "5" ]]; then
-            if [[ "$typed" == "0" ]]; then
-                echo "off" >/var/plexguide/vfs_rcsl
-            else
-                echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_rcsl
-            fi
-        fi
-
-        if [[ "$mountselection" == "7" ]]; then
-            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cma
-        fi
-
-        if [[ "$mountselection" == "8" ]]; then
-            if [[ "$typed" == "0" ]]; then
-                echo "off" >/var/plexguide/vfs_cms
-            else
-                echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cms
-            fi
+    if [[ "$mountselection" == "8" ]]; then
+        if [[ "$typed" == "0" ]]; then
+            echo "off" >/var/plexguide/vfs_cms
+        else
+            echo "${typed}${sizeSuffix}" >/var/plexguide/vfs_cms
         fi
 
         if [[ "$mountselection" == "6" ]]; then
@@ -371,6 +320,78 @@ EOF
             if [[ "$typed" == "4" ]]; then echo "ERROR" >/var/plexguide/vfs_ll; fi
         fi
     fi
+    mountnumbers
+}
+
+invalidInputNotice() {
+    tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Invalid Input Notice
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: The value must be a valid positive integer.
+Do not input suffix letters (M,G,H)!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+    mountset
+}
+
+invalidPowerInputNotice() {
+    tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Power of Two Notice
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: The value you enter must be a power of two!
+[8] [16] [32] [64] [128] [256] [512] [1024]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+    read -rp '↘️  Acknowledge Info | Press [ENTER] ' fluffycat </dev/tty
+    mountset
+}
+
+reloadservices() {
+    tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Quick Deploy ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This will restart the rclone services for vfs option changes take effect.
+
+Warning!
+
+Please check Plex/Emby/Jellyfin and Sonarr/Radarr/Lidarr to see if they are
+scanning before continuing. Restarting these services during scans is unpredictable!
+
+EOF
+
+    read -p '↘️  Press [ENTER] to deploy' typed </dev/tty
+
+    systemctl daemon-reload
+    systemctl restart gdrive 2>/dev/null
+    systemctl restart gcrypt 2>/dev/null
+    systemctl restart tdrive 2>/dev/null
+    systemctl restart tcrypt 2>/dev/null
+
+    tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 Quick Deploy Complete ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RClone services have been reloaded and your VFS options have now taken effect!
+
+EOF
+
+    read -p '↘️  Acknowledge Info | Press [ENTER]' typed </dev/tty
 
     mountnumbers
 }
