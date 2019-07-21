@@ -82,10 +82,9 @@ startscript() {
         find "$hdpath/move" -mindepth 2 -type d -empty -delete
         #DO NOT decrease DEPTH on this, leave it at 3. Leave this alone!
         find "$hdpath/downloads" -mindepth 3 -empty -delete
-        # Prevents category folders underneath the downloaders from being deleted, while removing empties from sonarr moving the files.
-        # This was done to address lazylibrarian having an issue if the ebooks/abooks category underneath the downloader is missing.
-        # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
-        find "$hdpath/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
+        # Prevents category folders underneath the downloaders from being deleted, while removing empties from the import process.
+        # This was done to address soem apps having an issue if the category underneath the downloader is missing.
+        find "$hdpath/downloads" -mindepth 2 -type d \( ! -name .stfolder ! -name ebooks ! -name abooks ! -name sonarr** ! -name radarr** ! -name lidarr** ! -name **kids** ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
 
     done </var/plexguide/.blitzfinal
 }
