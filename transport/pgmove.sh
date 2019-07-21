@@ -9,6 +9,8 @@
 # Variables come from what's being called from deploymove.sh under functions
 ## BWLIMIT 9 and Lower Prevents Google 750GB Google Upload Ban
 ################################################################################
+source /opt/pgclone/scripts/cloneclean.sh
+
 if pidof -o %PPID -x "$0"; then
     exit 1
 fi
@@ -74,18 +76,11 @@ while true; do
     else
         echo "No files in $hdpath/move to upload." >>/var/plexguide/logs/pgmove.log
     fi
-    sleep 30
-
-    # Remove empty directories
-    find "$hdpath/move" -mindepth 2 -type d -empty -delete
-    #DO NOT decrease DEPTH on this, leave it at 3. Leave this alone!
-    find "$hdpath/downloads" -mindepth 3 -empty -delete
-    # Prevents category folders underneath the downloaders from being deleted, while removing empties from sonarr moving the files.
-    # This was done to address lazylibrarian having an issue if the ebooks/abooks category underneath the downloader is missing.
-    # If this causes issues, remove the names as needed, but keep ebooks and abooks being excluded.
-    find "$hdpath/downloads" -mindepth 2 -type d \( ! -name ebooks ! -name abooks ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
-
     echo "---Completed cycle $cyclecount: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log
 
     echo "$(tail -n 200 /var/plexguide/logs/pgmove.log)" >/var/plexguide/logs/pgmove.log
+
+    sleep 30
+
+    cloneclean
 done

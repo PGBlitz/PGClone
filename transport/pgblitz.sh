@@ -6,6 +6,8 @@
 # GNU:        General Public License v3.0
 ################################################################################
 
+source /opt/pgclone/scripts/cloneclean.sh
+
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
 
@@ -78,13 +80,7 @@ startscript() {
         #sed -i -e "/Duplicate directory found in destination/d" /var/plexguide/logs/pgblitz.log
         sleep 30
 
-        # Remove empty directories
-        find "$hdpath/move" -mindepth 2 -type d -empty -delete
-        #DO NOT decrease DEPTH on this, leave it at 3. Leave this alone!
-        find "$hdpath/downloads" -mindepth 3 -empty -delete
-        # Prevents category folders underneath the downloaders from being deleted, while removing empties from the import process.
-        # This was done to address soem apps having an issue if the category underneath the downloader is missing.
-        find "$hdpath/downloads" -mindepth 2 -type d \( ! -name .stfolder ! -name ebooks ! -name abooks ! -name sonarr** ! -name radarr** ! -name lidarr** ! -name **kids** ! -name tv** ! -name **movies** ! -name music** ! -name audio** ! -name anime** ! -name software ! -name xxx \) -empty -delete
+        cloneclean
 
     done </var/plexguide/.blitzfinal
 }
