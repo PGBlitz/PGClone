@@ -656,11 +656,13 @@ keymenu() {
 [2] Project Options     : [$project]
 [3] Create Service Keys
 [4] EMail Generator
-[Z] Exit
+
 
 [A] Backup  Keys
 [B] Restore Keys
 [C] Destory All Prior Service Accounts
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF

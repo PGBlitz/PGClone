@@ -30,6 +30,7 @@ RClone Variable Name           Default ~ Current Settings
 [Z] Exit
 
 Please read the wiki on how changing these settings impact stability and performance!
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -276,8 +277,12 @@ $note
 
 Type a number between [$start] and [$end]
 
-Input must be a valid positive integer. To quit, type >>> z or exit
+Input must be a valid positive integer. 
+
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
@@ -296,6 +301,7 @@ NOTE: The value you enter must be a power of two!
 [8] [16] [32] [64] [128] [256] [512] [1024]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
             read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
             mountset
@@ -311,7 +317,9 @@ Invalid Input Notice
 
 NOTE: The value must be a valid positive integer.
 Do not input suffix letters (M,G,H)!
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
         mountset

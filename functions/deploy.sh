@@ -230,6 +230,12 @@ prunedocker() {
 ################################################################################
 cleanmounts() {
 
+fusermount -uzq /mnt/gdrive > /dev/null
+fusermount -uzq /mnt/tdrive > /dev/null
+fusermount -uzq /mnt/gcrypt > /dev/null
+fusermount -uzq /mnt/tcrypt > /dev/null
+fusermount -uzq /mnt/unionfs > /dev/null
+
   echo "checking for empty mounts..."
   emptycheck=2
   if [ -d "/mnt/unionfs" ]; then

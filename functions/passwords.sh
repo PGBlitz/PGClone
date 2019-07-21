@@ -64,8 +64,10 @@ Set a Primary Password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Type Main Password | Press [ENTER]: ' typed </dev/tty
 
@@ -88,8 +90,10 @@ Set a SALT password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Type SALT Password | Press [ENTER]: ' typed </dev/tty
 
@@ -112,8 +116,10 @@ Set the Following Passwords? Type y or n!
 Primary: $primarypassword
 SALT   : $secondarypassword
 
-To quit, type >>> z or exit
+[Z] Exit
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   read -p '↘️  Type y or n | Press [ENTER]: ' typed </dev/tty
