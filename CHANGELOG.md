@@ -3,6 +3,14 @@
 All notable changes to the PGClone will be added to this repo. For changes to the core project, see [PGBlitz changelog](https://github.com/PGBlitz/PGBlitz.com/blob/v8.6base/CHANGELOG.md).
 
 All changes require a PGClone redeploy to get them!
+
+## 2019-07-20
+
+**New features**
+
+- CloneCleaner refactored so cleaner is updated when PGClone menu is started, no longer requires a redeploy just to update the cleaner script
+- Consolidated the cleaner code into 1 script, the blitz/move scripts updated to call the cleaner script (redeploy pgclone needed for this change).
+
 ## 2019-07-19
 
 **New features**
