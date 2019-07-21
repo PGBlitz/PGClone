@@ -230,11 +230,11 @@ prunedocker() {
 ################################################################################
 cleanmounts() {
 
-fusermount -uz /mnt/gdrive > /dev/null
-fusermount -uz /mnt/tdrive > /dev/null
-fusermount -uz /mnt/gcrypt > /dev/null
-fusermount -uz /mnt/tcrypt > /dev/null
-fusermount -uz /mnt/unionfs > /dev/null
+fusermount -uzq /mnt/gdrive > /dev/null
+fusermount -uzq /mnt/tdrive > /dev/null
+fusermount -uzq /mnt/gcrypt > /dev/null
+fusermount -uzq /mnt/tcrypt > /dev/null
+fusermount -uzq /mnt/unionfs > /dev/null
 
   echo "checking for empty mounts..."
   emptycheck=2
