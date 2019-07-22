@@ -236,6 +236,8 @@ cleanmounts() {
   fusermount -uzq /mnt/gcrypt >/dev/null
   fusermount -uzq /mnt/tcrypt >/dev/null
   fusermount -uzq /mnt/unionfs >/dev/null
+  pkill -f rclone* >/dev/null
+
 
   echo "checking for empty mounts..."
 
