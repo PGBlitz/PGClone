@@ -287,8 +287,11 @@ There was a problem unmounting $mount. Please reboot your server and try
 a redeploy of PGClone again. If this problem persists after a reboot, join
 discord and ask for help.
 
+This happens when your drive fails to unmount or when the mount folder is over 10G
+when it should be empty.
+
 ⚠ Warning: Your apps have been stopped to prevent data loss. Please reboot
-and redepoy PGClone to fix.
+and redeploy PGClone to fix.
 
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
