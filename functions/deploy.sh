@@ -289,6 +289,9 @@ discord and ask for help.
 and redepoy PGClone to fix.
 
 EOF
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+
+  exit
 }
 
 restartapps() {
