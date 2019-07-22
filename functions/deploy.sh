@@ -368,3 +368,25 @@ All services are active and running normally.
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }
+
+buildrcloneenv() {
+  uagent="$(cat /var/plexguide/uagent)"
+  vfs_ll="$(cat /var/plexguide/vfs_ll)"
+  vfs_bs="$(cat /var/plexguide/vfs_bs)"
+  vfs_rcs="$(cat /var/plexguide/vfs_rcs)"
+  vfs_rcsl="$(cat /var/plexguide/vfs_rcsl)"
+  vfs_cma="$(cat /var/plexguide/vfs_cma)"
+  vfs_cm="$(cat /var/plexguide/vfs_cm)"
+  vfs_cms="$(cat /var/plexguide/vfs_cms)"
+  vfs_dct="$(cat /var/plexguide/vfs_dct)"
+
+  echo "uagent=$uagent" >/opt/appdata/plexguide/rclone.env
+  echo "vfs_ll=$vfs_ll" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_bs=$vfs_bs" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_rcs=$vfs_rcs" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_rcsl=$vfs_rcsl" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_cm=$vfs_cm" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_cma=$vfs_cma" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_cms=$vfs_cms" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_dct=$vfs_dct" >>/opt/appdata/plexguide/rclone.env
+}

@@ -25,6 +25,7 @@ executeblitz() {
     ansible-playbook /opt/pgclone/ymls/remove.yml
 
     cleanmounts
+    buildrcloneenv
 
     # gdrive deploys by standard
     echo "tdrive" >/var/plexguide/deploy.version
