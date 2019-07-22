@@ -199,7 +199,7 @@ deployblitzstartcheck() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Fail Notice ~ pgclone.pgblitz.com
+⛔ Fail Notice ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💬  There are [0] keys generated for PG Blitz! Create those first!
@@ -229,60 +229,66 @@ prunedocker() {
 }
 ################################################################################
 cleanmounts() {
-
-fusermount -uzq /mnt/gdrive > /dev/null
-fusermount -uzq /mnt/tdrive > /dev/null
-fusermount -uzq /mnt/gcrypt > /dev/null
-fusermount -uzq /mnt/tcrypt > /dev/null
-fusermount -uzq /mnt/unionfs > /dev/null
+  echo "Unmount drives..."
+  fusermount -uzq /mnt/gdrive >/dev/null
+  fusermount -uzq /mnt/tdrive >/dev/null
+  fusermount -uzq /mnt/gcrypt >/dev/null
+  fusermount -uzq /mnt/tcrypt >/dev/null
+  fusermount -uzq /mnt/unionfs >/dev/null
 
   echo "checking for empty mounts..."
-  emptycheck=2
-  if [ -d "/mnt/unionfs" ]; then
-    echo "Checking if unionfs is not empty when unmounted..."
-    pgunion_check=$(ls -a /mnt/unionfs | wc -l)
-    if [ "$pgunion_check" -ne "$emptycheck" ]; then
-      echo "pgunion is not empty when unmounted, fixing..."
-      rsync -aq /mnt/unionfs/ /mnt/move/
-      rm -rf /mnt/unionfs/*
-    fi
-  fi
-  if [ -d "/mnt/gdrive" ]; then
-    echo "Checking if gdrive is not empty when unmounted..."
-    gdrive_check=$(ls -a /mnt/gdrive | wc -l)
-    if [ "$gdrive_check" -ne "$emptycheck" ]; then
-      echo "gdrive is not empty when unmounted, fixing..."
-      rsync -aq /mnt/gdrive/ /mnt/move/
-      rm -rf /mnt/gdrive/*
-    fi
-  fi
 
-  if [ -d "/mnt/gcrypt" ]; then
-    echo "Checking if gcrypt is not empty when unmounted..."
-    gcrypt_check=$(ls -a /mnt/gcrypt | wc -l)
-    if [ "$gcrypt_check" -ne "$emptycheck" ]; then
-      echo "gcrypt is not empty when unmounted, fixing..."
-      rsync -aq /mnt/gcrypt/ /mnt/move/
-      rm -rf /mnt/gcrypt/*
+  mount="/mnt/unionfs/"
+  cleanmount
+
+  mount="/mnt/gdrive/"
+  cleanmount
+
+  mount="/mnt/tdrive/"
+  cleanmount
+
+  mount="/mnt/gcrypt/"
+  cleanmount
+
+  mount="/mnt/tcrypt/"
+  cleanmount
+
+}
+
+cleanmount() {
+  emptycheck=2
+  maxsize=10000000
+
+  if [ -d "$mount" ]; then
+    echo "Checking if $mount is not empty when unmounted..."
+    if [ "$(ls -a "$mount" | wc -l)" -ne "$emptycheck" ]; then
+
+      if [[ $(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev) -lt $maxsize ]]; then
+        echo "$mount is not empty when unmounted, fixing..."
+
+        rsync -aq $mount /mnt/move/
+        rm -rf "$mount*"
+      else
+        failclean
+      fi
     fi
   fi
-  if [ -d "/mnt/tdrive" ]; then
-    echo "Checking if tdrive is not empty when unmounted..."
-    tdrive_check=$(ls -a /mnt/tdrive | wc -l)
-    if [ "$tdrive_check" -ne "$emptycheck" ]; then
-      echo "tdrive is not empty when unmounted, fixing..."
-      rsync -aq /mnt/tdrive/ /mnt/move/
-      rm -rf /mnt/tdrive/*
-    fi
-  fi
-  if [ -d "/mnt/tcrypt" ]; then
-    tcrypt_check=$(ls -a /mnt/tcrypt | wc -l)
-    if [ "$tcrypt_check" -ne "$emptycheck" ]; then
-      echo "tcrypt is not empty when unmounted, fixing..."
-      rsync -aq /mnt/tcrypt/ /mnt/move/
-      rm -rf /mnt/tcrypt/*
-    fi
-  fi
+}
+
+failclean() {
+  tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Failure during $mount unmount ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+There was a problem unmounting $mount. Please reboot your server and try
+a redeploy of PGClone again. If this problem persists after a reboot, join
+discord and ask for help.
+
+⚠ Warning: Your apps have been stopped to prevent data loss. Please reboot
+and redepoy PGClone to fix.
+
+EOF
 }
 
 restartapps() {
