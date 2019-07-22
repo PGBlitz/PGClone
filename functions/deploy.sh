@@ -59,7 +59,8 @@ EOF
 
   if [ -e "/opt/var/.drivelog" ]; then rm -rf /opt/var/.drivelog; fi
   touch /opt/var/.drivelog
-
+  transport=$(cat /var/plexguide/pgclone.transport)
+  
   if [[ "$transport" == "mu" ]]; then
     gdrivemod
     multihdreadonly
@@ -297,4 +298,68 @@ EOF
 restartapps() {
   echo "restarting apps..."
   docker restart $(docker ps -a -q) >/dev/null
+}
+
+deployFail() {
+  # output final display
+  if [[ "$transport" == "by" ]]; then
+    finaldeployoutput="Blitz"
+  fi
+  if [[ "$transport" == "be" ]]; then
+    finaldeployoutput="Blitz: Encrypted"
+  fi
+
+  if [[ "$transport" == "mu" ]]; then
+    finaldeployoutput="Move"
+  fi
+  if [[ "$transport" == "me" ]]; then
+    finaldeployoutput="Move: Encrypted"
+  fi
+
+  erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
+  logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+An error has occurred when deploying PGClone.
+Your apps are currently stopped to prevent data loss.
+
+Things to try: If you just finished the initial setup, you likely made a typo
+or other error when configuring PGClone. Please redo the pgclone config first
+before reporting an issue.
+
+If this issue still persists:
+Please share this error on discord or the forums before proceeding.
+
+If there error says the mount is not empty, then you need to reboot your
+server and redeploy PGClone to fix.
+
+Error details: 
+$erroroutput
+$logoutput
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+
+}
+deploySuccess() {
+
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 DEPLOYED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PGClone has been deployed sucessfully!
+All services are active and running normally.
+
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }

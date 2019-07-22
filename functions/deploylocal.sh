@@ -43,49 +43,9 @@ executelocal() {
     if [[ "$pgunioncheck" != "active" ]]; then failed=true; fi
 
     if [[ $failed == true ]]; then
-        erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
-        logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
-        tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ DEPLOY FAILED: PG Local Edition
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-An error has occurred when deploying PGClone.
-Your apps are currently stopped to prevent data loss.
-
-Things to try: If you just finished the initial setup, you likely made a typo
-or other error when configuring PGClone. Please redo the pgclone config first
-before reporting an issue.
-
-If this issue still persists:
-Please share this error on discord or the forums before proceeding.
-
-If there error says the mount is not empty, then you need to reboot your
-server and redeploy PGClone to fix.
-
-Error details:
-$erroroutput
-$logoutput
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ DEPLOY FAILED: $finaldeployoutput
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
+        deployFail
     else
         restartapps
-        tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 DEPLOYED: PG Local Edition
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PGClone has been deployed sucessfully!
-All services are active and running normally.
-
-EOF
+        deploySuccess
     fi
-    read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-
 }
