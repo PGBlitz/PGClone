@@ -243,6 +243,11 @@ cleanmounts() {
   fusermount -uzq /mnt/unionfs >/dev/null
   pkill -f rclone* >/dev/null
 
+  chown 1000:1000 -R /mnt/gdrive >/dev/null
+  chown 1000:1000 -R /mnt/tdrive >/dev/null
+  chown 1000:1000 -R /mnt/gcrypt >/dev/null
+  chown 1000:1000 -R /mnt/tcrypt >/dev/null
+  
   echo "checking for empty mounts..."
 
   mount="/mnt/unionfs/"
