@@ -38,6 +38,7 @@ while true; do
 
     rsync "$hdpath/downloads/" "$hdpath/move/" \
         -aq --remove-source-files --link-dest="$hdpath/downloads/" \
+        --exclude-from="/opt/appdata/plexguide/transport.exclude" \
         --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
         --exclude="**partial~" --exclude=".unionfs-fuse/**" \
         --exclude=".fuse_hidden**" --exclude="**.grab/**" \
@@ -62,6 +63,7 @@ while true; do
             --bwlimit="$bwlimit" \
             --drive-chunk-size="$vfs_dcs" \
             --user-agent="$useragent" \
+            --exclude-from="/opt/appdata/plexguide/transport.exclude" \
             --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
             --exclude="**partial~" --exclude=".unionfs-fuse/**" \
             --exclude=".fuse_hidden**" --exclude="**.grab/**" \
