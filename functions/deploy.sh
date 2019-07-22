@@ -258,12 +258,11 @@ cleanmounts() {
 }
 
 cleanmount() {
-  emptycheck=2
   maxsize=1000000
 
   if [ -d "$mount" ]; then
     echo "Checking if $mount is not empty when unmounted..."
-    if [ "$(ls -a "$mount" | wc -l)" -ne "$emptycheck" ]; then
+    if [[ "$(ls -a "$mount" | wc -l)" -ne 2 && "$(ls -a "$mount" | wc -l)" -ne 0 ]]; then
 
       if [[ "$(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev)" -lt $maxsize ]]; then
         echo "$mount is not empty when unmounted, fixing..."
