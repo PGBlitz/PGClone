@@ -229,12 +229,24 @@ prunedocker() {
   docker system prune --volumes -f
 }
 ################################################################################
-cleanmounts() {
+createmountfolders() {
   mkdir /mnt/gdrive -p
   mkdir /mnt/tdrive -p
   mkdir /mnt/gcrypt -p
   mkdir /mnt/tcrypt -p
 
+  chown 1000:1000 -R /mnt/gdrive >/dev/null
+  chown 1000:1000 -R /mnt/tdrive >/dev/null
+  chown 1000:1000 -R /mnt/gcrypt >/dev/null
+  chown 1000:1000 -R /mnt/tcrypt >/dev/null
+  chmod 775 -R /mnt/gdrive >/dev/null
+  chmod 775-R /mnt/tdrive >/dev/null
+  chmod 775 -R /mnt/gcrypt >/dev/null
+  chmod 775 -R /mnt/tcrypt >/dev/null
+}
+
+cleanmounts() {
+  createmountfolders
   echo "Unmount drives..."
   fusermount -uzq /mnt/gdrive >/dev/null
   fusermount -uzq /mnt/tdrive >/dev/null
@@ -243,11 +255,6 @@ cleanmounts() {
   fusermount -uzq /mnt/unionfs >/dev/null
   pkill -f rclone* >/dev/null
 
-  chown 1000:1000 -R /mnt/gdrive >/dev/null
-  chown 1000:1000 -R /mnt/tdrive >/dev/null
-  chown 1000:1000 -R /mnt/gcrypt >/dev/null
-  chown 1000:1000 -R /mnt/tcrypt >/dev/null
-  
   echo "checking for empty mounts..."
 
   mount="/mnt/unionfs/"
