@@ -10,10 +10,9 @@ cloneclean() {
     # Outside Variables
     hdpath="$(cat /var/plexguide/server.hd.path)"
     cleaner="$(cat /var/plexguide/cloneclean)"
-    nzb="$(tree -d -L 1 /opt/appdata -I 'nzbhydra|nzbhydra2' | awk '{print $2}' | tail -n +2 | head -n -2 | grep nzb)"
 
-    # alt nzb cleanup WIP, delete files < 4G
-    find "$hdpath/downloads/$nzb" -mindepth 1 -type f -cmin +"$cleaner" -size -4G -exec rm -rf {} \;
+    find "$hdpath/downloads/nzbget" -mindepth 1 -type f -cmin +$cleaner -size -4G 2>/dev/null -exec rm -rf {} \;
+    find "$hdpath/downloads/sabnzbd" -mindepth 1 -type f -cmin +$cleaner -size -4G 2>/dev/null -exec rm -rf {} \;
 
     # Remove empty directories
     find "$hdpath/move" -mindepth 2 -type d -empty -delete

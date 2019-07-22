@@ -59,7 +59,8 @@ EOF
 
   if [ -e "/opt/var/.drivelog" ]; then rm -rf /opt/var/.drivelog; fi
   touch /opt/var/.drivelog
-
+  transport=$(cat /var/plexguide/pgclone.transport)
+  
   if [[ "$transport" == "mu" ]]; then
     gdrivemod
     multihdreadonly
@@ -199,7 +200,7 @@ deployblitzstartcheck() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Fail Notice ~ pgclone.pgblitz.com
+⛔ Fail Notice ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💬  There are [0] keys generated for PG Blitz! Create those first!
@@ -229,63 +230,136 @@ prunedocker() {
 }
 ################################################################################
 cleanmounts() {
-
-fusermount -uzq /mnt/gdrive > /dev/null
-fusermount -uzq /mnt/tdrive > /dev/null
-fusermount -uzq /mnt/gcrypt > /dev/null
-fusermount -uzq /mnt/tcrypt > /dev/null
-fusermount -uzq /mnt/unionfs > /dev/null
+  echo "Unmount drives..."
+  fusermount -uzq /mnt/gdrive >/dev/null
+  fusermount -uzq /mnt/tdrive >/dev/null
+  fusermount -uzq /mnt/gcrypt >/dev/null
+  fusermount -uzq /mnt/tcrypt >/dev/null
+  fusermount -uzq /mnt/unionfs >/dev/null
 
   echo "checking for empty mounts..."
-  emptycheck=2
-  if [ -d "/mnt/unionfs" ]; then
-    echo "Checking if unionfs is not empty when unmounted..."
-    pgunion_check=$(ls -a /mnt/unionfs | wc -l)
-    if [ "$pgunion_check" -ne "$emptycheck" ]; then
-      echo "pgunion is not empty when unmounted, fixing..."
-      rsync -aq /mnt/unionfs/ /mnt/move/
-      rm -rf /mnt/unionfs/*
-    fi
-  fi
-  if [ -d "/mnt/gdrive" ]; then
-    echo "Checking if gdrive is not empty when unmounted..."
-    gdrive_check=$(ls -a /mnt/gdrive | wc -l)
-    if [ "$gdrive_check" -ne "$emptycheck" ]; then
-      echo "gdrive is not empty when unmounted, fixing..."
-      rsync -aq /mnt/gdrive/ /mnt/move/
-      rm -rf /mnt/gdrive/*
-    fi
-  fi
 
-  if [ -d "/mnt/gcrypt" ]; then
-    echo "Checking if gcrypt is not empty when unmounted..."
-    gcrypt_check=$(ls -a /mnt/gcrypt | wc -l)
-    if [ "$gcrypt_check" -ne "$emptycheck" ]; then
-      echo "gcrypt is not empty when unmounted, fixing..."
-      rsync -aq /mnt/gcrypt/ /mnt/move/
-      rm -rf /mnt/gcrypt/*
+  mount="/mnt/unionfs/"
+  cleanmount
+
+  mount="/mnt/gdrive/"
+  cleanmount
+
+  mount="/mnt/tdrive/"
+  cleanmount
+
+  mount="/mnt/gcrypt/"
+  cleanmount
+
+  mount="/mnt/tcrypt/"
+  cleanmount
+
+}
+
+cleanmount() {
+  emptycheck=2
+  maxsize=10000000
+
+  if [ -d "$mount" ]; then
+    echo "Checking if $mount is not empty when unmounted..."
+    if [ "$(ls -a "$mount" | wc -l)" -ne "$emptycheck" ]; then
+
+      if [[ $(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev) -lt $maxsize ]]; then
+        echo "$mount is not empty when unmounted, fixing..."
+
+        rsync -aq $mount /mnt/move/
+        rm -rf "$mount*"
+      else
+        failclean
+      fi
     fi
   fi
-  if [ -d "/mnt/tdrive" ]; then
-    echo "Checking if tdrive is not empty when unmounted..."
-    tdrive_check=$(ls -a /mnt/tdrive | wc -l)
-    if [ "$tdrive_check" -ne "$emptycheck" ]; then
-      echo "tdrive is not empty when unmounted, fixing..."
-      rsync -aq /mnt/tdrive/ /mnt/move/
-      rm -rf /mnt/tdrive/*
-    fi
-  fi
-  if [ -d "/mnt/tcrypt" ]; then
-    tcrypt_check=$(ls -a /mnt/tcrypt | wc -l)
-    if [ "$tcrypt_check" -ne "$emptycheck" ]; then
-      echo "tcrypt is not empty when unmounted, fixing..."
-      rsync -aq /mnt/tcrypt/ /mnt/move/
-      rm -rf /mnt/tcrypt/*
-    fi
-  fi
+}
+
+failclean() {
+  tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Failure during $mount unmount ~ pgclone.pgblitz.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+There was a problem unmounting $mount. Please reboot your server and try
+a redeploy of PGClone again. If this problem persists after a reboot, join
+discord and ask for help.
+
+⚠ Warning: Your apps have been stopped to prevent data loss. Please reboot
+and redepoy PGClone to fix.
+
+EOF
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+
+  exit
 }
 
 restartapps() {
   echo "restarting apps..."
   docker restart $(docker ps -a -q) >/dev/null
+}
+
+deployFail() {
+  # output final display
+  if [[ "$transport" == "by" ]]; then
+    finaldeployoutput="Blitz"
+  fi
+  if [[ "$transport" == "be" ]]; then
+    finaldeployoutput="Blitz: Encrypted"
+  fi
+
+  if [[ "$transport" == "mu" ]]; then
+    finaldeployoutput="Move"
+  fi
+  if [[ "$transport" == "me" ]]; then
+    finaldeployoutput="Move: Encrypted"
+  fi
+
+  erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
+  logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+An error has occurred when deploying PGClone.
+Your apps are currently stopped to prevent data loss.
+
+Things to try: If you just finished the initial setup, you likely made a typo
+or other error when configuring PGClone. Please redo the pgclone config first
+before reporting an issue.
+
+If this issue still persists:
+Please share this error on discord or the forums before proceeding.
+
+If there error says the mount is not empty, then you need to reboot your
+server and redeploy PGClone to fix.
+
+Error details: 
+$erroroutput
+$logoutput
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ DEPLOY FAILED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+
+}
+deploySuccess() {
+
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 DEPLOYED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PGClone has been deployed sucessfully!
+All services are active and running normally.
+
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }
