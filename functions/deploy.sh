@@ -230,6 +230,11 @@ prunedocker() {
 }
 ################################################################################
 cleanmounts() {
+  mkdir /mnt/gdrive -p
+  mkdir /mnt/tdrive -p
+  mkdir /mnt/gcrypt -p
+  mkdir /mnt/tcrypt -p
+
   echo "Unmount drives..."
   fusermount -uzq /mnt/gdrive >/dev/null
   fusermount -uzq /mnt/tdrive >/dev/null
