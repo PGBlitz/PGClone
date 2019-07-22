@@ -145,6 +145,10 @@ pgclonevars() {
 
     echo $(sed -e 's/^"//' -e 's/"$//' <<<$(cat /var/plexguide/uagent)) >/var/plexguide/uagent
 
+    if [[ $(cat /var/plexguide/uagent) == "" ]]; then
+        echo "rclone/v1.48" >/var/plexguide/uagent
+    fi
+
     if [[ $(cat /var/plexguide/blitz.bw) != *"M"* ]]; then
         echo "$(cat /var/plexguide/blitz.bw)M" >/var/plexguide/blitz.bw
     fi
