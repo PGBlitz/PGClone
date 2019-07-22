@@ -59,8 +59,10 @@ or other error when configuring PGClone. Please redo the pgclone config first
 before reporting an issue.
 
 If this issue still persists:
-
 Please share this error on discord or the forums before proceeding.
+
+If there error says the mount is not empty, then you need to reboot your
+server and redeploy PGClone to fix.
 
 Error details:
 $erroroutput
