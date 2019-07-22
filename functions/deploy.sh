@@ -60,7 +60,7 @@ EOF
   if [ -e "/opt/var/.drivelog" ]; then rm -rf /opt/var/.drivelog; fi
   touch /opt/var/.drivelog
   transport=$(cat /var/plexguide/pgclone.transport)
-  
+
   if [[ "$transport" == "mu" ]]; then
     gdrivemod
     multihdreadonly
@@ -238,7 +238,6 @@ cleanmounts() {
   fusermount -uzq /mnt/unionfs >/dev/null
   pkill -f rclone* >/dev/null
 
-
   echo "checking for empty mounts..."
 
   mount="/mnt/unionfs/"
@@ -279,6 +278,7 @@ cleanmount() {
 
 failclean() {
   tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Failure during $mount unmount ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -287,11 +287,10 @@ There was a problem unmounting $mount. Please reboot your server and try
 a redeploy of PGClone again. If this problem persists after a reboot, join
 discord and ask for help.
 
-This happens when your drive fails to unmount or when the mount folder is over 10G
-when it should be empty.
-
 ⚠ Warning: Your apps have been stopped to prevent data loss. Please reboot
-and redeploy PGClone to fix.
+and redepoy PGClone to fix.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
@@ -306,7 +305,8 @@ restartapps() {
 
 deployFail() {
   # output final display
-  if [[ "$transport" == "by" ]]; then
+
+  if [[ "$transport" == "bu" ]]; then
     finaldeployoutput="Blitz"
   fi
   if [[ "$transport" == "be" ]]; then
@@ -351,6 +351,7 @@ $logoutput
 
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+  exit
 
 }
 deploySuccess() {
