@@ -276,8 +276,8 @@ cleanmount() {
 
       if [[ "$(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev)" -lt $maxsize ]]; then
         echo "$mount is not empty when unmounted, fixing..."
-        rsync -aq $mount /mnt/move/
-        rm -rf "$mount*"
+        rsync -aq "$mount" /mnt/move/
+        rm -rf "$mount"*
       else
         failclean
       fi
