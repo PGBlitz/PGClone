@@ -14,6 +14,7 @@ vfs_rcsl="$(cat /var/plexguide/vfs_rcsl)"
 vfs_cma="$(cat /var/plexguide/vfs_cma)"
 vfs_cm="$(cat /var/plexguide/vfs_cm)"
 vfs_dct="$(cat /var/plexguide/vfs_dct)"
+systemd-notify READY=1
 
 rclone mount {{drive}}: /mnt/{{drive}} \
     --config=/opt/appdata/plexguide/rclone.conf \
@@ -28,4 +29,5 @@ rclone mount {{drive}}: /mnt/{{drive}} \
     --vfs-cache-max-age="$vfs_cma" \
     --vfs-read-chunk-size-limit="$vfs_rcsl" \
     --vfs-read-chunk-size="$vfs_rcs" \
+    --BREAKME \
     --buffer-size="$vfs_bs"
