@@ -375,6 +375,7 @@ EOF
 
     read -p '↘️  Press [ENTER] to deploy' typed </dev/tty
 
+    buildrcloneenv
     systemctl daemon-reload
     systemctl restart gdrive 2>/dev/null
     systemctl restart gcrypt 2>/dev/null

@@ -27,7 +27,8 @@ executemove() {
     ansible-playbook /opt/pgclone/ymls/remove.yml
 
     cleanmounts
-
+    buildrcloneenv
+    
     # gdrive deploys by standard
     echo "gdrive" >/var/plexguide/deploy.version
     echo "mu" >/var/plexguide/deployed.version

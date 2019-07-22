@@ -57,13 +57,7 @@
     - name: Register vfs_ll
       shell: 'cat /var/plexguide/vfs_ll'
       register: vfs_ll
-
-    - name: 'Install - Script {{drive}}'
-      template:
-        src: '/opt/pgclone/mounts/drive.sh'
-        dest: '/opt/appdata/plexguide/{{drive}}.sh'
-        force: yes
-
+      
     - name: 'Install - Service {{drive}}'
       template:
         src: '/opt/pgclone/mounts/drive.service'
