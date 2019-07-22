@@ -29,5 +29,4 @@ rclone mount {{drive}}: /mnt/{{drive}} \
     --vfs-cache-max-age="$vfs_cma" \
     --vfs-read-chunk-size-limit="$vfs_rcsl" \
     --vfs-read-chunk-size="$vfs_rcs" \
-    --BREAKME \
     --buffer-size="$vfs_bs"
