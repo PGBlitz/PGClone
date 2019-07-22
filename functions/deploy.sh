@@ -229,7 +229,24 @@ prunedocker() {
   docker system prune --volumes -f
 }
 ################################################################################
+createmountfolders() {
+  mkdir /mnt/gdrive -p
+  mkdir /mnt/tdrive -p
+  mkdir /mnt/gcrypt -p
+  mkdir /mnt/tcrypt -p
+
+  chown 1000:1000 -R /mnt/gdrive >/dev/null
+  chown 1000:1000 -R /mnt/tdrive >/dev/null
+  chown 1000:1000 -R /mnt/gcrypt >/dev/null
+  chown 1000:1000 -R /mnt/tcrypt >/dev/null
+  chmod 775 -R /mnt/gdrive >/dev/null
+  chmod 775-R /mnt/tdrive >/dev/null
+  chmod 775 -R /mnt/gcrypt >/dev/null
+  chmod 775 -R /mnt/tcrypt >/dev/null
+}
+
 cleanmounts() {
+  createmountfolders
   echo "Unmount drives..."
   fusermount -uzq /mnt/gdrive >/dev/null
   fusermount -uzq /mnt/tdrive >/dev/null
@@ -258,17 +275,16 @@ cleanmounts() {
 }
 
 cleanmount() {
-  emptycheck=2
   maxsize=1000000
 
   if [ -d "$mount" ]; then
     echo "Checking if $mount is not empty when unmounted..."
-    if [ "$(ls -a "$mount" | wc -l)" -ne "$emptycheck" ]; then
+    if [[ "$(ls -a "$mount" | wc -l)" -ne 2 && "$(ls -a "$mount" | wc -l)" -ne 0 ]]; then
 
       if [[ "$(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev)" -lt $maxsize ]]; then
         echo "$mount is not empty when unmounted, fixing..."
-        rsync -aq $mount /mnt/move/
-        rm -rf "$mount*"
+        rsync -aq "$mount" /mnt/move/
+        rm -rf "$mount"*
       else
         failclean
       fi
