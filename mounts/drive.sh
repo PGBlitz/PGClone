@@ -14,7 +14,6 @@ vfs_rcsl="$(cat /var/plexguide/vfs_rcsl)"
 vfs_cma="$(cat /var/plexguide/vfs_cma)"
 vfs_cm="$(cat /var/plexguide/vfs_cm)"
 vfs_dct="$(cat /var/plexguide/vfs_dct)"
-systemd-notify READY=1
 
 rclone mount {{drive}}: /mnt/{{drive}} \
     --config=/opt/appdata/plexguide/rclone.conf \
