@@ -11,9 +11,10 @@ All changes require a PGClone redeploy to get them!
 - Updated pg commands
   - `blitz` will now just show the blitz/move log
   - dropped `move` since it's generic enough to cause conflicts
+  - dropped `ntdrive`, `ngdrive`, `ntcrypt`, `ngcrypt` in favor of `nrcloneenv` instead.
   - Added `pglogs` to display all of the logs, (matches prior `blitz`/`move` functionality)
   - Added excludes-file to allow user-custom file name pattern excludes.
-    - Patterns listed in this file will be excluded from upload to g/tdrive. This is useful for mp4 automator users.
+    - Patterns listed in this file will be excluded from upload. This is useful for mp4 automator users.
     - Added `npgexclude` to edit the excludes file
     - Changes to the exclude file take affect on the next blitz/move cycle.
 
