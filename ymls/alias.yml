@@ -41,7 +41,7 @@
     - pglogs
     - npgexclude
     - npgexcludes
-    
+
 - name: Installing service helpers
   template:
     src: '/opt/pgclone/templates/{{item}}'
