@@ -260,15 +260,14 @@ cleanmounts() {
 
 cleanmount() {
   emptycheck=2
-  maxsize=10000000
+  maxsize=1000000
 
   if [ -d "$mount" ]; then
     echo "Checking if $mount is not empty when unmounted..."
     if [ "$(ls -a "$mount" | wc -l)" -ne "$emptycheck" ]; then
 
-      if [[ $(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev) -lt $maxsize ]]; then
+      if [[ "$(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev)" -lt $maxsize ]]; then
         echo "$mount is not empty when unmounted, fixing..."
-
         rsync -aq $mount /mnt/move/
         rm -rf "$mount*"
       else
