@@ -246,7 +246,6 @@ createmountfolders() {
 }
 
 cleanmounts() {
-  createmountfolders
   echo "Unmount drives..."
   fusermount -uzq /mnt/gdrive >/dev/null
   fusermount -uzq /mnt/tdrive >/dev/null
