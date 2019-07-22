@@ -36,7 +36,10 @@
     - trclone
     - stcrypt
     - tlogs
-
+    - nrcloneenv
+    - pglog
+    - pglogs
+    - npgexclude
 - name: Installing service helpers
   template:
     src: '/opt/pgclone/templates/{{item}}'
@@ -45,15 +48,11 @@
     mode: 0775
   with_items:
     - blitz
-    - move
     - nrclone
-    - ngcrypt
-    - ngdrive
+    - nrcloneenv
     - npgblitz
     - npgmove
     - npgunion
-    - ntcrypt
-    - ntdrive
     - sgcrypt
     - sgdrive
     - spgblitz
@@ -63,3 +62,6 @@
     - stcrypt
     - stdrive
     - tlogs
+    - pglog
+    - pglogs
+    - npgexclude

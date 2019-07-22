@@ -4,6 +4,23 @@ All notable changes to the PGClone will be added to this repo. For changes to th
 
 All changes require a PGClone redeploy to get them!
 
+## 2019-07-22
+
+**New features**
+
+- Updated pg commands
+  - `blitz` will now just show the blitz/move log
+  - dropped `move` since it's generic enough to cause conflicts
+  - Added `pglogs` to display all of the logs, (matches prior `blitz`/`move` functionality)
+  - Added excludes-file to allow user-custom file name pattern excludes.
+    - Patterns listed in this file will be excluded from upload to g/tdrive. This is useful for mp4 automator users.
+    - Added `npgexclude` to edit the excludes file
+    - Changes to the exclude file take affect on the next blitz/move cycle.
+
+**Bugfixes**
+
+- Fixed bug with recent changes that prevented the rclone services from unmounting
+
 ## 2019-07-20
 
 **New features**
