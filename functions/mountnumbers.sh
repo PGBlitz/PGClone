@@ -126,10 +126,16 @@ Set the buffer size to 1/2 the value of the read-chunk-size for the best results
         end="1024"
         note="The larger the chunk size, the faster uploads will be, however it uses more RAM.
 
-64-128MB will max out 1Gbps. Values over 128 are not recommended.
+64-128MB will max out 1Gbps. 
+Values over 128 are not recommended on 1Gbps.
+Use 256 or 512 for 10Gbps.
 
 Input must be one of the following numbers (power of 2)!
-[8] [16] [32] [64] [128] [256] [512] [1024]"
+[8] [16] [32] [64] [128] [256] [512] [1024]
+
+This setting takes effect on the next upload.
+There is no need to quick deploy for this setting.
+"
     fi
 
     if [[ "$mountselection" == "3" ]]; then
