@@ -458,14 +458,13 @@ optionsmenu() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Transport Select             | INFO: Change Transport Type
-[2] RClone VFS Mount Setting     | INFO: Change RClone vfs settings
+[2] RClone Settings              | INFO: Change RClone settings
 [3] Multi-HD Option              | INFO: Add Multi-Points and Options
 [4] Destroy All Service Keys     | WARN: Wipes All Keys for the Project
 [5] Create New Project           | WARN: Resets Everything
-[6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
+[6] Demo Mode                    | Hide the E-Mail Address on the Front
 [7] Clone Clean                  | [$cloneclean] minutes
-[8] Change User Agent            | ${uagent}
-[9] Create a TeamDrive
+[8] Create a TeamDrive
 
 [Z] Exit
 
@@ -504,9 +503,6 @@ EOF
         cloneclean
         ;;
     8)
-        uagent
-        ;;
-    9)
         ctdrive
         ;;
     Z)
@@ -532,10 +528,9 @@ optionsmenumove() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Transport Select           | INFO: Change Transport Type
-[2] RClone VFS Options         | INFO: Change RClone vfs settings
+[2] RClone Settings            | INFO: Change RClone settings
 [3] Multi-HD Option            | INFO: Add Multi-Points and Options
 [4] Clone Clean                | [$cloneclean] minutes
-[5] Change User Agent          | $uagent
 
 [Z] Exit
 
@@ -561,9 +556,6 @@ EOF
         ;;
     4)
         cloneclean
-        ;;
-    5)
-        uagent
         ;;
     Z)
         clonestart
