@@ -11,20 +11,21 @@ mountnumbers() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 VFS RClone Mount Settings ~ pgclone.pgblitz.com
+💪 RClone Settings ~ pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-RClone Variable Name           Default ~ Current Settings
+RClone Variable Name           Default   ~   Current Settings
 
-[1] Buffer-Size                16M        [$vfs_bs]
-[2] Drive-Chunk-Size           64M        [$vfs_dcs]
-[3] Dir-Cache-Time             2m         [$vfs_dct]
-[4] VFS-Read-Chunk-Size        64M        [$vfs_rcs]
-[5] VFS-Read-Chunk-Size-Limit  2048M      [$vfs_rcsl]
-[6] VFS-Cache-Mode             writes     [$vfs_cm]
-[7] VFS-Cache-Max-Age          1h         [$vfs_cma]
-[8] VFS-Cache-Max-Size         off        [$vfs_cms]
-[9] Log-Level                  NOTICE     [$vfs_ll]
+[1] Buffer-Size                16M          [$vfs_bs]
+[2] Drive-Chunk-Size           64M          [$vfs_dcs]
+[3] Dir-Cache-Time             2m           [$vfs_dct]
+[4] VFS-Read-Chunk-Size        64M          [$vfs_rcs]
+[5] VFS-Read-Chunk-Size-Limit  2048M        [$vfs_rcsl]
+[6] VFS-Cache-Mode             writes       [$vfs_cm]
+[7] VFS-Cache-Max-Age          1h           [$vfs_cma]
+[8] VFS-Cache-Max-Size         off          [$vfs_cms]
+[9] Log-Level                  NOTICE       [$vfs_ll]
+[10] User Agent                rclone/1.48  [${uagent}]
 
 [A] Quick Deploy VFS Options
 [Z] Exit
@@ -65,6 +66,9 @@ EOF
     9)
         mountset
         ;;
+    10)
+        uagent
+        ;;
     a)
         reloadservices
         ;;
@@ -72,10 +76,10 @@ EOF
         reloadservices
         ;;
     z)
-        a=b
+        exit
         ;;
     Z)
-        a=b
+        exit
         ;;
     *)
         mountnumbers
@@ -400,5 +404,34 @@ EOF
 
     read -p '↘️  Acknowledge Info | Press [ENTER]' typed </dev/tty
 
+    mountnumbers
+}
+
+uagent() {
+
+    tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 User Agent for RClone
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: Don't use Google Chrome user agent strings, your mounts may go down.
+
+Current User Agent: ${uagent}
+
+Changing the useragent is useful when experience 429 problems from Google
+
+Do not wrap the string in double quotes!
+
+[Z] Exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+    read -p '↘️  Type User Agent | PRESS [ENTER]: ' varinput </dev/tty
+    if [[ "$varinput" == "exit" || "$varinput" == "Exit" || "$varinput" == "EXIT" || "$varinput" == "z" || "$varinput" == "Z" ]]; then mountnumbers; fi
+
+    echo "$varinput" >/var/plexguide/uagent
+    echo $(sed -e 's/^"//' -e 's/"$//' <<<$(cat /var/plexguide/uagent)) >/var/plexguide/uagent
     mountnumbers
 }
