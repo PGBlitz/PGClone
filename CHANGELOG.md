@@ -4,6 +4,12 @@ All notable changes to the PGClone will be added to this repo. For changes to th
 
 All changes require a PGClone redeploy to get them!
 
+## 2019-07-24
+
+**New features**
+
+- Moved user agent setting to be under Rclone Settings menu so it can utilize quick deploy.
+
 ## 2019-07-22
 
 **New features**
