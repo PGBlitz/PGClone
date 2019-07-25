@@ -21,7 +21,6 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --allow-other \
 --timeout=1h \
 --user-agent="${uagent}" \
---max-transfer 750G \
 --dir-cache-time="${vfs_dct}" \
 --vfs-cache-mode="${vfs_cm}" \
 --vfs-cache-max-age="${vfs_cma}" \
