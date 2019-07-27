@@ -60,6 +60,7 @@ while true; do
             --checkers=16 \
             --no-traverse \
             --fast-list \
+            --max-transfer 750G \
             --bwlimit="$bwlimit" \
             --drive-chunk-size="$vfs_dcs" \
             --user-agent="$useragent" \
