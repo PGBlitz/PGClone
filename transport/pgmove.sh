@@ -16,7 +16,7 @@ if pidof -o %PPID -x "$0"; then
 fi
 
 touch /var/plexguide/logs/pgmove.log
-
+truncate -s 0 /var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "" >>/var/plexguide/logs/pgmove.log
 echo "---Starting Move: $(date "+%Y-%m-%d %H:%M:%S")---" >>/var/plexguide/logs/pgmove.log

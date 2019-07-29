@@ -10,6 +10,7 @@ source /opt/pgclone/scripts/cloneclean.sh
 
 # Starting Actions
 touch /var/plexguide/logs/pgblitz.log
+truncate -s 0 /var/plexguide/logs/pgblitz.log
 
 echo "" >>/var/plexguide/logs/pgblitz.log
 echo "" >>/var/plexguide/logs/pgblitz.log
