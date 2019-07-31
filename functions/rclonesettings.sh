@@ -519,7 +519,9 @@ This will allocate a 4gb file on your system.
 It upload it to your drive while reporting the speed.
 After that it will download that file to your drive while reporting the speed.
 
-This is useful to test changes to the rclone options
+This is useful to test changes to the rclone options.
+
+NOTE: This speed test does not use the BWLimit or the Max-Transfer setting, as that would defeat the purpose of the test.
 
 [1] Set file size to test, currently [$vfs_test]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -561,11 +563,9 @@ EOF
         --transfers="$vfs_t" \
         --no-traverse \
         --fast-list \
-        --max-transfer "$vfs_mt" \
-        --bwlimit="$bwlimit" \
         --drive-chunk-size="$vfs_dcs" \
         --user-agent="$uagent" \
-        copyto ~/rclone.test gdrive:
+        copy ~/rclone.test gdrive:
     echo "Upload complete, deleting local file..."
     rm -rf ~/rclone.test
 
@@ -577,11 +577,9 @@ EOF
         --transfers="$vfs_t" \
         --no-traverse \
         --fast-list \
-        --max-transfer "$vfs_mt" \
-        --bwlimit="$bwlimit" \
         --drive-chunk-size="$vfs_dcs" \
         --user-agent="$uagent" \
-        copyto gdrive:/rclone.test ~/
+        copy gdrive:/rclone.test ~/
     echo "Download complete, deleting remote file..."
     rm -rf /mnt/gdrive/rclone.test
 
