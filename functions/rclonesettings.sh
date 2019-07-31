@@ -594,7 +594,7 @@ EOF
 See the above output from rclone for your results!
 
 EOF
-
+    read -rp '↘️  Press [ENTER] to continue ' typed </dev/tty
 }
 
 changeSpeedSize() {
