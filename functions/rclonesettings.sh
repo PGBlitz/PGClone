@@ -521,7 +521,7 @@ After that it will download that file to your drive while reporting the speed.
 
 This is useful to test changes to the rclone options.
 
-NOTE: This speed test does not use the BWLimit or the Max-Transfer setting, as that would defeat the purpose of the test.
+NOTE: This speed test DOES NOT use the BWLimit or the Max-Transfer settings.
 
 [1] Set file size to test, currently [$vfs_test]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
