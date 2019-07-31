@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -22,8 +22,8 @@ the correct Google Account!
 PUTTY USERS: Just select and highlight! DO NOT RIGHT CLICK! When you paste
 into the browser, it will just work!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF

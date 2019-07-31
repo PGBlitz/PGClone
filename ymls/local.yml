@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705 - Deiteq
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -10,7 +10,7 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-      include_tasks: '/opt/pgclone/ymls/alias.yml'
+      include_tasks: '/opt/pgclone/bin/bin.yml'
 
     - name: include PGClone cron jobs
       include_tasks: '/opt/pgclone/ymls/cron.yml'

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -117,10 +117,10 @@ pgclonevars() {
     variable /var/plexguide/vfs_bs "16M"
     vfs_bs=$(cat /var/plexguide/vfs_bs)
 
-    variable /var/plexguide/vfs_dcs "64M"
+    variable /var/plexguide/vfs_dcs "128M"
     vfs_dcs=$(cat /var/plexguide/vfs_dcs)
 
-    variable /var/plexguide/vfs_dct "2m"
+    variable /var/plexguide/vfs_dct "5m"
     vfs_dct=$(cat /var/plexguide/vfs_dct)
 
     variable /var/plexguide/vfs_cm "writes"
@@ -141,6 +141,21 @@ pgclonevars() {
     variable /var/plexguide/vfs_ll "NOTICE"
     vfs_ll=$(cat /var/plexguide/vfs_ll)
 
+    variable /var/plexguide/vfs_t "8"
+    vfs_t=$(cat /var/plexguide/vfs_t)
+
+    variable /var/plexguide/vfs_c "16"
+    vfs_c=$(cat /var/plexguide/vfs_c)
+    
+    variable /var/plexguide/vfs_mt "750G"
+    vfs_mt=$(cat /var/plexguide/vfs_mt)
+
+    variable /var/plexguide/vfs_test "4G"
+    vfs_test=$(cat /var/plexguide/vfs_test)
+
+    # For BWLimit
+    variable /var/plexguide/timetable.bw "00:00,off 15:00,60M Sat-08:00,30M Sun-08:00,30M"
+
     # Upgrade old var format to new var format
 
     echo $(sed -e 's/^"//' -e 's/"$//' <<<$(cat /var/plexguide/uagent)) >/var/plexguide/uagent
@@ -149,11 +164,11 @@ pgclonevars() {
         echo "rclone/v1.48" >/var/plexguide/uagent
     fi
 
-    if [[ $(cat /var/plexguide/blitz.bw) != *"M"* ]]; then
+    if [[ $(cat /var/plexguide/blitz.bw) != *"M"* && $(cat /var/plexguide/blitz.bw) != 0 ]]; then
         echo "$(cat /var/plexguide/blitz.bw)M" >/var/plexguide/blitz.bw
     fi
 
-    if [[ $(cat /var/plexguide/move.bw) != *"M"* ]]; then
+    if [[ $(cat /var/plexguide/move.bw) != *"M"* && $(cat /var/plexguide/move.bw) != 0 ]]; then
         echo "$(cat /var/plexguide/move.bw)M" >/var/plexguide/move.bw
     fi
 

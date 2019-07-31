@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -20,6 +20,7 @@ NOTE: Please visit the link and understand what your doing first!
 [5] Local Edition  : Local HDs     | Easy    | Utilizes System's HD's Only
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty

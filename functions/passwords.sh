@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -33,6 +33,7 @@ WARNING: Changing the values will RESET & DELETE the following:
 3. Service Keys
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Input Value | Press [Enter]: ' typed </dev/tty
     case $typed in
@@ -64,8 +65,8 @@ Set a Primary Password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -90,8 +91,8 @@ Set a SALT password for data encryption! DO NOT forget the password!
 If you do, we are UNABLE to recover all of your DATA! That is the primary
 risk of encryption; forgetfulness will cost you!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -116,8 +117,8 @@ Set the Following Passwords? Type y or n!
 Primary: $primarypassword
 SALT   : $secondarypassword
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -143,6 +144,7 @@ NOTE: If you set this up again, ensure to reuse the same passwords in
 order to read the data!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
   clonestart
@@ -165,6 +167,7 @@ NOTE: When setting the passwords, they act as a private key in order
 to encrypt your data!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
     clonestart

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -23,9 +23,9 @@ NOTE 1: Creating more keys DOES NOT SPEED up your transfers
 NOTE 2: Realistic key generation for most are 6 keys
 NOTE 3: Generating 100 keys over time, you must delete them all to create
         more, which is why making tons of keys is not ideal!
-
+        
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -81,6 +81,7 @@ keyphase2() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Key Generator ~ [$num] keys
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   gdsacount() {
@@ -188,6 +189,7 @@ NOTE: No Accounts for Project ~ $pgcloneproject
 are detected! Exiting!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Acknowledge Info! | PRESS [ENTER] ' token </dev/tty
     clonestart
@@ -220,6 +222,7 @@ containers! Deleting keys in use by this project will result in those
 containers losing metadata (due to being unable to access teamdrives)!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   read -p '↘️  Type y or n | PRESS [ENTER]: ' typed </dev/tty

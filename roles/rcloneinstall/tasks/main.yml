@@ -24,7 +24,7 @@
   file:
     path: '{{ rclone_setup_tmp_dir}}'
     state: directory
-    mode: 0775
+    mode: 0755
 
 - name: install rclone - unzip package
   unarchive:
@@ -75,7 +75,7 @@
   file:
     path: '{{ MAN_PAGES.PATH }}'
     state: directory
-    mode: 0775
+    mode: 0755
     owner: '{{ MAN_PAGES.OWNER }}'
     group: '{{ MAN_PAGES.GROUP }}'
   become: yes

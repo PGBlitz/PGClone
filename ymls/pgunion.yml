@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705 - Deiteq
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -10,7 +10,7 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-      include_tasks: '/opt/pgclone/ymls/alias.yml'
+      include_tasks: '/opt/pgclone/bin/bin.yml'
 
     - name: include PGClone cron jobs
       include_tasks: '/opt/pgclone/ymls/cron.yml'
@@ -47,7 +47,7 @@
       when: transport == "mu"
 
     - name: Creating required paths
-      file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
+      file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0755 owner=1000 group=1000 recurse=true'
       with_items:
         - 'move'
         - 'downloads'
@@ -64,7 +64,7 @@
         - 'incomplete'
 
     - name: 'Setting permissions'
-      shell: 'chmod -R 775 {{hdpath.stdout}}/{{item}}'
+      shell: 'chmod -R 755 {{hdpath.stdout}}/{{item}}'
       with_items:
         - 'move'
         - 'downloads'
