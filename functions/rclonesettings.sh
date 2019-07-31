@@ -543,7 +543,6 @@ EOF
 }
 
 runSpeedTest() {
-
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -555,12 +554,34 @@ EOF
     fallocate -l "$vfs_test" ~/rclone.test
 
     echo "Starting upload to gdrive..."
-    rclone --config /opt/appdata/plexguide/rclone.conf --stats 1s -P copy -P ~/rclone.test gdrive:
+    rclone --config /opt/appdata/plexguide/rclone.conf \
+        --stats 1s -P \
+        --tpslimit=10 \
+        --checkers="$vfs_c" \
+        --transfers="$vfs_t" \
+        --no-traverse \
+        --fast-list \
+        --max-transfer "$vfs_mt" \
+        --bwlimit="$bwlimit" \
+        --drive-chunk-size="$vfs_dcs" \
+        --user-agent="$uagent" \
+        copyto ~/rclone.test gdrive:
     echo "Upload complete, deleting local file..."
     rm -rf ~/rclone.test
 
     echo "Starting download from gdrive..."
-    rclone --config /opt/appdata/plexguide/rclone.conf --stats 1s -P copy -P gdrive:/rclone.test ~/
+    rclone --config /opt/appdata/plexguide/rclone.conf \
+        --stats 1s -P \
+        --tpslimit=10 \
+        --checkers="$vfs_c" \
+        --transfers="$vfs_t" \
+        --no-traverse \
+        --fast-list \
+        --max-transfer "$vfs_mt" \
+        --bwlimit="$bwlimit" \
+        --drive-chunk-size="$vfs_dcs" \
+        --user-agent="$uagent" \
+        copyto gdrive:/rclone.test ~/
     echo "Download complete, deleting remote file..."
     rm -rf /mnt/gdrive/rclone.test
 
