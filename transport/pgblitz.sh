@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705 & PhysK
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -24,7 +24,10 @@ startscript() {
         useragent="$(cat /var/plexguide/uagent)"
         bwlimit="$(cat /var/plexguide/blitz.bw)"
         vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
-
+        vfs_mt="$(cat /var/plexguide/vfs_mt)"
+        vfs_t="$(cat /var/plexguide/vfs_c)"
+        vfs_c="$(cat /var/plexguide/vfs_t)"
+        
         let "cyclecount++"
 
         if [[ $cyclecount -gt 4294967295 ]]; then
@@ -55,11 +58,11 @@ startscript() {
                 --log-level=INFO --stats=5s --stats-file-name-length=0 \
                 --max-size=300G \
                 --tpslimit=10 \
-                --checkers=16 \
-                --transfers=8 \
+                --checkers="$vfs_c" \
+                --transfers="$vfs_t" \
                 --no-traverse \
                 --fast-list \
-                --max-transfer 750G \
+                --max-transfer "$vfs_mt" \
                 --bwlimit="$bwlimit" \
                 --drive-chunk-size="$vfs_dcs" \
                 --user-agent="$useragent" \

@@ -2,7 +2,20 @@
 
 All notable changes to the PGClone will be added to this repo. For changes to the core project, see [PGBlitz changelog](https://github.com/PGBlitz/PGBlitz.com/blob/v8.6base/CHANGELOG.md).
 
-All changes require a PGClone redeploy to get them!
+Most changes require a PGClone redeploy to get them!
+
+## 2019-07-31
+
+**New features**
+
+- Moved BWLimit setting to be under Rclone Settings menu so it can utilize quick deploy.
+- Added TimeTable option when setting BWLimit! Now you can set different limits based on time/day.
+- Moved RClone settings to be a top menu item
+- Changed some commands. `ntdrive`, `ngdrive`, `ntcrypt`, `ngcrypt` have been updated to `ndrive gdrive`,`ndrive tdrive`,`ndrive gcrypt`,`ndrive tcrypt`
+- Added `pglog appname` to easily to see docker logs for an app
+- Added `pglogs` to display all of the mount and transport logs, (matches prior `blitz`/`move` functionality)
+- Added Rclone speed test under RClone Settings
+- Added --max-transfer and --transfers setttings.
 
 ## 2019-07-24
 
@@ -18,7 +31,6 @@ All changes require a PGClone redeploy to get them!
   - `blitz` will now just show the blitz/move log
   - dropped `move` since it's generic enough to cause conflicts
   - dropped `ntdrive`, `ngdrive`, `ntcrypt`, `ngcrypt` in favor of `nrcloneenv` instead.
-  - Added `pglogs` to display all of the logs, (matches prior `blitz`/`move` functionality)
   - Added excludes-file to allow user-custom file name pattern excludes.
     - Patterns listed in this file will be excluded from upload. This is useful for mp4 automator users.
     - Added `npgexclude` to edit the excludes file

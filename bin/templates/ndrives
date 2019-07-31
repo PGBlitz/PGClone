@@ -1,0 +1,1 @@
+nano /etc/systemd/system/*drive.service && systemctl daemon-reload

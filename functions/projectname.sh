@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -41,8 +41,8 @@ CURRENT PROJECT: $pgcloneproject
 [2] Project: Build New & Set Project
 [3] Project: Destroy
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -89,8 +89,9 @@ EOF
   projectlist
   tee <<-EOF
 
-Qutting? Type >>> Exit
+Qutting? Type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
@@ -128,8 +129,9 @@ EOF
   projectlist
   tee <<-EOF
 
-Qutting? Type >>> Exit
+Qutting? Type >>> z or exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then optionsmenu; fi
@@ -184,6 +186,7 @@ NOTE: Without setting a project, PG Blitz is unable to establish, build
 keys, and deploy the proper GDSA Accounts for the Team Drive
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
@@ -216,6 +219,7 @@ Do You Want to Proceed?
 [2] Yes
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Input Choice | Press [Enter]: ' typed </dev/tty
   case $typed in
@@ -240,6 +244,7 @@ Name of your project? Ensure the PROJECT NAME is one word; all lowercase;
 no spaces!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   read -p '↘️  Input Name | Press [Enter]: ' typed </dev/tty
   if [[ "$typed" == "" ]]; then projectnameset; else buildproject; fi
@@ -257,6 +262,7 @@ buildproject() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 ID: $projectid ~ Created
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   tee <<-EOF
@@ -275,6 +281,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 PG Clone - Resetting Prior Stored Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
   rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
   rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
@@ -306,6 +313,7 @@ PG Box when complete! Ensuring that the containers do not self erase
 meta-data due to the mounts being offline!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty

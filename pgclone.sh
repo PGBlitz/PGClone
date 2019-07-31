@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 # Title:      PGBlitz.com (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/pgclone/functions/functions.sh
 source /opt/pgclone/functions/variables.sh
-source /opt/pgclone/functions/mountnumbers.sh
+source /opt/pgclone/functions/rclonesettings.sh
 source /opt/pgclone/functions/keys.sh
 source /opt/pgclone/functions/keyback.sh
 source /opt/pgclone/functions/pgclone.sh
@@ -29,6 +29,7 @@ source /opt/pgclone/functions/deployblitz.sh
 source /opt/pgclone/functions/multihd.sh
 source /opt/pgclone/functions/deploylocal.sh
 source /opt/pgclone/functions/createtdrive.sh
+source /opt/pgclone/functions/bwlimit.sh
 ################################################################################
 rcloneinstall
 

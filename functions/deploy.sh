@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -57,8 +57,8 @@ deploydrives() {
 
 EOF
 
-  if [ -e "/opt/var/.drivelog" ]; then rm -rf /opt/var/.drivelog; fi
-  touch /opt/var/.drivelog
+  if [ -e "/var/plexguide/.drivelog" ]; then rm -rf /var/plexguide/.drivelog; fi
+  touch /var/plexguide/.drivelog
   transport=$(cat /var/plexguide/pgclone.transport)
 
   if [[ "$transport" == "mu" ]]; then
@@ -83,8 +83,8 @@ EOF
     multihdreadonly
   fi
 
-  cat /opt/var/.drivelog
-  logcheck=$(cat /opt/var/.drivelog | grep "Failed")
+  cat /var/plexguide/.drivelog
+  logcheck=$(cat /var/plexguide/.drivelog | grep "Failed")
 
   if [[ "$logcheck" == "" ]]; then
 
@@ -113,6 +113,7 @@ POSSIBLE REASONS:
 2. Client ID and/or Secret are invalid and/or no longer exist
 $emessage
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
     clonestart
@@ -128,7 +129,7 @@ gdrivemod() {
     initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDRIVE :  Passed" >>/opt/var/.drivelog; else echo "GDRIVE :  Failed" >>/opt/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDRIVE :  Passed" >>/var/plexguide/.drivelog; else echo "GDRIVE :  Failed" >>/var/plexguide/.drivelog; fi
 }
 tdrivemod() {
   initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
@@ -138,7 +139,7 @@ tdrivemod() {
     initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "TDRIVE :  Passed" >>/opt/var/.drivelog; else echo "TDRIVE :  Failed" >>/opt/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "TDRIVE :  Passed" >>/var/plexguide/.drivelog; else echo "TDRIVE :  Failed" >>/var/plexguide/.drivelog; fi
 }
 gcryptmod() {
   c1initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive: | grep -oP encrypt | head -n1)
@@ -153,8 +154,8 @@ gcryptmod() {
     c2initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gcrypt: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1initial" == "encrypt" ]]; then echo "GCRYPT1:  Passed" >>/opt/var/.drivelog; else echo "GCRYPT1:  Failed" >>/opt/var/.drivelog; fi
-  if [[ "$c2initial" == "plexguide" ]]; then echo "GCRYPT2:  Passed" >>/opt/var/.drivelog; else echo "GCRYPT2:  Failed" >>/opt/var/.drivelog; fi
+  if [[ "$c1initial" == "encrypt" ]]; then echo "GCRYPT1:  Passed" >>/var/plexguide/.drivelog; else echo "GCRYPT1:  Failed" >>/var/plexguide/.drivelog; fi
+  if [[ "$c2initial" == "plexguide" ]]; then echo "GCRYPT2:  Passed" >>/var/plexguide/.drivelog; else echo "GCRYPT2:  Failed" >>/var/plexguide/.drivelog; fi
 }
 tcryptmod() {
   c1initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tdrive: | grep -oP encrypt | head -n1)
@@ -169,8 +170,8 @@ tcryptmod() {
     c2initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf tcrypt: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1initial" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >>/opt/var/.drivelog; else echo "TCRYPT1:  Failed" >>/opt/var/.drivelog; fi
-  if [[ "$c2initial" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >>/opt/var/.drivelog; else echo "TCRYPT2:  Failed" >>/opt/var/.drivelog; fi
+  if [[ "$c1initial" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >>/var/plexguide/.drivelog; else echo "TCRYPT1:  Failed" >>/var/plexguide/.drivelog; fi
+  if [[ "$c2initial" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >>/var/plexguide/.drivelog; else echo "TCRYPT2:  Failed" >>/var/plexguide/.drivelog; fi
 }
 gdsamod() {
   initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
@@ -180,7 +181,7 @@ gdsamod() {
     initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 :  Passed" >>/opt/var/.drivelog; else echo "GDSA01 :  Failed" >>/opt/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 :  Passed" >>/var/plexguide/.drivelog; else echo "GDSA01 :  Failed" >>/var/plexguide/.drivelog; fi
 }
 gdsacryptmod() {
   initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01C: | grep -oP encrypt | head -n1)
@@ -190,7 +191,7 @@ gdsacryptmod() {
     initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01C: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01C:  Passed" >>/opt/var/.drivelog; else echo "GDSA01C:  Failed" >>/opt/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01C:  Passed" >>/var/plexguide/.drivelog; else echo "GDSA01C:  Failed" >>/var/plexguide/.drivelog; fi
 }
 ################################################################################
 deployblitzstartcheck() {
@@ -209,6 +210,7 @@ NOTE: Without any keys, PG Blitz cannot upload any data without the use
 of service accounts
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
@@ -239,10 +241,10 @@ createmountfolders() {
   chown 1000:1000 -R /mnt/tdrive >/dev/null
   chown 1000:1000 -R /mnt/gcrypt >/dev/null
   chown 1000:1000 -R /mnt/tcrypt >/dev/null
-  chmod 775 -R /mnt/gdrive >/dev/null
-  chmod 775-R /mnt/tdrive >/dev/null
-  chmod 775 -R /mnt/gcrypt >/dev/null
-  chmod 775 -R /mnt/tcrypt >/dev/null
+  chmod 755 -R /mnt/gdrive >/dev/null
+  chmod 755-R /mnt/tdrive >/dev/null
+  chmod 755 -R /mnt/gcrypt >/dev/null
+  chmod 755 -R /mnt/tcrypt >/dev/null
 }
 
 cleanmounts() {
@@ -394,6 +396,9 @@ buildrcloneenv() {
   vfs_cm="$(cat /var/plexguide/vfs_cm)"
   vfs_cms="$(cat /var/plexguide/vfs_cms)"
   vfs_dct="$(cat /var/plexguide/vfs_dct)"
+  vfs_t="$(cat /var/plexguide/vfs_t)"
+  vfs_mt="$(cat /var/plexguide/vfs_mt)"
+  vfs_c="$(cat /var/plexguide/vfs_c)"
 
   echo "uagent=$uagent" >/opt/appdata/plexguide/rclone.env
   echo "vfs_ll=$vfs_ll" >>/opt/appdata/plexguide/rclone.env
@@ -404,4 +409,7 @@ buildrcloneenv() {
   echo "vfs_cma=$vfs_cma" >>/opt/appdata/plexguide/rclone.env
   echo "vfs_cms=$vfs_cms" >>/opt/appdata/plexguide/rclone.env
   echo "vfs_dct=$vfs_dct" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_t=$vfs_t" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_mt=$vfs_mt" >>/opt/appdata/plexguide/rclone.env
+  echo "vfs_c=$vfs_c" >>/opt/appdata/plexguide/rclone.env
 }

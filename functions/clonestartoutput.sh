@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Title:      PGBlitz (Reference Title File)
-# Author(s):  Admin9705
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
@@ -68,6 +68,7 @@ Basically, we cannot authorize a TeamDrive without knowing which
 TeamDrive is being utilized first!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
         clonestart
@@ -83,7 +84,7 @@ clonestart() {
         output1="[C] Transport Select"
     else
         throttle=$(cat /var/plexguide/blitz.bw)
-        output1="[C] Options"
+        output1="[S] RClone Settings"
     fi
 
     if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "be" && "$transport" != "le" ]]; then
@@ -109,6 +110,7 @@ clonestart() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
         clonestartoutput
 
@@ -118,8 +120,8 @@ EOF
 [2] MultiHD    (Add Mounts xor Hard Drives)
 [3] Transport  (Change Transportion Mode)
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -139,12 +141,11 @@ EOF
 
         tee <<-EOF
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [A] Deploy $outputversion
-[B] Throttle              [${throttle}]
-[C] Options
-
+[O] Options
+[S] RClone Settings
 [Z] Exit
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -159,7 +160,7 @@ localstartoutput() {
         executelocal
         ;;
     2)
-        bash /opt/plexguide/menu/pgcloner/multihd.sh
+        bash /opt/plexguide/pcloner/multihd.sh
         ;;
     3)
         transportselect
@@ -204,16 +205,13 @@ clonestartactions() {
             mountchecker
             deploypgmove
             ;; ## flll
-        b)
-            setthrottlemove
-            ;;
-        B)
-            setthrottlemove
-            ;;
-        c)
+        o) optionsmenumove ;;
+
+        O) optionsmenumove ;;
+        s)
             optionsmenumove
             ;;
-        C)
+        S)
             optionsmenumove
             ;;
         *)
@@ -253,17 +251,11 @@ clonestartactions() {
             mountchecker
             deploypgmove
             ;; ## flll
-        b)
-            setthrottlemove
+        s)
+            rcloneSettings
             ;;
-        B)
-            setthrottlemove
-            ;;
-        c)
-            optionsmenumove
-            ;;
-        C)
-            optionsmenumove
+        S)
+            rcloneSettings
             ;;
         *)
             clonestart
@@ -329,23 +321,11 @@ clonestartactions() {
             mountchecker
             deploypgblitz
             ;; ## flll
-        b)
-            setthrottleblitz
+        s)
+            rcloneSettings
             ;;
-        B)
-            setthrottleblitz
-            ;;
-        c)
-            optionsmenu
-            ;;
-        C)
-            optionsmenu
-            ;;
-        d)
-            mountnumbers
-            ;;
-        D)
-            mountnumbers
+        S)
+            rcloneSettings
             ;;
         *)
             clonestart
@@ -422,23 +402,13 @@ clonestartactions() {
             mountchecker
             deploypgblitz
             ;; ## flll
-        b)
-            setthrottleblitz
+        o) optionsmenu ;;
+        O) optionsmenu ;;
+        s)
+            rcloneSettings
             ;;
-        B)
-            setthrottleblitz
-            ;;
-        c)
-            optionsmenu
-            ;;
-        C)
-            optionsmenu
-            ;;
-        d)
-            mountnumbers
-            ;;
-        D)
-            mountnumbers
+        S)
+            rcloneSettings
             ;;
         *)
             clonestart
@@ -458,22 +428,19 @@ optionsmenu() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Transport Select             | INFO: Change Transport Type
-[2] RClone Settings              | INFO: Change RClone settings
-[3] Multi-HD Option              | INFO: Add Multi-Points and Options
-[4] Destroy All Service Keys     | WARN: Wipes All Keys for the Project
-[5] Create New Project           | WARN: Resets Everything
-[6] Demo Mode                    | Hide the E-Mail Address on the Front
-[7] Clone Clean                  | [$cloneclean] minutes
-[8] Create a TeamDrive
+[2] Multi-HD Option              | INFO: Add Multi-Points and Options
+[3] Destroy All Service Keys     | WARN: Wipes All Keys for the Project
+[4] Create New Project           | WARN: Resets Everything
+[5] Demo Mode                    | Hide the E-Mail Address on the Front
+[6] Clone Clean                  | [$cloneclean] minutes
+[7] Create a TeamDrive
 
-[Z] Exit
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NOTE: When creating a NEW PROJECT (option C), the USER must create the
+NOTE: When creating a NEW PROJECT, the USER must create the
 CLIENT ID and SECRET for that project! We will assist in creating the
 project and enabling the API! Everything resets when complete!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[Z] Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -485,24 +452,21 @@ EOF
         clonestart
         ;;
     2)
-        mountnumbers
+        bash /opt/plexguide/pcloner/multihd.sh
         ;;
     3)
-        bash /opt/plexguide/menu/pgcloner/multihd.sh
-        ;;
-    4)
         deletekeys
         ;;
-    5)
+    4)
         projectnameset
         ;;
-    6)
+    5)
         demomode
         ;;
-    7)
+    6)
         cloneclean
         ;;
-    8)
+    7)
         ctdrive
         ;;
     Z)
@@ -528,16 +492,15 @@ optionsmenumove() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [1] Transport Select           | INFO: Change Transport Type
-[2] RClone Settings            | INFO: Change RClone settings
-[3] Multi-HD Option            | INFO: Add Multi-Points and Options
-[4] Clone Clean                | [$cloneclean] minutes
+[2] Multi-HD Option            | INFO: Add Multi-Points and Options
+[3] Clone Clean                | [$cloneclean] minutes
 
-[Z] Exit
-
-NOTE: When creating a NEW PROJECT (option C), the USER must create the
+NOTE: When creating a NEW PROJECT, the USER must create the
 CLIENT ID and SECRET for that project! We will assist in creating the
 project and enabling the API! Everything resets when complete!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[Z] Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -549,12 +512,9 @@ EOF
         clonestart
         ;;
     2)
-        mountnumbers
+        bash /opt/plexguide/pcloner/multihd.sh
         ;;
     3)
-        bash /opt/plexguide/menu/pgcloner/multihd.sh
-        ;;
-    4)
         cloneclean
         ;;
     Z)
@@ -581,6 +541,7 @@ demomode() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 DEMO MODE IS NOW: $demo | PRESS [ENTER] to CONFIRM!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
     read -rp '' typed </dev/tty
     optionsmenu
