@@ -231,6 +231,11 @@ setCustomTimeTable() {
 📅 BW Limit TimeTable              rclone.org/docs/#bwlimit-bandwidth-spec
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+It's highly recommended you read the rclone docs on the BWLimit TimeTable.
+While this does perform minor validation, it's still possible to make an invalid table which prevent uploads from working.
+
+Read the docs: https://rclone.org/docs/#bwlimit-bandwidth-spec
+
 [1] Add Timeslot to TimeTable
 [2] Reset TimeTable
 
