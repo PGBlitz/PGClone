@@ -552,11 +552,7 @@ runSpeedTest() {
 
 Allocating $vfs_test test file...
 EOF
-
     fallocate -l "$vfs_test" ~/rclone.test
-    tee -a <<-EOF
-...done.
-EOF
 
     echo "Starting upload to gdrive..."
     rclone --config /opt/appdata/plexguide/rclone.conf --stats 1s -P copy -P ~/rclone.test gdrive:
@@ -567,6 +563,17 @@ EOF
     rclone --config /opt/appdata/plexguide/rclone.conf --stats 1s -P copy -P gdrive:/rclone.test ~/
     echo "Download complete, deleting remote file..."
     rm -rf /mnt/gdrive/rclone.test
+
+    tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✔️ Completed RClone speed test
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+See the above output from rclone for your results!
+
+EOF
+
 }
 
 changeSpeedSize() {
