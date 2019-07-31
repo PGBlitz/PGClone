@@ -566,6 +566,8 @@ EOF
         --drive-chunk-size="$vfs_dcs" \
         --user-agent="$uagent" \
         copy ~/rclone.test gdrive:
+
+    echo ""
     echo "Upload complete, deleting local file..."
     rm -rf ~/rclone.test
 
@@ -580,6 +582,8 @@ EOF
         --drive-chunk-size="$vfs_dcs" \
         --user-agent="$uagent" \
         copy gdrive:/rclone.test ~/
+
+    echo ""
     echo "Download complete, deleting remote file..."
     rm -rf /mnt/gdrive/rclone.test
 
@@ -604,7 +608,7 @@ changeSpeedSize() {
 
 Input must be a positive integer. 
 
-We recommend a size of 4G to 60G. The size is fixed in Gigabytes. Do not input a G, M, or K!
+We recommend a size of 2G to 80G. The size is fixed in Gigabytes. Do not input a G, M, or K!
 
 EOF
     read -rp '↘️  Input Selection | Press [ENTER]: ' test_size </dev/tty
