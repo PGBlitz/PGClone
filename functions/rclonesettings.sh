@@ -132,7 +132,7 @@ setIntegerVariable() {
 
     menuSelection="$fluffycat"
 
-    if [[ "$menuSelection" == "4" ]]; then
+    if [[ "$menuSelection" == "5" ]]; then
         name="Buffer-Size"
         sizeSuffix="M"
         start="0"
@@ -208,7 +208,7 @@ This setting takes effect on the next upload.
 There is no need to quick deploy for this setting."
     fi
 
-    if [[ "$menuSelection" == "10" ]]; then
+    if [[ "$menuSelection" == "11" ]]; then
         name="Dir-Cache-Time"
         sizeSuffix="m"
         start="2"
@@ -218,7 +218,7 @@ This may delay external changes (such as from gdrive website) from being seen on
 You should set this to at least 60m unless you make lots of external changes."
     fi
 
-    if [[ "$menuSelection" == "5" ]]; then
+    if [[ "$menuSelection" == "6" ]]; then
         name="VFS-Read-Chunk-Size"
         sizeSuffix="M"
         start="16"
@@ -237,7 +237,7 @@ Transcoding: 64MB-128MB recommended.
 4K Remux: 128MB if you direct play big remux files for faster start times, however smaller files will take longer to start playback."
     fi
 
-    if [[ "$menuSelection" == "6" ]]; then
+    if [[ "$menuSelection" == "7" ]]; then
         name="VFS-Read-Chunk-Size-Limit"
         sizeSuffix="M"
         start="0"
@@ -252,7 +252,7 @@ This value is mostly used during transcodes or direct stream, it's not used for 
 Recommendations: 2048 or 0 (for unlimited growth)."
     fi
 
-    if [[ "$menuSelection" == "7" ]]; then
+    if [[ "$menuSelection" == "8" ]]; then
         name="VFS-Cache-Mode"
         sizeSuffix=""
         start="1"
@@ -281,7 +281,7 @@ writes is recommended for use when using encrypt or when using some community ap
     ◽️ This mode should support all normal file system operations."
     fi
 
-    if [[ "$menuSelection" == "8" ]]; then
+    if [[ "$menuSelection" == "9" ]]; then
         name="VFS-Cache-Max-Age"
         sizeSuffix="h"
         start="1"
@@ -289,7 +289,7 @@ writes is recommended for use when using encrypt or when using some community ap
         note="Impacts how long files are cached on disk, only used if [vfs-cache-mode] is NOT off!"
     fi
 
-    if [[ "$menuSelection" == "9" ]]; then
+    if [[ "$menuSelection" == "10" ]]; then
         name="VFS-Cache-Max-Size"
         sizeSuffix="G"
         start="0"
@@ -298,7 +298,7 @@ writes is recommended for use when using encrypt or when using some community ap
 Set this value to 0 to disable."
     fi
 
-    if [[ "$menuSelection" == "11" ]]; then
+    if [[ "$menuSelection" == "12" ]]; then
         name="Log-Level"
         sizeSuffix=""
         start="1"
