@@ -25,8 +25,8 @@ startscript() {
         bwlimit="$(cat /var/plexguide/blitz.bw)"
         vfs_dcs="$(cat /var/plexguide/vfs_dcs)"
         vfs_mt="$(cat /var/plexguide/vfs_mt)"
-        vfs_t="$(cat /var/plexguide/vfs_c)"
-        vfs_c="$(cat /var/plexguide/vfs_t)"
+        vfs_t="$(cat /var/plexguide/vfs_t)"
+        vfs_c="$(cat /var/plexguide/vfs_c)"
         
         let "cyclecount++"
 

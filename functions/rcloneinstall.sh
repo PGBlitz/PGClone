@@ -10,10 +10,6 @@ rcloneinstall() {
     # install what version of rclone
     rversion=1.48
 
-    if [[ ! -e "/root/.config/rclone/rclone.conf" ]]; then
-        touch /root/.config/rclone/rclone.conf
-    fi
-
     rcheck1=$(rclone --version 2>&1)
     rcheck2=$(echo $rcheck1 | cut -c1-12)
 
