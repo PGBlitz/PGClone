@@ -135,7 +135,7 @@ pgclonevars() {
     variable /var/plexguide/vfs_rcs "64M"
     vfs_rcs=$(cat /var/plexguide/vfs_rcs)
 
-    variable /var/plexguide/vfs_rcsl "2048M"
+    variable /var/plexguide/vfs_rcsl "1024M"
     vfs_rcsl=$(cat /var/plexguide/vfs_rcsl)
 
     variable /var/plexguide/vfs_ll "NOTICE"

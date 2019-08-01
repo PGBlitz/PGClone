@@ -37,7 +37,7 @@ Once you are done updating these settings, [A] Quick Deploy to take effect.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [5]  Buffer-Size               16M     [$vfs_bs]
 [6]  VFS-Read-Chunk-Size       64M     [$vfs_rcs]
-[7]  VFS-Read-Chunk-Size-Limit 2048M   [$vfs_rcsl]
+[7]  VFS-Read-Chunk-Size-Limit 1024M   [$vfs_rcsl]
 
 🔄 VFS Cache Mode Settings    Default  Current
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
