@@ -15,7 +15,7 @@ cloneclean() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Clone Clean deletes garbage files in your downloads folder per every
-[$cloneclean] minutes!
+[$clonecleanTime] minutes!
 
 TORRENT USERS: Recommend that you set this number higher! If seeding,
 Clone Clean will destory the seed files. Please set this number to a high

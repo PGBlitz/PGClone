@@ -438,7 +438,7 @@ optionsmenu() {
 [3] Destroy All Service Keys     | WARN: Wipes All Keys for the Project
 [4] Create New Project           | WARN: Resets Everything
 [5] Demo Mode                    | Hide the E-Mail Address on the Front
-[6] Clone Clean                  | [$cloneclean] minutes
+[6] Clone Clean                  | [$clonecleanTime] minutes
 [7] Create a TeamDrive
 
 NOTE: When creating a NEW PROJECT, the USER must create the

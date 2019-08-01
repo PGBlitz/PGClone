@@ -111,7 +111,7 @@ pgclonevars() {
 
     # For Clone Clean
     variable /var/plexguide/cloneclean "600"
-    cloneclean=$(cat /var/plexguide/cloneclean)
+    clonecleanTime=$(cat /var/plexguide/cloneclean)
 
     # For PG Blitz Mounts
     variable /var/plexguide/vfs_bs "16M"
