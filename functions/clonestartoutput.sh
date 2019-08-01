@@ -160,7 +160,7 @@ localstartoutput() {
         executelocal
         ;;
     2)
-        bash /opt/plexguide/menu/pcloner/multihd.sh
+        bash /opt/plexguide/menu/pgcloner/multihd.sh
         ;;
     3)
         transportselect
@@ -458,7 +458,7 @@ EOF
         clonestart
         ;;
     2)
-        bash /opt/plexguide/menu/pcloner/multihd.sh
+        bash /opt/plexguide/menu/pgcloner/multihd.sh
         ;;
     3)
         deletekeys
@@ -518,7 +518,7 @@ EOF
         clonestart
         ;;
     2)
-        bash /opt/plexguide/menu/pcloner/multihd.sh
+        bash /opt/plexguide/menu/pgcloner/multihd.sh
         ;;
     3)
         cloneclean
