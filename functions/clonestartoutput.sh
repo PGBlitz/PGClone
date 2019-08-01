@@ -438,7 +438,7 @@ optionsmenu() {
 [3] Destroy All Service Keys     | WARN: Wipes All Keys for the Project
 [4] Create New Project           | WARN: Resets Everything
 [5] Demo Mode                    | Hide the E-Mail Address on the Front
-[6] Clone Clean                  | [$clonecleanTime] minutes
+[6] Clone Clean                  | [$cloneCleanInterval] minutes
 [7] Create a TeamDrive
 
 NOTE: When creating a NEW PROJECT, the USER must create the
@@ -470,7 +470,7 @@ EOF
         demomode
         ;;
     6)
-        cloneclean
+        changeCloneCleanInterval
         ;;
     7)
         ctdrive
@@ -521,7 +521,7 @@ EOF
         bash /opt/plexguide/menu/pgcloner/multihd.sh
         ;;
     3)
-        cloneclean
+        changeCloneCleanInterval
         ;;
     Z)
         clonestart

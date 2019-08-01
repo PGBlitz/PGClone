@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-cloneclean() {
+changeCloneCleanInterval() {
   pgclonevars
 
   tee <<-EOF
@@ -15,7 +15,7 @@ cloneclean() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Clone Clean deletes garbage files in your downloads folder per every
-[$clonecleanTime] minutes!
+[$cloneCleanInterval] minutes!
 
 TORRENT USERS: Recommend that you set this number higher! If seeding,
 Clone Clean will destory the seed files. Please set this number to a high
