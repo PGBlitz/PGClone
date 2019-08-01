@@ -257,6 +257,9 @@ clonestartactions() {
         S)
             rcloneSettings
             ;;
+        o) optionsmenumove ;;
+
+        O) optionsmenumove ;;
         *)
             clonestart
             ;;
@@ -327,6 +330,9 @@ clonestartactions() {
         S)
             rcloneSettings
             ;;
+        o) optionsmenumove ;;
+
+        O) optionsmenumove ;;
         *)
             clonestart
             ;;
