@@ -209,10 +209,10 @@ clonestartactions() {
 
         O) optionsmenumove ;;
         s)
-            optionsmenumove
+            rcloneSettings
             ;;
         S)
-            optionsmenumove
+            rcloneSettings
             ;;
         *)
             clonestart
