@@ -37,7 +37,7 @@
         path: 'remotes = gdrive: {{hdpath}}/move'
       when: transport55.stdout == "umove"
 
-    - name: Creating required paths
+    - name: Creating Required Paths
       file: 'path={{hdpath}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
       with_items:
         - 'move'
