@@ -44,6 +44,11 @@
         - 'downloads'
         - 'incomplete'
 
+    - name: Creating Logs Path
+      file: 'path=/pg/var/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
+      with_items:
+        - 'logs'
+
     - name: 'Setting ownership on logs'
       shell: 'chown -R 1000:1000 /pg/var/logs'
 
