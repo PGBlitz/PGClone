@@ -54,8 +54,8 @@ tee <<-EOF
 
 EOF
 
-if [ -e "/pg/var/.drivelog" ]; then rm -rf /pg/var/.drivelog; fi
-touch /pg/var/.drivelog
+if [ -e "/pg/logs/.drivelog" ]; then rm -rf /pg/logs/.drivelog; fi
+touch /pg/logs/.drivelog
 
   if [[ "$transport" = "mu" ]]; then
     gdrivemod
@@ -79,8 +79,8 @@ touch /pg/var/.drivelog
     multihdreadonly
   fi
 
-cat /pg/var/.drivelog
-logcheck=$(cat /pg/var/.drivelog | grep "Failed")
+cat /pg/logs/.drivelog
+logcheck=$(cat /pg/logs/.drivelog | grep "Failed")
 
 if [[ "$logcheck" == "" ]]; then
 
@@ -124,7 +124,7 @@ gdrivemod ()
     initial=$(rclone lsd --config /pg/rclone/blitz.conf gd: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDRIVE :  Passed" >> /pg/var/.drivelog; else echo "GDRIVE :  Failed" >> /pg/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDRIVE :  Passed" >> /pg/logs/.drivelog; else echo "GDRIVE :  Failed" >> /pg/logs/.drivelog; fi
 }
 tdrivemod ()
 {
@@ -135,7 +135,7 @@ tdrivemod ()
     initial=$(rclone lsd --config /pg/rclone/blitz.conf sd: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "TDRIVE :  Passed" >> /pg/var/.drivelog; else echo "TDRIVE :  Failed" >> /pg/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "TDRIVE :  Passed" >> /pg/logs/.drivelog; else echo "TDRIVE :  Failed" >> /pg/logs/.drivelog; fi
 }
 gcryptmod ()
 {
@@ -151,8 +151,8 @@ gcryptmod ()
     c2initial=$(rclone lsd --config /pg/rclone/blitz.conf gc: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1initial" == "encrypt" ]]; then echo "GCRYPT1:  Passed" >> /pg/var/.drivelog; else echo "GCRYPT1:  Failed" >> /pg/var/.drivelog; fi
-  if [[ "$c2initial" == "plexguide" ]]; then echo "GCRYPT2:  Passed" >> /pg/var/.drivelog; else echo "GCRYPT2:  Failed" >> /pg/var/.drivelog; fi
+  if [[ "$c1initial" == "encrypt" ]]; then echo "GCRYPT1:  Passed" >> /pg/logs/.drivelog; else echo "GCRYPT1:  Failed" >> /pg/logs/.drivelog; fi
+  if [[ "$c2initial" == "plexguide" ]]; then echo "GCRYPT2:  Passed" >> /pg/logs/.drivelog; else echo "GCRYPT2:  Failed" >> /pg/logs/.drivelog; fi
 }
 tcryptmod ()
 {
@@ -168,8 +168,8 @@ tcryptmod ()
     c2initial=$(rclone lsd --config /pg/rclone/blitz.conf sc: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1initial" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >> /pg/var/.drivelog; else echo "TCRYPT1:  Failed" >> /pg/var/.drivelog; fi
-  if [[ "$c2initial" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >> /pg/var/.drivelog; else echo "TCRYPT2:  Failed" >> /pg/var/.drivelog; fi
+  if [[ "$c1initial" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >> /pg/logs/.drivelog; else echo "TCRYPT1:  Failed" >> /pg/logs/.drivelog; fi
+  if [[ "$c2initial" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >> /pg/logs/.drivelog; else echo "TCRYPT2:  Failed" >> /pg/logs/.drivelog; fi
 }
 gdsamod ()
 {
@@ -180,7 +180,7 @@ gdsamod ()
     initial=$(rclone lsd --config /pg/rclone/blitz.conf GDSA01: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 :  Passed" >> /pg/var/.drivelog; else echo "GDSA01 :  Failed" >> /pg/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 :  Passed" >> /pg/logs/.drivelog; else echo "GDSA01 :  Failed" >> /pg/logs/.drivelog; fi
 }
 gdsacryptmod ()
 {
@@ -191,7 +191,7 @@ gdsacryptmod ()
     initial=$(rclone lsd --config /pg/rclone/blitz.conf GDSA01C: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01C:  Passed" >> /pg/var/.drivelog; else echo "GDSA01C:  Failed" >> /pg/var/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "GDSA01C:  Passed" >> /pg/logs/.drivelog; else echo "GDSA01C:  Failed" >> /pg/logs/.drivelog; fi
 }
 ################################################################################
 deployblitzstartcheck () {
