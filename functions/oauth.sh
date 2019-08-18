@@ -37,14 +37,14 @@ EOF
   final=$(echo "${rcdate}T${rctime}${rczone}")
 
 ########################
-rm -rf /pg/var/.${type} 1>/dev/null 2>&1
-echo "" > /pg/var/.${type}
-echo "[$type]" >> /pg/var/.${type}
-echo "client_id = $pgclonepublic" >> /pg/var/.${type}
-echo "client_secret = $pgclonesecret" >> /pg/var/.${type}
-echo "type = drive" >> /pg/var/.${type}
-echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/var/.${type}
-echo "" >> /pg/var/.${type}
+rm -rf /pg/rclone/.${type} 1>/dev/null 2>&1
+echo "" > /pg/rclone/.${type}
+echo "[$type]" >> /pg/rclone/.${type}
+echo "client_id = $pgclonepublic" >> /pg/rclone/.${type}
+echo "client_secret = $pgclonesecret" >> /pg/rclone/.${type}
+echo "type = drive" >> /pg/rclone/.${type}
+echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/.${type}
+echo "" >> /pg/rclone/.${type}
 if [ "$type" == "tdrive" ]; then
 teamid=$(cat /pg/var/pgclone.teamid)
 echo "team_drive = $teamid" >> /pg/var/.tdrive; fi
