@@ -249,7 +249,7 @@ TIPS:
 3. Did you enable your API?
 
 EOF
-    echo "Not Active" > /pg/var/gdrive.pgclone
+    echo "Not Active" > /pg/var/gd.pgclone
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
     question1
 else
