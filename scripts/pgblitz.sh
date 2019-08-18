@@ -21,12 +21,12 @@ chmod -R 775 "{{hdpath}}/move"
 startscript () {
 while read p; do
 
-# Repull excluded folder 
+# Repull excluded folder
  wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
- 
+
   cleaner="$(cat /pg/var/cloneclean)"
   useragent="$(cat /pg/var/uagent)"
-  
+
   let "cyclecount++"
   echo "----------------------------" >> /pg/logs/pgblitz.log
   echo "PG Blitz Log - Cycle $cyclecount" >> /pg/logs/pgblitz.log
@@ -85,7 +85,7 @@ while read p; do
   # Remove empty directories
   find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
-  # Removes garbage | torrent folder excluded 
+  # Removes garbage | torrent folder excluded
   find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
   find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
 
