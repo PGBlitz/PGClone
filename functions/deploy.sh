@@ -13,17 +13,17 @@ echo "#------------------------------------------" > /pg/rclone/blitz.conf
 echo "#RClone Rewrite | Visit https://pgblitz.com" >> /pg/rclone/blitz.conf
 echo "#------------------------------------------" >> /pg/rclone/blitz.conf
 
-cat /pg/var/.gdrive >> /pg/rclone/blitz.conf
+cat /pg/rclone/.gdrive >> /pg/rclone/blitz.conf
 
-if [[ $(cat "/pg/var/.gcrypt") != "NOT-SET" ]]; then
+if [[ $(cat "/pg/rclone/.gc") != "NOT-SET" ]]; then
 echo ""
-cat /pg/var/.gcrypt >> /pg/rclone/blitz.conf; fi
+cat /pg/rclone/.gc >> /pg/rclone/blitz.conf; fi
 
-cat /pg/var/.tdrive >> /pg/rclone/blitz.conf
+cat /pg/rclone/.sd >> /pg/rclone/blitz.conf
 
-if [[ $(cat "/pg/var/.tcrypt") != "NOT-SET" ]]; then
+if [[ $(cat "/pg/rclone/.tc") != "NOT-SET" ]]; then
 echo ""
-cat /pg/var/.tcrypt >> /pg/rclone/blitz.conf; fi
+cat /pg/rclone/.tc >> /pg/rclone/blitz.conf; fi
 
 cat /pg/var/.keys >> /pg/rclone/blitz.conf
 
@@ -36,11 +36,11 @@ echo "#------------------------------------------" > /pg/rclone/blitz.conf
 echo "#RClone Rewrite | Visit https://pgblitz.com" >> /pg/rclone/blitz.conf
 echo "#------------------------------------------" >> /pg/rclone/blitz.conf
 
-cat /pg/var/.gdrive > /pg/rclone/blitz.conf
+cat /pg/rclone/.gdrive > /pg/rclone/blitz.conf
 
-if [[ $(cat "/pg/var/.gcrypt") != "NOT-SET" ]]; then
+if [[ $(cat "/pg/rclone/.gc") != "NOT-SET" ]]; then
 echo ""
-cat /pg/var/.gcrypt >> /pg/rclone/blitz.conf; fi
+cat /pg/rclone/.gc >> /pg/rclone/blitz.conf; fi
 deploydrives
 }
 

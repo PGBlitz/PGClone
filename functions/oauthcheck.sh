@@ -36,8 +36,8 @@ NOTES:
 EOF
 rm -rf /pg/var/.$oauthcheck 1>/dev/null 2>&1
 
-    if [[ "$oauthcheck" == "gdrive" ]]; then rm -rf /pg/var/.gcrypt 1>/dev/null 2>&1; fi
-    if [[ "$oauthcheck" == "tdrive" ]]; then rm -rf /pg/var/.tcrypt 1>/dev/null 2>&1; fi
+    if [[ "$oauthcheck" == "gdrive" ]]; then rm -rf /pg/rclone/.gc 1>/dev/null 2>&1; fi
+    if [[ "$oauthcheck" == "tdrive" ]]; then rm -rf /pg/rclone/.tc 1>/dev/null 2>&1; fi
 
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
     clonestart

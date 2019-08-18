@@ -37,20 +37,20 @@ pgclonevars () {
     clonesalt=$(cat /pg/var/pgclone.salt)
   fi
 
-  variable /pg/var/.gdrive "NOT-SET"
-  if [[ $(cat /pg/var/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
+  variable /pg/rclone/.gdrive "NOT-SET"
+  if [[ $(cat /pg/rclone/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
-  variable /pg/var/.tdrive "NOT-SET"
-  if [[ $(cat /pg/var/.tdrive) == "NOT-SET" ]]; then tstatus="NOT-SET"
+  variable /pg/rclone/.sd "NOT-SET"
+  if [[ $(cat /pg/rclone/.sd) == "NOT-SET" ]]; then tstatus="NOT-SET"
   else tstatus="ACTIVE"; fi
 
-  variable /pg/var/.tcrypt "NOT-SET"
-  if [[ $(cat /pg/var/.tcrypt) == "NOT-SET" ]]; then tcstatus="NOT-SET"
+  variable /pg/rclone/.tc "NOT-SET"
+  if [[ $(cat /pg/rclone/.tc) == "NOT-SET" ]]; then tcstatus="NOT-SET"
   else tcstatus="ACTIVE"; fi
 
-  variable /pg/var/.gcrypt "NOT-SET"
-  if [[ $(cat /pg/var/.gcrypt) == "NOT-SET" ]]; then gcstatus="NOT-SET"
+  variable /pg/rclone/.gc "NOT-SET"
+  if [[ $(cat /pg/rclone/.gc) == "NOT-SET" ]]; then gcstatus="NOT-SET"
   else gcstatus="ACTIVE"; fi
 
   transport=$(cat /pg/var/pgclone.transport)

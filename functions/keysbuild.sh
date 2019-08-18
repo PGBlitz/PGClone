@@ -43,10 +43,10 @@ num=$typed
 rm -rf /pg/var/blitzkeys 1>/dev/null 2>&1
 mkdir -p /pg/var/blitzkeys
 
-cat /pg/var/.gdrive > /pg/rclone/blitz.conf
-if [ -e "/pg/var/.tdrive" ]; then cat /pg/var/.tdrive >> /pg/var/.keytemp; fi
-if [ -e "/pg/var/.gcrypt" ]; then cat /pg/var/.gcrypt >> /pg/var/.keytemp; fi
-if [ -e "/pg/var/.tcrypt" ]; then cat /pg/var/.tcrypt >> /pg/var/.keytemp; fi
+cat /pg/rclone/.gdrive > /pg/rclone/blitz.conf
+if [ -e "/pg/rclone/.sd" ]; then cat /pg/rclone/.sd >> /pg/var/.keytemp; fi
+if [ -e "/pg/rclone/.gc" ]; then cat /pg/rclone/.gc >> /pg/var/.keytemp; fi
+if [ -e "/pg/rclone/.tc" ]; then cat /pg/rclone/.tc >> /pg/var/.keytemp; fi
 
 gcloud --account=${pgcloneemail} iam service-accounts list |  awk '{print $1}' | \
        tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq > /pg/var/.gcloudblitz

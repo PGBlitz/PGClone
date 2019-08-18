@@ -32,10 +32,10 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
-    rm -rf /pg/var/.gcrypt 1>/dev/null 2>&1
-    rm -rf /pg/var/.gdrive 1>/dev/null 2>&1
-    rm -rf /pg/var/.tcrypt 1>/dev/null 2>&1
-    rm -rf /pg/var/.tdrive 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.gc 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.gdrive 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.tc 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.sd 1>/dev/null 2>&1
     rm -rf /pg/var/pgclone.teamdrive 1>/dev/null 2>&1
     rm -rf /pg/var/pgclone.public 1>/dev/null 2>&1
     rm -rf /pg/var/pgclone.secret 1>/dev/null 2>&1

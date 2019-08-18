@@ -47,7 +47,7 @@ echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"ref
 echo "" >> /pg/rclone/.${type}
 if [ "$type" == "tdrive" ]; then
 teamid=$(cat /pg/var/pgclone.teamid)
-echo "team_drive = $teamid" >> /pg/var/.tdrive; fi
+echo "team_drive = $teamid" >> /pg/rclone/.sd; fi
 echo ""
 
 echo ${type} > /pg/var/oauth.check
