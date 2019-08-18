@@ -190,10 +190,10 @@ https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:iet
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
   if [ "$token" = "exit" ]; then mountsmenu; fi
-  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /pg/var/pgclone.info
+  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /pg/rclone/pgclone.info
 
-  accesstoken=$(cat /pg/var/pgclone.info | grep access_token | awk '{print $2}')
-  refreshtoken=$(cat /pg/var/pgclone.info | grep refresh_token | awk '{print $2}')
+  accesstoken=$(cat /pg/rclone/pgclone.info | grep access_token | awk '{print $2}')
+  refreshtoken=$(cat /pg/rclone/pgclone.info | grep refresh_token | awk '{print $2}')
   rcdate=$(date +'%Y-%m-%d')
   rctime=$(date +"%H:%M:%S" --date="$givenDate 60 minutes")
   rczone=$(date +"%:z")

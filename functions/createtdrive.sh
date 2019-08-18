@@ -27,9 +27,9 @@ Quitting? Type >>> exit
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
   if [[ "$token" == "exit" || "$token" == "Exit" || "$token" == "EXIT" ]]; then clonestart; fi
-  curl --request POST --data "code=$token&client_id=$pgclonepublic&client_secret=$pgclonesecret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /pg/var/pgclone.info
+  curl --request POST --data "code=$token&client_id=$pgclonepublic&client_secret=$pgclonesecret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /pg/rclone/pgclone.info
 
-  accesstoken=$(cat /pg/var/pgclone.info | grep access_token | awk '{print $2}')
+  accesstoken=$(cat /pg/rclone/pgclone.info | grep access_token | awk '{print $2}')
 
   curl --request POST \
     'https://www.googleapis.com/drive/v3/teamdrives?requestId=foxfield' \
