@@ -14,8 +14,8 @@
     - blitz
     - move
     - nrclone
-    - ngcrypt
-    - ngdrive
+    - nsc
+    - ngd
     - npgblitz
     - npgmove
     - npgunion
@@ -46,8 +46,8 @@
     - blitz
     - move
     - nrclone
-    - ngcrypt
-    - ngdrive
+    - nsc
+    - ngd
     - npgblitz
     - npgmove
     - npgunion
