@@ -20,7 +20,7 @@ pgclonevars
 ansible-playbook /pg/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
-echo "gdrive" > /pg/var/deploy.version
+echo "gd" > /pg/var/deploy.version
 echo "mu" > /pg/var/deployed.version
 type=gdrive
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\

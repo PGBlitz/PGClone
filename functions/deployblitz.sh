@@ -20,7 +20,7 @@ pgclonevars
 ansible-playbook /pg/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
-echo "tdrive" > /pg/var/deploy.version
+echo "sd" > /pg/var/deploy.version
 echo "bu" > /pg/var/deployed.version
 type=gdrive
 encryptbit=""
