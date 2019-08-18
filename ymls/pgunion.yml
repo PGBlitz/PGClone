@@ -143,8 +143,8 @@
 
     - name: Install PGUnion Script
       template:
-        src: /pg/pgclone/scripts/pgunion.sh
-        dest: /pg/var/pgunion.sh
+        src: /pg/pgclone/scripts/pgunity.sh
+        dest: /pg/var/pgunity.sh
         force: yes
 
     - name: Install PGUnion Service
