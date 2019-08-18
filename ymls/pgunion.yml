@@ -149,8 +149,8 @@
 
     - name: Install PGUnion Service
       template:
-        src: /pg/pgclone/mounts/pgunion.service
-        dest: /etc/systemd/system/pgunion.service
+        src: /pg/pgclone/mounts/pgunity.service
+        dest: /etc/systemd/system/pgunity.service
         force: yes
 
     - name: Reload PGUnion Service

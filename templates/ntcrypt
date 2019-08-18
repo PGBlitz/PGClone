@@ -5,4 +5,4 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-nano /etc/systemd/system/tcrypt.service && systemctl daemon-reload
+nano /etc/systemd/system/sc.serivce && systemctl daemon-reload
