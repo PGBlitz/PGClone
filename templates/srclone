@@ -5,4 +5,4 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-tail -10 /pg/var/logs/rclone*.log
+tail -10 /pg/logs/rclone*.log

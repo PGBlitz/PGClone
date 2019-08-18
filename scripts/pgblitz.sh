@@ -7,12 +7,12 @@
 ################################################################################
 
 # Starting Actions
-touch /pg/var/logs/pgblitz.log
+touch /pg/logs/pgblitz.log
 
-echo "" >> /pg/var/logs/pgblitz.log
-echo "" >> /pg/var/logs/pgblitz.log
-echo "----------------------------" >> /pg/var/logs/pgblitz.log
-echo "PG Blitz Log - First Startup" >> /pg/var/logs/pgblitz.log
+echo "" >> /pg/logs/pgblitz.log
+echo "" >> /pg/logs/pgblitz.log
+echo "----------------------------" >> /pg/logs/pgblitz.log
+echo "PG Blitz Log - First Startup" >> /pg/logs/pgblitz.log
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
 chown -R 1000:1000 "{{hdpath}}/move"
@@ -28,14 +28,14 @@ while read p; do
   useragent="$(cat /pg/var/uagent)"
   
   let "cyclecount++"
-  echo "----------------------------" >> /pg/var/logs/pgblitz.log
-  echo "PG Blitz Log - Cycle $cyclecount" >> /pg/var/logs/pgblitz.log
-  echo "" >> /pg/var/logs/pgblitz.log
-  echo "Utilizing: $p" >> /pg/var/logs/pgblitz.log
+  echo "----------------------------" >> /pg/logs/pgblitz.log
+  echo "PG Blitz Log - Cycle $cyclecount" >> /pg/logs/pgblitz.log
+  echo "" >> /pg/logs/pgblitz.log
+  echo "Utilizing: $p" >> /pg/logs/pgblitz.log
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /pg/var/rclone/blitz.conf \
-  --log-file=/pg/var/logs/pgblitz.log \
+  --log-file=/pg/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude="**partial~" --exclude=".unionfs-fuse/**" \
@@ -52,7 +52,7 @@ while read p; do
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
   --config /pg/var/rclone/blitz.conf \
-  --log-file=/pg/var/logs/pgblitz.log \
+  --log-file=/pg/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
   --tpslimit 12 \
   --checkers=20 \
@@ -71,9 +71,9 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /pg/var/logs/pgblitz.log
-  cat /pg/var/logs/pgblitz.log | tail -200 > /pg/var/logs/pgblitz.log
-  #sed -i -e "/Duplicate directory found in destination/d" /pg/var/logs/pgblitz.log
+  echo "Cycle $cyclecount - Sleeping for 30 Seconds" >> /pg/logs/pgblitz.log
+  cat /pg/logs/pgblitz.log | tail -200 > /pg/logs/pgblitz.log
+  #sed -i -e "/Duplicate directory found in destination/d" /pg/logs/pgblitz.log
   sleep 30
 
   #Quick fix

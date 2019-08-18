@@ -13,12 +13,12 @@ if pidof -o %PPID -x "$0"; then
    exit 1
 fi
 
-touch /pg/var/logs/pgmove.log
+touch /pg/logs/pgmove.log
 
-echo "" >> /pg/var/logs/pgmove.log
-echo "" >> /pg/var/logs/pgmove.log
-echo "----------------------------" >> /pg/var/logs/pgmove.log
-echo "PG Move Log - First Startup" >> /pg/var/logs/pgmove.log
+echo "" >> /pg/logs/pgmove.log
+echo "" >> /pg/logs/pgmove.log
+echo "----------------------------" >> /pg/logs/pgmove.log
+echo "PG Move Log - First Startup" >> /pg/logs/pgmove.log
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
@@ -37,7 +37,7 @@ do
 
 rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 --config /pg/var/rclone/blitz.conf \
---log-file=/pg/var/logs/pgmove.log \
+--log-file=/pg/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude="**partial~" --exclude=".unionfs-fuse/**" \
@@ -54,7 +54,7 @@ chmod -R 775 "{{hdpath}}/move"
 
 rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --config /pg/var/rclone/blitz.conf \
---log-file=/pg/var/logs/pgmove.log \
+--log-file=/pg/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \

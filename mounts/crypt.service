@@ -21,7 +21,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --size-only \
 --uid=1000 --gid=1000 \
 --umask 002 \
---log-file=/pg/var/logs/rclone-{{drive}}.log \
+--log-file=/pg/logs/rclone-{{drive}}.log \
 --log-level INFO \
 --drive-use-trash=false \
 --timeout 1h \

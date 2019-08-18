@@ -5,7 +5,7 @@ dlpath=$(cat /pg/var/server.hd.path)
 cleaner="$(cat /pg/var/cloneclean)"
 
 # Starting Actions
-touch /pg/var/logs/pgblitz.log
+touch /pg/logs/pgblitz.log
 mkdir -p "$dlpath/move"
 
 # Repull excluded folder 
