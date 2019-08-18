@@ -38,7 +38,7 @@ EOF
 }
 
 statusmount () {
-  mcheck5=$(cat /pg/var/rclone/blitz.conf | grep "$type")
+  mcheck5=$(cat /pg/rclone/blitz.conf | grep "$type")
   if [ "$mcheck5" != "" ]; then
 tee <<-EOF
 
@@ -58,14 +58,14 @@ elif [[ "$typed" == "N" || "$typed" == "n" ]]; then mountsmenu
     statusmount
   fi
 
-  rclone config delete $type --config /pg/var/rclone/blitz.conf
+  rclone config delete $type --config /pg/rclone/blitz.conf
 
   encheck=$(cat /pg/var/pgclone.transport)
   if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
     if [ "$type" == "gdrive" ]; then
-    rclone config delete gcrypt --config /pg/var/rclone/blitz.conf; fi
+    rclone config delete gcrypt --config /pg/rclone/blitz.conf; fi
     if [ "$type" == "tdrive" ]; then
-    rclone config delete tcrypt --config /pg/var/rclone/blitz.conf; fi
+    rclone config delete tcrypt --config /pg/rclone/blitz.conf; fi
   fi
 
 tee <<-EOF
@@ -737,16 +737,16 @@ EOF
 }
 
 testphase () {
-  echo "" > /pg/var/rclone/test.conf
-  echo "[$type]" >> /pg/var/rclone/test.conf
-  echo "client_id = $public" >> /pg/var/rclone/test.conf
-  echo "client_secret = $secret" >> /pg/var/rclone/test.conf
-  echo "type = drive" >> /pg/var/rclone/test.conf
-  echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/var/rclone/test.conf
-  echo "" >> /pg/var/rclone/test.conf
+  echo "" > /pg/rclone/test.conf
+  echo "[$type]" >> /pg/rclone/test.conf
+  echo "client_id = $public" >> /pg/rclone/test.conf
+  echo "client_secret = $secret" >> /pg/rclone/test.conf
+  echo "type = drive" >> /pg/rclone/test.conf
+  echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/test.conf
+  echo "" >> /pg/rclone/test.conf
   if [ "$type" == "tdrive" ]; then
   teamid=$(cat /pg/var/pgclone.teamid)
-  echo "team_drive = $teamid" >> /pg/var/rclone/test.conf; fi
+  echo "team_drive = $teamid" >> /pg/rclone/test.conf; fi
   echo ""
 
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
@@ -760,14 +760,14 @@ if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
   SALT=`cat /pg/var/pgclone.salt`
   ENC_PASSWORD=`rclone obscure "$PASSWORD"`
   ENC_SALT=`rclone obscure "$SALT"`
-  echo "" >> /pg/var/rclone/test.conf
-  echo "[$entype]" >> /pg/var/rclone/test.conf
-  echo "type = crypt" >> /pg/var/rclone/test.conf
-  echo "remote = $type:/encrypt" >> /pg/var/rclone/test.conf
-  echo "filename_encryption = standard" >> /pg/var/rclone/test.conf
-  echo "directory_name_encryption = true" >> /pg/var/rclone/test.conf
-  echo "password = $ENC_PASSWORD" >> /pg/var/rclone/test.conf
-  echo "password2 = $ENC_SALT" >> /pg/var/rclone/test.conf;
+  echo "" >> /pg/rclone/test.conf
+  echo "[$entype]" >> /pg/rclone/test.conf
+  echo "type = crypt" >> /pg/rclone/test.conf
+  echo "remote = $type:/encrypt" >> /pg/rclone/test.conf
+  echo "filename_encryption = standard" >> /pg/rclone/test.conf
+  echo "directory_name_encryption = true" >> /pg/rclone/test.conf
+  echo "password = $ENC_PASSWORD" >> /pg/rclone/test.conf
+  echo "password2 = $ENC_SALT" >> /pg/rclone/test.conf;
 
 fi
 testphase2
@@ -788,7 +788,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/test.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/test.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -796,7 +796,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/test.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/test.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -831,7 +831,7 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
 echo "✅ Activated" > /pg/var/$type.pgclone
 
 ## Copy the Test File to the Real RClone Conf
-cat /pg/var/rclone/test.conf >> /pg/var/rclone/blitz.conf
+cat /pg/rclone/test.conf >> /pg/rclone/blitz.conf
 
 ## Back to the Main Mount Menu
 mountsmenu

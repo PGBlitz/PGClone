@@ -99,25 +99,25 @@ removepgservices () {
 }
 
 readrcloneconfig () {
-  touch /pg/var/rclone/blitz.conf
-  mkdir -p /pg/var/rclone/
+  touch /pg/rclone/blitz.conf
+  mkdir -p /pg/rclone/
 
-  gdcheck=$(cat /pg/var/rclone/blitz.conf | grep gdrive)
-  if [ "$gdcheck" != "" ]; then echo "good" > /pg/var/rclone/gdrive.status && gdstatus="good";
-  else echo "bad" > /pg/var/rclone/gdrive.status && gdstatus="bad"; fi
+  gdcheck=$(cat /pg/rclone/blitz.conf | grep gdrive)
+  if [ "$gdcheck" != "" ]; then echo "good" > /pg/rclone/gdrive.status && gdstatus="good";
+  else echo "bad" > /pg/rclone/gdrive.status && gdstatus="bad"; fi
 
-  gccheck=$(cat /pg/var/rclone/blitz.conf | grep "remote = gdrive:/encrypt")
-  if [ "$gccheck" != "" ]; then echo "good" > /pg/var/rclone/gcrypt.status && gcstatus="good";
-  else echo "bad" > /pg/var/rclone/gcrypt.status && gcstatus="bad"; fi
+  gccheck=$(cat /pg/rclone/blitz.conf | grep "remote = gd:/encrypt")
+  if [ "$gccheck" != "" ]; then echo "good" > /pg/rclone/gcrypt.status && gcstatus="good";
+  else echo "bad" > /pg/rclone/gcrypt.status && gcstatus="bad"; fi
 
-  tdcheck=$(cat /pg/var/rclone/blitz.conf | grep tdrive)
-  if [ "$tdcheck" != "" ]; then echo "good" > /pg/var/rclone/tdrive.status && tdstatus="good"
-  else echo "bad" > /pg/var/rclone/tdrive.status && tdstatus="bad"; fi
+  tdcheck=$(cat /pg/rclone/blitz.conf | grep tdrive)
+  if [ "$tdcheck" != "" ]; then echo "good" > /pg/rclone/tdrive.status && tdstatus="good"
+  else echo "bad" > /pg/rclone/tdrive.status && tdstatus="bad"; fi
 
 }
 
 rcloneconfig () {
-  rclone config --config /pg/var/rclone/blitz.conf
+  rclone config --config /pg/rclone/blitz.conf
 }
 
 keysprocessed () {

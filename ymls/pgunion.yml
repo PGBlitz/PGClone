@@ -17,22 +17,22 @@
 
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
-        path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath}}/move'
+        path: 'remotes = gd: sd: gc: sc: {{hdpath}}/move'
       when: transport == "be"
 
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
-        path: 'remotes = gdrive: gcrypt: {{hdpath}}/move'
+        path: 'remotes = gd: gc: {{hdpath}}/move'
       when: transport == "me"
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
-        path: 'remotes = gdrive: tdrive: {{hdpath}}/move'
+        path: 'remotes = gd: sd: {{hdpath}}/move'
       when: transport == "bu"
 
     - name: 'If Fact Matches - UnEncrypted Move'
       set_fact:
-        path: 'remotes = gdrive: {{hdpath}}/move'
+        path: 'remotes = gd: {{hdpath}}/move'
       when: transport == "mu"
 
     - name: Creating required paths
@@ -65,16 +65,16 @@
         - 'incomplete'
 
     - name: Transport Type
-      shell: 'echo "" >> /pg/var/rclone/blitz.conf'
+      shell: 'echo "" >> /pg/rclone/blitz.conf'
 
     - name: Line Rmur
-      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /pg/var/rclone/blitz.conf'
+      shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /pg/rclone/blitz.conf'
 
     - name: Transport Type
       shell: |
-        echo "[pgunion]" >> /pg/var/rclone/blitz.conf
-        echo "type = union" >> /pg/var/rclone/blitz.conf
-        echo "{{path}}" >> /pg/var/rclone/blitz.conf
+        echo "[pgunion]" >> /pg/rclone/blitz.conf
+        echo "type = union" >> /pg/rclone/blitz.conf
+        echo "{{path}}" >> /pg/rclone/blitz.conf
 
     - name: 'PG Blitz Execution'
       block:
@@ -112,7 +112,7 @@
           register: bandwidth
 
         - name: Deploy Version
-          shell: 'cat /pg/var/rclone/deploy.version'
+          shell: 'cat /pg/rclone/deploy.version'
           register: ver
 
         - name: Register HD Path

@@ -14,8 +14,8 @@ After=multi-user.target
 Type=simple
 User=0
 Group=0
-ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
---config /pg/var/rclone/blitz.conf \
+ExecStart=/usr/bin/rclone mount {{drive}}: /pg/{{drive}} \
+--config /pg/rclone/blitz.conf \
 --allow-non-empty \
 --allow-other \
 --size-only \
@@ -34,7 +34,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /mnt/{{drive}} \
 --user-agent={{uagent.stdout}} \
 --buffer-size {{vfs_bs}}M
 
-ExecStop=/bin/fusermount -uz /mnt/{{drive}}
+ExecStop=/bin/fusermount -uz /pg/{{drive}}
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes

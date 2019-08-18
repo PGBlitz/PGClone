@@ -27,7 +27,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35,7 +35,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -78,7 +78,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -86,7 +86,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -127,7 +127,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -135,7 +135,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -176,7 +176,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -184,7 +184,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -226,7 +226,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -234,7 +234,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -333,9 +333,9 @@ gdsabuild () {
   downloadpath=$(cat /pg/var/server.hd.path)
   tempbuild=$(cat /pg/var/json.tempbuild)
   path=/pg/var/keys
-  rpath=/pg/var/rclone/blitz.conf
-  tdrive=$( cat /pg/var/rclone/blitz.conf | grep team_drive | head -n1 )
-  tdrive="${tdrive:13}"
+  rpath=/pg/rclone/blitz.conf
+  tdrive=$( cat /pg/rclone/blitz.conf | grep team_drive | head -n1 )
+  tdrive="${sd:13}"
 
   if [ "$bencrypted" == "yes" ]; then
   PASSWORD=$(cat /pg/var/pgclone.password)
@@ -409,21 +409,21 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
   rm -rf /pg/var/keys/processed/* 1>/dev/null 2>&1
 
   ## purpose of the rewrite is to save gdrive and tdrive info and toss old GDSAs
-      cat /pg/var/rclone/blitz.conf | grep -w "\[tdrive\]" -A 5 > /pg/var/tdrive.info
-      cat /pg/var/rclone/blitz.conf | grep -w "\[gdrive\]" -A 4 > /pg/var/gdrive.info
-      cat /pg/var/rclone/blitz.conf | grep -w "\[tcrypt\]" -A 6 > /pg/var/tcrypt.info
-      cat /pg/var/rclone/blitz.conf | grep -w "\[gcrypt\]" -A 6 > /pg/var/gcrypt.info
+      cat /pg/rclone/blitz.conf | grep -w "\[tdrive\]" -A 5 > /pg/var/tdrive.info
+      cat /pg/rclone/blitz.conf | grep -w "\[gdrive\]" -A 4 > /pg/var/gdrive.info
+      cat /pg/rclone/blitz.conf | grep -w "\[tcrypt\]" -A 6 > /pg/var/tcrypt.info
+      cat /pg/rclone/blitz.conf | grep -w "\[gcrypt\]" -A 6 > /pg/var/gcrypt.info
 
-      echo "#### rclone rewrite generated by pgblitz.com" > /pg/var/rclone/blitz.conf
-      echo "" >> /pg/var/rclone/blitz.conf
-      echo "" >> /pg/var/rclone/blitz.conf
-      cat /pg/var/gdrive.info >> /pg/var/rclone/blitz.conf
-      echo "" >> /pg/var/rclone/blitz.conf
-      cat /pg/var/tdrive.info >> /pg/var/rclone/blitz.conf
-      echo "" >> /pg/var/rclone/blitz.conf
-      cat /pg/var/tcrypt.info >> /pg/var/rclone/blitz.conf
-      echo "" >> /pg/var/rclone/blitz.conf
-      cat /pg/var/gcrypt.info >> /pg/var/rclone/blitz.conf
+      echo "#### rclone rewrite generated by pgblitz.com" > /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/gdrive.info >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/tdrive.info >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/tcrypt.info >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/gcrypt.info >> /pg/rclone/blitz.conf
 
     while [ "$count" != "$keys" ]; do
     ((count++))
@@ -507,8 +507,8 @@ ufsbuilder () {
   #echo -n "/pg/sd=RO:" > /tmp/pg.gdsa.build
   #echo -n "/pg/gd=RO:" >> /tmp/pg.gdsa.build
   ##### Encryption Portion ### Start
-  #tcrypt=$(grep "tcrypt" /pg/var/rclone/blitz.conf)
-  #gcrypt=$(grep "gcrypt" /pg/var/rclone/blitz.conf)
+  #tcrypt=$(grep "tcrypt" /pg/rclone/blitz.conf)
+  #gcrypt=$(grep "gcrypt" /pg/rclone/blitz.conf)
 
   #if [ "$tcrypt" == "[tcrypt]" ]  && [ "$gcrypt" == "[gcrypt]" ]; then
   #    encryption="on"
@@ -545,7 +545,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf gdsa01:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf gdsa01:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -553,7 +553,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf gdsa01: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf gdsa01: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -582,19 +582,19 @@ EOF
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Creating Test Directory - tdrive:/plexguide
+🚀 System Message: Creating Test Directory - sd:/plexguide
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config /pg/var/rclone/blitz.conf tdrive:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf sd:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Checking Existance of tdrive:/plexguide
+🚀 System Message: Checking Existance of sd:/plexguide
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/rclone/blitz.conf tdrive: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf sd: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF

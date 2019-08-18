@@ -13,11 +13,11 @@ pgclonevars () {
   }
 
   # rest standard
-  mkdir -p /pg/var/rclone /pg/logs
+  mkdir -p /pg/logs /pg/rclone
   touch /pg/logs/gd.log /pg/logs/sd.log /pg/logs/ge.log /pg/logs/se.log /pg/logs/pgblitz.log /pg/logs/pgmove.log
 
   variable /pg/var/project.account "NOT-SET"
-  variable /pg/var/rclone/deploy.version "null"
+  variable /pg/rclone/deploy.version "null"
   variable /pg/var/pgclone.transport "NOT-SET"
   variable /pg/var/move.bw  "9"
   variable /pg/var/blitz.bw  "1000"
@@ -64,8 +64,8 @@ pgclonevars () {
   variable /pg/var/pgclone.teamid ""
   tdid=$(cat /pg/var/pgclone.teamid)
 
-  variable /pg/var/rclone/deploy.version ""
-  type=$(cat /pg/var/rclone/deploy.version)
+  variable /pg/rclone/deploy.version ""
+  type=$(cat /pg/rclone/deploy.version)
 
   variable /pg/var/pgclone.public ""
   pgclonepublic=$(cat /pg/var/pgclone.public)

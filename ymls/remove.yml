@@ -11,9 +11,9 @@
   vars:
     service_vars:
       - {name: crypt.service}
-      - {name: pgdrive.service}
-      - {name: gdrive.service}
-      - {name: gcrypt.service}
+      - {name: pgd.service}
+      - {name: gd.service}
+      - {name: gc.service}
       - {name: tdrive.service}
       - {name: tcrypt.service}
       - {name: supertransfer2.service}

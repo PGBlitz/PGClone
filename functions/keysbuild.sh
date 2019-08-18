@@ -43,7 +43,7 @@ num=$typed
 rm -rf /pg/var/blitzkeys 1>/dev/null 2>&1
 mkdir -p /pg/var/blitzkeys
 
-cat /pg/var/.gdrive > /pg/var/rclone/blitz.conf
+cat /pg/var/.gdrive > /pg/rclone/blitz.conf
 if [ -e "/pg/var/.tdrive" ]; then cat /pg/var/.tdrive >> /pg/var/.keytemp; fi
 if [ -e "/pg/var/.gcrypt" ]; then cat /pg/var/.gcrypt >> /pg/var/.keytemp; fi
 if [ -e "/pg/var/.tcrypt" ]; then cat /pg/var/.tcrypt >> /pg/var/.keytemp; fi
