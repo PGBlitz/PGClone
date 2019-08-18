@@ -170,7 +170,7 @@ if [[ "$transport" == "mu" ]]; then
           keyinputpublic ;;
       2 )
           publicsecretchecker
-          echo "gdrive" > /pg/rclone/deploy.version
+          echo "gd" > /pg/rclone/deploy.version
           oauth ;;
       z )
           exit ;;
@@ -207,7 +207,7 @@ elif [[ "$transport" == "me" ]]; then
       3 )
           publicsecretchecker
           passwordcheck
-          echo "gdrive" > /pg/rclone/deploy.version
+          echo "gd" > /pg/rclone/deploy.version
           oauth ;;
       z )
           exit ;;
@@ -250,11 +250,11 @@ elif [[ "$transport" == "bu" ]]; then
         5 )
             publicsecretchecker
             tlabelchecker
-            echo "tdrive" > /pg/rclone/deploy.version
+            echo "sd" > /pg/rclone/deploy.version
             oauth ;;
         6 )
             publicsecretchecker
-            echo "gdrive" > /pg/rclone/deploy.version
+            echo "gd" > /pg/rclone/deploy.version
             oauth ;;
         7 )
             publicsecretchecker
@@ -319,12 +319,12 @@ elif [[ "$transport" == "be" ]]; then
             publicsecretchecker
             passwordcheck
             tlabelchecker
-            echo "tdrive" > /pg/rclone/deploy.version
+            echo "sd" > /pg/rclone/deploy.version
             oauth ;;
         7 )
             publicsecretchecker
             passwordcheck
-            echo "gdrive" > /pg/rclone/deploy.version
+            echo "gd" > /pg/rclone/deploy.version
             oauth ;;
 
         8 )
