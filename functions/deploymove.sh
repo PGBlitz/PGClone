@@ -30,7 +30,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=gdrive"
+  drive=gd"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "me" ]]; then
@@ -43,7 +43,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=gcrypt"
+  drive=gc"
 fi
 
 # deploy union
