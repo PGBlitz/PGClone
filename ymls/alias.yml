@@ -18,7 +18,7 @@
     - ngd
     - npgblitz
     - npgmove
-    - npgunion
+    - npgunity
     - ntcrypt
     - ntdrive
     - pgblitz
@@ -27,7 +27,7 @@
     - sgdrive
     - spgblitz
     - spgmove
-    - spgunion
+    - spgunity
     - srclone
     - tpgblitz
     - tpgmove
@@ -50,7 +50,7 @@
     - ngd
     - npgblitz
     - npgmove
-    - npgunion
+    - npunity
     - ntcrypt
     - ntdrive
     - pgmove
@@ -58,7 +58,7 @@
     - sgdrive
     - spgblitz
     - spgmove
-    - spgunion
+    - spunity
     - srclone
     - stcrypt
     - stdrive

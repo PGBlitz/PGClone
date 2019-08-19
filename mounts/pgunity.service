@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 [Unit]
-Description=PGUnion
+Description=PGUnity
 After=multi-user.target
 [Service]
 Type=simple
