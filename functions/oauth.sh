@@ -56,8 +56,8 @@ oauthcheck
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
 if [[ "$transport" == "be" || "$transport" == "me" ]]; then
 
-if [ "$type" == "gdrive" ]; then entype="gcrypt";
-else entype="tcrypt"; fi
+if [ "$type" == "gd" ]; then entype="gc";
+else entype="sc"; fi
 
 PASSWORD=`cat /pg/rclone/pgclone.password`
 SALT=`cat /pg/rclone/pgclone.salt`
