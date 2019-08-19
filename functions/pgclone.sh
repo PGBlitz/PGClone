@@ -219,7 +219,7 @@ if [ "$secret" == "" ]; then dsecret="NOT SET"; else dsecret="SET"; fi
 if [ "$public" == "" ]; then dpublic="NOT SET"; else dpublic="SET"; fi
 if [ "$teamdrive" == "" ]; then dteamdrive="NOT SET"; else dteamdrive=$teamdrive; fi
 
-gstatus=$(cat /pg/var/gd.pgclone)
+gdstatus=$(cat /pg/var/gd.pgclone)
 sdstatus=$(cat /pg/var/sd.pgclone)
 
 ###### START
@@ -235,7 +235,7 @@ tee <<-EOF
 [2] Secret ID: ${dsecret}
 
 📁 RClone Configuration
-[3] gdrive   : $gstatus
+[3] gdrive   : $gdstatus
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -276,7 +276,7 @@ tee <<-EOF
 [3] Passwords: $passdisplay
 
 📁 RClone Configuration
-[4] gdrive   : $gstatus
+[4] gdrive   : $gdstatus
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -321,7 +321,7 @@ tee <<-EOF
 [3] TD Label : $dteamdrive
 
 📁 RClone Configuration
-[4] gdrive   : $gstatus
+[4] gdrive   : $gdstatus
 [5] tdrive   : $sdstatus
 [Z] Exit
 
@@ -383,7 +383,7 @@ tee <<-EOF
 [4] Passwords: $passdisplay
 
 📁 RClone Configuration
-[5] gdrive   : $gstatus
+[5] gdrive   : $gdstatus
 [6] tdrive   : $sdstatus
 [Z] Exit
 

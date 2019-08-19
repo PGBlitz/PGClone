@@ -38,8 +38,8 @@ pgclonevars () {
   fi
 
   variable /pg/rclone/.gd "NOT-SET"
-  if [[ $(cat /pg/rclone/.gd) == "NOT-SET" ]]; then gstatus="NOT-SET"
-  else gstatus="ACTIVE"; fi
+  if [[ $(cat /pg/rclone/.gd) == "NOT-SET" ]]; then gdstatus="NOT-SET"
+  else gdstatus="ACTIVE"; fi
 
   variable /pg/rclone/.sd "NOT-SET"
   if [[ $(cat /pg/rclone/.sd) == "NOT-SET" ]]; then sdstatus="NOT-SET"

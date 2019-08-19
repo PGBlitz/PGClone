@@ -189,13 +189,13 @@ EOF
 mountchecker () {
 pgclonevars
   if [[ "$transport" == "mu" ]]; then
-    if [[ "$gstatus" != "ACTIVE" ]]; then mountfail; fi
+    if [[ "$gdstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "me" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
+  if [[ "$gdstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "bu" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" ]]; then mountfail; fi
+  if [[ "$gdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "be" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$scstatus" != "ACTIVE" ]]; then mountfail; fi
+  if [[ "$gdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$scstatus" != "ACTIVE" ]]; then mountfail; fi
 fi
 }
 

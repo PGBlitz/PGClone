@@ -16,13 +16,13 @@ if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; 
 if [[ "$transport" == "mu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret    [${pgcloneid}]
-[2] GDrive                [$gstatus]
+[2] GDrive                [$gdstatus]
 EOF
 elif [[ "$transport" == "me" ]]; then
 tee <<-EOF
 [1] Client ID & Secret    [${pgcloneid}]
 [2] Passwords             [$pstatus]
-[3] GDrive                [$gstatus] - [$gcstatus]
+[3] GDrive                [$gdstatus] - [$gcstatus]
 EOF
 elif [[ "$transport" == "bu" ]]; then
 tee <<-EOF
@@ -31,7 +31,7 @@ tee <<-EOF
 [3] Client ID & Secret    [${pgcloneid}]
 [4] TDrive Label          [$sdname]
 [5] TDrive OAuth          [$sdstatus]
-[6] GDrive OAuth          [$gstatus]
+[6] GDrive OAuth          [$gdstatus]
 [7] Key Management        [$displaykey] Built
 [8] TDrive (E-Mail Share Generator)
 EOF
@@ -43,7 +43,7 @@ tee <<-EOF
 [4] Passwords             [$pstatus]
 [5] TDrive Label          [$sdname]
 [6] TDrive | TCrypt       [$sdstatus] - [$scstatus]
-[7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
+[7] GDrive | GCrypt       [$gdstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
 [9] TDrive (E-Mail Share Generator)
 EOF
