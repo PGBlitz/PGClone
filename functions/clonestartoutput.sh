@@ -29,7 +29,7 @@ tee <<-EOF
 [1] Google Account Login  [$mainid]
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
-[4] TDrive Label          [$tdname]
+[4] TDrive Label          [$sdname]
 [5] TDrive OAuth          [$sdstatus]
 [6] GDrive OAuth          [$gstatus]
 [7] Key Management        [$displaykey] Built
@@ -41,7 +41,7 @@ tee <<-EOF
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
 [4] Passwords             [$pstatus]
-[5] TDrive Label          [$tdname]
+[5] TDrive Label          [$sdname]
 [6] TDrive | TCrypt       [$sdstatus] - [$scstatus]
 [7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
@@ -58,7 +58,7 @@ fi
 errorteamdrive ()
 
 {
-if [[ "$tdname" == "NOT-SET" ]]; then
+if [[ "$sdname" == "NOT-SET" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

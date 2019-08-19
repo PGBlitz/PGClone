@@ -219,7 +219,7 @@ clonestart
 
 tlabelchecker () {
 pgclonevars
-if [[ "$tdname" == "NOT-SET" ]]; then
+if [[ "$sdname" == "NOT-SET" ]]; then
 
 tee <<-EOF
 

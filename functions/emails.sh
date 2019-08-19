@@ -26,7 +26,7 @@ so will result in PGBlitz Failing!
 
 Shortcut to Google Team Drives >>> td.pgblitz.com
 
-NOTE 1: Share the E-Mails with the CORRECT TEAMDRIVE: $tdname
+NOTE 1: Share the E-Mails with the CORRECT TEAMDRIVE: $sdname
 NOTE 2: SAVE TIME! Copy & Paste the all the E-Mails into the share!"
 
 EOF

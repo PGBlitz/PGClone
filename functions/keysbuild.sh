@@ -134,7 +134,7 @@ tee >> /pg/var/.keys <<-EOF
 type = drive
 scope = drive
 service_account_file = /pg/var/.blitzkeys/GDSA${tempbuild}
-team_drive = ${tdid}
+team_drive = ${sdid}
 
 EOF
 

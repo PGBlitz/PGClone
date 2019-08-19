@@ -56,13 +56,13 @@ pgclonevars () {
   transport=$(cat /pg/rclone/pgclone.transport)
 
   variable /pg/rclone/pgclone.teamdrive "NOT-SET"
-  tdname=$(cat /pg/rclone/pgclone.teamdrive)
+  sdname=$(cat /pg/rclone/pgclone.teamdrive)
 
   variable /pg/rclone/pgclone.demo "OFF"
   demo=$(cat /pg/rclone/pgclone.demo)
 
   variable /pg/rclone/pgclone.teamid ""
-  tdid=$(cat /pg/rclone/pgclone.teamid)
+  sdid=$(cat /pg/rclone/pgclone.teamid)
 
   variable /pg/rclone/deploy.version ""
   type=$(cat /pg/rclone/deploy.version)
