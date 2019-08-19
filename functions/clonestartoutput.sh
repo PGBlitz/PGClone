@@ -89,7 +89,7 @@ output1="[C] Options"
 fi
 
 if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "be" && "$transport" != "le" ]]; then
-rm -rf /pg/var/pgclone.transport 1>/dev/null 2>&1
+rm -rf /pg/rclone/pgclone.transport 1>/dev/null 2>&1
 mustset; fi
 
     if [[ "$transport" == "mu" ]]; then outputversion="Unencrypted Move"
@@ -485,8 +485,8 @@ optionsmenu
 }
 
 demomode () {
-  if [[ "$demo" = "OFF" ]]; then echo "ON " > /pg/var/pgclone.demo
-  else echo "OFF" > /pg/var/pgclone.demo; fi
+  if [[ "$demo" = "OFF" ]]; then echo "ON " > /pg/rclone/pgclone.demo
+  else echo "OFF" > /pg/rclone/pgclone.demo; fi
 
 pgclonevars
 tee <<-EOF

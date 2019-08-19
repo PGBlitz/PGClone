@@ -18,23 +18,23 @@ pgclonevars () {
 
   variable /pg/var/project.account "NOT-SET"
   variable /pg/rclone/deploy.version "null"
-  variable /pg/var/pgclone.transport "NOT-SET"
+  variable /pg/rclone/pgclone.transport "NOT-SET"
   variable /pg/var/move.bw  "9"
   variable /pg/var/blitz.bw  "1000"
-  variable /pg/var/pgclone.salt ""
+  variable /pg/rclone/pgclone.salt ""
 
   variable /pg/var/server.hd.path "/mnt"
   hdpath=$(cat /pg/var/server.hd.path)
 
-  variable /pg/var/oauth.check ""
-  oauthcheck=$(cat /pg/var/oauth.check)
+  variable /pg/rclone/oauth.check ""
+  oauthcheck=$(cat /pg/rclone/oauth.check)
 
-  variable /pg/var/pgclone.password "NOT-SET"
-  if [[ $(cat /pg/var/pgclone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
+  variable /pg/rclone/pgclone.password "NOT-SET"
+  if [[ $(cat /pg/rclone/pgclone.password) == "NOT-SET" ]]; then pstatus="NOT-SET"
   else
     pstatus="ACTIVE"
-    clonepassword=$(cat /pg/var/pgclone.password)
-    clonesalt=$(cat /pg/var/pgclone.salt)
+    clonepassword=$(cat /pg/rclone/pgclone.password)
+    clonesalt=$(cat /pg/rclone/pgclone.salt)
   fi
 
   variable /pg/rclone/.gdrive "NOT-SET"
@@ -53,40 +53,40 @@ pgclonevars () {
   if [[ $(cat /pg/rclone/.gc) == "NOT-SET" ]]; then gcstatus="NOT-SET"
   else gcstatus="ACTIVE"; fi
 
-  transport=$(cat /pg/var/pgclone.transport)
+  transport=$(cat /pg/rclone/pgclone.transport)
 
-  variable /pg/var/pgclone.teamdrive "NOT-SET"
-  tdname=$(cat /pg/var/pgclone.teamdrive)
+  variable /pg/rclone/pgclone.teamdrive "NOT-SET"
+  tdname=$(cat /pg/rclone/pgclone.teamdrive)
 
-  variable /pg/var/pgclone.demo "OFF"
-  demo=$(cat /pg/var/pgclone.demo)
+  variable /pg/rclone/pgclone.demo "OFF"
+  demo=$(cat /pg/rclone/pgclone.demo)
 
-  variable /pg/var/pgclone.teamid ""
-  tdid=$(cat /pg/var/pgclone.teamid)
+  variable /pg/rclone/pgclone.teamid ""
+  tdid=$(cat /pg/rclone/pgclone.teamid)
 
   variable /pg/rclone/deploy.version ""
   type=$(cat /pg/rclone/deploy.version)
 
-  variable /pg/var/pgclone.public ""
-  pgclonepublic=$(cat /pg/var/pgclone.public)
+  variable /pg/rclone/pgclone.public ""
+  pgclonepublic=$(cat /pg/rclone/pgclone.public)
 
   mkdir -p /pg/var/.blitzkeys
   displaykey=$(ls /pg/var/.blitzkeys | wc -l)
 
-  variable /pg/var/pgclone.secret ""
-  pgclonesecret=$(cat /pg/var/pgclone.secret)
+  variable /pg/rclone/pgclone.secret ""
+  pgclonesecret=$(cat /pg/rclone/pgclone.secret)
 
   if [[ "$pgclonesecret" == "" || "$pgclonepublic" == "" ]]; then pgcloneid="NOT-SET"; fi
   if [[ "$pgclonesecret" != "" && "$pgclonepublic" != "" ]]; then pgcloneid="ACTIVE"; fi
 
-  variable /pg/var/pgclone.email "NOT-SET"
-  pgcloneemail=$(cat /pg/var/pgclone.email)
+  variable /pg/rclone/pgclone.email "NOT-SET"
+  pgcloneemail=$(cat /pg/rclone/pgclone.email)
 
   variable /pg/var/oauth.type "NOT-SET" #output for auth type
   oauthtype=$(cat /pg/var/oauth.type)
 
-  variable /pg/var/pgclone.project "NOT-SET"
-  pgcloneproject=$(cat /pg/var/pgclone.project)
+  variable /pg/rclone/pgclone.project "NOT-SET"
+  pgcloneproject=$(cat /pg/rclone/pgclone.project)
 
   variable /pg/var/deployed.version ""
   dversion=$(cat /pg/var/deployed.version)

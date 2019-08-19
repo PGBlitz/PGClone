@@ -45,5 +45,5 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 glogin
 fi
 
-echo "$typed" > /pg/var/pgclone.email
+echo "$typed" > /pg/rclone/pgclone.email
 }

@@ -46,11 +46,11 @@ echo "type = drive" >> /pg/rclone/.${type}
 echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/.${type}
 echo "" >> /pg/rclone/.${type}
 if [ "$type" == "tdrive" ]; then
-teamid=$(cat /pg/var/pgclone.teamid)
+teamid=$(cat /pg/rclone/pgclone.teamid)
 echo "team_drive = $teamid" >> /pg/rclone/.sd; fi
 echo ""
 
-echo ${type} > /pg/var/oauth.check
+echo ${type} > /pg/rclone/oauth.check
 oauthcheck
 
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
@@ -59,20 +59,20 @@ if [[ "$transport" == "be" || "$transport" == "me" ]]; then
 if [ "$type" == "gdrive" ]; then entype="gcrypt";
 else entype="tcrypt"; fi
 
-PASSWORD=`cat /pg/var/pgclone.password`
-SALT=`cat /pg/var/pgclone.salt`
+PASSWORD=`cat /pg/rclone/pgclone.password`
+SALT=`cat /pg/rclone/pgclone.salt`
 ENC_PASSWORD=`rclone obscure "$PASSWORD"`
 ENC_SALT=`rclone obscure "$SALT"`
 
-rm -rf /pg/var/.${entype} 1>/dev/null 2>&1
-echo "" >> /pg/var/.${entype}
-echo "[$entype]" >> /pg/var/.${entype}
-echo "type = crypt" >> /pg/var/.${entype}
-echo "remote = $type:/encrypt" >> /pg/var/.${entype}
-echo "filename_encryption = standard" >> /pg/var/.${entype}
-echo "directory_name_encryption = true" >> /pg/var/.${entype}
-echo "password = $ENC_PASSWORD" >> /pg/var/.${entype}
-echo "password2 = $ENC_SALT" >> /pg/var/.${entype};
+rm -rf /pg/rclone/.${entype} 1>/dev/null 2>&1
+echo "" >> /pg/rclone/.${entype}
+echo "[$entype]" >> /pg/rclone/.${entype}
+echo "type = crypt" >> /pg/rclone/.${entype}
+echo "remote = $type:/encrypt" >> /pg/rclone/.${entype}
+echo "filename_encryption = standard" >> /pg/rclone/.${entype}
+echo "directory_name_encryption = true" >> /pg/rclone/.${entype}
+echo "password = $ENC_PASSWORD" >> /pg/rclone/.${entype}
+echo "password2 = $ENC_SALT" >> /pg/rclone/.${entype};
 fi
 
 tee <<-EOF
@@ -96,7 +96,7 @@ clonestart
 tlabeloauth () {
 pgclonevars
   gtype="https://www.googleapis.com/drive/v3/teamdrives"
-  storage="/pg/var/teamdrive.output"
+  storage="/pg/rclone/teamdrive.output"
 
 tee <<-EOF
 
@@ -125,8 +125,8 @@ EOF
 }
 
 teamdriveselect () {
-  cat /pg/var/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /pg/var/teamdrive.id
-  cat /pg/var/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev > /pg/var/teamdrive.name
+  cat /pg/rclone/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /pg/rclone/teamdrive.id
+  cat /pg/rclone/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev > /pg/rclone/teamdrive.name
 
 tee <<-EOF
 
@@ -138,11 +138,11 @@ EOF
   A=0
   while read p; do
   ((A++))
-  name=$(sed -n ${A}p /pg/var/teamdrive.name)
+  name=$(sed -n ${A}p /pg/rclone/teamdrive.name)
   echo "[$A] $p - $name"
-done </pg/var/teamdrive.id
+done </pg/rclone/teamdrive.id
 
-if [[ $(cat /pg/var/teamdrive.name) == "" ]]; then
+if [[ $(cat /pg/rclone/teamdrive.name) == "" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -166,10 +166,10 @@ read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
 if [[ "$typed" -ge "1" && "$typed" -le "$A" ]]; then a=b
 else teamdriveselect; fi
 
-  name=$(sed -n ${typed}p /pg/var/teamdrive.name)
-  id=$(sed -n ${typed}p /pg/var/teamdrive.id)
-  echo "$name" > /pg/var/pgclone.teamdrive
-  echo "$id" > /pg/var/pgclone.teamid
+  name=$(sed -n ${typed}p /pg/rclone/teamdrive.name)
+  id=$(sed -n ${typed}p /pg/rclone/teamdrive.id)
+  echo "$name" > /pg/rclone/pgclone.teamdrive
+  echo "$id" > /pg/rclone/pgclone.teamid
 
 tee <<-EOF
 

@@ -326,7 +326,7 @@ fi
 gdsabuild () {
 
   ## what sets if encrypted is on or not
-  encheck=$(cat /pg/var/pgclone.transport)
+  encheck=$(cat /pg/rclone/pgclone.transport)
   bencrypted=no
   if [ "$encheck" == "eblitz" ]; then bencrypted=yes; fi
 
@@ -338,8 +338,8 @@ gdsabuild () {
   tdrive="${sd:13}"
 
   if [ "$bencrypted" == "yes" ]; then
-  PASSWORD=$(cat /pg/var/pgclone.password)
-  SALT=$(cat /pg/var/pgclone.salt)
+  PASSWORD=$(cat /pg/rclone/pgclone.password)
+  SALT=$(cat /pg/rclone/pgclone.salt)
   ENC_PASSWORD=`rclone obscure "$PASSWORD"`
   ENC_SALT=`rclone obscure "$SALT"`; fi
 
@@ -402,7 +402,7 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
 
   num=$keys
   count=0
-  project=$(cat /pg/var/pgclone.project)
+  project=$(cat /pg/rclone/pgclone.project)
 
   ##wipe previous keys stuck there
   mkdir -p /pg/var/keys/processed/
@@ -627,7 +627,7 @@ EOF
 keymenu () {
 gcloud info | grep Account: | cut -c 10- > /pg/var/project.account
 account=$(cat /pg/var/project.account)
-project=$(cat /pg/var/pgclone.project)
+project=$(cat /pg/rclone/pgclone.project)
 
 if [ "$account" == "NOT-SET" ]; then
   display5="[NOT-SET]"

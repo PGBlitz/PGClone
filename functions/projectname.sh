@@ -102,7 +102,7 @@ gcloud services enable drive.googleapis.com --project ${existingnumber} --accoun
 else exisitingproject; fi
 echo
 read -p '↘️  Existing Project Set | Press [ENTER] ' typed < /dev/tty
-echo "${existingnumber}" > /pg/var/pgclone.project
+echo "${existingnumber}" > /pg/rclone/pgclone.project
 clonestart
 }
 
@@ -128,7 +128,7 @@ if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
 destroynumber=$(cat /pg/var/prolist/$typed)
 
   # Cannot Destroy Active Project
-  if [[ $(cat /pg/var/pgclone.project) == "$destroynumber" ]]; then
+  if [[ $(cat /pg/rclone/pgclone.project) == "$destroynumber" ]]; then
   echo
   read -p '↘️  Unable to Destroy an Active Project | Press [ENTER] ' typed < /dev/tty
   destroyproject
@@ -254,7 +254,7 @@ tee <<-EOF
 EOF
 
 gcloud services enable drive.googleapis.com --project $projectid --account=${pgcloneemail}
-echo "$projectid" > /pg/var/pgclone.project
+echo "$projectid" > /pg/rclone/pgclone.project
 
 tee <<-EOF
 
@@ -262,14 +262,14 @@ tee <<-EOF
 🚀 PG Clone - Resetting Prior Stored Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rm -rf /pg/var/pgclone.secret 1>/dev/null 2>&1
-rm -rf /pg/var/pgclone.public 1>/dev/null 2>&1
-rm -rf /pg/var/pgclone.secret 1>/dev/null 2>&1
+rm -rf /pg/rclone/pgclone.secret 1>/dev/null 2>&1
+rm -rf /pg/rclone/pgclone.public 1>/dev/null 2>&1
+rm -rf /pg/rclone/pgclone.secret 1>/dev/null 2>&1
 rm -rf /pg/rclone/.sd 1>/dev/null 2>&1
 rm -rf /pg/rclone/.gdrive 1>/dev/null 2>&1
 rm -rf /pg/rclone/.gc 1>/dev/null 2>&1
 rm -rf /pg/rclone/.tc 1>/dev/null 2>&1
-rm -rf /pg/var/pgclone.teamdrive 1>/dev/null 2>&1
+rm -rf /pg/rclone/pgclone.teamdrive 1>/dev/null 2>&1
 rm -rf /pg/var/deployed.version 1>/dev/null 2>&1
 
 docker stop jellyfin 1>/dev/null 2>&1

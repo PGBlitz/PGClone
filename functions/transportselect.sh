@@ -26,15 +26,15 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-    echo "mu" > /pg/var/pgclone.transport ;;
+    echo "mu" > /pg/rclone/pgclone.transport ;;
     2 )
-    echo "me" > /pg/var/pgclone.transport ;;
+    echo "me" > /pg/rclone/pgclone.transport ;;
     3 )
-    echo "bu" > /pg/var/pgclone.transport ;;
+    echo "bu" > /pg/rclone/pgclone.transport ;;
     4 )
-    echo "be" > /pg/var/pgclone.transport ;;
+    echo "be" > /pg/rclone/pgclone.transport ;;
     5 )
-    echo "le" > /pg/var/pgclone.transport ;;
+    echo "le" > /pg/rclone/pgclone.transport ;;
     * )
         transportselect ;;
 esac
