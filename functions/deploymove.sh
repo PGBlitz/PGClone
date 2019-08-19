@@ -47,7 +47,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
 fi
 
 # deploy union
-ansible-playbook /pg/pgclone/ymls/pgunion.yml -e "\
+ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   transport=$transport \
   multihds=$multihds
   type=$type

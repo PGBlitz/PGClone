@@ -78,7 +78,7 @@ while read p; do
 done </pg/var/.blitzlist
 
 # deploy union
-ansible-playbook /pg/pgclone/ymls/pgunion.yml -e "\
+ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   transport=$transport \
   type=$type
   multihds=$multihds
