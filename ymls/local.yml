@@ -20,18 +20,18 @@
         dest: /pg/var/pgunity.sh
         force: yes
 
-    - name: Install PGUnion Service
+    - name: Install PGUnity Service
       template:
         src: /pg/pgclone/mounts/pgunity.service
         dest: /etc/systemd/system/pgunity.service
         force: yes
 
-    - name: Reload PGUnion Service
+    - name: Reload PGUnity Service
       systemd:
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        name: pgunion
+        name: pgunity
 
     - name: Sleep 2 Seconds
       wait_for: timeout=2
