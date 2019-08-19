@@ -158,7 +158,7 @@
         daemon_reload: yes
         enabled: yes
         state: reloaded
-        name: pgunion
+        name: pgunity
 
     - name: 'Waiting for PGUnion to initialize'
       wait_for:
