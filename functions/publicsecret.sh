@@ -33,8 +33,8 @@ read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
     rm -rf /pg/rclone/.gc 1>/dev/null 2>&1
-    rm -rf /pg/rclone/.gdrive 1>/dev/null 2>&1
-    rm -rf /pg/rclone/.tc 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.gd 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.sc 1>/dev/null 2>&1
     rm -rf /pg/rclone/.sd 1>/dev/null 2>&1
     rm -rf /pg/rclone/pgclone.teamdrive 1>/dev/null 2>&1
     rm -rf /pg/rclone/pgclone.public 1>/dev/null 2>&1

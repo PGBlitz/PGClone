@@ -13,7 +13,7 @@ echo "#------------------------------------------" > /pg/rclone/blitz.conf
 echo "#RClone Rewrite | Visit https://pgblitz.com" >> /pg/rclone/blitz.conf
 echo "#------------------------------------------" >> /pg/rclone/blitz.conf
 
-cat /pg/rclone/.gdrive >> /pg/rclone/blitz.conf
+cat /pg/rclone/.gd >> /pg/rclone/blitz.conf
 
 if [[ $(cat "/pg/rclone/.gc") != "NOT-SET" ]]; then
 echo ""
@@ -21,9 +21,9 @@ cat /pg/rclone/.gc >> /pg/rclone/blitz.conf; fi
 
 cat /pg/rclone/.sd >> /pg/rclone/blitz.conf
 
-if [[ $(cat "/pg/rclone/.tc") != "NOT-SET" ]]; then
+if [[ $(cat "/pg/rclone/.sc") != "NOT-SET" ]]; then
 echo ""
-cat /pg/rclone/.tc >> /pg/rclone/blitz.conf; fi
+cat /pg/rclone/.sc >> /pg/rclone/blitz.conf; fi
 
 cat /pg/var/.keys >> /pg/rclone/blitz.conf
 
@@ -36,7 +36,7 @@ echo "#------------------------------------------" > /pg/rclone/blitz.conf
 echo "#RClone Rewrite | Visit https://pgblitz.com" >> /pg/rclone/blitz.conf
 echo "#------------------------------------------" >> /pg/rclone/blitz.conf
 
-cat /pg/rclone/.gdrive > /pg/rclone/blitz.conf
+cat /pg/rclone/.gd > /pg/rclone/blitz.conf
 
 if [[ $(cat "/pg/rclone/.gc") != "NOT-SET" ]]; then
 echo ""

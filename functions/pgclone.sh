@@ -220,7 +220,7 @@ if [ "$public" == "" ]; then dpublic="NOT SET"; else dpublic="SET"; fi
 if [ "$teamdrive" == "" ]; then dteamdrive="NOT SET"; else dteamdrive=$teamdrive; fi
 
 gstatus=$(cat /pg/var/gd.pgclone)
-tstatus=$(cat /pg/var/sd.pgclone)
+sdstatus=$(cat /pg/var/sd.pgclone)
 
 ###### START
 if [ "$transport" == "PG Move /w No Encryption" ]; then
@@ -322,7 +322,7 @@ tee <<-EOF
 
 📁 RClone Configuration
 [4] gdrive   : $gstatus
-[5] tdrive   : $tstatus
+[5] tdrive   : $sdstatus
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -384,7 +384,7 @@ tee <<-EOF
 
 📁 RClone Configuration
 [5] gdrive   : $gstatus
-[6] tdrive   : $tstatus
+[6] tdrive   : $sdstatus
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -30,7 +30,7 @@ tee <<-EOF
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
 [4] TDrive Label          [$tdname]
-[5] TDrive OAuth          [$tstatus]
+[5] TDrive OAuth          [$sdstatus]
 [6] GDrive OAuth          [$gstatus]
 [7] Key Management        [$displaykey] Built
 [8] TDrive (E-Mail Share Generator)
@@ -42,7 +42,7 @@ tee <<-EOF
 [3] Client ID & Secret    [${pgcloneid}]
 [4] Passwords             [$pstatus]
 [5] TDrive Label          [$tdname]
-[6] TDrive | TCrypt       [$tstatus] - [$tcstatus]
+[6] TDrive | TCrypt       [$sdstatus] - [$scstatus]
 [7] GDrive | GCrypt       [$gstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
 [9] TDrive (E-Mail Share Generator)

@@ -193,9 +193,9 @@ pgclonevars
 elif [[ "$transport" == "me" ]]; then
   if [[ "$gstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "bu" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" ]]; then mountfail; fi
+  if [[ "$gstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "be" ]]; then
-  if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE" ]]; then mountfail; fi
+  if [[ "$gstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$scstatus" != "ACTIVE" ]]; then mountfail; fi
 fi
 }
 

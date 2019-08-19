@@ -37,17 +37,17 @@ pgclonevars () {
     clonesalt=$(cat /pg/rclone/pgclone.salt)
   fi
 
-  variable /pg/rclone/.gdrive "NOT-SET"
-  if [[ $(cat /pg/rclone/.gdrive) == "NOT-SET" ]]; then gstatus="NOT-SET"
+  variable /pg/rclone/.gd "NOT-SET"
+  if [[ $(cat /pg/rclone/.gd) == "NOT-SET" ]]; then gstatus="NOT-SET"
   else gstatus="ACTIVE"; fi
 
   variable /pg/rclone/.sd "NOT-SET"
-  if [[ $(cat /pg/rclone/.sd) == "NOT-SET" ]]; then tstatus="NOT-SET"
-  else tstatus="ACTIVE"; fi
+  if [[ $(cat /pg/rclone/.sd) == "NOT-SET" ]]; then sdstatus="NOT-SET"
+  else sdstatus="ACTIVE"; fi
 
-  variable /pg/rclone/.tc "NOT-SET"
-  if [[ $(cat /pg/rclone/.tc) == "NOT-SET" ]]; then tcstatus="NOT-SET"
-  else tcstatus="ACTIVE"; fi
+  variable /pg/rclone/.sc "NOT-SET"
+  if [[ $(cat /pg/rclone/.sc) == "NOT-SET" ]]; then scstatus="NOT-SET"
+  else scstatus="ACTIVE"; fi
 
   variable /pg/rclone/.gc "NOT-SET"
   if [[ $(cat /pg/rclone/.gc) == "NOT-SET" ]]; then gcstatus="NOT-SET"
