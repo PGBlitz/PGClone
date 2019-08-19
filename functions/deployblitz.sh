@@ -22,7 +22,7 @@ ansible-playbook /pg/pgclone/ymls/remove.yml
 # gdrive deploys by standard
 echo "sd" > /pg/var/deploy.version
 echo "bu" > /pg/var/deployed.version
-type=gdrive
+type=gd
 encryptbit=""
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
@@ -31,9 +31,9 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=gdrive"
+  drive=gd"
 
-type=tdrive
+type=sd
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
@@ -41,7 +41,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=tdrive"
+  drive=sd"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "be" ]]; then
@@ -52,10 +52,10 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=gcrypt"
+  drive=sc"
 
 echo "be" > /pg/var/deployed.version
-type=tcrypt
+type=sc
 encryptbit="C"
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
@@ -64,7 +64,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   vfs_cma=$vfs_cma
   vfs_rcs=$vfs_rcs
   vfs_rcsl=$vfs_rcsl
-  drive=tcrypt"
+  drive=sc"
 fi
 
 # builds the list
@@ -87,7 +87,7 @@ ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   hdpath=$hdpath"
 
 # output final display
-if [[ "$type" == "tdrive" ]]; then finaldeployoutput="PG Blitz - Unencrypted"
+if [[ "$type" == "sd" ]]; then finaldeployoutput="PG Blitz - Unencrypted"
 else finaldeployoutput="PG Blitz - Encrypted"; fi
 
 tee <<-EOF
