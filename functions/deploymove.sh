@@ -22,7 +22,7 @@ ansible-playbook /pg/pgclone/ymls/remove.yml
 # gdrive deploys by standard
 echo "gd" > /pg/var/deploy.version
 echo "mu" > /pg/var/deployed.version
-type=gdrive
+type=gd
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs
@@ -35,7 +35,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "me" ]]; then
 echo "me" > /pg/var/deployed.version
-type=gcrypt
+type=gc
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   vfs_bs=$vfs_bs
   vfs_dcs=$vfs_dcs

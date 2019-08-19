@@ -62,12 +62,12 @@ if [[ "$sdname" == "NOT-SET" ]]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Setup the TDrive Label First! ~ http://pgclone.pgblitz.com
+🚀 Setup the SDrive Label First! ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Set up your TDrive Label prior to executing the TDrive OAuth.
-Basically, we cannot authorize a TeamDrive without knowing which
-TeamDrive is being utilized first!
+NOTE: Set up your SDrive Label prior to executing the SDrive OAuth.
+Basically, we cannot authorize a ShareDrive without knowing which
+ShareDrive is being utilized first!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -161,7 +161,6 @@ localstartoutput () {
   esac
 clonestart
 }
-
 
 clonestartactions () {
 if [[ "$transport" == "mu" ]]; then
