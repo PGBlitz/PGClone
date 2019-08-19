@@ -15,10 +15,10 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /pg/var/.$oauthcheck $oauthcheck: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/.$oauthcheck $oauthcheck: | grep -oP plexguide | head -n1)
   if [[ "$rcheck" != "plexguide" ]]; then
-    rclone mkdir --config /pg/var/.$oauthcheck $oauthcheck:/plexguide
-    rcheck=$(rclone lsd --config /pg/var/.$oauthcheck $oauthcheck: | grep -oP plexguide | head -n1)
+    rclone mkdir --config /pg/rclone/.$oauthcheck $oauthcheck:/plexguide
+    rcheck=$(rclone lsd --config /pg/rclone/.$oauthcheck $oauthcheck: | grep -oP plexguide | head -n1)
   fi
 
   if [ "$rcheck" != "plexguide" ]; then
@@ -34,7 +34,7 @@ NOTES:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rm -rf /pg/var/.$oauthcheck 1>/dev/null 2>&1
+rm -rf /pg/rclone/.$oauthcheck 1>/dev/null 2>&1
 
     if [[ "$oauthcheck" == "gdrive" ]]; then rm -rf /pg/rclone/.gc 1>/dev/null 2>&1; fi
     if [[ "$oauthcheck" == "tdrive" ]]; then rm -rf /pg/rclone/.tc 1>/dev/null 2>&1; fi
