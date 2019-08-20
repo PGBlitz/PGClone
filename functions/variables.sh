@@ -106,8 +106,7 @@ else dversionoutput="None"; fi
   cloneclean=$(cat /pg/var/cloneclean)
 
 # Copy JSON if Missing
-  if [ -e "/pg/rclone/pgclone.json" ]
-  then cp /pg/pgclone/pgclone.json /pg/rclone/; fi
+  if [ ! -e "/pg/rclone/pgclone.json" ]; then cp /pg/pgclone/pgclone.json /pg/rclone/pgclone.json; fi
 
 # For PG Blitz Mounts
   bs=$(jq -r '.bs' /pg/rclone/pgclone.json)
