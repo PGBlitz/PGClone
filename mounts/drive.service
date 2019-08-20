@@ -25,13 +25,13 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /pg/{{drive}} \
 --log-level INFO \
 --timeout 1h \
 --drive-use-trash=false \
---dir-cache-time {{vfs_dct}}m \
---vfs-cache-max-age {{vfs_cma}}h \
---vfs-read-chunk-size {{vfs_rcs}}M \
---vfs-read-chunk-size-limit {{vfs_rcsl}}G \
---drive-chunk-size {{vfs_dcs}}M \
+--dir-cache-time {{dct}} \
+--vfs-cache-max-age {{cma}} \
+--vfs-read-chunk-size {{rcs}} \
+--vfs-read-chunk-size-limit {{rcsl}} \
+--drive-chunk-size {{dcs}} \
 --user-agent={{uagent.stdout}} \
---buffer-size {{vfs_bs}}M
+--buffer-size {{bs}}
 
 ExecStop=/bin/fusermount -uz /pg/{{drive}}
 TimeoutStopSec=20

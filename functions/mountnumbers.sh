@@ -18,14 +18,14 @@ NOTE1 : typ only numbers without M / G or H
 
 RClone Variable Name           Default ~ Current Settings
 
-[1] Buffer-Size                16M        [$vfs_bs] MB
-[2] Drive-Chunk-Size           64M        [$vfs_dcs] MB
-[3] Dir-Cache-Time             2M         [$vfs_dct] Minutes
-[4] VFS-Read-Chunk-Size        64M        [$vfs_rcs] MB
-[5] VFS-Read-Chunk-Size-Limit  2G         [$vfs_rcsl] GB
-[6] VFS-Cache-Mode             off        [$vfs_cm]
-[7] VFS-Cache-Max-Age          1H         [$vfs_cma] Hours
-[8] VFS-Cache-Max-Size         100G       [$vfs_cms] GB
+[1] Buffer-Size                16M        [$bs] MB
+[2] Drive-Chunk-Size           64M        [$dcs] MB
+[3] Dir-Cache-Time             2M         [$dct] Minutes
+[4] VFS-Read-Chunk-Size        64M        [$rcs] MB
+[5] VFS-Read-Chunk-Size-Limit  2G         [$rcsl] GB
+[6] VFS-Cache-Mode             off        [$cm]
+[7] VFS-Cache-Max-Age          1H         [$cma] Hours
+[8] VFS-Cache-Max-Size         100G       [$cms] GB
 [Z] Exit
 
 Please read the wiki on how changing these settings impact stability and performance!

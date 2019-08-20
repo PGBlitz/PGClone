@@ -25,45 +25,46 @@ echo "bu" > /pg/var/deployed.version
 type=gd
 encryptbit=""
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cma=$vfs_cma
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
+  bs=$bs
+  dcs=$dcs
+  dct=$dct
+  cma=$cma
+  rcs=$rcs
+  rcsl=$rcsl
   drive=gd"
 
 type=sd
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cma=$vfs_cma
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
+  bs=$bs
+  dcs=$dcs
+  dct=$dct
+  cma=$cma
+  rcs=$rcs
+  rcsl=$rcsl
+  cm="writes"
   drive=sd"
 
 # deploy only if pgmove is using encryption
 if [[ "$transport" == "be" ]]; then
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cma=$vfs_cma
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
+  bs=$bs
+  dcs=$dcs
+  dct=$dct
+  cma=$cma
+  rcs=$rcs
+  rcsl=$rcsl
   drive=sc"
 
 echo "be" > /pg/var/deployed.version
 type=sc
 encryptbit="C"
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
-  vfs_bs=$vfs_bs
-  vfs_dcs=$vfs_dcs
-  vfs_dct=$vfs_dct
-  vfs_cma=$vfs_cma
-  vfs_rcs=$vfs_rcs
-  vfs_rcsl=$vfs_rcsl
+  bs=$bs
+  dcs=$dcs
+  dct=$dct
+  cma=$cma
+  rcs=$rcs
+  rcsl=$rcsl
   drive=sc"
 fi
 
@@ -83,7 +84,7 @@ ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   type=$type
   multihds=$multihds
   encryptbit=$encryptbit
-  vfs_dcs=$vfs_dcs
+  dcs=$dcs
   hdpath=$hdpath"
 
 # output final display
