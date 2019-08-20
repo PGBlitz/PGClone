@@ -105,34 +105,21 @@ else dversionoutput="None"; fi
   variable /pg/var/cloneclean "600"
   cloneclean=$(cat /pg/var/cloneclean)
 
+# Copy JSON if Missing
+  if [ -e "/pg/rclone/pgclone.json" ]
+  then cp /pg/pgclone/pgclone.json /pg/rclone/; fi
+
 # For PG Blitz Mounts
-  variable /pg/var/vfs_bs "16"
-  vfs_bs=$(cat /pg/var/vfs_bs)
-
-
-  variable /pg/var/vfs_dcs "64"
-  vfs_dcs=$(cat /pg/var/vfs_dcs)
-
-  variable /pg/var/vfs_dct "2"
-  vfs_dct=$(cat /pg/var/vfs_dct)
-
-  variable /pg/var/vfs_cma "1"
-  vfs_cma=$(cat /pg/var/vfs_cma)
-
-  variable /pg/var/vfs_rcs "64"
-  vfs_rcs=$(cat /pg/var/vfs_rcs)
-
-  variable /pg/var/vfs_rcsl "2"
-  vfs_rcsl=$(cat /pg/var/vfs_rcsl)
-
-  variable /pg/var/vfs_cm "off"
-  vfs_cm=$(cat /pg/var/vfs_cm)
-
-  variable /pg/var/vfs_cms "100"
-  vfs_cms=$(cat /pg/var/vfs_cms)
+  bs=$(jq -r '.bs' /pg/rclone/pgclone.json)
+  dcs=$(jq -r '.dcs' /pg/rclone/pgclone.json)
+  dct=$(jq -r '.dct' /pg/rclone/pgclone.json)
+  cma=$(jq -r '.cma' /pg/rclone/pgclone.json)
+  rcs=$(jq -r '.rcs' /pg/rclone/pgclone.json)
+  rcsl=$(jq -r '.rcsl' /pg/rclone/pgclone.json)
+  cm=$(jq -r '.cm' /pg/rclone/pgclone.json)
+  cms=$(jq -r '.cms' /pg/rclone/pgclone.json)
 
   randomagent=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
-
   variable /pg/var/uagent "$randomagent"
   uagent=$(cat /pg/var/uagent)
 }

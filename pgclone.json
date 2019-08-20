@@ -1,12 +1,13 @@
 {
-    "version": "1",
-    "bs": "16",
-    "dcs": "64",
-    "dct": "2",
-    "cma": "2",
-    "rcs": "64",
-    "rcsl": "2",
-    "cm": "off",
-    "cms": "100",
+    "_comment": "Visit http://bvalues.pgblitz.com",
+    "version": 1,
+    "bs": "16M",
+    "dcs": "128M",
+    "dct": "5m",
+    "cma": "1h",
+    "rcs": "64M",
+    "rcsl": "1024M",
+    "cm": "writes",
+    "cms": "off",
     "drive": ""
 }
