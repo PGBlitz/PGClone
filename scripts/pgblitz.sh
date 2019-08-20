@@ -58,7 +58,6 @@ while read p; do
   --checkers=20 \
   --transfers=16 \
   --bwlimit {{bandwidth.stdout}}M \
-  --max-size=300G \
   --user-agent="$useragent" \
   --drive-chunk-size={{dcs}} \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \

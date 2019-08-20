@@ -29,9 +29,9 @@ sleep 10
 while true
 do
 
-# Repull excluded folder 
+# Repull excluded folder
  wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
- 
+
   cleaner="$(cat /pg/var/cloneclean)"
   useragent="$(cat /pg/var/uagent)"
 
@@ -59,8 +59,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
 --bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
---max-size=300G \
---drive-chunk-size={{vfs_dcs}}M \
+--drive-chunk-size={{dcs}} \
 --user-agent="$useragent" \
 --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
 --exclude="**partial~" --exclude=".unionfs-fuse/**" \
@@ -83,7 +82,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
   # Remove empty directories
   find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
-  # Removes garbage | torrent folder excluded 
+  # Removes garbage | torrent folder excluded
   find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
   find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
 
