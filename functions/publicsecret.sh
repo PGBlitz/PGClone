@@ -21,7 +21,7 @@ $pgclonesecret
 
 WARNING: Changing the values will RESET & DELETE the following:
 1. GDrive
-2. TDrive
+2. SDrive
 3. Service Keys
 
 Change the Stored Values?
