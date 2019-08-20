@@ -12,29 +12,22 @@
     state: absent
   with_items:
     - blitz
-    - move
-    - nrclone
-    - nsc
-    - ngd
-    - npgblitz
-    - npgmove
-    - npgunity
-    - nscrypt
-    - nsdrive
-    - pgblitz
+    - edit-blitz
+    - edit-gc
+    - edit-gd
+    - edit-pgmove
+    - edit-pgunity
+    - edit-rclone
+    - edit-sc
+    - edit-sd
     - pgmove
-    - sgcrypt
-    - sgdrive
-    - spgblitz
-    - spgmove
-    - spgunity
-    - srclone
-    - tpgblitz
-    - tpgmove
-    - tmove
-    - tblitz
-    - trclone
-    - sscrypt
+    - status-gc
+    - status-gd
+    - status-pgblitz
+    - status-pgunity
+    - status-rclone
+    - status-gc
+    - status-sd
 
 - name: Installing Service helpers
   template:
@@ -44,21 +37,19 @@
     mode: 0775
   with_items:
     - blitz
-    - move
-    - nrclone
-    - nsc
-    - ngd
-    - npgblitz
-    - npgmove
-    - npgunity
-    - nscrypt
-    - nsdrive
+    - edit-blitz
+    - edit-gc
+    - edit-gd
+    - edit-pgmove
+    - edit-pgunity
+    - edit-rclone
+    - edit-sc
+    - edit-sd
     - pgmove
-    - sgcrypt
-    - sgdrive
-    - spgblitz
-    - spgmove
-    - spgunity
-    - srclone
-    - sscrypt
-    - ssdrive
+    - status-gc
+    - status-gd
+    - status-pgblitz
+    - status-pgunity
+    - status-rclone
+    - status-gc
+    - status-sd
