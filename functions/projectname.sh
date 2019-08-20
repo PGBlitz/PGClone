@@ -192,7 +192,7 @@ WARNING ~ WARNING ~ WARNING ~ WARNING ~ WARNING ~ WARNING ~ WARNING
 
 Creating a NEW PROJECT will require a new Google CLIENT ID and SECRET from
 this project to be created! As a result when finished; this will also
-result in destroying the set gdrive/tdrive information due to the new
+result in destroying the set gdrive/sdrive information due to the new
 project being created!
 
 This will also destroy any TRANSPORT MODE deployed and including any

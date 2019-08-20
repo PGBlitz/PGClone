@@ -64,8 +64,8 @@ elif [[ "$typed" == "N" || "$typed" == "n" ]]; then mountsmenu
   if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
     if [ "$type" == "gdrive" ]; then
     rclone config delete gcrypt --config /pg/rclone/blitz.conf; fi
-    if [ "$type" == "tdrive" ]; then
-    rclone config delete tcrypt --config /pg/rclone/blitz.conf; fi
+    if [ "$type" == "sdrive" ]; then
+    rclone config delete scrypt --config /pg/rclone/blitz.conf; fi
   fi
 
 tee <<-EOF
@@ -149,7 +149,7 @@ deploychecks
 if [[ "$transport" == "PG Move /w No Encryption" || "$transport" == "PG Move /w Encryption" ]]; then
   display=""
 else
-  if [ "$type" == "tdrive" ]; then
+  if [ "$type" == "sdrive" ]; then
   display="TEAMDRIVE: $teamdrive
   ";fi; fi
 
@@ -322,7 +322,7 @@ tee <<-EOF
 
 📁 RClone Configuration
 [4] gdrive   : $gdstatus
-[5] tdrive   : $sdstatus
+[5] sdrive   : $sdstatus
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -356,7 +356,7 @@ tee <<-EOF
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
   mountsmenu; fi
-  type=tdrive
+  type=sdrive
   statusmount
   inputphase
   mountsmenu
@@ -384,7 +384,7 @@ tee <<-EOF
 
 📁 RClone Configuration
 [5] gdrive   : $gdstatus
-[6] tdrive   : $sdstatus
+[6] sdrive   : $sdstatus
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -423,7 +423,7 @@ tee <<-EOF
 EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
   mountsmenu; fi
-  type=tdrive
+  type=sdrive
   statusmount
   inputphase
   mountsmenu
@@ -744,7 +744,7 @@ testphase () {
   echo "type = drive" >> /pg/rclone/test.conf
   echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/test.conf
   echo "" >> /pg/rclone/test.conf
-  if [ "$type" == "tdrive" ]; then
+  if [ "$type" == "sdrive" ]; then
   teamid=$(cat /pg/rclone/pgclone.teamid)
   echo "team_drive = $teamid" >> /pg/rclone/test.conf; fi
   echo ""
@@ -754,7 +754,7 @@ encheck=$(cat /pg/rclone/pgclone.transport)
 if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
 
   if [ "$type" == "gdrive" ]; then entype="gcrypt";
-  else entype="tcrypt"; fi
+  else entype="scrypt"; fi
 
   PASSWORD=`cat /pg/rclone/pgclone.password`
   SALT=`cat /pg/rclone/pgclone.salt`

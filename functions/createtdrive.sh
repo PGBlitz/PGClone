@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-ctdrive () {
+csdrive () {
 pgclonevars
 
 tee <<-EOF

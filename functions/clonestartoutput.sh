@@ -426,7 +426,7 @@ case $typed in
       8 )
           uagent ;;
       9 )
-          ctdrive ;;
+          csdrive ;;
       Z )
           clonestart ;;
       z )

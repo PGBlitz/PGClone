@@ -66,15 +66,15 @@ touch /pg/logs/.drivelog
     multihdreadonly
   elif [[ "$transport" == "bu" ]]; then
     gdrivemod
-    tdrivemod
+    sdrivemod
     gdsamod
     multihdreadonly
   elif [[ "$transport" == "be" ]]; then
     gdrivemod
-    tdrivemod
+    sdrivemod
     gdsamod
     gcryptmod
-    tcryptmod
+    scryptmod
     gdsacryptmod
     multihdreadonly
   fi
@@ -126,7 +126,7 @@ gdrivemod ()
 
   if [[ "$initial" == "plexguide" ]]; then echo "GDRIVE :  Passed" >> /pg/logs/.drivelog; else echo "GDRIVE :  Failed" >> /pg/logs/.drivelog; fi
 }
-tdrivemod ()
+sdrivemod ()
 {
   initial=$(rclone lsd --config /pg/rclone/blitz.conf sd: | grep -oP plexguide | head -n1)
 
@@ -154,7 +154,7 @@ gcryptmod ()
   if [[ "$c1initial" == "encrypt" ]]; then echo "GCRYPT1:  Passed" >> /pg/logs/.drivelog; else echo "GCRYPT1:  Failed" >> /pg/logs/.drivelog; fi
   if [[ "$c2initial" == "plexguide" ]]; then echo "GCRYPT2:  Passed" >> /pg/logs/.drivelog; else echo "GCRYPT2:  Failed" >> /pg/logs/.drivelog; fi
 }
-tcryptmod ()
+scryptmod ()
 {
   c1initial=$(rclone lsd --config /pg/rclone/blitz.conf sd: | grep -oP encrypt | head -n1)
   c2initial=$(rclone lsd --config /pg/rclone/blitz.conf sc: | grep -oP plexguide | head -n1)

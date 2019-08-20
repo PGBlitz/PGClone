@@ -28,7 +28,7 @@ source /pg/pgclone/functions/deploymove.sh
 source /pg/pgclone/functions/deployblitz.sh
 source /pg/pgclone/functions/multihd.sh
 source /pg/pgclone/functions/deploylocal.sh
-source /pg/pgclone/functions/createtdrive.sh
+source /pg/pgclone/functions/createsdrive.sh
 source /pg/pgclone/functions/cloneclean.sh
 source /pg/pgclone/functions/uagent.sh
 ################################################################################
