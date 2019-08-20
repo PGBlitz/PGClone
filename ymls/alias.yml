@@ -19,8 +19,8 @@
     - npgblitz
     - npgmove
     - npgunity
-    - ntcrypt
-    - ntdrive
+    - nscrypt
+    - nsdrive
     - pgblitz
     - pgmove
     - sgcrypt
@@ -34,7 +34,7 @@
     - tmove
     - tblitz
     - trclone
-    - stcrypt
+    - sscrypt
 
 - name: Installing Service helpers
   template:
@@ -51,8 +51,8 @@
     - npgblitz
     - npgmove
     - npgunity
-    - ntcrypt
-    - ntdrive
+    - nscrypt
+    - nsdrive
     - pgmove
     - sgcrypt
     - sgdrive
@@ -60,5 +60,5 @@
     - spgmove
     - spgunity
     - srclone
-    - stcrypt
-    - stdrive
+    - sscrypt
+    - ssdrive
