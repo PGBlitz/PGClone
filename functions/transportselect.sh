@@ -15,8 +15,8 @@ NOTE: Please visit the link and understand what your doing first!
 
 [1] Move  Unencrypt: Data > GDrive | Novice  | 750GB Daily Transfer Max
 [2] Move  Encrypted: Data > GDrive | Novice  | 750GB Daily Transfer Max
-[3] Blitz Unencrypt: Data > TDrive | Complex | Exceed 750GB Transport Cap
-[4] Blitz Encrypted: Data > TDrive | Complex | Exceed 750GB Transport Cap
+[3] Blitz Unencrypt: Data > SDrive | Complex | Exceed 750GB Transport Cap
+[4] Blitz Encrypted: Data > SDrive | Complex | Exceed 750GB Transport Cap
 [5] Local Edition  : Local HDs     | Easy    | Utilizes System's HD's Only
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
