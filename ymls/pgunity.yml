@@ -17,22 +17,22 @@
 
     - name: 'If Fact Matches - Encrypted Blitz'
       set_fact:
-        path: 'remotes = gd: sd: gc: sc: {{hdpath}}/transfer'
+        path: 'remotes = gd: sd: gc: sc: {{hdpath}}/move'
       when: transport == "be"
 
     - name: 'If Fact Matches - Encrypted Move'
       set_fact:
-        path: 'remotes = gd: gc: {{hdpath}}/transfer'
+        path: 'remotes = gd: gc: {{hdpath}}/move'
       when: transport == "me"
 
     - name: 'If Fact Matches - UnEncrypted Blitz'
       set_fact:
-        path: 'remotes = gd: sd: {{hdpath}}/transfer'
+        path: 'remotes = gd: sd: {{hdpath}}/move'
       when: transport == "bu"
 
     - name: 'If Fact Matches - UnEncrypted Move'
       set_fact:
-        path: 'remotes = gd: {{hdpath}}/transfer'
+        path: 'remotes = gd: {{hdpath}}/move'
       when: transport == "mu"
 
     - name: Creating required paths
@@ -144,7 +144,7 @@
     - name: Install PGUnity Script
       template:
         src: /pg/pgclone/scripts/pgunity.sh
-        dest: /pg/rclone/pgunity.sh
+        dest: /pg/var/pgunity.sh
         force: yes
 
     - name: Install PGUnity Service

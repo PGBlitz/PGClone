@@ -9,8 +9,8 @@ sleep 2
 
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 755 "{{hdpath}}/downloads"
-chown -R 1000:1000 "{{hdpath}}/transfer"
-chmod -R 755 "{{hdpath}}/transfer"
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 755 "{{hdpath}}/move"
 
 mergerfs -o func.getattr=newest,category.create=ff,direct_io,use_ino,atomic_o_trunc,big_writes,default_permissions,splice_move,splice_read,splice_write,allow_other,sync_read,minfreespace=15,umask=002,uid=1000,gid=1000,fsname=pgunity,nonempty \
-{{hdpath}}/transfer=RO:{{hdpath}}/downloads=RW:{{multihds}} /pg/unity
+{{hdpath}}/move=RO:{{hdpath}}/downloads=RW:{{multihds}} /pg/unity

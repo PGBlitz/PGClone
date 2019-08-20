@@ -15,8 +15,8 @@ echo "----------------------------" >> /pg/logs/pgblitz.log
 echo "PG Blitz Log - First Startup" >> /pg/logs/pgblitz.log
 chown -R 1000:1000 "{{hdpath}}/downloads"
 chmod -R 775 "{{hdpath}}/downloads"
-chown -R 1000:1000 "{{hdpath}}/transfer"
-chmod -R 775 "{{hdpath}}/transfer"
+chown -R 1000:1000 "{{hdpath}}/move"
+chmod -R 775 "{{hdpath}}/move"
 
 startscript () {
 while read p; do
@@ -33,7 +33,7 @@ while read p; do
   echo "" >> /pg/logs/pgblitz.log
   echo "Utilizing: $p" >> /pg/logs/pgblitz.log
 
-  rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/transfer/" \
+  rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
   --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
@@ -47,10 +47,10 @@ while read p; do
   --exclude="**handbrake**" --exclude="**bazarr**" \
   --exclude="**ignore**"  --exclude="**inProgress**"
 
-  chown -R 1000:1000 "{{hdpath}}/transfer"
-  chmod -R 775 "{{hdpath}}/transfer"
+  chown -R 1000:1000 "{{hdpath}}/move"
+  chmod -R 775 "{{hdpath}}/move"
 
-  rclone moveto "{{hdpath}}/transfer" "${p}{{encryptbit}}:/" \
+  rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
   --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -83,7 +83,7 @@ while read p; do
   #find "$dlpath/move/" -mindepth 2 -type f -cmin +5 -size +1M -exec rm -rf {} \;
 
   # Remove empty directories
-  find "{{hdpath}}/transfer/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
+  find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage | torrent folder excluded
   find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
