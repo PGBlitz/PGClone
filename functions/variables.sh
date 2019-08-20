@@ -23,7 +23,7 @@ pgclonevars () {
   variable /pg/var/blitz.bw  "1000"
   variable /pg/rclone/pgclone.salt ""
 
-  variable /pg/var/server.hd.path "/mnt"
+  variable /pg/var/server.hd.path "/pg"
   hdpath=$(cat /pg/var/server.hd.path)
 
   variable /pg/rclone/oauth.check ""
