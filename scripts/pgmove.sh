@@ -35,7 +35,7 @@ do
   cleaner="$(cat /pg/var/cloneclean)"
   useragent="$(cat /pg/var/uagent)"
 
-rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
+rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/transfer/" \
 --config /pg/rclone/blitz.conf \
 --log-file=/pg/logs/pgmove.log \
 --log-level ERROR --stats 5s --stats-file-name-length 0 \
@@ -52,7 +52,7 @@ rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
 chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 775 "{{hdpath}}/move"
 
-rclone move "{{hdpath}}/move/" "{{type}}:/" \
+rclone move "{{hdpath}}/transfer/" "{{type}}:/" \
 --config /pg/rclone/blitz.conf \
 --log-file=/pg/logs/pgmove.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -80,7 +80,7 @@ rclone move "{{hdpath}}/move/" "{{type}}:/" \
   #find "$dlpath/move/" -mindepth 2 -type f -cmin +5 -size +1M -exec rm -rf {} \;
 
   # Remove empty directories
-  find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
+  find "{{hdpath}}/transfer/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage | torrent folder excluded
   find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;

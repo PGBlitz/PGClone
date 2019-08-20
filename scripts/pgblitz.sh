@@ -33,7 +33,7 @@ while read p; do
   echo "" >> /pg/logs/pgblitz.log
   echo "Utilizing: $p" >> /pg/logs/pgblitz.log
 
-  rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/move/" \
+  rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/transfer/" \
   --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
@@ -82,7 +82,7 @@ while read p; do
   #find "$dlpath/move/" -mindepth 2 -type f -cmin +5 -size +1M -exec rm -rf {} \;
 
   # Remove empty directories
-  find "{{hdpath}}/move/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
+  find "{{hdpath}}/transfer/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage | torrent folder excluded
   find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
