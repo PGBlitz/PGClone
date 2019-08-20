@@ -29,11 +29,11 @@ tee <<-EOF
 [1] Google Account Login  [$mainid]
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
-[4] TDrive Label          [$sdname]
-[5] TDrive OAuth          [$sdstatus]
+[4] SDrive Label          [$sdname]
+[5] SDrive OAuth          [$sdstatus]
 [6] GDrive OAuth          [$gdstatus]
 [7] Key Management        [$displaykey] Built
-[8] TDrive (E-Mail Share Generator)
+[8] SDrive (E-Mail Share Generator)
 EOF
 elif [[ "$transport" == "be" ]]; then
 tee <<-EOF
@@ -41,11 +41,11 @@ tee <<-EOF
 [2] Project Name          [$pgcloneproject]
 [3] Client ID & Secret    [${pgcloneid}]
 [4] Passwords             [$pstatus]
-[5] TDrive Label          [$sdname]
-[6] TDrive | TCrypt       [$sdstatus] - [$scstatus]
+[5] SDrive Label          [$sdname]
+[6] SDrive | SDrive       [$sdstatus] - [$scstatus]
 [7] GDrive | GCrypt       [$gdstatus] - [$gcstatus]
 [8] Key Management        [$displaykey] Built
-[9] TDrive (E-Mail Share Generator)
+[9] SDrive (E-Mail Share Generator)
 EOF
 elif [[ "$transport" == "le" ]]; then
 tee <<-EOF
