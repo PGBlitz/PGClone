@@ -20,17 +20,18 @@ echo "" >> /pg/logs/pgmove.log
 echo "----------------------------" >> /pg/logs/pgmove.log
 echo "PG Move Log - First Startup" >> /pg/logs/pgmove.log
 
-chown -R 1000:1000 "{{hdpath}}/downloads"
-chmod -R 775 "{{hdpath}}/downloads"
-chown -R 1000:1000 "{{hdpath}}/move"
-chmod -R 775 "{{hdpath}}/move"
+chown -R 1000:1000 "{{hdpath}}/transfer"
+chmod -R 775 "{{hdpath}}/transfer"
 
 sleep 10
 while true
 do
 
 # Repull excluded folder
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
+# wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
+
+find /pg/nzbget/finished -type f
+
 
   cleaner="$(cat /pg/var/cloneclean)"
   useragent="$(cat /pg/var/uagent)"

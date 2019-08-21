@@ -13,4 +13,4 @@ chown -R 1000:1000 "{{hdpath}}/move"
 chmod -R 755 "{{hdpath}}/move"
 
 mergerfs -o func.getattr=newest,category.create=ff,direct_io,use_ino,atomic_o_trunc,big_writes,default_permissions,splice_move,splice_read,splice_write,allow_other,sync_read,minfreespace=0,umask=002,uid=1000,gid=1000,fsname=pgunity,nonempty \
-{{hdpath}}/move=RW:{{hdpath}}/downloads=RW:{{multihds}}/pg/sd=NC:/pg/gd=NC:/pg/sc=NC:/pg/gc=NC /pg/unity
+{{hdpath}}/transfer=RW:{{multihds}}/pg/sd=NC:/pg/gd=NC:/pg/sc=NC:/pg/gc=NC /pg/unity

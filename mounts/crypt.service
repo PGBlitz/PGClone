@@ -32,7 +32,7 @@ ExecStart=/usr/bin/rclone mount {{drive}}: /pg/{{drive}} \
 --vfs-read-chunk-size-limit {{rcsl}} \
 --drive-chunk-size {{dcs}} \
 --user-agent={{uagent.stdout}} \
---buffer-size {{bs}}M
+--buffer-size {{bs}}
 
 ExecStop=/bin/fusermount -uz /pg/{{drive}}
 TimeoutStopSec=20
