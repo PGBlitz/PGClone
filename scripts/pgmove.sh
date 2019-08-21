@@ -30,7 +30,7 @@ do
 # Repull excluded folder
 # wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
 
-find /pg/nzbget/finished -type f
+find /pg/transfer/ -type f
 
 
   cleaner="$(cat /pg/var/cloneclean)"
