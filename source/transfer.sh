@@ -33,7 +33,6 @@ done </pg/logs/.transfer_list
 head -n +1 /pg/logs/.temp_list >> /pg/logs/.transfer_list
 uploadfile=$(head -n +1 /pg/logs/.temp_list)
 
-
 if [[ "$uploadfile" == "" ]]; then exit; fi
 
 chown 1000:1000 "$uploadfile"

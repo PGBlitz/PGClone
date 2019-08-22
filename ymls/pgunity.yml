@@ -121,8 +121,8 @@
 
         - name: Install MOVE Script
           template:
-            src: /pg/pgclone/source/pgmove.sh
-            dest: /pg/var/pgmove.sh
+            src: /pg/pgclone/source/transfer.sh
+            dest: /pg/var/transfer.sh
             force: yes
 
         - name: Install MOVE Service
