@@ -20,8 +20,9 @@ touch /pg/logs/pgtransfer.log
 touch /pg/logs/.transfer_list
 touch /pg/logs/.temp_list
 
-#chown -R 1000:1000 "{{hdpath}}/transfer"
-#chmod -R 775 "{{hdpath}}/transfer"
+filecount=$(wc -l /pg/logs/.transfer_list | awk '{print $1}')
+echo "$filecount" > /pg/var/filecount
+if [[ "$filecount" -gt 8 ]]; then echo "exit"; fi
 
 find /pg/transfer/ -type f > /pg/logs/.temp_list
 
@@ -37,17 +38,21 @@ chmod 775 "$uploadfile"
 
 #{{type}}
 
+
 rclone move "$uploadfile" "gd:/" \
 --config /pg/rclone/blitz.conf \
 --log-file=/pg/logs/pgtransfer.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
---bwlimit {{bandwidth.stdout}}M \
 --tpslimit 6 \
 --checkers=16 \
+--bwlimit {{bandwidth.stdout}}M \
 --drive-chunk-size={{dcs}} \
 --user-agent="$useragent" \
 --exclude="**_HIDDEN~" --exclude="**partial~"  \
 --exclude=".fuse_hidden**" --exclude="**.grab/**"
+
+sleep 5
+grep -v "$uploadfile" "/pg/logs/.transfer_list" | sponge "/pg/logs/.transfer_list"
 
 find "{{hdpath}}/transfer/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
