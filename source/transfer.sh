@@ -38,16 +38,14 @@ if [[ "$uploadfile" == "" ]]; then exit; fi
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
-#{{type}}
-#--bwlimit {{bandwidth.stdout}}M \
-#--drive-chunk-size={{dcs}} \
-
-rclone move "$uploadfile" "gd:/" \
+rclone move "$uploadfile" "{{type}}:/" \
 --config /pg/rclone/blitz.conf \
 --log-file=/pg/logs/pgtransfer.log \
 --log-level INFO --stats 5s --stats-file-name-length 0 \
 --tpslimit 6 \
 --checkers=16 \
+--bwlimit {{bandwidth.stdout}}M \
+--drive-chunk-size={{dcs}} \
 --user-agent="$useragent" \
 --exclude="**_HIDDEN~" --exclude="**partial~"  \
 --exclude=".fuse_hidden**" --exclude="**.grab/**"
