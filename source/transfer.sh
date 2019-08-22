@@ -35,6 +35,8 @@ uploadfile=$(head -n +1 /pg/logs/.temp_list)
 
 if [[ "$uploadfile" == "" ]]; then exit; fi
 
+chmod 775 -R {{hdpath}}/transfer/
+chown 1000:1000 {{hdpath}}/transfer/
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
