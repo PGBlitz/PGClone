@@ -18,7 +18,7 @@
       - {name: sc.serivce}
       - {name: pgunity.service}
       - {name: pgunity.service}
-      - {name: pgmove.service}
+      - {name: transfer.service}
       - {name: move.service}
       - {name: pgblitz.service}
       - {name: plexdrive.service}

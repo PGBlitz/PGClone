@@ -6,14 +6,14 @@
 # GNU:        General Public License v3.0
 ################################################################################
 [Unit]
-Description=Move Service Daemon
+Description='PGBlitz.com Transfer Service'
 After=multi-user.target
 
 [Service]
 Type=simple
 User=0
 Group=0
-ExecStart=/bin/bash /pg/var/transfer.sh
+ExecStart=/bin/bash /pg/rclone/transfer.sh
 TimeoutStopSec=20
 KillMode=process
 RemainAfterExit=yes
