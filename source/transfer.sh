@@ -15,7 +15,7 @@ fi
 
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
-hdpath="$(cat cat /pg/var/hd.path)"
+primepath="$(cat cat /pg/var/hd.path)"
 
 touch /pg/logs/pgtransfer.log
 touch /pg/logs/.transfer_list
@@ -56,7 +56,7 @@ rclone move "$uploadfile" "{{type}}:/" \
 sleep 5
 grep -v "$uploadfile" "/pg/logs/.transfer_list" | sponge "/pg/logs/.transfer_list"
 
-find "$hdpath/transfer" -mindepth 1 -type d -mmin +2 -empty -delete
+find "$primepath/transfer" -mindepth 1 -type d -mmin +2 -empty -delete
 # Removes garbage | torrent folder excluded
 #find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
 #find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
