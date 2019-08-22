@@ -7,13 +7,27 @@
 ################################################################################
 
 [Unit]
-Description={{drive}} Daemon
+Description=GD Daemon
 After=multi-user.target
 
 [Service]
 Type=simple
 User=0
 Group=0
+ExecStart=/usr/bin/rclone mount gd: /pg/gd \
+--config /pg/rclone/blitz.conf \
+--allow-non-empty \
+--allow-other \
+--size-only \
+--uid=1000 --gid=1000 \
+--umask 002 \
+--log-level INFO \
+--timeout 1h
+
+ExecStop=/bin/fusermount -uz /pg/gd
+TimeoutStopSec=20
+KillMode=process
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
