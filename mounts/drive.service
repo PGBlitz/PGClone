@@ -5,29 +5,16 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-
 [Unit]
-Description=GD Daemon
-After=multi-user.target
+Description='PGBlitz Loaded Balanced Multi SA GDrive Uploader'
+After=multi-user.target network-online.target
 
 [Service]
-Type=simple
 User=0
 Group=0
-ExecStart=/usr/bin/rclone mount gd: /pg/gd \
---config /pg/rclone/blitz.conf \
---allow-non-empty \
---allow-other \
---size-only \
---uid=1000 --gid=1000 \
---umask 002 \
---log-level INFO \
---timeout 1h
-
-ExecStop=/bin/fusermount -uz /pg/gd
-TimeoutStopSec=20
+Type=simple
+ExecStart=/bin/bash /pg/rclone/loop.sh
 KillMode=process
-RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
