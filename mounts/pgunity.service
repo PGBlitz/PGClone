@@ -8,11 +8,12 @@
 [Unit]
 Description=PGUnity
 After=multi-user.target
+
 [Service]
 Type=simple
 User=0
 Group=0
-ExecStart=/bin/bash /pg/var/pgunity.sh
+ExecStart=/bin/bash /pg/rclone/pgunity.sh
 ExecStop=/bin/fusermount -uz /pg/unity
 TimeoutStopSec=20
 KillMode=process

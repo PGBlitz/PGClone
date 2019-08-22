@@ -156,7 +156,7 @@
     - name: Install PGUnity Script
       template:
         src: /pg/pgclone/source/pgunity.sh
-        dest: /pg/var/pgunity.sh
+        dest: /pg/rclone/pgunity.sh
         force: yes
 
     - name: Install PGUnity Service
