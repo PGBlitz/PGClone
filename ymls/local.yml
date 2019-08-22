@@ -16,7 +16,7 @@
 
     - name: Install Union Script
       template:
-        src: /pg/pgclone/scripts/local.sh
+        src: /pg/pgclone/source/local.sh
         dest: /pg/var/pgunity.sh
         force: yes
 

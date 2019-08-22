@@ -85,7 +85,7 @@
 
         - name: Install PG Blitz Script
           template:
-            src: /pg/pgclone/scripts/pgblitz.sh
+            src: /pg/pgclone/source/pgblitz.sh
             dest: /pg/var/pgblitz.sh
             force: yes
 
@@ -121,7 +121,7 @@
 
         - name: Install MOVE Script
           template:
-            src: /pg/pgclone/scripts/pgmove.sh
+            src: /pg/pgclone/source/pgmove.sh
             dest: /pg/var/pgmove.sh
             force: yes
 
@@ -143,7 +143,7 @@
 
     - name: Install PGUnity Script
       template:
-        src: /pg/pgclone/scripts/pgunity.sh
+        src: /pg/pgclone/source/pgunity.sh
         dest: /pg/var/pgunity.sh
         force: yes
 
