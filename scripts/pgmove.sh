@@ -22,7 +22,6 @@ touch /pg/logs/.temp_list
 
 filecount=$(wc -l /pg/logs/.transfer_list | awk '{print $1}')
 echo "$filecount" > /pg/var/filecount
-if [[ "$filecount" -gt 8 || "$filecount" -lt "1" ]]; then exit; fi
 
 find /pg/transfer/ -type f > /pg/logs/.temp_list
 
@@ -32,6 +31,9 @@ done </pg/logs/.transfer_list
 
 head -n +1 /pg/logs/.temp_list >> /pg/logs/.transfer_list
 uploadfile=$(head -n +1 /pg/logs/.temp_list)
+
+#if [[ "$filecount" -gt 8 || "$filecount" -lt "1" ]]; then exit; fi
+if [[ "$uploadfile" == "" ]]; then exit; fi
 
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
