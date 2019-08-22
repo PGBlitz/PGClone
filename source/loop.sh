@@ -5,19 +5,10 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-[Unit]
-Description='PGBlitz.com Transfer Service'
-After=multi-user.target
+loop90210="90210"
+sleep 20
 
-[Service]
-Type=simple
-User=0
-Group=0
-ExecStart=/bin/bash /pg/rclone/loop.sh
-TimeoutStopSec=20
-KillMode=process
-RemainAfterExit=yes
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+while [[ "$loop90210" == "90210" ]]; do
+   bash /pg/rclone/transfer.sh
+   sleep 5
+done

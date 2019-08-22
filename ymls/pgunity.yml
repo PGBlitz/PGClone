@@ -83,24 +83,30 @@
           shell: 'cat /pg/var/blitz.bw'
           register: bandwidth
 
-        - name: Install PG Blitz Script
+        - name: Install Transfer Script
           template:
-            src: /pg/pgclone/source/pgblitz.sh
-            dest: /pg/var/pgblitz.sh
+            src: /pg/pgclone/source/transfer.sh
+            dest: /pg/rclone/transfer.sh
             force: yes
 
-        - name: Install PG Blitz Service
+        - name: Install Loop Script
           template:
-            src: /pg/pgclone/mounts/pgblitz.service
-            dest: /etc/systemd/system/pgblitz.service
+            src: /pg/pgclone/source/loop.sh
+            dest: /pg/rclone/loop.sh
             force: yes
 
-        - name: Reload PG Blitz Service
+        - name: Install Transfer Service
+          template:
+            src: /pg/pgclone/mounts/transfer.service
+            dest: /etc/systemd/system/transfer.service
+            force: yes
+
+        - name: Reload Transfer Service
           systemd:
             daemon_reload: yes
             enabled: yes
             state: reloaded
-            name: pgblitz
+            name: transfer
 
       when: (transport == "be") or
         (transport == "bu")
@@ -119,24 +125,30 @@
           shell: 'cat /pg/var/server.hd.path'
           register: hdpath
 
-        - name: Install MOVE Script
+        - name: Install Transfer Script
           template:
             src: /pg/pgclone/source/transfer.sh
-            dest: /pg/var/transfer.sh
+            dest: /pg/rclone/transfer.sh
             force: yes
 
-        - name: Install MOVE Service
+        - name: Install Loop Script
           template:
-            src: /pg/pgclone/mounts/pgmove.service
-            dest: /etc/systemd/system/pgmove.service
+            src: /pg/pgclone/source/loop.sh
+            dest: /pg/rclone/loop.sh
             force: yes
 
-        - name: Reload MOVE Service
+        - name: Install Transfer Service
+          template:
+            src: /pg/pgclone/mounts/transfer.service
+            dest: /etc/systemd/system/transfer.service
+            force: yes
+
+        - name: Reload Transfer Service
           systemd:
             daemon_reload: yes
             enabled: yes
             state: reloaded
-            name: pgmove
+            name: transfer
 
       when: (transport == "me") or
         (transport == "mu")
