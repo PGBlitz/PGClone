@@ -15,7 +15,7 @@ fi
 
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
-primepath="$(cat cat /pg/var/hd.path)"
+primepath="$(cat /pg/var/hd.path)"
 
 touch /pg/logs/pgtransfer.log
 touch /pg/logs/.transfer_list
