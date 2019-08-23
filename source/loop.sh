@@ -6,11 +6,11 @@
 # GNU:        General Public License v3.0
 ################################################################################
 admin9705="9705"
-sleep 20
+sleep 2
 
 while [[ "$admin9705" == "9705" ]]; do
    bash /pg/rclone/transfer.sh
-   sleep 5
+   sleep 2
    primepath="$(cat /pg/var/hd.path)"
-   find "$primepath/transfer" -mindepth 1 -type d -mmin +2 -empty -delete
+   find "$primepath/transfer" -mindepth 1 -type d -mmin +1 -empty -delete
 done
