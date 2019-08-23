@@ -18,8 +18,6 @@
       - {name: sc.serivce}
       - {name: pgunity.service}
       - {name: transfer.service}
-      - {name: move.service}
-      - {name: pgblitz.service}
   tasks:
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
