@@ -9,15 +9,15 @@ transportselect () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Set PG Clone Method ~ http://pgclone.pgblitz.com
+💪 Set PGClone Method ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 NOTE: Please visit the link and understand what your doing first!
 
-[1] Move  Unencrypt: Data > GDrive | Novice  | 750GB Daily Transfer Max
-[2] Move  Encrypted: Data > GDrive | Novice  | 750GB Daily Transfer Max
-[3] Blitz Unencrypt: Data > SDrive | Complex | Exceed 750GB Transport Cap
-[4] Blitz Encrypted: Data > SDrive | Complex | Exceed 750GB Transport Cap
-[5] Local Edition  : Local HDs     | Easy    | Utilizes System's HD's Only
+[1] Blitz GDrive - Unencrypt | Easy    | 750GB Daily Transfer Max
+[2] Blitz GDrive - Encrypted | Novice  | 750GB Daily Transfer Max
+[3] Blitz SDrive - Unencrypt | Complex | Exceed 750GB Daily Max Cap
+[4] Blitz SDrive - Encrypted | Complex | Exceed 750GB Daily Max Cap
+[5] Blitz Local  - Local HDs | Easy    | Utilizes Server HD's Only
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -26,13 +26,13 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-    echo "mu" > /pg/rclone/pgclone.transport ;;
+    echo "gu" > /pg/rclone/pgclone.transport ;;
     2 )
-    echo "me" > /pg/rclone/pgclone.transport ;;
+    echo "ge" > /pg/rclone/pgclone.transport ;;
     3 )
-    echo "bu" > /pg/rclone/pgclone.transport ;;
+    echo "su" > /pg/rclone/pgclone.transport ;;
     4 )
-    echo "be" > /pg/rclone/pgclone.transport ;;
+    echo "sd" > /pg/rclone/pgclone.transport ;;
     5 )
     echo "le" > /pg/rclone/pgclone.transport ;;
     * )

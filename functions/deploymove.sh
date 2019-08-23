@@ -21,7 +21,7 @@ ansible-playbook /pg/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
 echo "gd" > /pg/var/deploy.version
-echo "mu" > /pg/var/deployed.version
+echo "gu" > /pg/var/deployed.version
 type=gd
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   bs=$bs
@@ -33,8 +33,8 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   drive=gd"
 
 # deploy only if pgmove is using encryption
-if [[ "$transport" == "me" ]]; then
-echo "me" > /pg/var/deployed.version
+if [[ "$transport" == "ge" ]]; then
+echo "ge" > /pg/var/deployed.version
 type=gc
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
@@ -55,8 +55,8 @@ ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   hdpath=$hdpath"
 
 # output final display
-if [[ "$type" == "gdrive" ]]; then finaldeployoutput="PG Move - Unencrypted"
-else finaldeployoutput="PG Move - Encrypted"; fi
+if [[ "$type" == "gd" ]]; then finaldeployoutput="GDrive Unencrypted"
+else finaldeployoutput="GDrive Encrypted"; fi
 
 tee <<-EOF
 

@@ -13,18 +13,18 @@ echo ""
 
 if [[ "$demo" == "ON " ]]; then mainid="********"; else mainid="$pgcloneemail"; fi
 
-if [[ "$transport" == "mu" ]]; then
+if [[ "$transport" == "gu" ]]; then
 tee <<-EOF
 [1] Client ID & Secret    [${pgcloneid}]
 [2] GDrive                [$gdstatus]
 EOF
-elif [[ "$transport" == "me" ]]; then
+elif [[ "$transport" == "ge" ]]; then
 tee <<-EOF
 [1] Client ID & Secret    [${pgcloneid}]
 [2] Passwords             [$pstatus]
 [3] GDrive                [$gdstatus] - [$gcstatus]
 EOF
-elif [[ "$transport" == "bu" ]]; then
+elif [[ "$transport" == "su" ]]; then
 tee <<-EOF
 [1] Google Account Login  [$mainid]
 [2] Project Name          [$pgcloneproject]
@@ -35,7 +35,7 @@ tee <<-EOF
 [7] Key Management        [$displaykey] Built
 [8] SDrive (E-Mail Share Generator)
 EOF
-elif [[ "$transport" == "be" ]]; then
+elif [[ "$transport" == "sd" ]]; then
 tee <<-EOF
 [1] Google Account Login  [$mainid]
 [2] Project Name          [$pgcloneproject]
@@ -80,7 +80,7 @@ clonestart () {
 pgclonevars
 
 # pull throttle speeds based on role
-if [[ "$transport" == "mu" || "$transport" == "me" ]]; then
+if [[ "$transport" == "gu" || "$transport" == "ge" ]]; then
 throttle=$(cat /pg/var/move.bw)
 output1="[C] Transport Select"
 else
@@ -88,14 +88,14 @@ throttle=$(cat /pg/var/blitz.bw)
 output1="[C] Options"
 fi
 
-if [[ "$transport" != "mu" && "$transport" != "me" && "$transport" != "bu" && "$transport" != "be" && "$transport" != "le" ]]; then
+if [[ "$transport" != "gu" && "$transport" != "ge" && "$transport" != "su" && "$transport" != "sd" && "$transport" != "le" ]]; then
 rm -rf /pg/rclone/pgclone.transport 1>/dev/null 2>&1
 mustset; fi
 
-    if [[ "$transport" == "mu" ]]; then outputversion="Unencrypted Move"
-  elif [[ "$transport" == "me" ]]; then outputversion="Encrypted Move"
-  elif [[ "$transport" == "bu" ]]; then outputversion="Unencrypted Blitz"
-  elif [[ "$transport" == "be" ]]; then outputversion="Encrypted Blitz"
+    if [[ "$transport" == "gu" ]]; then outputversion="GDrive Unencrypted"
+  elif [[ "$transport" == "ge" ]]; then outputversion="GDrive Encrypted"
+  elif [[ "$transport" == "su" ]]; then outputversion="SDrive Unencrypted"
+  elif [[ "$transport" == "sd" ]]; then outputversion="SDrive Encrypted"
   elif [[ "$transport" == "le" ]]; then outputversion="Local Hard Drives"
   fi
 
@@ -163,7 +163,7 @@ clonestart
 }
 
 clonestartactions () {
-if [[ "$transport" == "mu" ]]; then
+if [[ "$transport" == "gu" ]]; then
   case $typed in
       1 )
           keyinputpublic ;;
@@ -196,7 +196,7 @@ if [[ "$transport" == "mu" ]]; then
       * )
           clonestart ;;
     esac
-elif [[ "$transport" == "me" ]]; then
+elif [[ "$transport" == "ge" ]]; then
   case $typed in
       1 )
           keyinputpublic ;;
@@ -235,7 +235,7 @@ elif [[ "$transport" == "me" ]]; then
       * )
           clonestart ;;
     esac
-elif [[ "$transport" == "bu" ]]; then
+elif [[ "$transport" == "su" ]]; then
   case $typed in
         1 )
             glogin ;;
@@ -300,7 +300,7 @@ elif [[ "$transport" == "bu" ]]; then
         * )
             clonestart ;;
       esac
-elif [[ "$transport" == "be" ]]; then
+elif [[ "$transport" == "sd" ]]; then
   case $typed in
         1 )
             glogin ;;

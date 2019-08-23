@@ -138,7 +138,7 @@ team_drive = ${sdid}
 
 EOF
 
-if [[ "$transport" == "be" ]]; then
+if [[ "$transport" == "sd" ]]; then
 encpassword=$(rclone obscure "${clonepassword}")
 encsalt=$(rclone obscure "${clonesalt}")
 

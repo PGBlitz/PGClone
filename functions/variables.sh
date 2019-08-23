@@ -94,10 +94,10 @@ pgclonevars () {
   variablet /pg/var/.tmp.multihd
   multihds=$(cat /pg/var/.tmp.multihd)
 
-  if [[ "$dversion" == "mu" ]]; then dversionoutput="Unencrypted Move"
-elif [[ "$dversion" == "me" ]]; then dversionoutput="Encrypted Move"
-elif [[ "$dversion" == "bu" ]]; then dversionoutput="Unencrypted Blitz"
-elif [[ "$dversion" == "be" ]]; then dversionoutput="Encrypted Blitz"
+  if [[ "$dversion" == "gu" ]]; then dversionoutput="GDrive Unencrypted"
+elif [[ "$dversion" == "ge" ]]; then dversionoutput="GDrive Encrypted"
+elif [[ "$dversion" == "su" ]]; then dversionoutput="SDrive Unencrypted"
+elif [[ "$dversion" == "sd" ]]; then dversionoutput="SDrive Encrypted"
 elif [[ "$dversion" == "le" ]]; then dversionoutput="Local HD/Mount"
 else dversionoutput="None"; fi
 

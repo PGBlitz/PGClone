@@ -57,19 +57,19 @@ EOF
 if [ -e "/pg/logs/.drivelog" ]; then rm -rf /pg/logs/.drivelog; fi
 touch /pg/logs/.drivelog
 
-  if [[ "$transport" = "mu" ]]; then
+  if [[ "$transport" = "gu" ]]; then
     gdrivemod
     multihdreadonly
-  elif [[ "$transport" == "me" ]]; then
+  elif [[ "$transport" == "ge" ]]; then
     gdrivemod
     gcryptmod
     multihdreadonly
-  elif [[ "$transport" == "bu" ]]; then
+  elif [[ "$transport" == "su" ]]; then
     gdrivemod
     sdrivemod
     gdsamod
     multihdreadonly
-  elif [[ "$transport" == "be" ]]; then
+  elif [[ "$transport" == "sd" ]]; then
     gdrivemod
     sdrivemod
     gdsamod
@@ -84,12 +84,12 @@ logcheck=$(cat /pg/logs/.drivelog | grep "Failed")
 
 if [[ "$logcheck" == "" ]]; then
 
-  if [[ "$transport" == "mu" || "$transport" == "me" ]]; then executemove; fi
-  if [[ "$transport" == "bu" || "$transport" == "be" ]]; then executeblitz; fi
+  if [[ "$transport" == "gu" || "$transport" == "ge" ]]; then executemove; fi
+  if [[ "$transport" == "su" || "$transport" == "sd" ]]; then executeblitz; fi
 
 else
 
-  if [[ "$transport" == "me" || "$transport" == "be" ]]; then
+  if [[ "$transport" == "ge" || "$transport" == "sd" ]]; then
   emessage="
   NOTE1: User forgot to share out GDSA E-Mail to Team Drive
   NOTE2: Conducted a blitz key restore and keys are no longer valid

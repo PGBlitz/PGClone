@@ -54,7 +54,7 @@ echo ${type} > /pg/rclone/oauth.check
 oauthcheck
 
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
-if [[ "$transport" == "be" || "$transport" == "me" ]]; then
+if [[ "$transport" == "sd" || "$transport" == "ge" ]]; then
 
 if [ "$type" == "gd" ]; then entype="gc";
 else entype="sc"; fi
@@ -188,13 +188,13 @@ EOF
 
 mountchecker () {
 pgclonevars
-  if [[ "$transport" == "mu" ]]; then
+  if [[ "$transport" == "gu" ]]; then
     if [[ "$gdstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "me" ]]; then
+elif [[ "$transport" == "ge" ]]; then
   if [[ "$gdstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "bu" ]]; then
+elif [[ "$transport" == "su" ]]; then
   if [[ "$gdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "be" ]]; then
+elif [[ "$transport" == "sd" ]]; then
   if [[ "$gdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$scstatus" != "ACTIVE" ]]; then mountfail; fi
 fi
 }

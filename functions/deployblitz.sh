@@ -21,7 +21,7 @@ ansible-playbook /pg/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
 echo "sd" > /pg/var/deploy.version
-echo "bu" > /pg/var/deployed.version
+echo "su" > /pg/var/deployed.version
 type=gd
 encryptbit=""
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
@@ -45,7 +45,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   drive=sd"
 
 # deploy only if pgmove is using encryption
-if [[ "$transport" == "be" ]]; then
+if [[ "$transport" == "sd" ]]; then
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
   dcs=$dcs
@@ -55,7 +55,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   rcsl=$rcsl
   drive=sc"
 
-echo "be" > /pg/var/deployed.version
+echo "sd" > /pg/var/deployed.version
 type=sc
 encryptbit="C"
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\

@@ -658,10 +658,10 @@ EOF
 
 transportdisplay () {
 temp=$(cat /pg/rclone/pgclone.transport)
-  if [ "$temp" == "umove" ]; then transport="PG Move /w No Encryption"
-elif [ "$temp" == "emove" ]; then transport="PG Move /w Encryption"
-elif [ "$temp" == "ublitz" ]; then transport="PG Blitz /w No Encryption"
-elif [ "$temp" == "eblitz" ]; then transport="PG Blitz /w Encryption"
+  if [ "$temp" == "umove" ]; then transport="GDrive Unencrypted"
+elif [ "$temp" == "emove" ]; then transport="GDrive Encrypted"
+elif [ "$temp" == "ublitz" ]; then transport="SDrive Unencrypted"
+elif [ "$temp" == "eblitz" ]; then transport="SDrive Unencrypted"
 elif [ "$temp" == "solohd" ]; then transport="PG Local"
 else transport="NOT-SET"; fi
 }
@@ -673,10 +673,10 @@ tee <<-EOF
 🌟 Select Transport Mode            📓 Reference: transport.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] PG Move  /w No Encryption | Upload 750GB Daily ~ Simple
-[2] PG Move  /w Encryption    | Upload 750GB Daily ~ Simple
-[3] PG Blitz /w No Encryption | Exceed 750GB Daily ~ Complex
-[4] PG Blitz /w Encryption    | Exceed 750GB Daily ~ Complex
+[1] GDrive Unencrypted | Upload 750GB Daily ~ Simple
+[2] GDrive Encrypted   | Upload 750GB Daily ~ Simple
+[3] SDrive Unencrypted | Exceed 750GB Daily ~ Complex
+[4] SDrive Encrypted   | Exceed 750GB Daily ~ Complex
 [5] PG Local                  | No GSuite - Stays Local
 [Z] Exit
 
