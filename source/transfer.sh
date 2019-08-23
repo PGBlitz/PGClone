@@ -16,7 +16,7 @@ fi
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
 
-touch /pg/logs/pgtransfer.log
+touch /pg/logs/transfer.log
 touch /pg/logs/.transfer_list
 touch /pg/logs/.temp_list
 
@@ -40,17 +40,39 @@ chown 1000:1000 {{hdpath}}/transfer/
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
-rclone move "$uploadfile" "{{type}}:/" \
---config /pg/rclone/blitz.conf \
---log-file=/pg/logs/pgtransfer.log \
---log-level INFO --stats 5s --stats-file-name-length 0 \
---tpslimit 6 \
---checkers=16 \
---bwlimit {{bandwidth.stdout}}M \
---drive-chunk-size={{dcs}} \
---user-agent="$useragent" \
---exclude="**_HIDDEN~" --exclude="**partial~"  \
---exclude=".fuse_hidden**" --exclude="**.grab/**"
+var3=$(cat /pg/rclone/deploy.version)
+if [[ "$var3" == "gu" ]]; then var4="gdrive"
+elif [[ "$var3" == "ge" ]]; then var4="gdrive"
+elif [[ "$var3" == "su" ]]; then var4="sdrive"
+elif [[ "$var3" == "sd" ]]; then var4="sdrive"
+
+if [[ "$var4" == "gdrive" ]]; then
+  rclone moveto "$uploadfile" "{{type}}:/" \
+  --config /pg/rclone/blitz.conf \
+  --log-file=/pg/logs/transfer.log \
+  --log-level INFO --stats 5s --stats-file-name-length 0 \
+  --tpslimit 6 \
+  --checkers=20 \
+  --bwlimit {{bandwidth.stdout}}M \
+  --drive-chunk-size={{dcs}} \
+  --user-agent="$useragent" \
+  --exclude="**_HIDDEN~" --exclude="**partial~"  \
+  --exclude=".fuse_hidden**" --exclude="**.grab/**"
+else
+  rclone moveto "$uploadfile" "${p}{{encryptbit}}:/" \
+  --config /pg/rclone/blitz.conf \
+  --log-file=/pg/logs/pgblitz.log \
+  --log-level INFO --stats 5s --stats-file-name-length 0 \
+  --tpslimit 12 \
+  --checkers=20 \
+  --transfers=16 \
+  --bwlimit {{bandwidth.stdout}}M \
+  --user-agent="$useragent" \
+  --drive-chunk-size={{dcs}} \
+  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+  --exclude=".fuse_hidden**" --exclude="**.grab/**"  \
+fi
 
 sleep 5
 grep -v "$uploadfile" "/pg/logs/.transfer_list" | sponge "/pg/logs/.transfer_list"
