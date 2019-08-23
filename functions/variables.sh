@@ -14,7 +14,7 @@ pgclonevars () {
 
   # rest standard
   mkdir -p /pg/logs /pg/rclone
-  touch /pg/logs/gd.log /pg/logs/sd.log /pg/logs/ge.log /pg/logs/se.log /pg/logs/pgblitz.log /pg/logs/pgmove.log
+  touch /pg/logs/gd.log /pg/logs/sd.log /pg/logs/ge.log /pg/logs/se.log /pg/logs/pgblitz.log /pg/logs/transport.log
 
   variable /pg/var/project.account "NOT-SET"
   variable /pg/rclone/deploy.version "null"
