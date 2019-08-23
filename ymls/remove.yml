@@ -17,12 +17,9 @@
       - {name: sd.service}
       - {name: sc.serivce}
       - {name: pgunity.service}
-      - {name: pgunity.service}
       - {name: transfer.service}
       - {name: move.service}
       - {name: pgblitz.service}
-      - {name: plexdrive.service}
-      - {name: st2monitor.service}
   tasks:
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
