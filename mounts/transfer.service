@@ -7,7 +7,7 @@
 ################################################################################
 [Unit]
 Description='PGBlitz.com Transfer Service'
-After=multi-user.target
+After=multi-user.target network-online.target
 
 [Service]
 Type=simple

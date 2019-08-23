@@ -5,10 +5,12 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-loop90210="90210"
+admin9705="9705"
 sleep 20
 
-while [[ "$loop90210" == "90210" ]]; do
+while [[ "$admin9705" == "9705" ]]; do
    bash /pg/rclone/transfer.sh
    sleep 5
+   primepath="$(cat /pg/var/hd.path)"
+   find "$primepath/transfer" -mindepth 1 -type d -mmin +2 -empty -delete
 done
