@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 [Unit]
-Description=PGUnity
+Description='PGBlitz.com Unity Service'
 After=multi-user.target
 
 [Service]
