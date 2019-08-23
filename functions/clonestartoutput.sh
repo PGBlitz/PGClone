@@ -88,7 +88,7 @@ throttle=$(cat /pg/var/blitz.bw)
 output1="[C] Options"
 fi
 
-if [[ "$transport" != "gd" && "$transport" != "gc" && "$transport" != "sd" && "$transport" != "sd" && "$transport" != "le" ]]; then
+if [[ "$transport" != "gd" && "$transport" != "gc" && "$transport" != "sd" && "$transport" != "sc" && "$transport" != "le" ]]; then
 rm -rf /pg/rclone/pgclone.transport 1>/dev/null 2>&1
 mustset; fi
 
