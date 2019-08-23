@@ -16,6 +16,12 @@ fi
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
 
+var3=$(cat /pg/rclone/deploy.version)
+if [[ "$var3" == "gu" ]]; then var4="gdrive"
+elif [[ "$var3" == "ge" ]]; then var4="gdrive"
+elif [[ "$var3" == "su" ]]; then var4="sdrive"
+elif [[ "$var3" == "sd" ]]; then var4="sdrive"
+
 touch /pg/logs/transfer.log
 touch /pg/logs/.transfer_list
 touch /pg/logs/.temp_list
@@ -39,12 +45,6 @@ chmod 775 -R {{hdpath}}/transfer/
 chown 1000:1000 {{hdpath}}/transfer/
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
-
-var3=$(cat /pg/rclone/deploy.version)
-if [[ "$var3" == "gu" ]]; then var4="gdrive"
-elif [[ "$var3" == "ge" ]]; then var4="gdrive"
-elif [[ "$var3" == "su" ]]; then var4="sdrive"
-elif [[ "$var3" == "sd" ]]; then var4="sdrive"
 
 if [[ "$var4" == "gdrive" ]]; then
   rclone moveto "$uploadfile" "{{type}}:/" \
