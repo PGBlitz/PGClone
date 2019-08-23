@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 # NOTES
-# Variables come from what's being called from deploymove.sh under functions
+# Variables come from what's being called from deploygdrive.sh under functions
 ## BWLIMIT 9 and Lower Prevents Google 750GB Google Upload Ban
 ################################################################################
 if pidof -o %PPID -x "$0"; then

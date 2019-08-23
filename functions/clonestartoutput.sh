@@ -178,12 +178,12 @@ if [[ "$transport" == "gu" ]]; then
       a )
           publicsecretchecker
           mountchecker
-          deploypgmove
+          deploygdrive
           ;; ## fill
       A )
           publicsecretchecker
           mountchecker
-          deploypgmove
+          deploygdrive
           ;; ## flll
       b )
           setthrottlemove ;;
@@ -216,13 +216,13 @@ elif [[ "$transport" == "ge" ]]; then
           publicsecretchecker
           passwordcheck
           mountchecker
-          deploypgmove
+          deploygdrive
           ;; ## fill
       A )
           publicsecretchecker
           passwordcheck
           mountchecker
-          deploypgmove
+          deploygdrive
           ;; ## flll
       b )
           setthrottlemove ;;
@@ -277,13 +277,13 @@ elif [[ "$transport" == "su" ]]; then
             publicsecretchecker
             tlabelchecker
             mountchecker
-            deploypgblitz
+            deploysdrive
             ;; ## fill
         A )
             publicsecretchecker
             tlabelchecker
             mountchecker
-            deploypgblitz
+            deploysdrive
             ;; ## flll
         b )
             setthrottleblitz ;;
@@ -351,14 +351,14 @@ elif [[ "$transport" == "sd" ]]; then
             passwordcheck
             tlabelchecker
             mountchecker
-            deploypgblitz
+            deploysdrive
             ;; ## fill
         A )
             publicsecretchecker
             passwordcheck
             tlabelchecker
             mountchecker
-            deploypgblitz
+            deploysdrive
             ;; ## flll
         b )
             setthrottleblitz ;;

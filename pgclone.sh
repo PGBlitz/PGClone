@@ -24,8 +24,8 @@ source /pg/pgclone/functions/keysbuild.sh
 source /pg/pgclone/functions/emails.sh
 source /pg/pgclone/functions/deploy.sh
 source /pg/pgclone/functions/rcloneinstall.sh
-source /pg/pgclone/functions/deploymove.sh
-source /pg/pgclone/functions/deployblitz.sh
+source /pg/pgclone/functions/deploygdrive.sh
+source /pg/pgclone/functions/deploysdrive.sh
 source /pg/pgclone/functions/multihd.sh
 source /pg/pgclone/functions/deploylocal.sh
 source /pg/pgclone/functions/createsdrive.sh

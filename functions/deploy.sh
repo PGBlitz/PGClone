@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-deploypgblitz () {
+deploysdrive () {
   deployblitzstartcheck # At Bottom - Ensure Keys Are Made
 
 # RCLONE BUILD
@@ -30,7 +30,7 @@ cat /pg/var/.keys >> /pg/rclone/blitz.conf
 deploydrives
 }
 
-deploypgmove () {
+deploygdrive () {
 # RCLONE BUILD
 echo "#------------------------------------------" > /pg/rclone/blitz.conf
 echo "#RClone Rewrite | Visit https://pgblitz.com" >> /pg/rclone/blitz.conf
