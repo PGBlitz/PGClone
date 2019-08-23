@@ -1,5 +1,5 @@
 #
-# Title:      Reference Title File
+# Title:      Reference Title File - PGBlitz
 # Author(s):  Admin9705 & https://github.com/PGBlitz/PGClone/graphs/contributors ~ Physik - FlickerRate
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0

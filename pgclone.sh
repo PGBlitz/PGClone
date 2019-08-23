@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Title:      PGBlitz.com (Reference Title File)
+# Title:      PGBlitz.com (Reference Title File - PGBlitz)
 # Author(s):  Admin9705 & https://github.com/PGBlitz/PGClone/graphs/contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
