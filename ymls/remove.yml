@@ -26,6 +26,7 @@
   tasks:
     - name: Stop All Docker Containers
       shell: docker stop $(docker ps -a -q)
+      ignore_errors: yes
 
     - name: Checking Existing Service Name
       stat:
