@@ -15,13 +15,21 @@ echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
 
 while [[ "$admin9705" == "9705" ]]; do
 
+var1=$(cat /pg/rclone/deploy.version)
+if [[ "$var1" == "gu" ]]; then var2="GDrive Unencrypted"
+elif [[ "$var1" == "ge" ]]; then var2="GDrive Encrypted"
+elif [[ "$var1" == "su" ]]; then var2="SDrive Unencrypted"
+elif [[ "$var1" == "sd" ]]; then var2="SDrive Encrypted"
+
 let "cyclecount++"
 echo "----------------------------" >> /pg/logs/transfer.log
-echo "PG Blitz Log - Cycle $cyclecount" >> /pg/logs/transfer.log
+echo "PG Blitz Log - Cycle $cyclecount - $var2" >> /pg/logs/transfer.log
 echo "" >> /pg/logs/transfer.log
 echo "Utilizing: $p" >> /pg/logs/transfer.log
 
    bash /pg/rclone/transfer.sh
+   cat /pg/logs/transfer.log | tail -200 > /pg/logs/transfer.log
+   echo "Cycle $cyclecount - Sleeping 5 Seconds" >> /pg/logs/transfer.log
    sleep 2
    primepath="$(cat /pg/var/hd.path)"
    find "$primepath/transfer" -mindepth 1 -type d -mmin +1 -empty -delete
