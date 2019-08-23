@@ -22,6 +22,7 @@ pgclonevars () {
   variable /pg/var/move.bw  "9"
   variable /pg/var/blitz.bw  "1000"
   variable /pg/rclone/pgclone.salt ""
+  variable /pg/var/multihd.paths ""
 
   variable /pg/var/server.hd.path "/pg"
   hdpath=$(cat /pg/var/server.hd.path)
