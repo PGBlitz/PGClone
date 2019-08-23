@@ -12,18 +12,16 @@
     state: absent
   with_items:
     - blitz
-    - edit-blitz
     - edit-gc
     - edit-gd
-    - edit-pgmove
+    - edit-transport
     - edit-pgunity
     - edit-rclone
     - edit-sc
     - edit-sd
-    - pgmove
+    - status-transport
     - status-gc
     - status-gd
-    - status-pgblitz
     - status-pgunity
     - status-rclone
     - status-gc
@@ -40,15 +38,14 @@
     - edit-blitz
     - edit-gc
     - edit-gd
-    - edit-pgmove
+    - edit-transport
     - edit-pgunity
     - edit-rclone
     - edit-sc
     - edit-sd
-    - pgmove
+    - status-transport
     - status-gc
     - status-gd
-    - status-pgblitz
     - status-pgunity
     - status-rclone
     - status-gc
