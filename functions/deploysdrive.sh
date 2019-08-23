@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Title:      PGBlitz (Reference Title File)
+# Title:      Reference Title File
 # Author(s):  Admin9705 & https://github.com/PGBlitz/PGClone/graphs/contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
@@ -44,7 +44,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   cm="writes"
   drive=sd"
 
-# deploy only if pgmove is using encryption
+# deploy only if gdrive is using encryption
 if [[ "$transport" == "sd" ]]; then
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs

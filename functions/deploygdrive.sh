@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Title:      PGBlitz (Reference Title File)
+# Title:      Reference Title File
 # Author(s):  Admin9705 & https://github.com/PGBlitz/PGClone/graphs/contributors
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
@@ -32,7 +32,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   rcsl=$rcsl
   drive=gd"
 
-# deploy only if pgmove is using encryption
+# deploy only if gdrive is using encryption
 if [[ "$transport" == "ge" ]]; then
 echo "ge" > /pg/var/deployed.version
 type=gc
