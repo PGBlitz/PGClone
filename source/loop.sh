@@ -8,7 +8,19 @@
 admin9705="9705"
 sleep 2
 
+echo "" >> /pg/logs/transfer.log
+echo "" >> /pg/logs/transfer.log
+echo "----------------------------" >> /pg/logs/transfer.log
+echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
+
 while [[ "$admin9705" == "9705" ]]; do
+
+let "cyclecount++"
+echo "----------------------------" >> /pg/logs/transfer.log
+echo "PG Blitz Log - Cycle $cyclecount" >> /pg/logs/transfer.log
+echo "" >> /pg/logs/transfer.log
+echo "Utilizing: $p" >> /pg/logs/transfer.log
+
    bash /pg/rclone/transfer.sh
    sleep 2
    primepath="$(cat /pg/var/hd.path)"
