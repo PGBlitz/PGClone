@@ -11,7 +11,7 @@ mountnumbers () {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RClone Mount Settings ~ clonesettings.pgblitz.com
+RClone Mount Settings ~ clonevalues.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE 1: Read the wiki on how changing the settings impact stability and
@@ -20,16 +20,16 @@ performance! After changing the settings, you must redeploy the mounts!
 NOTE 2: You will be editing a JSON file! Only change what's within the
 quotations! If you mess things up, your mounts can deploy incorrectly!
 
-NOTE 3: To RESET the JSON change the defaults setting to "yes" in all
-lower case.
+NOTE 3: To RESET the JSON change the "resetdefaults" setting to "yes"
+in all lower case.
 
-NOTE 4: Final Note, to SAVE... Press CTRL + X and select "YES" to save
-the settings!
+NOTE 4: Final Note, to SAVE > Press CTRL + X, Select "YES", and PRESS
+[ENTER] to save the settings! Do not change the name of the file!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-    read -rp '↘️  Input Selection | Press [ENTER]: ' fluffycat < /dev/tty
+    read -rp '↘️  PRESS [ENTER] to CONTINUE! ' fluffycat < /dev/tty
 
 nano /pg/rclone/pgclone.json
 

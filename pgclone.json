@@ -1,5 +1,5 @@
 {
-    "_comment": "Visit http://bvalues.pgblitz.com",
+    "_comment": "Visit http://clonevalues.pgblitz.com",
     "version": 1,
     "bs": "16M",
     "dcs": "128M",
@@ -9,5 +9,6 @@
     "rcsl": "1024M",
     "cm": "writes",
     "cms": "off",
-    "drive": ""
+    "drive": "",
+    "resetvalues": "no"
 }
