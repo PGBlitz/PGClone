@@ -11,7 +11,6 @@
     path: "/bin/{{item}}"
     state: absent
   with_items:
-    - blitz
     - edit-gc
     - edit-gd
     - edit-transport
@@ -34,8 +33,6 @@
     force: yes
     mode: 0775
   with_items:
-    - blitz
-    - edit-blitz
     - edit-gc
     - edit-gd
     - edit-transport
