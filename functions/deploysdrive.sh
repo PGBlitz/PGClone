@@ -20,8 +20,6 @@ pgclonevars
 ansible-playbook /pg/pgclone/ymls/remove.yml
 
 # gdrive deploys by standard
-echo "sd" > /pg/var/deploy.version
-echo "su" > /pg/var/deployed.version
 type=gd
 encryptbit=""
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
@@ -45,7 +43,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   drive=sd"
 
 # deploy only if gdrive is using encryption
-if [[ "$transport" == "sd" ]]; then
+if [[ "$transport" == "sc" ]]; then
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
   dcs=$dcs
@@ -53,9 +51,9 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   cma=$cma
   rcs=$rcs
   rcsl=$rcsl
-  drive=sc"
+  drive=gc"
 
-echo "sd" > /pg/var/deployed.version
+echo "sc" > /pg/var/deployed.version
 type=sc
 encryptbit="C"
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
@@ -88,7 +86,7 @@ ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   hdpath=$hdpath"
 
 # output final display
-if [[ "$type" == "sd" ]]; then finaldeployoutput="SDrive Unecrypted"
+if [[ "$type" == "sd" ]]; then finaldeployoutput="SDrive Unencrypted"
 else finaldeployoutput="SDrive Encrypted"; fi
 
 tee <<-EOF

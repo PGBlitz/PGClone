@@ -18,22 +18,22 @@
     - name: 'If Fact Matches - SDrive Encrypted'
       set_fact:
         path: 'remotes = gd: sd: gc: sc: {{hdpath}}/move'
-      when: transport == "sd"
+      when: transport == "sc"
 
     - name: 'If Fact Matches - GDrive Encrypted'
       set_fact:
         path: 'remotes = gd: gc: {{hdpath}}/move'
-      when: transport == "ge"
+      when: transport == "gc"
 
     - name: 'If Fact Matches - SDrive Unencrypted'
       set_fact:
         path: 'remotes = gd: sd: {{hdpath}}/move'
-      when: transport == "su"
+      when: transport == "sd"
 
     - name: 'If Fact Matches - GDrive Unencrypted'
       set_fact:
         path: 'remotes = gd: {{hdpath}}/move'
-      when: transport == "gu"
+      when: transport == "gd"
 
     - name: Creating required paths
       file: 'path={{hdpath}}/{{item}} state=directory mode=0775 owner=1000 group=1000 recurse=true'
@@ -108,8 +108,8 @@
             state: reloaded
             name: transfer
 
-      when: (transport == "sd") or
-        (transport == "su")
+      when: (transport == "gd") or
+        (transport == "gc")
 
     - name: 'PG Move Execution'
       block:
@@ -150,8 +150,8 @@
             state: reloaded
             name: transfer
 
-      when: (transport == "ge") or
-        (transport == "gu")
+      when: (transport == "sc") or
+        (transport == "sd")
 
     - name: Install PGUnity Script
       template:

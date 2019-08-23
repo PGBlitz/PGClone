@@ -16,10 +16,10 @@ echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
 while [[ "$admin9705" == "9705" ]]; do
 
 var1=$(cat /pg/rclone/deploy.version)
-if [[ "$var1" == "gu" ]]; then var2="GDrive Unencrypted"
-elif [[ "$var1" == "ge" ]]; then var2="GDrive Encrypted"
-elif [[ "$var1" == "su" ]]; then var2="SDrive Unencrypted"
-elif [[ "$var1" == "sd" ]]; then var2="SDrive Encrypted"
+if [[ "$var1" == "gd" ]]; then var2="GDrive Unencrypted"
+elif [[ "$var1" == "gc" ]]; then var2="GDrive Encrypted"
+elif [[ "$var1" == "sd" ]]; then var2="SDrive Unencrypted"
+elif [[ "$var1" == "sc" ]]; then var2="SDrive Encrypted"
 
 let "cyclecount++"
 echo "----------------------------" >> /pg/logs/transfer.log

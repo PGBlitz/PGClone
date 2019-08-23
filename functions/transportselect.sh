@@ -26,13 +26,13 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-    echo "gu" > /pg/rclone/pgclone.transport ;;
+    echo "gd" > /pg/rclone/pgclone.transport ;;
     2 )
-    echo "ge" > /pg/rclone/pgclone.transport ;;
+    echo "gc" > /pg/rclone/pgclone.transport ;;
     3 )
-    echo "su" > /pg/rclone/pgclone.transport ;;
-    4 )
     echo "sd" > /pg/rclone/pgclone.transport ;;
+    4 )
+    echo "sc" > /pg/rclone/pgclone.transport ;;
     5 )
     echo "le" > /pg/rclone/pgclone.transport ;;
     * )
