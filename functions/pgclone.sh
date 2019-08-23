@@ -61,7 +61,7 @@ elif [[ "$typed" == "N" || "$typed" == "n" ]]; then mountsmenu
   rclone config delete $type --config /pg/rclone/blitz.conf
 
   encheck=$(cat /pg/rclone/pgclone.transport)
-  if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
+  if [[ "$encheck" == "se" || "$encheck" == "ge" ]]; then
     if [ "$type" == "gdrive" ]; then
     rclone config delete gcrypt --config /pg/rclone/blitz.conf; fi
     if [ "$type" == "sdrive" ]; then
@@ -658,10 +658,10 @@ EOF
 
 transportdisplay () {
 temp=$(cat /pg/rclone/pgclone.transport)
-  if [ "$temp" == "umove" ]; then transport="GDrive Unencrypted"
-elif [ "$temp" == "emove" ]; then transport="GDrive Encrypted"
-elif [ "$temp" == "ublitz" ]; then transport="SDrive Unencrypted"
-elif [ "$temp" == "eblitz" ]; then transport="SDrive Unencrypted"
+  if [ "$temp" == "gu" ]; then transport="GDrive Unencrypted"
+elif [ "$temp" == "ge" ]; then transport="GDrive Encrypted"
+elif [ "$temp" == "su" ]; then transport="SDrive Unencrypted"
+elif [ "$temp" == "se" ]; then transport="SDrive Unencrypted"
 elif [ "$temp" == "solohd" ]; then transport="PG Local"
 else transport="NOT-SET"; fi
 }
@@ -677,16 +677,16 @@ tee <<-EOF
 [2] GDrive Encrypted   | Upload 750GB Daily ~ Simple
 [3] SDrive Unencrypted | Exceed 750GB Daily ~ Complex
 [4] SDrive Encrypted   | Exceed 750GB Daily ~ Complex
-[5] PG Local                  | No GSuite - Stays Local
+[5] PG Local           | No GSuite - Stays Local
 [Z] Exit
 
 EOF
 read -p '↘️  Set Choice | Press [ENTER]: ' typed < /dev/tty
 
-  if [ "$typed" == "1" ]; then echo "umove" > /pg/rclone/pgclone.transport && echo;
-elif [ "$typed" == "2" ]; then echo "emove" > /pg/rclone/pgclone.transport && echo;
-elif [ "$typed" == "3" ]; then echo "ublitz" > /pg/rclone/pgclone.transport && echo;
-elif [ "$typed" == "4" ]; then echo "eblitz" > /pg/rclone/pgclone.transport && echo;
+  if [ "$typed" == "1" ]; then echo "gu" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "2" ]; then echo "ge" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "3" ]; then echo "su" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "4" ]; then echo "se" > /pg/rclone/pgclone.transport && echo;
 elif [ "$typed" == "5" ]; then echo "solohd" > /pg/rclone/pgclone.transport && echo;
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
 
@@ -751,7 +751,7 @@ testphase () {
 
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
 encheck=$(cat /pg/rclone/pgclone.transport)
-if [[ "$encheck" == "eblitz" || "$encheck" == "emove" ]]; then
+if [[ "$encheck" == "se" || "$encheck" == "ge" ]]; then
 
   if [ "$type" == "gdrive" ]; then entype="gcrypt";
   else entype="scrypt"; fi

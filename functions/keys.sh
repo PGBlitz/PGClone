@@ -328,7 +328,7 @@ gdsabuild () {
   ## what sets if encrypted is on or not
   encheck=$(cat /pg/rclone/pgclone.transport)
   bencrypted=no
-  if [ "$encheck" == "eblitz" ]; then bencrypted=yes; fi
+  if [ "$encheck" == "se" ]; then bencrypted=yes; fi
 
   downloadpath=$(cat /pg/var/server.hd.path)
   tempbuild=$(cat /pg/var/json.tempbuild)

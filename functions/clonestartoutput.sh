@@ -190,9 +190,9 @@ if [[ "$transport" == "gu" ]]; then
       B )
           setthrottlemove ;;
       c )
-          optionsmenumove ;;
+          optionsmengu ;;
       C )
-          optionsmenumove ;;
+          optionsmengu ;;
       * )
           clonestart ;;
     esac
@@ -229,9 +229,9 @@ elif [[ "$transport" == "ge" ]]; then
       B )
           setthrottlemove ;;
       c )
-          optionsmenumove ;;
+          optionsmengu ;;
       C )
-          optionsmenumove ;;
+          optionsmengu ;;
       * )
           clonestart ;;
     esac
@@ -438,7 +438,7 @@ optionsmenu
 }
 
 # For Move
-optionsmenumove () {
+optionsmengu () {
 pgclonevars
 tee <<-EOF
 
