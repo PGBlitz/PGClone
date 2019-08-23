@@ -388,20 +388,19 @@ tee <<-EOF
 💪 Options Interface ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Transport Select         | INFO: Change Transport Type
-[2] RClone VFS Mount Setting | INFO: Change Varibles to for the Mount
-[3] Multi-HD Option          | INFO: Add Multi-Points and Options
-[4] Destroy All Service Keys | WARN: Wipes All Keys for the Project
-[5] Create New Project       | WARN: Resets Everything
-[6] Demo Mode - ${demo}          | Hide the E-Mail Address on the Front
-[7] Clone Clean - Destroy Garbage Files every [$cloneclean] minutes
-[8] Change User Agent - ${uagent}
-[9] Create a TeamDrive
+[1] Transport Select         | Change Transport Type
+[2] RClone Mount Settings    | Change Varibles to for the Mount
+[3] Multi-HD Option          | Add Multi-Points and Options
+[4] Destroy All Service Keys | Wipes All Keys for the Project
+[5] Create New Project       | Wipes Resets Everything
+[6] Demo Mode                | Hide Displaying the E-Mail Address - ${demo}
+[7] Clone Clean              | Destory Garbage Files - After [$cloneclean]M
+[8] Change User Agent        | Currently: ${uagent}
+[9] Create a Share Drive
 [Z] Exit
 
-NOTE: When creating a NEW PROJECT (option C), the USER must create the
-CLIENT ID and SECRET for that project! We will assist in creating the
-project and enabling the API! Everything resets when complete!
+NOTE: Creating NEW PROJECT [9]? User must create a CLIENT ID & SECRET for
+that project! We will assist in creating the project and enabling the API!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -446,16 +445,12 @@ tee <<-EOF
 💪 Options Interface ~ http://pgclone.pgblitz.com
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Transport Select         | INFO: Change Transport Type
-[2] RClone VFS Mount Setting | INFO: Change Varibles to for the Mount
-[3] Multi-HD Option          | INFO: Add Multi-Points and Options
-[4] Clone Clean - Destroy Garbage Files Every [$cloneclean] Minutes
+[1] Transport Select         | Change Transport Type
+[2] RClone Mount Settings    | Change Varibles to for the Mount
+[3] Multi-HD Option          | Add Multi-Points and Options
+[4] Clone Clean              | Destory Garbage Files - After [$cloneclean]M
 [5] Change User Agent - ${uagent}
 [Z] Exit
-
-NOTE: When creating a NEW PROJECT (option C), the USER must create the
-CLIENT ID and SECRET for that project! We will assist in creating the
-project and enabling the API! Everything resets when complete!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
