@@ -21,7 +21,7 @@ NOTE 2: You will be editing a JSON file! Only change what's within the
 quotations! If you mess things up, your mounts can deploy incorrectly!
 
 NOTE 3: To RESET the JSON change the "resetdefaults" setting to "yes"
-in all lower case.
+via all lowercase.
 
 NOTE 4: Final Note, to SAVE > Press CTRL + X, Select "YES", and PRESS
 [ENTER] to save the settings! Do not change the name of the file!
