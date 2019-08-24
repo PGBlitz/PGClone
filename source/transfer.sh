@@ -59,7 +59,7 @@ if [[ "$var4" == "gdrive" ]]; then
   echo "" >> /pg/logs/transfer.log
   udrive=$(cat /pg/rclone/deployed.version)
 
-    rclone move "/pg/transfer/woot.txt" "$udrive:/" \
+    rclone move "$uploadfile" "$udrive:/" \
     --config /pg/rclone/blitz.conf \
     --log-file=/pg/logs/transfer.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
