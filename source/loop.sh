@@ -31,6 +31,7 @@ while [[ "$admin9705" == "9705" ]]; do
   bash /pg/rclone/transfer.sh
 
   # cat /pg/logs/transfer.log | tail -200 > /pg/logs/transfer.log
+  echo "" >> /pg/logs/transfer.log
   echo "Cycle $cyclecount Complete - Sleeping 5 Seconds" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
   sleep 2
