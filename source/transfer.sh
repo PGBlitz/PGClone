@@ -14,7 +14,7 @@ if pidof -o %PPID -x "$0"; then
 fi
 
 chmod 775 -R {{hdpath}}/transfer/
-chown 1000:1000 {{hdpath}}/transfer/
+chown -R 1000:1000 {{hdpath}}/transfer/
 
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
