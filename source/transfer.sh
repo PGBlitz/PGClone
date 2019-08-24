@@ -53,7 +53,6 @@ chmod 775 "$uploadfile"
 
   echo "Preparing to Upload: $uploadfile" >> /pg/logs/transfer.log
 
-  #--drive-chunk-size={{dcs}} \
 
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
@@ -66,6 +65,7 @@ if [[ "$var4" == "gdrive" ]]; then
     --checkers=20 \
     --bwlimit="$bws"M \
     --user-agent="$useragent" \
+    --drive-chunk-size={{dcs}} \
     --exclude="**_HIDDEN~" --exclude="**partial~"  \
     --exclude=".fuse_hidden**" --exclude="**.grab/**"
 #else
