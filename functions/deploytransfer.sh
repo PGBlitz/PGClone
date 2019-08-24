@@ -45,6 +45,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   rcsl=$rcsl
   cm="writes"
   drive=sd"
+fi
 ########################################################### SDRIVE END
 
 ########################################################### ENCRYTPION START
