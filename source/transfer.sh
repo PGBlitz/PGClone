@@ -13,6 +13,9 @@ if pidof -o %PPID -x "$0"; then
    exit 1
 fi
 
+chmod 775 -R {{hdpath}}/transfer/
+chown 1000:1000 {{hdpath}}/transfer/
+
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
 
@@ -41,8 +44,6 @@ uploadfile=$(head -n +1 /pg/logs/.temp_list)
 
 if [[ "$uploadfile" == "" ]]; then exit; fi
 
-chmod 775 -R {{hdpath}}/transfer/
-chown 1000:1000 {{hdpath}}/transfer/
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
