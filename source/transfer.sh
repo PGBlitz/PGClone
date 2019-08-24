@@ -9,9 +9,6 @@
 # Variables come from what's being called from deploytransfer.sh under functions
 ## BWLIMIT 9 and Lower Prevents Google 750GB Google Upload Ban
 ################################################################################
-source /pg/pgclone/functions/variables.sh
-pgclonevars
-
 echo "Executing Transfer Process" >> /pg/logs/transfer.log
 chmod 775 -R {{hdpath}}/transfer/
 chown -R 1000:1000 {{hdpath}}/transfer/
@@ -20,6 +17,7 @@ touch /pg/logs/transfer.log
 touch /pg/logs/.transfer_list
 touch /pg/logs/.temp_list
 
+basicpath="$(cat /pg/var/server.hd.path)"
 useragent="$(cat /pg/var/uagent)"
 bwg="$(cat /pg/var/blitz.bw)"
 bws="$(cat /pg/var/move.bw)"
@@ -54,7 +52,7 @@ exit; fi
 chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
-  totalchar=$(echo "${hdpath}" | awk -F"/" '{print NF-1}')
+  totalchar=$(echo "${basicpath}" | awk -F"/" '{print NF-1}')
   finalcount=$((totalchar + 3))
 
   echo "Preparing to Upload: $uploadfile" >> /pg/logs/transfer.log
