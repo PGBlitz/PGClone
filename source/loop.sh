@@ -36,7 +36,7 @@ while [[ "$admin9705" == "9705" ]]; do
     let keyloop++
     echo "$keyloop" > /pg/rclone/keyloop
     currentkey=$(sed -n "${keyloop}p" /pg/var/.blitzlist)
-    echo "$currentkey"> /pg/rclone/currentkey
+    echo "$currentkey" > /pg/rclone/currentkey
     echo "Shared Key   - $var2" >> /pg/logs/transfer.log
     if [[ "$keeploop" -ge "$blitzcount" ]]; then keyloop=0; fi
   fi
