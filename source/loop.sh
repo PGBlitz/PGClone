@@ -8,7 +8,7 @@
 admin9705="9705"
 sleep 2
 
-echo "" >> /pg/logs/transfer.log
+echo "" > /pg/logs/transfer.log
 echo "" >> /pg/logs/transfer.log
 echo "----------------------------" >> /pg/logs/transfer.log
 echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
