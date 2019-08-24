@@ -52,7 +52,7 @@ chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
   echo "Preparing to Upload: $uploadfile" >> /pg/logs/transfer.log
-  truepath=$(echo $uploadfile | cut -d'/' -f3-)
+  truepath=$(echo $uploadfile | cut -d'/' -f4-)
 
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
