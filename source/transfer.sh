@@ -81,7 +81,7 @@ else
   encryptbit=""
   if [[ "$uread" == "sc" ]]; then encryptbit="C"; fi
 
-    rclone move "$uploadfile" "${readykey}${encryptbit}:/" \
+    rclone move "$uploadfile" "${readykey}${encryptbit}:/$truepath" \
     --config /pg/rclone/blitz.conf \
     --log-file=/pg/logs/pgblitz.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
