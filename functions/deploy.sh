@@ -83,7 +83,7 @@ cat /pg/logs/.drivelog
 logcheck=$(cat /pg/logs/.drivelog | grep "Failed")
 
 if [[ "$logcheck" == "" ]]; then
-  if [[ "$transport" == "gd" || "$transport" == "gc" "$transport" == "sd" || "$transport" == "sc" ]]; then executetransport; fi
+  if [[ "$transport" == "gd" || "$transport" == "gc" || "$transport" == "sd" || "$transport" == "sc" ]]; then executetransport; fi
 else
   if [[ "$transport" == "sd" || "$transport" == "sc" ]]; then
   emessage="
