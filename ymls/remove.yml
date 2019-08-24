@@ -14,7 +14,7 @@
       - {name: gd.service}
       - {name: gc.service}
       - {name: sd.service}
-      - {name: sc.serivce}
+      - {name: sc.service}
       - {name: pgunity.service}
       - {name: transfer.service}
   tasks:
