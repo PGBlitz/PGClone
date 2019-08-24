@@ -44,6 +44,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
 
 # deploy only if gdrive is using encryption
 if [[ "$transport" == "sc" ]]; then
+type=gc
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
   dcs=$dcs
