@@ -24,8 +24,7 @@ elif [[ "$var1" == "sc" ]]; then var2="SDrive Encrypted"; fi
 while [[ "$admin9705" == "9705" ]]; do
 
   let cyclecount++
-  echo "$cyclecount"
-  echo "----------------------------" >> /pg/logs/transfer.log
+  echo "--------------------------------------------------------" >> /pg/logs/transfer.log
   echo "PG Blitz Log - Cycle $cyclecount - $var2" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
   echo "Utilizing: $p" >> /pg/logs/transfer.log
@@ -34,6 +33,7 @@ while [[ "$admin9705" == "9705" ]]; do
 
   # cat /pg/logs/transfer.log | tail -200 > /pg/logs/transfer.log
   echo "Cycle $cyclecount - Sleeping 5 Seconds" >> /pg/logs/transfer.log
+  echo "" >> /pg/logs/transfer.log
   sleep 2
   primepath="$(cat /pg/var/hd.path)"
   find "$primepath/transfer" -mindepth 1 -type d -mmin +1 -empty -delete
