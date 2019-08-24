@@ -15,7 +15,7 @@ echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
 rm -rf /pg/logs/.transfer_list
 rm -rf /pg/logs/.temp_list
 
-var1=$(cat /pg/rclone/deploy.version)
+var1=$(cat /pg/rclone/deployed.version)
 if [[ "$var1" == "gd" ]]; then var2="GDrive Unencrypted"
 elif [[ "$var1" == "gc" ]]; then var2="GDrive Encrypted"
 elif [[ "$var1" == "sd" ]]; then var2="SDrive Unencrypted"
