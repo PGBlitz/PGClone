@@ -33,7 +33,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
 ########################################################### GDRIVE END
 
 ########################################################### SDRIVE END
-if [[ "$transport" == "gc" || "$transport" == "sc" || "$transport" == "sd"]]; then
+if [[ "$transport" == "gc" || "$transport" == "sc" || "$transport" == "sd" ]]; then
 type=sd
 encryptbit=""
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
