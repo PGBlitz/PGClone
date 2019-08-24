@@ -28,10 +28,10 @@ elif [[ "$var3" == "sd" ]]; then var4="sdrive"; fi
 
 filecount=$(wc -l /pg/logs/.transfer_list | awk '{print $1}')
 echo "$filecount" > /pg/var/filecount
-if [[ "$filecount" -gt 8 ]]; 
+if [[ "$filecount" -gt 8 ]]; then
 echo "Max Files of [8] Files - Pending Transfer" >> /pg/logs/transfer.log
 echo "Exiting Cycle" >> /pg/logs/transfer.log
-then exit; fi
+exit; fi
 
 find /pg/transfer/ -type f > /pg/logs/.temp_list
 
