@@ -164,8 +164,8 @@ scryptmod ()
     c2initial=$(rclone lsd --config /pg/rclone/blitz.conf sc: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$c1initial" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >> /pg/logs/.drivelog; else echo "TCRYPT1:  Failed" >> /pg/logs/.drivelog; fi
-  if [[ "$c2initial" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >> /pg/logs/.drivelog; else echo "TCRYPT2:  Failed" >> /pg/logs/.drivelog; fi
+  if [[ "$c1initial" == "encrypt" ]]; then echo "SCRYPT1:  Passed" >> /pg/logs/.drivelog; else echo "SCRYPT1:  Failed" >> /pg/logs/.drivelog; fi
+  if [[ "$c2initial" == "plexguide" ]]; then echo "SCRYPT2:  Passed" >> /pg/logs/.drivelog; else echo "SCRYPT2:  Failed" >> /pg/logs/.drivelog; fi
 }
 gdsamod ()
 {
