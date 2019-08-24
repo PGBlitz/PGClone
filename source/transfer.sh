@@ -78,13 +78,10 @@ else
   --drive-chunk-size={{dcs}} \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
   --exclude="**partial~" --exclude=".unionfs-fuse/**" \
-  --exclude=".fuse_hidden**" --exclude="**.grab/**"  \
+  --exclude=".fuse_hidden**" --exclude="**.grab/**"
 fi
 
 sleep 5
 grep -v "$uploadfile" "/pg/logs/.transfer_list" | sponge "/pg/logs/.transfer_list"
 
-# Removes garbage | torrent folder excluded
-#find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
-#find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
-exit 0
+exit
