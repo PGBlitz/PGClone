@@ -27,7 +27,7 @@ multihds=$(cat /pg/var/.tmp.multihd)
 ansible-playbook /pg/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
 
 # stores deployed version
-echo "le" > /pg/var/deployed.version
+echo "le" > /pg/rclone/deployed.version
 
 # display edition final
 tee <<-EOF

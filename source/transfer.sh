@@ -23,7 +23,7 @@ touch /pg/logs/.temp_list
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
 
-var3=$(cat /pg/rclone/deploy.version)
+var3=$(cat /pg/rclone/deployed.version)
 if [[ "$var3" == "gd" ]]; then var4="gdrive"
 elif [[ "$var3" == "gc" ]]; then var4="gdrive"
 elif [[ "$var3" == "sd" ]]; then var4="sdrive"

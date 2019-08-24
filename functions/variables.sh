@@ -89,8 +89,8 @@ pgclonevars () {
   variable /pg/rclone/pgclone.project "NOT-SET"
   pgcloneproject=$(cat /pg/rclone/pgclone.project)
 
-  variable /pg/var/deployed.version ""
-  dversion=$(cat /pg/var/deployed.version)
+  variable /pg/rclone/deployed.version ""
+  dversion=$(cat /pg/rclone/deployed.version)
 
   variablet /pg/var/.tmp.multihd
   multihds=$(cat /pg/var/.tmp.multihd)

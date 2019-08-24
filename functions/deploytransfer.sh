@@ -11,7 +11,7 @@
 executetransport () {
 
 # Reset Front Display
-rm -rf  /pg/var/deployed.version
+rm -rf  /pg/rclone/deployed.version
 
 # Call Variables
 pgclonevars
@@ -20,7 +20,7 @@ pgclonevars
 ansible-playbook /pg/pgclone/ymls/remove.yml
 
 ########################################################### GDRIVE START
-echo "gd" > /pg/var/deployed.version
+echo "gd" > /pg/rclone/deployed.version
 type=gd
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   bs=$bs
@@ -35,7 +35,7 @@ ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
 ########################################################### SDRIVE END
 if [[ "$transport" == "gc" || "$transport" == "sc" || "$transport" == "sd" ]]; then
 type=sd
-echo "sd" > /pg/var/deployed.version
+echo "sd" > /pg/rclone/deployed.version
 encryptbit=""
 ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   bs=$bs
@@ -51,7 +51,7 @@ fi
 
 ########################################################### ENCRYTPION START
 if [[ "$transport" == "gc" || "$transport" == "sc" ]]; then
-echo "gc" > /pg/var/deployed.version
+echo "gc" > /pg/rclone/deployed.version
 type=gc
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
@@ -64,7 +64,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
 fi
 
 if [[ "$transport" == "sc" ]]; then
-echo "sc" > /pg/var/deployed.version
+echo "sc" > /pg/rclone/deployed.version
 type=sc
 encryptbit="C"
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\

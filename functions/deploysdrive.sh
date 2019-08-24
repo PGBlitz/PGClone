@@ -54,7 +54,7 @@ ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   rcsl=$rcsl
   drive=gc"
 
-echo "sc" > /pg/var/deployed.version
+echo "sc" > /pg/rclone/deployed.version
 type=sc
 encryptbit="C"
 ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
