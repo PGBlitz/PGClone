@@ -12,6 +12,8 @@ echo "" > /pg/logs/transfer.log
 echo "" >> /pg/logs/transfer.log
 echo "----------------------------" >> /pg/logs/transfer.log
 echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
+rm -rf /pg/logs/.transfer_list
+rm -rf /pg/logs/.temp_list
 
 while [[ "$admin9705" == "9705" ]]; do
 

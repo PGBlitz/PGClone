@@ -16,6 +16,10 @@ fi
 chmod 775 -R {{hdpath}}/transfer/
 chown -R 1000:1000 {{hdpath}}/transfer/
 
+touch /pg/logs/transfer.log
+touch /pg/logs/.transfer_list
+touch /pg/logs/.temp_list
+
 useragent="$(cat /pg/var/uagent)"
 cleaner="$(cat /pg/var/cloneclean)"
 
@@ -24,10 +28,6 @@ if [[ "$var3" == "gd" ]]; then var4="gdrive"
 elif [[ "$var3" == "gc" ]]; then var4="gdrive"
 elif [[ "$var3" == "sd" ]]; then var4="sdrive"
 elif [[ "$var3" == "sd" ]]; then var4="sdrive"; fi
-
-touch /pg/logs/transfer.log
-touch /pg/logs/.transfer_list
-touch /pg/logs/.temp_list
 
 filecount=$(wc -l /pg/logs/.transfer_list | awk '{print $1}')
 echo "$filecount" > /pg/var/filecount
