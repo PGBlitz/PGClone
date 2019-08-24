@@ -71,7 +71,7 @@ if [[ "$var4" == "gdrive" ]]; then
     --exclude="**_HIDDEN~" --exclude="**partial~"  \
     --exclude=".fuse_hidden**" --exclude="**.grab/**"
 else
-  echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
+  echo "Started Shared Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
   udrive=$(cat /pg/rclone/deployed.version)
 
