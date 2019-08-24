@@ -15,13 +15,13 @@ echo "PGBlitz Log - First Startup" >> /pg/logs/transfer.log
 rm -rf /pg/logs/.transfer_list
 rm -rf /pg/logs/.temp_list
 
-while [[ "$admin9705" == "9705" ]]; do
+var1=$(cat /pg/rclone/deploy.version)
+if [[ "$var1" == "gd" ]]; then var2="GDrive Unencrypted"
+elif [[ "$var1" == "gc" ]]; then var2="GDrive Encrypted"
+elif [[ "$var1" == "sd" ]]; then var2="SDrive Unencrypted"
+elif [[ "$var1" == "sc" ]]; then var2="SDrive Encrypted"; fi
 
-  var1=$(cat /pg/rclone/deploy.version)
-  if [[ "$var1" == "gd" ]]; then var2="GDrive Unencrypted"
-  elif [[ "$var1" == "gc" ]]; then var2="GDrive Encrypted"
-  elif [[ "$var1" == "sd" ]]; then var2="SDrive Unencrypted"
-  elif [[ "$var1" == "sc" ]]; then var2="SDrive Encrypted"; fi
+while [[ "$admin9705" == "9705" ]]; do
 
   let cyclecount++
   echo "$cyclecount"
@@ -32,7 +32,7 @@ while [[ "$admin9705" == "9705" ]]; do
 
   bash /pg/rclone/transfer.sh
 
-  cat /pg/logs/transfer.log | tail -200 > /pg/logs/transfer.log
+  # cat /pg/logs/transfer.log | tail -200 > /pg/logs/transfer.log
   echo "Cycle $cyclecount - Sleeping 5 Seconds" >> /pg/logs/transfer.log
   sleep 2
   primepath="$(cat /pg/var/hd.path)"
