@@ -149,7 +149,7 @@ deploychecks
 if [[ "$transport" == "PG Move /w No Encryption" || "$transport" == "PG Move /w Encryption" ]]; then
   display=""
 else
-  if [ "$type" == "sdrive" ]; then
+  if [ "$type" == "sd" ]; then
   display="TEAMDRIVE: $teamdrive
   ";fi; fi
 
@@ -744,7 +744,7 @@ testphase () {
   echo "type = drive" >> /pg/rclone/test.conf
   echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/test.conf
   echo "" >> /pg/rclone/test.conf
-  if [ "$type" == "sdrive" ]; then
+  if [ "$type" == "sd" ]; then
   teamid=$(cat /pg/rclone/pgclone.teamid)
   echo "team_drive = $teamid" >> /pg/rclone/test.conf; fi
   echo ""
