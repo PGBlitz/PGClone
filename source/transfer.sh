@@ -20,7 +20,7 @@ var3=$(cat /pg/rclone/deploy.version)
 if [[ "$var3" == "gd" ]]; then var4="gdrive"
 elif [[ "$var3" == "gc" ]]; then var4="gdrive"
 elif [[ "$var3" == "sd" ]]; then var4="sdrive"
-elif [[ "$var3" == "sd" ]]; then var4="sdrive"
+elif [[ "$var3" == "sd" ]]; then var4="sdrive"; fi
 
 touch /pg/logs/transfer.log
 touch /pg/logs/.transfer_list
