@@ -57,8 +57,9 @@ chmod 775 "$uploadfile"
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
+  udrive=$(cat /pg/rclone/deployed.version)
 
-    rclone move "$uploadfile" "$var3:/" \
+    rclone move "/pg/transfer/woot.txt" "$udrive:/" \
     --config /pg/rclone/blitz.conf \
     --log-file=/pg/logs/transfer.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -72,7 +73,8 @@ if [[ "$var4" == "gdrive" ]]; then
 else
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
-  
+  udrive=$(cat /pg/rclone/deployed.version)
+
     rclone move "$uploadfile" "${p}{{encryptbit}}:/" \
     --config /pg/rclone/blitz.conf \
     --log-file=/pg/logs/pgblitz.log \
