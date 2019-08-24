@@ -48,7 +48,7 @@ chown 1000:1000 "$uploadfile"
 chmod 775 "$uploadfile"
 
 if [[ "$var4" == "gdrive" ]]; then
-  rclone moveto "$uploadfile" "{{type}}:/" \
+  rclone moveto "$uploadfile" "$var3:/" \
   --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/transfer.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
