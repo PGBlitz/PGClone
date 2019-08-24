@@ -18,7 +18,8 @@ touch /pg/logs/.transfer_list
 touch /pg/logs/.temp_list
 
 useragent="$(cat /pg/var/uagent)"
-cleaner="$(cat /pg/var/cloneclean)"
+bwg="$(cat /pg/var/blitz.bw)"
+bws="$(cat /pg/var/move.bw)"
 
 var3=$(cat /pg/rclone/deployed.version)
 if [[ "$var3" == "gd" ]]; then var4="gdrive"
@@ -28,6 +29,7 @@ elif [[ "$var3" == "sd" ]]; then var4="sdrive"; fi
 
 filecount=$(wc -l /pg/logs/.transfer_list | awk '{print $1}')
 echo "$filecount" > /pg/var/filecount
+
 if [[ "$filecount" -gt 8 ]]; then
 echo "Max Files of [8] Files - Pending Transfer" >> /pg/logs/transfer.log
 echo "Exiting Cycle" >> /pg/logs/transfer.log
@@ -51,38 +53,37 @@ chmod 775 "$uploadfile"
 
   echo "Preparing to Upload: $uploadfile" >> /pg/logs/transfer.log
 
-  #--bwlimit {{bandwidth.stdout}}M \
   #--drive-chunk-size={{dcs}} \
 
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  rclone moveto "$uploadfile" "$var3:/" \
-  --config /pg/rclone/blitz.conf \
-  --log-file=/pg/logs/transfer.log \
-  --log-level INFO --stats 5s --stats-file-name-length 0 \
-  --tpslimit 6 \
-  --checkers=20 \
-  --user-agent="$useragent" \
-  --exclude="**_HIDDEN~" --exclude="**partial~"  \
-  --exclude=".fuse_hidden**" --exclude="**.grab/**"
+
+    rclone move "$uploadfile" "$var3:/" \
+    --config /pg/rclone/blitz.conf \
+    --log-file=/pg/logs/transfer.log \
+    --log-level INFO --stats 5s --stats-file-name-length 0 \
+    --tpslimit 6 \
+    --checkers=20 \
+    --bwlimit="$bws"M \
+    --user-agent="$useragent" \
+    --exclude="**_HIDDEN~" --exclude="**partial~"  \
+    --exclude=".fuse_hidden**" --exclude="**.grab/**"
 #else
 #  echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-#  rclone moveto "$uploadfile" "${p}{{encryptbit}}:/" \
-#  --config /pg/rclone/blitz.conf \
-#  --log-file=/pg/logs/pgblitz.log \
-#  --log-level INFO --stats 5s --stats-file-name-length 0 \
-#  --tpslimit 12 \
-#  --checkers=20 \
-#  --transfers=16 \
-#  --bwlimit {{bandwidth.stdout}}M \
-#  --user-agent="$useragent" \
-#  --drive-chunk-size={{dcs}} \
-#  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-#  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
-#  --exclude=".fuse_hidden**" --exclude="**.grab/**"
+  #  rclone moveto "$uploadfile" "${p}{{encryptbit}}:/" \
+  #  --config /pg/rclone/blitz.conf \
+  #  --log-file=/pg/logs/pgblitz.log \
+  #  --log-level INFO --stats 5s --stats-file-name-length 0 \
+  #  --tpslimit 12 \
+  #  --checkers=20 \
+  #  --transfers=16 \
+  #  --bwlimit {{bandwidth.stdout}}M \
+  #  --user-agent="$useragent" \
+  #  --drive-chunk-size={{dcs}} \
+  #  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+  #  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+  #  --exclude=".fuse_hidden**" --exclude="**.grab/**"
 fi
 
-sleep 5
 grep -v "$uploadfile" "/pg/logs/.transfer_list" | sponge "/pg/logs/.transfer_list"
-
 exit
