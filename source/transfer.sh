@@ -53,7 +53,6 @@ chmod 775 "$uploadfile"
 
   echo "Preparing to Upload: $uploadfile" >> /pg/logs/transfer.log
 
-
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
@@ -73,9 +72,12 @@ if [[ "$var4" == "gdrive" ]]; then
 else
   echo "Started Shared Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
   echo "" >> /pg/logs/transfer.log
-  udrive=$(cat /pg/rclone/deployed.version)
+  readykey=$(cat /pg/rclone/currentkey)
+  uread=$(cat /pg/rclone/deployed.version)
+  encryptbit=""
+  if [[ "$uread" == "sc" ]]; then encryptbit="C"; fi
 
-    rclone move "$uploadfile" "${p}{{encryptbit}}:/" \
+    rclone move "$uploadfile" "${readykey}${encryptbit}:/" \
     --config /pg/rclone/blitz.conf \
     --log-file=/pg/logs/pgblitz.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
