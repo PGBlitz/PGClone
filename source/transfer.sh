@@ -63,26 +63,26 @@ if [[ "$var4" == "gdrive" ]]; then
     --log-level INFO --stats 5s --stats-file-name-length 0 \
     --tpslimit 6 \
     --checkers=20 \
-    --bwlimit="$bws"M \
+    --bwlimit="$bwg"M \
     --user-agent="$useragent" \
     --drive-chunk-size={{dcs}} \
     --exclude="**_HIDDEN~" --exclude="**partial~"  \
     --exclude=".fuse_hidden**" --exclude="**.grab/**"
-#else
-#  echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  #  rclone moveto "$uploadfile" "${p}{{encryptbit}}:/" \
-  #  --config /pg/rclone/blitz.conf \
-  #  --log-file=/pg/logs/pgblitz.log \
-  #  --log-level INFO --stats 5s --stats-file-name-length 0 \
-  #  --tpslimit 12 \
-  #  --checkers=20 \
-  #  --transfers=16 \
-  #  --bwlimit {{bandwidth.stdout}}M \
-  #  --user-agent="$useragent" \
-  #  --drive-chunk-size={{dcs}} \
-  #  --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
-  #  --exclude="**partial~" --exclude=".unionfs-fuse/**" \
-  #  --exclude=".fuse_hidden**" --exclude="**.grab/**"
+else
+  echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
+    rclone move "$uploadfile" "${p}{{encryptbit}}:/" \
+    --config /pg/rclone/blitz.conf \
+    --log-file=/pg/logs/pgblitz.log \
+    --log-level INFO --stats 5s --stats-file-name-length 0 \
+    --tpslimit 12 \
+    --checkers=20 \
+    --transfers=16 \
+    --bwlimit="$bws"M \
+    --user-agent="$useragent" \
+    --drive-chunk-size={{dcs}} \
+    --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
+    --exclude="**partial~" --exclude=".unionfs-fuse/**" \
+    --exclude=".fuse_hidden**" --exclude="**.grab/**"
 fi
 
 grep -v "$uploadfile" "/pg/logs/.transfer_list" | sponge "/pg/logs/.transfer_list"
