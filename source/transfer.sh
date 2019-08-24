@@ -55,7 +55,6 @@ chmod 775 "$uploadfile"
 
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  echo "" >> /pg/logs/transfer.log
   udrive=$(cat /pg/rclone/deployed.version)
 
     rclone move "$uploadfile" "$udrive:/" \
@@ -71,7 +70,6 @@ if [[ "$var4" == "gdrive" ]]; then
     --exclude=".fuse_hidden**" --exclude="**.grab/**"
 else
   echo "Started Shared Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  echo "" >> /pg/logs/transfer.log
   readykey=$(cat /pg/rclone/currentkey)
   uread=$(cat /pg/rclone/deployed.version)
   encryptbit=""
