@@ -63,6 +63,7 @@ if [[ "$var4" == "gdrive" ]]; then
     --log-level INFO --stats 5s --stats-file-name-length 0 \
     --tpslimit 6 \
     --checkers=20 \
+    --min-age=30s \
     --bwlimit="$bwg"M \
     --user-agent="$useragent" \
     --drive-chunk-size={{dcs}} \
@@ -81,6 +82,7 @@ else
     --log-level INFO --stats 5s --stats-file-name-length 0 \
     --tpslimit 12 \
     --checkers=20 \
+    --min-age=30s \
     --transfers=16 \
     --bwlimit="$bws"M \
     --user-agent="$useragent" \
