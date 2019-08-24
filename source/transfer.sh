@@ -53,7 +53,7 @@ chmod 775 "$uploadfile"
 
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  rclone moveto "$uploadfile" "$var3:/" \
+  rclone move "$uploadfile" "$var3:/" \
   --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/transfer.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
@@ -66,7 +66,7 @@ if [[ "$var4" == "gdrive" ]]; then
   --exclude=".fuse_hidden**" --exclude="**.grab/**"
 else
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  rclone moveto "$uploadfile" "${p}{{encryptbit}}:/" \
+  rclone move "$uploadfile" "${p}{{encryptbit}}:/" \
   --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
