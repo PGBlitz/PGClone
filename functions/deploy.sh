@@ -84,8 +84,8 @@ logcheck=$(cat /pg/logs/.drivelog | grep "Failed")
 
 if [[ "$logcheck" == "" ]]; then
 
-  if [[ "$transport" == "gd" || "$transport" == "gc" ]]; then executemove; fi
-  if [[ "$transport" == "sd" || "$transport" == "sc" ]]; then executeblitz; fi
+  if [[ "$transport" == "gd" || "$transport" == "gc" ]]; then executetransport; fi
+  if [[ "$transport" == "sd" || "$transport" == "sc" ]]; then executetransport; fi
 
 else
 
