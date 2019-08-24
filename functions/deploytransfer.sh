@@ -99,10 +99,10 @@ ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   hdpath=$hdpath"
 
 # output final display
-if [[ "$type" == "gd" ]]; then finaldeployoutput="GDrive Unencrypted"; fi
+if [[ "$type" == "gd" ]]; then finaldeployoutput="GDrive Unencrypted"
 elif [[ "$type" == "gc" ]]; then finaldeployoutput="GDrive Encrypted"
 elif [[ "$type" == "sd" ]]; then finaldeployoutput="SDrive Unencrypted"
-elif [[ "$type" == "sc" ]]; then finaldeployoutput="SDrive Encrypted"
+elif [[ "$type" == "sc" ]]; then finaldeployoutput="SDrive Encrypted"; fi
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
