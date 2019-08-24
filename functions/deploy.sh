@@ -131,7 +131,7 @@ sdrivemod ()
     initial=$(rclone lsd --config /pg/rclone/blitz.conf sd: | grep -oP plexguide | head -n1)
   fi
 
-  if [[ "$initial" == "plexguide" ]]; then echo "TDRIVE :  Passed" >> /pg/logs/.drivelog; else echo "TDRIVE :  Failed" >> /pg/logs/.drivelog; fi
+  if [[ "$initial" == "plexguide" ]]; then echo "SDRIVE :  Passed" >> /pg/logs/.drivelog; else echo "SDRIVE :  Failed" >> /pg/logs/.drivelog; fi
 }
 gcryptmod ()
 {
