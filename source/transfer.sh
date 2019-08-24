@@ -9,10 +9,6 @@
 # Variables come from what's being called from deploytransfer.sh under functions
 ## BWLIMIT 9 and Lower Prevents Google 750GB Google Upload Ban
 ################################################################################
-if pidof -o %PPID -x "$0"; then
-   exit 1
-fi
-
 chmod 775 -R {{hdpath}}/transfer/
 chown -R 1000:1000 {{hdpath}}/transfer/
 
