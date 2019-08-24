@@ -67,7 +67,7 @@ if [[ "$var4" == "gdrive" ]]; then
     --bwlimit="$bwg"M \
     --user-agent="$useragent" \
     --drive-chunk-size={{dcs}} \
-    --exclude="**_HIDDEN~" --exclude="**partial~"  \
+    --exclude="**_HIDDEN~" --exclude="*partial~"  \
     --exclude=".fuse_hidden**" --exclude="**.grab/**"
 else
   echo "Started Shared Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
