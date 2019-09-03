@@ -19,8 +19,8 @@ touch /pg/logs/.temp_list
 
 basicpath="$(cat /pg/var/server.hd.path)"
 useragent="$(cat /pg/var/uagent)"
-bwg="$(cat /pg/var/blitz.bw)"
-bws="$(cat /pg/var/move.bw)"
+bwg="$(cat /pg/var/move.bw)"
+bws="$(cat /pg/var/blitz.bw)"
 
 var3=$(cat /pg/rclone/deployed.version)
 if [[ "$var3" == "gd" ]]; then var4="gdrive"
