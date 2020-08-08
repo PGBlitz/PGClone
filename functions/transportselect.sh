@@ -9,16 +9,18 @@ transportselect() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Set PG Clone Method ~ http://pgclone.pgblitz.com
+💪 Set Clone Method 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 NOTE: Please visit the link and understand what your doing first!
 
-[1] Move  Unencrypt: Data > GDrive | Novice  | 750GB Daily Transfer Max
-[2] Move  Encrypted: Data > GDrive | Novice  | 750GB Daily Transfer Max
-[3] Blitz Unencrypt: Data > TDrive | Complex | Exceed 750GB Transport Cap
-[4] Blitz Encrypted: Data > TDrive | Complex | Exceed 750GB Transport Cap
-[5] Local Edition  : Local HDs     | Easy    | Utilizes System's HD's Only
+[1] GDrive-Unencrypt: Data > Novice  | 750GB Daily Transfer Max
+[2] GDrive-Encrypted: Data > Novice  | 750GB Daily Transfer Max
+[3] TDrive-Unencrypt: Data > Complex | Exceed 750GB Transport Cap
+[4] TDrive-Encrypted: Data > Complex | Exceed 750GB Transport Cap
 
+[5] Local Edition   : Local HDs      | Easy  Utilizes System's HD's Only
+
+[Z] EXIT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -46,6 +48,12 @@ EOF
         echo "le" >/var/plexguide/pgclone.transport
         echo "Local Edition" >/var/plexguide/pg.transport
         ;;
+	z)
+      exit
+      ;;
+    Z)
+      exit
+      ;;
     *)
         transportselect
         ;;

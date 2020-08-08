@@ -23,14 +23,15 @@ mustset() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Welcome to PG Clone ~ http://pgclone.pgblitz.com
+💪 Welcome to rClone  
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NOTE: PG Clone is a service that automates mergerfs; with mount, rclone,
+NOTE: rClone is a service that automates mergerfs; with mount, rclone,
 and key development to mount user drives and move/store data accordingly.
 Visit the link above before starting this process!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[1] PG Clone Method: $transport
+[1] rClone Method: [ $transport ]
+
 [Z] Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -39,18 +40,10 @@ EOF
     read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
 
     case $typed in
-    1)
-      transportselect
-      ;;
-    z)
-      exit
-      ;;
-    Z)
-      exit
-      ;;
-    *)
-      mustset
-      ;;
+    1) transportselect ;;
+    z) exit ;;
+    Z) exit ;;
+    *) mustset ;;
     esac
   fi
 }
@@ -67,74 +60,12 @@ EOF
 }
 
 removepgservices() {
-  ansible-playbook /opt/pgclone/pgservices.yml
+  ansible-playbook /opt/pgclone/ymls/remove.yml
 }
 
 keysprocessed() {
   mkdir -p /opt/appdata/plexguide/keys/processed
   ls -1 /opt/appdata/plexguide/keys/processed | wc -l >/var/plexguide/project.keycount
-}
-
-deletemelateron() {
-  pgclonevars
-
-  tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 PG Clone Key Management ~ http://pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[1] Google Account Login   [$pgcloneemail]
-[2] Project Name           [$pgcloneproject]
-[3] Build Service Keys     [$displaykey]
-[4] E-Mail Generator
-
-[A] Keys Backup  ~ NOT READY
-[B] Keys Restore ~ NOT READY
-[C] Keys Destroy
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[Z] Exit
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-
-  read -rp '↘️  Input Selection | Press [ENTER]: ' typed </dev/tty
-
-  case $typed in
-  1)
-    glogin
-    ;;
-  2)
-    projectname
-    ;;
-  3)
-    projectnamecheck
-    keystart
-    gdsaemail
-    ;;
-  4)
-    projectnamecheck
-    deployblitzstartcheck
-    emailgen
-    ;;
-  c)
-    deletekeys
-    ;;
-  C)
-    deletekeys
-    ;;
-  z)
-    clonestart
-    ;;
-  Z)
-    clonestart
-    ;;
-  *)
-    clonestart
-    ;;
-  esac
-  clonestart
 }
 
 ShortNotice() {

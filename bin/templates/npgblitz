@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# Title:      PGBlitz.com (Reference Title File)
-# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
-# URL:        https://pgblitz.com - http://github.pgblitz.com
-# GNU:        General Public License v3.0
-################################################################################
-nano /opt/appdata/plexguide/pgblitz.sh && systemctl daemon-reload

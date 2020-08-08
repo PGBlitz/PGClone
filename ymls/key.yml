@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# Title:      Docker Uploader 
+# Author(s):  PhyskX
+# CoAuthot:   MrDoob
+# GNU:        General Public License v3.0
+################################################################################
+---
+- name: 'Check of Existance files in {{ pgrole }}'
+  stat:
+    path: '/opt/appdata/uploader/rclone.conf'
+  register: rcp
+
+- name: 'Remove old rclone.conf from {{ pgrole }} folder'
+  shell: 'rm -rf /opt/appdata/uploader/rclone.conf'
+  ignore_errors: yes
+  when: rcp.stat.exists == true
+
+- name: 'Remove old Keys from {{ pgrole }} folder'
+  shell: 'rm -rf /opt/appdata/uploader/keys'
+  ignore_errors: yes
+  when: rcp.stat.exists == true
+
+- name: 'Clone rclone.config to {{ pgrole }} folder' 
+  copy:
+    src: /opt/appdata/plexguide/rclone.conf
+    dest: /opt/appdata/uploader/rclone.conf
+    owner: 1000
+    group: 1000
+    mode: '0755'
+
+- name: 'Check of Existance file for TDrive and TCrypt'
+  stat:
+    path: '/opt/appdata/uploader/keys/GDSA01'
+  register: tdgdsa
+
+- name: 'Clone fresh keys TDrive and TCrypt'
+  shell: 'cp -rv "/opt/appdata/plexguide/.blitzkeys" /opt/appdata/uploader/keys'
+
+  ignore_errors: yes
+  when: tdgdsa.stat.exists == false
+
+- name: 'Check of Existance files in {{ pgrole }}'
+  stat:
+    path: '/opt/appdata/uploader/Preferences.xml'
+  register: pcp
+  ignore_errors: yes
+
+- name: 'Remove old Preferences.xml from {{ pgrole }} folder'
+  shell: 'rm -rf /opt/appdata/uploader/Preferences.xml'
+  ignore_errors: yes
+  when: pcp.stat.exists == true
+
+- name: 'Copy Plex Preference to the Docker'
+  shell: 'cp -rv "/opt/appdata/plex/database/Library/Application Support/Plex Media Server/Preferences.xml" /opt/appdata/uploader/Preferences.xml'
+  ignore_errors: yes
+  when: pcp.stat.exists == true
+
+- name: 'Setting permissions on appdata'
+  shell: 'chmod -R 775 /opt/appdata/{{pgrole}}'
+
+- name: 'Setting ownership on appdata recursivley (this can take a while!)'
+  shell: 'chown -cR 1000:1000 /opt/appdata/{{pgrole}}'
+
+- name: 'Setting permissions on appdata recursivley (this can take a while!)'
+  shell: 'chmod -cR 775 /opt/appdata/{{pgrole}}'

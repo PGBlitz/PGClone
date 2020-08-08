@@ -11,8 +11,7 @@ ctdrive() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Create TeamDrive ~ oauth.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Create TeamDrive
 
 https://accounts.google.com/o/oauth2/auth?client_id=$pgclonepublic&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
 
@@ -38,6 +37,6 @@ EOF
     --header "Authorization: Bearer ${accesstoken}" \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
-    --data '{"name":"pg-media","backgroundImageLink":"https://pgblitz.com/styles/io_dark/images/pgblitz4.png"}' \
+    --data '{"name":"Media"}' \
     --compressed
 }

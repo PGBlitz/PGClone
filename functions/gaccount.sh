@@ -11,15 +11,21 @@ badinput() {
     echo
     read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed </dev/tty
 }
+variable /var/plexguide/project.email "NOT-SET"
+emailaccount=$(cat /var/plexguide/project.email)
 
 glogin() {
-
-    emailaccount=$(cat /var/plexguide/project.email)
-
+if [[ "$emailaccount" == "NOT-SET" ]]; then
+    echo
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo " Email Account - NOT-SET - First Start "
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+ fi
+  
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💪 Set E-Mail Address ~ http://pgclone.pgblitz.com
+💪 Set E-Mail Address
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 What email address from the Google Console do you want to be associated
 with from your Google GSuite? Ensure that it exists!

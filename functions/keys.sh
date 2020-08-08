@@ -47,8 +47,9 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TIPS:
-1. Did you set up your gcrypt accordingly to the wiki?
-2. Did you ensure that the gcrypt overlapped on gdrive per the wiki?
+[ 1. ] Did you set up your gcrypt accordingly to the wiki?
+
+[ 2. ] Did you ensure that the gcrypt overlapped on gdrive per the wiki?
 
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
@@ -101,7 +102,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TIPS:
-1. Did you set up your $type accordingly to the wiki?
+[ 1. ] Did you set up your $type accordingly to the wiki?
 
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
@@ -154,7 +155,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TIPS:
-1. Did you set up your $type accordingly to the wiki?
+[ 1. ] Did you set up your $type accordingly to the wiki?
 
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
@@ -172,7 +173,7 @@ EOF
 }
 
 deploygdsa01check() {
-  type=gdsa01
+  type=GDSA01
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -207,7 +208,7 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TIPS:
-1. Did you set up your keys and share out your emails per the blitz wiki?
+[ 1. ] Did you set up your keys and share out your emails per the blitz wiki?
 
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
@@ -261,9 +262,9 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TIPS:
-1. Did you copy your username and password correctly?
-2. When you created the credentials, did you select "Other"?
-3. Did you enable your API?
+[ 1. ] Did you copy your username and password correctly?
+[ 2. ] When you created the credentials, did you select "Other"?
+[ 3. ] Did you enable your API?
 
 EOF
     echo "Not Active" >/var/plexguide/gdrive.pgclone
@@ -321,7 +322,7 @@ deletekeys() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 ID: PG Key Gen Information
+🚀 ID: Key Gen Information
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -345,14 +346,8 @@ EOF
     deletekeys
   fi
 }
-
 gdsabuild() {
-
   ## what sets if encrypted is on or not
-  encheck=$(cat /var/plexguide/pgclone.transport)
-  bencrypted=no
-  if [ "$encheck" == "be" ]; then bencrypted=yes; fi
-
   downloadpath=$(cat /var/plexguide/server.hd.path)
   tempbuild=$(cat /var/plexguide/json.tempbuild)
   path=/opt/appdata/plexguide/keys
@@ -360,26 +355,23 @@ gdsabuild() {
   tdrive=$(cat /opt/appdata/plexguide/rclone.conf | grep team_drive | head -n1)
   tdrive="${tdrive:13}"
 
-  if [ "$bencrypted" == "yes" ]; then
-    PASSWORD=$(cat /var/plexguide/pgclone.password)
-    SALT=$(cat /var/plexguide/pgclone.salt)
-    ENC_PASSWORD=$(rclone obscure "$PASSWORD")
-    ENC_SALT=$(rclone obscure "$SALT")
-  fi
+  if [[ "$(cat /var/plexguide/pgclone.transport)" == "be" ]]; then
+    # PASSWORD=$(cat /var/plexguide/pgclone.password)
+    # SALT=$(cat /var/plexguide/pgclone.salt)
+    ENC_PASSWORD=$(rclone obscure "$(cat /var/plexguide/pgclone.password)")
+    ENC_SALT=$(rclone obscure "$(cat /var/plexguide/pgclone.salt)")
 
-  ####tempbuild is need in order to call the correct gdsa
-  mkdir -p $downloadpath/move/$tempbuild
-  echo "" >>$rpath
-  echo "[$tempbuild]" >>$rpath
-  echo "type = drive" >>$rpath
-  echo "client_id =" >>$rpath
-  echo "client_secret =" >>$rpath
-  echo "scope = drive" >>$rpath
-  echo "root_folder_id =" >>$rpath
-  echo "service_account_file = /opt/appdata/plexguide/keys/processed/$tempbuild" >>$rpath
-  echo "team_drive = $tdrive" >>$rpath
+    mkdir -p $downloadpath/move/$tempbuild
+    echo "" >>$rpath
+    echo "[$tempbuild]" >>$rpath
+    echo "type = drive" >>$rpath
+    echo "client_id =" >>$rpath
+    echo "client_secret =" >>$rpath
+    echo "scope = drive" >>$rpath
+    echo "root_folder_id =" >>$rpath
+    echo "service_account_file = /opt/appdata/plexguide/keys/processed/$tempbuild" >>$rpath
+    echo "team_drive = $tdrive" >>$rpath
 
-  if [ "$bencrypted" == "yes" ]; then
     echo "" >>$rpath
     echo "[${tempbuild}C]" >>$rpath
     echo "type = crypt" >>$rpath
@@ -389,48 +381,64 @@ gdsabuild() {
     echo "password = $ENC_PASSWORD" >>$rpath
     echo "password2 = $ENC_SALT" >>$rpath
   fi
-}
+  
+  if [[ "$(cat /var/plexguide/pgclone.transport)" == "bu" ]]; then
+  ####tempbuild is need in order to call the correct gdsa
+    mkdir -p $downloadpath/move/$tempbuild
+    echo "" >>$rpath
+    echo "[$tempbuild]" >>$rpath
+    echo "type = drive" >>$rpath
+    echo "client_id =" >>$rpath
+    echo "client_secret =" >>$rpath
+    echo "scope = drive" >>$rpath
+    echo "root_folder_id =" >>$rpath
+    echo "service_account_file = /opt/appdata/plexguide/keys/processed/$tempbuild" >>$rpath
+    echo "team_drive = $tdrive" >>$rpath
+  fi
 
+}
 deploykeys3() {
+ kread=$(gcloud --account=${pgcloneemail} iam service-accounts list | awk '{print $1}' | tail -n +2 | cut -c7- | cut -f1 -d "?" | sort | uniq | head -n 1 >/var/plexguide/.gcloudposs)
+ keyposs=$(cat /var/plexguide/.gcloudposs )
+
+FIRSTV=$keyposs
+SECONDV=1
+keysposscount=$(expr $FIRSTV - $SECONDV)
+#echo $keysposscount
+
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 SYSTEM MESSAGE: Key Number Selection!
+🚀 SYSTEM MESSAGE: Key Number Selection! (From 2 thru 20 )
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUESTION - Create how many keys for Blitz? 
 
-[1] Create 2 Keys:  Daily Limit - 1.5  TB
-[2] Create 4 Keys:  Daily Limit - 3.0  TB
-[3] Create 6 Keys:  Daily Limit - 4.5  TB  <--- Realistic
-[4] Create 8 Keys:  Daily Limit - 6.0  TB  <--- The max you'll ever need
-[5] Create 10 Keys: Daily Limit - 7.5  TB  <--- only GCE-FEEDER, it won't unless your on GCE!
-[6] Create 20 Keys: Daily Limit - 15   TB <--- only GCE-FEEDER, it won't unless your on GCE!
+MATH:
+2  Keys = 1.5 TB Daily | 6  Keys = 4.5 TB Daily
+10 Keys = 7.5 TB Daily | 20 Keys = 15  TB Daily
+
+Possible $keysposscount before you hit the 100 SAC's
+
+NOTE 1: Creating more keys DOES NOT SPEED up your transfers
+NOTE 2: Realistic key generation for most are 6 - 8 keys
+NOTE 3: 20 Keys are only for GCE Feeder !!
+NOTE 4: maximum of SAC is 100 , remove unused keys !!
 
 💬 # of Keys Generated Sets Your Daily Upload Limit!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  read -p '↘️  Type Choice | Press [ENTER]: ' typed </dev/tty
+  read -p '↘️  Type a Number [ 1 thru 20 ] | Press [ENTER]: ' typed </dev/tty
 
+  num=$typed
   echo ""
-  echo "NOTE: Please Wait"
-  echo ""
-  if [ "$typed" == "1" ]; then
-    echo "Creating 2 Keys - Daily Upload Limit Set to 1.5TB" && keys=2
-  elif [ "$typed" == "2" ]; then
-    echo "Creating 4 Keys - Daily Upload Limit Set to 3.0TB" && keys=4
-  elif [ "$typed" == "3" ]; then
-    echo "Creating 6 Keys - Daily Upload Limit Set to 4.5TB" && keys=6
-  elif [ "$typed" == "4" ]; then
-    echo "Creating 8 Keys - Daily Upload Limit Set to 6.0TB" && keys=8
-  elif [ "$typed" == "5" ]; then
-    echo "Creating 10 Keys - Daily Upload Limit Set to 7.5TB" && keys=10
-  elif [ "$typed" == "6" ]; then
-    echo "Creating 20 Keys - Daily Upload Limit Set to 15.0TB" && keys=20
+ if [[ "$typed" -le "0" || "$typed" -ge "21" ]]; then
+    echo "Creating $typed Keys" && keys=$typed
   fi
   sleep 2
   echo ""
 
-  if [[ "$typed" -le "0" && "$typed" -ge 7 ]]; then deploykeys3; fi
+   if [[ "$typed" -le "0" || "$typed" -ge "51" ]]; then deploykeys3; fi
 
   num=$keys
   count=0
@@ -446,7 +454,7 @@ EOF
   cat /opt/appdata/plexguide/rclone.conf | grep -w "\[tcrypt\]" -A 6 >/opt/appdata/plexguide/tcrypt.info
   cat /opt/appdata/plexguide/rclone.conf | grep -w "\[gcrypt\]" -A 6 >/opt/appdata/plexguide/gcrypt.info
 
-  echo "#### rclone rewrite generated by pgblitz.com" >/opt/appdata/plexguide/rclone.conf
+  echo "#### rclone rewrite generated by rClone" >/opt/appdata/plexguide/rclone.conf
   echo "" >>/opt/appdata/plexguide/rclone.conf
   echo "" >>/opt/appdata/plexguide/rclone.conf
   cat /opt/appdata/plexguide/gdrive.info >>/opt/appdata/plexguide/rclone.conf
@@ -495,19 +503,19 @@ deploykeys2() {
 }
 
 deploykeys() {
-  gcloud iam service-accounts list --filter="GDSA" >/var/plexguide/gdsa.list
+  gcloud iam service-accounts list --filter="gdsa" >/var/plexguide/gdsa.list
   cat /var/plexguide/gdsa.list | awk '{print $2}' | tail -n +2 >/var/plexguide/gdsa.cut
   deploykeys2
 }
 
 projectid() {
-  gcloud projects list >/var/plexguide/projects.list
-  cat /var/plexguide/projects.list | cut -d' ' -f1 | tail -n +2 >/var/plexguide/project.cut
-  projectlist=$(cat /var/plexguide/project.cut)
+  # gcloud projects list >/var/plexguide/projects.list
+  gcloud projects list | cut -d' ' -f1 | tail -n +2 >/var/plexguide/project.cut
+  projectlist=$(gcloud projects list | cut -d' ' -f1 | tail -n +2)
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Projects Interface Menu            📓 Reference: project.pgblitz.com
+🚀 Projects Interface Menu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 $projectlist
@@ -538,21 +546,8 @@ ufsbuilder() {
   downloadpath=$(cat /var/plexguide/server.hd.path)
   ls -la /opt/appdata/plexguide/keys/processed | awk '{ print $9}' | tail -n +4 >/tmp/pg.gdsa.ufs
   rm -rf /tmp/pg.gdsa.build 1>/dev/null 2>&1
-  #echo -n "/mnt/tdrive=RO:" > /tmp/pg.gdsa.build
-  #echo -n "/mnt/gdrive=RO:" >> /tmp/pg.gdsa.build
-  ##### Encryption Portion ### Start
-  #tcrypt=$(grep "tcrypt" /opt/appdata/plexguide/rclone.conf)
-  #gcrypt=$(grep "gcrypt" /opt/appdata/plexguide/rclone.conf)
 
-  #if [ "$tcrypt" == "[tcrypt]" ]  && [ "$gcrypt" == "[gcrypt]" ]; then
-  #    encryption="on"
-  #  else
   encryption="off"
-  #fi
-
-  #if [ "$encryption" == "on" ]; then
-  #  echo -n "/mnt/gcrypt=RO:" >> /tmp/pg.gdsa.build
-  #fi
   ##### Encryption Portion ### END
   file="/var/plexguide/unionfs.pgpath"
   if [ -e "$file" ]; then rm -rf /var/plexguide/unionfs.pgpath && touch /var/plexguide/unionfs.pgpath; fi
@@ -576,20 +571,20 @@ EOF
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Creating Test Directory - gdsa01:/plexguide
+🚀 System Message: Creating Test Directory - GDSA01:/plexguide
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
   sleep 1
-  rclone mkdir --config /opt/appdata/plexguide/rclone.conf gdsa01:/plexguide
+  rclone mkdir --config /opt/appdata/plexguide/rclone.conf GDSA01:/plexguide
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Checking Existance of gdsa01:/plexguide
+🚀 System Message: Checking Existance of GDSA01:/plexguide
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf gdsa01: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ]; then
     tee <<-EOF
@@ -655,7 +650,7 @@ pgbdeploy() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: PG Blitz Deployed!
+🚀 System Message: Blitz Deployed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -676,17 +671,16 @@ keymenu() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Blitz Key Generation             📓 Reference: pgblitz.pgblitz.com
+🚀 Blitz Key Generation 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[1] Google Account Login: $display5
-[2] Project Options     : [$project]
+[1] Google Account Login: [ $display5 ]
+[2] Project Options     : [ $project ]
 [3] Create Service Keys
 [4] EMail Generator
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [A] Backup  Keys
-[B] Restore Keys
 [C] Destory All Prior Service Accounts
 [Z] Exit
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -720,9 +714,6 @@ EOF
     keymenu
   elif [[ "$typed" == "A" || "$typed" == "a" ]]; then
     keybackup
-    keymenu
-  elif [[ "$typed" == "B" || "$typed" == "b" ]]; then
-    keyrestore
     keymenu
   else
     badinput

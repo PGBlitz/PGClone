@@ -50,11 +50,10 @@
     force: yes
     mode: 0755
   with_items:
-    - blitz
+    - mgupdate
+    - rcupdate
     - ndrive
     - ndrives
-    - npgblitz
-    - npgmove
     - npgunion
     - npgexclude
     - npgexcludes
@@ -62,3 +61,4 @@
     - nrcloneenv
     - pglog
     - pglogs
+    - tlogs

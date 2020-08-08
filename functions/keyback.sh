@@ -8,107 +8,127 @@
 
 ### NOTE TO DELETE KEYS THAT EXIST WHEN BACKING UP
 keybackup() {
-
-  serverid=$(cat /var/plexguide/pg.serverid)
+  tree -d -L 1 /mnt/gdrive/plexguide/backup | awk '{print $2}' | tail -n +2 | head -n -2 >/tmp/server.list
+  servers=$(cat /tmp/server.list)
+  server_id=$(cat /var/plexguide/server.id)
 
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Backing Up to GDrive - $serverid
+🚀 System Message: Server Name for Backup
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📂 Current [${server_id}] & Prior Servers Detected:
+
+$servers
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  read -p '🌍 Type Server Name | Press [ENTER]: ' server </dev/tty
+  echo $server >/tmp/server.select
+  idbackup=$(cat /tmp/server.select)
+
+  tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 System Message: Backing Up to GDrive - $idbackup
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 NOTE: Standby, takes a minute!
 
 EOF
-  rclone purge --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide/backup/keys/$serverid
-  rclone copy --config /opt/appdata/plexguide/rclone.conf /opt/appdata/plexguide/rclone.conf gdrive:/plexguide/backup/keys/$serverid/conf -v --checksum --drive-chunk-size=64M
-  rclone copy --config /opt/appdata/plexguide/rclone.conf /opt/appdata/plexguide/keys/processed/ gdrive:/plexguide/backup/keys/$serverid/keys -v --checksum --drive-chunk-size=64M
+  mkdir -p /tmp/backup/
+  tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed -C /opt/appdata/plexguide/ -czf /tmp/backup/plexguide-backup.tar.gz ./
 
-  tee <<-EOF
+  rclone moveto /tmp/backup/ gdrive:/plexguide/system/$idbackup \
+   --config=/opt/appdata/plexguide/rclone.conf \
+   --stats-one-line \
+   --log-level=INFO --stats=5s --stats-file-name-length=0 \
+   --tpslimit=10 \
+   --checkers=4 \
+   --transfers=4 \
+   --no-traverse \
+   --fast-list \
+   --exclude="*traefik.check*" \
+   --user-agent="key_backup:pts"
+
+  rm -rf /tmp/backup/*
+   
+ tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 System Message: Backup Complete!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
+
   read -p '🌍 Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
+  clonestart
 }
 
-keyrestore() {
-  tee <<-EOF
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Standby! Conducting Key Restore Check!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+########################### 
+####restore keys rclone.conf GDSA keys
+########################### 
 
-EOF
-  rclone lsd --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide/backup/keys/ | awk '{ print $5 }' >/tmp/service.keys
-  checkcheck=$(cat /tmp/service.keys)
+# keyrestore() {
+  # tree -d -L 1 /mnt/gdrive/plexguide/backup | awk '{print $2}' | tail -n +2 | head -n -2 >/tmp/server.list
+  # servers=$(cat /tmp/server.list)
+  # server_id=$(cat /var/plexguide/server.id)
 
-  if [ "$checkcheck" == "" ]; then
-    tee <<-EOF
+  # tee <<-EOF
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Either You Failed to Configure RClone with GDrive or No Backups Exist!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🚀 System Message: Server Name for Restore
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-EOF
-    read -p '🌍 Acknowledge Info | Press [ENTER] ' typed </dev/tty
-    keymenu
-  fi
+# 📂 Current [${server_id}] & Prior Servers Detected:
 
-  tee <<-EOF
+# $servers
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Type the Name of the Backup to Restore
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Quit? Type > exit
+# EOF
+  # read -p '🌍 Type Server Name | Press [ENTER]: ' server </dev/tty
+  # echo $server >/tmp/server.select
+  # idbackup=$(cat /tmp/server.select)
 
-EOF
-  cat /tmp/service.keys
+  # tee <<-EOF
 
-  echo
-  read -p '🌍 Type Name | Press [ENTER]: ' typed </dev/tty
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🚀 System Message: Restore from GDrive - $idbackup
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then keymenu; fi
+# NOTE: Standby, takes a minute!
 
-  grepcheck=$(cat /tmp/service.keys | grep $typed)
-  if [ "$grepcheck" == "" ]; then
-    tee <<-EOF
+# EOF
+  # rclone copyto gdrive:/plexguide/system/$idbackup /tmp/backup/ \
+   # --config=/opt/appdata/plexguide/rclone.conf \
+   # --stats-one-line \
+   # --log-level=INFO --stats=5s --stats-file-name-length=0 \
+   # --tpslimit=10 \
+   # --checkers=4 \
+   # --transfers=4 \
+   # --no-traverse \
+   # --fast-list \
+   # --exclude="*traefik.check*" \
+   # --user-agent="key_backup:pts"
+  # mkdir -p /tmp/backup/ 
+  # mkdir -p /opt/appdata/plexguide/
+  # tar -C /opt/appdata/plexguide/ -xvf /tmp/backup/plexguide-backup.tar.gz
+  # chown -cR 1000:1000 /opt/appdata/plexguide/*
+  # rm -rf /tmp/backup/*
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Failed to Type Name of a Backup on the list! Restarting process!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ # tee <<-EOF
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 🚀 System Message: Key Restoration Complete!
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-EOF
-    read -p '🌍 Acknowledge Info | Press [ENTER] ' typed </dev/tty
-    keyrestore
-  fi
+# NOTE: When conducting a restore, no need to share out emails and etc! Just
+# redeploy rClone!
 
-  serverid="$typed"
-  mkdir -p /opt/appdata/plexguide/processed
-
-  tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Restoring Keys - $serverid
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-  rclone copy --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide/backup/keys/$serverid/conf /opt/appdata/plexguide/ -v --checksum --drive-chunk-size=64M
-  rclone copy --config /opt/appdata/plexguide/rclone.conf gdrive:/plexguide/backup/keys/$serverid/keys /opt/appdata/plexguide/keys/processed/ -v --checksum --drive-chunk-size=64M
-
-  tee <<-EOF
-  
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 System Message: Key Restoration Complete!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NOTE: When conducting a restore, no need to share out emails and etc! Just
-redeploy PGBlitz!
-
-EOF
-  read -p '🌍 Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
-  keymenu
-}
+# EOF
+  # read -p '🌍 Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
+  # clonestart
+# }

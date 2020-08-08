@@ -18,13 +18,13 @@ emailgen() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 EMail Share Generator ~ pgclone.pgblitz.com
+🚀 EMail Share Generator
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-PURPOSE: Share out the service accounts for the TeamDrives. Failing to do
-so will result in PGBlitz Failing!
+PURPOSE: Share out the service accounts for the TeamDrives. 
+Failing to do so will result in Blitz Failing!
 
-Shortcut to Google Team Drives >>> td.pgblitz.com
+Shortcut to Google Team Drives 
 
 NOTE 1: Share the E-Mails with the CORRECT TEAMDRIVE: $tdname
 NOTE 2: SAVE TIME! Copy & Paste the all the E-Mails into the share!"

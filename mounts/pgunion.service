@@ -8,6 +8,8 @@
 [Unit]
 Description=PGUnion
 After=multi-user.target
+StartLimitBurst=5
+StartLimitIntervalSec=10
 
 [Service]
 Type=simple
@@ -18,6 +20,8 @@ ExecStop=/bin/fusermount -uzq /mnt/unionfs
 TimeoutStopSec=60
 KillMode=process
 RemainAfterExit=yes
+Restart=on-failure
+RestartSec=60s
 
 [Install]
 WantedBy=multi-user.target
