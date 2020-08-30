@@ -171,10 +171,12 @@ upper=$(docker ps --format '{{.Names}}' | grep "uploader")
 if [[ "$upper" == "uploader" ]]; then
  dstatus="✅ DEPLOYED"
   else dstatus="⚠️ NOT DEPLOYED"; fi
+}
+dockerstatusmounts() {
 dmount=$(docker ps --format '{{.Names}}' | grep "mounts")
 if [[ "$dmount" == "mounts" ]]; then
- dmtatus="✅ DEPLOYED"
-  else dstatus="⚠️ NOT DEPLOYED"; fi
+ dmstatus="✅ DEPLOYED"
+  else dmstatus="⚠️ NOT DEPLOYED"; fi
 }
 localstartoutput() {
     case $typed in
