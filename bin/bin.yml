@@ -52,13 +52,5 @@
   with_items:
     - mgupdate
     - rcupdate
-    - ndrive
-    - ndrives
-    - npgunion
-    - npgexclude
-    - npgexcludes
-    - nrclone
-    - nrcloneenv
     - pglog
-    - pglogs
     - tlogs
