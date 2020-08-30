@@ -7,10 +7,8 @@
 ################################################################################
 blitzpasswordmain() {
   pgclonevars
-
   clonepassword57=$(cat /var/plexguide/pgclone.password)
   clonesalt57=$(cat /var/plexguide/pgclone.salt)
-
   if [[ "$pstatus" != "NOT-SET" ]]; then
     tee <<-EOF
 
@@ -47,15 +45,10 @@ EOF
       rm -rf /opt/appdata/plexguide/.tdrive 1>/dev/null 2>&1
       rm -rf /var/plexguide/pgclone.teamdrive 1>/dev/null 2>&1
       ;;
-    1)
-      clonestart
-      ;;
-    *)
-      blitzpasswordmain
-      ;;
+    1) clonestart ;;
+    *) blitzpasswordmain ;;
     esac
   fi
-
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -71,13 +64,11 @@ risk of encryption; forgetfulness will cost you!
 
 EOF
   read -p '↘️  Type Main Password | Press [ENTER]: ' typed </dev/tty
-
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
   if [[ "$typed" == "" ]]; then blitzpasswordmain; fi
   primarypassword=$typed
   blitzpasswordsalt
 }
-
 blitzpasswordsalt() {
   tee <<-EOF
 
@@ -97,13 +88,10 @@ risk of encryption; forgetfulness will cost you!
 
 EOF
   read -p '↘️  Type SALT Password | Press [ENTER]: ' typed </dev/tty
-
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
   if [[ "$typed" == "" ]]; then blitzpasswordsalt; fi
-
   secondarypassword=$typed
   blitzpasswordfinal
-
 }
 
 blitzpasswordfinal() {
@@ -124,14 +112,12 @@ SALT   : $secondarypassword
 EOF
 
   read -p '↘️  Type y or n | Press [ENTER]: ' typed </dev/tty
-
   if [[ "$typed" == "n" ]]; then
     blitzpasswordmain
   elif [[ "$typed" == "y" ]]; then
     echo $primarypassword >/var/plexguide/pgclone.password
     echo $secondarypassword >/var/plexguide/pgclone.salt
   else blitzpasswordfinal; fi
-
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -149,12 +135,9 @@ EOF
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
   clonestart
 }
-
 passwordcheck() {
   pgclonevars
-
   if [[ "$pstatus" == "NOT-SET" ]]; then
-
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

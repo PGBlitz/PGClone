@@ -17,8 +17,6 @@ executeblitz() {
     cleanlogs
     # to remove all service running prior to ensure a clean launch
     ansible-playbook /opt/pgclone/ymls/remove.yml
-    cleanmounts
-    buildrcloneenv
     # gdrive deploys by standard
     echo "tdrive" >/var/plexguide/deploy.version
     echo "bu" >/var/plexguide/deployed.version
@@ -44,23 +42,8 @@ executeblitz() {
         if [[ "$(grep "GDSA" /var/plexguide/.blitztemp)" != "" ]]; then echo $p >>/var/plexguide/.blitzfinal; fi
     done </var/plexguide/.blitzlist
     # deploy union
-    ansible-playbook /opt/pgclone/ymls/pgunion.yml -e "transport=$transport type=$type multihds=$multihds encryptbit=$encryptbit"
     ansible-playbook /opt/pgclone/ymls/uploader.yml
     # check if services are active and running
-    failed=false
-
-    gdrivecheck=$(systemctl is-active gdrive)
-    gcryptcheck=$(systemctl is-active gcrypt)
-    tdrivecheck=$(systemctl is-active tdrive)
-    tcryptcheck=$(systemctl is-active tcrypt)
-    pgunioncheck=$(systemctl is-active pgunion)
-
-    if [[ "$gdrivecheck" != "active" || "$tdrivecheck" != "active" || "$pgunioncheck" != "active" ]]; then failed=true; fi
-    if [[ "$gcryptcheck" != "active" || "$tcryptcheck" != "active" ]] && [[ "$transport" == "be" ]]; then failed=true; fi
-    if [[ $failed == true ]]; then
-        deployFail
-    else
-        restartapps
-        deploySuccess
-    fi
+    restartapps
+    deploySuccess
 }

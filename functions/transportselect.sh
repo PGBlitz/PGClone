@@ -48,14 +48,8 @@ EOF
         echo "le" >/var/plexguide/pgclone.transport
         echo "Local Edition" >/var/plexguide/pg.transport
         ;;
-	z)
-      exit
-      ;;
-    Z)
-      exit
-      ;;
-    *)
-        transportselect
-        ;;
+	z) exit ;;
+    Z) exit ;;
+    *) transportselect ;;
     esac
 }

@@ -8,11 +8,52 @@
 ---
 - hosts: localhost
   gather_facts: false
+  vars:
+    service_vars:
+      - { name: crypt.service }
+      - { name: pgdrive.service }
+      - { name: gdrive.service }
+      - { name: gcrypt.service }
+      - { name: tdrive.service }
+      - { name: tcrypt.service }
+      - { name: supertransfer2.service }
+      - { name: unionfs.service }
+      - { name: pgmove.service }
+      - { name: move.service }
+      - { name: pgblitz.service }
+      - { name: plexdrive.service }
+      - { name: st2monitor.service }
+      - { name: pgunion.service }
+
   tasks:
+    - name: Stop All Docker Containers
+      shell: docker stop $(docker ps -a -q)
+
     - name: 'Creating Folder - /mnt/{{drive}}'
-      file: 'path={{item}} state=directory mode=0755 owner=1000 group=1000'
+      file: 'path={{item}} state=absent'
+          state: absent 
       with_items:
         - '/mnt/{{drive}}'
+    - name: Get existing services
+      stat:
+        path: '/etc/systemd/system/{{ item.name }}'
+      with_items: '{{ service_vars }}'
+      register: check_service_name
+
+    - name: Stop services
+      systemd: state=stopped name={{ item.item.name }} daemon_reload=yes enabled=no
+      with_items: '{{ check_service_name.results }}'
+      when: item.stat.exists
+
+    - name: 'Waiting for 5 seconds for services to stop and mounts to unmount cleanly.'
+      wait_for: timeout=5
+
+    - name: Remove services
+      file:
+        path: '/etc/systemd/system/{{ item.item.name }}'
+        state: absent
+      with_items: '{{ check_service_name.results }}'
+      when: item.stat.exists
 
     - name: Register hdpath
       shell: 'cat /var/plexguide/server.hd.path'
@@ -28,15 +69,6 @@
         - '/opt/plexguide/roles/log'
       ignore_errors: yes
 
-    - name: 'Install - Service {{drive}}'
-      template:
-        src: '/opt/pgclone/mounts/drive.service'
-        dest: '/etc/systemd/system/{{drive}}.service'
-        force: yes
+    - name: Stop All Docker Containers
+      shell: docker start $(docker ps -a -q)
 
-    - name: 'Reload Service - {{drive}}'
-      systemd:
-        daemon_reload: yes
-        enabled: yes
-        state: reloaded
-        name: '{{drive}}'

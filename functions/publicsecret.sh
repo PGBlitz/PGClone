@@ -41,14 +41,9 @@ EOF
             rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
             rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
             ;;
-        1)
-            clonestart
-            ;;
-        *)
-            keyinputpublic
-            ;;
+        1) clonestart ;;
+        *) keyinputpublic ;;
         esac
-
     fi
 
     tee <<-EOF

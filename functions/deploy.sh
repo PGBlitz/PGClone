@@ -46,13 +46,88 @@ if [[ "$UI" == "pgui" ]]; then
    rm -rf /opt/appdata/pgui/
 fi
 }
+deploymounts() {
+dmounts=$(docker ps --format '{{.Names}}' | grep "mounts")
+if [[ "$dmounts" != "mounts" ]]; then
+   ddmounts
+else ddmountsredeploy; fi
+}
+ddmounts() {
+	tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	🚀      Deploy of Docker Mounts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	EOF
+    removeoldui
+	cleanlogs
+	ansible-playbook /opt/pgclone/ymls/mounts.yml
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+  tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	💪     DEPLOYED sucessfully !
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     The Mounts is under
+     https://mounts.${domain}
+     or
+     http://${ip}:7755
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
+    clonestart
+}
+ddmountsredeploy() {
+	tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	🚀      Redeploy of Docker Mounts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+  removeoldui
+  cleanlogs
+  ansible-playbook /opt/pgclone/ymls/mounts.yml
+  sleep 10
+domain=$(cat /var/plexguide/server.domain)
+ip=$(cat /var/plexguide/server.ip)
+  tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	💪     DEPLOYED sucessfully !
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     The Mounts is under
+     https://mounts.${domain}
+     or
+     http://${ip}:7755
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
+    clonestart
+}
+
 
 ### Docker Uploader Deploy start ##
-deploydockeruploader() {
+deploydockermount() {
+UI=$(docker ps --format '{{.Names}}' | grep "mounts")
+if [[ "$UI" != "mounts" ]]; then 
+nounionrunning
+else deploymounts; fi
+}
+norcloneconf() {
 rcc=/opt/appdata/plexguide/rclone.conf
 if [[ ! -f "$rcc" ]]; then
-nounionrunning
-else deploydocker; fi
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Fail Notice for deploy of Docker Mounts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ Sorry we can't  Deploy the Docker Mounts.
+ we cant find any rclone.conf 
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Fail Notice for deploy of Docker Mounts 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
+clonestart
+fi
 }
 nounionrunning() {
 rcc=/opt/appdata/plexguide/rclone.conf
@@ -63,7 +138,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
  Sorry we can't  Deploy the Docker Uploader.
- No mounts are running , please deploy first the mounts.
+ No docker mounts are running , 
+ please deploy first the docker mounts.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Fail Notice for deploy of Docker Uploader 
@@ -85,7 +161,7 @@ dduploader() {
 	🚀      Deploy of Docker Uploader
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	EOF
-        removeoldui
+    removeoldui
 	cleanlogs
 	ansible-playbook /opt/pgclone/ymls/uploader.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
@@ -241,16 +317,12 @@ tcryptmod() {
   if [[ "$c1initial" == "encrypt" ]]; then echo "TCRYPT1:  Passed" >>/var/plexguide/.drivelog; else echo "TCRYPT1:  Failed" >>/var/plexguide/.drivelog; fi
   if [[ "$c2initial" == "plexguide" ]]; then echo "TCRYPT2:  Passed" >>/var/plexguide/.drivelog; else echo "TCRYPT2:  Failed" >>/var/plexguide/.drivelog; fi
 }
-
-
 gdsamod() {
   initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
   if [[ "$initial" != "plexguide" ]]; then
     rclone mkdir --config /opt/appdata/plexguide/rclone.conf GDSA01:/plexguide
     initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01: | grep -oP plexguide | head -n1)
   fi
-
-
   if [[ "$initial" == "plexguide" ]]; then echo "GDSA01 :  Passed" >>/var/plexguide/.drivelog; else echo "GDSA01 :  Failed" >>/var/plexguide/.drivelog; fi
 }
 gdsacryptmod() {
@@ -260,8 +332,6 @@ gdsacryptmod() {
     rclone mkdir --config /opt/appdata/plexguide/rclone.conf GDSA01C:/plexguide
     initial=$(rclone lsd --config /opt/appdata/plexguide/rclone.conf GDSA01C: | grep -oP plexguide | head -n1)
   fi
-
-
   if [[ "$initial" == "plexguide" ]]; then echo "GDSA01C:  Passed" >>/var/plexguide/.drivelog; else echo "GDSA01C:  Failed" >>/var/plexguide/.drivelog; fi
 }
 ################################################################################
@@ -302,122 +372,9 @@ prunedocker() {
   docker system prune --volumes -f
 }
 ################################################################################
-createmountfolders() {
-  mkdir -p /mnt/{gdrive,tdrive,gcrypt,tcrypt}
-  chown -R 1000:1000 /mnt/{gdrive,tdrive,gcrypt,tcrypt} >/dev/null
-  chmod -R 755 /mnt/{gdrive,tdrive,gcrypt,tcrypt} >/dev/null
-}
-cleanmounts() {
-  echo "Unmount drives..."
-  fusermount -uzq /mnt/gdrive >/dev/null
-  fusermount -uzq /mnt/tdrive >/dev/null
-  fusermount -uzq /mnt/gcrypt >/dev/null
-  fusermount -uzq /mnt/tcrypt >/dev/null
-  fusermount -uzq /mnt/unionfs >/dev/null
-  pkill -f rclone* >/dev/null
-  echo "checking for empty mounts..."
-  mount="/mnt/unionfs/"
-  cleanmount
-  mount="/mnt/gdrive/"
-  cleanmount
-  mount="/mnt/tdrive/"
-  cleanmount
-  mount="/mnt/gcrypt/"
-  cleanmount
-  mount="/mnt/tcrypt/"
-  cleanmount
-}
-cleanmount() {
-  maxsize=1000000
-  if [ -d "$mount" ]; then
-    echo "Checking if $mount is not empty when unmounted..."
-    if [[ "$(ls -a "$mount" | wc -l)" -ne 2 && "$(ls -a "$mount" | wc -l)" -ne 0 ]]; then
-      if [[ "$(du -s "$mount" | cut -f1 | bc -l | rev | cut -c 2- | rev)" -lt $maxsize ]]; then
-        echo "$mount is not empty when unmounted, fixing..."
-        rsync -aq "$mount" /mnt/move/
-        rm -rf "$mount"*
-      else
-        failclean
-      fi
-    fi
-  fi
-}
-failclean() {
-  tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Failure during $mount unmount
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-There was a problem unmounting $mount. 
-Please reboot your server and trya redeploy of rClone again. 
-If this problem persists after a reboot, join
-discord and ask for help.
-
-⚠ Warning: 
-
-Your apps have been stopped to prevent data loss. 
-Please reboot and redepoy rClone to fix.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-
-  exit
-}
 restartapps() {
   echo "restarting apps..."
   docker restart $(docker ps -a -q) >/dev/null
-}
-deployFail() {
-  # output final display
-  if [[ "$transport" == "bu" ]]; then
-    finaldeployoutput="Blitz"
-  fi
-  if [[ "$transport" == "be" ]]; then
-    finaldeployoutput="Blitz: Encrypted"
-  fi
-  if [[ "$transport" == "mu" ]]; then
-    finaldeployoutput="Move"
-  fi
-  if [[ "$transport" == "me" ]]; then
-    finaldeployoutput="Move: Encrypted"
-  fi
-  erroroutput="$(journalctl -u gdrive -u gcrypt -u pgunion -u pgmove -b -q -p 6 --no-tail -e --no-pager --since "5 minutes ago" -n 20)"
-  logoutput="$(tail -n 20 /var/plexguide/logs/*.log)"
-  tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ DEPLOY FAILED: $finaldeployoutput
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-An error has occurred when deploying rClone.
-Your apps are currently stopped to prevent data loss.
-
-Things to try: 
-If you just finished the initial setup, you likely made a typo
-or other error when configuring rClone. 
-Please redo the rClone config first before reporting an issue.
-
-If this issue still persists:
-Please share this error on discord or the forums before proceeding.
-
-If there error says the mount is not empty, then you need to reboot your
-server and redeploy rClone to fix.
-
-Error details: 
-$erroroutput
-$logoutput
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ DEPLOY FAILED: $finaldeployoutput
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-  exit
-
 }
 deploySuccess() {
 domain=$(cat /var/plexguide/server.domain)
@@ -443,25 +400,27 @@ The Uploader is under
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }
+deploymountSuccess() {
+domain=$(cat /var/plexguide/server.domain)
+ip=$(cat /var/plexguide/server.ip)
+  tee <<-EOF
 
-buildrcloneenv() {
-  uagent="$(cat /var/plexguide/uagent)"
-  vfs_ll="$(cat /var/plexguide/vfs_ll)"
-  vfs_bs="$(cat /var/plexguide/vfs_bs)"
-  vfs_rcs="$(cat /var/plexguide/vfs_rcs)"
-  vfs_rcsl="$(cat /var/plexguide/vfs_rcsl)"
-  vfs_cma="$(cat /var/plexguide/vfs_cma)"
-  vfs_cm="$(cat /var/plexguide/vfs_cm)"
-  vfs_cms="$(cat /var/plexguide/vfs_cms)"
-  vfs_dct="$(cat /var/plexguide/vfs_dct)"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💪 DEPLOYED: $finaldeployoutput
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  echo "uagent=$uagent" >/opt/appdata/plexguide/rclone.env
-  echo "vfs_ll=$vfs_ll" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_bs=$vfs_bs" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_rcs=$vfs_rcs" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_rcsl=$vfs_rcsl" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_cm=$vfs_cm" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_cma=$vfs_cma" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_cms=$vfs_cms" >>/opt/appdata/plexguide/rclone.env
-  echo "vfs_dct=$vfs_dct" >>/opt/appdata/plexguide/rclone.env
+rClone has been deployed sucessfully!
+All services are active and running normally.
+
+The Uploader is under
+
+     https://mounts.${domain}
+
+     or
+
+     http://${ip}:7755
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }

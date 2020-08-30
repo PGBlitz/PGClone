@@ -19,33 +19,6 @@
       shell: 'cat /var/plexguide/server.hd.path'
       register: hdpath
 
-    - name: Register vfs_dcs
-      shell: 'cat /var/plexguide/vfs_dcs'
-      register: vfs_dcs
-
-    - debug: msg="Blitz Type - {{transport}}"
-    - debug: msg="HD Path - {{hdpath.stdout}}"
-
-    - name: 'If Fact Matches - Encrypted Blitz'
-      set_fact:
-        path: 'remotes = gdrive: tdrive: gcrypt: tcrypt: {{hdpath.stdout}}/downloads'
-      when: transport == "be"
-
-    - name: 'If Fact Matches - Encrypted Move'
-      set_fact:
-        path: 'remotes = gdrive: gcrypt: {{hdpath.stdout}}/downloads'
-      when: transport == "me"
-
-    - name: 'If Fact Matches - UnEncrypted Blitz'
-      set_fact:
-        path: 'remotes = gdrive: tdrive: {{hdpath.stdout}}/downloads'
-      when: transport == "bu"
-
-    - name: 'If Fact Matches - UnEncrypted Move'
-      set_fact:
-        path: 'remotes = gdrive: {{hdpath.stdout}}/downloads'
-      when: transport == "mu"
-
     - name: Creating required paths
       file: 'path={{hdpath.stdout}}/{{item}} state=directory mode=0755 owner=1000 group=1000 recurse=true'
       with_items:
@@ -72,31 +45,3 @@
 
     - name: Transport Type
       shell: 'sed -i -e "/\[(unionfs|pgunion)\]/,+2d" /opt/appdata/plexguide/rclone.conf'
-
-    - name: Transport Type
-      shell: |
-        echo "[pgunion]" >> /opt/appdata/plexguide/rclone.conf
-        echo "type = union" >> /opt/appdata/plexguide/rclone.conf
-        echo "{{path}}" >> /opt/appdata/plexguide/rclone.conf
-
-    - name: Install Union Script
-      template:
-        src: /opt/pgclone/mounts/pgunion.sh
-        dest: /opt/appdata/plexguide/pgunion.sh
-        force: yes
-
-    - name: Install Union Service
-      template:
-        src: /opt/pgclone/mounts/pgunion.service
-        dest: /etc/systemd/system/pgunion.service
-        force: yes
-
-    - name: Reload Union Service
-      systemd:
-        daemon_reload: yes
-        enabled: yes
-        state: reloaded
-        name: pgunion
-
-    - name: 'Waiting for Union to initialize'
-      wait_for: timeout=2

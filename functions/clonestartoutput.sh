@@ -6,7 +6,6 @@
 # GNU:        General Public License v3.0
 ################################################################################
 rcstored="$(rclone --version | awk '{print $2}' | tail -n 3 | head -n 1 )"
-mgstored="$(mergerfs -v | grep 'mergerfs version:' | awk '{print $3}')"
 sudocheck() {
   if [[ $EUID -ne 0 ]]; then
     tee <<-EOF
@@ -155,10 +154,9 @@ EOF
         dockerstatus
         tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[A] Deploy Mounts            [ $outputversion ]
+[A] Deploy Docker Mounts     [ $dmstatus ] - [ $outputversion ]
 [D] Deploy Docker Uploader   [ $dstatus ] - [ $output ]
 [O] Options
-[B] Backup Rclone Settings
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [Z] Exit
@@ -172,6 +170,10 @@ dockerstatus() {
 upper=$(docker ps --format '{{.Names}}' | grep "uploader")
 if [[ "$upper" == "uploader" ]]; then
  dstatus="✅ DEPLOYED"
+  else dstatus="⚠️ NOT DEPLOYED"; fi
+dmount=$(docker ps --format '{{.Names}}' | grep "mounts")
+if [[ "$dmount" == "mounts" ]]; then
+ dmtatus="✅ DEPLOYED"
   else dstatus="⚠️ NOT DEPLOYED"; fi
 }
 localstartoutput() {
@@ -192,8 +194,8 @@ clonestartactions() {
         2) publicsecretchecker && echo "gdrive" >/var/plexguide/rclone/deploy.version && oauth ;;
         z) exit ;;
         Z) exit ;;
-        a) publicsecretchecker && mountchecker && deploypgmove ;;
-        A) publicsecretchecker && mountchecker && deploypgmove ;;
+        a) publicsecretchecker && deploydockermount ;;
+        A) publicsecretchecker && deploydockermount ;;
         D) publicsecretchecker && deploydockeruploader ;;
         d) publicsecretchecker && deploydockeruploader ;;
         o) optionsmenumove ;;
@@ -208,8 +210,8 @@ clonestartactions() {
         3) publicsecretchecker && passwordcheck && echo "gdrive" >/var/plexguide/rclone/deploy.version && oauth ;;
         z) exit ;;
         Z) exit ;;
-        a) publicsecretchecker && passwordcheck && mountchecker && deploypgmove ;;
-        A) publicsecretchecker && passwordcheck && mountchecker && deploypgmove ;;
+        a) publicsecretchecker && passwordcheck && deploydockermount ;;
+        A) publicsecretchecker && passwordcheck && deploydockermount ;;
         D) publicsecretchecker && passwordcheck && deploydockeruploader ;;
         d) publicsecretchecker && passwordcheck && deploydockeruploader ;;
         o) optionsmenumove ;;
@@ -225,16 +227,16 @@ clonestartactions() {
         4) publicsecretchecker && tlabeloauth ;;
         5) publicsecretchecker && tlabelchecker && echo "tdrive" >/var/plexguide/rclone/deploy.version && oauth ;;
         6) publicsecretchecker && echo "gdrive" >/var/plexguide/rclone/deploy.version && oauth ;;
-        7) publicsecretchecker && tlabelchecker && mountchecker && projectnamecheck && keystart && gdsaemail ;;
-        8) publicsecretchecker && tlabelchecker && mountchecker && projectnamecheck && deployblitzstartcheck && emailgen ;;
+        7) publicsecretchecker && tlabelchecker && projectnamecheck && keystart && gdsaemail ;;
+        8) publicsecretchecker && tlabelchecker && projectnamecheck && deployblitzstartcheck && emailgen ;;
         z) exit ;;
         Z) exit ;;
-        a) publicsecretchecker && tlabelchecker && mountchecker && deploypgblitz ;;
-        A) publicsecretchecker && tlabelchecker && mountchecker && deploypgblitz ;;
+        a) publicsecretchecker && tlabelchecker && deploydockermount ;;
+        A) publicsecretchecker && tlabelchecker && deploydockermount ;;
         D) publicsecretchecker && tlabelchecker && deploydockeruploader ;;
         d) publicsecretchecker && tlabelchecker && deploydockeruploader ;;
-        b) publicsecretchecker && mountchecker && keybackup ;;
-        B) publicsecretchecker && mountchecker && keybackup ;;
+        b) publicsecretchecker && keybackup ;;
+        B) publicsecretchecker && keybackup ;;
         o) optionsmenu ;;
         O) optionsmenu ;;
         *) clonestart ;;
@@ -249,16 +251,14 @@ clonestartactions() {
         5) publicsecretchecker && tlabeloauth ;;
         6) publicsecretchecker && passwordcheck && tlabelchecker && echo "tdrive" >/var/plexguide/rclone/deploy.version && oauth ;;
         7) publicsecretchecker && passwordcheck && echo "gdrive" >/var/plexguide/rclone/deploy.version && oauth ;;
-        8) publicsecretchecker && passwordcheck && tlabelchecker && mountchecker && projectnamecheck && keystart && gdsaemail ;;
-        9) publicsecretchecker && passwordcheck && tlabelchecker && mountchecker && projectnamecheck && deployblitzstartcheck && emailgen ;;
+        8) publicsecretchecker && passwordcheck && tlabelchecker && projectnamecheck && keystart && gdsaemail ;;
+        9) publicsecretchecker && passwordcheck && tlabelchecker && projectnamecheck && deployblitzstartcheck && emailgen ;;
         z) exit ;;
         Z) exit ;;
-        a) publicsecretchecker && passwordcheck && tlabelchecker && mountchecker && deploypgblitz ;;
-        A) publicsecretchecker && passwordcheck && tlabelchecker && mountchecker && deploypgblitz ;;
+        a) publicsecretchecker && passwordcheck && tlabelchecker && deploydockermount ;;
+        A) publicsecretchecker && passwordcheck && tlabelchecker && deploydockermount ;;
         D) publicsecretchecker && passwordcheck && tlabelchecker && deploydockeruploader ;;
         d) publicsecretchecker && passwordcheck && tlabelchecker && deploydockeruploader ;;
-        b) publicsecretchecker && passwordcheck && mountchecker && keybackup ;;
-        B) publicsecretchecker && passwordcheck && mountchecker && keybackup ;;
         o) optionsmenu ;;
         O) optionsmenu ;;
         *) clonestart ;;

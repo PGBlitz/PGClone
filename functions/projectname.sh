@@ -7,14 +7,6 @@
 ################################################################################
 projectname() {
   pgclonevars
-
-  ############## REMINDERS
-  # Make destroying piece quiet and create a manual delete confirmatino
-  # When user creates project, give them the option to switch
-  # fix existing set project
-
-  ############## REMINDERS
-
   # prevents user from moving on unless email is set
   if [[ "$pgcloneemail" == "NOT-SET" ]]; then
     echo
@@ -61,23 +53,12 @@ EOF
     projectnameset
     buildproject
     ;;
-
-  3)
-    destroyproject
-    ;;
-  Z)
-    clonestart
-    ;;
-  z)
-    clonestart
-    ;;
-  *)
-    keyinputpublic
-    ;;
+  3) destroyproject ;;
+  Z) clonestart ;;
+  z) clonestart ;;
+  *) keyinputpublic ;;
   esac
-
 }
-
 exisitingproject() {
   tee <<-EOF
 
@@ -95,14 +76,11 @@ Qutting? Type >>> z or exit
 EOF
   read -p '↘️  Use Which Existing Project? | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then clonestart; fi
-
   # Repeats if Users Fails the Range
   if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
     existingnumber=$(cat /var/plexguide/prolist/$typed)
-
     echo
     gcloud config set project ${existingnumber} --account=${pgcloneemail}
-
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -117,7 +95,6 @@ EOF
   echo "${existingnumber}" >/var/plexguide/pgclone.project
   clonestart
 }
-
 destroyproject() {
   tee <<-EOF
 
@@ -135,18 +112,15 @@ Qutting? Type >>> z or exit
 EOF
   read -p '↘️  Destroy Which Project? | Press [ENTER]: ' typed </dev/tty
   if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then optionsmenu; fi
-
   # Repeats if Users Fails the Range
   if [[ "$typed" -ge "1" && "$typed" -le "$pnum" ]]; then
     destroynumber=$(cat /var/plexguide/prolist/$typed)
-
     # Cannot Destroy Active Project
     if [[ $(cat /var/plexguide/pgclone.project) == "$destroynumber" ]]; then
       echo
       read -p '↘️  Unable to Destroy an Active Project | Press [ENTER] ' typed </dev/tty
       destroyproject
     fi
-
     echo
     gcloud projects delete ${destroynumber} --account=${pgcloneemail}
   else destroyproject; fi
@@ -154,14 +128,11 @@ EOF
   read -p '↘️  Project Deleted | Press [ENTER] ' typed </dev/tty
   optionsmenu
 }
-
 projectlist() {
   pnum=0
   mkdir -p /var/plexguide/prolist
   rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
-
   gcloud projects list --account=${pgcloneemail} | tail -n +2 | awk '{print $1}' >/var/plexguide/prolist/prolist.sh
-
   while read p; do
     let "pnum++"
     echo "$p" >"/var/plexguide/prolist/$pnum"
@@ -169,9 +140,7 @@ projectlist() {
     echo "[$pnum] ${filler}${p}"
   done </var/plexguide/prolist/prolist.sh
 }
-
 projectnamecheck() {
-
   pgclonevars
   if [[ "$pgcloneproject" == "NOT-SET" ]]; then
     tee <<-EOF
@@ -188,15 +157,12 @@ keys, and deploy the proper GDSA Accounts for the Team Drive
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
     clonestart
   fi
-
 }
 
 projectnameset() {
-
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -223,15 +189,9 @@ Do You Want to Proceed?
 EOF
   read -p '↘️  Input Choice | Press [Enter]: ' typed </dev/tty
   case $typed in
-  1)
-    clonestart
-    ;;
-  2)
-    a=bc
-    ;;
-  *)
-    optionsmenu
-    ;;
+  1) clonestart ;;
+  2) a=bc ;;
+  *) optionsmenu ;;
   esac
 
   tee <<-EOF
@@ -299,9 +259,7 @@ EOF
   docker rm jellyfin 1>/dev/null 2>&1
   docker rm plex 1>/dev/null 2>&1
   docker rm emby 1>/dev/null 2>&1
-
   ansible-playbook /opt/pgclone/ymls/remove.yml
-  cleanmounts
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

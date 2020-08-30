@@ -67,5 +67,3 @@
 - name: 'Purge old PGBlitz Service | part 2'
   shell: 'rm -rf /etc/systemd/system/pgblitz.service'
   when: pgb.stat.exists
-
- 
