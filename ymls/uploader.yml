@@ -92,7 +92,7 @@
         state: started
         labels: '{{pg_labels}}'
         mounts:
-          -  source: ''{{downloadpath.stdout}}/downloads'
+          -  source: '{{downloadpath.stdout}}/downloads'
              target: '/move'
              type: bind
              consistency: consistent
