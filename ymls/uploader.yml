@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Title:           Docker Uploader 
+# Title:           Docker Uploader
 # Author(s):       PhyskX
 # CoAuthor:        MrDoob
 # Dockerowner:     MrDoob
@@ -21,6 +21,9 @@
     - name: 'Register  Download Drive'
       shell: 'cat /var/plexguide/server.hd.path'
       register: downloadpath
+    - name: 'Register Timezone'
+      shell: 'cat /etc/timezone'
+      register: TZone
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including main job'
@@ -49,24 +52,11 @@
           traefik.frontend.headers.forceSTSHeader: 'true'
           traefik.frontend.redirect.entryPoint: 'https'
 
-    - name: 'Setting {{pgrole}} Volumes'
-      set_fact:
-        pg_volumes:
-          - '/opt/appdata/{{pgrole}}/:/config'
-          - '/mnt/unionfs:/unionfs:shared'
-          - '{{downloadpath.stdout}}/downloads:/move:shared'
-
     - name: 'Setting {{pgrole}} ENV'
       set_fact:
         pg_env:
           PUID: '1000'
           PGID: '1000'
-          TZ: '${TZ}'
-          DISABLE_UNIONFS_CHOWN: 'true'
-          DISABLE_TDRIVE1: 'true'
-          DISABLE_TDRIVE2: 'true'
-          DISABLE_GDRIVE: 'true'
-          DISABLE_MERGERFS: 'true'
           BWLIMITSET: '80'
           CHUNK: '32'
           DISCORD_WEBHOOK_URL: 'null'
@@ -86,7 +76,6 @@
         pull: yes
         published_ports:
           - '{{ports.stdout}}{{extport}}:{{intport}}'
-        volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         capabilities:
           - 'SYS_ADMIN'
@@ -102,3 +91,14 @@
               - '{{pgrole}}'
         state: started
         labels: '{{pg_labels}}'
+        mounts:
+          -  source: ''{{downloadpath.stdout}}/downloads'
+             target: '/move'
+             type: bind
+             consistency: consistent
+             propagation: shared
+          -  source: '/opt/appdata/{{pgrole}}/'
+             target: '/config'
+             type: bind
+             consistency: consistent
+             propagation: shared
