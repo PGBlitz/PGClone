@@ -60,7 +60,7 @@ ddmounts() {
 	EOF
    removeoldui
    cleanlogs
-   ansible-playbook /opt/pgclone/ymlsremove-2.yml
+   ansible-playbook /opt/pgclone/ymls/remove-2.yml
    ansible-playbook /opt/pgclone/ymls/mounts.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
   tee <<-EOF
@@ -85,7 +85,7 @@ ddmountsredeploy() {
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
   removeoldui
   cleanlogs
-  ansible-playbook /opt/pgclone/ymlsremove-2.yml
+  ansible-playbook /opt/pgclone/ymls/remove-2.yml
   ansible-playbook /opt/pgclone/ymls/mounts.yml
   sleep 10
 domain=$(cat /var/plexguide/server.domain)
