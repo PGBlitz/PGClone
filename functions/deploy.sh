@@ -58,9 +58,10 @@ ddmounts() {
 	🚀      Deploy of Docker Mounts
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	EOF
-    removeoldui
-	cleanlogs
-	ansible-playbook /opt/pgclone/ymls/mounts.yml
+   removeoldui
+   cleanlogs
+   ansible-playbook /opt/pgclone/ymlsremove-2.yml
+   ansible-playbook /opt/pgclone/ymls/mounts.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
   tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -84,6 +85,7 @@ ddmountsredeploy() {
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
   removeoldui
   cleanlogs
+  ansible-playbook /opt/pgclone/ymlsremove-2.yml
   ansible-playbook /opt/pgclone/ymls/mounts.yml
   sleep 10
 domain=$(cat /var/plexguide/server.domain)
@@ -101,13 +103,11 @@ EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
     clonestart
 }
-
-
 ### Docker Uploader Deploy start ##
 deploydockermount() {
 UI=$(docker ps --format '{{.Names}}' | grep "mounts")
 if [[ "$UI" != "mounts" ]]; then 
-nounionrunning
+norcloneconf
 else deploymounts; fi
 }
 norcloneconf() {
@@ -115,14 +115,13 @@ rcc=/opt/appdata/plexguide/rclone.conf
 if [[ ! -f "$rcc" ]]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Fail Notice for deploy of Docker Mounts
+⛔ Fail Notice deploy of Docker Mounts
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
- Sorry we can't  Deploy the Docker Mounts.
+ Sorry we cant  Deploy the Docker Mounts.
  we cant find any rclone.conf 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Fail Notice for deploy of Docker Mounts 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
@@ -137,7 +136,7 @@ tee <<-EOF
 ⛔ Fail Notice for deploy of Docker Uploader
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
- Sorry we can't  Deploy the Docker Uploader.
+ Sorry we cant  Deploy the Docker Uploader.
  No docker mounts are running , 
  please deploy first the docker mounts.
 
@@ -161,7 +160,7 @@ dduploader() {
 	🚀      Deploy of Docker Uploader
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	EOF
-    removeoldui
+        removeoldui
 	cleanlogs
 	ansible-playbook /opt/pgclone/ymls/uploader.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
@@ -219,6 +218,7 @@ EOF
   if [[ "$transport" == "mu" ]]; then
     gdrivemod
     multihdreadonly
+    deploydockermount
   elif [[ "$transport" == "me" ]]; then
     gdrivemod
     gcryptmod
@@ -228,6 +228,7 @@ EOF
     tdrivemod
     gdsamod
     multihdreadonly
+    deploydockermount
   elif [[ "$transport" == "be" ]]; then
     gdrivemod
     tdrivemod
@@ -236,6 +237,7 @@ EOF
     tcryptmod
     gdsacryptmod
     multihdreadonly
+    deploydockermount
   fi
   cat /var/plexguide/.drivelog
   logcheck=$(cat /var/plexguide/.drivelog | grep "Failed")
@@ -412,7 +414,7 @@ ip=$(cat /var/plexguide/server.ip)
 rClone has been deployed sucessfully!
 All services are active and running normally.
 
-The Uploader is under
+The Mounts is under
 
      https://mounts.${domain}
 
