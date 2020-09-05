@@ -6,6 +6,50 @@
 # GNU:        General Public License v3.0
 ################################################################################
 ---
+#!/bin/bash
+#
+# Title:      PGBlitz (Reference Title File)
+# Authors:    Admin9705, Deiteq, and many PGBlitz Contributors
+# URL:        https://pgblitz.com - http://github.pgblitz.com
+# GNU:        General Public License v3.0
+################################################################################
+---
+- name: Ansible delete multiple file example
+  file:
+    path: '/etc/systemd/system/{{ item.name }}'
+    state: absent
+  with_items:
+    - crypt.service
+    - pgdrive.service
+    - gdrive.service
+    - gcrypt.service
+    - tdrive.service
+    - tcrypt.service
+    - supertransfer2.service
+    - unionfs.service
+    - pgmove.service
+    - move.service
+    - pgblitz.service
+    - plexdrive.service
+    - st2monitor.service
+    - pgunion.service
+  register: check_service_name
+
+- name: Stop services
+  systemd: state=stopped name={{ item.item.name }} daemon_reload=yes enabled=no
+  with_items: '{{ check_service_name.results }}'
+  when: item.stat.exists
+
+- name: 'Waiting for 5 seconds for services to stop and mounts to unmount cleanly.'
+  wait_for: timeout=5
+
+- name: Remove services
+  file:
+    path: '/etc/systemd/system/{{ item.item.name }}'
+    state: absent
+  with_items: '{{ check_service_name.results }}'
+  when: item.stat.exists
+
 - name: 'Check of Existance files in {{ pgrole }}'
   stat:
     path: '/opt/appdata/{{pgrole}}/rclone.conf'
