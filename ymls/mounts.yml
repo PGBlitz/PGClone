@@ -75,7 +75,7 @@
               - '{{pgrole}}'
         state: started
         labels: '{{pg_labels}}'
-        mount:
+        mounts:
           -  source: '/mnt/unionfs'
              target: '/mnt/unionfs'
              type: bind
