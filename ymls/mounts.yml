@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Title:      Docker Mounts
+# Title:      Docker Mount
 # Authot:     MrDoob
 # GNU:        General Public License v3.0
 ################################################################################
@@ -16,7 +16,7 @@
         extport: '7755'
     # CORE (MANDATORY) ############################################################
     - name: 'Including main job'
-      include_tasks: './core.yml'
+      include_tasks: '/opt/coreapps/apps/_core.yml'
     - name: 'Including rclone job'
       include_tasks: './rclone.yml'
     - name: 'Register  Download Drive'
