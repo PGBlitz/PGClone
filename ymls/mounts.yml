@@ -52,13 +52,13 @@
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: '{{pgrole}}'
-        image: 'mrdoob/rccmount:deverlop'
+        image: 'mrdoob/rccmount:latest'
         pull: yes
         published_ports:
           - '{{ports.stdout}}{{extport}}:{{intport}}'
         volumes:
           - '/opt/appdata/{{pgrole}}/:/config'
-          - '/mnt/downloads:/mnt/downloads'
+          - '{{downloadpath.stdout}}/downloads:/mnt/downloads'
           - '/var/run/docker.sock:/var/run/docker.sock'
         env: '{{pg_env}}'
         capabilities:
