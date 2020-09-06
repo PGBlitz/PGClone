@@ -1,2 +1,0 @@
-# Clone
-# Integrating Mrdoob/rccup 

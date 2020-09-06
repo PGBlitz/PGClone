@@ -174,7 +174,7 @@ if [[ "$upper" == "uploader" ]]; then
   else dstatus="⚠️ NOT DEPLOYED"; fi
 }
 dockerstatusmounts() {
-dmount=$(docker ps --format '{{.Names}}' | grep "mounts")
+dmount=$(docker ps --format '{{.Names}}' | grep "mount")
 if [[ "$dmount" == "mounts" ]]; then
  dmstatus="✅ DEPLOYED"
   else dmstatus="⚠️ NOT DEPLOYED"; fi

@@ -1,0 +1,2 @@
+tail -n 100 /var/plexguide/logs/drive/*.log
+tail -n 100 /var/plexguide/logs/uploader/*.log

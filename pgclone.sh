@@ -25,7 +25,6 @@ source /opt/pgclone/functions/deployblitz.sh
 source /opt/pgclone/functions/multihd.sh
 source /opt/pgclone/functions/deploylocal.sh
 source /opt/pgclone/functions/createtdrive.sh
-source /opt/pgclone/functions/update.sh
 ################################################################################
 pgclonevars
 mustset
