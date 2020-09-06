@@ -148,7 +148,7 @@ EOF
 clonestart
 fi
 }
-deploydocker() {
+deploydockeruploader() {
 upper=$(docker ps --format '{{.Names}}' | grep "uploader")
 if [[ "$upper" != "uploader" ]]; then
    dduploader
@@ -160,7 +160,7 @@ dduploader() {
 	🚀      Deploy of Docker Uploader
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	EOF
-        removeoldui
+    removeoldui
 	cleanlogs
 	ansible-playbook /opt/pgclone/ymls/uploader.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
