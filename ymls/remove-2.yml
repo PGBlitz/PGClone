@@ -24,6 +24,9 @@
       - { name: plexdrive.service }
       - { name: st2monitor.service }
       - { name: pgunion.service }
+      - { name: localspace.service }
+      - { name: mountcheck.servive }
+
   tasks:
     - name: Get existing services
       stat:

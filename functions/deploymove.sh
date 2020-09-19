@@ -14,6 +14,8 @@ executemove() {
     rm -rf plexguide/deployed.version
     # Call Variables
     pgclonevars
+	# update system to new packages
+    ansible-playbook /opt/pgclone/ymls/update.yml
     # flush and clear service logs
     cleanlogs
     # to remove all service running prior to ensure a clean launch
@@ -35,6 +37,6 @@ executemove() {
     if [[ "$type" == "gdrive" ]]; then
         finaldeployoutput="Move - Unencrypted"
     else finaldeployoutput="Move - Encrypted"; fi
-    restartapps
-    deploySuccess
+    deploySuccess && deploymountSuccess
+	
 }

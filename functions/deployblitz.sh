@@ -13,6 +13,8 @@ executeblitz() {
     rm -rf plexguide/deployed.version
     # Call Variables
     pgclonevars
+	# update system to new packages
+    ansible-playbook /opt/pgclone/ymls/update.yml
     # flush and clear service logs
     cleanlogs
     # to remove all service running prior to ensure a clean launch
@@ -44,6 +46,5 @@ executeblitz() {
     # deploy union
     ansible-playbook /opt/pgclone/ymls/uploader.yml
     # check if services are active and running
-    restartapps
-    deploySuccess
+    deploySuccess && deploymountSuccess
 }

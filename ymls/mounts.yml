@@ -19,6 +19,8 @@
       include_tasks: '/opt/coreapps/apps/_core.yml'
     - name: 'Including rclone job'
       include_tasks: './rclone.yml'
+    - name: 'Including journal jobs'
+      include_tasks: './journald.yml'
     - name: 'Register Download Drive'
       shell: 'cat /var/plexguide/server.hd.path'
       register: downloadpath
@@ -77,11 +79,6 @@
         mounts:
           -  source: '/mnt/unionfs'
              target: '/mnt/unionfs'
-             type: bind
-             consistency: consistent
-             propagation: shared
-          -  source: '{{downloadpath.stdout}}/downloads'
-             target: '/move'
              type: bind
              consistency: consistent
              propagation: shared

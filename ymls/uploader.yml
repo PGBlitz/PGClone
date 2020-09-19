@@ -1,8 +1,7 @@
 #!/bin/bash
 #
 # Title:           Docker Uploader
-# Author(s):       PhyskX
-# CoAuthor:        MrDoob
+# Author:          MrDoob
 # Dockerowner:     MrDoob
 # GNU:             General Public License v3.0
 ################################################################################
@@ -24,15 +23,15 @@
     - name: 'Register Timezone'
       shell: 'cat /etc/timezone'
       register: TZone
-
     # CORE (MANDATORY) ############################################################
     - name: 'Including main job'
-      include_tasks: './core.yml'
+      include_tasks: '/opt/coreapps/apps/_core.yml'
     - name: 'Including cleaner job'
       include_tasks: './cleaner.yml'
     - name: 'Including key and rclone job'
       include_tasks: './key.yml'
-
+    - name: 'Including journal jobs'
+      include_tasks: './journald.yml'
     # LABELS ######################################################################
     - name: 'Adding Traefik'
       set_fact:
@@ -51,6 +50,12 @@
           traefik.frontend.headers.customResponseHeaders: 'X-Robots-Tag:noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex'
           traefik.frontend.headers.forceSTSHeader: 'true'
           traefik.frontend.redirect.entryPoint: 'https'
+
+    - name: 'Setting {{pgrole}} Volumes'
+      set_fact:
+        pg_volumes:
+          - '/opt/appdata/{{pgrole}}/:/config'
+          - '/mnt/downloads:/move'
 
     - name: 'Setting {{pgrole}} ENV'
       set_fact:
@@ -76,6 +81,7 @@
         pull: yes
         published_ports:
           - '{{ports.stdout}}{{extport}}:{{intport}}'
+        volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         capabilities:
           - 'SYS_ADMIN'
@@ -91,14 +97,3 @@
               - '{{pgrole}}'
         state: started
         labels: '{{pg_labels}}'
-        mounts:
-          -  source: '{{downloadpath.stdout}}/downloads'
-             target: '/move'
-             type: bind
-             consistency: consistent
-             propagation: shared
-          -  source: '/opt/appdata/{{pgrole}}/'
-             target: '/config'
-             type: bind
-             consistency: consistent
-             propagation: shared

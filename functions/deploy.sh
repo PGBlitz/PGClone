@@ -1,8 +1,7 @@
 #!/bin/bash
 #
-# Title:      Docker Uploader 
-# Author(s):  PhyskX
-# CoAuthot:   MrDoob
+# Title:      basic parts 
+# Author:     MrDoob
 # GNU:        General Public License v3.0
 ################################################################################
 deploypgblitz() {
@@ -25,7 +24,11 @@ deploypgblitz() {
   cat /opt/appdata/plexguide/.keys >>/opt/appdata/plexguide/rclone.conf
   deploydrives
 }
-
+updatesystem() {
+  # update system to new packages
+  sudo pip install --ignore-installed --upgrade ansible 2>&1 >>/dev/null
+  ansible-playbook /opt/pgclone/ymls/update.yml 2>&1 >>/dev/null
+}
 deploypgmove() {
   # RCLONE BUILD
   echo "#------------------------------------------" >/opt/appdata/plexguide/rclone.conf
@@ -38,161 +41,97 @@ deploypgmove() {
   fi
   deploydrives
 }
+stopmunts() {
+mount=$(docker ps --format '{{.Names}}' | grep "mount**")
+if [[ "$mount" == "mount**" ]]; then 
+   docker stop mount** >> /dev/null
+   fusermount -uzq /mnt/unionfs >> /dev/null
+fi
+}
 removeoldui() {
 UI=$(docker ps --format '{{.Names}}' | grep "pgui")
 if [[ "$UI" == "pgui" ]]; then 
-   docker stop pgui
-   docker rm pgui
-   rm -rf /opt/appdata/pgui/
+   docker stop pgui >> /dev/null
+   docker rm pgui >> /dev/null
+   rm -rf /opt/appdata/pgui/ >> /dev/null
 fi
 }
-deploymounts() {
-dmounts=$(docker ps --format '{{.Names}}' | grep "mounts")
-if [[ "$dmounts" != "mounts" ]]; then
-   ddmounts
-else ddmountsredeploy; fi
+
+vnstat() {
+apt-get install ethtool vnstat vnstati -yqq 2>&1 >>/dev/null
+export DEBIAN_FRONTEND=noninteractive
+network=$(ifconfig | grep -E 'eno1|enp|ens5' | awk '{print $1}' | sed -e 's/://g')
+sed -i 's/eth0/'$network'/g' /etc/vnstat.conf
+sed -i '/UseLogging/s/2/0/' /etc/vnstat.conf
+sed -i '/RateUnit/s/1/0/' /etc/vnstat.conf
+sed -i '/UnitMode/s/0/1/' /etc/vnstat.conf
+sed -i 's/Locale "-"/Locale "LC_ALL=en_US.UTF-8"/g' /etc/vnstat.conf
+/etc/init.d/vnstat restart 2>&1 >>/dev/null
 }
-ddmounts() {
-	tee <<-EOF
+
+deploydockermount() {
+tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	🚀      Deploy of Docker Mounts
+     🚀      Deploy of Docker Mounts
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	EOF
+EOF
+   vnstat
+   norcloneconf
+   updatesystem
    removeoldui
    cleanlogs
+   stopmunts
    ansible-playbook /opt/pgclone/ymls/remove-2.yml
    ansible-playbook /opt/pgclone/ymls/mounts.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-  tee <<-EOF
+tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	💪     DEPLOYED sucessfully !
+     💪     DEPLOYED sucessfully !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      The Mounts is under
-     https://mounts.${domain}
+     https://mount.${domain}
      or
      http://${ip}:7755
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
     clonestart
-}
-ddmountsredeploy() {
-	tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	🚀      Redeploy of Docker Mounts
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	EOF
-  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-  removeoldui
-  cleanlogs
-  ansible-playbook /opt/pgclone/ymls/remove-2.yml
-  ansible-playbook /opt/pgclone/ymls/mounts.yml
-  sleep 10
-domain=$(cat /var/plexguide/server.domain)
-ip=$(cat /var/plexguide/server.ip)
-  tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	💪     DEPLOYED sucessfully !
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     The Mounts is under
-     https://mounts.${domain}
-     or
-     http://${ip}:7755
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
-    clonestart
-}
-### Docker Uploader Deploy start ##
-deploydockermount() {
-UI=$(docker ps --format '{{.Names}}' | grep "mounts")
-if [[ "$UI" != "mounts" ]]; then 
-norcloneconf
-else deploymounts; fi
 }
 norcloneconf() {
 rcc=/opt/appdata/plexguide/rclone.conf
 if [[ ! -f "$rcc" ]]; then
 tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Fail Notice deploy of Docker Mounts
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
- Sorry we cant  Deploy the Docker Mounts.
- we cant find any rclone.conf 
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ⛔ Fail Notice for deploy of Docker 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     Sorry we cant Deploy the Docker.
+     We cant find any rclone.conf file 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ⛔ Fail Notice for deploy of Docker
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 clonestart
-fi
-}
-nounionrunning() {
-rcc=/opt/appdata/plexguide/rclone.conf
-if [[ ! -f "$rcc" ]]; then
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Fail Notice for deploy of Docker Uploader
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
- Sorry we cant  Deploy the Docker Uploader.
- No docker mounts are running , 
- please deploy first the docker mounts.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Fail Notice for deploy of Docker Uploader 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-clonestart
+else
+  echo ""
 fi
 }
 deploydockeruploader() {
-upper=$(docker ps --format '{{.Names}}' | grep "uploader")
-if [[ "$upper" != "uploader" ]]; then
-   dduploader
-else ddredeploy; fi
-}
-dduploader() {
-	tee <<-EOF
+tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	🚀      Deploy of Docker Uploader
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	EOF
-    removeoldui
-	cleanlogs
-	ansible-playbook /opt/pgclone/ymls/uploader.yml
-  read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-  tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	💪     DEPLOYED sucessfully !
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     The Uploader is under
-     https://uploader.${domain}
-     or
-     http://${ip}:7777
+     🚀  Deploy of Docker Uploader
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
-    clonestart
-}
-ddredeploy() {
-	tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	🚀      Redeploy of Docker Uploader
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	EOF
+    vnstat
+    norcloneconf
+    updatesystem
+    removeoldui
+    cleanlogs
+    ansible-playbook /opt/pgclone/ymls/uploader.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-  removeoldui
-  cleanlogs
-  ansible-playbook /opt/pgclone/ymls/uploader.yml
-  sleep 10
-domain=$(cat /var/plexguide/server.domain)
-ip=$(cat /var/plexguide/server.ip)
-  tee <<-EOF
+tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	💪     DEPLOYED sucessfully !
+     💪     DEPLOYED sucessfully !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      The Uploader is under
      https://uploader.${domain}
@@ -206,9 +145,9 @@ EOF
 ### Docker Uploader Deploy end ##
 deploydrives() {
   fail=0
-  tee <<-EOF
+tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Conducting RClone Mount Checks
+      🚀 Conducting RClone Mount Checks
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
@@ -216,19 +155,29 @@ EOF
   touch /var/plexguide/.drivelog
   transport=$(cat /var/plexguide/pgclone.transport)
   if [[ "$transport" == "mu" ]]; then
-    gdrivemod
+    gdrivemod 
     multihdreadonly
+    updatesystem
+    stopmunts
     deploydockermount
+    deploydockeruploader
   elif [[ "$transport" == "me" ]]; then
     gdrivemod
     gcryptmod
+    updatesystem
     multihdreadonly
+    stopmunts
+    deploydockermount
+    deploydockeruploader
   elif [[ "$transport" == "bu" ]]; then
     gdrivemod
     tdrivemod
     gdsamod
     multihdreadonly
+    updatesystem
+    stopmunts
     deploydockermount
+    deploydockeruploader
   elif [[ "$transport" == "be" ]]; then
     gdrivemod
     tdrivemod
@@ -237,7 +186,10 @@ EOF
     tcryptmod
     gdsacryptmod
     multihdreadonly
+    updatesystem
+    stopmunts
     deploydockermount
+    deploydockeruploader
   fi
   cat /var/plexguide/.drivelog
   logcheck=$(cat /var/plexguide/.drivelog | grep "Failed")
@@ -253,19 +205,17 @@ EOF
     fi
     tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 RClone Mount Checks - Failed
+  🚀 RClone Mount Checks - Failed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CANNOT DEPLOY!
 
-CANNOT DEPLOY!
-
-POSSIBLE REASONS:
-1. GSuite Account is no longer valid or suspended
-2. Client ID and/or Secret are invalid and/or no longer exist
-$emessage
+  POSSIBLE REASONS:
+  1. GSuite Account is no longer valid or suspended
+  2. Client ID and/or Secret are invalid and/or no longer exist
+  $emessage
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
-    read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
+  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 </dev/tty
     clonestart
   fi
 }
@@ -341,22 +291,18 @@ deployblitzstartcheck() {
   pgclonevars
   if [[ "$displaykey" == "0" ]]; then
     tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Fail Notice
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💬  There are [0] keys generated for Blitz! Create those first!
-
-NOTE: 
-
-Without any keys, Blitz cannot upload any data without the use
-of service accounts
-
+   ⛔ Fail Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+  💬  There are [0] keys generated for Blitz! Create those first!
+  NOTE: 
+
+  Without any keys, Blitz cannot upload any data without the use
+  of service accounts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
     clonestart
   fi
@@ -367,60 +313,45 @@ cleanlogs() {
   journalctl --flush
   journalctl --rotate
   journalctl --vacuum-time=1s
-  truncate -s 0 /var/plexguide/logs/*.log
+  rm -rf /var/plexguide/logs/*.log
+  find /var/logs -name "*.gz" -delete  
 }
 prunedocker() {
   echo "Prune docker images and volumes..."
   docker system prune --volumes -f
 }
 ################################################################################
-restartapps() {
-  echo "restarting apps..."
-  docker restart $(docker ps -a -q) >/dev/null
-}
 deploySuccess() {
-domain=$(cat /var/plexguide/server.domain)
-ip=$(cat /var/plexguide/server.ip)
   tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: $finaldeployoutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  rClone has been deployed sucessfully!
+  All services are active and running normally.
 
-rClone has been deployed sucessfully!
-All services are active and running normally.
+  The Uploader is under
 
-The Uploader is under
-
-     https://uploader.${domain}
-
+     https://uploader.$(cat /var/plexguide/server.domain)
      or
-
-     http://${ip}:7777
+     http://$(cat /var/plexguide/server.ip):7777
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 }
 deploymountSuccess() {
-domain=$(cat /var/plexguide/server.domain)
-ip=$(cat /var/plexguide/server.ip)
   tee <<-EOF
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 DEPLOYED: $finaldeployoutput
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  rClone has been deployed sucessfully!
+  All services are active and running normally.
 
-rClone has been deployed sucessfully!
-All services are active and running normally.
+  The Mounts is under
 
-The Mounts is under
-
-     https://mounts.${domain}
-
+     https://mounts.$(cat /var/plexguide/server.domain)
      or
-
-     http://${ip}:7755
+     http://$(cat /var/plexguide/server.ip):7755
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
