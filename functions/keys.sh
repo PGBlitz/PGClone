@@ -409,20 +409,19 @@ keysposscount=$(expr $FIRSTV - $SECONDV)
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 SYSTEM MESSAGE: Key Number Selection! (From 2 thru 20 )
+🚀 SYSTEM MESSAGE: Key Number Selection! (From 6 thru 20 )
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-QUESTION - Create how many keys for Blitz? 
+QUESTION - Create how many keys for TDrive? 
 
 MATH:
-2  Keys = 1.5 TB Daily | 6  Keys = 4.5 TB Daily
-10 Keys = 7.5 TB Daily | 20 Keys = 15  TB Daily
+Min  6 Keys = 4.5TB Daily
+Max 20 Keys = 15 TB Daily
 
 Possible $keysposscount before you hit the 100 SAC's
 
 NOTE 1: Creating more keys DOES NOT SPEED up your transfers
 NOTE 2: Realistic key generation for most are 6 - 8 keys
-NOTE 3: 20 Keys are only for GCE Feeder !!
-NOTE 4: maximum of SAC is 100 , remove unused keys !!
+NOTE 3: maximum of SAC is 100 , remove unused keys !!
 
 💬 # of Keys Generated Sets Your Daily Upload Limit!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -432,14 +431,12 @@ EOF
 
   num=$typed
   echo ""
- if [[ "$typed" -le "0" || "$typed" -ge "21" ]]; then
+ if [[ "$typed" -le "6" || "$typed" -ge "21" ]]; then
     echo "Creating $typed Keys" && keys=$typed
   fi
   sleep 2
   echo ""
-
-   if [[ "$typed" -le "0" || "$typed" -ge "51" ]]; then deploykeys3; fi
-
+   if [[ "$typed" -le "0" || "$typed" -ge "21" ]]; then deploykeys3; fi
   num=$keys
   count=0
   project=$(cat /var/plexguide/pgclone.project)

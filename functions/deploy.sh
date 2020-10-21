@@ -26,20 +26,13 @@ deploypgblitz() {
 }
 updatesystem() {
   # update system to new packages
-  sudo pip install --ignore-installed --upgrade ansible 2>&1 >>/dev/null
+  apt-get update -yq && apt-get upgrade -yq
+  pip uninstall ansible 2>&1 >>/dev/null
+  pip install ansible-base 2>&1 >>/dev/null
+  pip install ansible 2>&1 >>/dev/null
+  python3 -m pip install ansible 2>&1 >>/dev/null
+  pip install --ignore-installed --upgrade ansible 2>&1 >>/dev/null
   ansible-playbook /opt/pgclone/ymls/update.yml 2>&1 >>/dev/null
-}
-deploypgmove() {
-  # RCLONE BUILD
-  echo "#------------------------------------------" >/opt/appdata/plexguide/rclone.conf
-  echo "# rClone.config created over rclone"  >>/opt/appdata/plexguide/rclone.conf
-  echo "#------------------------------------------" >>/opt/appdata/plexguide/rclone.conf
-  cat /opt/appdata/plexguide/.gdrive >/opt/appdata/plexguide/rclone.conf
-  if [[ $(cat "/opt/appdata/plexguide/.gcrypt") != "NOT-SET" ]]; then
-    echo ""
-    cat /opt/appdata/plexguide/.gcrypt >>/opt/appdata/plexguide/rclone.conf
-  fi
-  deploydrives
 }
 stopmunts() {
 mount=$(docker ps --format '{{.Names}}' | grep "mount**")
@@ -56,7 +49,9 @@ if [[ "$UI" == "pgui" ]]; then
    rm -rf /opt/appdata/pgui/ >> /dev/null
 fi
 }
-
+update_pip() {
+pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+}
 vnstat() {
 apt-get install ethtool vnstat vnstati -yqq 2>&1 >>/dev/null
 export DEBIAN_FRONTEND=noninteractive
@@ -77,6 +72,7 @@ tee <<-EOF
 EOF
    vnstat
    norcloneconf
+   update_pip
    updatesystem
    removeoldui
    cleanlogs
@@ -122,12 +118,13 @@ tee <<-EOF
      🚀  Deploy of Docker Uploader
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-    vnstat
-    norcloneconf
-    updatesystem
-    removeoldui
-    cleanlogs
-    ansible-playbook /opt/pgclone/ymls/uploader.yml
+   vnstat
+   norcloneconf
+   update_pip
+   updatesystem
+   removeoldui
+   cleanlogs
+   ansible-playbook /opt/pgclone/ymls/uploader.yml
   read -rp '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -154,22 +151,7 @@ EOF
   if [ -e "/var/plexguide/.drivelog" ]; then rm -rf /var/plexguide/.drivelog; fi
   touch /var/plexguide/.drivelog
   transport=$(cat /var/plexguide/pgclone.transport)
-  if [[ "$transport" == "mu" ]]; then
-    gdrivemod 
-    multihdreadonly
-    updatesystem
-    stopmunts
-    deploydockermount
-    deploydockeruploader
-  elif [[ "$transport" == "me" ]]; then
-    gdrivemod
-    gcryptmod
-    updatesystem
-    multihdreadonly
-    stopmunts
-    deploydockermount
-    deploydockeruploader
-  elif [[ "$transport" == "bu" ]]; then
+  if [[ "$transport" == "bu" ]]; then
     gdrivemod
     tdrivemod
     gdsamod
@@ -194,8 +176,7 @@ EOF
   cat /var/plexguide/.drivelog
   logcheck=$(cat /var/plexguide/.drivelog | grep "Failed")
   if [[ "$logcheck" == "" ]]; then
-    if [[ "$transport" == "mu" || "$transport" == "me" ]]; then executemove; fi
-    if [[ "$transport" == "bu" || "$transport" == "be" ]]; then executeblitz; fi
+     if [[ "$transport" == "bu" || "$transport" == "be" ]]; then executeblitz; fi
   else
     if [[ "$transport" == "me" || "$transport" == "be" ]]; then
       emessage="
@@ -313,8 +294,9 @@ cleanlogs() {
   journalctl --flush
   journalctl --rotate
   journalctl --vacuum-time=1s
-  rm -rf /var/plexguide/logs/*.log
-  find /var/logs -name "*.gz" -delete  
+  truncate -s 0 /var/plexguide/logs/*.log
+  rm -rf /var/plexguide/logs/ >>/dev/null 2>&1
+  find /var/logs -name "*.gz" -delete >>/dev/null 2>&1
 }
 prunedocker() {
   echo "Prune docker images and volumes..."

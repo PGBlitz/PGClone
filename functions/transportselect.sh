@@ -11,14 +11,11 @@ transportselect() {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💪 Set Clone Method 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NOTE: Please visit the link and understand what your doing first!
 
-[1] GDrive-Unencrypt: Data > Novice  | 750GB Daily Transfer Max
-[2] GDrive-Encrypted: Data > Novice  | 750GB Daily Transfer Max
-[3] TDrive-Unencrypt: Data > Complex | Exceed 750GB Transport Cap
-[4] TDrive-Encrypted: Data > Complex | Exceed 750GB Transport Cap
+[1] TDrive-Unencrypt: Data > Complex | Exceed 750GB Transport Cap
+[2] TDrive-Encrypted: Data > Complex | Exceed 750GB Transport Cap
 
-[5] Local Edition   : Local HDs      | Easy  Utilizes System's HD's Only
+[3] Local Edition   : Local HDs      | Easy  Utilizes System's HD's Only
 
 [Z] EXIT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -29,22 +26,14 @@ EOF
 
     case $typed in
     1)
-        echo "mu" >/var/plexguide/pgclone.transport
-        echo "Move" >/var/plexguide/pg.transport
-        ;;
-    2)
-        echo "me" >/var/plexguide/pgclone.transport
-        echo "Move Encrypted" >/var/plexguide/pg.transport
-        ;;
-    3)
         echo "bu" >/var/plexguide/pgclone.transport
         echo "Blitz" >/var/plexguide/pg.transport
         ;;
-    4)
+    2)
         echo "be" >/var/plexguide/pgclone.transport
         echo "Blitz Encrypted" >/var/plexguide/pg.transport
         ;;
-    5)
+    3)
         echo "le" >/var/plexguide/pgclone.transport
         echo "Local Edition" >/var/plexguide/pg.transport
         ;;

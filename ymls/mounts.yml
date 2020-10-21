@@ -53,10 +53,11 @@
     - name: 'Deploying {{pgrole}}'
       docker_container:
         name: '{{pgrole}}'
+        hostname: '{{pgrole}}'
         image: 'mrdoob/rccmount:latest'
         pull: yes
         published_ports:
-          - '{{ports.stdout}}{{extport}}:{{intport}}'
+          - '{{extport}}:{{intport}}'
         volumes:
           - '/opt/appdata/{{pgrole}}/:/config'
           - '{{downloadpath.stdout}}/downloads:/mnt/downloads'
@@ -74,6 +75,9 @@
           - name: plexguide
             aliases:
               - '{{pgrole}}'
+        dns_servers:
+          - '8.8.8.8'
+          - '8.8 4.4'
         state: started
         labels: '{{pg_labels}}'
         mounts:
