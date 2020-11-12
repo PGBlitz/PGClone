@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: apt-get update
+      apt:
+        update-cache: yes
+      changed_when: 0
+
+    - name: get list of pending upgrades
+      command: apt-get --simulate dist-upgrade
+      args:
+        warn: false
+      register: apt_simulate
+
+    - name: apt-get autoremove
+      command: apt-get -y autoremove
+      args:
+        warn: false
+      when: '"Inst linux-image-" in apt_simulate.stdout'
+      changed_when: 0
+
+    - name: update system 
+      shell: apt-get update -y
+    - name: upgrade system
+      shell: apt-get upgrade -y
+    - name: remove old packages
+      shell: apt-get autoremove -y
+
+    - name: apt-get dist-upgrade
+      apt:
+        upgrade: dist
+
+    - name: update pip and ansible
+      shell: pip install --ignore-installed --upgrade ansible

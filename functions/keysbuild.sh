@@ -8,24 +8,32 @@
 keystart() {
   pgclonevars
 
+ kread=$(gcloud --account=${pgcloneemail} iam service-accounts list | awk '{print $1}' | tail -n +2 | cut -c7- | cut -f1 -d "?" | sort | uniq | head -n 1 >/var/plexguide/.gcloudposs)
+ keyposs=$( cat /var/plexguide/.gcloudposs )
+
+FIRSTV=$keyposs
+SECONDV=1
+keysposscount=$(expr $FIRSTV - $SECONDV)
+#echo $keysposscount
+
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Key Builder ~ http://pgclone.pgblitz.com
+🚀 SYSTEM MESSAGE: Key Number Selection! (From 2 thru 20 )
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-QUESTION - Create how many keys for PGBlitz? (From 2 thru 20 )
+QUESTION - Create how many keys for Blitz? 
 
 MATH:
 2  Keys = 1.5 TB Daily | 6  Keys = 4.5 TB Daily
 10 Keys = 7.5 TB Daily | 20 Keys = 15  TB Daily
 
+Possible $keysposscount keys to build for $pgcloneproject
+
 NOTE 1: Creating more keys DOES NOT SPEED up your transfers
-NOTE 2: Realistic key generation for most are 6 keys
-NOTE 3: Generating 100 keys over time, you must delete them all to create
-        more, which is why making tons of keys is not ideal!
-        
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[Z] Exit
+NOTE 2: Realistic key generation for most are 6 - 8 keys
+NOTE 3: 20 Keys are only for GCE Feeder !!
+
+💬 # of Keys Generated Sets Your Daily Upload Limit!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -34,9 +42,7 @@ EOF
   exitclone
 
   num=$typed
-  if [[ "$typed" -le "0" || "$typed" -ge "51" ]]; then
-    keystart
-  elif [[ "$typed" -ge "1" && "$typed" -le "50" ]]; then
+  if [[ "$typed" -ge "1" && "$typed" -le "21" ]]; then
     keyphase2
   else keystart; fi
 }
@@ -227,21 +233,11 @@ EOF
 
   read -p '↘️  Type y or n | PRESS [ENTER]: ' typed </dev/tty
   case $typed in
-  y)
-    yesdeletekeys
-    ;;
-  Y)
-    yesdeletekeys
-    ;;
-  N)
-    clonestart
-    ;;
-  n)
-    clonestart
-    ;;
-  *)
-    deletekeys
-    ;;
+  y) yesdeletekeys ;;
+  Y) yesdeletekeys ;;
+  N) clonestart ;;
+  n) clonestart ;;
+  *) deletekeys ;;
   esac
 }
 

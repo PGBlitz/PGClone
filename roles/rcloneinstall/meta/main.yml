@@ -1,4 +1,5 @@
 ---
+
 dependencies: []
 
 galaxy_info:
@@ -10,11 +11,19 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+        - buster
+        - stretch
         - jessie
+    - name: Fedora
+      versions:
+        - 30
+        - 29
+        - 27
     - name: Ubuntu
       versions:
+        - bionic
         - xenial
-    - name: RHEL
-  categories:
+        - trusty
+  galaxy_tags:
     - networking
     - system

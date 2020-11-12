@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Title:      rclone updater
+# GNU:        General Public License v3.0
+################################################################################
+
+source /opt/plexguide/menu/functions/update.sh
+
+sudocheck
+rcloneupdate
+exitcheck

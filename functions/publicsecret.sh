@@ -11,7 +11,7 @@ keyinputpublic() {
         tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Change Values? ~ pgclone.pgblitz.com
+🚀 rClone - Change Values?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CLIENT ID
 $pgclonepublic
@@ -41,24 +41,18 @@ EOF
             rm -rf /var/plexguide/pgclone.public 1>/dev/null 2>&1
             rm -rf /var/plexguide/pgclone.secret 1>/dev/null 2>&1
             ;;
-        1)
-            clonestart
-            ;;
-        *)
-            keyinputpublic
-            ;;
+        1) clonestart ;;
+        *) keyinputpublic ;;
         esac
-
     fi
 
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Client ID ~ pgclone.pgblitz.com
+🚀 rClone - Client ID
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Visit oauth.pgblitz.com in order to generate your Client ID! Ensure that
-you input the CORRECT Client ID from your current project!
+Ensure that you input the CORRECT Client ID from your current project!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
@@ -76,11 +70,10 @@ keyinputsecret() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Secret ~ pgclone.pgblitz.com
+🚀 rClone - Secret
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Visit oauth.pgblitz.com in order to generate your Secret! Ensure that
-you input the CORRECT Secret ID from your current project!
+Ensure thatyou input the CORRECT Secret ID from your current project!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [Z] Exit
@@ -95,7 +88,7 @@ EOF
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 PG Clone - Output ~ pgclone.pgblitz.com
+🚀 rClone - Output 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CLIENT ID
@@ -155,13 +148,13 @@ publicsecretchecker() {
         tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Fail Notice ~ oauth.pgblitz.com
+🌎 Fail Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💬  Public & Secret Key - NOT SET!
 
-NOTE: Nothing can occur unless the public & secret key are set! Without
-setting them; PGBlitz cannot create keys, nor create rclone configurations
+NOTE: Nothing can occur unless the public & secret key are set! 
+Without setting them; rclone cannot create keys, or create rclone configurations
 to mount the required drives!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

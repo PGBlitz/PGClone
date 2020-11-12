@@ -1,0 +1,34 @@
+# Journald.conf MOD
+# Title:      journald.conf Mod
+# Author(s):  MrDoob
+################################################################################
+
+[Journal]
+Storage=volatile
+Compress=yes
+#Seal=yes
+#SplitMode=uid
+#SyncIntervalSec=5m
+#RateLimitIntervalSec=
+#RateLimitBurst=10M
+SystemMaxUse=100M
+#SystemKeepFree=
+SystemMaxFileSize=10M
+SystemMaxFiles=10
+#RuntimeMaxUse=100M
+#RuntimeKeepFree=
+#RuntimeMaxFileSize=
+#RuntimeMaxFiles=100
+#MaxRetentionSec=
+#MaxFileSec=1day
+#ForwardToSyslog=yes
+#ForwardToKMsg=no
+#ForwardToConsole=no
+#ForwardToWall=yes
+#TTYPath=/dev/console
+MaxLevelStore=crit
+#MaxLevelSyslog=debug
+#MaxLevelKMsg=notice
+#MaxLevelConsole=info
+#MaxLevelWall=emerg
+#LineMax=48K

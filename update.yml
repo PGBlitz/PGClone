@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  vars:
+    extra: ''
+
+  roles:
+    - { role: docker, tags: ['docker'] }
+    - { role: docstart, tags: ['docstart'] }
+    - { role: autodelete, tags: ['autodelete'] }
+    - { role: clean, tags: ['clean'] }
+    - { role: update, tags: ['update'] }
+    - { role: rcloneinstall, tags: ['rcloneinstall'] }
+    - { role: mergerfsinstall, tags: ['mergerfsinstall'] }
+    - { role: gcloud_sdk, tags: ['gcloud_sdk'] }
+    - { role: system, tags: ['system'] }
+    - { role: mergerfsupdate, tags: ['mergerfsupdate'] }
+    - { role: journal, tags: ['journal'] }
+    - { role: plex_dupefinder, tags: ['plex_dupefinder'] }
+    - { role: plexpatrol, tags: ['plexpatrol'] }
+    - { role: remove, tags: ['remove'] }
+    - { role: traktarr, tags: ['traktarr'] }
+    - { role: nvidia, tags: ['nvidia'] }

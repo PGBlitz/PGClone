@@ -1,0 +1,88 @@
+#!/bin/bash
+#
+# Title:      Docker Mount
+# Authot:     MrDoob
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    # FACTS #######################################################################
+    - name: 'Set Known Facts'
+      set_fact:
+        pgrole: 'mount'
+        intport: '8080'
+        extport: '7755'
+    # CORE (MANDATORY) ############################################################
+    - name: 'Including main job'
+      include_tasks: '/opt/coreapps/apps/_core.yml'
+    - name: 'Including rclone job'
+      include_tasks: './rclone.yml'
+    - name: 'Including journal jobs'
+      include_tasks: './journald.yml'
+    - name: 'Register Download Drive'
+      shell: 'cat /var/plexguide/server.hd.path'
+      register: downloadpath
+    # LABELS ######################################################################
+    - name: 'Adding Traefik'
+      set_fact:
+        pg_labels:
+          traefik.enable: 'true'
+          traefik.port: '{{intport}}'
+          traefik.frontend.auth.forward.address: '{{gauth}}'
+          traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}}'
+          traefik.frontend.headers.SSLHost: '{{domain.stdout}}'
+          traefik.frontend.headers.SSLRedirect: 'true'
+          traefik.frontend.headers.STSIncludeSubdomains: 'true'
+          traefik.frontend.headers.STSPreload: 'true'
+          traefik.frontend.headers.STSSeconds: '315360000'
+          traefik.frontend.headers.browserXSSFilter: 'true'
+          traefik.frontend.headers.contentTypeNosniff: 'true'
+          traefik.frontend.headers.customResponseHeaders: 'X-Robots-Tag:noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex'
+          traefik.frontend.headers.forceSTSHeader: 'true'
+          traefik.frontend.redirect.entryPoint: 'https'
+
+    - name: 'Setting {{pgrole}} ENV'
+      set_fact:
+        pg_env:
+          PUID: '1000'
+          PGID: '1000'
+          TZ: 'Europe/London'
+     ########## DEPLOYMENT ##########
+    - name: 'Deploying {{pgrole}}'
+      docker_container:
+        name: '{{pgrole}}'
+        hostname: '{{pgrole}}'
+        image: 'mrdoob/rccmount:latest'
+        pull: yes
+        published_ports:
+          - '{{extport}}:{{intport}}'
+        volumes:
+          - '/opt/appdata/{{pgrole}}/:/config'
+          - '{{downloadpath.stdout}}/downloads:/mnt/downloads'
+          - '/var/run/docker.sock:/var/run/docker.sock'
+        env: '{{pg_env}}'
+        capabilities:
+          - 'SYS_ADMIN'
+        devices:
+          - '/dev/fuse'
+        privileged: true
+        restart_policy: unless-stopped
+        security_opts:
+          - apparmor:unconfined
+        networks:
+          - name: plexguide
+            aliases:
+              - '{{pgrole}}'
+        dns_servers:
+          - '8.8.8.8'
+          - '8.8 4.4'
+        state: started
+        labels: '{{pg_labels}}'
+        mounts:
+          -  source: '/mnt/unionfs'
+             target: '/mnt/unionfs'
+             type: bind
+             consistency: consistent
+             propagation: shared

@@ -11,7 +11,7 @@ oauth() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Google Auth - ${type} ~ oauth.pgblitz.com
+🚀 Google Auth - ${type}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 https://accounts.google.com/o/oauth2/auth?client_id=$pgclonepublic&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
@@ -45,6 +45,7 @@ EOF
   echo "client_id = $pgclonepublic" >>/opt/appdata/plexguide/.${type}
   echo "client_secret = $pgclonesecret" >>/opt/appdata/plexguide/.${type}
   echo "type = drive" >>/opt/appdata/plexguide/.${type}
+  echo "server_side_across_configs = true" >>/opt/appdata/plexguide/.${type}
   echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >>/opt/appdata/plexguide/.${type}
   echo "" >>/opt/appdata/plexguide/.${type}
   if [ "$type" == "tdrive" ]; then
@@ -82,7 +83,7 @@ EOF
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Process Complete ~ pgclone.pgblitz.com
+🌎 Process Complete
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💬  [${type}] is now established!
@@ -106,7 +107,7 @@ tlabeloauth() {
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Google Auth - Team Drive Label ~ oauth.pgblitz.com
+🚀 Google Auth - Team Drive Label
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 https://accounts.google.com/o/oauth2/auth?client_id=${pgclonepublic}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/drive&response_type=code
@@ -127,7 +128,6 @@ EOF
   if [[ "$token" == "exit" || "$token" == "Exit" || "$token" == "EXIT" || "$token" == "z" || "$token" == "Z" ]]; then clonestart; fi
   curl --request POST --data "code=${token}&client_id=${pgclonepublic}&client_secret=${pgclonesecret}&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token >/var/plexguide/token.part1
   curl -H "GData-Version: 3.0" -H "Authorization: Bearer $(cat /var/plexguide/token.part1 | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev)" $gtype >$storage
-
   teamdriveselect
 }
 
@@ -195,39 +195,6 @@ drive can be shutdown!)
 EOF
   read -p '↘️  Acknowledge Info | PRESS [ENTER] ' temp </dev/tty
 }
-
-mountchecker() {
-  pgclonevars
-  if [[ "$transport" == "mu" ]]; then
-    if [[ "$gstatus" != "ACTIVE" ]]; then mountfail; fi
-  elif [[ "$transport" == "me" ]]; then
-    if [[ "$gstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
-  elif [[ "$transport" == "bu" ]]; then
-    if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" ]]; then mountfail; fi
-  elif [[ "$transport" == "be" ]]; then
-    if [[ "$gstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tstatus" != "ACTIVE" || "$tcstatus" != "ACTIVE" ]]; then mountfail; fi
-  fi
-}
-
-mountfail() {
-  tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Fail Notice ~ pgclone.pgblitz.com
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💬  All Mounts Must Be Active!
-
-NOTE: If any mount says [NOT-SET]; that process must be completed first!
-We will continue to block this process until completed!
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-EOF
-  read -p '↘️  Acknowledge Info | Press [ENTER] ' typed </dev/tty
-  clonestart
-}
-
 tlabelchecker() {
   pgclonevars
   if [[ "$tdname" == "NOT-SET" ]]; then
@@ -235,7 +202,7 @@ tlabelchecker() {
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎 Fail Notice ~ oauth.pgblitz.com
+🌎 Fail Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💬  Team Drive Label Not Set!

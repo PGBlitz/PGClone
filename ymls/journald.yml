@@ -1,0 +1,16 @@
+---
+- name: Install Journald Fix
+  template:
+    dest: /etc/systemd/journald.conf
+    force: true
+    src: /opt/pgclone/journald/journald.conf.j2
+
+- name: systemd reloading
+  systemd:
+    daemon_reload: true
+
+- name: restart journald
+  systemd:
+    daemon_reload: true
+    name: systemd-journald
+    state: restarted

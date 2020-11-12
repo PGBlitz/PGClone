@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# Title:      Docker Uploader 
+# Author(s):  PhyskX
+# CoAuthot:   MrDoob
+# GNU:        General Public License v3.0
+################################################################################
+---
+- name: 'CloneClean || Check Services Existance'
+  stat:
+    path: '/etc/systemd/system/cloneclean.service'
+  register: cxp
+
+- name: 'CloneClean || Get running processes'
+  shell: "ps -ef | grep -v grep | grep -w cloneclean | awk '{print $2}'"
+  register: running_processes
+
+- name: 'CloneClean || Kill running processes'
+  shell: "kill {{ item }}"
+  with_items: "{{ running_processes.stdout_lines }}"
+
+- wait_for:
+    path: "/proc/{{ item }}/status"
+    state: absent
+  with_items: "{{ running_processes.stdout_lines }}"
+  ignore_errors: yes
+  register: killed_processes
+
+- name: 'CloneClean || Force kill stuck processes'
+  shell: "kill -9 {{ item }}"
+  with_items: "{{ killed_processes.results | select('failed') | map(attribute='item') | list }}"
+
+- name: 'Remove PGMove Uploader'
+  stat:
+    path: '/etc/systemd/system/pgmove.service'
+  register: pgm
+
+- name: 'Stop PGMove'
+  systemd:
+    name: pgmove
+    state: stopped
+  when: pgm.stat.exists
+
+- name: 'Purge old PGMove Service | part 1'
+  shell: 'rm -rf /opt/appdata/plexguide/pgmove.sh'
+  when: pgm.stat.exists
+
+- name: 'Purge old PGMove Service | part 2'
+  shell: 'rm -rf /etc/systemd/system/pgmove.service'
+  when: pgm.stat.exists
+
+- name: 'Remove PGBlitz Uploader'
+  stat:
+    path: '/etc/systemd/system/pgblitz.service'
+  register: pgb
+
+- name: 'Stop PGBlitz '
+  systemd:
+    name: pgblitz
+    state: stopped
+  when: pgb.stat.exists
+
+- name: 'Purge old PGBlitz Service | part 1'
+  shell: 'rm -rf /opt/appdata/plexguide/pgblitz.sh'
+  when: pgb.stat.exists
+
+- name: 'Purge old PGBlitz Service | part 2'
+  shell: 'rm -rf /etc/systemd/system/pgblitz.service'
+  when: pgb.stat.exists
