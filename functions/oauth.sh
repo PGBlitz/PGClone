@@ -45,7 +45,7 @@ echo "client_secret = $pgclonesecret" >> /pg/rclone/.${type}
 echo "type = drive" >> /pg/rclone/.${type}
 echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/.${type}
 echo "" >> /pg/rclone/.${type}
-if [ "$type" == "sd" ]; then
+if [ "$type" == "sd" ] || [ "$type" == "sc" ]; then
 teamid=$(cat /pg/rclone/pgclone.teamid)
 echo "team_drive = $teamid" >> /pg/rclone/.sd; fi
 echo ""
@@ -194,8 +194,8 @@ elif [[ "$transport" == "gc" ]]; then
   if [[ "$gdstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" ]]; then mountfail; fi
 elif [[ "$transport" == "sd" ]]; then
   if [[ "$gdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" ]]; then mountfail; fi
-elif [[ "$transport" == "sd" ]]; then
-  if [[ "$gdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$scstatus" != "ACTIVE" ]]; then mountfail; fi
+elif [[ "$transport" == "sc" ]]; then
+  if [[ "$gdstatus" != "ACTIVE" || "$gcstatus" != "ACTIVE" || "$sdstatus" != "ACTIVE" || "$scstatus" != "ACTIVE" ]]; then mountfail; fi
 fi
 }
 
