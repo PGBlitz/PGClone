@@ -28,7 +28,7 @@
 
 - name: Installing Service helpers
   template:
-    src: "/pg/pgclone/templates/{{item}}"
+    src: "./templates/{{item}}"
     dest: /bin/{{item}}
     force: yes
     mode: 0775

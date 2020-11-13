@@ -10,7 +10,7 @@
   gather_facts: false
   tasks:
     - name: include PGClone aliases
-      include_tasks: '/pg/pgclone/ymls/alias.yml'
+      include_tasks: '${PGBLITZ_DIR}/ymls/alias.yml'
 
     - debug: msg="PGBlitz Type - {{transport}}"
     - debug: msg="HD Path - {{hdpath}}"
@@ -65,39 +65,39 @@
         - 'incomplete'
 
     - name: Transport Type
-      shell: 'echo "" >> /pg/rclone/blitz.conf'
+      shell: 'echo "" >> ${PGBLITZ_DIR}/rclone/blitz.conf'
 
     - name: Line Rmur
-      shell: 'sed -i -e "/\[(unionfs|pgunity)\]/,+2d" /pg/rclone/blitz.conf'
+      shell: 'sed -i -e "/\[(unionfs|pgunity)\]/,+2d" ${PGBLITZ_DIR}/rclone/blitz.conf'
 
     - name: Transport Type
       shell: |
-        echo "[pgunity]" >> /pg/rclone/blitz.conf
-        echo "type = union" >> /pg/rclone/blitz.conf
-        echo "{{path}}" >> /pg/rclone/blitz.conf
+        echo "[pgunity]" >> ${PGBLITZ_DIR}/rclone/blitz.conf
+        echo "type = union" >> ${PGBLITZ_DIR}/rclone/blitz.conf
+        echo "{{path}}" >> ${PGBLITZ_DIR}/rclone/blitz.conf
 
     - name: 'PG Blitz Execution'
       block:
 
         - name: Bandwidth Limit
-          shell: 'cat /pg/var/blitz.bw'
+          shell: 'cat ${PGBLITZ_DIR}/var/blitz.bw'
           register: bandwidth
 
         - name: Install Transfer Script
           template:
-            src: /pg/pgclone/source/transfer.sh
-            dest: /pg/rclone/transfer.sh
+            src: ${PGBLITZ_DIR}/source/transfer.sh
+            dest: ${PGBLITZ_DIR}/rclone/transfer.sh
             force: yes
 
         - name: Install Loop Script
           template:
-            src: /pg/pgclone/source/loop.sh
-            dest: /pg/rclone/loop.sh
+            src: ${PGBLITZ_DIR}/source/loop.sh
+            dest: ${PGBLITZ_DIR}/rclone/loop.sh
             force: yes
 
         - name: Install Transfer Service
           template:
-            src: /pg/pgclone/mounts/transfer.service
+            src: ${PGBLITZ_DIR}/mounts/transfer.service
             dest: /etc/systemd/system/transfer.service
             force: yes
 
@@ -114,32 +114,32 @@
     - name: 'PG Move Execution'
       block:
         - name: Bandwidth Limit
-          shell: 'cat /pg/var/move.bw'
+          shell: 'cat ${PGBLITZ_DIR}/var/move.bw'
           register: bandwidth
 
         - name: Deploy Version
-          shell: 'cat /pg/rclone/deploy.version'
+          shell: 'cat ${PGBLITZ_DIR}/rclone/deploy.version'
           register: ver
 
         - name: Register HD Path
-          shell: 'cat /pg/var/server.hd.path'
+          shell: 'cat ${PGBLITZ_DIR}/var/server.hd.path'
           register: hdpath
 
         - name: Install Transfer Script
           template:
-            src: /pg/pgclone/source/transfer.sh
-            dest: /pg/rclone/transfer.sh
+            src: ${PGBLITZ_DIR}/source/transfer.sh
+            dest: ${PGBLITZ_DIR}/rclone/transfer.sh
             force: yes
 
         - name: Install Loop Script
           template:
-            src: /pg/pgclone/source/loop.sh
-            dest: /pg/rclone/loop.sh
+            src: ${PGBLITZ_DIR}/source/loop.sh
+            dest: ${PGBLITZ_DIR}/rclone/loop.sh
             force: yes
 
         - name: Install Transfer Service
           template:
-            src: /pg/pgclone/mounts/transfer.service
+            src: ${PGBLITZ_DIR}/mounts/transfer.service
             dest: /etc/systemd/system/transfer.service
             force: yes
 
@@ -155,13 +155,13 @@
 
     - name: Install PGUnity Script
       template:
-        src: /pg/pgclone/source/pgunity.sh
-        dest: /pg/rclone/pgunity.sh
+        src: ${PGBLITZ_DIR}/source/pgunity.sh
+        dest: ${PGBLITZ_DIR}/rclone/pgunity.sh
         force: yes
 
     - name: Install PGUnity Service
       template:
-        src: /pg/pgclone/mounts/pgunity.service
+        src: ${PGBLITZ_DIR}/mounts/pgunity.service
         dest: /etc/systemd/system/pgunity.service
         force: yes
 
@@ -179,7 +179,7 @@
         delay: 2
 
     - name: Register HD Path
-      shell: 'cat /pg/var/server.hd.path'
+      shell: 'cat ${PGBLITZ_DIR}/var/server.hd.path'
       register: hdpath
 
     - name: Restart All Docker Containers

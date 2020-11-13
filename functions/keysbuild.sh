@@ -40,26 +40,26 @@ else keystart; fi
 keyphase2 () {
 num=$typed
 
-rm -rf /pg/var/blitzkeys 1>/dev/null 2>&1
-mkdir -p /pg/var/blitzkeys
+rm -rf ${PGBLITZ_DIR}/var/blitzkeys 1>/dev/null 2>&1
+mkdir -p ${PGBLITZ_DIR}/var/blitzkeys
 
-cat /pg/rclone/.gd > /pg/rclone/blitz.conf
-if [ -e "/pg/rclone/.sd" ]; then cat /pg/rclone/.sd >> /pg/var/.keytemp; fi
-if [ -e "/pg/rclone/.gc" ]; then cat /pg/rclone/.gc >> /pg/var/.keytemp; fi
-if [ -e "/pg/rclone/.sc" ]; then cat /pg/rclone/.sc >> /pg/var/.keytemp; fi
+cat ${PGBLITZ_DIR}/rclone/.gd > ${PGBLITZ_DIR}/rclone/blitz.conf
+if [ -e "${PGBLITZ_DIR}/rclone/.sd" ]; then cat ${PGBLITZ_DIR}/rclone/.sd >> ${PGBLITZ_DIR}/var/.keytemp; fi
+if [ -e "${PGBLITZ_DIR}/rclone/.gc" ]; then cat ${PGBLITZ_DIR}/rclone/.gc >> ${PGBLITZ_DIR}/var/.keytemp; fi
+if [ -e "${PGBLITZ_DIR}/rclone/.sc" ]; then cat ${PGBLITZ_DIR}/rclone/.sc >> ${PGBLITZ_DIR}/var/.keytemp; fi
 
 gcloud --account=${pgcloneemail} iam service-accounts list |  awk '{print $1}' | \
-       tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq > /pg/var/.gcloudblitz
+       tail -n +2 | cut -c2- | cut -f1 -d "?" | sort | uniq > ${PGBLITZ_DIR}/var/.gcloudblitz
 
- rm -rf /pg/var/.blitzbuild 1>/dev/null 2>&1
- touch /pg/var/.blitzbuild
+ rm -rf ${PGBLITZ_DIR}/var/.blitzbuild 1>/dev/null 2>&1
+ touch ${PGBLITZ_DIR}/var/.blitzbuild
  while read p; do
-   echo $p > /pg/var/.blitztemp
-   blitzcheck=$(grep "blitz" /pg/var/.blitztemp)
-   if [[ "$blitzcheck" != "" ]]; then echo $p >> /pg/var/.blitzbuild; fi
- done </pg/var/.gcloudblitz
+   echo $p > ${PGBLITZ_DIR}/var/.blitztemp
+   blitzcheck=$(grep "blitz" ${PGBLITZ_DIR}/var/.blitztemp)
+   if [[ "$blitzcheck" != "" ]]; then echo $p >> ${PGBLITZ_DIR}/var/.blitzbuild; fi
+ done <${PGBLITZ_DIR}/var/.gcloudblitz
 
-keystotal=$(cat /pg/var/.blitzbuild | wc -l)
+keystotal=$(cat ${PGBLITZ_DIR}/var/.blitzbuild | wc -l)
 # do a 100 calculation - reminder
 
 keysleft=$num
@@ -67,11 +67,11 @@ count=0
 gdsacount=0
 gcount=0
 tempbuild=0
-rm -rf /pg/var/.keys 1>/dev/null 2>&1
-touch /pg/var/.keys
-rm -rf /pg/var/.blitzkeys
-mkdir -p /pg/var/.blitzkeys
-echo "" > /pg/var/.keys
+rm -rf ${PGBLITZ_DIR}/var/.keys 1>/dev/null 2>&1
+touch ${PGBLITZ_DIR}/var/.keys
+rm -rf ${PGBLITZ_DIR}/var/.blitzkeys
+mkdir -p ${PGBLITZ_DIR}/var/.blitzkeys
+echo "" > ${PGBLITZ_DIR}/var/.keys
 
 tee <<-EOF
 
@@ -90,7 +90,7 @@ keycreate1 () {
     #echo $count # for tshoot
     gdsacount
     gcloud --account=${pgcloneemail} iam service-accounts create blitz0${count} --display-name “blitz0${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /pg/var/.blitzkeys/GDSA${tempbuild} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create ${PGBLITZ_DIR}/var/.blitzkeys/GDSA${tempbuild} --iam-account blitz0${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz0${count} is linked to GDSA${tempbuild}"
     else echo "blitz0${count} is linked to GDSA${gcount}"; fi
@@ -103,7 +103,7 @@ keycreate2 () {
     #echo $count # for tshoot
     gdsacount
     gcloud --account=${pgcloneemail} iam service-accounts create blitz${count} --display-name “blitz${count}”
-    gcloud --account=${pgcloneemail} iam service-accounts keys create /pg/var/.blitzkeys/GDSA${tempbuild} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
+    gcloud --account=${pgcloneemail} iam service-accounts keys create ${PGBLITZ_DIR}/var/.blitzkeys/GDSA${tempbuild} --iam-account blitz${count}@${pgcloneproject}.iam.gserviceaccount.com --key-file-type="json"
     gdsabuild
     if [[ "$gcount" -ge "1" && "$gcount" -le "9" ]]; then echo "blitz${count} is linked to GDSA${tempbuild}"
     else echo "blitz${count} is linked to GDSA${gcount}"; fi
@@ -118,9 +118,9 @@ while [[ "$keysleft" -gt "0" ]]; do
   while [[ "$flip" == "off" ]]; do
     ((count++))
     if [[ "$count" -ge "1" && "$count" -le "9" ]]; then
-      if [[ $(grep "0${count}" /pg/var/.blitzbuild) = "" ]]; then keycreate1; fi
+      if [[ $(grep "0${count}" ${PGBLITZ_DIR}/var/.blitzbuild) = "" ]]; then keycreate1; fi
     else
-      if [[ $(grep "${count}" /pg/var/.blitzbuild) = "" ]]; then keycreate2; fi; fi
+      if [[ $(grep "${count}" ${PGBLITZ_DIR}/var/.blitzbuild) = "" ]]; then keycreate2; fi; fi
   done
 done
 
@@ -129,11 +129,11 @@ done
 gdsabuild () {
 pgclonevars
 ####tempbuild is need in order to call the correct gdsa
-tee >> /pg/var/.keys <<-EOF
+tee >> ${PGBLITZ_DIR}/var/.keys <<-EOF
 [GDSA${tempbuild}]
 type = drive
 scope = drive
-service_account_file = /pg/var/.blitzkeys/GDSA${tempbuild}
+service_account_file = ${PGBLITZ_DIR}/var/.blitzkeys/GDSA${tempbuild}
 team_drive = ${sdid}
 
 EOF
@@ -142,7 +142,7 @@ if [[ "$transport" == "sc" || "$transport" == "sd" ]]; then
 encpassword=$(rclone obscure "${clonepassword}")
 encsalt=$(rclone obscure "${clonesalt}")
 
-tee >> /pg/var/.keys <<-EOF
+tee >> ${PGBLITZ_DIR}/var/.keys <<-EOF
 [GDSA${tempbuild}C]
 type = crypt
 remote = GDSA${tempbuild}:/encrypt
@@ -154,7 +154,7 @@ password2 = $encsalt
 EOF
 
 fi
-#echo "" /pg/var/.keys
+#echo "" ${PGBLITZ_DIR}/var/.keys
 }
 
 gdsaemail () {
@@ -167,9 +167,9 @@ emailgen
 
 deletekeys () {
 pgclonevars
-gcloud --account=${pgcloneemail} iam service-accounts list > /pg/var/.deletelistpart1
+gcloud --account=${pgcloneemail} iam service-accounts list > ${PGBLITZ_DIR}/var/.deletelistpart1
 
-  if [[ $(cat /pg/var/.deletelistpart1) == "" ]]; then
+  if [[ $(cat ${PGBLITZ_DIR}/var/.deletelistpart1) == "" ]]; then
 
 tee <<-EOF
 
@@ -185,15 +185,15 @@ EOF
 read -p '↘️  Acknowledge Info! | PRESS [ENTER] ' token < /dev/tty
 clonestart; fi
 
-  rm -rf /pg/var/.listpart2 1>/dev/null 2>&1
+  rm -rf ${PGBLITZ_DIR}/var/.listpart2 1>/dev/null 2>&1
   while read p; do
-  echo $p > /pg/var/.listpart1
-  writelist=$(grep pg-bumpnono-143619 /pg/var/.listpart1)
-  if [[ "$writelist" != "" ]]; then echo $writelist >> /pg/var/.listpart2; fi
-done </pg/var/.deletelistpart1
+  echo $p > ${PGBLITZ_DIR}/var/.listpart1
+  writelist=$(grep pg-bumpnono-143619 ${PGBLITZ_DIR}/var/.listpart1)
+  if [[ "$writelist" != "" ]]; then echo $writelist >> ${PGBLITZ_DIR}/var/.listpart2; fi
+done <${PGBLITZ_DIR}/var/.deletelistpart1
 
-cat /pg/var/.listpart2 |  awk '{print $2}' | \
-    sort | uniq > /pg/var/.gcloudblitz
+cat ${PGBLITZ_DIR}/var/.listpart2 |  awk '{print $2}' | \
+    sort | uniq > ${PGBLITZ_DIR}/var/.gcloudblitz
 
 tee <<-EOF
 
@@ -202,7 +202,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-cat /pg/var/.gcloudblitz
+cat ${PGBLITZ_DIR}/var/.gcloudblitz
 tee <<-EOF
 
 Delete All Keys for Project ~ ${pgcloneproject}?
@@ -230,11 +230,11 @@ esac
 }
 
 yesdeletekeys () {
-rm -rf /pg/var/.blitzkeys/* 1>/dev/null 2>&1
+rm -rf ${PGBLITZ_DIR}/var/.blitzkeys/* 1>/dev/null 2>&1
 echo ""
 while read p; do
 gcloud --account=${pgcloneemail} iam service-accounts delete $p --quiet
-done </pg/var/.gcloudblitz
+done <${PGBLITZ_DIR}/var/.gcloudblitz
 
 echo
 read -p '↘️  Process Complete! | PRESS [ENTER]: ' token < /dev/tty

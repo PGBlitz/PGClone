@@ -8,8 +8,8 @@
 blitzpasswordmain () {
 pgclonevars
 
-clonepassword57=$(cat /pg/rclone/pgclone.password)
-clonesalt57=$(cat /pg/rclone/pgclone.salt)
+clonepassword57=$(cat ${PGBLITZ_DIR}/rclone/pgclone.password)
+clonesalt57=$(cat ${PGBLITZ_DIR}/rclone/pgclone.salt)
 
 if [[ "$pstatus" != "NOT-SET" ]]; then
 tee <<-EOF
@@ -37,14 +37,14 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
-    rm -rf /pg/rclone/pgclone.password 1>/dev/null 2>&1
-    rm -rf /pg/rclone/pgclone.salt 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/pgclone.password 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/pgclone.salt 1>/dev/null 2>&1
 
-    rm -rf /pg/rclone/.gc 1>/dev/null 2>&1
-    rm -rf /pg/rclone/.gd 1>/dev/null 2>&1
-    rm -rf /pg/rclone/.sc 1>/dev/null 2>&1
-    rm -rf /pg/rclone/.sd 1>/dev/null 2>&1
-    rm -rf /pg/rclone/pgclone.teamdrive 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/.gc 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/.gd 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/.sc 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/.sd 1>/dev/null 2>&1
+    rm -rf ${PGBLITZ_DIR}/rclone/pgclone.teamdrive 1>/dev/null 2>&1
     ;;
 1 )
     clonestart ;;
@@ -118,8 +118,8 @@ read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "n" ]]; then blitzpasswordmain;
 elif [[ "$typed" == "y" ]]; then
-echo $primarypassword > /pg/rclone/pgclone.password
-echo $secondarypassword > /pg/rclone/pgclone.salt
+echo $primarypassword > ${PGBLITZ_DIR}/rclone/pgclone.password
+echo $secondarypassword > ${PGBLITZ_DIR}/rclone/pgclone.salt
 else blitzpasswordfinal; fi
 
 tee <<-EOF

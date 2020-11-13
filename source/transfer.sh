@@ -17,19 +17,19 @@ touch /pg/logs/transfer.log
 touch /pg/logs/.transfer_list
 touch /pg/logs/.temp_list
 
-basicpath="$(cat /pg/var/server.hd.path)"
-useragent="$(cat /pg/var/uagent)"
-bwg="$(cat /pg/var/move.bw)"
-bws="$(cat /pg/var/blitz.bw)"
+basicpath="$(cat ${PGBLITZ_DIR}/var/server.hd.path)"
+useragent="$(cat ${PGBLITZ_DIR}/var/uagent)"
+bwg="$(cat ${PGBLITZ_DIR}/var/move.bw)"
+bws="$(cat ${PGBLITZ_DIR}/var/blitz.bw)"
 
-var3=$(cat /pg/rclone/deployed.version)
+var3=$(cat ${PGBLITZ_DIR}/rclone/deployed.version)
 if [[ "$var3" == "gd" ]]; then var4="gdrive"
 elif [[ "$var3" == "gc" ]]; then var4="gdrive"
 elif [[ "$var3" == "sd" ]]; then var4="sdrive"
 elif [[ "$var3" == "sd" ]]; then var4="sdrive"; fi
 
 filecount=$(wc -l /pg/logs/.transfer_list | awk '{print $1}')
-echo "$filecount" > /pg/var/filecount
+echo "$filecount" > ${PGBLITZ_DIR}/var/filecount
 
 if [[ "$filecount" -gt 8 ]]; then
 echo "Max Files of [8] Files - Pending Transfer" >> /pg/logs/transfer.log
@@ -60,10 +60,10 @@ chmod 775 "$uploadfile"
 
 if [[ "$var4" == "gdrive" ]]; then
   echo "Started Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  udrive=$(cat /pg/rclone/deployed.version)
+  udrive=$(cat ${PGBLITZ_DIR}/rclone/deployed.version)
 
     rclone move "$uploadfile" "$udrive:/$truepath" \
-    --config /pg/rclone/blitz.conf \
+    --config ${PGBLITZ_DIR}/rclone/blitz.conf \
     --log-file=/pg/logs/transfer.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
     --tpslimit 6 \
@@ -76,13 +76,13 @@ if [[ "$var4" == "gdrive" ]]; then
     --exclude=".fuse_hidden**" --exclude="**.grab/**"
 else
   echo "Started Shared Upload - $var3: $uploadfile" >> /pg/logs/transfer.log
-  readykey=$(cat /pg/rclone/currentkey)
-  uread=$(cat /pg/rclone/deployed.version)
+  readykey=$(cat ${PGBLITZ_DIR}/rclone/currentkey)
+  uread=$(cat ${PGBLITZ_DIR}/rclone/deployed.version)
   encryptbit=""
   if [[ "$uread" == "sc" ]]; then encryptbit="C"; fi
 
     rclone move "$uploadfile" "${readykey}${encryptbit}:/$truepath" \
-    --config /pg/rclone/blitz.conf \
+    --config ${PGBLITZ_DIR}/rclone/blitz.conf \
     --log-file=/pg/logs/pgblitz.log \
     --log-level INFO --stats 5s --stats-file-name-length 0 \
     --tpslimit 12 \

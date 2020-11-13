@@ -17,17 +17,17 @@ rm -rf plexguide/deployed.version
 pgclonevars
 
 # to remove all service running prior to ensure a clean launch
-ansible-playbook /pg/pgclone/ymls/remove.yml
+ansible-playbook ${PGBLITZ_DIR}/ymls/remove.yml
 
 # builds multipath
 multihdreadonly
 
 # deploy union
-multihds=$(cat /pg/var/.tmp.multihd)
-ansible-playbook /pg/pgclone/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
+multihds=$(cat ${PGBLITZ_DIR}/var/.tmp.multihd)
+ansible-playbook ${PGBLITZ_DIR}/ymls/local.yml -e "multihds=$multihds hdpath=$hdpath"
 
 # stores deployed version
-echo "le" > /pg/rclone/deployed.version
+echo "le" > ${PGBLITZ_DIR}/rclone/deployed.version
 
 # display edition final
 tee <<-EOF
