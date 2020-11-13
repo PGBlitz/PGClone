@@ -7,7 +7,7 @@
 ################################################################################
 set_location () {
     
-    if [[ "${PGBLITZ:0:1}" == / ]]
+    if [[ "${PGBLITZ:0:1}" == / ]]; then
         mkdir -p $PGBLITZ_DIR
     elif [[ ! -z $PGBLITZ_DIR ]]; then
         export PGBLITZ_DIR=/${PGBLITZ_DIR}
