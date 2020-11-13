@@ -20,31 +20,31 @@ set_location () {
 
 set_location
 ################################################################################
-source ./functions/functions.sh
-source ./functions/variables.sh
-source ./functions/mountnumbers.sh
-source ./functions/keys.sh
-source ./functions/keyback.sh
-source ./functions/pgclone.sh
-source ./functions/gaccount.sh
-source ./functions/publicsecret.sh
-source ./functions/transportselect.sh
-source ./functions/projectname.sh
-source ./functions/clonestartoutput.sh
-source ./functions/oauth.sh
-source ./functions/passwords.sh
-source ./functions/oauthcheck.sh
-source ./functions/keysbuild.sh
-source ./functions/emails.sh
-source ./functions/deploy.sh
-source ./functions/rcloneinstall.sh
-source ./functions/deploytransfer.sh
-source ./functions/deploysdrive.sh
-source ./functions/multihd.sh
-source ./functions/deploylocal.sh
-source ./functions/createsdrive.sh
-source ./functions/cloneclean.sh
-source ./functions/uagent.sh
+source ${PGBLITZ_DIR}/functions/functions.sh
+source ${PGBLITZ_DIR}/functions/variables.sh
+source ${PGBLITZ_DIR}/functions/mountnumbers.sh
+source ${PGBLITZ_DIR}/functions/keys.sh
+source ${PGBLITZ_DIR}/functions/keyback.sh
+source ${PGBLITZ_DIR}/functions/pgclone.sh
+source ${PGBLITZ_DIR}/functions/gaccount.sh
+source ${PGBLITZ_DIR}/functions/publicsecret.sh
+source ${PGBLITZ_DIR}/functions/transportselect.sh
+source ${PGBLITZ_DIR}/functions/projectname.sh
+source ${PGBLITZ_DIR}/functions/clonestartoutput.sh
+source ${PGBLITZ_DIR}/functions/oauth.sh
+source ${PGBLITZ_DIR}/functions/passwords.sh
+source ${PGBLITZ_DIR}/functions/oauthcheck.sh
+source ${PGBLITZ_DIR}/functions/keysbuild.sh
+source ${PGBLITZ_DIR}/functions/emails.sh
+source ${PGBLITZ_DIR}/functions/deploy.sh
+source ${PGBLITZ_DIR}/functions/rcloneinstall.sh
+source ${PGBLITZ_DIR}/functions/deploytransfer.sh
+source ${PGBLITZ_DIR}/functions/deploysdrive.sh
+source ${PGBLITZ_DIR}/functions/multihd.sh
+source ${PGBLITZ_DIR}/functions/deploylocal.sh
+source ${PGBLITZ_DIR}/functions/createsdrive.sh
+source ${PGBLITZ_DIR}/functions/cloneclean.sh
+source ${PGBLITZ_DIR}/functions/uagent.sh
 ################################################################################
 
 # (folders.sh) Create folders if running in "standalone" mode
