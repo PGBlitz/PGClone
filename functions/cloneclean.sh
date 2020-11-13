@@ -31,5 +31,5 @@ EOF
 
   if [[ "$varinput" -lt "120" ]]; then cloneclean; fi
 
-  echo "$varinput" > ${PGBLITZ_DIR}/var/cloneclean
+  echo "$varinput" > /pg/var/cloneclean
 }

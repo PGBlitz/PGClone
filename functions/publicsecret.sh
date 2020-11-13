@@ -32,13 +32,13 @@ EOF
 read -p '↘️  Input Value | Press [Enter]: ' typed < /dev/tty
 case $typed in
 2 )
-    rm -rf ${PGBLITZ_DIR}/rclone/.gc 1>/dev/null 2>&1
-    rm -rf ${PGBLITZ_DIR}/rclone/.gd 1>/dev/null 2>&1
-    rm -rf ${PGBLITZ_DIR}/rclone/.sc 1>/dev/null 2>&1
-    rm -rf ${PGBLITZ_DIR}/rclone/.sd 1>/dev/null 2>&1
-    rm -rf ${PGBLITZ_DIR}/rclone/pgclone.teamdrive 1>/dev/null 2>&1
-    rm -rf ${PGBLITZ_DIR}/rclone/pgclone.public 1>/dev/null 2>&1
-    rm -rf ${PGBLITZ_DIR}/rclone/pgclone.secret 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.gc 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.gd 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.sc 1>/dev/null 2>&1
+    rm -rf /pg/rclone/.sd 1>/dev/null 2>&1
+    rm -rf /pg/rclone/pgclone.teamdrive 1>/dev/null 2>&1
+    rm -rf /pg/rclone/pgclone.public 1>/dev/null 2>&1
+    rm -rf /pg/rclone/pgclone.secret 1>/dev/null 2>&1
     ;;
 1 )
     clonestart ;;
@@ -109,12 +109,12 @@ read -p '↘️  Input Information | Press [Enter]: ' typed < /dev/tty
 
 case $typed in
 1 )
-    echo "$clientid" > ${PGBLITZ_DIR}/rclone/pgclone.public
-    echo "$secretid" > ${PGBLITZ_DIR}/rclone/pgclone.secret
+    echo "$clientid" > /pg/rclone/pgclone.public
+    echo "$secretid" > /pg/rclone/pgclone.secret
     echo
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     read -p '↘️  Information Stored | Press [Enter] ' secretid < /dev/tty
-    echo "SET" > ${PGBLITZ_DIR}/rclone/pgclone.id
+    echo "SET" > /pg/rclone/pgclone.id
     ;;
 2 )
     echo

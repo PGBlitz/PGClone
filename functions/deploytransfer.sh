@@ -11,18 +11,18 @@
 executetransport () {
 
 # Reset Front Display
-rm -rf  ${PGBLITZ_DIR}/rclone/deployed.version
+rm -rf  /pg/rclone/deployed.version
 
 # Call Variables
 pgclonevars
 
 # to remove all service running prior to ensure a clean launch
-ansible-playbook ${PGBLITZ_DIR}/ymls/remove.yml
+ansible-playbook /pg/pgclone/ymls/remove.yml
 
 ########################################################### GDRIVE START
-echo "gd" > ${PGBLITZ_DIR}/rclone/deployed.version
+echo "gd" > /pg/rclone/deployed.version
 type=gd
-ansible-playbook ${PGBLITZ_DIR}/ymls/mount.yml -e "\
+ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   bs=$bs
   dcs=$dcs
   dct=$dct
@@ -35,9 +35,9 @@ ansible-playbook ${PGBLITZ_DIR}/ymls/mount.yml -e "\
 ########################################################### SDRIVE END
 if [[ "$transport" == "gc" || "$transport" == "sc" || "$transport" == "sd" ]]; then
 type=sd
-echo "sd" > ${PGBLITZ_DIR}/rclone/deployed.version
+echo "sd" > /pg/rclone/deployed.version
 encryptbit=""
-ansible-playbook ${PGBLITZ_DIR}/ymls/mount.yml -e "\
+ansible-playbook /pg/pgclone/ymls/mount.yml -e "\
   bs=$bs
   dcs=$dcs
   dct=$dct
@@ -51,9 +51,9 @@ fi
 
 ########################################################### ENCRYTPION START
 if [[ "$transport" == "gc" || "$transport" == "sc" ]]; then
-echo "gc" > ${PGBLITZ_DIR}/rclone/deployed.version
+echo "gc" > /pg/rclone/deployed.version
 type=gc
-ansible-playbook ${PGBLITZ_DIR}/ymls/crypt.yml -e "\
+ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
   dcs=$dcs
   dct=$dct
@@ -64,10 +64,10 @@ ansible-playbook ${PGBLITZ_DIR}/ymls/crypt.yml -e "\
 fi
 
 if [[ "$transport" == "sc" ]]; then
-echo "sc" > ${PGBLITZ_DIR}/rclone/deployed.version
+echo "sc" > /pg/rclone/deployed.version
 type=sc
 encryptbit="C"
-ansible-playbook ${PGBLITZ_DIR}/ymls/crypt.yml -e "\
+ansible-playbook /pg/pgclone/ymls/crypt.yml -e "\
   bs=$bs
   dcs=$dcs
   dct=$dct
@@ -80,18 +80,18 @@ fi
 
 # builds the list
 if [[ "$transport" == "sd" || "$transport" == "sc" ]]; then
-  ls -la ${PGBLITZ_DIR}/var/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > ${PGBLITZ_DIR}/var/.blitzlist
-  rm -rf ${PGBLITZ_DIR}/var/.blitzfinal 1>/dev/null 2>&1
-  touch ${PGBLITZ_DIR}/var/.blitzbuild
+  ls -la /pg/var/.blitzkeys/ | awk '{print $9}' | tail -n +4 | sort | uniq > /pg/var/.blitzlist
+  rm -rf /pg/var/.blitzfinal 1>/dev/null 2>&1
+  touch /pg/var/.blitzbuild
   while read p; do
-    echo $p > ${PGBLITZ_DIR}/var/.blitztemp
-    blitzcheck=$(grep "GDSA" ${PGBLITZ_DIR}/var/.blitztemp)
-    if [[ "$blitzcheck" != "" ]]; then echo $p >> ${PGBLITZ_DIR}/var/.blitzfinal; fi
-  done <${PGBLITZ_DIR}/var/.blitzlist
+    echo $p > /pg/var/.blitztemp
+    blitzcheck=$(grep "GDSA" /pg/var/.blitztemp)
+    if [[ "$blitzcheck" != "" ]]; then echo $p >> /pg/var/.blitzfinal; fi
+  done </pg/var/.blitzlist
 fi
 
 # deploy union
-ansible-playbook ${PGBLITZ_DIR}/ymls/pgunity.yml -e "\
+ansible-playbook /pg/pgclone/ymls/pgunity.yml -e "\
   transport=$transport
   encryptbit=$encryptbit
   multihds=$multihds

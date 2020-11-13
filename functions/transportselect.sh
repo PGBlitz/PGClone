@@ -26,15 +26,15 @@ read -rp '↘️  Input Selection | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-    echo "gd" > ${PGBLITZ_DIR}/rclone/pgclone.transport ;;
+    echo "gd" > /pg/rclone/pgclone.transport ;;
     2 )
-    echo "gc" > ${PGBLITZ_DIR}/rclone/pgclone.transport ;;
+    echo "gc" > /pg/rclone/pgclone.transport ;;
     3 )
-    echo "sd" > ${PGBLITZ_DIR}/rclone/pgclone.transport ;;
+    echo "sd" > /pg/rclone/pgclone.transport ;;
     4 )
-    echo "sc" > ${PGBLITZ_DIR}/rclone/pgclone.transport ;;
+    echo "sc" > /pg/rclone/pgclone.transport ;;
     5 )
-    echo "le" > ${PGBLITZ_DIR}/rclone/pgclone.transport ;;
+    echo "le" > /pg/rclone/pgclone.transport ;;
     * )
         transportselect ;;
 esac

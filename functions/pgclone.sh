@@ -17,7 +17,7 @@ tee <<-EOF
 
 EOF
   read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > ${PGBLITZ_DIR}/var/move.bw && question1;
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /pg/var/move.bw && question1;
   else badinput && bandwidth; fi
 }
 
@@ -33,12 +33,12 @@ tee <<-EOF
 
 EOF
   read -p '↘️  Type a Speed from 1 - 1000 | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > ${PGBLITZ_DIR}/var/blitz.bw && question1;
+  if [[ "$typed" -ge "1" && "$typed" -le "1000" ]]; then echo "$typed" > /pg/var/blitz.bw && question1;
   else badinput && bandwidth; fi
 }
 
 statusmount () {
-  mcheck5=$(cat ${PGBLITZ_DIR}/rclone/blitz.conf | grep "$type")
+  mcheck5=$(cat /pg/rclone/blitz.conf | grep "$type")
   if [ "$mcheck5" != "" ]; then
 tee <<-EOF
 
@@ -58,14 +58,14 @@ elif [[ "$typed" == "N" || "$typed" == "n" ]]; then mountsmenu
     statusmount
   fi
 
-  rclone config delete $type --config ${PGBLITZ_DIR}/rclone/blitz.conf
+  rclone config delete $type --config /pg/rclone/blitz.conf
 
-  encheck=$(cat ${PGBLITZ_DIR}/rclone/pgclone.transport)
+  encheck=$(cat /pg/rclone/pgclone.transport)
   if [[ "$encheck" == "sc" || "$encheck" == "gc" ]]; then
     if [ "$type" == "gc" ]; then
-    rclone config delete gcrypt --config ${PGBLITZ_DIR}/rclone/blitz.conf; fi
+    rclone config delete gcrypt --config /pg/rclone/blitz.conf; fi
     if [ "$type" == "sd" ]; then
-    rclone config delete scrypt --config ${PGBLITZ_DIR}/rclone/blitz.conf; fi
+    rclone config delete scrypt --config /pg/rclone/blitz.conf; fi
   fi
 
 tee <<-EOF
@@ -81,8 +81,8 @@ fi
 
 tmgen() {
 
-secret=$(cat ${PGBLITZ_DIR}/rclone/pgclone.secret)
-public=$(cat ${PGBLITZ_DIR}/rclone/pgclone.public)
+secret=$(cat /pg/rclone/pgclone.secret)
+public=$(cat /pg/rclone/pgclone.public)
 
 tee <<-EOF
 
@@ -97,16 +97,16 @@ https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:iet
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
   if [ "$token" = "exit" ]; then mountsmenu; fi
-  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > ${PGBLITZ_DIR}/var/pgtokentm.output
-  cat ${PGBLITZ_DIR}/var/pgtokentm.output | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > ${PGBLITZ_DIR}/var/pgtokentm2.output
-  primet=$(cat ${PGBLITZ_DIR}/var/pgtokentm2.output)
-  curl -H "GData-Version: 3.0" -H "Authorization: Bearer $primet" https://www.googleapis.com/drive/v3/teamdrives > ${PGBLITZ_DIR}/rclone/teamdrive.output
+  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /pg/var/pgtokentm.output
+  cat /pg/var/pgtokentm.output | grep access_token | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /pg/var/pgtokentm2.output
+  primet=$(cat /pg/var/pgtokentm2.output)
+  curl -H "GData-Version: 3.0" -H "Authorization: Bearer $primet" https://www.googleapis.com/drive/v3/teamdrives > /pg/rclone/teamdrive.output
   tokenscript
 
-  name=$(sed -n ${typed}p ${PGBLITZ_DIR}/rclone/teamdrive.name)
-  id=$(sed -n ${typed}p ${PGBLITZ_DIR}/rclone/teamdrive.id)
-echo "$name" > ${PGBLITZ_DIR}/rclone/pgclone.teamdrive
-echo "$id" > ${PGBLITZ_DIR}/rclone/pgclone.teamid
+  name=$(sed -n ${typed}p /pg/rclone/teamdrive.name)
+  id=$(sed -n ${typed}p /pg/rclone/teamdrive.id)
+echo "$name" > /pg/rclone/pgclone.teamdrive
+echo "$id" > /pg/rclone/pgclone.teamid
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -118,8 +118,8 @@ EOF
 }
 
 tokenscript () {
-  cat ${PGBLITZ_DIR}/rclone/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > ${PGBLITZ_DIR}/rclone/teamdrive.id
-  cat ${PGBLITZ_DIR}/rclone/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev > ${PGBLITZ_DIR}/rclone/teamdrive.name
+  cat /pg/rclone/teamdrive.output | grep "id" | awk '{ print $2 }' | cut -c2- | rev | cut -c3- | rev > /pg/rclone/teamdrive.id
+  cat /pg/rclone/teamdrive.output | grep "name" | awk '{ print $2 }' | cut -c2- | rev | cut -c2- | rev > /pg/rclone/teamdrive.name
 
 tee <<-EOF
 
@@ -131,9 +131,9 @@ EOF
   A=0
   while read p; do
   ((A++))
-  name=$(sed -n ${A}p ${PGBLITZ_DIR}/rclone/teamdrive.name)
+  name=$(sed -n ${A}p /pg/rclone/teamdrive.name)
   echo "[$A] $p - $name"
-done <${PGBLITZ_DIR}/rclone/teamdrive.id
+done </pg/rclone/teamdrive.id
 
 echo ""
 read -p '↘️  Type Number | PRESS [ENTER]: ' typed < /dev/tty
@@ -190,10 +190,10 @@ https://accounts.google.com/o/oauth2/auth?client_id=$public&redirect_uri=urn:iet
 EOF
   read -p '↘️  Token | PRESS [ENTER]: ' token < /dev/tty
   if [ "$token" = "exit" ]; then mountsmenu; fi
-  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > ${PGBLITZ_DIR}/rclone/pgclone.info
+  curl --request POST --data "code=$token&client_id=$public&client_secret=$secret&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code" https://accounts.google.com/o/oauth2/token > /pg/rclone/pgclone.info
 
-  accesstoken=$(cat ${PGBLITZ_DIR}/rclone/pgclone.info | grep access_token | awk '{print $2}')
-  refreshtoken=$(cat ${PGBLITZ_DIR}/rclone/pgclone.info | grep refresh_token | awk '{print $2}')
+  accesstoken=$(cat /pg/rclone/pgclone.info | grep access_token | awk '{print $2}')
+  refreshtoken=$(cat /pg/rclone/pgclone.info | grep refresh_token | awk '{print $2}')
   rcdate=$(date +'%Y-%m-%d')
   rctime=$(date +"%H:%M:%S" --date="$givenDate 60 minutes")
   rczone=$(date +"%:z")
@@ -205,22 +205,22 @@ EOF
 mountsmenu () {
 
 # Sets Display Status if Passwords are not set for the encryhpted edition
-check5=$(cat ${PGBLITZ_DIR}/rclone/pgclone.password)
-check6=$(cat ${PGBLITZ_DIR}/rclone/pgclone.salt)
+check5=$(cat /pg/rclone/pgclone.password)
+check6=$(cat /pg/rclone/pgclone.salt)
 if [[ "$check5" == "" || "$check6" == "" ]]; then passdisplay="⚠️  Not Activated"
 else passdisplay="✅ Activated"; fi
 
-projectid=$(cat ${PGBLITZ_DIR}/rclone/pgclone.project)
-secret=$(cat ${PGBLITZ_DIR}/rclone/pgclone.secret)
-public=$(cat ${PGBLITZ_DIR}/rclone/pgclone.public)
-teamdrive=$(cat ${PGBLITZ_DIR}/rclone/pgclone.teamdrive)
+projectid=$(cat /pg/rclone/pgclone.project)
+secret=$(cat /pg/rclone/pgclone.secret)
+public=$(cat /pg/rclone/pgclone.public)
+teamdrive=$(cat /pg/rclone/pgclone.teamdrive)
 
 if [ "$secret" == "" ]; then dsecret="NOT SET"; else dsecret="SET"; fi
 if [ "$public" == "" ]; then dpublic="NOT SET"; else dpublic="SET"; fi
 if [ "$teamdrive" == "" ]; then dteamdrive="NOT SET"; else dteamdrive=$teamdrive; fi
 
-gdstatus=$(cat ${PGBLITZ_DIR}/var/gd.pgclone)
-sdstatus=$(cat ${PGBLITZ_DIR}/var/sd.pgclone)
+gdstatus=$(cat /pg/var/gd.pgclone)
+sdstatus=$(cat /pg/var/sd.pgclone)
 
 ###### START
 if [ "$transport" == "PG Move /w No Encryption" ]; then
@@ -345,7 +345,7 @@ elif [ "$typed" == "4" ]; then
   inputphase
   mountsmenu
 elif [ "$typed" == "5" ]; then
-  tmcheck=$(cat ${PGBLITZ_DIR}/rclone/pgclone.teamdrive)
+  tmcheck=$(cat /pg/rclone/pgclone.teamdrive)
   if [ "$tmcheck" == "" ]; then
 tee <<-EOF
 
@@ -412,7 +412,7 @@ elif [ "$typed" == "5" ]; then
   mountsmenu
 elif [ "$typed" == "6" ]; then
   encpasswdcheck
-  tmcheck=$(cat ${PGBLITZ_DIR}/rclone/pgclone.teamdrive)
+  tmcheck=$(cat /pg/rclone/pgclone.teamdrive)
   if [ "$tmcheck" == "" ]; then
 tee <<-EOF
 
@@ -436,8 +436,8 @@ fi
 }
 
 encpasswdcheck () {
-check5=$(cat ${PGBLITZ_DIR}/rclone/pgclone.password)
-check6=$(cat ${PGBLITZ_DIR}/rclone/pgclone.salt)
+check5=$(cat /pg/rclone/pgclone.password)
+check6=$(cat /pg/rclone/pgclone.salt)
 
 if [[ "$check5" == "" || "$check6" == "" ]]; then
 tee <<-EOF
@@ -518,8 +518,8 @@ read -p '↘️  Type y or n | Press [ENTER]: ' typed < /dev/tty
 
 if [ "$typed" == "n" ]; then mountsmenu;
 elif [ "$typed" == "y" ]; then
-echo $bpassword > ${PGBLITZ_DIR}/rclone/pgclone.password
-echo $bsalt > ${PGBLITZ_DIR}/rclone/pgclone.salt
+echo $bpassword > /pg/rclone/pgclone.password
+echo $bsalt > /pg/rclone/pgclone.salt
 mountsmenu;
 else
   badinput
@@ -539,7 +539,7 @@ EOF
 
 read -p '↘️  Client ID  | Press [Enter]: ' public < /dev/tty
 if [ "$public" = "exit" ]; then mountsmenu; fi
-echo "$public" > ${PGBLITZ_DIR}/rclone/pgclone.public
+echo "$public" > /pg/rclone/pgclone.public
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -563,7 +563,7 @@ NOTE: Visit reference for Google OAuth Keys!
 EOF
 read -p '↘️  Secret Key  | Press [Enter]: ' secret < /dev/tty
 if [ "$secret" = "exit" ]; then mountsmenu; fi
-echo "$secret" > ${PGBLITZ_DIR}/rclone/pgclone.secret
+echo "$secret" > /pg/rclone/pgclone.secret
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -577,7 +577,7 @@ mountsmenu
 }
 
 projectmenu () {
-projectid=$(cat ${PGBLITZ_DIR}/rclone/pgclone.project)
+projectid=$(cat /pg/rclone/pgclone.project)
 
 tee <<-EOF
 
@@ -605,8 +605,8 @@ else badinput
 
 projectestablish () {
 
-  gcloud projects list > ${PGBLITZ_DIR}/var/projects.list
-  projectcheck=(cat ${PGBLITZ_DIR}/var/projects.list)
+  gcloud projects list > /pg/var/projects.list
+  projectcheck=(cat /pg/var/projects.list)
   if [ "$projectcheck" == "" ]; then
 tee <<-EOF
 
@@ -628,8 +628,8 @@ tee <<-EOF
 Project ID: $projectid
 
 EOF
-  cat ${PGBLITZ_DIR}/var/projects.list | cut -d' ' -f1 | tail -n +2
-  cat ${PGBLITZ_DIR}/var/projects.list | cut -d' ' -f1 | tail -n +2 > ${PGBLITZ_DIR}/var/project.cut
+  cat /pg/var/projects.list | cut -d' ' -f1 | tail -n +2
+  cat /pg/var/projects.list | cut -d' ' -f1 | tail -n +2 > /pg/var/project.cut
   echo
   changeproject
   echo
@@ -650,14 +650,14 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  echo $typed > ${PGBLITZ_DIR}/rclone/pgclone.project
+  echo $typed > /pg/rclone/pgclone.project
   read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
   projectmenu
 
 }
 
 transportdisplay () {
-temp=$(cat ${PGBLITZ_DIR}/rclone/pgclone.transport)
+temp=$(cat /pg/rclone/pgclone.transport)
   if [ "$temp" == "gd" ]; then transport="GDrive Unencrypted"
 elif [ "$temp" == "gc" ]; then transport="GDrive Encrypted"
 elif [ "$temp" == "sd" ]; then transport="SDrive Unencrypted"
@@ -683,15 +683,15 @@ tee <<-EOF
 EOF
 read -p '↘️  Set Choice | Press [ENTER]: ' typed < /dev/tty
 
-  if [ "$typed" == "1" ]; then echo "gd" > ${PGBLITZ_DIR}/rclone/pgclone.transport && echo;
-elif [ "$typed" == "2" ]; then echo "gc" > ${PGBLITZ_DIR}/rclone/pgclone.transport && echo;
-elif [ "$typed" == "3" ]; then echo "sd" > ${PGBLITZ_DIR}/rclone/pgclone.transport && echo;
-elif [ "$typed" == "4" ]; then echo "sc" > ${PGBLITZ_DIR}/rclone/pgclone.transport && echo;
-elif [ "$typed" == "5" ]; then echo "solohd" > ${PGBLITZ_DIR}/rclone/pgclone.transport && echo;
+  if [ "$typed" == "1" ]; then echo "gd" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "2" ]; then echo "gc" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "3" ]; then echo "sd" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "4" ]; then echo "sc" > /pg/rclone/pgclone.transport && echo;
+elif [ "$typed" == "5" ]; then echo "solohd" > /pg/rclone/pgclone.transport && echo;
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
 
 # If a New Installer, User Cannot Exit & Must Select a Version
-transport=$(cat ${PGBLITZ_DIR}/rclone/pgclone.transport)
+transport=$(cat /pg/rclone/pgclone.transport)
 if [ "$transport" == "NOT-SET" ]; then
 transportmode; fi
 
@@ -717,12 +717,12 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  cat ${PGBLITZ_DIR}/var/projects.list | cut -d' ' -f1 | tail -n +2
-  cat ${PGBLITZ_DIR}/var/projects.list | cut -d' ' -f1 | tail -n +2 > ${PGBLITZ_DIR}/var/project.cut
+  cat /pg/var/projects.list | cut -d' ' -f1 | tail -n +2
+  cat /pg/var/projects.list | cut -d' ' -f1 | tail -n +2 > /pg/var/project.cut
   echo ""
   read -p '↘️  Type Project Name | Press [ENTER]: ' typed < /dev/tty
   echo ""
-  list=$(cat ${PGBLITZ_DIR}/var/project.cut | grep $typed)
+  list=$(cat /pg/var/project.cut | grep $typed)
 
   if [ "$typed" != "$list" ]; then
 tee <<-EOF
@@ -737,37 +737,37 @@ EOF
 }
 
 testphase () {
-  echo "" > ${PGBLITZ_DIR}/rclone/test.conf
-  echo "[$type]" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "client_id = $public" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "client_secret = $secret" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "type = drive" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "" >> ${PGBLITZ_DIR}/rclone/test.conf
+  echo "" > /pg/rclone/test.conf
+  echo "[$type]" >> /pg/rclone/test.conf
+  echo "client_id = $public" >> /pg/rclone/test.conf
+  echo "client_secret = $secret" >> /pg/rclone/test.conf
+  echo "type = drive" >> /pg/rclone/test.conf
+  echo -n "token = {\"access_token\":${accesstoken}\"token_type\":\"Bearer\",\"refresh_token\":${refreshtoken}\"expiry\":\"${final}\"}" >> /pg/rclone/test.conf
+  echo "" >> /pg/rclone/test.conf
   if [ "$type" == "sd" ]; then
-  teamid=$(cat ${PGBLITZ_DIR}/rclone/pgclone.teamid)
-  echo "team_drive = $teamid" >> ${PGBLITZ_DIR}/rclone/test.conf; fi
+  teamid=$(cat /pg/rclone/pgclone.teamid)
+  echo "team_drive = $teamid" >> /pg/rclone/test.conf; fi
   echo ""
 
 ## Adds Encryption to the Test Phase if Move or Blitz Encrypted is On
-encheck=$(cat ${PGBLITZ_DIR}/rclone/pgclone.transport)
+encheck=$(cat /pg/rclone/pgclone.transport)
 if [[ "$encheck" == "sc" || "$encheck" == "gc" ]]; then
 
   if [ "$type" == "gdrive" ]; then entype="gcrypt";
   else entype="scrypt"; fi
 
-  PASSWORD=`cat ${PGBLITZ_DIR}/rclone/pgclone.password`
-  SALT=`cat ${PGBLITZ_DIR}/rclone/pgclone.salt`
+  PASSWORD=`cat /pg/rclone/pgclone.password`
+  SALT=`cat /pg/rclone/pgclone.salt`
   ENC_PASSWORD=`rclone obscure "$PASSWORD"`
   ENC_SALT=`rclone obscure "$SALT"`
-  echo "" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "[$entype]" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "type = crypt" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "remote = $type:/encrypt" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "filename_encryption = standard" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "directory_name_encryption = true" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "password = $ENC_PASSWORD" >> ${PGBLITZ_DIR}/rclone/test.conf
-  echo "password2 = $ENC_SALT" >> ${PGBLITZ_DIR}/rclone/test.conf;
+  echo "" >> /pg/rclone/test.conf
+  echo "[$entype]" >> /pg/rclone/test.conf
+  echo "type = crypt" >> /pg/rclone/test.conf
+  echo "remote = $type:/encrypt" >> /pg/rclone/test.conf
+  echo "filename_encryption = standard" >> /pg/rclone/test.conf
+  echo "directory_name_encryption = true" >> /pg/rclone/test.conf
+  echo "password = $ENC_PASSWORD" >> /pg/rclone/test.conf
+  echo "password2 = $ENC_SALT" >> /pg/rclone/test.conf;
 
 fi
 testphase2
@@ -788,7 +788,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/test.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/test.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -796,7 +796,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/test.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/test.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -814,7 +814,7 @@ FOR ENCRYPTION (IF SELECTED)
 1. Did You Set a Password?
 
 EOF
-    echo "⚠️  Not Activated" > ${PGBLITZ_DIR}/var/$type.pgclone
+    echo "⚠️  Not Activated" > /pg/var/$type.pgclone
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
     question1
 else
@@ -828,10 +828,10 @@ EOF
 fi
 
 read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
-echo "✅ Activated" > ${PGBLITZ_DIR}/var/$type.pgclone
+echo "✅ Activated" > /pg/var/$type.pgclone
 
 ## Copy the Test File to the Real RClone Conf
-cat ${PGBLITZ_DIR}/rclone/test.conf >> ${PGBLITZ_DIR}/rclone/blitz.conf
+cat /pg/rclone/test.conf >> /pg/rclone/blitz.conf
 
 ## Back to the Main Mount Menu
 mountsmenu
@@ -840,9 +840,9 @@ EOF
 }
 
 deploychecks () {
-secret=$(cat ${PGBLITZ_DIR}/rclone/pgclone.secret)
-public=$(cat ${PGBLITZ_DIR}/rclone/pgclone.public)
-teamdrive=$(cat ${PGBLITZ_DIR}/rclone/pgclone.teamdrive)
+secret=$(cat /pg/rclone/pgclone.secret)
+public=$(cat /pg/rclone/pgclone.public)
+teamdrive=$(cat /pg/rclone/pgclone.teamdrive)
 
 if [ "$secret" == "" ]; then
 tee <<-EOF

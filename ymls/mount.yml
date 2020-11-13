@@ -16,12 +16,12 @@
         - "/pg/{{drive}}"
 
     - name: Register Agent
-      shell: 'cat ${PGBLITZ_DIR}/var/uagent'
+      shell: 'cat /pg/var/uagent'
       register: uagent
 
     - name: "Install - Service {{drive}}"
       template:
-        src: "${PGBLITZ_DIR}/mounts/drive.service"
+        src: "/pg/pgclone/mounts/drive.service"
         dest: "/etc/systemd/system/{{drive}}.service"
         force: yes
       ignore_errors: yes

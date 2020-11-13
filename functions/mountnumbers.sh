@@ -31,6 +31,6 @@ EOF
 
     read -rp '↘️  PRESS [ENTER] to CONTINUE! ' fluffycat < /dev/tty
 
-nano ${PGBLITZ_DIR}/rclone/pgclone.json
+nano /pg/rclone/pgclone.json
 
 }

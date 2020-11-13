@@ -9,7 +9,7 @@
 ### NOTE TO DELETE KEYS THAT EXIST WHEN BACKING UP
 keybackup () {
 
-serverid=$(cat ${PGBLITZ_DIR}/var/pg.serverid)
+serverid=$(cat /pg/var/pg.serverid)
 
 tee <<-EOF
 
@@ -20,9 +20,9 @@ tee <<-EOF
 NOTE: Standby, takes a minute!
 
 EOF
-rclone purge --config ${PGBLITZ_DIR}/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid
-rclone copy --config ${PGBLITZ_DIR}/rclone/blitz.conf ${PGBLITZ_DIR}/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid/conf -v --checksum --drive-chunk-size=64M
-rclone copy --config ${PGBLITZ_DIR}/rclone/blitz.conf ${PGBLITZ_DIR}/var/keys/processed/ gd:/plexguide/backup/keys/$serverid/keys -v --checksum --drive-chunk-size=64M
+rclone purge --config /pg/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid
+rclone copy --config /pg/rclone/blitz.conf /pg/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid/conf -v --checksum --drive-chunk-size=64M
+rclone copy --config /pg/rclone/blitz.conf /pg/var/keys/processed/ gd:/plexguide/backup/keys/$serverid/keys -v --checksum --drive-chunk-size=64M
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -40,7 +40,7 @@ tee <<-EOF
 🚀 Standby! Conducting Key Restore Check!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf gd:/plexguide/backup/keys/ | awk '{ print $5 }' > /tmp/service.keys
+rclone lsd --config /pg/rclone/blitz.conf gd:/plexguide/backup/keys/ | awk '{ print $5 }' > /tmp/service.keys
 checkcheck=$(cat /tmp/service.keys)
 
 if [ "$checkcheck" == "" ];then
@@ -83,7 +83,7 @@ EOF
 keyrestore; fi
 
 serverid="$typed"
-mkdir -p ${PGBLITZ_DIR}/var/processed
+mkdir -p /pg/var/processed
 
 tee <<-EOF
 
@@ -92,8 +92,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-rclone copy --config ${PGBLITZ_DIR}/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid/conf ${PGBLITZ_DIR}/var/  -v --checksum --drive-chunk-size=64M
-rclone copy --config ${PGBLITZ_DIR}/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid/keys ${PGBLITZ_DIR}/var/keys/processed/  -v --checksum --drive-chunk-size=64M
+rclone copy --config /pg/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid/conf /pg/var/  -v --checksum --drive-chunk-size=64M
+rclone copy --config /pg/rclone/blitz.conf gd:/plexguide/backup/keys/$serverid/keys /pg/var/keys/processed/  -v --checksum --drive-chunk-size=64M
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

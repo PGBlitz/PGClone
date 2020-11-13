@@ -5,8 +5,8 @@
 # GNU:        General Public License v3.0
 ################################################################################
 defaultvars () {
-  touch ${PGBLITZ_DIR}/var/rclone.gdrive
-  touch ${PGBLITZ_DIR}/var/rclone.gcrypt
+  touch /pg/var/rclone.gdrive
+  touch /pg/var/rclone.gcrypt
 }
 
 # FOR START DEPLOYMENT END #####################################################
@@ -27,7 +27,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35,7 +35,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -78,7 +78,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -86,7 +86,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -127,7 +127,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -135,7 +135,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -176,7 +176,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -184,7 +184,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -226,7 +226,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf $type:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf $type:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -234,7 +234,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf $type: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -249,7 +249,7 @@ TIPS:
 3. Did you enable your API?
 
 EOF
-    echo "Not Active" > ${PGBLITZ_DIR}/var/gd.pgclone
+    echo "Not Active" > /pg/var/gd.pgclone
     read -p '↘️  Acknowledge Info | Press [ENTER] ' typed2 < /dev/tty
     question1
 else
@@ -265,7 +265,7 @@ EOF
 }
 
 deletekeys2 () {
-choicedel=$(cat ${PGBLITZ_DIR}/var/gdsa.cut)
+choicedel=$(cat /pg/var/gdsa.cut)
 if [ "$choicedel" != "" ]; then
   echo ""
   echo "Deleting All Previous Service Accounts & Keys!"
@@ -273,9 +273,9 @@ if [ "$choicedel" != "" ]; then
 
   while read p; do
   gcloud iam service-accounts delete $p --quiet
-  done <${PGBLITZ_DIR}/var/gdsa.cut
+  done </pg/var/gdsa.cut
 
-rm -rf ${PGBLITZ_DIR}/var/keys/processed/* 1>/dev/null 2>&1
+rm -rf /pg/var/keys/processed/* 1>/dev/null 2>&1
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -304,9 +304,9 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-gcloud iam service-accounts list --filter="GDSA" > ${PGBLITZ_DIR}/var/gdsa.list
-cat ${PGBLITZ_DIR}/var/gdsa.list | awk '{print $2}' | tail -n +2 > ${PGBLITZ_DIR}/var/gdsa.cut
-cat ${PGBLITZ_DIR}/var/gdsa.cut
+gcloud iam service-accounts list --filter="GDSA" > /pg/var/gdsa.list
+cat /pg/var/gdsa.list | awk '{print $2}' | tail -n +2 > /pg/var/gdsa.cut
+cat /pg/var/gdsa.cut
 tee <<-EOF
 
 Items listed are all service accounts that have been created! Proceeding
@@ -326,20 +326,20 @@ fi
 gdsabuild () {
 
   ## what sets if encrypted is on or not
-  encheck=$(cat ${PGBLITZ_DIR}/rclone/pgclone.transport)
+  encheck=$(cat /pg/rclone/pgclone.transport)
   bencrypted=no
   if [ "$encheck" == "sc" ]; then bencrypted=yes; fi
 
-  downloadpath=$(cat ${PGBLITZ_DIR}/var/server.hd.path)
-  tempbuild=$(cat ${PGBLITZ_DIR}/var/json.tempbuild)
-  path=${PGBLITZ_DIR}/var/keys
-  rpath=${PGBLITZ_DIR}/rclone/blitz.conf
-  sdrive=$( cat ${PGBLITZ_DIR}/rclone/blitz.conf | grep team_drive | head -n1 )
+  downloadpath=$(cat /pg/var/server.hd.path)
+  tempbuild=$(cat /pg/var/json.tempbuild)
+  path=/pg/var/keys
+  rpath=/pg/rclone/blitz.conf
+  sdrive=$( cat /pg/rclone/blitz.conf | grep team_drive | head -n1 )
   sdrive="${sd:13}"
 
   if [ "$bencrypted" == "yes" ]; then
-  PASSWORD=$(cat ${PGBLITZ_DIR}/rclone/pgclone.password)
-  SALT=$(cat ${PGBLITZ_DIR}/rclone/pgclone.salt)
+  PASSWORD=$(cat /pg/rclone/pgclone.password)
+  SALT=$(cat /pg/rclone/pgclone.salt)
   ENC_PASSWORD=`rclone obscure "$PASSWORD"`
   ENC_SALT=`rclone obscure "$SALT"`; fi
 
@@ -352,7 +352,7 @@ gdsabuild () {
   echo "client_secret =" >> $rpath
   echo "scope = drive" >> $rpath
   echo "root_folder_id =" >> $rpath
-  echo "service_account_file = ${PGBLITZ_DIR}/var/keys/processed/$tempbuild" >> $rpath
+  echo "service_account_file = /pg/var/keys/processed/$tempbuild" >> $rpath
   echo "team_drive = $sdrive" >> $rpath
 
   if [ "$bencrypted" == "yes" ]; then
@@ -402,28 +402,28 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
 
   num=$keys
   count=0
-  project=$(cat ${PGBLITZ_DIR}/rclone/pgclone.project)
+  project=$(cat /pg/rclone/pgclone.project)
 
   ##wipe previous keys stuck there
-  mkdir -p ${PGBLITZ_DIR}/var/keys/processed/
-  rm -rf ${PGBLITZ_DIR}/var/keys/processed/* 1>/dev/null 2>&1
+  mkdir -p /pg/var/keys/processed/
+  rm -rf /pg/var/keys/processed/* 1>/dev/null 2>&1
 
   ## purpose of the rewrite is to save gdrive and sdrive info and toss old GDSAs
-      cat ${PGBLITZ_DIR}/rclone/blitz.conf | grep -w "\[sdrive\]" -A 5 > ${PGBLITZ_DIR}/var/sdrive.info
-      cat ${PGBLITZ_DIR}/rclone/blitz.conf | grep -w "\[gdrive\]" -A 4 > ${PGBLITZ_DIR}/var/gdrive.info
-      cat ${PGBLITZ_DIR}/rclone/blitz.conf | grep -w "\[scrypt\]" -A 6 > ${PGBLITZ_DIR}/var/scrypt.info
-      cat ${PGBLITZ_DIR}/rclone/blitz.conf | grep -w "\[gcrypt\]" -A 6 > ${PGBLITZ_DIR}/var/gcrypt.info
+      cat /pg/rclone/blitz.conf | grep -w "\[sdrive\]" -A 5 > /pg/var/sdrive.info
+      cat /pg/rclone/blitz.conf | grep -w "\[gdrive\]" -A 4 > /pg/var/gdrive.info
+      cat /pg/rclone/blitz.conf | grep -w "\[scrypt\]" -A 6 > /pg/var/scrypt.info
+      cat /pg/rclone/blitz.conf | grep -w "\[gcrypt\]" -A 6 > /pg/var/gcrypt.info
 
-      echo "#### rclone rewrite generated by pgblitz.com" > ${PGBLITZ_DIR}/rclone/blitz.conf
-      echo "" >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      echo "" >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      cat ${PGBLITZ_DIR}/var/gdrive.info >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      echo "" >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      cat ${PGBLITZ_DIR}/var/sdrive.info >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      echo "" >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      cat ${PGBLITZ_DIR}/var/scrypt.info >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      echo "" >> ${PGBLITZ_DIR}/rclone/blitz.conf
-      cat ${PGBLITZ_DIR}/var/gcrypt.info >> ${PGBLITZ_DIR}/rclone/blitz.conf
+      echo "#### rclone rewrite generated by pgblitz.com" > /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/gdrive.info >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/sdrive.info >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/scrypt.info >> /pg/rclone/blitz.conf
+      echo "" >> /pg/rclone/blitz.conf
+      cat /pg/var/gcrypt.info >> /pg/rclone/blitz.conf
 
     while [ "$count" != "$keys" ]; do
     ((count++))
@@ -431,20 +431,20 @@ elif [ "$typed" == "6" ]; then echo "Creating 20 Keys - Daily Upload Limit Set t
 
     if [ "$count" -ge 1 -a "$count" -le 9 ]; then
       gcloud iam service-accounts create gdsa$rand --display-name “gdsa0$count”
-      gcloud iam service-accounts keys create ${PGBLITZ_DIR}/var/keys/processed/gdsa0$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
-      echo "gdsa0$count" > ${PGBLITZ_DIR}/var/json.tempbuild
+      gcloud iam service-accounts keys create /pg/var/keys/processed/gdsa0$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
+      echo "gdsa0$count" > /pg/var/json.tempbuild
       gdsabuild
       echo ""
     else
       gcloud iam service-accounts create gdsa$rand --display-name “gdsa$count”
-      gcloud iam service-accounts keys create ${PGBLITZ_DIR}/var/keys/processed/gdsa$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
-      echo "gdsa$count" > ${PGBLITZ_DIR}/var/json.tempbuild
+      gcloud iam service-accounts keys create /pg/var/keys/processed/gdsa$count --iam-account gdsa$rand@$project.iam.gserviceaccount.com --key-file-type="json"
+      echo "gdsa$count" > /pg/var/json.tempbuild
       gdsabuild
       echo ""
     fi
     done
 
-  echo "no" > ${PGBLITZ_DIR}/var/project.deployed
+  echo "no" > /pg/var/project.deployed
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -462,15 +462,15 @@ deploykeys3
 }
 
 deploykeys () {
-  gcloud iam service-accounts list --filter="GDSA" > ${PGBLITZ_DIR}/var/gdsa.list
-  cat ${PGBLITZ_DIR}/var/gdsa.list | awk '{print $2}' | tail -n +2 > ${PGBLITZ_DIR}/var/gdsa.cut
+  gcloud iam service-accounts list --filter="GDSA" > /pg/var/gdsa.list
+  cat /pg/var/gdsa.list | awk '{print $2}' | tail -n +2 > /pg/var/gdsa.cut
 deploykeys2
 }
 
 projectid () {
-gcloud projects list > ${PGBLITZ_DIR}/var/projects.list
-cat ${PGBLITZ_DIR}/var/projects.list | cut -d' ' -f1 | tail -n +2 > ${PGBLITZ_DIR}/var/project.cut
-projectlist=$(cat ${PGBLITZ_DIR}/var/project.cut)
+gcloud projects list > /pg/var/projects.list
+cat /pg/var/projects.list | cut -d' ' -f1 | tail -n +2 > /pg/var/project.cut
+projectlist=$(cat /pg/var/project.cut)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -482,7 +482,7 @@ $projectlist
 EOF
 
 read -p '↘️  Type EXACT Project Name to Utilize | Press [ENTER]: ' typed2 < /dev/tty
-  list=$(cat ${PGBLITZ_DIR}/var/project.cut | grep $typed2)
+  list=$(cat /pg/var/project.cut | grep $typed2)
   if [ "$list" == "" ]; then
   badinput && projectid; fi
   gcloud config set project $typed2
@@ -494,21 +494,21 @@ tee <<-EOF
 
 EOF
   gcloud services enable drive.googleapis.com --project $typed2
-  echo $typed2 > ${PGBLITZ_DIR}/var/project.final
+  echo $typed2 > /pg/var/project.final
 echo
 read -p '🌍 Process Complete | Press [ENTER] ' typed2 < /dev/tty
 
 }
 
 ufsbuilder () {
-  downloadpath=$(cat ${PGBLITZ_DIR}/var/server.hd.path)
-  ls -la ${PGBLITZ_DIR}/var/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
+  downloadpath=$(cat /pg/var/server.hd.path)
+  ls -la /pg/var/keys/processed | awk '{ print $9}' | tail -n +4 > /tmp/pg.gdsa.ufs
   rm -rf /tmp/pg.gdsa.build 1>/dev/null 2>&1
   #echo -n "/pg/sd=RO:" > /tmp/pg.gdsa.build
   #echo -n "/pg/gd=RO:" >> /tmp/pg.gdsa.build
   ##### Encryption Portion ### Start
-  #scrypt=$(grep "scrypt" ${PGBLITZ_DIR}/rclone/blitz.conf)
-  #gcrypt=$(grep "gcrypt" ${PGBLITZ_DIR}/rclone/blitz.conf)
+  #scrypt=$(grep "scrypt" /pg/rclone/blitz.conf)
+  #gcrypt=$(grep "gcrypt" /pg/rclone/blitz.conf)
 
   #if [ "$scrypt" == "[scrypt]" ]  && [ "$gcrypt" == "[gcrypt]" ]; then
   #    encryption="on"
@@ -520,14 +520,14 @@ ufsbuilder () {
   #  echo -n "/pg/gc=RO:" >> /tmp/pg.gdsa.build
   #fi
   ##### Encryption Portion ### END
-  file="${PGBLITZ_DIR}/var/unionfs.pgpath"
-  if [ -e "$file" ]; then rm -rf ${PGBLITZ_DIR}/var/unionfs.pgpath && touch ${PGBLITZ_DIR}/var/unionfs.pgpath; fi
+  file="/pg/var/unionfs.pgpath"
+  if [ -e "$file" ]; then rm -rf /pg/var/unionfs.pgpath && touch /pg/var/unionfs.pgpath; fi
 
   while read p; do
   mkdir -p $downloadpath/move/$p
-  echo -n "$downloadpath/move/$p=RO:" >> ${PGBLITZ_DIR}/var/unionfs.pgpath
+  echo -n "$downloadpath/move/$p=RO:" >> /pg/var/unionfs.pgpath
   done </tmp/pg.gdsa.ufs
-  builder=$(cat ${PGBLITZ_DIR}/var/unionfs.pgpath)
+  builder=$(cat /pg/var/unionfs.pgpath)
 }
 
 blitzchecker () {
@@ -545,7 +545,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf gdsa01:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf gdsa01:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -553,7 +553,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf gdsa01: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf gdsa01: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -586,7 +586,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 1
-  rclone mkdir --config ${PGBLITZ_DIR}/rclone/blitz.conf sd:/plexguide
+  rclone mkdir --config /pg/rclone/blitz.conf sd:/plexguide
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -594,7 +594,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  rcheck=$(rclone lsd --config ${PGBLITZ_DIR}/rclone/blitz.conf sd: | grep -oP plexguide | head -n1)
+  rcheck=$(rclone lsd --config /pg/rclone/blitz.conf sd: | grep -oP plexguide | head -n1)
 
   if [ "$rcheck" != "plexguide" ];then
 tee <<-EOF
@@ -625,9 +625,9 @@ EOF
 }
 
 keymenu () {
-gcloud info | grep Account: | cut -c 10- > ${PGBLITZ_DIR}/var/project.account
-account=$(cat ${PGBLITZ_DIR}/var/project.account)
-project=$(cat ${PGBLITZ_DIR}/rclone/pgclone.project)
+gcloud info | grep Account: | cut -c 10- > /pg/var/project.account
+account=$(cat /pg/var/project.account)
+project=$(cat /pg/rclone/pgclone.project)
 
 if [ "$account" == "NOT-SET" ]; then
   display5="[NOT-SET]"
@@ -657,8 +657,8 @@ read -p '↘️  Type Choice | Press [ENTER]: ' typed < /dev/tty
 
 if [ "$typed" == "1" ]; then
   gcloud auth login
-  gcloud info | grep Account: | cut -c 10- > ${PGBLITZ_DIR}/var/project.account
-  account=$(cat ${PGBLITZ_DIR}/var/project.account)
+  gcloud info | grep Account: | cut -c 10- > /pg/var/project.account
+  account=$(cat /pg/var/project.account)
   keymenu
 elif [ "$typed" == "2" ]; then
   projectmenu
@@ -669,7 +669,7 @@ elif [ "$typed" == "3" ]; then
   deploykeys
   keymenu; fi
 elif [ "$typed" == "4" ]; then
-  bash ${PGBLITZ_DIR}/emails.sh && echo
+  bash /pg/pgclone/emails.sh && echo
   read -p '↘️  Confirm Info | Press [ENTER]: ' typed < /dev/tty
   keymenu
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then

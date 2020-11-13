@@ -22,10 +22,10 @@ startscript () {
 while read p; do
 
 # Repull excluded folder
- wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v10/functions/exclude -P ${PGBLITZ_DIR}/var/
+ wget -qN https://raw.githubusercontent.com/PGBlitz/PGClone/v8.6/functions/exclude -P /pg/var/
 
-  cleaner="$(cat ${PGBLITZ_DIR}/var/cloneclean)"
-  useragent="$(cat ${PGBLITZ_DIR}/var/uagent)"
+  cleaner="$(cat /pg/var/cloneclean)"
+  useragent="$(cat /pg/var/uagent)"
 
   let "cyclecount++"
   echo "----------------------------" >> /pg/logs/pgblitz.log
@@ -34,7 +34,7 @@ while read p; do
   echo "Utilizing: $p" >> /pg/logs/pgblitz.log
 
   rclone moveto "{{hdpath}}/downloads/" "{{hdpath}}/transfer/" \
-  --config ${PGBLITZ_DIR}/rclone/blitz.conf \
+  --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/pgblitz.log \
   --log-level ERROR --stats 5s --stats-file-name-length 0 \
   --exclude="**_HIDDEN~" --exclude=".unionfs/**" \
@@ -51,7 +51,7 @@ while read p; do
   chmod -R 775 "{{hdpath}}/move"
 
   rclone moveto "{{hdpath}}/move" "${p}{{encryptbit}}:/" \
-  --config ${PGBLITZ_DIR}/rclone/blitz.conf \
+  --config /pg/rclone/blitz.conf \
   --log-file=/pg/logs/pgblitz.log \
   --log-level INFO --stats 5s --stats-file-name-length 0 \
   --tpslimit 12 \
@@ -85,10 +85,10 @@ while read p; do
   find "{{hdpath}}/transfer/" -mindepth 2 -type d -mmin +2 -empty -exec rm -rf {} \;
 
   # Removes garbage | torrent folder excluded
-  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat ${PGBLITZ_DIR}/var/exclude)) -empty -exec rm -rf {} \;
-  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat ${PGBLITZ_DIR}/var/exclude)) -size +1M -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type d -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -empty -exec rm -rf {} \;
+  find "{{hdpath}}/downloads" -mindepth 2 -type f -cmin +$cleaner  $(printf "! -name %s " $(cat /pg/var/exclude)) -size +1M -exec rm -rf {} \;
 
-done <${PGBLITZ_DIR}/var/.blitzfinal
+done </pg/var/.blitzfinal
 }
 
 # keeps the function in a loop

@@ -14,7 +14,7 @@ read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed < /dev/tty
 
 glogin () {
 
-emailaccount=$(cat ${PGBLITZ_DIR}/var/project.email)
+emailaccount=$(cat /pg/var/project.email)
 
 tee <<-EOF
 
@@ -34,8 +34,8 @@ if [[ "$typed" == "" ]]; then glogin; fi
 if [[ "$typed" == "Exit" || "$typed" == "exit" || "$typed" == "EXIT" ]]; then clonestart; fi
 
 gcloud auth login --account = $typed
-gcloud info | grep Account: | cut -c 10- > ${PGBLITZ_DIR}/var/project.account
-account=$(cat ${PGBLITZ_DIR}/var/project.account)
+gcloud info | grep Account: | cut -c 10- > /pg/var/project.account
+account=$(cat /pg/var/project.account)
 
 testcheck=$(gcloud auth list | grep "$typed")
 if [[ "$testcheck" == "" ]]; then
@@ -45,5 +45,5 @@ read -p '↘️  Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 glogin
 fi
 
-echo "$typed" > ${PGBLITZ_DIR}/rclone/pgclone.email
+echo "$typed" > /pg/rclone/pgclone.email
 }
